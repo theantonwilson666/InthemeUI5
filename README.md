@@ -11,3 +11,7 @@ npm i grunt-contrib-connect
 
 npm i grunt-openui5
 
+
+
+## I18N Conversion
+https://native2ascii.net/
