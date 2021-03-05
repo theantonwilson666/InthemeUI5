@@ -23,4 +23,4 @@ https://sapui5.hana.ondemand.com/sdk/test-resources/sap/m/demokit/iconExplorer/w
 
 ## Deploy Help
 1) grunt build
-2) grunt deploy_<app>
+2) grunt deploy_/<app/>
