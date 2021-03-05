@@ -1,0 +1,145 @@
+<mvc:View 
+    controllerName="intheme.zjira_project_register.controller.Main" 
+    xmlns:core="sap.ui.core" 
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true" 
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:l="sap.ui.layout"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:smartField="sap.ui.comp.smartfield">
+    <f:DynamicPage toggleHeaderOnTitleClick="true" showFooter="false" headerExpanded="false" preserveHeaderStateOnScroll="true" class="sapUiNoContentPadding">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <!-- <Title text="{i18n>appTitle}"/> -->
+                    <sv:SmartVariantManagement id="projectPageVariant"
+                                               persistencyKey="projectPage.PKey"
+                                               showShare="true"
+                                               showExecuteOnSelection="true"/>
+                </f:heading>
+                <f:expandedContent>
+                    <Label text="{i18n>appDescription}"/>
+                </f:expandedContent>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="false" class="sapUiNoContentPadding">
+                <f:content>
+                    <smartFilterBar:SmartFilterBar
+                            id="projectFilterBar"
+                            smartVariant="projectPageVariant"
+                            entitySet="ProjectSet"
+                            useToolbar="false"
+                            considerSelectionVariants="true"
+                            enableBasicSearch="false"
+                            liveMode="false"
+                            persistencyKey="projectPage.PKey.FilterBar">
+                    </smartFilterBar:SmartFilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <!-- <Text text='test' /> -->
+            <smartTable:SmartTable
+                    id="projectSmartTable"
+                    smartVariant="projectPageVariant"
+                    smartFilterId="projectFilterBar"
+                    header="{i18n>SmartTableTitle}"
+                    entitySet="ProjectSet"
+                    useExportToExcel="false"
+                    showRowCount="true"
+                    tableType="ResponsiveTable"
+                    useVariantManagement="true"
+                    persistencyKey="projectPage.PKey.SmartTable"
+                    useTablePersonalisation="true"
+                    showFullScreenButton="false"
+                    enableAutoBinding="true"
+                    requestAtLeastFields="ProjectID,ProjectName,ProjectTypeName,ProjectCatName,ProjectKey"
+                    demandPopin="true">
+                <smartTable:customData>
+                    <core:CustomData key="dateFormatSettings" value='\{"UTC":true, "pattern":"HH.mm dd.MM.yyyy"\}'/>
+                </smartTable:customData>
+                <Table sticky="ColumnHeaders"
+                       growing="true"
+                       fixedLayout="false"
+                       growingThreshold="200"
+                       growingScrollToLoad="true"
+                       mode="SingleSelectMaster"
+                       selectionChange="onViewDetail"
+                       updateFinished="projectTableUpdateFinished">
+                    <columns>
+                        <!--1 column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "0",
+                                                        "columnKey": "ProjectName",
+                                                        "leadingProperty": "ProjectName",
+                                                        "sortProperty": "ProjectName",
+                                                        "filterProperty": "ProjectName"
+                                                     }'/>
+                            </customData>
+                            <header>
+                                <Text text="{/#Project/ProjectName/@sap:label}"/>
+                            </header>
+                        </Column>
+                        <!--2 column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "1",
+                                                        "columnKey": "ProjectTypeName",
+                                                        "leadingProperty": "ProjectTypeName",
+                                                        "sortProperty": "ProjectTypeName",
+                                                        "filterProperty": "ProjectTypeName"
+                                                     }'/>
+                            </customData>
+                            <header>
+                                <Text text="{/#Project/ProjectTypeName/@sap:label}"/>
+                            </header>
+                        </Column>
+                        <!--3 column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "2",
+                                                        "columnKey": "ProjectCatName",
+                                                        "leadingProperty": "ProjectCatName",
+                                                        "sortProperty": "ProjectCatName",
+                                                        "filterProperty": "ProjectCatName"
+                                                     }'/>
+                            </customData>
+                            <header>
+                                <Text text="{/#Project/ProjectCatName/@sap:label}"/>
+                            </header>
+                        </Column>
+                    </columns>
+                    <ColumnListItem
+                            type="Navigation">
+                        <!--1 cells-->
+                        <cells>
+                            <HBox>
+                                <ObjectIdentifier title="{ProjectName}" text="{ProjectKey}"/>
+                            </HBox>
+                        </cells>
+                        <!--2 cells-->
+                        <cells>
+                            <smartField:SmartField value="{ProjectTypeName}"/>
+                        </cells>
+                        <!--3 cells-->
+                        <cells>
+                            <smartField:SmartField value="{ProjectCatName}"/>
+                        </cells>
+                    </ColumnListItem>
+                </Table>
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

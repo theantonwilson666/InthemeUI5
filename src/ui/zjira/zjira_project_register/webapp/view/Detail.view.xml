@@ -1,0 +1,197 @@
+<mvc:View controllerName="intheme.zjira_project_register.controller.Detail"
+          xmlns:mvc="sap.ui.core.mvc"
+          xmlns="sap.m"
+          xmlns:dnd="sap.ui.core.dnd"
+          xmlns:core="sap.ui.core"
+          xmlns:f="sap.f"
+          xmlns:layout="sap.ui.layout"
+          xmlns:form="sap.ui.layout.form"
+          xmlns:sv="sap.ui.comp.smartvariants"
+          xmlns:smartTable="sap.ui.comp.smarttable"
+          xmlns:smartField="sap.ui.comp.smartfield"
+          xmlns:smartMultiInput="sap.ui.comp.smartmultiinput"
+          xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+          xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+          height="100%">
+    <f:DynamicPage id="issueView" toggleHeaderOnTitleClick="true" showFooter="true" preserveHeaderStateOnScroll="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="{ProjectName}"/>
+                </f:heading>
+                <f:content>
+                    <Text text="{ProjectKey}"/>
+                </f:content>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="false" class="sapUiNoContentPadding">
+                <f:content>
+                    <VBox>
+                        <Text text="{ProjectCatName}" />
+                        <sv:SmartVariantManagement id="issuePageVariant"
+                                                   persistencyKey="issuePage.PKey"
+                                                   showShare="true"
+                                                   showExecuteOnSelection="true"/>
+                        <smartFilterBar:SmartFilterBar
+                            id="issueFilterBar"
+                            entityType="Issue"
+                            useToolbar="false"
+                            smartVariant="issuePageVariant"
+                            considerSelectionVariants="true"
+                            enableBasicSearch="false"
+                            persistencyKey="issuePage.PKey.FilterBar"
+                            liveMode="false">
+                        </smartFilterBar:SmartFilterBar>
+                    </VBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <smartTable:SmartTable
+                    id="issueSmartTable"
+                    smartFilterId="issueFilterBar"
+                    header="{i18n>IssueTableTitle}"
+                    entitySet="IssueSet"
+                    useExportToExcel="false"
+                    tableBindingPath="Issues"
+                    showRowCount="true"
+                    tableType="ResponsiveTable"
+                    useVariantManagement="true"
+                    useTablePersonalisation="true"
+                    showFullScreenButton="false"
+                    persistencyKey="issuePage.PKey.SmartTable"
+                    enableAutoBinding="true"
+                    requestAtLeastFields="ProjectID,IssueID,IssueName,IssueDescr,PriorityID,PriorityName,StatusID,StatusName,StatusCatName,StageName,SubstageName,OrigEstHours,SpendHours,FsNumber,ProjectStageID,ProjectStageName,RequestNumber,DueDate,AssignedName,TypeName,IssueKey,TypeID"
+                    demandPopin="true">
+                <smartTable:customData>
+                    <core:CustomData key="dateFormatSettings" value='\{"UTC":true, "pattern":"HH.mm dd.MM.yyyy"\}'/>
+                </smartTable:customData>
+                <Table sticky="ColumnHeaders"
+                       growing="true"
+                       fixedLayout="false"
+                       growingThreshold="300"
+                       growingScrollToLoad="false"
+                       mode="SingleSelectMaster"
+                       selectionChange="onViewIssue"
+                       updateFinished="projectTableUpdateFinished">
+                    <columns>
+                        <!--1 column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "0",
+                                                        "columnKey": "IssueName",
+                                                        "leadingProperty": "IssueName",
+                                                        "sortProperty": "IssueName",
+                                                        "filterProperty": "IssueName"
+                                                     }'/>
+                            </customData>
+                            <header>
+                                <Text text="{/#Issue/IssueName/@sap:label}"/>
+                            </header>
+                        </Column>
+                        <!--2 column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "1",
+                                                        "columnKey": "StatusName",
+                                                        "leadingProperty": "StatusName",
+                                                        "sortProperty": "StatusName",
+                                                        "filterProperty": "StatusName"
+                                                     }'/>
+                            </customData>
+                            <header>
+                                <Text text="{/#Issue/StatusName/@sap:label}"/>
+                            </header>
+                        </Column>
+                        <!--3 column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "2",
+                                                        "columnKey": "StageName",
+                                                        "leadingProperty": "StageName",
+                                                        "sortProperty": "StageName",
+                                                        "filterProperty": "StageName"
+                                                     }'/>
+                            </customData>
+                            <header>
+                                <Text text="{/#Issue/StageName/@sap:label}"/>
+                            </header>
+                        </Column>
+                        <!--4 column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "3",
+                                                        "columnKey": "ProjectStageName",
+                                                        "leadingProperty": "ProjectStageName",
+                                                        "sortProperty": "ProjectStageName",
+                                                        "filterProperty": "ProjectStageName"
+                                                     }'/>
+                            </customData>
+                            <header>
+                                <Text text="{/#Issue/ProjectStageName/@sap:label}"/>
+                            </header>
+                        </Column>
+                        <!--5 column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "4",
+                                                        "columnKey": "AssignedName",
+                                                        "leadingProperty": "AssignedName",
+                                                        "sortProperty": "AssignedName",
+                                                        "filterProperty": "AssignedName"
+                                                     }'/>
+                            </customData>
+                            <header>
+                                <Text text="{/#Issue/AssignedName/@sap:label}"/>
+                            </header>
+                        </Column>
+                    </columns>
+                    <ColumnListItem type="Navigation" highlight="{path:'PriorityID', formatter:'.formatter.formatRowHighlight'}">
+                        <!--1 cells-->
+                        <cells>
+                            <VBox>
+                                <ObjectIdentifier title="{IssueName}" text="{IssueKey}"/>
+                                <Text text="{TypeName}"/>
+                                <Text text="{IssueDescr}"/>
+                            </VBox>
+                        </cells>
+                        <!--2 cells-->
+                        <cells>
+                            <ObjectIdentifier title="{StatusName}" text="{StatusCatName}"/>
+                        </cells>
+                        <!--3 cells-->
+                        <cells>
+                            <ObjectIdentifier title="{StageName}" text="{SubstageName}"/>
+                        </cells>
+                        <!--4 cells-->
+                        <cells>
+                            <smartField:SmartField value="{ProjectStageName}"/>
+                        </cells>
+                        <!--5 cells-->
+                        <cells>
+                            <smartField:SmartField value="{AssignedName}"/>
+                        </cells>
+                    </ColumnListItem>
+                </Table>
+            </smartTable:SmartTable>
+        </f:content>
+        <!-- <f:footer>
+            <OverflowToolbar visible="{state>/editDetail}">
+                <ToolbarSpacer/>
+                <Button text="{i18n>SaveBtn}" type="Emphasized" press="onSavePackageChange"/>
+                <Button text="{i18n>CancelBtn}" type="Transparent" press="onCancelPackageChange"/>
+            </OverflowToolbar>
+        </f:footer> -->
+    </f:DynamicPage>
+</mvc:View>
