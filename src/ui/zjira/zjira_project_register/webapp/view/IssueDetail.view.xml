@@ -3,6 +3,7 @@
     xmlns:core="sap.ui.core" 
     xmlns:mvc="sap.ui.core.mvc"
     displayBlock="true" 
+    xmlns:control="sap.ui.core.Control"
     xmlns="sap.m"
     xmlns:f="sap.f"
     xmlns:fb="sap.ui.comp.filterbar"
@@ -41,7 +42,7 @@
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
-            <VBox>
+            <VBox >
                 <smartForm:SmartForm id="IssueContentForm" title="{i18n>IssueContentFormName} - {IssueKey}">
                     <smartForm:Group label="{i18n>Group1Title}">
                         <smartForm:GroupElement>
@@ -81,6 +82,101 @@
                         </smartForm:GroupElement>
                         <smartForm:GroupElement>
                             <smartField:SmartField value ="{AssignedName}"/>
+                        </smartForm:GroupElement>
+                    </smartForm:Group>
+                    <smartForm:Group label="{i18n>Group3Title}">
+                        
+                        <!-- <smartForm:layout>
+                            <l:GridData  span="L2 M2 S2" linebreak="false"/>
+                        </smartForm:layout> -->
+                        <smartForm:GroupElement>
+                            <!-- <smartField:SmartField value ="{AssignedName}"/> -->
+                            <!-- <Text text='test'/> -->
+                            <smartTable:SmartTable
+                                id="PartSmartTable"
+                                entitySet="ParticipaterSet"
+                                useExportToExcel="false"
+                                tableBindingPath="Participaters"
+                                showRowCount="false"
+                                tableType="Table"
+                                useVariantManagement="false"
+                                useTablePersonalisation="false"
+                                showFullScreenButton="false"
+                                enableAutoBinding="true"
+                                requestAtLeastFields="ProjectID,IssueID,ParticipaterID,RoleID,RoleDescr,ParticipaterName,HoursSpend"
+                                demandPopin="false">
+                                <Table sticky="ColumnHeaders"
+                                        growing="true"
+                                        fixedLayout="false"
+                                        growingThreshold="300"
+                                        growingScrollToLoad="false"
+                                        mode="None">
+                                    <columns>
+                                        <!--1 column -->
+                                        <Column>
+                                            <customData>
+                                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "0",
+                                                        "columnKey": "RoleDescr",
+                                                        "leadingProperty": "RoleDescr",
+                                                        "sortProperty": "RoleDescr",
+                                                        "filterProperty": "RoleDescr"
+                                                     }'/>
+                                            </customData>
+                                            <header>
+                                                <Text text="{/#Participater/RoleDescr/@sap:label}"/>
+                                            </header>
+                                        </Column>
+                                        <!--2 column -->
+                                        <Column>
+                                            <customData>
+                                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "1",
+                                                        "columnKey": "ParticipaterName",
+                                                        "leadingProperty": "ParticipaterName",
+                                                        "sortProperty": "ParticipaterName",
+                                                        "filterProperty": "ParticipaterName"
+                                                     }'/>
+                                            </customData>
+                                            <header>
+                                                <Text text="{/#Participater/ParticipaterName/@sap:label}"/>
+                                            </header>
+                                        </Column>
+                                        <!--3 column -->
+                                        <Column>
+                                            <customData>
+                                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "2",
+                                                        "columnKey": "HoursSpend",
+                                                        "leadingProperty": "HoursSpend",
+                                                        "sortProperty": "HoursSpend",
+                                                        "filterProperty": "HoursSpend"
+                                                     }'/>
+                                            </customData>
+                                            <header>
+                                                <Text text="{/#Participater/HoursSpend/@sap:label}"/>
+                                            </header>
+                                        </Column>
+                                    </columns>
+                                    <ColumnListItem>
+                                        <!--1 cells-->
+                                        <cells>
+                                            <smartField:SmartField value="{RoleDescr}"/>
+                                        </cells>
+                                        <!--2 cells-->
+                                        <cells>
+                                            <smartField:SmartField value="{ParticipaterName}"/>
+                                        </cells>
+                                        <!--3 cells-->
+                                        <cells>
+                                            <smartField:SmartField value="{HoursSpend}"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </Table>
+                            </smartTable:SmartTable>
                         </smartForm:GroupElement>
                     </smartForm:Group>
                 </smartForm:SmartForm>
