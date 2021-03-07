@@ -1,8 +1,6 @@
-<mvc:View 
-    controllerName="intheme.zjira_project_register.controller.IssueDetail" 
-    xmlns:core="sap.ui.core" 
-    xmlns:mvc="sap.ui.core.mvc"
-    displayBlock="true" 
+<mvc:View controllerName="intheme.zjira_project_register.controller.IssueDetail"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns:control="sap.ui.core.Control"
     xmlns="sap.m"
     xmlns:f="sap.f"
@@ -12,6 +10,7 @@
     xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
     xmlns:smartForm="sap.ui.comp.smartform"
     xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:mc="sap.suite.ui.microchart"
     xmlns:smartField="sap.ui.comp.smartfield">
     <f:DynamicPage id="IssueDetailView" toggleHeaderOnTitleClick="true" showFooter="false" headerExpanded="false" preserveHeaderStateOnScroll="true">
         <f:title>
@@ -21,12 +20,8 @@
                 </f:heading>
                 <f:content>
                     <VBox>
-                        <ObjectStatus
-                            text="{TypeName}"
-                            state="None"/>
-                        <ObjectIdentifier
-                            text="{StatusName}"
-                            title="{StatusCatName}"/>
+                        <ObjectStatus text="{TypeName}" state="None"/>
+                        <ObjectIdentifier text="{StatusName}" title="{StatusCatName}"/>
                     </VBox>
                 </f:content>
             </f:DynamicPageTitle>
@@ -34,193 +29,220 @@
         <f:header>
             <f:DynamicPageHeader pinnable="false" class="sapUiNoContentPadding">
                 <f:content>
-                    <sv:SmartVariantManagement id="worklogPageVariant"
-                                               persistencyKey="worklog.PKey"
-                                               showShare="true"
-                                               showExecuteOnSelection="true"/>
+                    <sv:SmartVariantManagement id="worklogPageVariant" persistencyKey="worklog.PKey" showShare="true" showExecuteOnSelection="true"/>
                 </f:content>
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
             <VBox >
-                <smartForm:SmartForm id="IssueContentForm" title="{i18n>IssueContentFormName} - {IssueKey}">
-                    <smartForm:Group label="{i18n>Group1Title}">
-                        <smartForm:GroupElement>
-                            <smartField:SmartField value ="{IssueDescr}"/>
-                        </smartForm:GroupElement>
-                        <smartForm:GroupElement>
-                            <smartField:SmartField value ="{StageName}"/>
-                        </smartForm:GroupElement>
-                        <smartForm:GroupElement>
-                            <smartField:SmartField value ="{SubstageName}"/>
-                        </smartForm:GroupElement>
-                        <smartForm:GroupElement>
-                            <smartField:SmartField value ="{ProjectStageName}"/>
-                        </smartForm:GroupElement>
-                        <smartForm:GroupElement>
-                            <smartField:SmartField value ="{TypeName}"/>
-                        </smartForm:GroupElement>
-                        <smartForm:GroupElement>
-                            <smartField:SmartField value ="{PriorityName}"/>
-                        </smartForm:GroupElement>
-                    </smartForm:Group>
-                    <smartForm:Group label="{i18n>Group2Title}">
-                        <smartForm:GroupElement>
-                            <smartField:SmartField value ="{FsNumber}"/>
-                        </smartForm:GroupElement>
-                        <smartForm:GroupElement>
-                            <smartField:SmartField value ="{RequestNumber}"/>
-                        </smartForm:GroupElement>
-                        <smartForm:GroupElement>
-                            <smartField:SmartField value ="{DueDate}"/>
-                        </smartForm:GroupElement>
-                        <smartForm:GroupElement>
-                            <smartField:SmartField value ="{OrigEstHours}"/>
-                        </smartForm:GroupElement>
-                        <smartForm:GroupElement>
-                            <smartField:SmartField value ="{SpendHours}"/>
-                        </smartForm:GroupElement>
-                        <smartForm:GroupElement>
-                            <smartField:SmartField value ="{AssignedName}"/>
-                        </smartForm:GroupElement>
-                    </smartForm:Group>
-                    <smartForm:Group label="{i18n>Group3Title}">
-                        
-                        <!-- <smartForm:layout>
-                            <l:GridData  span="L2 M2 S2" linebreak="false"/>
-                        </smartForm:layout> -->
-                        <smartForm:GroupElement>
-                            <!-- <smartField:SmartField value ="{AssignedName}"/> -->
-                            <!-- <Text text='test'/> -->
-                            <smartTable:SmartTable
-                                id="PartSmartTable"
-                                entitySet="ParticipaterSet"
-                                useExportToExcel="false"
-                                tableBindingPath="Participaters"
-                                showRowCount="false"
-                                tableType="Table"
-                                useVariantManagement="false"
-                                useTablePersonalisation="false"
-                                showFullScreenButton="false"
-                                enableAutoBinding="true"
-                                requestAtLeastFields="ProjectID,IssueID,ParticipaterID,RoleID,RoleDescr,ParticipaterName,HoursSpend"
-                                demandPopin="false">
-                                <Table sticky="ColumnHeaders"
-                                        growing="true"
-                                        fixedLayout="false"
-                                        growingThreshold="300"
-                                        growingScrollToLoad="false"
-                                        mode="None">
-                                    <columns>
-                                        <!--1 column -->
-                                        <Column>
-                                            <customData>
-                                                <core:CustomData key="p13nData"
-                                                 value='\{
+                <HBox alignItems="Stretch" fitContainer="true" class="sapUiSmallMargin">
+                    <layoutData>
+                        <FlexItemData growFactor="2" />
+                    </layoutData>
+                    <smartForm:SmartForm id="IssueContentForm" title="{i18n>IssueContentFormName} - {IssueKey}" width="50%">
+                        <smartForm:layout>
+                            <smartForm:ColumnLayout columnsM="2" columnsL="2" columnsXL="2"/>
+                        </smartForm:layout>
+                        <smartForm:Group label="{i18n>Group1Title}">
+                            <smartForm:GroupElement>
+                                <smartField:SmartField value ="{IssueDescr}"/>
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement>
+                                <smartField:SmartField value ="{StageName}"/>
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement>
+                                <smartField:SmartField value ="{SubstageName}"/>
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement>
+                                <smartField:SmartField value ="{ProjectStageName}"/>
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement>
+                                <smartField:SmartField value ="{TypeName}"/>
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement>
+                                <smartField:SmartField value ="{PriorityName}"/>
+                            </smartForm:GroupElement>
+                        </smartForm:Group>
+                        <smartForm:Group label="{i18n>Group2Title}">
+                            <smartForm:GroupElement>
+                                <smartField:SmartField value ="{FsNumber}"/>
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement>
+                                <smartField:SmartField value ="{RequestNumber}"/>
+                            </smartForm:GroupElement>
+
+                            <smartForm:GroupElement>
+                                <smartField:SmartField value ="{OrigEstHours}"/>
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement>
+                                <smartField:SmartField value ="{SpendHours}"/>
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement>
+                                <smartField:SmartField value ="{AssignedName}"/>
+                            </smartForm:GroupElement>
+                        </smartForm:Group>
+                        <smartForm:Group label="{i18n>Group3Title}">
+                            <smartForm:GroupElement>
+                                <smartField:SmartField value ="{DueDate}"/>
+                            </smartForm:GroupElement>
+
+                            <smartForm:GroupElement class="sapUiTinyMargin">
+                                <smartField:SmartField value ="{PlanHoursTest}"/>
+                                <DateRangeSelection id="PlanTest" dateValue="{PlanTestStart}" secondDateValue="{PlanTestEnd}" editable="false" displayFormat="dd.MM.yyyy" visible="{= (${PlanTestStart} !== null ) ? true : false}"/>
+                            </smartForm:GroupElement>
+
+                            <smartForm:GroupElement>
+                                <smartField:SmartField value ="{PlanHoursKons}"/>
+                                <DateRangeSelection id="PlanKons" dateValue="{PlanKonsStart}" secondDateValue="{PlanKonsEnd}" editable="false" displayFormat="dd.MM.yyyy" visible="{= (${PlanKonsStart} !== null ) ? true : false}"/>
+                            </smartForm:GroupElement>
+
+                            <smartForm:GroupElement>
+                                <smartField:SmartField value ="{PlanHoursDev}"/>
+                                <DateRangeSelection id="PlanDev" dateValue="{PlanDevStart}" secondDateValue="{PlanDevEnd}" editable="false" displayFormat="dd.MM.yyyy" visible="{= (${PlanDevStart} !== null ) ? true : false}"/>
+                            </smartForm:GroupElement>
+
+                        </smartForm:Group>
+
+
+                        <smartForm:Group label="{i18n>Group4Title}">
+                            <smartForm:GroupElement>
+
+                            </smartForm:GroupElement>
+                        </smartForm:Group>
+
+                    </smartForm:SmartForm>
+                    <!-- <smartField:SmartField value ="{AssignedName}"/> -->
+
+                    <VBox alignItems="Stretch" fitContainer="true" width="50%">
+                        <smartTable:SmartTable id="PartSmartTable" entitySet="ParticipaterSet" useExportToExcel="false" header="{i18n>ParticipaterTabHeader}" tableBindingPath="Participaters" showRowCount="false" tableType="Table" useVariantManagement="false" useTablePersonalisation="false" showFullScreenButton="false" enableAutoBinding="true" requestAtLeastFields="ProjectID,IssueID,ParticipaterID,RoleID,RoleDescr,ParticipaterName,HoursSpend" demandPopin="false">
+                            <Table sticky="ColumnHeaders" growing="true" fixedLayout="false" growingThreshold="300" growingScrollToLoad="false" mode="None">
+                                <columns>
+                                    <!--1 column -->
+                                    <Column>
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{
                                                         "columnIndex": "0",
                                                         "columnKey": "RoleDescr",
                                                         "leadingProperty": "RoleDescr",
                                                         "sortProperty": "RoleDescr",
                                                         "filterProperty": "RoleDescr"
                                                      }'/>
-                                            </customData>
-                                            <header>
-                                                <Text text="{/#Participater/RoleDescr/@sap:label}"/>
-                                            </header>
-                                        </Column>
-                                        <!--2 column -->
-                                        <Column>
-                                            <customData>
-                                                <core:CustomData key="p13nData"
-                                                 value='\{
+                                        </customData>
+                                        <header>
+                                            <Text text="{/#Participater/RoleDescr/@sap:label}"/>
+                                        </header>
+                                    </Column>
+                                    <!--2 column -->
+                                    <Column>
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{
                                                         "columnIndex": "1",
                                                         "columnKey": "ParticipaterName",
                                                         "leadingProperty": "ParticipaterName",
                                                         "sortProperty": "ParticipaterName",
                                                         "filterProperty": "ParticipaterName"
                                                      }'/>
-                                            </customData>
-                                            <header>
-                                                <Text text="{/#Participater/ParticipaterName/@sap:label}"/>
-                                            </header>
-                                        </Column>
-                                        <!--3 column -->
-                                        <Column>
-                                            <customData>
-                                                <core:CustomData key="p13nData"
-                                                 value='\{
+                                        </customData>
+                                        <header>
+                                            <Text text="{/#Participater/ParticipaterName/@sap:label}"/>
+                                        </header>
+                                    </Column>
+                                    <!--3 column -->
+                                    <Column>
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{
                                                         "columnIndex": "2",
                                                         "columnKey": "HoursSpend",
                                                         "leadingProperty": "HoursSpend",
                                                         "sortProperty": "HoursSpend",
                                                         "filterProperty": "HoursSpend"
                                                      }'/>
-                                            </customData>
-                                            <header>
-                                                <Text text="{/#Participater/HoursSpend/@sap:label}"/>
-                                            </header>
-                                        </Column>
-                                    </columns>
-                                    <ColumnListItem>
-                                        <!--1 cells-->
-                                        <cells>
-                                            <smartField:SmartField value="{RoleDescr}"/>
-                                        </cells>
-                                        <!--2 cells-->
-                                        <cells>
-                                            <smartField:SmartField value="{ParticipaterName}"/>
-                                        </cells>
-                                        <!--3 cells-->
-                                        <cells>
-                                            <smartField:SmartField value="{HoursSpend}"/>
-                                        </cells>
-                                    </ColumnListItem>
-                                </Table>
-                            </smartTable:SmartTable>
-                        </smartForm:GroupElement>
-                    </smartForm:Group>
-                </smartForm:SmartForm>
-                <smartFilterBar:SmartFilterBar
-                            id="workLogFilterBar"
-                            entityType="Issue"
-                            useToolbar="false"
-                            smartVariant="worklogPageVariant"
-                            considerSelectionVariants="true"
-                            enableBasicSearch="false"
-                            persistencyKey="worklog.PKey.FilterBar"
-                            liveMode="false">
-                        </smartFilterBar:SmartFilterBar>
-                <smartTable:SmartTable
-                    id="issueSmartTable"
-                    smartFilterId="workLogFilterBar"
-                    header="{i18n>WorklogTabHeader}"
-                    entitySet="WorklogSet"
-                    useExportToExcel="false"
-                    tableBindingPath="Worklogs"
-                    showRowCount="true"
-                    tableType="Table"
-                    useVariantManagement="true"
-                    useTablePersonalisation="true"
-                    showFullScreenButton="false"
-                    persistencyKey="worklog.PKey.SmartTable"
-                    enableAutoBinding="true"
-                    requestAtLeastFields="ProjectID,IssueID,WorklogID,AuthorName,WorklogStarted,HoursSpend,TimeSpendText,Comment"
-                    demandPopin="true">
+                                        </customData>
+                                        <header>
+                                            <Text text="{/#Participater/HoursSpend/@sap:label}"/>
+                                        </header>
+                                    </Column>
+                                </columns>
+                                <ColumnListItem>
+                                    <!--1 cells-->
+                                    <cells>
+                                        <smartField:SmartField value="{RoleDescr}"/>
+                                    </cells>
+                                    <!--2 cells-->
+                                    <cells>
+                                        <smartField:SmartField value="{ParticipaterName}"/>
+                                    </cells>
+                                    <!--3 cells-->
+                                    <cells>
+                                        <smartField:SmartField value="{HoursSpend}"/>
+                                    </cells>
+                                </ColumnListItem>
+                            </Table>
+                        </smartTable:SmartTable>
+
+                        <VBox>
+                            <layoutData>
+                                <FlexItemData alignSelf="Center"></FlexItemData>
+                            </layoutData>
+                            <mc:RadialMicroChart id="WorkRatioBar" size="L" total="100" fraction="{WorkRatio}" valueColor="Good" class="sapUiSmallMargin" press="onWorkRatioBarPress">
+                            </mc:RadialMicroChart>
+                            <Text text="{i18n>WorkRatioTitle}"/>
+                        </VBox>
+
+                        <smartTable:SmartTable id="IssueCommentSmartTable" 
+                                               entitySet="IssueCommentSet" 
+                                               useExportToExcel="false" 
+                                               header="{i18n>IssueCommentTabHeader}" 
+                                               tableBindingPath="IssueComments" 
+                                               showRowCount="false" 
+                                               tableType="Table" 
+                                               useVariantManagement="false" 
+                                               useTablePersonalisation="false" 
+                                               showFullScreenButton="false" 
+                                               enableAutoBinding="true" 
+                                               requestAtLeastFields="IssueID,ProjectID,CommentID,Comment" 
+                                               demandPopin="false">
+                            <Table sticky="ColumnHeaders" growing="true" fixedLayout="false" growingThreshold="300" growingScrollToLoad="false" mode="None">
+                                <columns>
+                                    <!--1 column -->
+                                    <Column>
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{
+                                                        "columnIndex": "0",
+                                                        "columnKey": "Comment",
+                                                        "leadingProperty": "Comment",
+                                                        "sortProperty": "Comment",
+                                                        "filterProperty": "Comment"
+                                                     }'/>
+                                        </customData>
+                                        <header>
+                                            <Text text="{/#IssueComment/Comment/@sap:label}"/>
+                                        </header>
+                                    </Column>
+                                    <!--2 column -->
+                                </columns>
+                                <ColumnListItem>
+                                    <!--1 cells-->
+                                    <cells>
+                                        <smartField:SmartField value="{Comment}"/>
+                                    </cells>
+                                </ColumnListItem>
+                            </Table>
+                        </smartTable:SmartTable>
+                    </VBox>
+                </HBox>
+                <smartFilterBar:SmartFilterBar id="workLogFilterBar" entityType="Issue" useToolbar="false" smartVariant="worklogPageVariant" considerSelectionVariants="true" enableBasicSearch="false" persistencyKey="worklog.PKey.FilterBar" liveMode="false">
+                </smartFilterBar:SmartFilterBar>
+                <smartTable:SmartTable id="issueSmartTable" smartFilterId="workLogFilterBar" header="{i18n>WorklogTabHeader}" entitySet="WorklogSet" useExportToExcel="false" tableBindingPath="Worklogs" showRowCount="true" tableType="AnalyticalTable" useVariantManagement="true" useTablePersonalisation="true" showFullScreenButton="false" persistencyKey="worklog.PKey.SmartTable" enableAutoBinding="true" requestAtLeastFields="ProjectID,IssueID,WorklogID,AuthorName,WorklogStarted,HoursSpend,TimeSpendText,Comment" demandPopin="true">
                     <smartTable:customData>
                         <core:CustomData key="dateFormatSettings" value='\{"UTC":true, "pattern":"HH.mm dd.MM.yyyy"\}'/>
                     </smartTable:customData>
-                    <Table sticky="ColumnHeaders"
-                       growing="true"
-                       fixedLayout="false"
-                       growingThreshold="300"
-                       growingScrollToLoad="false"
-                       mode="None">
+                    <Table sticky="ColumnHeaders" growing="true" fixedLayout="false" growingThreshold="300" growingScrollToLoad="false" mode="None">
                         <columns>
                             <!--1 column -->
                             <Column>
                                 <customData>
-                                    <core:CustomData key="p13nData"
-                                                 value='\{
+                                    <core:CustomData key="p13nData" value='\{
                                                         "columnIndex": "0",
                                                         "columnKey": "WorklogStarted",
                                                         "leadingProperty": "WorklogStarted",
@@ -235,8 +257,7 @@
                             <!--2 column -->
                             <Column>
                                 <customData>
-                                    <core:CustomData key="p13nData"
-                                                 value='\{
+                                    <core:CustomData key="p13nData" value='\{
                                                         "columnIndex": "1",
                                                         "columnKey": "AuthorName",
                                                         "leadingProperty": "AuthorName",
@@ -251,8 +272,7 @@
                             <!--3 column -->
                             <Column>
                                 <customData>
-                                    <core:CustomData key="p13nData"
-                                                 value='\{
+                                    <core:CustomData key="p13nData" value='\{
                                                         "columnIndex": "2",
                                                         "columnKey": "TimeSpendText",
                                                         "leadingProperty": "TimeSpendText",
@@ -267,8 +287,7 @@
                             <!--4 column -->
                             <Column>
                                 <customData>
-                                    <core:CustomData key="p13nData"
-                                                 value='\{
+                                    <core:CustomData key="p13nData" value='\{
                                                         "columnIndex": "3",
                                                         "columnKey": "HoursSpend",
                                                         "leadingProperty": "HoursSpend",
@@ -283,8 +302,7 @@
                             <!--5 column -->
                             <Column width="40%">
                                 <customData>
-                                    <core:CustomData key="p13nData"
-                                                 value='\{
+                                    <core:CustomData key="p13nData" value='\{
                                                         "columnIndex": "4",
                                                         "columnKey": "Comment",
                                                         "leadingProperty": "Comment",
@@ -319,6 +337,12 @@
                                 <smartField:SmartField value="{Comment}"/>
                             </cells>
                         </ColumnListItem>
+
+                        <footer>
+                            
+                        </footer>
+
+
                     </Table>
                 </smartTable:SmartTable>
             </VBox>

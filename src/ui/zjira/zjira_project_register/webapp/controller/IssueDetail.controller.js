@@ -21,6 +21,11 @@ sap.ui.define(
 
           this.setStateProperty("/layout", "EndColumnFullScreen");
         },
+
+
+        onWorkRatioBarPress: function(oEvent){
+          debugger;
+        }
       }
     );
   }
