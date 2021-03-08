@@ -11,6 +11,7 @@
     xmlns:smartForm="sap.ui.comp.smartform"
     xmlns:smartTable="sap.ui.comp.smarttable"
     xmlns:mc="sap.suite.ui.microchart"
+    xmlns:tab="sap.ui.table"
     xmlns:smartField="sap.ui.comp.smartfield">
     <f:DynamicPage id="IssueDetailView" toggleHeaderOnTitleClick="true" showFooter="false" headerExpanded="false" preserveHeaderStateOnScroll="true">
         <f:title>
@@ -70,7 +71,6 @@
                             <smartForm:GroupElement>
                                 <smartField:SmartField value ="{RequestNumber}"/>
                             </smartForm:GroupElement>
-
                             <smartForm:GroupElement>
                                 <smartField:SmartField value ="{OrigEstHours}"/>
                             </smartForm:GroupElement>
@@ -85,34 +85,26 @@
                             <smartForm:GroupElement>
                                 <smartField:SmartField value ="{DueDate}"/>
                             </smartForm:GroupElement>
-
                             <smartForm:GroupElement class="sapUiTinyMargin">
                                 <smartField:SmartField value ="{PlanHoursTest}"/>
                                 <DateRangeSelection id="PlanTest" dateValue="{PlanTestStart}" secondDateValue="{PlanTestEnd}" editable="false" displayFormat="dd.MM.yyyy" visible="{= (${PlanTestStart} !== null ) ? true : false}"/>
                             </smartForm:GroupElement>
-
                             <smartForm:GroupElement>
                                 <smartField:SmartField value ="{PlanHoursKons}"/>
                                 <DateRangeSelection id="PlanKons" dateValue="{PlanKonsStart}" secondDateValue="{PlanKonsEnd}" editable="false" displayFormat="dd.MM.yyyy" visible="{= (${PlanKonsStart} !== null ) ? true : false}"/>
                             </smartForm:GroupElement>
-
                             <smartForm:GroupElement>
                                 <smartField:SmartField value ="{PlanHoursDev}"/>
                                 <DateRangeSelection id="PlanDev" dateValue="{PlanDevStart}" secondDateValue="{PlanDevEnd}" editable="false" displayFormat="dd.MM.yyyy" visible="{= (${PlanDevStart} !== null ) ? true : false}"/>
                             </smartForm:GroupElement>
-
                         </smartForm:Group>
-
-
                         <smartForm:Group label="{i18n>Group4Title}">
                             <smartForm:GroupElement>
 
                             </smartForm:GroupElement>
                         </smartForm:Group>
-
                     </smartForm:SmartForm>
                     <!-- <smartField:SmartField value ="{AssignedName}"/> -->
-
                     <VBox alignItems="Stretch" fitContainer="true" width="50%">
                         <smartTable:SmartTable id="PartSmartTable" entitySet="ParticipaterSet" useExportToExcel="false" header="{i18n>ParticipaterTabHeader}" tableBindingPath="Participaters" showRowCount="false" tableType="Table" useVariantManagement="false" useTablePersonalisation="false" showFullScreenButton="false" enableAutoBinding="true" requestAtLeastFields="ProjectID,IssueID,ParticipaterID,RoleID,RoleDescr,ParticipaterName,HoursSpend" demandPopin="false">
                             <Table sticky="ColumnHeaders" growing="true" fixedLayout="false" growingThreshold="300" growingScrollToLoad="false" mode="None">
@@ -179,7 +171,6 @@
                                 </ColumnListItem>
                             </Table>
                         </smartTable:SmartTable>
-
                         <VBox>
                             <layoutData>
                                 <FlexItemData alignSelf="Center"></FlexItemData>
@@ -188,7 +179,6 @@
                             </mc:RadialMicroChart>
                             <Text text="{i18n>WorkRatioTitle}"/>
                         </VBox>
-
                         <smartTable:SmartTable id="IssueCommentSmartTable" 
                                                entitySet="IssueCommentSet" 
                                                useExportToExcel="false" 
@@ -231,13 +221,40 @@
                         </smartTable:SmartTable>
                     </VBox>
                 </HBox>
-                <smartFilterBar:SmartFilterBar id="workLogFilterBar" entityType="Issue" useToolbar="false" smartVariant="worklogPageVariant" considerSelectionVariants="true" enableBasicSearch="false" persistencyKey="worklog.PKey.FilterBar" liveMode="false">
+                <smartFilterBar:SmartFilterBar id="workLogFilterBar" 
+                                               entityType="Worklog" 
+                                               useToolbar="false" 
+                                               smartVariant="worklogPageVariant" 
+                                               considerSelectionVariants="true" 
+                                               enableBasicSearch="false" 
+                                               persistencyKey="worklog.PKey.FilterBar" 
+                                               liveMode="false">
                 </smartFilterBar:SmartFilterBar>
-                <smartTable:SmartTable id="issueSmartTable" smartFilterId="workLogFilterBar" header="{i18n>WorklogTabHeader}" entitySet="WorklogSet" useExportToExcel="false" tableBindingPath="Worklogs" showRowCount="true" tableType="AnalyticalTable" useVariantManagement="true" useTablePersonalisation="true" showFullScreenButton="false" persistencyKey="worklog.PKey.SmartTable" enableAutoBinding="true" requestAtLeastFields="ProjectID,IssueID,WorklogID,AuthorName,WorklogStarted,HoursSpend,TimeSpendText,Comment" demandPopin="true">
+                <smartTable:SmartTable 
+                                id="WorklogSmartTable" 
+                                smartFilterId="workLogFilterBar" 
+                                header="{i18n>WorklogTabHeader}" 
+                                entitySet="WorklogSet" 
+                                useExportToExcel="false" 
+                                tableBindingPath="Worklogs" 
+                                showRowCount="true" 
+                                tableType="ResponsiveTable" 
+                                useVariantManagement="true"
+                                useTablePersonalisation="true" 
+                                showFullScreenButton="false" 
+                                persistencyKey="worklog.PKey.SmartTable" 
+                                enableAutoBinding="true"
+                                beforeRebindTable="onBeforeBindingTab($event,'HoursSpend','TotalHoursSum')"
+                                requestAtLeastFields="ProjectID,IssueID,WorklogID,AuthorName,WorklogStarted,HoursSpend,TimeSpendText,Comment">
                     <smartTable:customData>
                         <core:CustomData key="dateFormatSettings" value='\{"UTC":true, "pattern":"HH.mm dd.MM.yyyy"\}'/>
                     </smartTable:customData>
-                    <Table sticky="ColumnHeaders" growing="true" fixedLayout="false" growingThreshold="300" growingScrollToLoad="false" mode="None">
+                    <Table sticky="ColumnHeaders" 
+                           growing="true" 
+                           fixedLayout="false" 
+                           growingThreshold="10" 
+                           growingScrollToLoad="false" 
+                           mode="None">
                         <columns>
                             <!--1 column -->
                             <Column>
@@ -253,6 +270,10 @@
                                 <header>
                                     <Text text="{/#Worklog/WorklogStarted/@sap:label}"/>
                                 </header>
+
+                                <footer>
+                                    <Text text="{i18n>TotalSum}"/>
+                                </footer>
                             </Column>
                             <!--2 column -->
                             <Column>
@@ -298,6 +319,9 @@
                                 <header>
                                     <Text text="{/#Worklog/HoursSpend/@sap:label}"/>
                                 </header>
+                                <footer>
+                                    <Text id='TotalHoursSum' text="test"/>
+                                </footer>
                             </Column>
                             <!--5 column -->
                             <Column width="40%">
@@ -337,12 +361,6 @@
                                 <smartField:SmartField value="{Comment}"/>
                             </cells>
                         </ColumnListItem>
-
-                        <footer>
-                            
-                        </footer>
-
-
                     </Table>
                 </smartTable:SmartTable>
             </VBox>

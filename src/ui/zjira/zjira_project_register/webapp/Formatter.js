@@ -14,5 +14,10 @@ sap.ui.define([], function () {
           return "Success";
       }
     },
+
+    formatSumHours: function(oValue){
+      debugger;
+    },
+
   };
 });

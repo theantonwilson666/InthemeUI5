@@ -86,9 +86,9 @@ module.exports = function (grunt) {
         options: {
           appresources: "src",
           resources:
-            "C:/Users/AntonPC/Desktop/Intheme/sapui5-sdk-1.65.16/resources",
+            "C:/Users/АнтонВильсон/Desktop/Work/InThemJira/UI5/sapui5-sdk-1.65.16/resources",
           testresources:
-            "C:/Users/AntonPC/Desktop/Intheme/sapui5-sdk-1.65.16/test-resources",
+            "C:/Users/АнтонВильсон/Desktop/Work/InThemJira/UI5/sapui5-sdk-1.65.16/test-resources",
         },
       },
     },

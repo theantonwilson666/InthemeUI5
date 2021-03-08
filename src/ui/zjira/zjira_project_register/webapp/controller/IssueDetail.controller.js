@@ -6,6 +6,7 @@ sap.ui.define(
     return Controller.extend(
       "intheme.zjira_project_register.controller.IssueDetail",
       {
+        
         onInit: function () {
           this.getRouter()
             .getRoute("IssueDetailRoute")
@@ -22,10 +23,11 @@ sap.ui.define(
           this.setStateProperty("/layout", "EndColumnFullScreen");
         },
 
-
-        onWorkRatioBarPress: function(oEvent){
+        onWorkRatioBarPress: function (oEvent) {
           debugger;
-        }
+        },
+
+        
       }
     );
   }

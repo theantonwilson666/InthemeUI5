@@ -62,6 +62,7 @@
                     showFullScreenButton="false"
                     persistencyKey="issuePage.PKey.SmartTable"
                     enableAutoBinding="true"
+                    beforeRebindTable="onBeforeBindingTab($event,'SpendHours','TotalHoursSum')"
                     requestAtLeastFields="ProjectID,IssueID,IssueName,IssueDescr,PriorityID,PriorityName,StatusID,StatusName,StatusCatName,StageName,SubstageName,OrigEstHours,SpendHours,FsNumber,ProjectStageID,ProjectStageName,RequestNumber,DueDate,AssignedName,TypeName,IssueKey,TypeID"
                     demandPopin="true">
                 <smartTable:customData>
@@ -91,6 +92,9 @@
                             <header>
                                 <Text text="{/#Issue/IssueName/@sap:label}"/>
                             </header>
+                            <footer>
+                                <Text text="{i18n>TotalSum}"/>
+                            </footer>
                         </Column>
                         <!--2 column -->
                         <Column>
@@ -130,22 +134,6 @@
                                 <core:CustomData key="p13nData"
                                                  value='\{
                                                         "columnIndex": "3",
-                                                        "columnKey": "ProjectStageName",
-                                                        "leadingProperty": "ProjectStageName",
-                                                        "sortProperty": "ProjectStageName",
-                                                        "filterProperty": "ProjectStageName"
-                                                     }'/>
-                            </customData>
-                            <header>
-                                <Text text="{/#Issue/ProjectStageName/@sap:label}"/>
-                            </header>
-                        </Column>
-                        <!--5 column -->
-                        <Column>
-                            <customData>
-                                <core:CustomData key="p13nData"
-                                                 value='\{
-                                                        "columnIndex": "4",
                                                         "columnKey": "AssignedName",
                                                         "leadingProperty": "AssignedName",
                                                         "sortProperty": "AssignedName",
@@ -156,6 +144,25 @@
                                 <Text text="{/#Issue/AssignedName/@sap:label}"/>
                             </header>
                         </Column>
+                        <!--5 column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "4",
+                                                        "columnKey": "SpendHours",
+                                                        "leadingProperty": "SpendHours",
+                                                        "sortProperty": "SpendHours",
+                                                        "filterProperty": "SpendHours"
+                                                     }'/>
+                            </customData>
+                            <header>
+                                <Text text="{/#Issue/SpendHours/@sap:label}"/>
+                            </header>
+                            <footer>
+                                <Text id='TotalHoursSum' text="test"/>
+                            </footer>
+                        </Column>
                     </columns>
                     <ColumnListItem type="Navigation" highlight="{path:'PriorityID', formatter:'.formatter.formatRowHighlight'}">
                         <!--1 cells-->
@@ -164,6 +171,7 @@
                                 <ObjectIdentifier title="{IssueName}" text="{IssueKey}"/>
                                 <Text text="{TypeName}"/>
                                 <Text text="{IssueDescr}"/>
+                                <smartField:SmartField value="{ProjectStageName}"/>
                             </VBox>
                         </cells>
                         <!--2 cells-->
@@ -176,11 +184,11 @@
                         </cells>
                         <!--4 cells-->
                         <cells>
-                            <smartField:SmartField value="{ProjectStageName}"/>
+                            <smartField:SmartField value="{AssignedName}"/>
                         </cells>
                         <!--5 cells-->
                         <cells>
-                            <smartField:SmartField value="{AssignedName}"/>
+                            <smartField:SmartField value="{SpendHours}"/>
                         </cells>
                     </ColumnListItem>
                 </Table>

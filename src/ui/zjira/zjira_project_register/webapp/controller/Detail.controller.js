@@ -32,9 +32,7 @@ sap.ui.define(
             this.getModel().createKey("/ProjectSet", oArr)
           );
         },
-
         
-
         onViewIssue: function(oEvent){
           var oBindingObject = oEvent.getParameter("listItem").getBindingContext().getObject();
 

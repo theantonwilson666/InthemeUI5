@@ -58,6 +58,7 @@
                     useTablePersonalisation="true"
                     showFullScreenButton="false"
                     enableAutoBinding="true"
+                    beforeRebindTable="onBeforeBindingTab($event,'HoursSpend','TotalHoursSum')"
                     requestAtLeastFields="ProjectID,ProjectName,ProjectTypeName,ProjectCatName,ProjectKey"
                     demandPopin="true">
                 <smartTable:customData>
@@ -87,29 +88,19 @@
                             <header>
                                 <Text text="{/#Project/ProjectName/@sap:label}"/>
                             </header>
+
+                            <footer>
+                                <Text text="{i18n>TotalSum}"/>
+                            </footer>
+
                         </Column>
+
                         <!--2 column -->
                         <Column>
                             <customData>
                                 <core:CustomData key="p13nData"
                                                  value='\{
                                                         "columnIndex": "1",
-                                                        "columnKey": "ProjectTypeName",
-                                                        "leadingProperty": "ProjectTypeName",
-                                                        "sortProperty": "ProjectTypeName",
-                                                        "filterProperty": "ProjectTypeName"
-                                                     }'/>
-                            </customData>
-                            <header>
-                                <Text text="{/#Project/ProjectTypeName/@sap:label}"/>
-                            </header>
-                        </Column>
-                        <!--3 column -->
-                        <Column>
-                            <customData>
-                                <core:CustomData key="p13nData"
-                                                 value='\{
-                                                        "columnIndex": "2",
                                                         "columnKey": "ProjectCatName",
                                                         "leadingProperty": "ProjectCatName",
                                                         "sortProperty": "ProjectCatName",
@@ -120,6 +111,28 @@
                                 <Text text="{/#Project/ProjectCatName/@sap:label}"/>
                             </header>
                         </Column>
+
+
+                        <!--3 column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "2",
+                                                        "columnKey": "HoursSpend",
+                                                        "leadingProperty": "HoursSpend",
+                                                        "sortProperty": "HoursSpend",
+                                                        "filterProperty": "HoursSpend"
+                                                     }'/>
+                            </customData>
+                            <header>
+                                <Text text="{/#Project/HoursSpend/@sap:label}"/>
+                            </header>
+
+                             <footer>
+                                <Text id='TotalHoursSum' text="test"/>
+                            </footer>
+                        </Column>
                     </columns>
                     <ColumnListItem
                             type="Navigation">
@@ -129,14 +142,17 @@
                                 <ObjectIdentifier title="{ProjectName}" text="{ProjectKey}"/>
                             </HBox>
                         </cells>
+
                         <!--2 cells-->
-                        <cells>
-                            <smartField:SmartField value="{ProjectTypeName}"/>
-                        </cells>
-                        <!--3 cells-->
                         <cells>
                             <smartField:SmartField value="{ProjectCatName}"/>
                         </cells>
+
+                        <!--3 cells-->
+                        <cells>
+                            <smartField:SmartField value="{HoursSpend}"/>
+                        </cells>
+
                     </ColumnListItem>
                 </Table>
             </smartTable:SmartTable>
