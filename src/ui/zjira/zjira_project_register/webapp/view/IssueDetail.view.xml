@@ -246,9 +246,11 @@
                                 enableAutoBinding="true"
                                 beforeRebindTable="onBeforeBindingTab($event,'HoursSpend','TotalHoursSum')"
                                 requestAtLeastFields="ProjectID,IssueID,WorklogID,AuthorName,WorklogStarted,HoursSpend,TimeSpendText,Comment">
+                    
                     <smartTable:customData>
-                        <core:CustomData key="dateFormatSettings" value='\{"UTC":true, "pattern":"HH.mm dd.MM.yyyy"\}'/>
+                        <core:CustomData key="dateFormatSettings" value='\{"UTC":true, "pattern":"dd.MM.yyyy"\}'/>
                     </smartTable:customData>
+
                     <Table sticky="ColumnHeaders" 
                            growing="true" 
                            fixedLayout="false" 

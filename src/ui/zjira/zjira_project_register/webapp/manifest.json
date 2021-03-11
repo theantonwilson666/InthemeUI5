@@ -94,7 +94,8 @@
           "icons": {
             "goHome": "sap-icon://home"
           },
-          "layout": "OneColumn"
+          "layout": "OneColumn",
+          "proj_filter": ""
         }
       }
     },

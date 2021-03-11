@@ -28,6 +28,7 @@ sap.ui.define(
 
         var oParams = {
           ProjectID: oBindingObject.ProjectID,
+          Filter: this.getStateProperty("/proj_filter"),
         };
 
         this.navTo("DetailRoute", { query: oParams }, false);
@@ -70,6 +71,10 @@ sap.ui.define(
         );
       },
 
+      getStateProperty: function (sPath, oContext) {
+        return this.getModel("state").getProperty(sPath, oContext);
+      },
+
       getModel: function (sName) {
         return (
           this.getOwnerComponent().getModel(sName) ||
@@ -109,22 +114,50 @@ sap.ui.define(
         }
       },
 
-      onBeforeBindingTab: function (oEvent, iSumParam, iFooterText) {
+      onBeforeBindingTab: function (
+        oEvent,
+        iSumParam,
+        iFooterText,
+        iFilterInit
+      ) {
         var mBindingParams = oEvent.getParameter("bindingParams");
         //Event handlers for the binding
         this.SumParam = iSumParam;
         this.footerText = iFooterText;
-        mBindingParams.events = {
-          dataReceived: function (oEvent, iSumParam) {
-            var oReceivedData = oEvent.getParameter("data");
-            var iSum = 0;
-            oReceivedData.results.forEach(function (oItem) {
-              iSum += oItem[this.SumParam];
-            }.bind(this));
-            this.getView().byId(this.footerText).setText(iSum);
-          }.bind(this)
-        };
-      }
+
+        if (!iFilterInit) {
+          mBindingParams.events = {
+            dataReceived: function (oEvent, iSumParam) {
+              var oReceivedData = oEvent.getParameter("data");
+              var iSum = 0;
+              oReceivedData.results.forEach(
+                function (oItem) {
+                  iSum += oItem[this.SumParam];
+                }.bind(this)
+              );
+              this.getView().byId(this.footerText).setText(iSum);
+            }.bind(this),
+          };
+        } else {
+          mBindingParams.events = {
+            dataReceived: function (oEvent, iSumParam) {
+              var oReceivedData = oEvent.getParameter("data");
+              var iSum = 0;
+              oReceivedData.results.forEach(
+                function (oItem) {
+                  iSum += oItem[this.SumParam];
+                }.bind(this)
+              );
+              this.getView().byId(this.footerText).setText(iSum);
+            }.bind(this),
+
+            dataRequested: function(oEvent){
+              this.setStateProperty("/proj_filter", this.getView().byId("projectFilterBar").getFilterDataAsString()) ;
+            }.bind(this)
+
+          };
+        }
+      },
     });
   }
 );

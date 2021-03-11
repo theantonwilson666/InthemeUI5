@@ -38,7 +38,8 @@ sap.ui.define(
 
           var oParams = {
             ProjectID: oBindingObject.ProjectID,
-            IssueID: oBindingObject.IssueID
+            IssueID: oBindingObject.IssueID,
+            Filter: this.getStateProperty("/proj_filter"),
           };
 
           this.navTo("IssueDetailRoute", {query: oParams}, false);
