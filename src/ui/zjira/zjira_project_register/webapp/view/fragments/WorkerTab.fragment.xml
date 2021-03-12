@@ -1,0 +1,180 @@
+<core:FragmentDefinition xmlns="sap.m"
+                         xmlns:core="sap.ui.core"
+                         xmlns:smartTable="sap.ui.comp.smarttable"
+                         xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+                         xmlns:sv="sap.ui.comp.smartvariants"
+                         xmlns:f="sap.f"
+                        xmlns:smartField="sap.ui.comp.smartfield"
+                         xmlns:l="sap.ui.layout">
+    <f:DynamicPage id="workerDetailListView" toggleHeaderOnTitleClick="true" showFooter="false" headerExpanded="false" preserveHeaderStateOnScroll="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="workerPageVariant"
+                                                   persistencyKey="workerPage.PKey"
+                                                   showShare="true"
+                                                   showExecuteOnSelection="true"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="false" class="sapUiNoContentPadding">
+                <f:content>
+                    <Text text='zz'/>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <VBox>
+                <smartFilterBar:SmartFilterBar
+                            id="workerFilterBar"
+                            entityType="ProjectWorker"
+                            useToolbar="false"
+                            smartVariant="workerPageVariant"
+                            considerSelectionVariants="true"
+                            enableBasicSearch="false"
+                            persistencyKey="workerPage.PKey.FilterBar"
+                            liveMode="false">
+                        </smartFilterBar:SmartFilterBar>
+                <smartTable:SmartTable
+                            id="workerSmartTable"
+                            smartFilterId="workerFilterBar"
+                            header="{i18n>IssueTableTitle}"
+                            entitySet="ProjectWorkerSet"
+                            useExportToExcel="false"
+                            tableBindingPath="ProjectWorkers"
+                            showRowCount="true"
+                            tableType="ResponsiveTable"
+                            useVariantManagement="true"
+                            useTablePersonalisation="true"
+                            showFullScreenButton="false"
+                            persistencyKey="workerPage.PKey.SmartTable"
+                            enableAutoBinding="true"
+                            beforeRebindTable="onBeforeBindingTab($event,'SpendHours','WorkerTotalHoursSum')"
+                            requestAtLeastFields="ProjectID,WorkerID,WorkerName,PositionID,PositionName,TeamID,TeamName,SpendHours,EstHours,WorkRatio"
+                            demandPopin="true">
+                    <smartTable:customData>
+                        <core:CustomData key="dateFormatSettings" value='\{"UTC":false, "pattern":"dd.MM.yyyy"\}'/>
+                    </smartTable:customData>
+                    <Table sticky="ColumnHeaders"
+                                growing="true"
+                                fixedLayout="false"
+                                growingThreshold="300"
+                                growingScrollToLoad="false"
+                                mode="None">
+                        <columns>
+                            <!--1 column -->
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "0",
+                                                        "columnKey": "WorkerName",
+                                                        "leadingProperty": "WorkerName",
+                                                        "sortProperty": "WorkerName",
+                                                        "filterProperty": "WorkerName"
+                                                     }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#ProjectWorker/WorkerName/@sap:label}"/>
+                                </header>
+                                <footer>
+                                    <Text text="{i18n>TotalSum}"/>
+                                </footer>
+                            </Column>
+                            <!--2 column -->
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "1",
+                                                        "columnKey": "EstHours",
+                                                        "leadingProperty": "EstHours",
+                                                        "sortProperty": "EstHours",
+                                                        "filterProperty": "EstHours"
+                                                     }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#ProjectWorker/EstHours/@sap:label}"/>
+                                </header>
+                            </Column>
+                            <!--3 column -->
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "2",
+                                                        "columnKey": "SpendHours",
+                                                        "leadingProperty": "SpendHours",
+                                                        "sortProperty": "SpendHours",
+                                                        "filterProperty": "SpendHours"
+                                                     }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#ProjectWorker/SpendHours/@sap:label}"/>
+                                </header>
+                                <footer>
+                                    <Text id='WorkerTotalHoursSum' text="test"/>
+                                </footer>
+                            </Column>
+                            <!--4 column -->
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "3",
+                                                        "columnKey": "WorkRatio",
+                                                        "leadingProperty": "WorkRatio",
+                                                        "sortProperty": "WorkRatio",
+                                                        "filterProperty": "WorkRatio"
+                                                     }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#ProjectWorker/WorkRatio/@sap:label}"/>
+                                </header>
+                            </Column>
+                            <!--5 column -->
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "4",
+                                                        "columnKey": "TeamName",
+                                                        "leadingProperty": "TeamName",
+                                                        "sortProperty": "TeamName",
+                                                        "filterProperty": "TeamName"
+                                                     }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#ProjectWorker/TeamName/@sap:label}"/>
+                                </header>
+                            </Column>
+                        </columns>
+                        <ColumnListItem>
+                            <!--1 cells-->
+                            <cells>
+                                <ObjectIdentifier title="{WorkerName}" text="{PositionName}"/>
+                            </cells>
+                            <!--2 cells-->
+                            <cells>
+                                <smartField:SmartField value="{EstHours}"/>
+                            </cells>
+                            <!--3 cells-->
+                            <cells>
+                                <smartField:SmartField value="{SpendHours}"/>
+                            </cells>
+                            <!--4 cells-->
+                            <cells>
+                                <smartField:SmartField value="{WorkRatio}"/>
+                            </cells>
+                            <!--5 cells-->
+                            <cells>
+                                <smartField:SmartField value="{TeamName}"/>
+                            </cells>
+                        </ColumnListItem>
+                    </Table>
+                </smartTable:SmartTable>
+            </VBox>
+        </f:content>
+    </f:DynamicPage>
+</core:FragmentDefinition>

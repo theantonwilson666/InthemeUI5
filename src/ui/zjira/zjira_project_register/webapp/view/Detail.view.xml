@@ -28,171 +28,30 @@
             <f:DynamicPageHeader pinnable="false" class="sapUiNoContentPadding">
                 <f:content>
                     <VBox>
-                        <Text text="{ProjectCatName}" />
-                        <sv:SmartVariantManagement id="issuePageVariant"
-                                                   persistencyKey="issuePage.PKey"
-                                                   showShare="true"
-                                                   showExecuteOnSelection="true"/>
-                        <smartFilterBar:SmartFilterBar
-                            id="issueFilterBar"
-                            entityType="Issue"
-                            useToolbar="false"
-                            smartVariant="issuePageVariant"
-                            considerSelectionVariants="true"
-                            enableBasicSearch="false"
-                            persistencyKey="issuePage.PKey.FilterBar"
-                            liveMode="false">
-                        </smartFilterBar:SmartFilterBar>
+                        
                     </VBox>
                 </f:content>
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
-            <smartTable:SmartTable
-                    id="issueSmartTable"
-                    smartFilterId="issueFilterBar"
-                    header="{i18n>IssueTableTitle}"
-                    entitySet="IssueSet"
-                    useExportToExcel="false"
-                    tableBindingPath="Issues"
-                    showRowCount="true"
-                    tableType="ResponsiveTable"
-                    useVariantManagement="true"
-                    useTablePersonalisation="true"
-                    showFullScreenButton="false"
-                    persistencyKey="issuePage.PKey.SmartTable"
-                    enableAutoBinding="true"
-                    beforeRebindTable="onBeforeBindingTab($event,'SpendHours','TotalHoursSum')"
-                    requestAtLeastFields="ProjectID,IssueID,IssueName,IssueDescr,PriorityID,PriorityName,StatusID,StatusName,StatusCatName,StageName,SubstageName,OrigEstHours,SpendHours,FsNumber,ProjectStageID,ProjectStageName,RequestNumber,DueDate,AssignedName,TypeName,IssueKey,TypeID"
-                    demandPopin="true">
-                <smartTable:customData>
-                    <core:CustomData key="dateFormatSettings" value='\{"UTC":false, "pattern":"dd.MM.yyyy"\}'/>
-                </smartTable:customData>
-                <Table sticky="ColumnHeaders"
-                       growing="true"
-                       fixedLayout="false"
-                       growingThreshold="300"
-                       growingScrollToLoad="false"
-                       mode="SingleSelectMaster"
-                       selectionChange="onViewIssue"
-                       updateFinished="projectTableUpdateFinished">
-                    <columns>
-                        <!--1 column -->
-                        <Column>
-                            <customData>
-                                <core:CustomData key="p13nData"
-                                                 value='\{
-                                                        "columnIndex": "0",
-                                                        "columnKey": "IssueName",
-                                                        "leadingProperty": "IssueName",
-                                                        "sortProperty": "IssueName",
-                                                        "filterProperty": "IssueName"
-                                                     }'/>
-                            </customData>
-                            <header>
-                                <Text text="{/#Issue/IssueName/@sap:label}"/>
-                            </header>
-                            <footer>
-                                <Text text="{i18n>TotalSum}"/>
-                            </footer>
-                        </Column>
-                        <!--2 column -->
-                        <Column>
-                            <customData>
-                                <core:CustomData key="p13nData"
-                                                 value='\{
-                                                        "columnIndex": "1",
-                                                        "columnKey": "StatusName",
-                                                        "leadingProperty": "StatusName",
-                                                        "sortProperty": "StatusName",
-                                                        "filterProperty": "StatusName"
-                                                     }'/>
-                            </customData>
-                            <header>
-                                <Text text="{/#Issue/StatusName/@sap:label}"/>
-                            </header>
-                        </Column>
-                        <!--3 column -->
-                        <Column>
-                            <customData>
-                                <core:CustomData key="p13nData"
-                                                 value='\{
-                                                        "columnIndex": "2",
-                                                        "columnKey": "StageName",
-                                                        "leadingProperty": "StageName",
-                                                        "sortProperty": "StageName",
-                                                        "filterProperty": "StageName"
-                                                     }'/>
-                            </customData>
-                            <header>
-                                <Text text="{/#Issue/StageName/@sap:label}"/>
-                            </header>
-                        </Column>
-                        <!--4 column -->
-                        <Column>
-                            <customData>
-                                <core:CustomData key="p13nData"
-                                                 value='\{
-                                                        "columnIndex": "3",
-                                                        "columnKey": "AssignedName",
-                                                        "leadingProperty": "AssignedName",
-                                                        "sortProperty": "AssignedName",
-                                                        "filterProperty": "AssignedName"
-                                                     }'/>
-                            </customData>
-                            <header>
-                                <Text text="{/#Issue/AssignedName/@sap:label}"/>
-                            </header>
-                        </Column>
-                        <!--5 column -->
-                        <Column>
-                            <customData>
-                                <core:CustomData key="p13nData"
-                                                 value='\{
-                                                        "columnIndex": "4",
-                                                        "columnKey": "SpendHours",
-                                                        "leadingProperty": "SpendHours",
-                                                        "sortProperty": "SpendHours",
-                                                        "filterProperty": "SpendHours"
-                                                     }'/>
-                            </customData>
-                            <header>
-                                <Text text="{/#Issue/SpendHours/@sap:label}"/>
-                            </header>
-                            <footer>
-                                <Text id='TotalHoursSum' text="test"/>
-                            </footer>
-                        </Column>
-                    </columns>
-                    <ColumnListItem type="Navigation" highlight="{path:'PriorityID', formatter:'.formatter.formatRowHighlight'}">
-                        <!--1 cells-->
-                        <cells>
-                            <VBox>
-                                <ObjectIdentifier title="{IssueName}" text="{IssueKey}"/>
-                                <Text text="{TypeName}"/>
-                                <Text text="{IssueDescr}"/>
-                                <smartField:SmartField value="{ProjectStageName}"/>
-                            </VBox>
-                        </cells>
-                        <!--2 cells-->
-                        <cells>
-                            <ObjectIdentifier title="{StatusName}" text="{StatusCatName}"/>
-                        </cells>
-                        <!--3 cells-->
-                        <cells>
-                            <ObjectIdentifier title="{StageName}" text="{SubstageName}"/>
-                        </cells>
-                        <!--4 cells-->
-                        <cells>
-                            <smartField:SmartField value="{AssignedName}"/>
-                        </cells>
-                        <!--5 cells-->
-                        <cells>
-                            <smartField:SmartField value="{SpendHours}"/>
-                        </cells>
-                    </ColumnListItem>
-                </Table>
-            </smartTable:SmartTable>
+            <IconTabBar id="iconTabBar"
+                        selectedKey="issues"
+                        applyContentPadding="false"
+                        expanded="true"
+                        expandable="false"
+                        stretchContentHeight="true"
+                        tabDensityMode="Compact">
+                <items>
+                    <IconTabFilter id="IssueTab" text="{i18n>IssueTab}" key="issues">
+                       <core:Fragment fragmentName="intheme.zjira_project_register.view.fragments.IssueTab" type="XML"/>
+                    </IconTabFilter>
+
+                     <IconTabFilter id="WorkerTab" text="{i18n>WorkerTab}" key="workers">
+                       <core:Fragment fragmentName="intheme.zjira_project_register.view.fragments.WorkerTab" type="XML"/>
+                    </IconTabFilter>
+
+                </items>
+            </IconTabBar>
         </f:content>
         <!-- <f:footer>
             <OverflowToolbar visible="{state>/editDetail}">
