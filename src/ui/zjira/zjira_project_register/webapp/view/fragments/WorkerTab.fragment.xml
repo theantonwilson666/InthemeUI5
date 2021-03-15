@@ -39,7 +39,7 @@
                 <smartTable:SmartTable
                             id="workerSmartTable"
                             smartFilterId="workerFilterBar"
-                            header="{i18n>IssueTableTitle}"
+                            header="{i18n>WorkerTableTitle}"
                             entitySet="ProjectWorkerSet"
                             useExportToExcel="false"
                             tableBindingPath="ProjectWorkers"
@@ -50,7 +50,7 @@
                             showFullScreenButton="false"
                             persistencyKey="workerPage.PKey.SmartTable"
                             enableAutoBinding="true"
-                            beforeRebindTable="onBeforeBindingTab($event,'SpendHours','WorkerTotalHoursSum')"
+                            beforeRebindTable="onBeforeBindingTab($event,'SpendHours')"
                             requestAtLeastFields="ProjectID,WorkerID,WorkerName,PositionID,PositionName,TeamID,TeamName,SpendHours,EstHours,WorkRatio"
                             demandPopin="true">
                     <smartTable:customData>

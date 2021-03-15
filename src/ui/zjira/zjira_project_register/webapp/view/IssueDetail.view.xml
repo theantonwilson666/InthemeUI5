@@ -244,12 +244,12 @@
                                 showFullScreenButton="false" 
                                 persistencyKey="worklog.PKey.SmartTable" 
                                 enableAutoBinding="true"
-                                beforeRebindTable="onBeforeBindingTab($event,'HoursSpend','TotalHoursSum')"
+                                beforeRebindTable="onBeforeBindingTab($event,'HoursSpend')"
                                 requestAtLeastFields="ProjectID,IssueID,WorklogID,AuthorName,WorklogStarted,HoursSpend,TimeSpendText,Comment">
                     
                     <smartTable:customData>
                         <core:CustomData key="dateFormatSettings" value='\{"UTC":true, "pattern":"dd.MM.yyyy"\}'/>
-                    </smartTable:customData>
+                    </smartTable:customData> 
 
                     <Table sticky="ColumnHeaders" 
                            growing="true" 

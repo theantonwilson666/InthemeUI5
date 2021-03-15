@@ -61,7 +61,7 @@
                     useTablePersonalisation="true"
                     showFullScreenButton="false"
                     enableAutoBinding="true"
-                    beforeRebindTable="onBeforeBindingTab($event,'HoursSpend','TotalHoursSum', 'true')"
+                    beforeRebindTable="onBeforeBindingTab($event,'HoursSpend','true')"
                     requestAtLeastFields="ProjectID,ProjectName,ProjectTypeName,ProjectCatName,ProjectKey"
                     demandPopin="true">
                 <smartTable:customData>

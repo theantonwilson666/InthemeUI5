@@ -117,13 +117,17 @@ sap.ui.define(
       onBeforeBindingTab: function (
         oEvent,
         iSumParam,
-        iFooterText,
         iFilterInit
       ) {
         var mBindingParams = oEvent.getParameter("bindingParams");
         //Event handlers for the binding
         this.SumParam = iSumParam;
-        this.footerText = iFooterText;
+        this.oTotalRow = {
+          Project : "TotalHoursSum",
+          Issue : "TotalHoursSum",
+          ProjectWorker : "WorkerTotalHoursSum",
+          Worklog  : "TotalHoursSum"
+        };
 
         if (!iFilterInit) {
           mBindingParams.events = {
@@ -135,7 +139,7 @@ sap.ui.define(
                   iSum += oItem[this.SumParam];
                 }.bind(this)
               );
-              this.getView().byId(this.footerText).setText(iSum);
+              this.getView().byId(this.oTotalRow[oEvent.getSource()._getEntityType().name]).setText(iSum);
             }.bind(this),
           };
         } else {
@@ -148,7 +152,7 @@ sap.ui.define(
                   iSum += oItem[this.SumParam];
                 }.bind(this)
               );
-              this.getView().byId(this.footerText).setText(iSum);
+              this.getView().byId(this.oTotalRow[oEvent.getSource()._getEntityType().name]).setText(iSum);
             }.bind(this),
 
             dataRequested: function(oEvent){
