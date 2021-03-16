@@ -422,7 +422,9 @@ sap.ui.define(
                   error: function (oError) {
                     this.closeBusyDialog();
                     oUploadInput.clear();
-                    this.showError(oError);
+                    this.showMessageToast(
+                      this.i18n('FILE_LOAD_ERROR')
+                    );
                     rej(false);
                   }.bind(this),
                 });

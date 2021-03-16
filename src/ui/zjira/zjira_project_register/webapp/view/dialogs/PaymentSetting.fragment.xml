@@ -22,7 +22,7 @@
                     useVariantManagement="false"
                     useTablePersonalisation="false"
                     enableAutoBinding="false"
-                    requestAtLeastFields="TeamID,TeamName,PositionID,PositionName,CoefWeek,CoefWeekend"
+                    requestAtLeastFields="ProjectID,ProjectName,TeamID,TeamName,PositionID,PositionName,CoefWeek,CoefWeekend"
                     demandPopin="true">
                 <smartTable:customData>
                     <core:CustomData key="dateFormatSettings" value='\{"pattern": "dd.MM.yyyy"\}'/>
@@ -100,13 +100,30 @@
                             </header>
                         </Column>
 
-
                         <!--3 column -->
                         <Column>
                             <customData>
                                 <core:CustomData key="p13nData"
                                                  value='\{
                                                             "columnIndex": "2",
+                                                            "columnKey": "ProjectName",
+                                                            "leadingProperty": "ProjectName",
+                                                            "sortProperty": "ProjectName",
+                                                            "filterProperty": "ProjectName"
+                                                         }'/>
+                            </customData>
+                            <header>
+                                <Text text="{/#PaymentSetting/ProjectName/@sap:label}"/>
+                            </header>
+                        </Column>
+
+
+                        <!--4 column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                            "columnIndex": "3",
                                                             "columnKey": "CoefWeek",
                                                             "leadingProperty": "CoefWeek",
                                                             "sortProperty": "CoefWeek",
@@ -123,7 +140,7 @@
                             <customData>
                                 <core:CustomData key="p13nData"
                                                  value='\{
-                                                            "columnIndex": "3",
+                                                            "columnIndex": "4",
                                                             "columnKey": "CoefCoefWeekend",
                                                             "leadingProperty": "CoefWeekend",
                                                             "sortProperty": "CoefWeekend",
@@ -149,12 +166,19 @@
                                 <smartField:SmartField value="{PositionName}" editable="{= ${state>/PaymentSettingSTMode} === 'Delete' }"/>
                             </cells>
 
+
                             <!--3 cells-->
+                            <cells>
+                                <smartField:SmartField value="{ProjectName}" editable="{= ${state>/PaymentSettingSTMode} === 'Delete' }"/>
+                            </cells>
+
+
+                            <!--4 cells-->
                             <cells>
                                 <smartField:SmartField value="{CoefWeek}" editable="{= ${state>/PaymentSettingSTMode} === 'Delete' }"/>
                             </cells>
 
-                            <!--4 cells-->
+                            <!--5 cells-->
                             <cells>
                                 <smartField:SmartField value="{CoefWeekend}" editable="{= ${state>/PaymentSettingSTMode} === 'Delete' }"/>
                             </cells>

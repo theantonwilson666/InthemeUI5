@@ -92,7 +92,6 @@
                     </Record>
                 </Annotation>
             </Annotations>
-
             <Annotations Target="ZJIRA_SRV.Project/Team">
                 <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
                 <Annotation Term="Common.ValueList">
@@ -113,8 +112,6 @@
                     </Record>
                 </Annotation>
             </Annotations>
-
-
             <Annotations Target="ZJIRA_SRV.Project/Position">
                 <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
                 <Annotation Term="Common.ValueList">
@@ -135,9 +132,6 @@
                     </Record>
                 </Annotation>
             </Annotations>
-
-
-
             <Annotations Target="ZJIRA_SRV.Project/ProjectCatID">
                 <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
                 <Annotation Term="Common.ValueList">
@@ -365,7 +359,15 @@
                     </Record>
                 </Annotation>
             </Annotations>
-
+            <Annotations Target="ZJIRA_SRV.PaymentSetting">
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>TeamID</PropertyPath>
+                        <PropertyPath>PositionID</PropertyPath>
+                        <PropertyPath>ProjectID</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
             <Annotations Target="ZJIRA_SRV.PaymentSetting/TeamName">
                 <Annotation Term="Common.ValueListWithFixedValues" Bool="false"/>
                 <Annotation Term="Common.ValueList">
@@ -387,8 +389,6 @@
                     </Record>
                 </Annotation>
             </Annotations>
-
-
             <Annotations Target="ZJIRA_SRV.PaymentSetting/PositionName">
                 <Annotation Term="Common.ValueListWithFixedValues" Bool="false"/>
                 <Annotation Term="Common.ValueList">
@@ -411,6 +411,29 @@
                 </Annotation>
             </Annotations>
 
+            <Annotations Target="ZJIRA_SRV.PaymentSetting/ProjectName">
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="false"/>
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath" String="ProjectSHSet"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="PositionID"/>
+                                    <PropertyValue Property="ValueListProperty" String="ProjectID"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ProjectName"/>
+                                    <PropertyValue Property="ValueListProperty" String="ProjectDescr"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
 
 
             <Annotations Target="ZJIRA_SRV.ProjectWorker">
@@ -422,9 +445,7 @@
                     </Collection>
                 </Annotation>
             </Annotations>
-
-
-             <Annotations Target="ZJIRA_SRV.ProjectWorker/TeamID">
+            <Annotations Target="ZJIRA_SRV.ProjectWorker/TeamID">
                 <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
                 <Annotation Term="Common.ValueList">
                     <Record>
@@ -444,8 +465,6 @@
                     </Record>
                 </Annotation>
             </Annotations>
-
-
             <Annotations Target="ZJIRA_SRV.ProjectWorker/PositionID">
                 <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
                 <Annotation Term="Common.ValueList">
@@ -466,7 +485,6 @@
                     </Record>
                 </Annotation>
             </Annotations>
-
             <Annotations Target="ZJIRA_SRV.ProjectWorker/WorkerID">
                 <Annotation Term="Common.ValueListWithFixedValues" Bool="false"/>
                 <Annotation Term="Common.ValueList">
@@ -493,9 +511,6 @@
                     </Record>
                 </Annotation>
             </Annotations>
-
-
-
         </Schema>
     </edmx:DataServices>
 </edmx:Edmx>
