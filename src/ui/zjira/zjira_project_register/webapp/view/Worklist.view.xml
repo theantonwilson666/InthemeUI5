@@ -24,6 +24,12 @@
                 <f:expandedContent>
                     <Label text="{i18n>appDescription}"/>
                 </f:expandedContent>
+                <f:actions>
+                    <Button icon="sap-icon://monitor-payments"
+                            text="{i18n>paymentSettButton}"
+                            press="onOpenPaymentSettingDialog"
+                            type="Emphasized"/>
+                </f:actions>
             </f:DynamicPageTitle>
         </f:title>
         <f:header>
@@ -36,6 +42,7 @@
                             useToolbar="false"
                             considerSelectionVariants="true"
                             enableBasicSearch="false"
+                            showFilterConfiguration="false"
                             liveMode="false"
                             persistencyKey="projectPage.PKey.FilterBar">
                         <smartFilterBar:customData>

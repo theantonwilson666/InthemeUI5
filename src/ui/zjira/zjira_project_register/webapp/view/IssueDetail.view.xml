@@ -227,6 +227,7 @@
                                                smartVariant="worklogPageVariant" 
                                                considerSelectionVariants="true" 
                                                enableBasicSearch="false" 
+                                               showFilterConfiguration="false"
                                                persistencyKey="worklog.PKey.FilterBar" 
                                                liveMode="false">
                 </smartFilterBar:SmartFilterBar>

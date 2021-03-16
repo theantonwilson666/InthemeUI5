@@ -95,7 +95,8 @@
             "goHome": "sap-icon://home"
           },
           "layout": "OneColumn",
-          "proj_filter": ""
+          "proj_filter": "",
+          "PaymentSettingSTMode" : "None"
         }
       }
     },

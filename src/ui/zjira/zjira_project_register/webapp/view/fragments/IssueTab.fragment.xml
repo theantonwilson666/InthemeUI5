@@ -33,6 +33,7 @@
                             smartVariant="issuePageVariant"
                             considerSelectionVariants="true"
                             enableBasicSearch="false"
+                            showFilterConfiguration="false"
                             persistencyKey="issuePage.PKey.FilterBar"
                             liveMode="false">
                         </smartFilterBar:SmartFilterBar>

@@ -33,6 +33,7 @@
                             smartVariant="workerPageVariant"
                             considerSelectionVariants="true"
                             enableBasicSearch="false"
+                            showFilterConfiguration="false"
                             persistencyKey="workerPage.PKey.FilterBar"
                             liveMode="false">
                         </smartFilterBar:SmartFilterBar>
