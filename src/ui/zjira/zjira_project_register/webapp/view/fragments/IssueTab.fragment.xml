@@ -52,7 +52,7 @@
                             persistencyKey="issuePage.PKey.SmartTable"
                             enableAutoBinding="true"
                             beforeRebindTable="onBeforeBindingTab($event,'SpendHours')"
-                            requestAtLeastFields="ProjectID,IssueID,IssueName,IssueDescr,PriorityID,PriorityName,StatusID,StatusName,StatusCatName,StageName,SubstageName,OrigEstHours,SpendHours,FsNumber,ProjectStageID,ProjectStageName,RequestNumber,DueDate,AssignedName,TypeName,IssueKey,TypeID"
+                            requestAtLeastFields="ProjectID,IssueID,IssueName,IssueDescr,PriorityID,PriorityName,StatusID,StatusName,StatusCatName,StageName,SubstageName,OrigEstHours,SpendHours,FsNumber,ProjectStageID,ProjectStageName,RequestNumber,DueDate,AssignedName,TypeName,IssueKey,TypeID,Cost"
                             demandPopin="true">
                     <smartTable:customData>
                         <core:CustomData key="dateFormatSettings" value='\{"UTC":false, "pattern":"dd.MM.yyyy"\}'/>
@@ -177,7 +177,14 @@
                             </cells>
                             <!--5 cells-->
                             <cells>
-                                <smartField:SmartField value="{SpendHours}"/>
+                                <VBox>
+                                    <smartField:SmartField value="{SpendHours}"/>
+                                    <ObjectNumber number="{Cost}"
+                                                  unit="RUB"
+                                                  state="Success"/>
+
+                                    
+                                </VBox>
                             </cells>
                         </ColumnListItem>
                     </Table>

@@ -52,7 +52,7 @@
                             persistencyKey="workerPage.PKey.SmartTable"
                             enableAutoBinding="true"
                             beforeRebindTable="onBeforeBindingTab($event,'SpendHours')"
-                            requestAtLeastFields="ProjectID,WorkerID,WorkerName,PositionID,PositionName,TeamID,TeamName,SpendHours,EstHours,WorkRatio"
+                            requestAtLeastFields="ProjectID,WorkerID,WorkerName,PositionID,PositionName,TeamID,TeamName,SpendHours,EstHours,WorkRatio,Cost"
                             demandPopin="true">
                     <smartTable:customData>
                         <core:CustomData key="dateFormatSettings" value='\{"UTC":false, "pattern":"dd.MM.yyyy"\}'/>
@@ -162,7 +162,12 @@
                             </cells>
                             <!--3 cells-->
                             <cells>
-                                <smartField:SmartField value="{SpendHours}"/>
+                                <VBox>
+                                    <smartField:SmartField value="{SpendHours}"/>
+                                    <ObjectNumber number="{Cost}"
+                                                  unit="RUB"
+                                                  state="Success"/>
+                                </VBox>
                             </cells>
                             <!--4 cells-->
                             <cells>

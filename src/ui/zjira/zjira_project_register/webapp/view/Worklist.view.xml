@@ -69,7 +69,7 @@
                     showFullScreenButton="false"
                     enableAutoBinding="true"
                     beforeRebindTable="onBeforeBindingTab($event,'HoursSpend','true')"
-                    requestAtLeastFields="ProjectID,ProjectName,ProjectTypeName,ProjectCatName,ProjectKey"
+                    requestAtLeastFields="ProjectID,ProjectName,ProjectTypeName,ProjectCatName,ProjectKey,Cost"
                     demandPopin="true">
                 <smartTable:customData>
                     <core:CustomData key="dateFormatSettings" value='\{"UTC":false, "pattern":"dd.MM.yyyy"\}'/>
@@ -137,6 +137,22 @@
                                 <Text id='TotalHoursSum' text="test"/>
                             </footer>
                         </Column>
+                        <!--4 column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "3",
+                                                        "columnKey": "Cost",
+                                                        "leadingProperty": "Cost",
+                                                        "sortProperty": "Cost",
+                                                        "filterProperty": "Cost"
+                                                     }'/>
+                            </customData>
+                            <header>
+                                <Text text="{/#Project/Cost/@sap:label}"/>
+                            </header>
+                        </Column>
                     </columns>
                     <ColumnListItem
                             type="Navigation">
@@ -153,6 +169,12 @@
                         <!--3 cells-->
                         <cells>
                             <smartField:SmartField value="{HoursSpend}"/>
+                        </cells>
+                        <!--4 cells-->
+                        <cells>
+                            <ObjectNumber number="{Cost}"
+                                          unit="RUB"
+                                          state="Success"/>
                         </cells>
                     </ColumnListItem>
                 </Table>
