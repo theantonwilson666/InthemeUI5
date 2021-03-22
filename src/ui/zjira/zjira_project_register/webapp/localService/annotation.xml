@@ -410,7 +410,6 @@
                     </Record>
                 </Annotation>
             </Annotations>
-
             <Annotations Target="ZJIRA_SRV.PaymentSetting/ProjectName">
                 <Annotation Term="Common.ValueListWithFixedValues" Bool="false"/>
                 <Annotation Term="Common.ValueList">
@@ -419,7 +418,6 @@
                         <PropertyValue Property="SearchSupported" Bool="true"/>
                         <PropertyValue Property="Parameters">
                             <Collection>
-                                
                                 <Record Type="Common.ValueListParameterInOut">
                                     <PropertyValue Property="LocalDataProperty" PropertyPath="PositionID"/>
                                     <PropertyValue Property="ValueListProperty" String="ProjectID"/>
@@ -433,9 +431,6 @@
                     </Record>
                 </Annotation>
             </Annotations>
-
-
-
             <Annotations Target="ZJIRA_SRV.ProjectWorker">
                 <Annotation Term="UI.SelectionFields">
                     <Collection>
@@ -505,6 +500,51 @@
                                 <Record Type="Common.ValueListParameterOut">
                                     <PropertyValue Property="LocalDataProperty" PropertyPath="WorkerID"/>
                                     <PropertyValue Property="ValueListProperty" String="WorkerID"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZJIRA_SRV.ProjectStageProfit">
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>ProjectStageID</PropertyPath>
+                        <PropertyPath>RequestNo</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZJIRA_SRV.ProjectStageProfit/ProjectStageID">
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath" String="ProjectStageSHSet"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="StageDescr"/>
+                                </Record>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ProjectStageID"/>
+                                    <PropertyValue Property="ValueListProperty" String="StageID"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZJIRA_SRV.ProjectStageProfit/RequestNo">
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath" String="RequestNoSHSet"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="RequestNo"/>
+                                    <PropertyValue Property="ValueListProperty" String="RequestNo"/>
                                 </Record>
                             </Collection>
                         </PropertyValue>

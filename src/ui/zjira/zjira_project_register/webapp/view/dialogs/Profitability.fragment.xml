@@ -1,0 +1,152 @@
+<core:FragmentDefinition
+        xmlns="sap.m"
+        xmlns:l="sap.ui.layout"
+        xmlns:smartField="sap.ui.comp.smartfield"
+        xmlns:smartTable="sap.ui.comp.smarttable"
+        xmlns:smartForm="sap.ui.comp.smartform"
+        xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+        xmlns:sv="sap.ui.comp.smartvariants"
+        xmlns:u="sap.ui.unified"
+        xmlns:f="sap.f"
+        xmlns:core="sap.ui.core">
+    <Dialog id="profitabilityDialog"
+            title="{i18n>ProfitabilityTitle} - {ProjectName}"
+            class="sapUiSizeCompact"
+            contentHeight="80%"
+            contentWidth="80%">
+        <content>
+            <VBox>
+                <smartFilterBar:SmartFilterBar
+                            id="projectStageFilterBar"
+                            entityType="ProjectStageProfit"
+                            useToolbar="false"
+                            considerSelectionVariants="true"
+                            enableBasicSearch="false"
+                            showFilterConfiguration="false"
+                            liveMode="false"
+                            class="">
+                        </smartFilterBar:SmartFilterBar>
+                <smartTable:SmartTable
+                            id="projectStageSmartTable"
+                            smartFilterId="projectStageFilterBar"
+                            header="{i18n>IssueTableTitle}"
+                            entitySet="ProjectStageProfitSet"
+                            useExportToExcel="false"
+                            showRowCount="true"
+                            tableBindingPath="ProjectStagesProfit" 
+                            tableType="ResponsiveTable"
+                            useVariantManagement="true"
+                            useTablePersonalisation="true"
+                            showFullScreenButton="false"
+                            enableAutoBinding="true"
+                            requestAtLeastFields="ProjectID,Filter,ProjectStageID,RequestNo,ProjectStageDescr,Profit,Cost,Profitability,Hours"
+                            demandPopin="true">
+                    <smartTable:customData>
+                        <core:CustomData key="dateFormatSettings" value='\{"UTC":false, "pattern":"dd.MM.yyyy"\}'/>
+                    </smartTable:customData>
+                    <Table sticky="ColumnHeaders"
+                                growing="true"
+                                fixedLayout="false"
+                                growingThreshold="300"
+                                growingScrollToLoad="false"
+                                mode="None">
+                        <columns>
+                            <!--1 column -->
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "0",
+                                                        "columnKey": "ProjectStageDescr",
+                                                        "leadingProperty": "ProjectStageDescr",
+                                                        "sortProperty": "ProjectStageDescr",
+                                                        "filterProperty": "ProjectStageDescr"
+                                                     }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#ProjectStageProfit/ProjectStageDescr/@sap:label}"/>
+                                </header>
+                            </Column>
+                            <!--2 column -->
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "1",
+                                                        "columnKey": "Profit",
+                                                        "leadingProperty": "Profit",
+                                                        "sortProperty": "Profit",
+                                                        "filterProperty": "Profit"
+                                                     }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#ProjectStageProfit/Profit/@sap:label}"/>
+                                </header>
+                            </Column>
+                            <!--3 column -->
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "2",
+                                                        "columnKey": "Cost",
+                                                        "leadingProperty": "Cost",
+                                                        "sortProperty": "Cost",
+                                                        "filterProperty": "Cost"
+                                                     }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#ProjectStageProfit/Cost/@sap:label}"/>
+                                </header>
+                            </Column>
+                            <!--4 column -->
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "3",
+                                                        "columnKey": "Profitability",
+                                                        "leadingProperty": "Profitability",
+                                                        "sortProperty": "Profitability",
+                                                        "filterProperty": "Profitability"
+                                                     }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#ProjectStageProfit/Profitability/@sap:label}"/>
+                                </header>
+                            </Column>
+                        </columns>
+                        <ColumnListItem>
+                            <!--1 cells-->
+                            <cells>
+                                <smartField:SmartField value="{ProjectStageDescr}"/>
+                            </cells>
+                            <!--2 cells-->
+                            <cells>
+                                <smartField:SmartField value="{Profit}"/>
+                            </cells>
+                            <!--3 cells-->
+                            <cells>
+                                <VBox>
+                                    <ObjectNumber number="{Cost}"
+                                                          unit="RUB"
+                                                          state="Error"/>
+                                    <ObjectAttribute title="{/#ProjectStageProfit/Hours/@sap:label}"
+                                                             text="{Hours}"/>
+                                </VBox>
+                            </cells>
+                            <!--4 cells-->
+                            <cells>
+                                <smartField:SmartField value="{Profitability}"/>
+                            </cells>
+                        </ColumnListItem>
+                    </Table>
+                </smartTable:SmartTable>
+            </VBox>
+        </content>
+        <buttons>
+            <Button text="{i18n>CalcProfit}" type="Emphasized" press="onCalcProfitability"/>
+            <Button text="{i18n>CancelBtn}" type="Transparent" press="onCancelProfitabilityDialog"/>
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

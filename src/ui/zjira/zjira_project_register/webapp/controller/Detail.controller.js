@@ -32,9 +32,12 @@ sap.ui.define(
             this.getModel().createKey("/ProjectSet", oArr)
           );
         },
-        
-        onViewIssue: function(oEvent){
-          var oBindingObject = oEvent.getParameter("listItem").getBindingContext().getObject();
+
+        onViewIssue: function (oEvent) {
+          var oBindingObject = oEvent
+            .getParameter("listItem")
+            .getBindingContext()
+            .getObject();
 
           var oParams = {
             ProjectID: oBindingObject.ProjectID,
@@ -42,10 +45,30 @@ sap.ui.define(
             Filter: this.getStateProperty("/proj_filter"),
           };
 
-          this.navTo("IssueDetailRoute", {query: oParams}, false);
+          this.navTo("IssueDetailRoute", { query: oParams }, false);
+        },
 
+        onProfitabilyButtonPress: function (oEvent) {
+          this.loadDialog
+            .call(this, {
+              sDialogName: "_oProfitabilitySettingDialog",
+              sViewName:
+                "intheme.zjira_project_register.view.dialogs.Profitability",
+            })
+            .then(
+              function (oDialog) {
+                oDialog.open();
+              }.bind(this)
+            );
+        },
+
+        onCancelProfitabilityDialog: function(oEvent){
+          oEvent.getSource().getParent().close();
+        },
+
+        onCalcProfitability: function(oEvent){
+          
         }
-
       }
     );
   }

@@ -22,6 +22,13 @@
                 <f:content>
                     <Text text="{ProjectKey}"/>
                 </f:content>
+
+                <f:actions>
+                    <Button icon="sap-icon://lead"
+                            type="Emphasized"
+                            text="{i18n>profitButton}"
+                            press="onProfitabilyButtonPress"/>
+                </f:actions>
             </f:DynamicPageTitle>
         </f:title>
         <f:header>
