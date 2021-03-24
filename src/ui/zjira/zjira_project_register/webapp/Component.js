@@ -32,7 +32,7 @@ sap.ui.define([
             if (!this.getViewBinder()) {
                 this.setViewBinder(new ViewBinder());
             }
-
+            
             // enable routing
             this.getRouter().initialize();
             

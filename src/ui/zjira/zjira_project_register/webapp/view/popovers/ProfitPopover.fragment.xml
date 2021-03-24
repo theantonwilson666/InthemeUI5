@@ -1,0 +1,23 @@
+<core:FragmentDefinition
+        xmlns="sap.m"
+        xmlns:core="sap.ui.core"
+        xmlns:l="sap.ui.layout"
+        xmlns:smartField="sap.ui.comp.smartfield">
+    <Popover
+            title="{i18n>PopOverTitle}"
+            showHeader="true"
+            contentWidth="12rem"
+            contentHeight="15rem"
+            placement="Left">
+        <VBox class="sapUiSmallMargin" alignItems="Stretch" fitContainer="true">
+            <smartField:SmartLabel labelFor="ProfitA"/>
+            <smartField:SmartField id='ProfitA' value="{path : 'ProfitA', formatter: '.formatter.formatFloat'}"/>
+            <smartField:SmartLabel labelFor="ProfitB"/>
+            <smartField:SmartField id='ProfitB' value="{path : 'ProfitB', formatter: '.formatter.formatFloat'}"/>
+            <smartField:SmartLabel labelFor="ProfitC"/>
+            <smartField:SmartField id='ProfitC' value="{path : 'ProficC', formatter: '.formatter.formatFloat'}"/>
+            <smartField:SmartLabel labelFor="Profitability"/>
+            <smartField:SmartField id='Profitability' value="{path : 'Profitability', formatter: '.formatter.formatFloat'}"/>
+        </VBox>
+    </Popover>
+</core:FragmentDefinition>

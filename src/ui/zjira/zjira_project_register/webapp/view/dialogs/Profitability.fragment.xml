@@ -29,18 +29,32 @@
                 <smartTable:SmartTable
                             id="projectStageSmartTable"
                             smartFilterId="projectStageFilterBar"
-                            header="{i18n>IssueTableTitle}"
                             entitySet="ProjectStageProfitSet"
                             useExportToExcel="false"
                             showRowCount="true"
+                            editable="true"
                             tableBindingPath="ProjectStagesProfit" 
                             tableType="ResponsiveTable"
                             useVariantManagement="true"
                             useTablePersonalisation="true"
                             showFullScreenButton="false"
                             enableAutoBinding="true"
-                            requestAtLeastFields="ProjectID,Filter,ProjectStageID,RequestNo,ProjectStageDescr,Profit,Cost,Profitability,Hours"
+                            beforeRebindTable="onBeforeBindingProjectStage"
+                            requestAtLeastFields="ProjectID,Filter,ProjectStageID,RequestNo,ProjectStageDescr,Profit,Cost,Profitability,Hours,ProfitA,ProfitB,ProficC"
                             demandPopin="true">
+                    <smartTable:customToolbar>
+                        <OverflowToolbar design="Solid">
+                            <HBox class="sapUiSmallMargin">
+                                <!-- <Label text="{i18n>TaxInputLabel}" labelFor="taxInput" /> -->
+                                <Input  id="taxInput"
+                                    placeholder="{i18n>TaxPlaceHolder}"
+                                    type="Number"
+                                    fieldWidth="100%">
+                            </Input>
+                            </HBox>
+                            <ToolbarSpacer/>
+                        </OverflowToolbar>
+                    </smartTable:customToolbar>
                     <smartTable:customData>
                         <core:CustomData key="dateFormatSettings" value='\{"UTC":false, "pattern":"dd.MM.yyyy"\}'/>
                     </smartTable:customData>
@@ -67,12 +81,30 @@
                                     <Text text="{/#ProjectStageProfit/ProjectStageDescr/@sap:label}"/>
                                 </header>
                             </Column>
+
                             <!--2 column -->
                             <Column>
                                 <customData>
                                     <core:CustomData key="p13nData"
                                                  value='\{
                                                         "columnIndex": "1",
+                                                        "columnKey": "RequestNo",
+                                                        "leadingProperty": "RequestNo",
+                                                        "sortProperty": "RequestNo",
+                                                        "filterProperty": "RequestNo"
+                                                     }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#ProjectStageProfit/RequestNo/@sap:label}"/>
+                                </header>
+                            </Column>
+
+                            <!--3 column -->
+                            <Column width="20%">
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "2",
                                                         "columnKey": "Profit",
                                                         "leadingProperty": "Profit",
                                                         "sortProperty": "Profit",
@@ -83,12 +115,12 @@
                                     <Text text="{/#ProjectStageProfit/Profit/@sap:label}"/>
                                 </header>
                             </Column>
-                            <!--3 column -->
+                            <!--4 column -->
                             <Column>
                                 <customData>
                                     <core:CustomData key="p13nData"
                                                  value='\{
-                                                        "columnIndex": "2",
+                                                        "columnIndex": "3",
                                                         "columnKey": "Cost",
                                                         "leadingProperty": "Cost",
                                                         "sortProperty": "Cost",
@@ -99,12 +131,12 @@
                                     <Text text="{/#ProjectStageProfit/Cost/@sap:label}"/>
                                 </header>
                             </Column>
-                            <!--4 column -->
+                            <!--5 column -->
                             <Column>
                                 <customData>
                                     <core:CustomData key="p13nData"
                                                  value='\{
-                                                        "columnIndex": "3",
+                                                        "columnIndex": "4",
                                                         "columnKey": "Profitability",
                                                         "leadingProperty": "Profitability",
                                                         "sortProperty": "Profitability",
@@ -121,11 +153,17 @@
                             <cells>
                                 <smartField:SmartField value="{ProjectStageDescr}"/>
                             </cells>
+
                             <!--2 cells-->
+                            <cells>
+                                <smartField:SmartField value="{RequestNo}"/>
+                            </cells>
+
+                            <!--3 cells-->
                             <cells>
                                 <smartField:SmartField value="{Profit}"/>
                             </cells>
-                            <!--3 cells-->
+                            <!--4 cells-->
                             <cells>
                                 <VBox>
                                     <ObjectNumber number="{Cost}"
@@ -135,9 +173,9 @@
                                                              text="{Hours}"/>
                                 </VBox>
                             </cells>
-                            <!--4 cells-->
+                            <!--5 cells-->
                             <cells>
-                                <smartField:SmartField value="{Profitability}"/>
+                                <Link text="{path : 'Profitability', formatter: '.formatter.formatFloat'}" enabled="{= ${Profitability} !== '0' ? true : false}" press="onPressProfitLink"/>
                             </cells>
                         </ColumnListItem>
                     </Table>

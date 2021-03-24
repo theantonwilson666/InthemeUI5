@@ -369,7 +369,13 @@ sap.ui.define(
         sap.m.MessageToast.show(sMessage);
       },
 
-      handleFileSelected: function (oEvent, sEntitySet, oProperty, bGetFile, oUriParam) {
+      handleFileSelected: function (
+        oEvent,
+        sEntitySet,
+        oProperty,
+        bGetFile,
+        oUriParam
+      ) {
         return new Promise(
           function (res, rej) {
             var oUploadInput = oEvent.getSource();
@@ -414,17 +420,13 @@ sap.ui.define(
                   success: function () {
                     this.closeBusyDialog();
                     oUploadInput.clear();
-                    this.showMessageToast(
-                      this.i18n('FILE_SUCCESSFUL_LOAD')
-                    );
+                    this.showMessageToast(this.i18n("FILE_SUCCESSFUL_LOAD"));
                     res(true);
                   }.bind(this),
                   error: function (oError) {
                     this.closeBusyDialog();
                     oUploadInput.clear();
-                    this.showMessageToast(
-                      this.i18n('FILE_LOAD_ERROR')
-                    );
+                    this.showMessageToast(this.i18n("FILE_LOAD_ERROR"));
                     rej(false);
                   }.bind(this),
                 });
@@ -434,6 +436,60 @@ sap.ui.define(
               Log.error("File not found");
               rej(false);
             }
+          }.bind(this)
+        );
+      },
+
+      openPopoverBy: function (oParams) {
+        if (!this[oParams.sPopoverName]) {
+          return Fragment.load({
+            id: this.getView().sId,
+            type: "XML",
+            name: oParams.sViewName,
+            controller: this,
+          }).then(
+            function (oPopover) {
+              this[oParams.sPopoverName] = oPopover;
+              this.getView().addDependent(oPopover);
+              return this._openPopoverBy(oParams);
+            }.bind(this)
+          );
+        } else {
+          if (this[oParams.sPopoverName].isOpen()) {
+            this[oParams.sPopoverName].close();
+
+            // Popover open if binding context different
+            if (
+              this[oParams.sPopoverName].getBindingContext() &&
+              this[oParams.sPopoverName].getBindingContext().getPath() !==
+                oParams.oSource.getBindingContext().getPath()
+            ) {
+              return this._openPopoverBy(oParams);
+            }
+
+            return new Promise(
+              function (res) {
+                res(this[oParams.sPopoverName]);
+              }.bind(this)
+            );
+          } else {
+            return this._openPopoverBy(oParams);
+          }
+        }
+      },
+
+      _openPopoverBy: function (oParams) {
+        if (oParams.sPath) {
+          this[oParams.sPopoverName].setBindingContext(
+            new sap.ui.model.Context(this.getModel(), oParams.sPath)
+          );
+        }
+
+        this[oParams.sPopoverName].openBy(oParams.oSource);
+
+        return new Promise(
+          function (res) {
+            res(this[oParams.sPopoverName]);
           }.bind(this)
         );
       },

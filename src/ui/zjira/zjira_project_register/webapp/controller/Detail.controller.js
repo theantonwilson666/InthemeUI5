@@ -1,6 +1,11 @@
 sap.ui.define(
-  ["intheme/zjira_project_register/controller/Main.controller", "sap/m/Dialog"],
-  function (Controller, Dialog) {
+  [
+    "intheme/zjira_project_register/controller/Main.controller",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator",
+    "sap/m/Dialog",
+  ],
+  function (Controller, Filter, FilterOperator, Dialog) {
     "use strict";
 
     return Controller.extend(
@@ -62,13 +67,64 @@ sap.ui.define(
             );
         },
 
-        onCancelProfitabilityDialog: function(oEvent){
+        onCancelProfitabilityDialog: function (oEvent) {
           oEvent.getSource().getParent().close();
         },
 
-        onCalcProfitability: function(oEvent){
-          
-        }
+        onCalcProfitability: function (oEvent) {
+          var oTab = this.getView().byId("projectStageSmartTable");
+          oTab.rebindTable();
+        },
+
+        onBeforeBindingProjectStage: function (oEvent) {
+          var mBindingParams = oEvent.getParameter("bindingParams");
+          var aItems = this.getView()
+            .byId("projectStageSmartTable")
+            .getTable()
+            .getItems();
+
+          if (aItems.lenth != 0) {
+            var aFilterData = [];
+            aItems.forEach(
+              function (oItem) {
+                var oObj = oItem.getBindingContext().getObject();
+                aFilterData.push({
+                  ProjectStage: oObj.ProjectStageID,
+                  RequestNo: oObj.RequestNo,
+                  Profit: oObj.Profit,
+                });
+              }.bind(this)
+            );
+
+            var oFilter = {
+              Tax: this.getView().byId("taxInput").getValue(),
+              Data: aFilterData,
+            };
+
+            mBindingParams.filters.push(
+              new Filter({
+                path: "TechFilter",
+                operator: FilterOperator.EQ,
+                value1: JSON.stringify(oFilter),
+              })
+            );
+          }
+        },
+
+        onPressProfitLink: function (oEvent) {
+          // var sPath = oEvent.getSource().getBindingContext().getPath()
+          this.openPopoverBy
+            .call(this, {
+              sPopoverName: "_profitPopover",
+              sViewName: "intheme.zjira_project_register.view.popovers.ProfitPopover",
+              sPath: oEvent.getSource().getBindingContext().getPath(),
+              oSource: oEvent.getSource(),
+            })
+            .then(
+              function (oPopover) {
+                // oPopover.setBindingContext(new sap.ui.model.Context(this.getModel(), sPath));
+              }.bind(this));
+        },
       }
     );
   }

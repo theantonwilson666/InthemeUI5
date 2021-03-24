@@ -15,9 +15,12 @@ sap.ui.define([], function () {
       }
     },
 
-    formatSumHours: function(oValue){
+    formatSumHours: function (oValue) {
       debugger;
     },
 
+    formatFloat: function (value) {
+      return parseFloat(value);
+    },
   };
 });
