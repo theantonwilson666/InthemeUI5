@@ -11,13 +11,13 @@
             placement="Left">
         <VBox class="sapUiSmallMargin" alignItems="Stretch" fitContainer="true">
             <smartField:SmartLabel labelFor="ProfitA"/>
-            <smartField:SmartField id='ProfitA' value="{path : 'ProfitA', formatter: '.formatter.formatFloat'}"/>
+            <smartField:SmartField id='ProfitA' value="{path : 'ProfitA', formatter: '.commonFormatter.formatFloat'}"/>
             <smartField:SmartLabel labelFor="ProfitB"/>
-            <smartField:SmartField id='ProfitB' value="{path : 'ProfitB', formatter: '.formatter.formatFloat'}"/>
+            <smartField:SmartField id='ProfitB' value="{path : 'ProfitB', formatter: '.commonFormatter.formatFloat'}"/>
             <smartField:SmartLabel labelFor="ProfitC"/>
-            <smartField:SmartField id='ProfitC' value="{path : 'ProficC', formatter: '.formatter.formatFloat'}"/>
+            <smartField:SmartField id='ProfitC' value="{path : 'ProficC', formatter: '.commonFormatter.formatFloat'}"/>
             <smartField:SmartLabel labelFor="Profitability"/>
-            <smartField:SmartField id='Profitability' value="{path : 'Profitability', formatter: '.formatter.formatFloat'}"/>
+            <smartField:SmartField id='Profitability' value="{path : 'Profitability', formatter: '.commonFormatter.formatFloat'}"/>
         </VBox>
     </Popover>
 </core:FragmentDefinition>

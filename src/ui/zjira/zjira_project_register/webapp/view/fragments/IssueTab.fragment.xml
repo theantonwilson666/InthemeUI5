@@ -153,7 +153,7 @@
                                 </footer>
                             </Column>
                         </columns>
-                        <ColumnListItem type="Navigation" highlight="{path:'PriorityID', formatter:'.formatter.formatRowHighlight'}">
+                        <ColumnListItem type="Navigation" highlight="{path:'PriorityID', formatter:'.commonFormatter.formatRowHighlight'}">
                             <!--1 cells-->
                             <cells>
                                 <VBox>

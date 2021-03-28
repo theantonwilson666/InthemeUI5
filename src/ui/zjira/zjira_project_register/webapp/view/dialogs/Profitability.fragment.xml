@@ -81,7 +81,6 @@
                                     <Text text="{/#ProjectStageProfit/ProjectStageDescr/@sap:label}"/>
                                 </header>
                             </Column>
-
                             <!--2 column -->
                             <Column>
                                 <customData>
@@ -98,7 +97,6 @@
                                     <Text text="{/#ProjectStageProfit/RequestNo/@sap:label}"/>
                                 </header>
                             </Column>
-
                             <!--3 column -->
                             <Column width="20%">
                                 <customData>
@@ -153,12 +151,10 @@
                             <cells>
                                 <smartField:SmartField value="{ProjectStageDescr}"/>
                             </cells>
-
                             <!--2 cells-->
                             <cells>
                                 <smartField:SmartField value="{RequestNo}"/>
                             </cells>
-
                             <!--3 cells-->
                             <cells>
                                 <smartField:SmartField value="{Profit}"/>
@@ -175,7 +171,7 @@
                             </cells>
                             <!--5 cells-->
                             <cells>
-                                <Link text="{path : 'Profitability', formatter: '.formatter.formatFloat'}" enabled="{= ${Profitability} !== '0' ? true : false}" press="onPressProfitLink"/>
+                                <ObjectStatus text="{path : 'Profitability', formatter: '.commonFormatter.formatFloat'}" active="{= ${Profitability} !== '0' ? true : false}" press="onPressProfitLink" state="Success"/>
                             </cells>
                         </ColumnListItem>
                     </Table>

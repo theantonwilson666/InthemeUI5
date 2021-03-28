@@ -21,7 +21,6 @@ module.exports = function (grunt) {
     sLevel = "0";
   }
 
-
   // Structure of MOL
   var oAuth = {
     server: "http://sap-tm.inthemelab.com:8000",
@@ -43,7 +42,6 @@ module.exports = function (grunt) {
     ],
   };
 
-
   grunt.initConfig({
     zip: {
       "src.zip": ["src/**/*.*", "Gruntfile.js"],
@@ -59,6 +57,7 @@ module.exports = function (grunt) {
       server: {
         options: {
           port: 8000,
+          hostname: "localhost",
           livereload: false,
           keepalive: true,
           middleware: function (connect, options, middlewares) {
@@ -69,6 +68,17 @@ module.exports = function (grunt) {
           },
         },
         proxies: [
+
+          {
+            context: "/sap/bc/ui5_ui5/sap/zjiralib/",
+            host: "localhost",
+            port: 8000,
+            https: false,
+            rewrite: {
+              "^/sap/bc/ui5_ui5/sap/zjiralib/": "/ui/zjira/zjiralib/src/",
+            },
+          },
+
           {
             context: "/sap/",
             host: "10.11.12.4",
@@ -89,6 +99,7 @@ module.exports = function (grunt) {
             "C:/Users/АнтонВильсон/Desktop/Work/InThemJira/UI5/sapui5-sdk-1.65.16/resources",
           testresources:
             "C:/Users/АнтонВильсон/Desktop/Work/InThemJira/UI5/sapui5-sdk-1.65.16/test-resources",
+          proxypath: "proxy",
         },
       },
     },
@@ -119,11 +130,11 @@ module.exports = function (grunt) {
               sApp +
               "/webapp",
             src: "**/*.*",
-          }
-        }
-        }
-      }
-    });
+          },
+        },
+      },
+    },
+  });
 
   grunt.registerTask("initBuild", function () {
     oAuth.packages.forEach(function (oPackage) {
@@ -154,9 +165,8 @@ module.exports = function (grunt) {
           "src/dist/ui/" + oPackage.project + "/" + app + "/webapp"
         );
       }
-    })
+    });
   });
-
 
   grunt.registerTask("serve", function () {
     grunt.task.run(["configureProxies:server", "openui5_connect:server"]);

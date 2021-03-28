@@ -1,9 +1,9 @@
 sap.ui.define([
     "sap/ui/base/Object",
-    "intheme/zjira_project_register/ODataModelUtils"
+    "jira/lib/ODataModelUtils"
 ], function (Object, ODataModelUtils) {
 
-    return Object.extend("intheme.zjira_project_register.ViewBinder", {
+    return Object.extend("jira.lib.ViewBinder", {
 
         _view: null,
         _model: null,

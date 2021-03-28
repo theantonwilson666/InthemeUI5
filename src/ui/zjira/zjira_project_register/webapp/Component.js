@@ -1,21 +1,16 @@
+sap.ui.loader.config({paths: {"jira/lib": "/sap/bc/ui5_ui5/sap/zjiralib"}});
+
 sap.ui.define([
-    "sap/ui/core/UIComponent",
-    "intheme/zjira_project_register/ViewBinder",
+    "jira/lib/Component",
     "intheme/zjira_project_register/model/models",
     "sap/ui/Device"
-], function (UIComponent, ViewBinder, models, Device) {
+], function (UIComponent, models, Device) {
     "use strict";
 
     return UIComponent.extend("intheme.zjira_project_register.Component", {
 
         metadata: {
             manifest: "json",
-            aggregations: {
-                viewBinder: {
-                    type: "intheme.zjira_project_register.ViewBinder",
-                    multiple: false
-                },
-            }
         },
 
         /**
@@ -27,11 +22,6 @@ sap.ui.define([
         init: function () {
             // call the base component's init function
             UIComponent.prototype.init.apply(this, arguments);
-            
-            // Set View Binder in Component
-            if (!this.getViewBinder()) {
-                this.setViewBinder(new ViewBinder());
-            }
             
             // enable routing
             this.getRouter().initialize();

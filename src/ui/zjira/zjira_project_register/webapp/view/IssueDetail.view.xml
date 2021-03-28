@@ -106,7 +106,7 @@
                     </smartForm:SmartForm>
                     <!-- <smartField:SmartField value ="{AssignedName}"/> -->
                     <VBox alignItems="Stretch" fitContainer="true" width="50%">
-                        <smartTable:SmartTable id="PartSmartTable" entitySet="ParticipaterSet" useExportToExcel="false" header="{i18n>ParticipaterTabHeader}" tableBindingPath="Participaters" showRowCount="false" tableType="Table" useVariantManagement="false" useTablePersonalisation="false" showFullScreenButton="false" enableAutoBinding="true" requestAtLeastFields="ProjectID,IssueID,ParticipaterID,RoleID,RoleDescr,ParticipaterName,HoursSpend" demandPopin="false">
+                        <smartTable:SmartTable id="PartSmartTable" entitySet="ParticipaterSet" useExportToExcel="false" header="{i18n>ParticipaterTabHeader}" tableBindingPath="Participaters" showRowCount="false" tableType="Table" useVariantManagement="false" useTablePersonalisation="false" showFullScreenButton="false" enableAutoBinding="true" requestAtLeastFields="ProjectID,IssueID,ParticipaterID,RoleID,RoleDescr,ParticipaterName,HoursSpend,PlanHours" demandPopin="false">
                             <Table sticky="ColumnHeaders" growing="true" fixedLayout="false" growingThreshold="300" growingScrollToLoad="false" mode="None">
                                 <columns>
                                     <!--1 column -->
@@ -139,11 +139,28 @@
                                             <Text text="{/#Participater/ParticipaterName/@sap:label}"/>
                                         </header>
                                     </Column>
+
                                     <!--3 column -->
                                     <Column>
                                         <customData>
                                             <core:CustomData key="p13nData" value='\{
                                                         "columnIndex": "2",
+                                                        "columnKey": "PlanHours",
+                                                        "leadingProperty": "PlanHours",
+                                                        "sortProperty": "PlanHours",
+                                                        "filterProperty": "PlanHours"
+                                                     }'/>
+                                        </customData>
+                                        <header>
+                                            <Text text="{/#Participater/PlanHours/@sap:label}"/>
+                                        </header>
+                                    </Column>
+
+                                    <!--4 column -->
+                                    <Column>
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{
+                                                        "columnIndex": "3",
                                                         "columnKey": "HoursSpend",
                                                         "leadingProperty": "HoursSpend",
                                                         "sortProperty": "HoursSpend",
@@ -164,7 +181,13 @@
                                     <cells>
                                         <smartField:SmartField value="{ParticipaterName}"/>
                                     </cells>
+                                    
                                     <!--3 cells-->
+                                    <cells>
+                                        <smartField:SmartField value="{PlanHours}"/>
+                                    </cells>
+
+                                    <!--4 cells-->
                                     <cells>
                                         <smartField:SmartField value="{HoursSpend}"/>
                                     </cells>
@@ -253,9 +276,9 @@
                     </smartTable:customData> 
 
                     <Table sticky="ColumnHeaders" 
-                           growing="true" 
+                           growing="false" 
                            fixedLayout="false" 
-                           growingThreshold="10" 
+                           growingThreshold="300" 
                            growingScrollToLoad="false" 
                            mode="None">
                         <columns>

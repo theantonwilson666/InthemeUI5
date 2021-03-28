@@ -96,7 +96,8 @@
           },
           "layout": "OneColumn",
           "proj_filter": "",
-          "PaymentSettingSTMode" : "None"
+          "PaymentSettingSTMode" : "None",
+          "rebindProj": false
         }
       }
     },
