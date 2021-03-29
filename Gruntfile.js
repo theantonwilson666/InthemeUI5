@@ -10,7 +10,7 @@ module.exports = function (grunt) {
   // Parameters for deploy (comes from console command)
   var sApp = grunt.option("app");
   var sLevel = grunt.option("level");
-  // var sLib = grunt.option("lib");
+  var sLib = grunt.option("lib");
   // var sPlugin = grunt.option("plugin");
 
   if (sApp === undefined) {
@@ -19,6 +19,10 @@ module.exports = function (grunt) {
 
   if (sLevel === undefined) {
     sLevel = "0";
+  }
+
+  if (sLib === undefined) {
+    sLib = "zjiralib";
   }
 
   // Structure of MOL
@@ -40,6 +44,15 @@ module.exports = function (grunt) {
         },
       },
     ],
+
+    libs: {
+      zjiralib: {
+        package: "ZJIRA",
+        bspContainer: "ZJIRALIB",
+        transportno: "TMDK910450",
+        bspDescription: "JIRA LIB FOR UI5 APPLICATION",
+      },
+    },
   };
 
   grunt.initConfig({
@@ -68,7 +81,6 @@ module.exports = function (grunt) {
           },
         },
         proxies: [
-
           {
             context: "/sap/bc/ui5_ui5/sap/zjiralib/",
             host: "localhost",
@@ -104,6 +116,20 @@ module.exports = function (grunt) {
       },
     },
 
+    openui5_preload: {
+      zjiralib: {
+        options: {
+          resources: {
+            cwd: "src/ui/zjira/zjiralib/src",
+            prefix: "jira/lib",
+          },
+          dest: "src/dist/ui/zjira/zjiralib/",
+        },
+        components: true,
+        libraries: true,
+      },
+    },
+
     nwabap_ui5uploader: {
       options: {
         conn: {
@@ -129,6 +155,21 @@ module.exports = function (grunt) {
               "/" +
               sApp +
               "/webapp",
+            src: "**/*.*",
+          },
+        },
+      },
+
+      upload_library: {
+        options: {
+          ui5: {
+            package: oAuth.libs[sLib].package,
+            transportno: oAuth.libs[sLib].transportno,
+            bspcontainer: oAuth.libs[sLib].bspContainer,
+            bspcontainer_text: oAuth.libs[sLib].bspDescription,
+          },
+          resources: {
+            cwd: "src/dist/ui/zjira/" + sLib,
             src: "**/*.*",
           },
         },
@@ -166,6 +207,12 @@ module.exports = function (grunt) {
         );
       }
     });
+
+    // Copying remaining files of libs
+    for (var lib in oAuth.libs) {
+      grunt.file.copy("src/ui/zjira/" + lib + "/src", "src/dist/ui/zjira/" + lib);
+    }
+
   });
 
   grunt.registerTask("serve", function () {
@@ -173,6 +220,8 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask("deploy", ["nwabap_ui5uploader:upload_build"]);
+  
+  grunt.registerTask("deploy_lib", ["nwabap_ui5uploader:upload_library"]);
 
   grunt.registerTask("build", [
     "clean",

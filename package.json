@@ -16,6 +16,7 @@
   "scripts": {
     "serve": "grunt serve",
     "deploy_zjira_project_register": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=0 --app=zjira_project_register",
+    "deploy_zjiralib": "node node_modules\\grunt-cli\\bin\\grunt deploy_lib --lib=zjiralib",
     "build": "grunt build"
   },
   "keywords": [],
