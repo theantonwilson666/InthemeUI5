@@ -37,6 +37,16 @@
             description: "Отчет по проектам",
             title: "Jira: Проекты",
           },
+
+          "zjira_worker_register-display": {
+            additionalInformation:
+              "SAPUI5.Component=intheme.zjira_worker_register",
+            applicationType: "URL",
+            url: "/ui/zjira/zjira_worker_register/webapp/",
+            description: "Отчет по сотрудникам",
+            title: "Jira: Сотрудники",
+          },
+
         },
       };
     </script>
@@ -52,7 +62,8 @@
       data-sap-ui-theme="sap_belize"
       data-sap-ui-compatVersion="edge"
       data-sap-ui-resourceroots='{
-                "intheme.zjira_project_register": "../practice/zjira_project_register/webapp"
+                "intheme.zjira_project_register": "../zjira/zjira_project_register/webapp",
+                "intheme.zjira_worker_register": "../zjira/zjira_worker_register/webapp"
 			}'
       data-sap-ui-frameOptions="allow"
       data-sap-ui-language="ru"
