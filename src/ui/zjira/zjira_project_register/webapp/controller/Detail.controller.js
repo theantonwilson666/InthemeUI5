@@ -128,7 +128,8 @@ sap.ui.define(
             })
             .then(
               function (oPopover) {
-                // oPopover.setBindingContext(new sap.ui.model.Context(this.getModel(), sPath));
+                var sTax = this.getView().byId("taxInput").getValue() + '%';
+                this.getView().byId("TaxField").setText(sTax);
               }.bind(this)
             );
         },

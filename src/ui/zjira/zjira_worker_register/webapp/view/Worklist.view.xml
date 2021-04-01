@@ -59,7 +59,8 @@
                     useTablePersonalisation="true"
                     showFullScreenButton="false"
                     enableAutoBinding="true"
-                    requestAtLeastFields="Worker,Filter,WorkerName,Position,PositionName,Team,SpendHours,Cost,Bonus,FilterDate"
+                    beforeRebindTable="onBeforeBindingTab"
+                    requestAtLeastFields="Worker,Filter,WorkerName,Position,PositionName,Team,SpendHours,Cost,Bonus,WorklogDate,CloseIssueDate"
                     demandPopin="true">
                 <smartTable:customData>
                     <core:CustomData key="dateFormatSettings" value='\{"UTC":false, "pattern":"dd.MM.yyyy"\}'/>
@@ -69,7 +70,8 @@
                        fixedLayout="false"
                        growingThreshold="200"
                        growingScrollToLoad="false"
-                       mode="None">
+                       mode="SingleSelectMaster"
+                       selectionChange="onViewWorker">
                     <columns>
                         <!--1 column -->
                         <Column>
@@ -119,8 +121,6 @@
                                 <Text text="{/#WorkerRegister/Bonus/@sap:label}"/>
                             </header>
                         </Column>
-
-
                         <!--4 column -->
                         <Column>
                             <customData>
@@ -137,7 +137,6 @@
                                 <Text text="{/#WorkerRegister/Team/@sap:label}"/>
                             </header>
                         </Column>
-
                     </columns>
                     <ColumnListItem type="Navigation">
                         <!--1 cells-->
@@ -157,16 +156,15 @@
                         </cells>
                         <!--3 cells-->
                         <cells>
-                            <smartField:SmartField value="{Bonus}"/>
+                            <ObjectNumber number="{Bonus}"
+                                          unit="RUB"
+                                          state="Success"/>
                         </cells>
-
-
                         <!--4 cells-->
                         <cells>
                             <Text text="{Team}"/>
                             <smartField:SmartField value="{Team}"/>
                         </cells>
-
                     </ColumnListItem>
                 </Table>
             </smartTable:SmartTable>

@@ -41,6 +41,12 @@ module.exports = function (grunt) {
             bspDescription: "Jira Project UI5 application",
             prefix: "intheme/zjira_project_register",
           },
+
+          zjira_worker_register: {
+            bspContainer: "ZJIRA_WORKER",
+            bspDescription: "Jira Worker UI5 application",
+            prefix: "intheme/zjira_worker_register",
+          },
         },
       },
     ],

@@ -34,7 +34,8 @@
                         <PropertyPath>Worker</PropertyPath>
                         <PropertyPath>Position</PropertyPath>
                         <PropertyPath>Team</PropertyPath>
-                        <PropertyPath>FilterDate</PropertyPath>
+                        <PropertyPath>WorklogDate</PropertyPath>
+                        <PropertyPath>CloseIssueDate</PropertyPath>
                     </Collection>
                 </Annotation>
             </Annotations>

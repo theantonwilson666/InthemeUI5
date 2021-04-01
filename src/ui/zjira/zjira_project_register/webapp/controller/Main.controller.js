@@ -1,18 +1,14 @@
-sap.ui.define(
-  [
-    "jira/lib/BaseController",
-  ],
-  function (BaseController) {
-    "use strict";
+sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
+  "use strict";
 
-    return BaseController.extend("intheme.zjira_project_register.controller.Main", {
-     
+  return BaseController.extend(
+    "intheme.zjira_project_register.controller.Main",
+    {
       onInit: function () {
         this.getRouter()
           .getRoute("WorklistRoute")
           .attachPatternMatched(this._onRouteMatched, this);
       },
-
 
       onViewDetail: function (oEvent) {
         var oBindingObject = oEvent
@@ -100,13 +96,8 @@ sap.ui.define(
             function (oDialog) {
               oDialog.open();
               this.getView().byId("PaymentSettingST").rebindTable();
-
-              // oDialog.attachEventOnce(
-              //   "afterClose",
-              //   function () {
-              //     this.setEditableTradeLanesST(false);
-              //   }.bind(this)
-              // );
+              this.getView().byId("ProjWeekendST").rebindTable();
+              this.getView().byId("WorkerCostConfST").rebindTable();
             }.bind(this)
           );
       },
@@ -128,10 +119,10 @@ sap.ui.define(
         this.resetChanges();
       },
 
-      onAddPaymentSetting: function (oEvent) {
-        var oTable = this.getView().byId("PaymentSettingST").getTable();
-        var lisItemForTable = this.byId("paymentSettingListItem").clone();
-        var oCreatedTrade = this.getModel().createEntry("PaymentSettingSet", {
+      onAddPaymentSetting: function (oEvent, sSmartTab, sTab, sEntitySet) {
+        var oTable = this.getView().byId(sSmartTab).getTable();
+        var lisItemForTable = this.byId(sTab).clone();
+        var oCreatedTrade = this.getModel().createEntry(sEntitySet, {
           properties: {},
         });
 
@@ -147,7 +138,7 @@ sap.ui.define(
         );
       },
 
-      onDeletePaymentSetting: function (oEvent) {
+      onDeletePaymentSetting: function (oEvent, sSmartTab) {
         var oListItem = oEvent.getParameter("listItem");
         var oBindingContext = oListItem.getBindingContext();
 
@@ -157,7 +148,7 @@ sap.ui.define(
             if (MessageBox.Action.OK === sAction) {
               if (oBindingContext.bCreated) {
                 this.getView()
-                  .byId("PaymentSettingST")
+                  .byId(sSmartTab)
                   .getTable()
                   .removeItem(oListItem);
                 this.getModel().deleteCreatedEntry(oBindingContext);
@@ -180,6 +171,7 @@ sap.ui.define(
         this.showBusyDialog();
         this.getModel().callFunction("/DeletePaymentSettings", {
           method: "POST",
+          urlParameters: {SourceID : this.getStateProperty('/currentTab')},
           success: function (oData) {
             if (oData.DeletePaymentSettings.Ok === true) {
               this.closeBusyDialog();
@@ -198,6 +190,16 @@ sap.ui.define(
         });
       },
 
-    });
-  }
-);
+      onIconTabConfBarSelected: function (oEvent) {
+        this.setStateProperty(
+          "/currentTab",
+          oEvent.getSource().getSelectedKey()
+        );
+      },
+
+      handleConfFileSelected: function(oEvent){
+        this.handleFileSelected(oEvent, '/FileSet', {SourceID: this.getStateProperty('/currentTab')})
+      }
+    }
+  );
+});

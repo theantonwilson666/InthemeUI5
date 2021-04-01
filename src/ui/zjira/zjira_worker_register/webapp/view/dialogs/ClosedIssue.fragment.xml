@@ -1,0 +1,186 @@
+<core:FragmentDefinition
+        xmlns="sap.m"
+        xmlns:l="sap.ui.layout"
+        xmlns:smartField="sap.ui.comp.smartfield"
+        xmlns:smartTable="sap.ui.comp.smarttable"
+        xmlns:smartForm="sap.ui.comp.smartform"
+        xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+        xmlns:sv="sap.ui.comp.smartvariants"
+        xmlns:u="sap.ui.unified"
+        xmlns:f="sap.f"
+        xmlns:core="sap.ui.core">
+    <Dialog id="profitabilityDialog"
+            title="{i18n>ClossedIssueTitle} - {WorkerName}"
+            class="sapUiSizeCompact"
+            contentHeight="80%"
+            contentWidth="80%">
+        <content>
+            <VBox>
+                <smartFilterBar:SmartFilterBar
+                            id="closedIssueFilter"
+                            entityType="WorkerClosedIssue"
+                            useToolbar="false"
+                            considerSelectionVariants="true"
+                            enableBasicSearch="false"
+                            showFilterConfiguration="false"
+                            liveMode="false"
+                            class="">
+                        </smartFilterBar:SmartFilterBar>
+                <smartTable:SmartTable
+                            id="closedIssueSmartTable"
+                            smartFilterId="closedIssueFilter"
+                            useExportToExcel="false"
+                            showRowCount="true"
+                            editable="true"
+                            tableType="ResponsiveTable"
+                            useVariantManagement="true"
+                            useTablePersonalisation="true"
+                            showFullScreenButton="false"
+                            enableAutoBinding="true"
+                            requestAtLeastFields="Worker,Filter,WorkerName,Issue,IssueName,DueDate,Cost,Bonus,Project,ProjectName,SpendHours,EstHours,RequestNumber,ProjectStage,ProjectStageName"
+                            demandPopin="true">
+                    <smartTable:customData>
+                        <core:CustomData key="dateFormatSettings" value='\{"UTC":false, "pattern":"dd.MM.yyyy"\}'/>
+                    </smartTable:customData>
+                    <Table sticky="ColumnHeaders"
+                                growing="true"
+                                fixedLayout="false"
+                                growingThreshold="300"
+                                growingScrollToLoad="false"
+                                mode="None">
+                        <columns>
+                            <!--1 column -->
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "0",
+                                                        "columnKey": "IssueName",
+                                                        "leadingProperty": "IssueName",
+                                                        "sortProperty": "IssueName",
+                                                        "filterProperty": "IssueName"
+                                                     }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#WorkerClosedIssue/IssueName/@sap:label}"/>
+                                </header>
+                            </Column>
+                            <!--2 column -->
+                            <Column width="20%">
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "1",
+                                                        "columnKey": "DueDate",
+                                                        "leadingProperty": "DueDate",
+                                                        "sortProperty": "DueDate",
+                                                        "filterProperty": "DueDate"
+                                                     }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#WorkerClosedIssue/DueDate/@sap:label}"/>
+                                </header>
+                            </Column>
+                            <!--3 column -->
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "2",
+                                                        "columnKey": "Cost",
+                                                        "leadingProperty": "Cost",
+                                                        "sortProperty": "Cost",
+                                                        "filterProperty": "Cost"
+                                                     }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#WorkerClosedIssue/Cost/@sap:label}"/>
+                                </header>
+                            </Column>
+                            <!--4 column -->
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "3",
+                                                        "columnKey": "Bonus",
+                                                        "leadingProperty": "Bonus",
+                                                        "sortProperty": "Bonus",
+                                                        "filterProperty": "Bonus"
+                                                     }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#WorkerClosedIssue/Bonus/@sap:label}"/>
+                                </header>
+                            </Column>
+                            <!--5 column -->
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "4",
+                                                        "columnKey": "RequestNumber",
+                                                        "leadingProperty": "RequestNumber",
+                                                        "sortProperty": "RequestNumber",
+                                                        "filterProperty": "RequestNumber"
+                                                     }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#WorkerClosedIssue/RequestNumber/@sap:label}"/>
+                                </header>
+                            </Column>
+                            <!--6 column -->
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "5",
+                                                        "columnKey": "ProjectStageName",
+                                                        "leadingProperty": "ProjectStageName",
+                                                        "sortProperty": "ProjectStageName",
+                                                        "filterProperty": "ProjectStageName"
+                                                     }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#WorkerClosedIssue/ProjectStageName/@sap:label}"/>
+                                </header>
+                            </Column>
+                        </columns>
+                        <ColumnListItem>
+                            <!--1 cells-->
+                            <cells>
+                                <ObjectIdentifier title="{IssueName}" text="{ProjectName}"/>
+                            </cells>
+                            <!--2 cells-->
+                            <cells>
+                                <VBox>
+                                    <smartField:SmartField value="{DueDate}"/>
+                                    <ObjectNumber number="{SpendHours}"
+                                                  unit="h"/>
+                                </VBox>
+                            </cells>
+                            <!--3 cells-->
+                            <cells>
+                                <smartField:SmartField value="{Cost}"/>
+                            </cells>
+                            <!--4 cells-->
+                            <cells>
+                                <smartField:SmartField value="{Bonus}"/>
+                            </cells>
+
+                            <!--5 cells-->
+                            <cells>
+                                <smartField:SmartField value="{RequestNumber}"/>
+                            </cells>
+
+                            <!--6 cells-->
+                            <cells>
+                                <smartField:SmartField value="{ProjectStageName}"/>
+                            </cells>
+                        </ColumnListItem>
+                    </Table>
+                </smartTable:SmartTable>
+            </VBox>
+        </content>
+    </Dialog>
+</core:FragmentDefinition>

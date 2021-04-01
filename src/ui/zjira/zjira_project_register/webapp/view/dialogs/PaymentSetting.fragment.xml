@@ -1,37 +1,17 @@
 <core:FragmentDefinition
         xmlns="sap.m"
-        xmlns:l="sap.ui.layout"
-        xmlns:smartField="sap.ui.comp.smartfield"
-        xmlns:smartTable="sap.ui.comp.smarttable"
-         xmlns:u="sap.ui.unified"
+        xmlns:u="sap.ui.unified"
         xmlns:core="sap.ui.core">
     <Dialog id="paymentSettingDialog"
             title="{i18n>PaymentSettingTitle}"
             class="sapUiSizeCompact"
             contentHeight="80%"
             contentWidth="80%">
-        <content>
-            <smartTable:SmartTable
-                    id="PaymentSettingST"
-                    entitySet="PaymentSettingSet"
-                    useExportToExcel="false"
-                    showRowCount="false"
-                    editTogglable="true"
-                    editToggled="onEditToggled"
-                    tableType="ResponsiveTable"
-                    useVariantManagement="false"
-                    useTablePersonalisation="false"
-                    enableAutoBinding="false"
-                    requestAtLeastFields="TeamID,TeamName,PositionID,PositionName,CoefWeek"
-                    demandPopin="true">
-                <smartTable:customData>
-                    <core:CustomData key="dateFormatSettings" value='\{"pattern": "dd.MM.yyyy"\}'/>
-                    <core:CustomData key="useSmartField" value="true"/>
-                </smartTable:customData>
-                <smartTable:customToolbar>
-                    <OverflowToolbar design="Transparent">
+        <subHeader>
+            <Bar>
+                <contentRight>
+                    <!-- <HBox> -->
                         <ToolbarSpacer/>
-
                         <u:FileUploader
                                 id="uploadPaymentSetting"
                                 icon="sap-icon://excel-attachment"
@@ -40,109 +20,41 @@
                                 buttonText="{i18n>PaymentSettingLoadExcel}"
                                 fileType="xlsx,xsl"
                                 typeMissmatch="handleTypeMissmatch"
-                                change="handleFileSelected($event, '/FileSet', {SourceID: 'ZTEST'})"
+                                change="handleConfFileSelected"
                                 style="Emphasized"/>
-                        
                         <Button type="Transparent"
                                 iconFirst="false"
                                 icon="sap-icon://delete"
                                 text="{i18n>PaymentDeleteAll}"
                                 press="onDeleteAllPaymentSettings"/>
-                        
-                        <Button type="Transparent"
-                                iconFirst="false"
-                                enabled="{= ${state>/PaymentSettingSTMode} === 'Delete' }"
-                                icon="sap-icon://add"
-                                press="onAddPaymentSetting"/>
-                    </OverflowToolbar>
-                </smartTable:customToolbar>
-                <Table sticky="ColumnHeaders"
-                       alternateRowColors="true"
-                       growing="true"
-                       fixedLayout="false"
-                       growingThreshold="300"
-                       growingScrollToLoad="true"
-                       delete="onDeletePaymentSetting"
-                       mode="{state>/PaymentSettingSTMode}">
-                    <columns>
-                        <!--1 column -->
-                        <Column>
-                            <customData>
-                                <core:CustomData key="p13nData"
-                                                 value='\{
-                                                            "columnIndex": "0",
-                                                            "columnKey": "TeamName",
-                                                            "leadingProperty": "TeamName",
-                                                            "sortProperty": "TeamName",
-                                                            "filterProperty": "TeamName"
-                                                         }'/>
-                            </customData>
-                            <header>
-                                <Text text="{/#PaymentSetting/TeamName/@sap:label}"/>
-                            </header>
-                        </Column>
+                    <!-- </HBox> -->
+                </contentRight>
+            </Bar>
+        </subHeader>
+        <content>
+            <IconTabBar id="iconTabConfBar"
+                        selectedKey="common"
+                        applyContentPadding="false"
+                        expanded="true"
+                        expandable="false"
+                        stretchContentHeight="true"
+                        tabDensityMode="Compact"
+                        select="onIconTabConfBarSelected">
+                <items>
+                    <IconTabFilter id="CommonTab" text="{i18n>CommonPaymentTab}" key="common">
+                        <core:Fragment fragmentName="intheme.zjira_project_register.view.dialogs.paymentSettingTabs.CommonPaymentSett" type="XML"/>
+                    </IconTabFilter>
 
+                    <IconTabFilter id="ProjectWeekendTab" text="{i18n>ProjectWeekendTab}" key="projWeek">
+                        <core:Fragment fragmentName="intheme.zjira_project_register.view.dialogs.paymentSettingTabs.ProjectWeekend" type="XML"/>
+                    </IconTabFilter>
 
-                         <!--2 column -->
-                        <Column>
-                            <customData>
-                                <core:CustomData key="p13nData"
-                                                 value='\{
-                                                            "columnIndex": "1",
-                                                            "columnKey": "PositionName",
-                                                            "leadingProperty": "PositionName",
-                                                            "sortProperty": "PositionName",
-                                                            "filterProperty": "PositionName"
-                                                         }'/>
-                            </customData>
-                            <header>
-                                <Text text="{/#PaymentSetting/PositionName/@sap:label}"/>
-                            </header>
-                        </Column>
+                    <IconTabFilter id="WorkerCostTab" text="{i18n>WorkerCostTab}" key="workerCost">
+                        <core:Fragment fragmentName="intheme.zjira_project_register.view.dialogs.paymentSettingTabs.WorkerCost" type="XML"/>
+                    </IconTabFilter>
 
-
-
-                        <!--3 column -->
-                        <Column>
-                            <customData>
-                                <core:CustomData key="p13nData"
-                                                 value='\{
-                                                            "columnIndex": "2",
-                                                            "columnKey": "CoefWeek",
-                                                            "leadingProperty": "CoefWeek",
-                                                            "sortProperty": "CoefWeek",
-                                                            "filterProperty": "CoefWeek"
-                                                         }'/>
-                            </customData>
-                            <header>
-                                <Text text="{/#PaymentSetting/CoefWeek/@sap:label}"/>
-                            </header>
-                        </Column>
-
-
-
-                    </columns>
-                    <items>
-                        <ColumnListItem id="paymentSettingListItem">
-                            <!--1 cells-->
-                            <cells>
-                                <smartField:SmartField value="{TeamName}" editable="{= ${state>/PaymentSettingSTMode} === 'Delete' }"/>
-                            </cells>
-
-                            <!--2 cells-->
-                            <cells>
-                                <smartField:SmartField value="{PositionName}" editable="{= ${state>/PaymentSettingSTMode} === 'Delete' }"/>
-                            </cells>
-
-                            <!--3 cells-->
-                            <cells>
-                                <smartField:SmartField value="{CoefWeek}" editable="{= ${state>/PaymentSettingSTMode} === 'Delete' }"/>
-                            </cells>
-
-                        </ColumnListItem>
-                    </items>
-                </Table>
-            </smartTable:SmartTable>
+                </items>
+            </IconTabBar>
         </content>
         <buttons>
             <Button text="{i18n>SaveBtn}" type="Emphasized" press="onSavePaymentSettingDialog"/>

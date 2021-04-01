@@ -97,7 +97,8 @@
           "layout": "OneColumn",
           "proj_filter": "",
           "PaymentSettingSTMode" : "None",
-          "rebindProj": false
+          "rebindProj": false,
+          "currentTab": "common"
         }
       }
     },

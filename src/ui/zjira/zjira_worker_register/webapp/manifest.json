@@ -94,8 +94,7 @@
             "icons": {
               "goHome": "sap-icon://home"
             },
-            "layout": "OneColumn",
-            "proj_filter": "",
+            "worker_filter": "",
             "PaymentSettingSTMode" : "None",
             "rebindProj": false
           }

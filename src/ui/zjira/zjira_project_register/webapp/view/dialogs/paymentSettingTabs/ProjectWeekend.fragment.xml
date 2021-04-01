@@ -1,0 +1,97 @@
+<core:FragmentDefinition xmlns="sap.m"
+                         xmlns:core="sap.ui.core"
+                         xmlns:smartTable="sap.ui.comp.smarttable"
+                         xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+                         xmlns:sv="sap.ui.comp.smartvariants"
+                         xmlns:f="sap.f"
+                         xmlns:u="sap.ui.unified"
+                         xmlns:smartField="sap.ui.comp.smartfield"
+                         xmlns:l="sap.ui.layout">
+    <f:DynamicPage id="projWeekendPage" toggleHeaderOnTitleClick="true" showFooter="false" headerExpanded="false" preserveHeaderStateOnScroll="true">
+        <f:content>
+            <smartTable:SmartTable
+                    id="ProjWeekendST"
+                    entitySet="ProjectWeekendSet"
+                    useExportToExcel="false"
+                    showRowCount="false"
+                    editTogglable="true"
+                    editToggled="onEditToggled"
+                    tableType="ResponsiveTable"
+                    useVariantManagement="false"
+                    useTablePersonalisation="false"
+                    enableAutoBinding="false"
+                    requestAtLeastFields="Project,ProjectName,WeekendConf,WeekendConfDescr"
+                    demandPopin="true">
+                <smartTable:customData>
+                    <core:CustomData key="dateFormatSettings" value='\{"pattern": "dd.MM.yyyy"\}'/>
+                    <core:CustomData key="useSmartField" value="true"/>
+                </smartTable:customData>
+                <smartTable:customToolbar>
+                    <OverflowToolbar design="Transparent">
+                        <ToolbarSpacer/>
+                        <Button type="Transparent"
+                                iconFirst="false"
+                                enabled="{= ${state>/PaymentSettingSTMode} === 'Delete' }"
+                                icon="sap-icon://add"
+                                press="onAddPaymentSetting($event, 'ProjWeekendST', 'projectWeekendListItem', 'ProjectWeekendSet')"/>
+                    </OverflowToolbar>
+                </smartTable:customToolbar>
+                <Table sticky="ColumnHeaders"
+                       alternateRowColors="true"
+                       growing="true"
+                       fixedLayout="false"
+                       growingThreshold="300"
+                       growingScrollToLoad="true"
+                       delete="onDeletePaymentSetting($event, 'ProjWeekendST')"
+                       mode="{state>/PaymentSettingSTMode}">
+                    <columns>
+                        <!--1 column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                            "columnIndex": "0",
+                                                            "columnKey": "ProjectName",
+                                                            "leadingProperty": "ProjectName",
+                                                            "sortProperty": "ProjectName",
+                                                            "filterProperty": "ProjectName"
+                                                         }'/>
+                            </customData>
+                            <header>
+                                <Text text="{/#ProjectWeekend/ProjectName/@sap:label}"/>
+                            </header>
+                        </Column>
+                        <!--2 column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                            "columnIndex": "1",
+                                                            "columnKey": "WeekendConfDescr",
+                                                            "leadingProperty": "WeekendConfDescr",
+                                                            "sortProperty": "WeekendConfDescr",
+                                                            "filterProperty": "WeekendConfDescr"
+                                                         }'/>
+                            </customData>
+                            <header>
+                                <Text text="{/#ProjectWeekend/WeekendConfDescr/@sap:label}"/>
+                            </header>
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem id="projectWeekendListItem">
+                            <!--1 cells-->
+                            <cells>
+                                <smartField:SmartField value="{ProjectName}" editable="{= ${state>/PaymentSettingSTMode} === 'Delete' }"/>
+                            </cells>
+                            <!--2 cells-->
+                            <cells>
+                                <smartField:SmartField value="{WeekendConfDescr}" editable="{= ${state>/PaymentSettingSTMode} === 'Delete' }"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</core:FragmentDefinition>

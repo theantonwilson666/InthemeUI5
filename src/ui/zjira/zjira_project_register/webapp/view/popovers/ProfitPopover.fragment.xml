@@ -7,17 +7,26 @@
             title="{i18n>PopOverTitle}"
             showHeader="true"
             contentWidth="12rem"
-            contentHeight="15rem"
+            contentHeight="17rem"
             placement="Left">
-        <VBox class="sapUiSmallMargin" alignItems="Stretch" fitContainer="true">
-            <smartField:SmartLabel labelFor="ProfitA"/>
-            <smartField:SmartField id='ProfitA' value="{path : 'ProfitA', formatter: '.commonFormatter.formatFloat'}"/>
-            <smartField:SmartLabel labelFor="ProfitB"/>
-            <smartField:SmartField id='ProfitB' value="{path : 'ProfitB', formatter: '.commonFormatter.formatFloat'}"/>
-            <smartField:SmartLabel labelFor="ProfitC"/>
-            <smartField:SmartField id='ProfitC' value="{path : 'ProficC', formatter: '.commonFormatter.formatFloat'}"/>
-            <smartField:SmartLabel labelFor="Profitability"/>
-            <smartField:SmartField id='Profitability' value="{path : 'Profitability', formatter: '.commonFormatter.formatFloat'}"/>
-        </VBox>
+        <content>
+            <VBox class="sapUiSmallMargin" alignItems="Stretch" fitContainer="true">
+
+                <Label text="{i18n>TaxInputLabel}" labelFor="TaxField" />
+                <Text id="TaxField" text=""/>
+
+                <Label text="{i18n>USNTitle}" labelFor="USNField" />
+                <Text id="USNField" text="15%"/>
+
+                <smartField:SmartLabel labelFor="ProfitA"/>
+                <smartField:SmartField id='ProfitA' value="{path : 'ProfitA', formatter: '.commonFormatter.formatFloat'}"/>
+                <smartField:SmartLabel labelFor="ProfitB"/>
+                <smartField:SmartField id='ProfitB' value="{path : 'ProfitB', formatter: '.commonFormatter.formatFloat'}"/>
+                <smartField:SmartLabel labelFor="ProfitC"/>
+                <smartField:SmartField id='ProfitC' value="{path : 'ProficC', formatter: '.commonFormatter.formatFloat'}"/>
+                <smartField:SmartLabel labelFor="Profitability"/>
+                <smartField:SmartField id='Profitability' value="{path : 'Profitability', formatter: '.commonFormatter.formatFloat'}"/>
+            </VBox>
+        </content>
     </Popover>
 </core:FragmentDefinition>
