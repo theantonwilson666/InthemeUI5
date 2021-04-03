@@ -410,7 +410,6 @@
                     </Record>
                 </Annotation>
             </Annotations>
-            
             <Annotations Target="ZJIRA_SRV.ProjectWorker">
                 <Annotation Term="UI.SelectionFields">
                     <Collection>
@@ -525,6 +524,75 @@
                                 <Record Type="Common.ValueListParameterOut">
                                     <PropertyValue Property="LocalDataProperty" PropertyPath="RequestNo"/>
                                     <PropertyValue Property="ValueListProperty" String="RequestNo"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZJIRA_SRV.ProjectWeekend/ProjectName">
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="false"/>
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath" String="ProjectSHSet"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ProjectName"/>
+                                    <PropertyValue Property="ValueListProperty" String="ProjectDescr"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Project"/>
+                                    <PropertyValue Property="ValueListProperty" String="ProjectID"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZJIRA_SRV.ProjectWeekend/WeekendConfDescr">
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath" String="WeekendConfSHSet"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="WeekendConfDescr"/>
+                                    <PropertyValue Property="ValueListProperty" String="WeekendConfDescr"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="WeekendConf"/>
+                                    <PropertyValue Property="ValueListProperty" String="WeekendConf"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZJIRA_SRV.WorkerCostConf/WorkerName">
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="false"/>
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath" String="WorkerSHSet"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="WorkerName"/>
+                                    <PropertyValue Property="ValueListProperty" String="WorkerName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Position"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Teams"/>
+                                </Record>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Worker"/>
+                                    <PropertyValue Property="ValueListProperty" String="WorkerID"/>
                                 </Record>
                             </Collection>
                         </PropertyValue>

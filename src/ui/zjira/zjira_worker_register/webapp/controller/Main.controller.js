@@ -24,8 +24,7 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
         this.loadDialog
           .call(this, {
             sDialogName: "_oClosedIssueDialog",
-            sViewName:
-              "intheme.zjira_worker_register.view.dialogs.ClosedIssue",
+            sViewName: "intheme.zjira_worker_register.view.dialogs.ClosedIssue",
           })
           .then(
             function (oDialog) {
@@ -35,23 +34,99 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
                 path: sPath + "/WorkerClosedIssues",
                 parameters: {
                   custom: {
-                    Filter: this.getStateProperty("/worker_filter")
-                  }
+                    Filter: this.getStateProperty("/worker_filter"),
+                  },
                 },
                 events: {
-                  dataReceived: function(oEvent) {
+                  dataReceived: function (oEvent) {
                     if (!oEvent.getParameter("data")) {
                       // this.showError();
                       oDialog.close();
                     } else {
                       oDialog.setBusy(false);
                     }
-                  }.bind(this)
-                }
+                  }.bind(this),
+                },
               });
             }.bind(this)
           );
       },
+
+      onOpenBonusSettingDialog: function (oEvent) {
+        this.loadDialog
+          .call(this, {
+            sDialogName: "_oBonusSettingDialog",
+            sViewName:
+              "intheme.zjira_worker_register.view.dialogs.BonusSetting",
+          })
+          .then(
+            function (oDialog) {
+              oDialog.open();
+              this.getView().byId("PositionConfST").rebindTable();
+              this.getView().byId("ProjectConfST").rebindTable();
+            }.bind(this)
+          );
+      },
+
+      onDeleteAllBonusSettings: function (oEvent) {
+        this.showBusyDialog();
+        this.getModel().callFunction("/DeletePaymentSettings", {
+          method: "POST",
+          urlParameters: {SourceID : this.getStateProperty('/currentTab')},
+          success: function (oData) {
+            if (oData.DeletePaymentSettings.Ok === true) {
+              this.closeBusyDialog();
+              this.showMessageToast(this.i18n("MessageSuccess"));
+              this.byId("PaymentSettingST").rebindTable();
+            } else {
+              this.closeBusyDialog();
+              this.showMessageToast(this.i18n("MessageError"));
+            }
+          }.bind(this),
+          error: function (oData) {
+            this.closeBusyDialog();
+            this.showMessageToast(this.i18n("MessageError"));
+          }.bind(this),
+          refreshAfterChange: false,
+        });
+      },
+
+      onSaveBonusSettingDialog: function (oEvent) {
+        oEvent.getSource().getParent().close();
+        this.submitChanges({
+          success: function () {
+            this.showMessageToast(this.i18n("MessageSuccess"));
+          }.bind(this),
+          error: function () {
+            this.showMessageToast(this.i18n("MessageError"));
+          }.bind(this),
+        });
+      },
+
+      onCancelBonusSettingDialog: function (oEvent) {
+        oEvent.getSource().getParent().close();
+        this.resetChanges();
+      },
+
+      onIconTabConfBarSelected: function(oEvent){
+        this.setStateProperty(
+          "/currentTab",
+          oEvent.getSource().getSelectedKey()
+        );
+      },
+
+      handleConfFileSelected: function(oEvent){
+        this.handleFileSelected(oEvent, '/FileSet', {SourceID: this.getStateProperty('/currentTab')})
+      },
+
+      onEditToggled: function (oEvent) {
+        var bEditable = oEvent.getParameter("editable");
+        this.setStateProperty(
+          "/BonusSettingSTMode",
+          bEditable ? "Delete" : "None"
+        );
+      }
+
     }
   );
 });

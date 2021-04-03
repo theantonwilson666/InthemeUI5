@@ -95,8 +95,9 @@
               "goHome": "sap-icon://home"
             },
             "worker_filter": "",
-            "PaymentSettingSTMode" : "None",
-            "rebindProj": false
+            "BonusSettingSTMode" : "None",
+            "rebindProj": false,
+            "currentTab": "position_bonus"
           }
         }
       },

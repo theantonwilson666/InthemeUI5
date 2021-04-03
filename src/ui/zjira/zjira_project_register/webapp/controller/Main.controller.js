@@ -119,17 +119,6 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
         this.resetChanges();
       },
 
-      onAddPaymentSetting: function (oEvent, sSmartTab, sTab, sEntitySet) {
-        var oTable = this.getView().byId(sSmartTab).getTable();
-        var lisItemForTable = this.byId(sTab).clone();
-        var oCreatedTrade = this.getModel().createEntry(sEntitySet, {
-          properties: {},
-        });
-
-        lisItemForTable.setBindingContext(oCreatedTrade);
-        oTable.insertItem(lisItemForTable, 0);
-      },
-
       onEditToggled: function (oEvent) {
         var bEditable = oEvent.getParameter("editable");
         this.setStateProperty(
@@ -138,34 +127,7 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
         );
       },
 
-      onDeletePaymentSetting: function (oEvent, sSmartTab) {
-        var oListItem = oEvent.getParameter("listItem");
-        var oBindingContext = oListItem.getBindingContext();
-
-        MessageBox.confirm(this.i18n("ConfirmDeletePaymentSetting"), {
-          styleClass: "sapUiSizeCompact",
-          onClose: function (sAction) {
-            if (MessageBox.Action.OK === sAction) {
-              if (oBindingContext.bCreated) {
-                this.getView()
-                  .byId(sSmartTab)
-                  .getTable()
-                  .removeItem(oListItem);
-                this.getModel().deleteCreatedEntry(oBindingContext);
-              } else {
-                this.getModel().remove(oBindingContext.getPath(), {
-                  success: function () {
-                    this.showMessageToast(this.i18n("SuccessfullyDeleted"));
-                  }.bind(this),
-                  error: function () {
-                    this.showMessageToast(this.i18n("MessageError"));
-                  }.bind(this),
-                });
-              }
-            }
-          }.bind(this),
-        });
-      },
+     
 
       onDeleteAllPaymentSettings: function (oEvent) {
         this.showBusyDialog();

@@ -1,0 +1,60 @@
+<core:FragmentDefinition
+        xmlns="sap.m"
+        xmlns:u="sap.ui.unified"
+        xmlns:core="sap.ui.core">
+    <Dialog id="paymentSettingDialog"
+            title="{i18n>BonusSettingTitle}"
+            class="sapUiSizeCompact"
+            contentHeight="80%"
+            contentWidth="80%">
+        <subHeader>
+            <Bar>
+                <contentRight>
+                    <!-- <HBox> -->
+                        <ToolbarSpacer/>
+                        <u:FileUploader
+                                id="uploadBonusSetting"
+                                icon="sap-icon://excel-attachment"
+                                iconOnly="false"
+                                buttonOnly="true"
+                                buttonText="{i18n>BonusSettingLoadExcel}"
+                                fileType="xlsx,xsl"
+                                typeMissmatch="handleTypeMissmatch"
+                                change="handleConfFileSelected"
+                                style="Emphasized"/>
+                        <Button type="Transparent"
+                                iconFirst="false"
+                                icon="sap-icon://delete"
+                                text="{i18n>BonusDeleteAll}"
+                                press="onDeleteAllBonusSettings"/>
+                    <!-- </HBox> -->
+                </contentRight>
+            </Bar>
+        </subHeader>
+        <content>
+            <IconTabBar id="iconTabConfBar"
+                        selectedKey="position_bonus"
+                        applyContentPadding="false"
+                        expanded="true"
+                        expandable="false"
+                        stretchContentHeight="true"
+                        tabDensityMode="Compact"
+                        select="onIconTabConfBarSelected">
+                <items>
+                    <IconTabFilter id="PositionTab" text="{i18n>PositionConfTabTitle}" key="position_bonus">
+                        <core:Fragment fragmentName="intheme.zjira_worker_register.view.dialogs.bonusSettingTabs.PositionConf" type="XML"/>
+                    </IconTabFilter>
+
+                    <IconTabFilter id="ProjectTab" text="{i18n>ProjectConfTabTitle}" key="project_bonus">
+                        <core:Fragment fragmentName="intheme.zjira_worker_register.view.dialogs.bonusSettingTabs.ProjectConf" type="XML"/>
+                    </IconTabFilter>
+
+                </items>
+            </IconTabBar>
+        </content>
+        <buttons>
+            <Button text="{i18n>SaveBtn}" type="Emphasized" press="onSaveBonusSettingDialog"/>
+            <Button text="{i18n>CancelBtn}" type="Transparent" press="onCancelBonusSettingDialog"/>
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

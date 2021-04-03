@@ -21,6 +21,12 @@
                                                showShare="true"
                                                showExecuteOnSelection="true"/>
                 </f:heading>
+                <f:actions>
+                    <Button icon="sap-icon://monitor-payments"
+                            text="{i18n>BonusConfigButtonTitle}"
+                            press="onOpenBonusSettingDialog"
+                            type="Emphasized"/>
+                </f:actions>
             </f:DynamicPageTitle>
         </f:title>
         <f:header>

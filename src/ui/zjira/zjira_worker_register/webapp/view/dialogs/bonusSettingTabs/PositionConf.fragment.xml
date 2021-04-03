@@ -7,11 +7,11 @@
                          xmlns:u="sap.ui.unified"
                          xmlns:smartField="sap.ui.comp.smartfield"
                          xmlns:l="sap.ui.layout">
-    <f:DynamicPage id="workerCostPage" toggleHeaderOnTitleClick="true" showFooter="false" headerExpanded="false" preserveHeaderStateOnScroll="true">
+    <f:DynamicPage id="positionConfListView" toggleHeaderOnTitleClick="true" showFooter="false" headerExpanded="false" preserveHeaderStateOnScroll="true">
         <f:content>
             <smartTable:SmartTable
-                    id="WorkerCostConfST"
-                    entitySet="WorkerCostConfSet"
+                    id="PositionConfST"
+                    entitySet="BonusPositionConfSet"
                     useExportToExcel="false"
                     showRowCount="false"
                     editTogglable="true"
@@ -20,7 +20,7 @@
                     useVariantManagement="false"
                     useTablePersonalisation="false"
                     enableAutoBinding="false"
-                    requestAtLeastFields="Worker,WorkerName,Position,PositionName,Cost"
+                    requestAtLeastFields="Position,PositionName,BonusPerDay"
                     demandPopin="true">
                 <smartTable:customData>
                     <core:CustomData key="dateFormatSettings" value='\{"pattern": "dd.MM.yyyy"\}'/>
@@ -31,9 +31,9 @@
                         <ToolbarSpacer/>
                         <Button type="Transparent"
                                 iconFirst="false"
-                                enabled="{= ${state>/PaymentSettingSTMode} === 'Delete' }"
+                                enabled="{= ${state>/BonusSettingSTMode} === 'Delete' }"
                                 icon="sap-icon://add"
-                                press="onAddPaymentSetting($event, 'WorkerCostConfST', 'workerCostListItem', 'WorkerCostConfSet')"/>
+                                press="onAddPaymentSetting($event, 'PositionConfST', 'positionConfListItem', 'BonusPositionConfSet')"/>
                     </OverflowToolbar>
                 </smartTable:customToolbar>
                 <Table sticky="ColumnHeaders"
@@ -42,8 +42,8 @@
                        fixedLayout="false"
                        growingThreshold="300"
                        growingScrollToLoad="true"
-                       delete="onDeletePaymentSetting($event, 'WorkerCostConfST')"
-                       mode="{state>/PaymentSettingSTMode}">
+                       delete="onDeletePaymentSetting($event, 'PositionConfST')"
+                       mode="{state>/BonusSettingSTMode}">
                     <columns>
                         <!--1 column -->
                         <Column>
@@ -51,14 +51,14 @@
                                 <core:CustomData key="p13nData"
                                                  value='\{
                                                             "columnIndex": "0",
-                                                            "columnKey": "WorkerName",
-                                                            "leadingProperty": "WorkerName",
-                                                            "sortProperty": "WorkerName",
-                                                            "filterProperty": "WorkerName"
+                                                            "columnKey": "PositionName",
+                                                            "leadingProperty": "PositionName",
+                                                            "sortProperty": "PositionName",
+                                                            "filterProperty": "PositionName"
                                                          }'/>
                             </customData>
                             <header>
-                                <Text text="{/#WorkerCostConf/WorkerName/@sap:label}"/>
+                                <Text text="{/#BonusPositionConf/PositionName/@sap:label}"/>
                             </header>
                         </Column>
                         <!--2 column -->
@@ -67,28 +67,28 @@
                                 <core:CustomData key="p13nData"
                                                  value='\{
                                                             "columnIndex": "1",
-                                                            "columnKey": "Cost",
-                                                            "leadingProperty": "Cost",
-                                                            "sortProperty": "Cost",
-                                                            "filterProperty": "Cost"
+                                                            "columnKey": "BonusPerDay",
+                                                            "leadingProperty": "BonusPerDay",
+                                                            "sortProperty": "BonusPerDay",
+                                                            "filterProperty": "BonusPerDay"
                                                          }'/>
                             </customData>
                             <header>
-                                <Text text="{/#WorkerCostConf/Cost/@sap:label}"/>
+                                <Text text="{/#BonusPositionConf/BonusPerDay/@sap:label}"/>
                             </header>
                         </Column>
                     </columns>
                     <items>
-                        <ColumnListItem id="workerCostListItem">
+                        <ColumnListItem id="positionConfListItem">
                             <!--1 cells-->
                             <cells>
-                                 <smartField:SmartField value="{WorkerName}" editable="{= ${state>/PaymentSettingSTMode} === 'Delete' }"/>
+                                <smartField:SmartField value="{PositionName}" editable="{= ${state>/BonusSettingSTMode} === 'Delete' }"/>
                             </cells>
-
                             <!--2 cells-->
                             <cells>
-                                <smartField:SmartField value="{Cost}" editable="{= ${state>/PaymentSettingSTMode} === 'Delete' }"/>
+                                <smartField:SmartField value="{BonusPerDay}" editable="{= ${state>/BonusSettingSTMode} === 'Delete' }"/>
                             </cells>
+                            
                         </ColumnListItem>
                     </items>
                 </Table>

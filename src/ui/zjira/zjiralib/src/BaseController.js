@@ -5,8 +5,9 @@ sap.ui.define(
     "sap/ui/core/Fragment",
     "jira/lib/MessageDialog",
     "sap/base/Log",
+    "sap/m/MessageBox",
   ],
-  function (Controller, CommonFormatter, Fragment, MessageDialog, Log) {
+  function (Controller, CommonFormatter, Fragment, MessageDialog, Log, MessageBox) {
     "use strict";
 
     var oResourceBundle = sap.ui.getCore().getLibraryResourceBundle("jira.lib");
@@ -306,6 +307,47 @@ sap.ui.define(
         }
         return false;
       },
+
+      onAddPaymentSetting: function (oEvent, sSmartTab, sTab, sEntitySet) {
+        var oTable = this.getView().byId(sSmartTab).getTable();
+        var lisItemForTable = this.byId(sTab).clone();
+        var oCreatedTrade = this.getModel().createEntry(sEntitySet, {
+          properties: {},
+        });
+
+        lisItemForTable.setBindingContext(oCreatedTrade);
+        oTable.insertItem(lisItemForTable, 0);
+      },
+
+      onDeletePaymentSetting: function (oEvent, sSmartTab) {
+        var oListItem = oEvent.getParameter("listItem");
+        var oBindingContext = oListItem.getBindingContext();
+        var oResourceBundle = sap.ui.getCore().getLibraryResourceBundle("jira.lib");
+
+        MessageBox.confirm(oResourceBundle.getText("ConfirmDeletePaymentSetting"), {
+          styleClass: "sapUiSizeCompact",
+          onClose: function (sAction) {
+            if (MessageBox.Action.OK === sAction) {
+              if (oBindingContext.bCreated) {
+                this.getView()
+                  .byId(sSmartTab)
+                  .getTable()
+                  .removeItem(oListItem);
+                this.getModel().deleteCreatedEntry(oBindingContext);
+              } else {
+                this.getModel().remove(oBindingContext.getPath(), {
+                  success: function () {
+                    this.showMessageToast(this.i18n("SuccessfullyDeleted"));
+                  }.bind(this),
+                  error: function () {
+                    this.showMessageToast(this.i18n("MessageError"));
+                  }.bind(this),
+                });
+              }
+            }
+          }.bind(this),
+        });
+      }
     });
   }
 );
