@@ -23,17 +23,16 @@
                             considerSelectionVariants="true"
                             enableBasicSearch="false"
                             showFilterConfiguration="false"
-                            liveMode="false"
-                            class="">
+                            liveMode="false">
                         </smartFilterBar:SmartFilterBar>
                 <smartTable:SmartTable
                             id="closedIssueSmartTable"
                             smartFilterId="closedIssueFilter"
                             useExportToExcel="false"
                             showRowCount="true"
-                            editable="true"
+                            entitySet="WorkerClosedIssueSet"
+                            tableBindingPath="WorkerClosedIssues"
                             tableType="ResponsiveTable"
-                            useVariantManagement="true"
                             useTablePersonalisation="true"
                             showFullScreenButton="false"
                             enableAutoBinding="true"
@@ -156,23 +155,29 @@
                                 <VBox>
                                     <smartField:SmartField value="{DueDate}"/>
                                     <ObjectNumber number="{SpendHours}"
-                                                  unit="h"/>
+                                                  unit="h"
+                                                  state="Error"/>
+                                    <ObjectNumber number="{EstHours}"
+                                                  unit="h"
+                                                  state="Success"/>
                                 </VBox>
                             </cells>
                             <!--3 cells-->
                             <cells>
-                                <smartField:SmartField value="{Cost}"/>
+                                <ObjectNumber number="{Cost}"
+                                                  unit="RUB"
+                                                  state="Error"/>
                             </cells>
                             <!--4 cells-->
                             <cells>
-                                <smartField:SmartField value="{Bonus}"/>
+                                <ObjectNumber number="{Bonus}"
+                                                  unit="RUB"
+                                                  state="Success"/>
                             </cells>
-
                             <!--5 cells-->
                             <cells>
                                 <smartField:SmartField value="{RequestNumber}"/>
                             </cells>
-
                             <!--6 cells-->
                             <cells>
                                 <smartField:SmartField value="{ProjectStageName}"/>

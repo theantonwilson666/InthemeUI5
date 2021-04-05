@@ -22,6 +22,10 @@
                 <smartField:SmartField id='ProfitA' value="{path : 'ProfitA', formatter: '.commonFormatter.formatFloat'}"/>
                 <smartField:SmartLabel labelFor="ProfitB"/>
                 <smartField:SmartField id='ProfitB' value="{path : 'ProfitB', formatter: '.commonFormatter.formatFloat'}"/>
+
+                <smartField:SmartLabel labelFor="Tax"/>
+                <smartField:SmartField id='Tax' value="{path : 'Tax', formatter: '.commonFormatter.formatFloat'}"/>
+
                 <smartField:SmartLabel labelFor="ProfitC"/>
                 <smartField:SmartField id='ProfitC' value="{path : 'ProficC', formatter: '.commonFormatter.formatFloat'}"/>
                 <smartField:SmartLabel labelFor="Profitability"/>

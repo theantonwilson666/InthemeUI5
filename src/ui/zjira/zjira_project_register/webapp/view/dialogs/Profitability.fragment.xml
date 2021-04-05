@@ -40,7 +40,7 @@
                             showFullScreenButton="false"
                             enableAutoBinding="true"
                             beforeRebindTable="onBeforeBindingProjectStage"
-                            requestAtLeastFields="ProjectID,Filter,ProjectStageID,RequestNo,ProjectStageDescr,Profit,Cost,Profitability,Hours,ProfitA,ProfitB,ProficC"
+                            requestAtLeastFields="ProjectID,Filter,ProjectStageID,RequestNo,ProjectStageDescr,Profit,Cost,Profitability,Hours,ProfitA,ProfitB,ProficC,Tax"
                             demandPopin="true">
                     <smartTable:customToolbar>
                         <OverflowToolbar design="Solid">

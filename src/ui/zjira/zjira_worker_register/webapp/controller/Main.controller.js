@@ -28,10 +28,10 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
           })
           .then(
             function (oDialog) {
-              oDialog.setBusy(true);
+              // oDialog.setBusy(true);
               oDialog.open();
               oDialog.bindElement({
-                path: sPath + "/WorkerClosedIssues",
+                path: sPath,
                 parameters: {
                   custom: {
                     Filter: this.getStateProperty("/worker_filter"),
