@@ -69,8 +69,19 @@
                     showFullScreenButton="false"
                     enableAutoBinding="true"
                     beforeRebindTable="onBeforeBindingTab($event,'HoursSpend','true')"
-                    requestAtLeastFields="ProjectID,ProjectName,ProjectTypeName,ProjectCatName,ProjectKey,Cost"
+                    requestAtLeastFields="ProjectID,ProjectName,ProjectTypeName,ProjectCatName,ProjectKey,Cost,ProjectUrl"
                     demandPopin="true">
+                <smartTable:customToolbar>
+                    <OverflowToolbar design="Transparent">
+                        <ToolbarSpacer/>
+                        <Button icon="sap-icon://refresh"
+                                type="Transparent"
+                                press="rebindTable('projectSmartTable')"/>
+                        <Button icon="sap-icon://excel-attachment" type="Transparent" press="onDownloadExcelFiles({ uploadEntity: '/DownloadExcelSet', downloadEntity: 'ProjectSet', oControlId: 'projectSmartTable' })"/>
+                    </OverflowToolbar>
+                </smartTable:customToolbar>
+
+
                 <smartTable:customData>
                     <core:CustomData key="dateFormatSettings" value='\{"UTC":false, "pattern":"dd.MM.yyyy"\}'/>
                 </smartTable:customData>
@@ -159,7 +170,9 @@
                         <!--1 cells-->
                         <cells>
                             <HBox>
-                                <ObjectIdentifier title="{ProjectName}" text="{ProjectKey}"/>
+                                <ObjectIdentifier title="{ProjectName}" text="{ProjectKey}"
+                                                  titleActive="true"
+                                                  titlePress="onUrlPress($event, 'ProjectUrl')"/>
                             </HBox>
                         </cells>
                         <!--2 cells-->

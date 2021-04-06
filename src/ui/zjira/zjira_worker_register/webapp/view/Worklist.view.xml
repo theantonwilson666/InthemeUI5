@@ -68,6 +68,15 @@
                     beforeRebindTable="onBeforeBindingTab"
                     requestAtLeastFields="Worker,Filter,WorkerName,Position,PositionName,Team,SpendHours,Cost,Bonus,WorklogDate,CloseIssueDate"
                     demandPopin="true">
+                <smartTable:customToolbar>
+                    <OverflowToolbar design="Transparent">
+                        <CheckBox id="closedIssueBonus" text="{i18n>ClosedIssueBonus}" selected="true"/>
+                        <ToolbarSpacer/>
+                        <Button icon="sap-icon://refresh"
+                                type="Transparent"
+                                press="rebindTable('workerSmartTable')"/>
+                    </OverflowToolbar>
+                </smartTable:customToolbar>
                 <smartTable:customData>
                     <core:CustomData key="dateFormatSettings" value='\{"UTC":false, "pattern":"dd.MM.yyyy"\}'/>
                 </smartTable:customData>

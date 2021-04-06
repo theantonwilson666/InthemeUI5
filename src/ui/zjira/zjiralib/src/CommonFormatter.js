@@ -22,6 +22,7 @@ sap.ui.define([], function () {
       formatFloat: function (value) {
         return parseFloat(value);
       },
+
     };
   });
   

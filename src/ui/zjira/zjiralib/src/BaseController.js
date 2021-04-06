@@ -347,7 +347,39 @@ sap.ui.define(
             }
           }.bind(this),
         });
+      },
+
+      onUrlPress: function(oEvent, sUrlField){
+        var sUrl = oEvent.getSource().getBindingContext().getObject()[sUrlField];
+        window.open(sUrl, '_blank').focus();
+      },
+
+      rebindTable: function (oSmartTable) {
+        this.byId(oSmartTable).rebindTable(true);
+      },
+
+
+      onDownloadExcelFiles: function (oParams) {
+        var oModel = this.getModel();
+        var sServiceUrl = oModel.sServiceUrl;
+        var oControl = this.byId(oParams.oControlId);
+
+        var oSmartFilter = this.getView().byId(oControl.getSmartFilterId());
+        var sFilterData = oSmartFilter.getFilterDataAsString();
+
+        var oKeys = {};
+        for(var sKey in oParams.mKey){
+          oKeys[oParams.mKey[sKey]] = this.getView().getBindingContext().getObject()[oParams.mKey[sKey]]
+        }
+        
+        var sPath = oModel.createKey(oParams.uploadEntity, { EntitySet: oParams.downloadEntity, Filter: sFilterData, Keys: JSON.stringify(oKeys) });
+        var sUrl = sServiceUrl + sPath + "/$value";
+        sap.m.URLHelper.redirect(sUrl, true);
       }
+
+
+
+
     });
   }
 );

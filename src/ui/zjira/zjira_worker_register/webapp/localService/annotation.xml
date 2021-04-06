@@ -190,6 +190,85 @@
                 </Annotation>
             </Annotations>
 
+            <Annotations Target="ZJIRA_SRV.WorkerClosedIssue">
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>DueDate</PropertyPath>
+                        <PropertyPath>Project</PropertyPath>
+                        <PropertyPath>RequestNumber</PropertyPath>
+                        <PropertyPath>ProjectStage</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+
+
+             <Annotations Target="ZJIRA_SRV.WorkerClosedIssue/Project">
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="false"/>
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath" String="ProjectSHSet"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Project"/>
+                                    <PropertyValue Property="ValueListProperty" String="ProjectID"/>
+                                </Record>
+                                
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ProjectKey"/>
+                                </Record>
+                                
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ProjectName"/>
+                                    <PropertyValue Property="ValueListProperty" String="ProjectDescr"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+
+             <Annotations Target="ZJIRA_SRV.WorkerClosedIssue/RequestNumber">
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath" String="RequestNoSHSet"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="RequestNumber"/>
+                                    <PropertyValue Property="ValueListProperty" String="RequestNo"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+
+             <Annotations Target="ZJIRA_SRV.WorkerClosedIssue/ProjectStage">
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath" String="ProjectStageSHSet"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="StageDescr"/>
+                                </Record>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ProjectStage"/>
+                                    <PropertyValue Property="ValueListProperty" String="StageID"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
 
 
 

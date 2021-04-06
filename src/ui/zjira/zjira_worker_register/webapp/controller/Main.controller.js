@@ -8,6 +8,13 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
 
       onBeforeBindingTab: function (oEvent) {
         var mBindingParams = oEvent.getParameter("bindingParams");
+
+        var oCustom = {
+          BonusClosed: this.getView().byId('closedIssueBonus').getSelected().toString()
+        };
+
+        mBindingParams.parameters.custom = oCustom;
+
         mBindingParams.events = {
           dataRequested: function (oEvent) {
             this.setStateProperty(
@@ -125,6 +132,18 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
           "/BonusSettingSTMode",
           bEditable ? "Delete" : "None"
         );
+      },
+
+      onBeforeClosedIssueTab: function(oEvent){
+        var mBindingParams = oEvent.getParameter("bindingParams");
+        var oFilter = {
+          Filter: this.getStateProperty("/worker_filter")
+        };
+        mBindingParams.parameters.custom = oFilter;
+      },
+
+      onCloseDialog: function(oEvent){
+        oEvent.getSource().getParent().close();
       }
 
     }

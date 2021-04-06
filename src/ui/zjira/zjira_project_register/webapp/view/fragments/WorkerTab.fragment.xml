@@ -54,6 +54,16 @@
                             beforeRebindTable="onBeforeBindingTab($event,'SpendHours')"
                             requestAtLeastFields="ProjectID,WorkerID,WorkerName,PositionID,PositionName,TeamID,TeamName,SpendHours,EstHours,WorkRatio,Cost"
                             demandPopin="true">
+
+                    <smartTable:customToolbar>
+                        <OverflowToolbar design="Transparent">
+                            <ToolbarSpacer/>
+                            <Button icon="sap-icon://refresh"
+                                type="Transparent"
+                                press="rebindTable('workerSmartTable')"/>
+                            <Button icon="sap-icon://excel-attachment" type="Transparent" press="onDownloadExcelFiles({ uploadEntity: '/DownloadExcelSet', downloadEntity: 'ProjectWorkerSet', oControlId: 'workerSmartTable', mKey: ['ProjectID', 'Filter']})"/>
+                        </OverflowToolbar>
+                    </smartTable:customToolbar>
                     <smartTable:customData>
                         <core:CustomData key="dateFormatSettings" value='\{"UTC":false, "pattern":"dd.MM.yyyy"\}'/>
                     </smartTable:customData>

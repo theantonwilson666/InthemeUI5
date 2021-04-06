@@ -52,8 +52,17 @@
                             persistencyKey="issuePage.PKey.SmartTable"
                             enableAutoBinding="true"
                             beforeRebindTable="onBeforeBindingTab($event,'SpendHours')"
-                            requestAtLeastFields="ProjectID,IssueID,IssueName,IssueDescr,PriorityID,PriorityName,StatusID,StatusName,StatusCatName,StageName,SubstageName,OrigEstHours,SpendHours,FsNumber,ProjectStageID,ProjectStageName,RequestNumber,DueDate,AssignedName,TypeName,IssueKey,TypeID,Cost"
+                            requestAtLeastFields="ProjectID,IssueID,IssueName,IssueDescr,PriorityID,PriorityName,StatusID,StatusName,StatusCatName,StageName,SubstageName,OrigEstHours,SpendHours,FsNumber,ProjectStageID,ProjectStageName,RequestNumber,DueDate,AssignedName,TypeName,IssueKey,TypeID,Cost,IssueUrl"
                             demandPopin="true">
+                    <smartTable:customToolbar>
+                        <OverflowToolbar design="Transparent">
+                            <ToolbarSpacer/>
+                            <Button icon="sap-icon://refresh"
+                                type="Transparent"
+                                press="rebindTable('issueSmartTable')"/>
+                            <Button icon="sap-icon://excel-attachment" type="Transparent" press="onDownloadExcelFiles({ uploadEntity: '/DownloadExcelSet', downloadEntity: 'IssueSet', oControlId: 'issueSmartTable', mKey: ['ProjectID', 'Filter']})"/>
+                        </OverflowToolbar>
+                    </smartTable:customToolbar>
                     <smartTable:customData>
                         <core:CustomData key="dateFormatSettings" value='\{"UTC":false, "pattern":"dd.MM.yyyy"\}'/>
                     </smartTable:customData>
@@ -157,7 +166,9 @@
                             <!--1 cells-->
                             <cells>
                                 <VBox>
-                                    <ObjectIdentifier title="{IssueName}" text="{IssueKey}"/>
+                                    <ObjectIdentifier title="{IssueName}" text="{IssueKey}"
+                                                      titleActive="true"
+                                                      titlePress="onUrlPress($event, 'IssueUrl')"/>
                                     <Text text="{TypeName}"/>
                                     <Text text="{IssueDescr}"/>
                                     <smartField:SmartField value="{ProjectStageName}"/>
@@ -182,8 +193,6 @@
                                     <ObjectNumber number="{Cost}"
                                                   unit="RUB"
                                                   state="Success"/>
-
-                                    
                                 </VBox>
                             </cells>
                         </ColumnListItem>

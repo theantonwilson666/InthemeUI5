@@ -23,6 +23,7 @@
                             considerSelectionVariants="true"
                             enableBasicSearch="false"
                             showFilterConfiguration="false"
+                            useDateRangeType="true"
                             liveMode="false">
                         </smartFilterBar:SmartFilterBar>
                 <smartTable:SmartTable
@@ -36,7 +37,8 @@
                             useTablePersonalisation="true"
                             showFullScreenButton="false"
                             enableAutoBinding="true"
-                            requestAtLeastFields="Worker,Filter,WorkerName,Issue,IssueName,DueDate,Cost,Bonus,Project,ProjectName,SpendHours,EstHours,RequestNumber,ProjectStage,ProjectStageName"
+                            beforeRebindTable="onBeforeClosedIssueTab"
+                            requestAtLeastFields="Worker,Filter,WorkerName,Issue,IssueName,DueDate,Cost,Bonus,Project,ProjectName,SpendHours,EstHours,RequestNumber,ProjectStage,ProjectStageName,BonusCalcToolTip,IssueUrl"
                             demandPopin="true">
                     <smartTable:customData>
                         <core:CustomData key="dateFormatSettings" value='\{"UTC":false, "pattern":"dd.MM.yyyy"\}'/>
@@ -148,7 +150,9 @@
                         <ColumnListItem>
                             <!--1 cells-->
                             <cells>
-                                <ObjectIdentifier title="{IssueName}" text="{ProjectName}"/>
+                                <ObjectIdentifier title="{IssueName}" text="{ProjectName}"
+                                                  titleActive="true"
+                                                  titlePress="onUrlPress($event, 'IssueUrl')"/>
                             </cells>
                             <!--2 cells-->
                             <cells>
@@ -171,8 +175,10 @@
                             <!--4 cells-->
                             <cells>
                                 <ObjectNumber number="{Bonus}"
-                                                  unit="RUB"
-                                                  state="Success"/>
+                                              unit="RUB"
+                                              state="Success"
+                                              tooltip="{BonusCalcToolTip}">
+                                </ObjectNumber>
                             </cells>
                             <!--5 cells-->
                             <cells>
@@ -187,5 +193,10 @@
                 </smartTable:SmartTable>
             </VBox>
         </content>
+
+         <buttons>
+            <Button text="{i18n>CloseBtn}" type="Transparent" press="onCloseDialog"/>
+        </buttons>
+
     </Dialog>
 </core:FragmentDefinition>
