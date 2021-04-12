@@ -198,6 +198,8 @@ module.exports = function (grunt) {
             compress: true,
           },
           components: true,
+
+          
         });
       });
     });

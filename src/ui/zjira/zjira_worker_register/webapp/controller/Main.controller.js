@@ -6,23 +6,63 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
     {
       onInit: function () {},
 
+      onInitFilter: function (oEvent) {
+        this.getModel().callFunction("/GetCurrentQuarter", {
+          method: "POST",
+          success: function (oData) {
+            var oFilter = this.getView().byId("workerFilterBar");
+
+            var aRanges = [];
+            
+            aRanges.push({
+              exclude: false,
+              keyField: "CloseIssueDate",
+              operation: "BT",
+              value1: oData.GetCurrentQuarter.Low,
+              value2:  oData.GetCurrentQuarter.High
+            });
+
+            var oDefaultFilter = {
+              CloseIssueDate: {
+                conditionTypeInfo: {
+                  data: {
+                    operation: "THISQUARTER",
+                    value1: null,
+                    value2: null,
+                    key: "CloseIssueDate",
+                    calendarType: "Gregorian",
+                  },
+                  name: "sap.ui.comp.config.condition.DateRangeType",
+                },
+                items: [],
+                ranges: aRanges,
+              },
+            };
+            oFilter.setFilterData(oDefaultFilter, true);
+            this.getView().byId("workerSmartTable").rebindTable();
+
+          }.bind(this),
+          error: function (oData) {
+            debugger;
+          }.bind(this),
+        });
+
+        
+      },
+
       onBeforeBindingTab: function (oEvent) {
         var mBindingParams = oEvent.getParameter("bindingParams");
 
         var oCustom = {
-          BonusClosed: this.getView().byId('closedIssueBonus').getSelected().toString()
+          BonusClosed: this.getView()
+            .byId("closedIssueBonus")
+            .getSelected()
+            .toString(),
         };
 
         mBindingParams.parameters.custom = oCustom;
+        this.setStateProperty("/worker_filter", this.getView().byId("workerFilterBar").getFilterDataAsString());
 
-        mBindingParams.events = {
-          dataRequested: function (oEvent) {
-            this.setStateProperty(
-              "/worker_filter",
-              this.getView().byId("workerFilterBar").getFilterDataAsString()
-            );
-          }.bind(this),
-        };
       },
 
       onViewWorker: function (oEvent) {
@@ -42,6 +82,7 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
                 parameters: {
                   custom: {
                     Filter: this.getStateProperty("/worker_filter"),
+                    Test : '11'
                   },
                 },
                 events: {
@@ -79,7 +120,7 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
         this.showBusyDialog();
         this.getModel().callFunction("/DeletePaymentSettings", {
           method: "POST",
-          urlParameters: {SourceID : this.getStateProperty('/currentTab')},
+          urlParameters: { SourceID: this.getStateProperty("/currentTab") },
           success: function (oData) {
             if (oData.DeletePaymentSettings.Ok === true) {
               this.closeBusyDialog();
@@ -115,15 +156,17 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
         this.resetChanges();
       },
 
-      onIconTabConfBarSelected: function(oEvent){
+      onIconTabConfBarSelected: function (oEvent) {
         this.setStateProperty(
           "/currentTab",
           oEvent.getSource().getSelectedKey()
         );
       },
 
-      handleConfFileSelected: function(oEvent){
-        this.handleFileSelected(oEvent, '/FileSet', {SourceID: this.getStateProperty('/currentTab')})
+      handleConfFileSelected: function (oEvent) {
+        this.handleFileSelected(oEvent, "/FileSet", {
+          SourceID: this.getStateProperty("/currentTab"),
+        });
       },
 
       onEditToggled: function (oEvent) {
@@ -134,18 +177,17 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
         );
       },
 
-      onBeforeClosedIssueTab: function(oEvent){
+      onBeforeClosedIssueTab: function (oEvent) {
         var mBindingParams = oEvent.getParameter("bindingParams");
         var oFilter = {
-          Filter: this.getStateProperty("/worker_filter")
+          Filter: this.getStateProperty("/worker_filter"),
         };
         mBindingParams.parameters.custom = oFilter;
       },
 
-      onCloseDialog: function(oEvent){
+      onCloseDialog: function (oEvent) {
         oEvent.getSource().getParent().close();
-      }
-
+      },
     }
   );
 });
