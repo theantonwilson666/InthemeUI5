@@ -72,6 +72,8 @@
                 <smartTable:customToolbar>
                     <OverflowToolbar design="Transparent">
                         <CheckBox id="closedIssueBonus" text="{i18n>ClosedIssueBonus}" selected="true"/>
+                        <CheckBox id="bonusWithManagmentTask" text="{i18n>ManagmentTaskBonus}" selected="true"/>
+
                         <ToolbarSpacer/>
                         <Button icon="sap-icon://refresh"
                                 type="Transparent"

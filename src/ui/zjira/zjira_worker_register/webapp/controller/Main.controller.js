@@ -58,6 +58,11 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
             .byId("closedIssueBonus")
             .getSelected()
             .toString(),
+
+          ManagmentTaskBonus: this.getView()
+          .byId("bonusWithManagmentTask")
+          .getSelected()
+          .toString(),
         };
 
         mBindingParams.parameters.custom = oCustom;
