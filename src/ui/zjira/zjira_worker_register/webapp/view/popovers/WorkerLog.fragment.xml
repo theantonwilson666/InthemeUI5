@@ -27,6 +27,17 @@
                 <smartTable:customData>
                     <core:CustomData key="dateFormatSettings" value='\{"pattern": "dd.MM.yyyy"\}'/>
                 </smartTable:customData>
+
+                 <smartTable:customToolbar>
+                    <OverflowToolbar design="Transparent">
+                        <ToolbarSpacer/>
+                        <Button icon="sap-icon://refresh"
+                                type="Transparent"
+                                press="rebindTable('WorkerLogST')"/>
+                        <Button icon="sap-icon://excel-attachment" type="Transparent" press="onDownloadExcelFiles({ uploadEntity: '/DownloadExcelSet', downloadEntity: 'WorkerLogSet', oControlId: 'WorkerLogST', mKey: ['Worker', 'Filter']})"/>
+                    
+                    </OverflowToolbar>
+                </smartTable:customToolbar>
                 
                 <Table sticky="ColumnHeaders"
                        growing="true"

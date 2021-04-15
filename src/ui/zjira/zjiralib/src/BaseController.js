@@ -7,7 +7,14 @@ sap.ui.define(
     "sap/base/Log",
     "sap/m/MessageBox",
   ],
-  function (Controller, CommonFormatter, Fragment, MessageDialog, Log, MessageBox) {
+  function (
+    Controller,
+    CommonFormatter,
+    Fragment,
+    MessageDialog,
+    Log,
+    MessageBox
+  ) {
     "use strict";
 
     var oResourceBundle = sap.ui.getCore().getLibraryResourceBundle("jira.lib");
@@ -322,64 +329,86 @@ sap.ui.define(
       onDeletePaymentSetting: function (oEvent, sSmartTab) {
         var oListItem = oEvent.getParameter("listItem");
         var oBindingContext = oListItem.getBindingContext();
-        var oResourceBundle = sap.ui.getCore().getLibraryResourceBundle("jira.lib");
+        var oResourceBundle = sap.ui
+          .getCore()
+          .getLibraryResourceBundle("jira.lib");
 
-        MessageBox.confirm(oResourceBundle.getText("ConfirmDeletePaymentSetting"), {
-          styleClass: "sapUiSizeCompact",
-          onClose: function (sAction) {
-            if (MessageBox.Action.OK === sAction) {
-              if (oBindingContext.bCreated) {
-                this.getView()
-                  .byId(sSmartTab)
-                  .getTable()
-                  .removeItem(oListItem);
-                this.getModel().deleteCreatedEntry(oBindingContext);
-              } else {
-                this.getModel().remove(oBindingContext.getPath(), {
-                  success: function () {
-                    this.showMessageToast(this.i18n("SuccessfullyDeleted"));
-                  }.bind(this),
-                  error: function () {
-                    this.showMessageToast(this.i18n("MessageError"));
-                  }.bind(this),
-                });
+        MessageBox.confirm(
+          oResourceBundle.getText("ConfirmDeletePaymentSetting"),
+          {
+            styleClass: "sapUiSizeCompact",
+            onClose: function (sAction) {
+              if (MessageBox.Action.OK === sAction) {
+                if (oBindingContext.bCreated) {
+                  this.getView()
+                    .byId(sSmartTab)
+                    .getTable()
+                    .removeItem(oListItem);
+                  this.getModel().deleteCreatedEntry(oBindingContext);
+                } else {
+                  this.getModel().remove(oBindingContext.getPath(), {
+                    success: function () {
+                      this.showMessageToast(this.i18n("SuccessfullyDeleted"));
+                    }.bind(this),
+                    error: function () {
+                      this.showMessageToast(this.i18n("MessageError"));
+                    }.bind(this),
+                  });
+                }
               }
-            }
-          }.bind(this),
-        });
+            }.bind(this),
+          }
+        );
       },
 
-      onUrlPress: function(oEvent, sUrlField){
-        var sUrl = oEvent.getSource().getBindingContext().getObject()[sUrlField];
-        window.open(sUrl, '_blank').focus();
+      onUrlPress: function (oEvent, sUrlField) {
+        var sUrl = oEvent.getSource().getBindingContext().getObject()[
+          sUrlField
+        ];
+        window.open(sUrl, "_blank").focus();
       },
 
       rebindTable: function (oSmartTable) {
         this.byId(oSmartTable).rebindTable(true);
       },
 
-
       onDownloadExcelFiles: function (oParams) {
         var oModel = this.getModel();
         var sServiceUrl = oModel.sServiceUrl;
         var oControl = this.byId(oParams.oControlId);
-
-        var oSmartFilter = this.getView().byId(oControl.getSmartFilterId());
-        var sFilterData = oSmartFilter.getFilterDataAsString();
+        var sFilterData = '';
+        if (this.getView().byId(oControl.getSmartFilterId()) != null) {
+          var oSmartFilter = this.getView().byId(oControl.getSmartFilterId());
+          sFilterData = oSmartFilter.getFilterDataAsString();
+        }
 
         var oKeys = {};
-        for(var sKey in oParams.mKey){
-          oKeys[oParams.mKey[sKey]] = this.getView().getBindingContext().getObject()[oParams.mKey[sKey]]
+        for (var sKey in oParams.mKey) {
+          if (this.getView().getBindingContext() != null){
+            oKeys[
+              oParams.mKey[sKey]
+            ] = this.getView().getBindingContext().getObject()[
+              oParams.mKey[sKey]
+            ];
+          } else{
+            oKeys[
+              oParams.mKey[sKey]
+            ] = this.getView().byId(oParams.oControlId).getBindingContext().getObject()[
+              oParams.mKey[sKey]
+            ];
+
+          }
+          
         }
-        
-        var sPath = oModel.createKey(oParams.uploadEntity, { EntitySet: oParams.downloadEntity, Filter: sFilterData, Keys: JSON.stringify(oKeys) });
+
+        var sPath = oModel.createKey(oParams.uploadEntity, {
+          EntitySet: oParams.downloadEntity,
+          Filter: sFilterData,
+          Keys: JSON.stringify(oKeys),
+        });
         var sUrl = sServiceUrl + sPath + "/$value";
         sap.m.URLHelper.redirect(sUrl, true);
-      }
-
-
-
-
+      },
     });
   }
 );
