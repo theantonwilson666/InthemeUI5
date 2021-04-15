@@ -1,0 +1,71 @@
+<core:FragmentDefinition
+        xmlns="sap.m"
+        xmlns:core="sap.ui.core"
+        xmlns:l="sap.ui.layout"
+        xmlns:smartTable="sap.ui.comp.smarttable"
+        xmlns:smartField="sap.ui.comp.smartfield">
+    <Popover
+            title="{i18n>WorkerLogTitle} - {WorkerName}"
+            showHeader="true"
+            contentWidth="25rem"
+            contentHeight="17rem"
+            placement="Right">
+        <content>
+            <smartTable:SmartTable
+                    id="WorkerLogST"
+                    entitySet="WorkerLogSet"
+                    useExportToExcel="false"
+                    showRowCount="false"
+                    tableBindingPath="WorkerLogs"
+                    tableType="ResponsiveTable"
+                    useVariantManagement="false"
+                    useTablePersonalisation="false"
+                    enableAutoBinding="false"
+                    requestAtLeastFields="Worker,Filter,Date,Error,IsWeekend,ValueState"
+                    beforeRebindTable="onBeforeRebindWorkerLogTab"
+                    demandPopin="true">
+                <smartTable:customData>
+                    <core:CustomData key="dateFormatSettings" value='\{"pattern": "dd.MM.yyyy"\}'/>
+                </smartTable:customData>
+                
+                <Table sticky="ColumnHeaders"
+                       growing="true"
+                       fixedLayout="false"
+                       growingThreshold="300"
+                       growingScrollToLoad="true">
+                    <columns>
+                        <!--1 column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                            "columnIndex": "0",
+                                                            "columnKey": "Date",
+                                                            "leadingProperty": "Date",
+                                                            "sortProperty": "Date",
+                                                            "filterProperty": "Date"
+                                                         }'/>
+                            </customData>
+                            <header>
+                                <Text text="{/#WorkerLog/Date/@sap:label}"/>
+                            </header>
+                        </Column>
+
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <!--1 cells-->
+                            <cells>
+                                <ObjectStatus title="{Date}"
+                                              text="{Error}"
+                                              state="{ValueState}"
+                                              icon="{= (${IsWeekend} === true ) ? 'sap-icon://bed': ''}"/>
+                            </cells>
+                           
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </smartTable:SmartTable>
+        </content>
+    </Popover>
+</core:FragmentDefinition>

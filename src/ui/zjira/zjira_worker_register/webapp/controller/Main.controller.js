@@ -188,6 +188,33 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
       onCloseDialog: function (oEvent) {
         oEvent.getSource().getParent().close();
       },
+
+
+      onPressWorkerLog: function(oEvent){
+        this.openPopoverBy
+        .call(this, {
+          sPopoverName: "_workerlogPopover",
+          sViewName:
+            "intheme.zjira_worker_register.view.popovers.WorkerLog",
+          sPath: oEvent.getSource().getBindingContext().getPath(),
+          oSource: oEvent.getSource(),
+        })
+        .then(
+          function (oPopover) {
+            this.getView().byId('WorkerLogST').rebindTable();
+            // var sTax = this.getView().byId("taxInput").getValue() + '%';
+            // this.getView().byId("TaxField").setText(sTax);
+          }.bind(this)
+        );
+      },
+
+      onBeforeRebindWorkerLogTab: function(oEvent){
+        var mBindingParams = oEvent.getParameter("bindingParams");
+        var oFilter = {
+          Filter: this.getStateProperty("/worker_filter"),
+        };
+        mBindingParams.parameters.custom = oFilter;
+      }
     }
   );
 });
