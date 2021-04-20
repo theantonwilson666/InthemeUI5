@@ -71,6 +71,7 @@
                     demandPopin="true">
                 <smartTable:customToolbar>
                     <OverflowToolbar design="Transparent">
+                        <CheckBox id="showEmptyWorker" text="{i18n>ShowEmptyWorker}" selected="false"/>
                         <CheckBox id="closedIssueBonus" text="{i18n>ClosedIssueBonus}" selected="true"/>
                         <CheckBox id="bonusWithManagmentTask" text="{i18n>ManagmentTaskBonus}" selected="true"/>
 

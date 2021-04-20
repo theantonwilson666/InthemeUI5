@@ -3,12 +3,13 @@
         xmlns:core="sap.ui.core"
         xmlns:l="sap.ui.layout"
         xmlns:smartTable="sap.ui.comp.smarttable"
+        xmlns:table="sap.ui.table"
         xmlns:smartField="sap.ui.comp.smartfield">
     <Popover
             title="{i18n>WorkerLogTitle} - {WorkerName}"
             showHeader="true"
-            contentWidth="25rem"
-            contentHeight="17rem"
+            contentWidth="40rem"
+            contentHeight="25rem"
             placement="Right">
         <content>
             <smartTable:SmartTable
@@ -17,65 +18,79 @@
                     useExportToExcel="false"
                     showRowCount="false"
                     tableBindingPath="WorkerLogs"
-                    tableType="ResponsiveTable"
+                    tableType="TreeTable"
                     useVariantManagement="false"
                     useTablePersonalisation="false"
                     enableAutoBinding="false"
-                    requestAtLeastFields="Worker,Filter,Date,Error,IsWeekend,ValueState"
+                    requestAtLeastFields="Worker,Filter,Date,Error,IsWeekend,ValueState,Magnitude,DrillDownState,ParentNode,Level,Description,IssueName,Issue,IssueLink,SpendHours"
                     beforeRebindTable="onBeforeRebindWorkerLogTab"
                     demandPopin="true">
                 <smartTable:customData>
                     <core:CustomData key="dateFormatSettings" value='\{"pattern": "dd.MM.yyyy"\}'/>
                 </smartTable:customData>
-
-                 <smartTable:customToolbar>
+                <smartTable:customToolbar>
                     <OverflowToolbar design="Transparent">
                         <ToolbarSpacer/>
+
+                        <Button icon="sap-icon://paper-plane"
+                                type="Emphasized"
+                                press="onSendLogToTelegramButton"/>
+
                         <Button icon="sap-icon://refresh"
                                 type="Transparent"
                                 press="rebindTable('WorkerLogST')"/>
-                        <Button icon="sap-icon://excel-attachment" type="Transparent" press="onDownloadExcelFiles({ uploadEntity: '/DownloadExcelSet', downloadEntity: 'WorkerLogSet', oControlId: 'WorkerLogST', mKey: ['Worker', 'Filter']})"/>
-                    
+                        <Button icon="sap-icon://excel-attachment" type="Transparent" press="onDownloadExcelFiles({ uploadEntity: '/DownloadExcelSet', downloadEntity: 'WorkerLogSet', oControlId: 'WorkerLogST', mKey: ['Worker', 'Filter'], stateFilter: 'worker_filter'})"/>
                     </OverflowToolbar>
                 </smartTable:customToolbar>
-                
-                <Table sticky="ColumnHeaders"
-                       growing="true"
-                       fixedLayout="false"
-                       growingThreshold="300"
-                       growingScrollToLoad="true">
-                    <columns>
-                        <!--1 column -->
-                        <Column>
-                            <customData>
-                                <core:CustomData key="p13nData"
-                                                 value='\{
-                                                            "columnIndex": "0",
-                                                            "columnKey": "Date",
-                                                            "leadingProperty": "Date",
-                                                            "sortProperty": "Date",
-                                                            "filterProperty": "Date"
-                                                         }'/>
-                            </customData>
-                            <header>
-                                <Text text="{/#WorkerLog/Date/@sap:label}"/>
-                            </header>
-                        </Column>
+                <table:TreeTable id="treeTable"
+                                 selectionMode="Single"
+                                 enableColumnReordering="false"
+                                 visibleRowCountMode="Interactive"   
+                                 visibleRowCount="17"                             
+                                 rows="{ path:'/WorkerLogSet',
+                                         parameters : { countMode: 'Inline',
+                                                        numberOfExpandedLevels : 3 }
+                                        }">
+                    <table:columns>
+                        <table:Column label="{/#WorkerLog/Error/@sap:label}" width="27rem">
+                            <table:template>
+                                <VBox>
+                                    <ObjectStatus text="{Description}"
+                                              state="Information"
+                                              class="customDateColor customFontSizeForDate"
+                                              visible="{= (${Level} === 0) ? true : false}"/>
 
-                    </columns>
-                    <items>
-                        <ColumnListItem>
-                            <!--1 cells-->
-                            <cells>
-                                <ObjectStatus title="{Date}"
-                                              text="{Error}"
-                                              state="{ValueState}"
-                                              icon="{= (${IsWeekend} === true ) ? 'sap-icon://bed': ''}"/>
-                            </cells>
-                           
-                        </ColumnListItem>
-                    </items>
-                </Table>
+                                    
+                                    <ObjectStatus text="{Description}"
+                                                  state="{= (${ValueState} === '') ? 'None' : ${ValueState} }"
+                                                  visible="{= (${Level} === 1) ? true : false}"/>
+
+                                    <ObjectIdentifier title="{IssueName}"
+                                                      text="{Issue}"
+                                                      titleActive="true"
+                                                      titlePress="onUrlPress($event, 'IssueLink')"
+                                                      visible="{= (${Level} === 2) ? true : false}"/>
+
+
+                                </VBox>
+                                <!-- state="Information"
+                                            class="customDecadeColor customFontSizeForDecade" -->
+                                            <!-- onUrlPress($event, 'ProjectUrl') -->
+                            </table:template>
+                        </table:Column>
+
+                        
+                     <table:Column label="{/#WorkerLog/SpendHours/@sap:label}" width="10rem" hAlign="Center">
+                            <table:template>
+                                <smartField:SmartField value="{SpendHours}" visible="{= (${SpendHours} === 0) ? false : true}"
+                                                       class="customHoursSize"/>
+                            </table:template>
+                        </table:Column>
+
+                    </table:columns>
+
+
+                </table:TreeTable>
             </smartTable:SmartTable>
         </content>
     </Popover>

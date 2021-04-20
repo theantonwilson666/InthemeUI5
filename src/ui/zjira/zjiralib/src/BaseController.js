@@ -401,6 +401,10 @@ sap.ui.define(
           
         }
 
+        if(oParams.stateFilter != null){
+          sFilterData = this.getStateProperty('/' + oParams.stateFilter);
+        };
+
         var sPath = oModel.createKey(oParams.uploadEntity, {
           EntitySet: oParams.downloadEntity,
           Filter: sFilterData,

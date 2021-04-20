@@ -50,7 +50,7 @@
                         <Button icon="sap-icon://refresh"
                                 type="Transparent"
                                 press="rebindTable('closedIssueSmartTable')"/>
-                        <Button icon="sap-icon://excel-attachment" type="Transparent" press="onDownloadExcelFiles({ uploadEntity: '/DownloadExcelSet', downloadEntity: 'WorkerClosedIssueSet', oControlId: 'closedIssueSmartTable' })"/>
+                        <Button icon="sap-icon://excel-attachment" type="Transparent" press="onDownloadExcelFiles({ uploadEntity: '/DownloadExcelSet', downloadEntity: 'WorkerClosedIssueSet', oControlId: 'closedIssueSmartTable', mKey: ['Worker', 'Filter'], stateFilter: 'worker_filter'})"/>
                     
                     </OverflowToolbar>
                 </smartTable:customToolbar>

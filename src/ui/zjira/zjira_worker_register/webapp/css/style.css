@@ -3,3 +3,17 @@
     height: 1rem !important;
     padding-top: 0.09rem;
 }
+
+.customDateColor {
+    color: #20B2AA !important;
+}
+
+.customFontSizeForDate {
+    font-size: 1rem !important;
+}
+
+.customHoursSize{
+    font-size: 2rem !important;
+    font-weight: bold !important;
+}
+

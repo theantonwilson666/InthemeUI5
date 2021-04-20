@@ -63,6 +63,11 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
           .byId("bonusWithManagmentTask")
           .getSelected()
           .toString(),
+
+          ShowEmptyWorker: this.getView()
+          .byId("showEmptyWorker")
+          .getSelected()
+          .toString(),
         };
 
         mBindingParams.parameters.custom = oCustom;
@@ -219,6 +224,33 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
           Filter: this.getStateProperty("/worker_filter"),
         };
         mBindingParams.parameters.custom = oFilter;
+        mBindingParams.parameters.numberOfExpandedLevels = 3;
+
+      },
+
+      onSendLogToTelegramButton: function(oEvent){
+        this.showBusyDialog();
+
+        var oWorker = oEvent.getSource().getParent().getParent().getBindingContext().getObject();
+        
+        this.getModel().callFunction("/SendLogToTelegram", {
+          method: "POST",
+          urlParameters: { 
+            WorkerID: oWorker.Worker,
+            Filter: this.getStateProperty("/worker_filter") 
+        },
+          success: function (oData) {
+            if (oData.SendLogToTelegram.Ok === true) {
+              this.closeBusyDialog();
+            } else {
+              this.closeBusyDialog();
+            }
+          }.bind(this),
+          error: function (oData) {
+            this.closeBusyDialog();
+          }.bind(this),
+          refreshAfterChange: false,
+        });
       }
     }
   );

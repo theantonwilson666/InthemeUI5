@@ -53,6 +53,10 @@
                             </Input>
                             </HBox>
                             <ToolbarSpacer/>
+                            <Button icon="sap-icon://refresh"
+                                type="Transparent"
+                                press="rebindTable('projectStageSmartTable')"/>
+                            <Button icon="sap-icon://excel-attachment" type="Transparent" press="onDownloadExcelFiles({ uploadEntity: '/DownloadExcelSet', downloadEntity: 'ProjectStageProfitSet', oControlId: 'projectStageSmartTable', mKey: ['ProjectID', 'Filter']})"/>
                         </OverflowToolbar>
                     </smartTable:customToolbar>
                     <smartTable:customData>
