@@ -13,7 +13,8 @@
             title="{i18n>ClossedIssueTitle} - {WorkerName}"
             class="sapUiSizeCompact"
             contentHeight="80%"
-            contentWidth="80%">
+            contentWidth="80%"
+            afterClose="afterCloseIssuesDialog">
         <content>
             <VBox>
                 <smartFilterBar:SmartFilterBar
@@ -47,6 +48,8 @@
                      <smartTable:customToolbar>
                     <OverflowToolbar design="Transparent">
                         <ToolbarSpacer/>
+                        <Button text="{i18n>PaymentSheetButtonTitle}" type="Emphasized" icon="sap-icon://pdf-reader"
+                                press="onPressPaymentSheetButton"/>
                         <Button icon="sap-icon://refresh"
                                 type="Transparent"
                                 press="rebindTable('closedIssueSmartTable')"/>

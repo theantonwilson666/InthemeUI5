@@ -56,11 +56,10 @@
                             <table:template>
                                 <VBox>
                                     <ObjectStatus text="{Description}"
-                                              state="Information"
+                                              state="{= (${ValueState} === '') ? 'None' : ${ValueState} }"
                                               class="customDateColor customFontSizeForDate"
                                               visible="{= (${Level} === 0) ? true : false}"/>
 
-                                    
                                     <ObjectStatus text="{Description}"
                                                   state="{= (${ValueState} === '') ? 'None' : ${ValueState} }"
                                                   visible="{= (${Level} === 1) ? true : false}"/>

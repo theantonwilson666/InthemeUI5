@@ -65,7 +65,7 @@
           "sap.m": {}
         }
       },
-      "contentDensities": {
+      "contentDensities": {       
         "compact": true,
         "cozy": true
       },
