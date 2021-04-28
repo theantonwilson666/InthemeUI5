@@ -49,6 +49,13 @@
                         <core:Fragment fragmentName="intheme.zjira_worker_register.view.dialogs.bonusSettingTabs.ProjectConf" type="XML"/>
                     </IconTabFilter>
 
+
+                    <IconTabFilter id="ChebTab" text="{i18n>ChebConf}" key="cheb_bonus">
+                        <core:Fragment fragmentName="intheme.zjira_worker_register.view.dialogs.bonusSettingTabs.ChebConf" type="XML"/>
+                    </IconTabFilter>
+
+
+
                 </items>
             </IconTabBar>
         </content>

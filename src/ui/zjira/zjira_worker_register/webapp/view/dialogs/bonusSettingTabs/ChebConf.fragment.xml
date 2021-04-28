@@ -7,11 +7,11 @@
                          xmlns:u="sap.ui.unified"
                          xmlns:smartField="sap.ui.comp.smartfield"
                          xmlns:l="sap.ui.layout">
-    <f:DynamicPage id="workerDetailListView" toggleHeaderOnTitleClick="true" showFooter="false" headerExpanded="false" preserveHeaderStateOnScroll="true">
+    <f:DynamicPage id="ChebConfListView" toggleHeaderOnTitleClick="true" showFooter="false" headerExpanded="false" preserveHeaderStateOnScroll="true">
         <f:content>
             <smartTable:SmartTable
-                    id="PaymentSettingST"
-                    entitySet="PaymentSettingSet"
+                    id="ChebConfST"
+                    entitySet="CheboksSalarySet"
                     useExportToExcel="false"
                     showRowCount="false"
                     editTogglable="true"
@@ -20,7 +20,7 @@
                     useVariantManagement="false"
                     useTablePersonalisation="false"
                     enableAutoBinding="false"
-                    requestAtLeastFields="TeamID,TeamName,PositionID,PositionName,CoefWeek,DateFrom,DateTo"
+                    requestAtLeastFields="Position,PositionName,Salary,SalaryBonusPercent,SalaryBonusWithPercent"
                     demandPopin="true">
                 <smartTable:customData>
                     <core:CustomData key="dateFormatSettings" value='\{"pattern": "dd.MM.yyyy"\}'/>
@@ -31,9 +31,9 @@
                         <ToolbarSpacer/>
                         <Button type="Transparent"
                                 iconFirst="false"
-                                enabled="{= ${state>/PaymentSettingSTMode} === 'Delete' }"
+                                enabled="{= ${state>/BonusSettingSTMode} === 'Delete' }"
                                 icon="sap-icon://add"
-                                press="onAddPaymentSetting($event, 'PaymentSettingST', 'paymentSettingListItem', 'PaymentSettingSet')"/>
+                                press="onAddPaymentSetting($event, 'ChebConfST', 'ChebConfListItem', 'CheboksSalarySet')"/>
                     </OverflowToolbar>
                 </smartTable:customToolbar>
                 <Table sticky="ColumnHeaders"
@@ -42,8 +42,8 @@
                        fixedLayout="false"
                        growingThreshold="300"
                        growingScrollToLoad="true"
-                       delete="onDeletePaymentSetting($event, 'PaymentSettingST')"
-                       mode="{state>/PaymentSettingSTMode}">
+                       delete="onDeletePaymentSetting($event, 'ChebConfST')"
+                       mode="{state>/BonusSettingSTMode}">
                     <columns>
                         <!--1 column -->
                         <Column>
@@ -51,14 +51,14 @@
                                 <core:CustomData key="p13nData"
                                                  value='\{
                                                             "columnIndex": "0",
-                                                            "columnKey": "TeamName",
-                                                            "leadingProperty": "TeamName",
-                                                            "sortProperty": "TeamName",
-                                                            "filterProperty": "TeamName"
+                                                            "columnKey": "PositionName",
+                                                            "leadingProperty": "PositionName",
+                                                            "sortProperty": "PositionName",
+                                                            "filterProperty": "PositionName"
                                                          }'/>
                             </customData>
                             <header>
-                                <Text text="{/#PaymentSetting/TeamName/@sap:label}"/>
+                                <Text text="{/#CheboksSalary/PositionName/@sap:label}"/>
                             </header>
                         </Column>
                         <!--2 column -->
@@ -67,16 +67,17 @@
                                 <core:CustomData key="p13nData"
                                                  value='\{
                                                             "columnIndex": "1",
-                                                            "columnKey": "PositionName",
-                                                            "leadingProperty": "PositionName",
-                                                            "sortProperty": "PositionName",
-                                                            "filterProperty": "PositionName"
+                                                            "columnKey": "Salary",
+                                                            "leadingProperty": "Salary",
+                                                            "sortProperty": "Salary",
+                                                            "filterProperty": "Salary"
                                                          }'/>
                             </customData>
                             <header>
-                                <Text text="{/#PaymentSetting/PositionName/@sap:label}"/>
+                                <Text text="{/#CheboksSalary/Salary/@sap:label}"/>
                             </header>
                         </Column>
+
 
                         <!--3 column -->
                         <Column>
@@ -84,16 +85,17 @@
                                 <core:CustomData key="p13nData"
                                                  value='\{
                                                             "columnIndex": "2",
-                                                            "columnKey": "DateTo",
-                                                            "leadingProperty": "DateTo",
-                                                            "sortProperty": "DateTo",
-                                                            "filterProperty": "DateTo"
+                                                            "columnKey": "SalaryBonusPercent",
+                                                            "leadingProperty": "SalaryBonusPercent",
+                                                            "sortProperty": "SalaryBonusPercent",
+                                                            "filterProperty": "SalaryBonusPercent"
                                                          }'/>
                             </customData>
                             <header>
-                                <Text text="{i18n>PaymentSettingPeriod}"/>
+                                <Text text="{/#CheboksSalary/SalaryBonusPercent/@sap:label}"/>
                             </header>
                         </Column>
+
 
                         <!--4 column -->
                         <Column>
@@ -101,41 +103,40 @@
                                 <core:CustomData key="p13nData"
                                                  value='\{
                                                             "columnIndex": "3",
-                                                            "columnKey": "CoefWeek",
-                                                            "leadingProperty": "CoefWeek",
-                                                            "sortProperty": "CoefWeek",
-                                                            "filterProperty": "CoefWeek"
+                                                            "columnKey": "SalaryBonusWithPercent",
+                                                            "leadingProperty": "SalaryBonusWithPercent",
+                                                            "sortProperty": "SalaryBonusWithPercent",
+                                                            "filterProperty": "SalaryBonusWithPercent"
                                                          }'/>
                             </customData>
                             <header>
-                                <Text text="{/#PaymentSetting/CoefWeek/@sap:label}"/>
+                                <Text text="{/#CheboksSalary/SalaryBonusWithPercent/@sap:label}"/>
                             </header>
                         </Column>
+
                     </columns>
                     <items>
-                        <ColumnListItem id="paymentSettingListItem">
+                        <ColumnListItem id="ChebConfListItem">
                             <!--1 cells-->
                             <cells>
-                                <smartField:SmartField value="{TeamName}" editable="{= ${state>/PaymentSettingSTMode} === 'Delete' }"/>
+                                <smartField:SmartField value="{PositionName}" editable="{= ${state>/BonusSettingSTMode} === 'Delete' }"/>
                             </cells>
                             <!--2 cells-->
                             <cells>
-                                <smartField:SmartField value="{PositionName}" editable="{= ${state>/PaymentSettingSTMode} === 'Delete' }"/>
+                                <smartField:SmartField value="{Salary}" editable="{= ${state>/BonusSettingSTMode} === 'Delete' }"/>
                             </cells>
 
                             <!--3 cells-->
                             <cells>
-                                <HBox>
-                                    <smartField:SmartField value="{DateFrom}" editable="{= ${state>/PaymentSettingSTMode} === 'Delete' }"/>
-                                    <Text text='   –   '/>
-                                    <smartField:SmartField value="{DateTo}" editable="{= ${state>/PaymentSettingSTMode} === 'Delete' }"/>
-                                </HBox>
+                                <smartField:SmartField value="{SalaryBonusPercent}" editable="{= ${state>/BonusSettingSTMode} === 'Delete' }"/>
                             </cells>
 
                             <!--4 cells-->
                             <cells>
-                                <smartField:SmartField value="{CoefWeek}" editable="{= ${state>/PaymentSettingSTMode} === 'Delete' }"/>
+                                <smartField:SmartField value="{SalaryBonusWithPercent}" editable="{= ${state>/BonusSettingSTMode} === 'Delete' }"/>
                             </cells>
+
+                            
                         </ColumnListItem>
                     </items>
                 </Table>

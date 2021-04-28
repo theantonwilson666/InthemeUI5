@@ -74,6 +74,7 @@
                         <CheckBox id="showEmptyWorker" text="{i18n>ShowEmptyWorker}" selected="false"/>
                         <CheckBox id="closedIssueBonus" text="{i18n>ClosedIssueBonus}" selected="true"/>
                         <CheckBox id="bonusWithManagmentTask" text="{i18n>ManagmentTaskBonus}" selected="true"/>
+                        <CheckBox id="calcWithError" text="{i18n>CalcWithError}" selected="false"/>
 
                         <ToolbarSpacer/>
                         <Button icon="sap-icon://refresh"

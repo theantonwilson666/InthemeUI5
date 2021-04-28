@@ -67,6 +67,11 @@ sap.ui.define(
               .byId("showEmptyWorker")
               .getSelected()
               .toString(),
+            
+            CalcWithError: this.getView()
+            .byId("calcWithError")
+            .getSelected()
+            .toString()
           };
 
           mBindingParams.parameters.custom = oCustom;
@@ -124,6 +129,7 @@ sap.ui.define(
                 oDialog.open();
                 this.getView().byId("PositionConfST").rebindTable();
                 this.getView().byId("ProjectConfST").rebindTable();
+                this.getView().byId("ChebConfST").rebindTable();
               }.bind(this)
             );
         },
