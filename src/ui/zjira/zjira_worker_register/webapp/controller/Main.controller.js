@@ -67,11 +67,11 @@ sap.ui.define(
               .byId("showEmptyWorker")
               .getSelected()
               .toString(),
-            
+
             CalcWithError: this.getView()
-            .byId("calcWithError")
-            .getSelected()
-            .toString()
+              .byId("calcWithError")
+              .getSelected()
+              .toString(),
           };
 
           mBindingParams.parameters.custom = oCustom;
@@ -197,8 +197,28 @@ sap.ui.define(
 
         onBeforeClosedIssueTab: function (oEvent) {
           var mBindingParams = oEvent.getParameter("bindingParams");
+
           var oFilter = {
             Filter: this.getStateProperty("/worker_filter"),
+            BonusClosed: this.getView()
+              .byId("closedIssueBonus")
+              .getSelected()
+              .toString(),
+
+            ManagmentTaskBonus: this.getView()
+              .byId("bonusWithManagmentTask")
+              .getSelected()
+              .toString(),
+
+            ShowEmptyWorker: this.getView()
+              .byId("showEmptyWorker")
+              .getSelected()
+              .toString(),
+
+            CalcWithError: this.getView()
+              .byId("calcWithError")
+              .getSelected()
+              .toString(),
           };
           mBindingParams.parameters.custom = oFilter;
         },
@@ -269,8 +289,34 @@ sap.ui.define(
         },
 
         onPressPaymentSheetButton: function (oEvent) {
+          var oObject = oEvent
+            .getSource()
+            .getParent()
+            .getParent()
+            .getBindingContext()
+            .getObject();
 
-          var oObject = oEvent.getSource().getParent().getParent().getBindingContext().getObject();
+          var oConf = {
+            BonusClosed: this.getView()
+              .byId("closedIssueBonus")
+              .getSelected()
+              .toString(),
+
+            ManagmentTaskBonus: this.getView()
+              .byId("bonusWithManagmentTask")
+              .getSelected()
+              .toString(),
+
+            ShowEmptyWorker: this.getView()
+              .byId("showEmptyWorker")
+              .getSelected()
+              .toString(),
+
+            CalcWithError: this.getView()
+              .byId("calcWithError")
+              .getSelected()
+              .toString(),
+          };
 
           var oPDFViewer = new PDFViewer();
           var sSource =
@@ -278,10 +324,13 @@ sap.ui.define(
             this.getModel().createKey("/PaymentSheetPDFSet", {
               Worker: oObject.Worker,
               Filter: this.getStateProperty("/worker_filter"),
+              Conf: JSON.stringify(oConf)
             }) +
             "/$value";
 
-          oPDFViewer.setTitle(this.i18n('PaymentSheetButtonTitle') + ' - ' + oObject.WorkerName);
+          oPDFViewer.setTitle(
+            this.i18n("PaymentSheetButtonTitle") + " - " + oObject.WorkerName
+          );
           oPDFViewer.setSource(sSource);
           oPDFViewer.open();
         },

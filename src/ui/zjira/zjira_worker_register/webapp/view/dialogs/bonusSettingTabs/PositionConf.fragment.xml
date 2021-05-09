@@ -20,7 +20,7 @@
                     useVariantManagement="false"
                     useTablePersonalisation="false"
                     enableAutoBinding="false"
-                    requestAtLeastFields="Position,PositionName,BonusPerDay"
+                    requestAtLeastFields="Position,PositionName,BonusPerDay,DateFrom,DateTo"
                     demandPopin="true">
                 <smartTable:customData>
                     <core:CustomData key="dateFormatSettings" value='\{"pattern": "dd.MM.yyyy"\}'/>
@@ -61,12 +61,30 @@
                                 <Text text="{/#BonusPositionConf/PositionName/@sap:label}"/>
                             </header>
                         </Column>
+
                         <!--2 column -->
                         <Column>
                             <customData>
                                 <core:CustomData key="p13nData"
                                                  value='\{
                                                             "columnIndex": "1",
+                                                            "columnKey": "DateTo",
+                                                            "leadingProperty": "DateTo",
+                                                            "sortProperty": "DateTo",
+                                                            "filterProperty": "DateTo"
+                                                         }'/>
+                            </customData>
+                            <header>
+                                <Text text="{i18n>BonusSettingPeriod}"/>
+                            </header>
+                        </Column>
+                        
+                        <!--3 column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                            "columnIndex": "2",
                                                             "columnKey": "BonusPerDay",
                                                             "leadingProperty": "BonusPerDay",
                                                             "sortProperty": "BonusPerDay",
@@ -84,7 +102,17 @@
                             <cells>
                                 <smartField:SmartField value="{PositionName}" editable="{= ${state>/BonusSettingSTMode} === 'Delete' }"/>
                             </cells>
-                            <!--2 cells-->
+
+                             <!--2 cells-->
+                            <cells>
+                                <HBox>
+                                    <smartField:SmartField value="{DateFrom}" editable="{= ${state>/BonusSettingSTMode} === 'Delete' }"/>
+                                    <Text text='   –   '/>
+                                    <smartField:SmartField value="{DateTo}" editable="{= ${state>/BonusSettingSTMode} === 'Delete' }"/>
+                                </HBox>
+                            </cells>
+
+                            <!--3 cells-->
                             <cells>
                                 <smartField:SmartField value="{BonusPerDay}" editable="{= ${state>/BonusSettingSTMode} === 'Delete' }"/>
                             </cells>

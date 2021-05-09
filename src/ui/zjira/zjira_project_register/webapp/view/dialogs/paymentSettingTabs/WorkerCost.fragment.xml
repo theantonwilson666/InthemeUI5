@@ -20,7 +20,7 @@
                     useVariantManagement="false"
                     useTablePersonalisation="false"
                     enableAutoBinding="false"
-                    requestAtLeastFields="Worker,WorkerName,Position,PositionName,Cost"
+                    requestAtLeastFields="Worker,WorkerName,Position,PositionName,Cost,DateTo,DateFrom,Project,ProjectName"
                     demandPopin="true">
                 <smartTable:customData>
                     <core:CustomData key="dateFormatSettings" value='\{"pattern": "dd.MM.yyyy"\}'/>
@@ -67,6 +67,38 @@
                                 <core:CustomData key="p13nData"
                                                  value='\{
                                                             "columnIndex": "1",
+                                                            "columnKey": "ProjectName",
+                                                            "leadingProperty": "ProjectName",
+                                                            "sortProperty": "ProjectName",
+                                                            "filterProperty": "ProjectName"
+                                                         }'/>
+                            </customData>
+                            <header>
+                                <Text text="{/#WorkerCostConf/ProjectName/@sap:label}"/>
+                            </header>
+                        </Column>
+                        <!--3 column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                            "columnIndex": "2",
+                                                            "columnKey": "DateFrom",
+                                                            "leadingProperty": "DateFrom",
+                                                            "sortProperty": "DateFrom",
+                                                            "filterProperty": "DateFrom"
+                                                         }'/>
+                            </customData>
+                            <header>
+                                <Text text="{i18n>PaymentSettingPeriod}"/>
+                            </header>
+                        </Column>
+                        <!--4 column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                            "columnIndex": "3",
                                                             "columnKey": "Cost",
                                                             "leadingProperty": "Cost",
                                                             "sortProperty": "Cost",
@@ -82,10 +114,21 @@
                         <ColumnListItem id="workerCostListItem">
                             <!--1 cells-->
                             <cells>
-                                 <smartField:SmartField value="{WorkerName}" editable="{= ${state>/PaymentSettingSTMode} === 'Delete' }"/>
+                                <smartField:SmartField value="{WorkerName}" editable="{= ${state>/PaymentSettingSTMode} === 'Delete' }"/>
                             </cells>
-
                             <!--2 cells-->
+                            <cells>
+                                <smartField:SmartField value="{ProjectName}" editable="{= ${state>/PaymentSettingSTMode} === 'Delete' }"/>
+                            </cells>
+                            <!--3 cells-->
+                            <cells>
+                                <HBox>
+                                    <smartField:SmartField value="{DateFrom}" editable="{= ${state>/PaymentSettingSTMode} === 'Delete' }"/>
+                                    <Text text='   –   '/>
+                                    <smartField:SmartField value="{DateTo}" editable="{= ${state>/PaymentSettingSTMode} === 'Delete' }"/>
+                                </HBox>
+                            </cells>
+                            <!--4 cells-->
                             <cells>
                                 <smartField:SmartField value="{Cost}" editable="{= ${state>/PaymentSettingSTMode} === 'Delete' }"/>
                             </cells>
