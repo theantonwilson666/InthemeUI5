@@ -324,7 +324,7 @@ sap.ui.define(
             this.getModel().createKey("/PaymentSheetPDFSet", {
               Worker: oObject.Worker,
               Filter: this.getStateProperty("/worker_filter"),
-              Conf: JSON.stringify(oConf)
+              Conf: JSON.stringify(oConf),
             }) +
             "/$value";
 
@@ -334,6 +334,52 @@ sap.ui.define(
           oPDFViewer.setSource(sSource);
           oPDFViewer.open();
         },
+
+        onInitFilterKPI: function (oEvent) {
+          this.getModel().callFunction("/GetCurrentQuarter", {
+            method: "POST",
+            success: function (oData) {
+              var oFilter = this.getView().byId("WorkerKPIFilter");
+
+              var aRanges = [];
+
+              aRanges.push({
+                exclude: false,
+                keyField: "DateFrom",
+                operation: "BT",
+                value1: oData.GetCurrentQuarter.Low,
+                value2: oData.GetCurrentQuarter.High,
+              });
+
+              var oDefaultFilter = {
+                DateFrom: {
+                  conditionTypeInfo: {
+                    data: {
+                      operation: "THISQUARTER",
+                      value1: null,
+                      value2: null,
+                      key: "DateFrom",
+                      calendarType: "Gregorian",
+                    },
+                    name: "sap.ui.comp.config.condition.DateRangeType",
+                  },
+                  items: [],
+                  ranges: aRanges,
+                },
+              };
+              oFilter.setFilterData(oDefaultFilter, true);
+              this.getView().byId("WorkerKPI_ST").rebindTable();
+            }.bind(this),
+            error: function (oData) {
+              debugger;
+            }.bind(this),
+          });
+        },
+
+
+        onBeforeBindingTabKPI: function(oEvent){
+          debugger
+        }
       }
     );
   }

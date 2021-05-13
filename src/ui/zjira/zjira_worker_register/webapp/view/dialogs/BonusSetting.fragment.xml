@@ -54,7 +54,9 @@
                         <core:Fragment fragmentName="intheme.zjira_worker_register.view.dialogs.bonusSettingTabs.ChebConf" type="XML"/>
                     </IconTabFilter>
 
-
+                    <IconTabFilter id="WorkerKPI" text="{i18n>WorkerKPI}" key="worker_kpi">
+                        <core:Fragment fragmentName="intheme.zjira_worker_register.view.dialogs.bonusSettingTabs.WorkerKPI" type="XML"/>
+                    </IconTabFilter>
 
                 </items>
             </IconTabBar>
