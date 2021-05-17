@@ -117,6 +117,13 @@ sap.ui.define(
             );
         },
 
+        rebindConfTab: function(oEvent){
+          this.getView().byId("PositionConfST").rebindTable();
+          this.getView().byId("ProjectConfST").rebindTable();
+          this.getView().byId("ChebConfST").rebindTable();
+          this.getView().byId("WorkerKPI_ST").rebindTable();
+        },
+
         onOpenBonusSettingDialog: function (oEvent) {
           this.loadDialog
             .call(this, {
@@ -127,9 +134,7 @@ sap.ui.define(
             .then(
               function (oDialog) {
                 oDialog.open();
-                this.getView().byId("PositionConfST").rebindTable();
-                this.getView().byId("ProjectConfST").rebindTable();
-                this.getView().byId("ChebConfST").rebindTable();
+                this.rebindConfTab();
               }.bind(this)
             );
         },
@@ -158,14 +163,12 @@ sap.ui.define(
         },
 
         onSaveBonusSettingDialog: function (oEvent) {
-          oEvent.getSource().getParent().close();
           this.submitChanges({
             success: function () {
-              this.showMessageToast(this.i18n("MessageSuccess"));
+              this.isExistError();
+              this.rebindConfTab();
             }.bind(this),
-            error: function () {
-              this.showMessageToast(this.i18n("MessageError"));
-            }.bind(this),
+            error: this.showError.bind(this),
           });
         },
 
@@ -351,6 +354,13 @@ sap.ui.define(
                 value2: oData.GetCurrentQuarter.High,
               });
 
+
+              var aTeam = [];
+              aTeam.push({
+                key: "3763699611210895198",
+                text: "Чебоксары"
+              });
+
               var oDefaultFilter = {
                 DateFrom: {
                   conditionTypeInfo: {
@@ -366,6 +376,11 @@ sap.ui.define(
                   items: [],
                   ranges: aRanges,
                 },
+
+                Team: {
+                  items: aTeam,
+                  value: null
+                }
               };
               oFilter.setFilterData(oDefaultFilter, true);
               this.getView().byId("WorkerKPI_ST").rebindTable();

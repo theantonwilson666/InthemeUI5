@@ -10,6 +10,12 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
           .attachPatternMatched(this._onRouteMatched, this);
       },
 
+      rebindCostTab: function(oEvent){
+        this.getView().byId("PaymentSettingST").rebindTable();
+        this.getView().byId("ProjWeekendST").rebindTable();
+        this.getView().byId("WorkerCostConfST").rebindTable();
+      },
+      
       onViewDetail: function (oEvent) {
         var oBindingObject = oEvent
           .getParameter("listItem")
@@ -106,11 +112,10 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
         oEvent.getSource().getParent().close();
         this.submitChanges({
           success: function () {
-            this.showMessageToast(this.i18n("MessageSuccess"));
+            this.isExistError();
+            this.rebindCostTab();
           }.bind(this),
-          error: function () {
-            this.showMessageToast(this.i18n("MessageError"));
-          }.bind(this),
+          error: this.showError.bind(this),
         });
       },
 

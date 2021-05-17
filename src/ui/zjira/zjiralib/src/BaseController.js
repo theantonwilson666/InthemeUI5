@@ -22,6 +22,27 @@ sap.ui.define(
     return Controller.extend("jira.lib.BaseController", {
       commonFormatter: CommonFormatter,
 
+      showError: function (oError) {
+        if (oError && JSON.parse(oError.statusCode) === 500) {
+          MessageDialog.showError.call(this, oError);
+          return;
+        }
+        MessageDialog.showCurrentState();
+      },
+
+      isExistError: function () {
+        var aMassages = sap.ui
+          .getCore()
+          .getMessageManager()
+          .getMessageModel()
+          .getProperty("/");
+        if (aMassages.length > 0) {
+          MessageDialog.showCurrentState();
+          return true;
+        }
+        return false;
+      },
+
       loadDialog: function (oParams) {
         if (!this[oParams.sDialogName]) {
           return Fragment.load({
@@ -376,7 +397,7 @@ sap.ui.define(
         var oModel = this.getModel();
         var sServiceUrl = oModel.sServiceUrl;
         var oControl = this.byId(oParams.oControlId);
-        var sFilterData = '';
+        var sFilterData = "";
         if (this.getView().byId(oControl.getSmartFilterId()) != null) {
           var oSmartFilter = this.getView().byId(oControl.getSmartFilterId());
           sFilterData = oSmartFilter.getFilterDataAsString();
@@ -384,26 +405,21 @@ sap.ui.define(
 
         var oKeys = {};
         for (var sKey in oParams.mKey) {
-          if (this.getView().getBindingContext() != null){
-            oKeys[
-              oParams.mKey[sKey]
-            ] = this.getView().getBindingContext().getObject()[
-              oParams.mKey[sKey]
-            ];
-          } else{
-            oKeys[
-              oParams.mKey[sKey]
-            ] = this.getView().byId(oParams.oControlId).getBindingContext().getObject()[
-              oParams.mKey[sKey]
-            ];
-
+          if (this.getView().getBindingContext() != null) {
+            oKeys[oParams.mKey[sKey]] = this.getView()
+              .getBindingContext()
+              .getObject()[oParams.mKey[sKey]];
+          } else {
+            oKeys[oParams.mKey[sKey]] = this.getView()
+              .byId(oParams.oControlId)
+              .getBindingContext()
+              .getObject()[oParams.mKey[sKey]];
           }
-          
         }
 
-        if(oParams.stateFilter != null){
-          sFilterData = this.getStateProperty('/' + oParams.stateFilter);
-        };
+        if (oParams.stateFilter != null) {
+          sFilterData = this.getStateProperty("/" + oParams.stateFilter);
+        }
 
         var sPath = oModel.createKey(oParams.uploadEntity, {
           EntitySet: oParams.downloadEntity,

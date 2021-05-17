@@ -61,31 +61,19 @@
                     useVariantManagement="false"
                     useTablePersonalisation="false"
                     enableAutoBinding="false"
-                    requestAtLeastFields="Worker"
+                    requestAtLeastFields="Worker,Position,PositionName,Team,DateFrom,DateTo,WorkerName,KPI"
                     beforeRebindTable="onBeforeBindingTabKPI"
                     demandPopin="true">
                     <smartTable:customData>
                         <core:CustomData key="dateFormatSettings" value='\{"pattern": "dd.MM.yyyy"\}'/>
                         <core:CustomData key="useSmartField" value="true"/>
                     </smartTable:customData>
-                    <smartTable:customToolbar>
-                        <OverflowToolbar design="Transparent">
-                            <ToolbarSpacer/>
-                            <Button type="Transparent"
-                                iconFirst="false"
-                                enabled="{= ${state>/BonusSettingSTMode} === 'Delete' }"
-                                icon="sap-icon://add"
-                                press="onAddPaymentSetting($event, 'WorkerKPI_ST', 'workerKPIListItem', 'WorkerKPISet')"/>
-                        </OverflowToolbar>
-                    </smartTable:customToolbar>
                     <Table sticky="ColumnHeaders"
                        alternateRowColors="true"
                        growing="true"
                        fixedLayout="false"
                        growingThreshold="300"
-                       growingScrollToLoad="true"
-                       delete="onDeletePaymentSetting($event, 'WorkerKPI_ST')"
-                       mode="{state>/BonusSettingSTMode}">
+                       growingScrollToLoad="true">
                         <columns>
                             <!--1 column -->
                             <Column>
@@ -93,23 +81,73 @@
                                     <core:CustomData key="p13nData"
                                                  value='\{
                                                             "columnIndex": "0",
-                                                            "columnKey": "Worker",
-                                                            "leadingProperty": "Worker",
-                                                            "sortProperty": "Worker",
-                                                            "filterProperty": "Worker"
+                                                            "columnKey": "WorkerName",
+                                                            "leadingProperty": "WorkerName",
+                                                            "sortProperty": "WorkerName",
+                                                            "filterProperty": "WorkerName"
                                                          }'/>
                                 </customData>
                                 <header>
-                                    <Text text="{/#WorkerKPI/Worker/@sap:label}"/>
+                                    <Text text="{/#WorkerKPI/WorkerName/@sap:label}"/>
                                 </header>
                             </Column>
+
+
+                            <!--2 column -->
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                            "columnIndex": "1",
+                                                            "columnKey": "Team",
+                                                            "leadingProperty": "Team",
+                                                            "sortProperty": "Team",
+                                                            "filterProperty": "Team"
+                                                         }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#WorkerKPI/Team/@sap:label}"/>
+                                </header>
+                            </Column>
+
+
+                            
+                            <!--3 column -->
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                            "columnIndex": "2",
+                                                            "columnKey": "KPI",
+                                                            "leadingProperty": "KPI",
+                                                            "sortProperty": "KPI",
+                                                            "filterProperty": "KPI"
+                                                         }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#WorkerKPI/KPI/@sap:label}"/>
+                                </header>
+                            </Column>
+
+
                         </columns>
                         <items>
                             <ColumnListItem id="workerKPIListItem">
                                 <!--1 cells-->
                                 <cells>
-                                    <smartField:SmartField value="{Worker}" editable="{= ${state>/BonusSettingSTMode} === 'Delete' }"/>
+                                    <ObjectIdentifier title="{WorkerName}" text="{PositionName}"/>
                                 </cells>
+
+                                <!--2 cells-->
+                                <cells>
+                                    <Text text="{Team}"/>
+                                </cells>
+
+                                <!--3 cells-->
+                                <cells>
+                                    <smartField:SmartField value="{KPI}" editable="{= ${state>/BonusSettingSTMode} === 'Delete' }"/>
+                                </cells>
+                                
                             </ColumnListItem>
                         </items>
                     </Table>
