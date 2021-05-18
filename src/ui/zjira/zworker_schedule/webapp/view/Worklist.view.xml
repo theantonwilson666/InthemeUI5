@@ -1,0 +1,140 @@
+<mvc:View 
+    controllerName="intheme.zworker_schedule.controller.Main" 
+    xmlns:core="sap.ui.core" 
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true" 
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:l="sap.ui.layout"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:smartField="sap.ui.comp.smartfield">
+    <f:DynamicPage toggleHeaderOnTitleClick="true" showFooter="false" headerExpanded="false" preserveHeaderStateOnScroll="true" class="sapUiNoContentPadding">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <!-- <Title text="{i18n>appTitle}"/> -->
+                    <sv:SmartVariantManagement id="workerPageVariant"
+                                               persistencyKey="workerPage.PKey"
+                                               showShare="true"
+                                               showExecuteOnSelection="true"/>
+                </f:heading>
+                <f:expandedContent>
+                    <Label text="{i18n>appDescription}"/>
+                </f:expandedContent>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="false" class="sapUiNoContentPadding">
+                <f:content>
+                    <smartFilterBar:SmartFilterBar
+                            id="workerFilterBar"
+                            smartVariant="workerPageVariant"
+                            entitySet="WorkerRegisterSet"
+                            useToolbar="false"
+                            considerSelectionVariants="true"
+                            enableBasicSearch="false"
+                            showFilterConfiguration="false"
+                            liveMode="false"
+                            persistencyKey="workerPage.PKey.FilterBar">
+                        <smartFilterBar:customData>
+                            <core:CustomData key="dateFormatSettings" value='\{"UTC":true, "pattern":"dd.MM.yyyy"\}'/>
+                        </smartFilterBar:customData>
+                    </smartFilterBar:SmartFilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <!-- <Text text='test' /> -->
+            <smartTable:SmartTable
+                    id="workerSmartTable"
+                    smartVariant="workerPageVariant"
+                    smartFilterId="workerFilterBar"
+                    header="{i18n>SmartTableTitle}"
+                    entitySet="WorkerRegisterSet"
+                    useExportToExcel="false"
+                    showRowCount="true"
+                    tableType="ResponsiveTable"
+                    useVariantManagement="true"
+                    persistencyKey="workerPage.PKey.SmartTable"
+                    useTablePersonalisation="true"
+                    showFullScreenButton="false"
+                    enableAutoBinding="true"
+                    requestAtLeastFields="Worker,WorkerName,Position,PositionName,Team"
+                    demandPopin="true">
+                <smartTable:customToolbar>
+                    <OverflowToolbar design="Transparent">
+                        <ToolbarSpacer/>
+                        <Button icon="sap-icon://refresh"
+                                type="Transparent"
+                                press="rebindTable('workerSmartTable')"/>
+                    </OverflowToolbar>
+                </smartTable:customToolbar>
+
+
+                <smartTable:customData>
+                    <core:CustomData key="dateFormatSettings" value='\{"UTC":false, "pattern":"dd.MM.yyyy"\}'/>
+                </smartTable:customData>
+                <Table sticky="ColumnHeaders"
+                       growing="true"
+                       fixedLayout="false"
+                       growingThreshold="200"
+                       growingScrollToLoad="true"
+                       mode="SingleSelectMaster"
+                       selectionChange="onViewDetail">
+                    <columns>
+                        <!--1 column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "0",
+                                                        "columnKey": "WorkerName",
+                                                        "leadingProperty": "WorkerName",
+                                                        "sortProperty": "WorkerName",
+                                                        "filterProperty": "WorkerName"
+                                                     }'/>
+                            </customData>
+                            <header>
+                                <Text text="{/#WorkerRegister/WorkerName/@sap:label}"/>
+                            </header>
+                        </Column>
+                        <!--2 column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "1",
+                                                        "columnKey": "Team",
+                                                        "leadingProperty": "Team",
+                                                        "sortProperty": "Team",
+                                                        "filterProperty": "Team"
+                                                     }'/>
+                            </customData>
+                            <header>
+                                <Text text="{/#WorkerRegister/Team/@sap:label}"/>
+                            </header>
+                        </Column>
+                        
+                    </columns>
+                    <ColumnListItem
+                            type="Navigation">
+                        <!--1 cells-->
+                        <cells>
+                            <HBox>
+                                <ObjectIdentifier title="{WorkerName}" text="{PositionName}"/>
+                            </HBox>
+                        </cells>
+                        <!--2 cells-->
+                        <cells>
+                            <Text text="{Team}"/>
+                        </cells>
+
+                    </ColumnListItem>
+                </Table>
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

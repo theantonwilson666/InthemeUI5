@@ -1,0 +1,71 @@
+<mvc:View controllerName="intheme.zworker_schedule.controller.Detail"
+          xmlns:mvc="sap.ui.core.mvc"
+          xmlns="sap.m"
+          xmlns:dnd="sap.ui.core.dnd"
+          xmlns:core="sap.ui.core"
+          xmlns:f="sap.f"
+          xmlns:layout="sap.ui.layout"
+          xmlns:form="sap.ui.layout.form"
+          xmlns:sv="sap.ui.comp.smartvariants"
+          xmlns:smartTable="sap.ui.comp.smarttable"
+          xmlns:smartField="sap.ui.comp.smartfield"
+          xmlns:smartMultiInput="sap.ui.comp.smartmultiinput"
+          xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+          xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+          height="100%">
+    <f:DynamicPage id="issueView" toggleHeaderOnTitleClick="true" showFooter="true" preserveHeaderStateOnScroll="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="{ProjectName}"/>
+                </f:heading>
+                <f:content>
+                    <Text text="{ProjectKey}"/>
+                </f:content>
+
+                <f:actions>
+                    <Button icon="sap-icon://lead"
+                            type="Emphasized"
+                            text="{i18n>profitButton}"
+                            press="onProfitabilyButtonPress"/>
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="false" class="sapUiNoContentPadding">
+                <f:content>
+                    <VBox>
+                        
+                    </VBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <IconTabBar id="iconTabBar"
+                        selectedKey="issues"
+                        applyContentPadding="false"
+                        expanded="true"
+                        expandable="false"
+                        stretchContentHeight="true"
+                        tabDensityMode="Compact">
+                <items>
+                    <IconTabFilter id="IssueTab" text="{i18n>IssueTab}" key="issues">
+                       <core:Fragment fragmentName="intheme.zjira_project_register.view.fragments.IssueTab" type="XML"/>
+                    </IconTabFilter>
+
+                     <IconTabFilter id="WorkerTab" text="{i18n>WorkerTab}" key="workers">
+                       <core:Fragment fragmentName="intheme.zjira_project_register.view.fragments.WorkerTab" type="XML"/>
+                    </IconTabFilter>
+
+                </items>
+            </IconTabBar>
+        </f:content>
+        <!-- <f:footer>
+            <OverflowToolbar visible="{state>/editDetail}">
+                <ToolbarSpacer/>
+                <Button text="{i18n>SaveBtn}" type="Emphasized" press="onSavePackageChange"/>
+                <Button text="{i18n>CancelBtn}" type="Transparent" press="onCancelPackageChange"/>
+            </OverflowToolbar>
+        </f:footer> -->
+    </f:DynamicPage>
+</mvc:View>
