@@ -17,6 +17,7 @@
     "serve": "grunt serve",
     "deploy_zjira_project_register": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=0 --app=zjira_project_register",
     "deploy_zjira_worker_register": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=0 --app=zjira_worker_register",
+    "deploy_zworker_schedule": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=1 --app=zworker_schedule",
     "deploy_zjiralib": "node node_modules\\grunt-cli\\bin\\grunt deploy_lib --lib=zjiralib",
     "build": "grunt build"
   },

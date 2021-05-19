@@ -49,6 +49,23 @@ module.exports = function (grunt) {
           },
         },
       },
+
+      {
+        package: "ZWORKER_SCHEDULE",
+        transportno: "TMDK921753",
+        project: "zjira",
+        apps: {
+          zworker_schedule: {
+            bspContainer: "ZWORKERSCHEDULE",
+            bspDescription: "Worker Schedule",
+            prefix: "intheme/zworker_schedule",
+          }
+        },
+      },
+
+
+
+
     ],
 
     libs: {

@@ -16,11 +16,9 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
           .getObject();
 
         var oParams = {
-          ProjectID: oBindingObject.ProjectID,
-          Filter: this.getStateProperty("/proj_filter"),
+          Worker: oBindingObject.Worker
         };
 
-        this.setStateProperty("/rebindProj", true);
         this.navTo("DetailRoute", { query: oParams }, false);
       },
 

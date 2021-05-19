@@ -20,39 +20,78 @@ sap.ui.define(
         _onRouteMatched: function (oEvent) {
           var oArr = oEvent.getParameter("arguments")["?query"];
           this.bindView({
-            entitySet: "/ProjectSet",
+            entitySet: "/WorkerRegisterSet",
             keyParameters: oArr,
-          }).then(
-            function () {
-              this.setStateProperty(
-                "/sOpenedProjectBindingCtnx",
-                this.getView().getBindingContext()
-              );
-            }.bind(this)
-          );
+          });
 
           this.setStateProperty("/layout", "TwoColumnsMidExpanded");
           this.setStateProperty(
             "/detailBindingPath",
-            this.getModel().createKey("/ProjectSet", oArr)
+            this.getModel().createKey("/WorkerRegisterSet", oArr)
+          );
+
+          this.bindSmartForm(
+            oArr.Worker,
+            encodeURIComponent(this.convertDate(new Date()))
           );
         },
 
-        onViewIssue: function (oEvent) {
-          var oBindingObject = oEvent
-            .getParameter("listItem")
+        onDateSelect: function (oEvent) {
+          this.bindSmartForm(
+            this.getWorker(),
+            encodeURIComponent(
+              this.convertDate(
+                oEvent.getSource().getSelectedDates()[0].getStartDate()
+              )
+            )
+          );
+        },
+
+        bindSmartForm: function (sWorkerId, sDate) {
+          var sPath =
+            "/WorkerScheduleSet(Date=datetime'" +
+            sDate +
+            "',Worker='" +
+            sWorkerId +
+            "')";
+          var oSmartForm = this.getView().byId("dateSmartForm");
+          oSmartForm.bindElement(sPath);
+        },
+
+        convertDate: function (oDate) {
+          return oDate.toJSON().split(".")[0];
+        },
+
+        getWorker: function () {
+          return this.getView().getBindingContext().getObject().Worker;
+        },
+
+        onTimeChange: function (oEvent, sPropName) {
+          var oBindingWorker = this.getView()
+            .byId("dateSmartForm")
             .getBindingContext()
             .getObject();
 
-          var oParams = {
-            ProjectID: oBindingObject.ProjectID,
-            IssueID: oBindingObject.IssueID,
-            Filter: this.getStateProperty("/proj_filter"),
-          };
-
-          this.navTo("IssueDetailRoute", { query: oParams }, false);
+          oBindingWorker.StudyTo = new Date();
         },
 
+        onSaveChanges: function (oEvent) {
+          this.showBusyDialog();
+          this.getModel().submitChanges({
+            success: function () {
+              this.closeBusyDialog();
+              if (!this.isExistError()) {
+                this.showMessageToast('zzz');
+              }
+              this.resetChanges();
+            }.bind(this),
+            error: function () {
+              this.closeBusyDialog();
+              this.showError();
+              this.resetChanges();
+            }.bind(this),
+          });
+        },
       }
     );
   }
