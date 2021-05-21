@@ -22,6 +22,11 @@
                 <f:content>
                     <u:CalendarLegend id="calendarLegend"/>
                 </f:content>
+                <f:actions>
+                    <Button icon="sap-icon://refresh"
+                            type="Transparent"
+                            press="updateCalendar"/>
+                </f:actions>
             </f:DynamicPageTitle>
         </f:title>
         <f:content>
@@ -55,8 +60,8 @@
                         <!-- <smartField:SmartField value ="{StudyFrom}" editable="true" entitySet="WorkerScheduleSet"/> -->
                     </smartForm:GroupElement>
                     <smartForm:GroupElement>
-                         <Text text='{i18n>StudyTo}'/>
-                         <TimePicker
+                        <Text text='{i18n>StudyTo}'/>
+                        <TimePicker
                                 id="TP2"
                                 title="{i18n>StudyTo}"
                                 value="{StudyTo}"

@@ -66,7 +66,7 @@
                     useTablePersonalisation="true"
                     showFullScreenButton="false"
                     enableAutoBinding="true"
-                    beforeRebindTable="onBeforeBindingTab"
+                    beforeRebindTable="onBeforeBindingTab($event, 'Bonus')"
                     requestAtLeastFields="Worker,Filter,WorkerName,Position,PositionName,Team,SpendHours,Cost,Bonus,WorklogDate,CloseIssueDate,WithError,Project"
                     demandPopin="true">
                 <smartTable:customToolbar>
@@ -75,13 +75,11 @@
                         <CheckBox id="closedIssueBonus" text="{i18n>ClosedIssueBonus}" selected="true"/>
                         <CheckBox id="bonusWithManagmentTask" text="{i18n>ManagmentTaskBonus}" selected="true"/>
                         <CheckBox id="calcWithError" text="{i18n>CalcWithError}" selected="false"/>
-
                         <ToolbarSpacer/>
                         <Button icon="sap-icon://refresh"
                                 type="Transparent"
                                 press="rebindTable('workerSmartTable')"/>
                         <Button icon="sap-icon://excel-attachment" type="Transparent" press="onDownloadExcelFiles({ uploadEntity: '/DownloadExcelSet', downloadEntity: 'WorkerRegisterSet', oControlId: 'workerSmartTable' })"/>
-                    
                     </OverflowToolbar>
                 </smartTable:customToolbar>
                 <smartTable:customData>
@@ -142,6 +140,12 @@
                             <header>
                                 <Text text="{/#WorkerRegister/Bonus/@sap:label}"/>
                             </header>
+                            <footer>
+                                <ObjectNumber id='TotalBonusSum'
+                                              number="0"
+                                              unit="RUB"
+                                              state="Error" />
+                            </footer>
                         </Column>
                         <!--4 column -->
                         <Column>

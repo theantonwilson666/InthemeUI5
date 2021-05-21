@@ -49,9 +49,14 @@ sap.ui.define(
           });
         },
 
-        onBeforeBindingTab: function (oEvent) {
+        onBeforeBindingTab: function (oEvent,iSumParam) {
           var mBindingParams = oEvent.getParameter("bindingParams");
+          this.SumParam = iSumParam;
+          this.oTotalRow = {
+            WorkerRegister: 'TotalBonusSum',
+          };
 
+          
           var oCustom = {
             BonusClosed: this.getView()
               .byId("closedIssueBonus")
@@ -72,6 +77,20 @@ sap.ui.define(
               .byId("calcWithError")
               .getSelected()
               .toString(),
+          };
+          mBindingParams.events = {
+            dataReceived: function (oEvent) {
+              var oReceivedData = oEvent.getParameter("data");
+              var iSum = 0;
+              oReceivedData.results.forEach(
+                function (oItem) {
+                  iSum += Number(oItem[this.SumParam]);
+                }.bind(this)
+              );
+              this.getView()
+                .byId(this.oTotalRow[oEvent.getSource()._getEntityType().name])
+                .setNumber(iSum);
+            }.bind(this),
           };
 
           mBindingParams.parameters.custom = oCustom;

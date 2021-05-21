@@ -4,6 +4,7 @@
     xmlns:mvc="sap.ui.core.mvc"
     displayBlock="true" 
     xmlns="sap.m"
+    xmlns:u="sap.ui.unified"
     xmlns:f="sap.f"
     xmlns:fb="sap.ui.comp.filterbar"
     xmlns:l="sap.ui.layout"
@@ -24,6 +25,21 @@
                 <f:expandedContent>
                     <Label text="{i18n>appDescription}"/>
                 </f:expandedContent>
+
+                 <f:actions>
+                    <u:FileUploader
+                                id="uploadExcelSchedule"
+                                icon="sap-icon://excel-attachment"
+                                iconOnly="false"
+                                buttonOnly="true"
+                                buttonText="{i18n>uploadExcelSchedule}"
+                                fileType="xlsx,xsl"
+                                typeMissmatch="handleTypeMissmatch"
+                                change="handleFileSelected($event, '/FileSet', {SourceId: 'ScheduleUpload'})"
+                                style="Emphasized"/>
+                </f:actions>
+
+
             </f:DynamicPageTitle>
         </f:title>
         <f:header>

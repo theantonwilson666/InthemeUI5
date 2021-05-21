@@ -3,3 +3,36 @@
     height: 1rem !important;
     padding-top: 0.09rem;
 }
+
+.sapUiCalItemType01>.sapUiCalItemText {
+    background-color: #FF0000;
+}
+
+.sapUiCalItemType02>.sapUiCalItemText {
+    background-color: #FFC000;
+}
+
+
+.sapUiCalItemType03>.sapUiCalItemText {
+    background-color: #FFFF00;
+}
+
+.sapUiCalItemType04>.sapUiCalItemText {
+    background-color: #92D050;
+}
+
+
+.sapUiCalItemType05>.sapUiCalItemText {
+    background-color: #00B0F0;
+}
+
+
+.sapUiCalItemType06>.sapUiCalItemText {
+    background-color: #0070C0;
+}
+
+.sapUiCalItemType07>.sapUiCalItemText {
+    background-color: #CC99FF;
+}
+
+
