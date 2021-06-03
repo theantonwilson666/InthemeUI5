@@ -235,13 +235,13 @@ sap.ui.define(
                   success: function () {
                     this.closeBusyDialog();
                     oUploadInput.clear();
-                    this.showMessageToast(this.i18n("FILE_SUCCESSFUL_LOAD"));
+                    this.showMessageToast(oResourceBundle.getText("FILE_SUCCESSFUL_LOAD"));
                     res(true);
                   }.bind(this),
                   error: function (oError) {
                     this.closeBusyDialog();
                     oUploadInput.clear();
-                    this.showMessageToast(this.i18n("FILE_LOAD_ERROR"));
+                    this.showError(oError);
                     rej(false);
                   }.bind(this),
                 });

@@ -1,0 +1,7 @@
+{
+    "i18n-ally.localesPaths": [
+        "src/ui/zjira/zjira_project_register/webapp/i18n",
+        "src/ui/zjira/zworker_schedule/webapp/i18n",
+        "src/ui/zjira/zjira_worker_register/webapp/i18n"
+    ]
+}

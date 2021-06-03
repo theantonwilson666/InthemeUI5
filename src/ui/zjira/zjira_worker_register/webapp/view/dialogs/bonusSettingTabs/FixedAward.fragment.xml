@@ -1,0 +1,121 @@
+<core:FragmentDefinition xmlns="sap.m"
+                         xmlns:core="sap.ui.core"
+                         xmlns:smartTable="sap.ui.comp.smarttable"
+                         xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+                         xmlns:sv="sap.ui.comp.smartvariants"
+                         xmlns:f="sap.f"
+                         xmlns:u="sap.ui.unified"
+                         xmlns:smartField="sap.ui.comp.smartfield"
+                         xmlns:l="sap.ui.layout">
+    <f:DynamicPage id="fixedAwardListView" toggleHeaderOnTitleClick="true" showFooter="false" headerExpanded="false" preserveHeaderStateOnScroll="true">
+        <f:content>
+            <smartTable:SmartTable
+                    id="FixedAwardST"
+                    entitySet="FixedAwardSet"
+                    useExportToExcel="false"
+                    showRowCount="false"
+                    editTogglable="true"
+                    editToggled="onEditToggled"
+                    tableType="ResponsiveTable"
+                    useVariantManagement="false"
+                    useTablePersonalisation="false"
+                    enableAutoBinding="false"
+                    requestAtLeastFields="Worker,WorkerName,Sum,DateTo,DateFrom"
+                    demandPopin="true">
+                <smartTable:customData>
+                    <core:CustomData key="dateFormatSettings" value='\{"pattern": "dd.MM.yyyy"\}'/>
+                    <core:CustomData key="useSmartField" value="true"/>
+                </smartTable:customData>
+                <smartTable:customToolbar>
+                    <OverflowToolbar design="Transparent">
+                        <ToolbarSpacer/>
+                        <Button type="Transparent"
+                                iconFirst="false"
+                                enabled="{= ${state>/BonusSettingSTMode} === 'Delete' }"
+                                icon="sap-icon://add"
+                                press="onAddPaymentSetting($event, 'FixedAwardST', 'fixedAwardListItem', 'FixedAwardSet')"/>
+                    </OverflowToolbar>
+                </smartTable:customToolbar>
+                <Table sticky="ColumnHeaders"
+                       alternateRowColors="true"
+                       growing="true"
+                       fixedLayout="false"
+                       growingThreshold="300"
+                       growingScrollToLoad="true"
+                       delete="onDeletePaymentSetting($event, 'FixedAwardST')"
+                       mode="{state>/BonusSettingSTMode}">
+                    <columns>
+                        <!--1 column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                            "columnIndex": "0",
+                                                            "columnKey": "WorkerName",
+                                                            "leadingProperty": "WorkerName",
+                                                            "sortProperty": "WorkerName",
+                                                            "filterProperty": "WorkerName"
+                                                         }'/>
+                            </customData>
+                            <header>
+                                <Text text="{/#FixedAward/WorkerName/@sap:label}"/>
+                            </header>
+                        </Column>
+                        <!--2 column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                            "columnIndex": "1",
+                                                            "columnKey": "DateFrom",
+                                                            "leadingProperty": "DateFrom",
+                                                            "sortProperty": "DateFrom",
+                                                            "filterProperty": "DateFrom"
+                                                         }'/>
+                            </customData>
+                            <header>
+                                <Text text="{i18n>BonusSettingPeriod}"/>
+                            </header>
+                        </Column>
+                        <!--3 column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                            "columnIndex": "2",
+                                                            "columnKey": "Sum",
+                                                            "leadingProperty": "Sum",
+                                                            "sortProperty": "Sum",
+                                                            "filterProperty": "Sum"
+                                                         }'/>
+                            </customData>
+                            <header>
+                                <Text text="{/#FixedAward/Sum/@sap:label}"/>
+                            </header>
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem id="fixedAwardListItem">
+                            <!--1 cells-->
+                            <cells>
+                                <smartField:SmartField value="{WorkerName}" editable="{= ${state>/BonusSettingSTMode} === 'Delete' }"/>
+                            </cells>
+                            <!--2 cells-->
+                            <cells>
+                                <HBox>
+                                    <smartField:SmartField value="{DateFrom}" editable="{= ${state>/BonusSettingSTMode} === 'Delete' }"/>
+                                    <Text text='   –   '/>
+                                    <smartField:SmartField value="{DateTo}" editable="{= ${state>/BonusSettingSTMode} === 'Delete' }"/>
+                                </HBox>
+                            </cells>
+                            <!--3 cells-->
+                            <cells>
+                                <smartField:SmartField value="{Sum}" editable="{= ${state>/BonusSettingSTMode} === 'Delete' }"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</core:FragmentDefinition>

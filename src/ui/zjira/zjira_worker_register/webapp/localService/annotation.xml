@@ -271,7 +271,7 @@
                 <Annotation Term="Common.ValueListWithFixedValues" Bool="false"/>
                 <Annotation Term="Common.ValueList">
                     <Record>
-                        <PropertyValue Property="CollectionPath" String="PositionSHSet"/>
+                        <PropertyValue Property="CollectionPath" String="WorkerSHSet"/>
                         <PropertyValue Property="SearchSupported" Bool="true"/>
                         <PropertyValue Property="Parameters">
                             <Collection>
@@ -288,9 +288,6 @@
                     </Record>
                 </Annotation>
             </Annotations>
-
-
-
             <Annotations Target="ZJIRA_SRV.WorkerKPI">
                 <Annotation Term="UI.SelectionFields">
                     <Collection>
@@ -301,8 +298,6 @@
                     </Collection>
                 </Annotation>
             </Annotations>
-
-
             <Annotations Target="ZJIRA_SRV.WorkerKPI/Position">
                 <Annotation Term="Common.ValueListWithFixedValues" Bool="false"/>
                 <Annotation Term="Common.ValueList">
@@ -324,10 +319,7 @@
                     </Record>
                 </Annotation>
             </Annotations>
-
-
-
-             <Annotations Target="ZJIRA_SRV.WorkerKPI/Worker">
+            <Annotations Target="ZJIRA_SRV.WorkerKPI/Worker">
                 <Annotation Term="Common.ValueListWithFixedValues" Bool="false"/>
                 <Annotation Term="Common.ValueList">
                     <Record>
@@ -353,8 +345,7 @@
                     </Record>
                 </Annotation>
             </Annotations>
-
-             <Annotations Target="ZJIRA_SRV.WorkerKPI/Team">
+            <Annotations Target="ZJIRA_SRV.WorkerKPI/Team">
                 <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
                 <Annotation Term="Common.ValueList">
                     <Record>
@@ -374,8 +365,33 @@
                     </Record>
                 </Annotation>
             </Annotations>
-
-
+            <Annotations Target="ZJIRA_SRV.FixedAward/WorkerName">
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="false"/>
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath" String="WorkerSHSet"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Worker"/>
+                                    <PropertyValue Property="ValueListProperty" String="WorkerID"/>
+                                </Record>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="WorkerName"/>
+                                    <PropertyValue Property="ValueListProperty" String="WorkerName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Position"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Teams"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
         </Schema>
     </edmx:DataServices>
 </edmx:Edmx>

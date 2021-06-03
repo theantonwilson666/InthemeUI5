@@ -58,6 +58,11 @@
                         <core:Fragment fragmentName="intheme.zjira_worker_register.view.dialogs.bonusSettingTabs.WorkerKPI" type="XML"/>
                     </IconTabFilter>
 
+
+                    <IconTabFilter id="FixedAward" text="{i18n>FixedAward}" key="fixed_award">
+                        <core:Fragment fragmentName="intheme.zjira_worker_register.view.dialogs.bonusSettingTabs.FixedAward" type="XML"/>
+                    </IconTabFilter>
+
                 </items>
             </IconTabBar>
         </content>

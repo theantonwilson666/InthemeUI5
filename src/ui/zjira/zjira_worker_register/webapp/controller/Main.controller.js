@@ -141,6 +141,7 @@ sap.ui.define(
           this.getView().byId("ProjectConfST").rebindTable();
           this.getView().byId("ChebConfST").rebindTable();
           this.getView().byId("WorkerKPI_ST").rebindTable();
+          this.getView().byId("FixedAwardST").rebindTable();
         },
 
         onOpenBonusSettingDialog: function (oEvent) {

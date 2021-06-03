@@ -33,7 +33,7 @@
                                 iconOnly="false"
                                 buttonOnly="true"
                                 buttonText="{i18n>uploadExcelSchedule}"
-                                fileType="xlsx,xsl"
+                                fileType="xlsx,xlsm,xls"
                                 typeMissmatch="handleTypeMissmatch"
                                 change="handleFileSelected($event, '/FileSet', {SourceId: 'ScheduleUpload'})"
                                 style="Emphasized"/>
