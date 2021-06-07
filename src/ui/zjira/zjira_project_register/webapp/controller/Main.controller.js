@@ -10,12 +10,15 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
           .attachPatternMatched(this._onRouteMatched, this);
       },
 
-      rebindCostTab: function(oEvent){
-        this.getView().byId("PaymentSettingST").rebindTable();
-        this.getView().byId("ProjWeekendST").rebindTable();
-        this.getView().byId("WorkerCostConfST").rebindTable();
+      rebindCostTab: function (oEvent) {
+        var oConf = this.getStateProperty("/smartTabConf");
+        Object.keys(oConf).forEach(
+          function (sKey) {
+            this.getView().byId(oConf[sKey]).rebindTable();
+          }.bind(this)
+        );
       },
-      
+
       onViewDetail: function (oEvent) {
         var oBindingObject = oEvent
           .getParameter("listItem")
@@ -109,7 +112,22 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
       },
 
       onSavePaymentSettingDialog: function (oEvent) {
-        oEvent.getSource().getParent().close();
+        var oConf = this.getStateProperty("/smartTabConf");
+
+        Object.keys(oConf).forEach(
+          function (sKey) {
+            var oTable = this.getView().byId(oConf[sKey]).getTable();
+            var mItems = oTable.getItems();
+            mItems.forEach(
+              function (oItem) {
+                if (oItem.getBindingContext().bCreated) {
+                  oTable.removeItem(oItem);
+                }
+              }.bind(this)
+            );
+          }.bind(this)
+        );
+
         this.submitChanges({
           success: function () {
             this.isExistError();
@@ -132,13 +150,11 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
         );
       },
 
-     
-
       onDeleteAllPaymentSettings: function (oEvent) {
         this.showBusyDialog();
         this.getModel().callFunction("/DeletePaymentSettings", {
           method: "POST",
-          urlParameters: {SourceID : this.getStateProperty('/currentTab')},
+          urlParameters: { SourceID: this.getStateProperty("/currentTab") },
           success: function (oData) {
             if (oData.DeletePaymentSettings.Ok === true) {
               this.closeBusyDialog();
@@ -164,9 +180,11 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
         );
       },
 
-      handleConfFileSelected: function(oEvent){
-        this.handleFileSelected(oEvent, '/FileSet', {SourceID: this.getStateProperty('/currentTab')})
-      }
+      handleConfFileSelected: function (oEvent) {
+        this.handleFileSelected(oEvent, "/FileSet", {
+          SourceID: this.getStateProperty("/currentTab"),
+        });
+      },
     }
   );
 });

@@ -11,13 +11,17 @@
           xmlns:smartTable="sap.ui.comp.smarttable"
           xmlns:smartField="sap.ui.comp.smartfield"
           xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+          xmlns:viz="sap.viz.ui5.controls"
+          xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+          xmlns:viz.data="sap.viz.ui5.data"
           height="100%">
     <f:DynamicPage id="issueView" toggleHeaderOnTitleClick="true" showFooter="true" preserveHeaderStateOnScroll="true">
         <f:title>
             <f:DynamicPageTitle>
                 <f:heading>
                     <u:Calendar width="40em" id="workerCalendar" legend="calendarLegend" intervalSelection="false"
-                                select="onDateSelect"/>
+                                select="onDateSelect"
+                                startDateChange="onStartDateChange"/>
                 </f:heading>
                 <f:content>
                     <u:CalendarLegend id="calendarLegend"/>
@@ -30,47 +34,88 @@
             </f:DynamicPageTitle>
         </f:title>
         <f:content>
-            <smartForm:SmartForm id="dateSmartForm" title="{Date}" editable="true">
-                <smartForm:layout>
-                    <smartForm:ColumnLayout columnsM="2" columnsL="2" columnsXL="2"/>
-                </smartForm:layout>
-                <smartForm:Group label="{i18n>GroupTitle}">
-                    <smartForm:GroupElement>
-                        <smartField:SmartField value ="{WorkerName}"/>
-                    </smartForm:GroupElement>
-                    <smartForm:GroupElement>
-                        <smartField:SmartField value ="{Date}"/>
-                    </smartForm:GroupElement>
-                    <smartForm:GroupElement>
-                        <smartField:SmartField value ="{DateType}" editable="true" entitySet="WorkerScheduleSet"/>
-                    </smartForm:GroupElement>
-                    <smartForm:GroupElement>
-                        <smartField:SmartField value ="{WorkDayType}" editable="true" entitySet="WorkerScheduleSet"/>
-                    </smartForm:GroupElement>
-                </smartForm:Group>
-                <smartForm:Group label="{i18n>StudentGroup}">
-                    <smartForm:GroupElement>
-                        <Text text='{i18n>StudyFrom}'/>
-                        <TimePicker
+            <VBox alignContent="Stretch">
+                <smartForm:SmartForm id="dateSmartForm" title="{Date}" editable="true">
+                    <smartForm:layout>
+                        <smartForm:ColumnLayout columnsM="2" columnsL="2" columnsXL="2"/>
+                    </smartForm:layout>
+                    <smartForm:Group label="{i18n>GroupTitle}">
+                        <smartForm:GroupElement>
+                            <smartField:SmartField value ="{WorkerName}"/>
+                        </smartForm:GroupElement>
+                        <smartForm:GroupElement>
+                            <smartField:SmartField value ="{Date}"/>
+                        </smartForm:GroupElement>
+                        <smartForm:GroupElement>
+                            <smartField:SmartField value ="{DateType}" editable="true" entitySet="WorkerScheduleSet"/>
+                        </smartForm:GroupElement>
+                        <smartForm:GroupElement>
+                            <smartField:SmartField value ="{WorkDayType}" editable="true" entitySet="WorkerScheduleSet"/>
+                        </smartForm:GroupElement>
+                    </smartForm:Group>
+                    <smartForm:Group label="{i18n>StudentGroup}">
+                        <smartForm:GroupElement>
+                            <Text text='{i18n>StudyFrom}'/>
+                            <TimePicker
                                 id="TP1"
                                 title="{i18n>StudyFrom}"
                                 value="{StudyFrom}"
                                 valueFormat="HH:mm"
                                 change="onTimeChange($event, 'StudyFrom')"/>
-                        <!-- <smartField:SmartField value ="{StudyFrom}" editable="true" entitySet="WorkerScheduleSet"/> -->
-                    </smartForm:GroupElement>
-                    <smartForm:GroupElement>
-                        <Text text='{i18n>StudyTo}'/>
-                        <TimePicker
+                            <!-- <smartField:SmartField value ="{StudyFrom}" editable="true" entitySet="WorkerScheduleSet"/> -->
+                        </smartForm:GroupElement>
+                        <smartForm:GroupElement>
+                            <Text text='{i18n>StudyTo}'/>
+                            <TimePicker
                                 id="TP2"
                                 title="{i18n>StudyTo}"
                                 value="{StudyTo}"
                                 valueFormat="HH:mm"
                                 change="onTimeChange($event, 'StudyTo')"/>
-                        <!-- <smartField:SmartField value ="{StudyTo}" editable="true" entitySet="WorkerScheduleSet"/> -->
-                    </smartForm:GroupElement>
-                </smartForm:Group>
-            </smartForm:SmartForm>
+                            <!-- <smartField:SmartField value ="{StudyTo}" editable="true" entitySet="WorkerScheduleSet"/> -->
+                        </smartForm:GroupElement>
+                    </smartForm:Group>
+                    <smartForm:Group label="{i18n>WorkDayGroup}">
+                        <smartForm:GroupElement >
+                            <smartField:SmartField value ="{WorkFrom1}" editable="true" entitySet="WorkerScheduleSet"/>
+                            <smartField:SmartField value ="{WorkTo1}" editable="true" entitySet="WorkerScheduleSet"/>
+                            <Button icon="sap-icon://add" press="onAddWorkIntervalPress" width="3em" visible="{= !${state>/showNewInterval} }"/>
+                        </smartForm:GroupElement>
+                        <smartForm:GroupElement id="SecondWorkInterval" visible="{state>/showNewInterval}">
+                            <smartField:SmartField value ="{WorkFrom2}" editable="true" entitySet="WorkerScheduleSet"/>
+                            <smartField:SmartField value ="{WorkTo2}" editable="true" entitySet="WorkerScheduleSet"/>
+                        </smartForm:GroupElement>
+                    </smartForm:Group>
+                </smartForm:SmartForm>
+                <VBox alignContent="Stretch">
+                    <viz:Popover id="vizPopover"></viz:Popover>
+                    <viz:VizFrame id="monthPlot" uiConfig="{applicationSet:'fiori'}"
+                                   vizType='column' width="100%">
+                        <viz:dataset>
+                            <viz.data:FlattenedDataset data="{ChartMdl>/Chart}">
+                                <viz.data:dimensions>
+                                    <viz.data:DimensionDefinition name="Date"
+                                value="{ChartMdl>Date}" />
+                                </viz.data:dimensions>
+                                <viz.data:measures>
+                                    <viz.data:MeasureDefinition name="Fact Hours"
+                                value="{ChartMdl>FactHours}" />
+                                    <viz.data:MeasureDefinition name="Plan Hours"
+                                value="{ChartMdl>PlanHours}" />
+                                    <viz.data:MeasureDefinition name="Jira Hours"
+                                value="{ChartMdl>JiraHours}" />
+                                </viz.data:measures>
+                            </viz.data:FlattenedDataset>
+                        </viz:dataset>
+                        <viz:feeds>
+                            <viz.feeds:FeedItem uid="valueAxis" type="Measure"
+                        values="Fact Hours,Plan Hours,Jira Hours"/>
+                            <viz.feeds:FeedItem uid="categoryAxis" type="Dimension"
+                        values="Date" />
+                        </viz:feeds>
+                    </viz:VizFrame>
+                </VBox>
+            </VBox>
         </f:content>
         <f:footer>
             <OverflowToolbar>

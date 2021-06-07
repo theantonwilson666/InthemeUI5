@@ -99,7 +99,8 @@
           "proj_filter": "",
           "PaymentSettingSTMode" : "None",
           "rebindProj": false,
-          "currentTab": "common"
+          "currentTab": "common",
+          "showNewInterval": false
         }
       }
     },

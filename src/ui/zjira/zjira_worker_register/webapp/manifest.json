@@ -1,139 +1,146 @@
 {
-    "_version": "1.12.0",
-    "sap.app": {
-      "id": "intheme.zjira_worker_register",
-      "type": "application",
-      "dataSources": {
-        "mainService": {
-          "uri": "/sap/opu/odata/sap/ZJIRA_SRV",
-          "type": "OData",
-          "settings": {
-            "odataVersion": "2.0",
-            "annotations": ["annotation"]
-          }
-        },
-        "annotation": {
-          "type": "ODataAnnotation",
-          "uri": "localService/annotation.xml",
-          "settings": {
-            "localUri": "localService/annotation.xml"
-          }
+  "_version": "1.12.0",
+  "sap.app": {
+    "id": "intheme.zjira_worker_register",
+    "type": "application",
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata/sap/ZJIRA_SRV",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "annotations": ["annotation"]
         }
       },
-      "i18n": "i18n/i18n.properties",
-      "applicationVersion": {
-        "version": "1.0.0"
-      },
-      "title": "{{appTitle}}",
-      "description": "{{appDescription}}",
-      "sourceTemplate": {
-        "id": "ui5template.basicSAPUI5ApplicationProject",
-        "version": "1.40.12"
+      "annotation": {
+        "type": "ODataAnnotation",
+        "uri": "localService/annotation.xml",
+        "settings": {
+          "localUri": "localService/annotation.xml"
+        }
       }
     },
-    "sap.ui": {
-      "technology": "UI5",
-      "icons": {
-        "icon": "",
-        "favIcon": "",
-        "phone": "",
-        "phone@2": "",
-        "tablet": "",
-        "tablet@2": ""
-      },
-      "deviceTypes": {
-        "desktop": true,
-        "tablet": true,
-        "phone": true
-      },
-      "supportedThemes": ["sap_hcb", "sap_belize"],
-      "fullWidth": true
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "1.0.0"
     },
-    "sap.ui5": {
-      "flexEnabled": false,
-      "rootView": {
-        "viewName": "intheme.zjira_worker_register.view.App",
-        "type": "XML",
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "sourceTemplate": {
+      "id": "ui5template.basicSAPUI5ApplicationProject",
+      "version": "1.40.12"
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    },
+    "supportedThemes": ["sap_hcb", "sap_belize"],
+    "fullWidth": true
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "rootView": {
+      "viewName": "intheme.zjira_worker_register.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    },
+    "dependencies": {
+      "minUI5Version": "1.71.22",
+      "libs": {
+        "sap.ui.layout": {},
+        "sap.ui.core": {},
+        "sap.m": {},
+        "sap.ui.comp": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "": {
+        "dataSource": "mainService",
+        "settings": {
+          "serviceUrlParams": {
+            "sap-client": "300"
+          },
+          "defaultBindingMode": "TwoWay",
+          "useBatch": true,
+          "defaultCountMode": "Inline"
+        }
+      },
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "intheme.zjira_worker_register.i18n.i18n"
+        }
+      },
+      "state": {
+        "type": "sap.ui.model.json.JSONModel",
+        "settings": {
+          "isDraft": false,
+          "icons": {
+            "goHome": "sap-icon://home"
+          },
+          "worker_filter": "",
+          "BonusSettingSTMode": "None",
+          "rebindProj": false,
+          "currentTab": "position_bonus",
+
+          "smartTabConf": {
+            "PositionTab": "PositionConfST",
+            "ProjectTab": "ProjectConfST",
+            "ChebTab": "ChebConfST",
+            "WorkerKPI": "WorkerKPI_ST",
+            "FixedAward": "FixedAwardST"
+          }
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
         "async": true,
-        "id": "App"
+        "viewPath": "intheme.zjira_worker_register.view",
+        "controlAggregation": "pages",
+        "controlId": "app"
       },
-      "dependencies": {
-        "minUI5Version": "1.71.22",
-        "libs": {
-          "sap.ui.layout": {},
-          "sap.ui.core": {},
-          "sap.m": {},
-          "sap.ui.comp": {}
+      "routes": [
+        {
+          "name": "WorklistRoute",
+          "pattern": "",
+          "target": ["WorklistTarget"]
         }
-      },
-      "contentDensities": {       
-        "compact": true,
-        "cozy": true
-      },
-      "models": {
-        "": {
-          "dataSource": "mainService",
-          "settings": {
-            "serviceUrlParams": {
-              "sap-client": "300"
-            },
-            "defaultBindingMode": "TwoWay",
-            "useBatch": true,
-            "defaultCountMode": "Inline"
-          }
-        },
-        "i18n": {
-          "type": "sap.ui.model.resource.ResourceModel",
-          "settings": {
-            "bundleName": "intheme.zjira_worker_register.i18n.i18n"
-          }
-        },
-        "state": {
-          "type": "sap.ui.model.json.JSONModel",
-          "settings": {
-            "isDraft": false,
-            "icons": {
-              "goHome": "sap-icon://home"
-            },
-            "worker_filter": "",
-            "BonusSettingSTMode" : "None",
-            "rebindProj": false,
-            "currentTab": "position_bonus"
-          }
-        }
-      },
-      "resources": {
-        "css": [
-          {
-            "uri": "css/style.css"
-          }
-        ]
-      },
-      "routing": {
-        "config": {
-          "routerClass": "sap.m.routing.Router",
+      ],
+      "targets": {
+        "WorklistTarget": {
           "viewType": "XML",
-          "async": true,
-          "viewPath": "intheme.zjira_worker_register.view",
-          "controlAggregation": "pages",
-          "controlId": "app"
-        },
-        "routes": [
-          {
-            "name": "WorklistRoute",
-            "pattern": "",
-            "target": ["WorklistTarget"]
-          }
-        ],
-        "targets": {
-          "WorklistTarget": {
-            "viewType": "XML",
-            "transition": "fade",
-            "viewName": "Worklist",
-            "ViewID": "Worklist"
-          }
+          "transition": "fade",
+          "viewName": "Worklist",
+          "ViewID": "Worklist"
         }
       }
     }
   }
-  
+}

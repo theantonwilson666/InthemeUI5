@@ -98,7 +98,13 @@
           "proj_filter": "",
           "PaymentSettingSTMode" : "None",
           "rebindProj": false,
-          "currentTab": "common"
+          "currentTab": "common",
+
+          "smartTabConf": {
+            "CommonTab": "PaymentSettingST",
+            "ProjectWeekendTab": "ProjWeekendST",
+            "WorkerCostTab": "WorkerCostConfST"
+          }
         }
       }
     },

@@ -3,6 +3,7 @@ sap.ui.define(
   function (BaseController, PDFViewer) {
     "use strict";
 
+
     return BaseController.extend(
       "intheme.zjira_worker_register.controller.Main",
       {
@@ -137,11 +138,11 @@ sap.ui.define(
         },
 
         rebindConfTab: function(oEvent){
-          this.getView().byId("PositionConfST").rebindTable();
-          this.getView().byId("ProjectConfST").rebindTable();
-          this.getView().byId("ChebConfST").rebindTable();
-          this.getView().byId("WorkerKPI_ST").rebindTable();
-          this.getView().byId("FixedAwardST").rebindTable();
+          var oConf = this.getStateProperty("/smartTabConf");
+
+          Object.keys(oConf).forEach(function(sKey) {
+            this.getView().byId(oConf[sKey]).rebindTable();
+          }.bind(this));
         },
 
         onOpenBonusSettingDialog: function (oEvent) {
@@ -183,6 +184,18 @@ sap.ui.define(
         },
 
         onSaveBonusSettingDialog: function (oEvent) {
+          var oConf = this.getStateProperty("/smartTabConf");
+
+          Object.keys(oConf).forEach(function(sKey) {
+            var oTable = this.getView().byId(oConf[sKey]).getTable();
+            var mItems = oTable.getItems();
+            mItems.forEach(function(oItem){
+              if (oItem.getBindingContext().bCreated){
+                oTable.removeItem(oItem);
+              }
+            }.bind(this));
+          }.bind(this));
+
           this.submitChanges({
             success: function () {
               this.isExistError();

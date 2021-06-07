@@ -25,8 +25,7 @@
                 <f:expandedContent>
                     <Label text="{i18n>appDescription}"/>
                 </f:expandedContent>
-
-                 <f:actions>
+                <f:actions>
                     <u:FileUploader
                                 id="uploadExcelSchedule"
                                 icon="sap-icon://excel-attachment"
@@ -38,8 +37,6 @@
                                 change="handleFileSelected($event, '/FileSet', {SourceId: 'ScheduleUpload'})"
                                 style="Emphasized"/>
                 </f:actions>
-
-
             </f:DynamicPageTitle>
         </f:title>
         <f:header>
@@ -63,8 +60,7 @@
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
-            <!-- <Text text='test' /> -->
-            <smartTable:SmartTable
+                <smartTable:SmartTable
                     id="workerSmartTable"
                     smartVariant="workerPageVariant"
                     smartFilterId="workerFilterBar"
@@ -80,31 +76,29 @@
                     enableAutoBinding="true"
                     requestAtLeastFields="Worker,WorkerName,Position,PositionName,Team"
                     demandPopin="true">
-                <smartTable:customToolbar>
-                    <OverflowToolbar design="Transparent">
-                        <ToolbarSpacer/>
-                        <Button icon="sap-icon://refresh"
+                    <smartTable:customToolbar>
+                        <OverflowToolbar design="Transparent">
+                            <ToolbarSpacer/>
+                            <Button icon="sap-icon://refresh"
                                 type="Transparent"
                                 press="rebindTable('workerSmartTable')"/>
-                    </OverflowToolbar>
-                </smartTable:customToolbar>
-
-
-                <smartTable:customData>
-                    <core:CustomData key="dateFormatSettings" value='\{"UTC":false, "pattern":"dd.MM.yyyy"\}'/>
-                </smartTable:customData>
-                <Table sticky="ColumnHeaders"
+                        </OverflowToolbar>
+                    </smartTable:customToolbar>
+                    <smartTable:customData>
+                        <core:CustomData key="dateFormatSettings" value='\{"UTC":false, "pattern":"dd.MM.yyyy"\}'/>
+                    </smartTable:customData>
+                    <Table sticky="ColumnHeaders"
                        growing="true"
                        fixedLayout="false"
                        growingThreshold="200"
                        growingScrollToLoad="true"
                        mode="SingleSelectMaster"
                        selectionChange="onViewDetail">
-                    <columns>
-                        <!--1 column -->
-                        <Column>
-                            <customData>
-                                <core:CustomData key="p13nData"
+                        <columns>
+                            <!--1 column -->
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
                                                  value='\{
                                                         "columnIndex": "0",
                                                         "columnKey": "WorkerName",
@@ -112,15 +106,15 @@
                                                         "sortProperty": "WorkerName",
                                                         "filterProperty": "WorkerName"
                                                      }'/>
-                            </customData>
-                            <header>
-                                <Text text="{/#WorkerRegister/WorkerName/@sap:label}"/>
-                            </header>
-                        </Column>
-                        <!--2 column -->
-                        <Column>
-                            <customData>
-                                <core:CustomData key="p13nData"
+                                </customData>
+                                <header>
+                                    <Text text="{/#WorkerRegister/WorkerName/@sap:label}"/>
+                                </header>
+                            </Column>
+                            <!--2 column -->
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
                                                  value='\{
                                                         "columnIndex": "1",
                                                         "columnKey": "Team",
@@ -128,29 +122,27 @@
                                                         "sortProperty": "Team",
                                                         "filterProperty": "Team"
                                                      }'/>
-                            </customData>
-                            <header>
-                                <Text text="{/#WorkerRegister/Team/@sap:label}"/>
-                            </header>
-                        </Column>
-                        
-                    </columns>
-                    <ColumnListItem
+                                </customData>
+                                <header>
+                                    <Text text="{/#WorkerRegister/Team/@sap:label}"/>
+                                </header>
+                            </Column>
+                        </columns>
+                        <ColumnListItem
                             type="Navigation">
-                        <!--1 cells-->
-                        <cells>
-                            <HBox>
-                                <ObjectIdentifier title="{WorkerName}" text="{PositionName}"/>
-                            </HBox>
-                        </cells>
-                        <!--2 cells-->
-                        <cells>
-                            <Text text="{Team}"/>
-                        </cells>
-
-                    </ColumnListItem>
-                </Table>
-            </smartTable:SmartTable>
+                            <!--1 cells-->
+                            <cells>
+                                <HBox>
+                                    <ObjectIdentifier title="{WorkerName}" text="{PositionName}"/>
+                                </HBox>
+                            </cells>
+                            <!--2 cells-->
+                            <cells>
+                                <Text text="{Team}"/>
+                            </cells>
+                        </ColumnListItem>
+                    </Table>
+                </smartTable:SmartTable>
         </f:content>
     </f:DynamicPage>
 </mvc:View>
