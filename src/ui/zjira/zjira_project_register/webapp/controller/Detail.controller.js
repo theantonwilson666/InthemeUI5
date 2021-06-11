@@ -133,6 +133,32 @@ sap.ui.define(
               }.bind(this)
             );
         },
+
+        onPressProfitListItem: function(oEvent){
+          var oBindProjectStage = {
+            Path : oEvent.mParameters.listItem.getBindingContext().getPath(),
+            Object : oEvent.mParameters.listItem.getBindingContext().getObject()
+          };
+
+          this.setStateProperty("/currentProjectStage", oBindProjectStage)
+
+
+          this.loadDialog
+            .call(this, {
+              sDialogName: "_oProfitWorkerDialog",
+              sViewName:
+                "intheme.zjira_project_register.view.dialogs.ProfitWorker",
+            })
+            .then(
+              function (oDialog) {
+                var oBindProjectStage = this.getStateProperty("/currentProjectStage");
+                oDialog.bindElement({
+                  path: oBindProjectStage.Path
+                });
+                oDialog.open();
+              }.bind(this)
+            );
+        }
       }
     );
   }

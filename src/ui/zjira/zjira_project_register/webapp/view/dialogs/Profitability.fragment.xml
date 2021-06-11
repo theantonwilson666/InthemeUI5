@@ -63,11 +63,8 @@
                         <core:CustomData key="dateFormatSettings" value='\{"UTC":false, "pattern":"dd.MM.yyyy"\}'/>
                     </smartTable:customData>
                     <Table sticky="ColumnHeaders"
-                                growing="true"
-                                fixedLayout="false"
-                                growingThreshold="300"
-                                growingScrollToLoad="false"
-                                mode="None">
+                                mode="SingleSelectMaster"
+                                selectionChange="onPressProfitListItem">
                         <columns>
                             <!--1 column -->
                             <Column>
@@ -150,7 +147,7 @@
                                 </header>
                             </Column>
                         </columns>
-                        <ColumnListItem>
+                        <ColumnListItem type="Navigation">
                             <!--1 cells-->
                             <cells>
                                 <smartField:SmartField value="{ProjectStageDescr}"/>

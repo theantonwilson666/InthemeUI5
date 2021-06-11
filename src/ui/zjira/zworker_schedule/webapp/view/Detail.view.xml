@@ -26,11 +26,11 @@
                 <f:content>
                     <u:CalendarLegend id="calendarLegend"/>
                 </f:content>
-                <f:actions>
+                <!-- <f:actions>
                     <Button icon="sap-icon://refresh"
                             type="Transparent"
                             press="updateCalendar"/>
-                </f:actions>
+                </f:actions> -->
             </f:DynamicPageTitle>
         </f:title>
         <f:content>

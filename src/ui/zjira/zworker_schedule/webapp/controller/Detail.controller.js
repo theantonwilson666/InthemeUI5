@@ -51,7 +51,7 @@ sap.ui.define(
         );
 
         this.initCalendarLegend();
-        this.updateCalendar()
+        
         
       },
 
@@ -129,6 +129,7 @@ sap.ui.define(
           .getModel()
           .read("/CalendarLegendSet", {
             success: function (oData, response) {
+              this.updateCalendar()
               var oLegend = this.getView().byId("calendarLegend");
               oLegend.destroyItems();
               oLegend.setStandardItems(["Today", "Selected"]);
@@ -142,7 +143,9 @@ sap.ui.define(
                     })
                   );
                 })
-                .bind(this);
+
+
+                
             }.bind(this),
           });
       },

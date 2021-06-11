@@ -1,0 +1,169 @@
+<core:FragmentDefinition
+        xmlns="sap.m"
+        xmlns:l="sap.ui.layout"
+        xmlns:smartField="sap.ui.comp.smartfield"
+        xmlns:smartTable="sap.ui.comp.smarttable"
+        xmlns:smartForm="sap.ui.comp.smartform"
+        xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+        xmlns:core="sap.ui.core">
+    <Dialog id="profitWorkerDialog"
+            title="{i18n>ProfitWorkerTitle}"
+            class="sapUiSizeCompact"
+            contentHeight="60%"
+            contentWidth="60%">
+        <content>
+            <VBox>
+                <smartForm:SmartForm width="100%">
+                    <smartForm:layout>
+                        <smartForm:ColumnLayout columnsM="2" columnsL="2" columnsXL="2"/>
+                    </smartForm:layout>
+                    <smartForm:Group>
+                        <smartForm:GroupElement>
+                            <smartField:SmartField value ="{ProjectStageDescr}"/>
+                        </smartForm:GroupElement>
+                        <smartForm:GroupElement>
+                            <smartField:SmartField value ="{RequestNo}"/>
+                        </smartForm:GroupElement>
+                    </smartForm:Group>
+                </smartForm:SmartForm>
+                <smartTable:SmartTable
+                            id="profitWorkerSmartTable"
+                            entitySet="ProfitWorkerSet"
+                            useExportToExcel="false"
+                            showRowCount="true"
+                            editable="true"
+                            tableBindingPath="ProfitWorkers" 
+                            tableType="ResponsiveTable"
+                            useVariantManagement="true"
+                            useTablePersonalisation="true"
+                            showFullScreenButton="false"
+                            enableAutoBinding="true"
+                            beforeRebindTable="onBeforeBindingProjectStage"
+                            requestAtLeastFields="TechFilter,RequestNo,ProjectStageID,ProjectID,Worker,WorkerName,ClosedIssuesNum,SpendHours,HoursPercent,Bonus"
+                            demandPopin="true">
+                    <smartTable:customToolbar>
+                        <OverflowToolbar design="Solid">
+                            <ToolbarSpacer/>
+                            <Button icon="sap-icon://refresh"
+                                type="Transparent"
+                                press="rebindTable('profitWorkerSmartTable')"/>
+                        </OverflowToolbar>
+                    </smartTable:customToolbar>
+                    <smartTable:customData>
+                        <core:CustomData key="dateFormatSettings" value='\{"UTC":false, "pattern":"dd.MM.yyyy"\}'/>
+                    </smartTable:customData>
+                    <Table  sticky="ColumnHeaders"
+                            growing="true"
+                            fixedLayout="false"
+                            growingThreshold="300"
+                            growingScrollToLoad="false">
+                        <columns>
+                            <!--1 column -->
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "0",
+                                                        "columnKey": "WorkerName",
+                                                        "leadingProperty": "WorkerName",
+                                                        "sortProperty": "WorkerName",
+                                                        "filterProperty": "WorkerName"
+                                                     }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#ProfitWorker/WorkerName/@sap:label}"/>
+                                </header>
+                            </Column>
+                            <!--2 column -->
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "1",
+                                                        "columnKey": "SpendHours",
+                                                        "leadingProperty": "SpendHours",
+                                                        "sortProperty": "SpendHours",
+                                                        "filterProperty": "SpendHours"
+                                                     }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#ProfitWorker/SpendHours/@sap:label}"/>
+                                </header>
+                            </Column>
+                            <!--3 column -->
+                            <Column width="20%">
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "2",
+                                                        "columnKey": "ClosedIssuesNum",
+                                                        "leadingProperty": "ClosedIssuesNum",
+                                                        "sortProperty": "ClosedIssuesNum",
+                                                        "filterProperty": "ClosedIssuesNum"
+                                                     }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#ProfitWorker/ClosedIssuesNum/@sap:label}"/>
+                                </header>
+                            </Column>
+                            <!--4 column -->
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "3",
+                                                        "columnKey": "HoursPercent",
+                                                        "leadingProperty": "HoursPercent",
+                                                        "sortProperty": "HoursPercent",
+                                                        "filterProperty": "HoursPercent"
+                                                     }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#ProfitWorker/HoursPercent/@sap:label}"/>
+                                </header>
+                            </Column>
+                            <!--5 column -->
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "4",
+                                                        "columnKey": "Bonus",
+                                                        "leadingProperty": "Bonus",
+                                                        "sortProperty": "Bonus",
+                                                        "filterProperty": "Bonus"
+                                                     }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#ProfitWorker/Bonus/@sap:label}"/>
+                                </header>
+                            </Column>
+                        </columns>
+                        <ColumnListItem type="Navigation">
+                            <!--1 cells-->
+                            <cells>
+                                <smartField:SmartField value="{WorkerName}"/>
+                            </cells>
+                            <!--2 cells-->
+                            <cells>
+                                <smartField:SmartField value="{SpendHours}"/>
+                            </cells>
+                            <!--3 cells-->
+                            <cells>
+                                <smartField:SmartField value="{ClosedIssuesNum}"/>
+                            </cells>
+                            <!--4 cells-->
+                            <cells>
+                                <smartField:SmartField value="{HoursPercent}"/>
+                            </cells>
+                            <!--5 cells-->
+                            <cells>
+                                <smartField:SmartField value="{Bonus}"/>
+                            </cells>
+                        </ColumnListItem>
+                    </Table>
+                </smartTable:SmartTable>
+            </VBox>
+        </content>
+    </Dialog>
+</core:FragmentDefinition>
