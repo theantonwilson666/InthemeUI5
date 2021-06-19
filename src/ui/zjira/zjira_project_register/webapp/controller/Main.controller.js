@@ -43,15 +43,29 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
         }
       },
 
-      onBeforeBindingTab: function (oEvent, iSumParam, iFilterInit) {
+      onBeforeBindingTab: function (oEvent, iSumParam, iSumCost, iFilterInit) {
         var mBindingParams = oEvent.getParameter("bindingParams");
         //Event handlers for the binding
         this.SumParam = iSumParam;
+        this.CostParam = iSumCost;
+
         this.oTotalRow = {
-          Project: "TotalHoursSum",
-          Issue: "TotalHoursSum",
-          ProjectWorker: "WorkerTotalHoursSum",
-          Worklog: "TotalHoursSum",
+          Project: {
+            hours: "TotalHoursSum",
+            cost: "TotalCost",
+          },
+          Issue: {
+            hours: "TotalHoursSum",
+            cost: "TotalCost",
+          },
+          ProjectWorker: {
+            hours: "WorkerTotalHoursSum",
+            cost: "TotalWorkerCost",
+          },
+
+          Worklog: {
+            hours: "TotalHoursSum",
+          },
         };
 
         if (!iFilterInit) {
@@ -59,14 +73,21 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
             dataReceived: function (oEvent, iSumParam) {
               var oReceivedData = oEvent.getParameter("data");
               var iSum = 0;
+              var iSumCost = 0;
               oReceivedData.results.forEach(
                 function (oItem) {
                   iSum += oItem[this.SumParam];
+                  iSumCost += parseInt(oItem[this.CostParam]);
                 }.bind(this)
               );
-              this.getView()
-                .byId(this.oTotalRow[oEvent.getSource()._getEntityType().name])
-                .setText(iSum);
+
+              var oTotal =
+                this.oTotalRow[oEvent.getSource()._getEntityType().name];
+
+              this.getView().byId(oTotal.hours).setNumber(iSum);
+              if (oTotal.cost) {
+                this.getView().byId(oTotal.cost).setNumber(iSumCost);
+              }
             }.bind(this),
           };
         } else {
@@ -74,14 +95,22 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
             dataReceived: function (oEvent, iSumParam) {
               var oReceivedData = oEvent.getParameter("data");
               var iSum = 0;
+              var iSumCost = 0;
               oReceivedData.results.forEach(
                 function (oItem) {
                   iSum += oItem[this.SumParam];
+                  iSumCost += parseInt(oItem[this.CostParam]);
                 }.bind(this)
               );
-              this.getView()
-                .byId(this.oTotalRow[oEvent.getSource()._getEntityType().name])
-                .setText(iSum);
+
+              var oTotal =
+                this.oTotalRow[oEvent.getSource()._getEntityType().name];
+
+              this.getView().byId(oTotal.hours).setNumber(iSum);
+
+              if (oTotal.cost) {
+                this.getView().byId(oTotal.cost).setNumber(iSumCost);
+              }
             }.bind(this),
 
             dataRequested: function (oEvent) {
@@ -146,7 +175,7 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
         var bEditable = oEvent.getParameter("editable");
         this.setStateProperty(
           "/PaymentSettingSTMode",
-          bEditable ? "Delete" : "None"
+          bEditable ? "SingleSelectLeft" : "None"
         );
       },
 

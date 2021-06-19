@@ -1,0 +1,159 @@
+<mvc:View 
+    controllerName="intheme.zui5_example.controller.DetailDetail" 
+    xmlns:core="sap.ui.core" 
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true" 
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:l="sap.ui.layout"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartForm="sap.ui.comp.smartform">
+    <f:DynamicPage id="detailPage"
+                  toggleHeaderOnTitleClick="true" showFooter="false" headerExpanded="false" preserveHeaderStateOnScroll="true" class="sapUiNoContentPadding">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="{Order}"/>
+                </f:heading>
+                <f:content>
+                    <VBox>
+                        <ObjectStatus text="{Material}" state="None"/>
+                    </VBox>
+                </f:content>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:content>
+            <VBox>
+                <smartForm:SmartForm id="DetailDetailForm">
+                    <smartForm:layout>
+                        <smartForm:ColumnLayout columnsM="2" columnsL="2" columnsXL="2"/>
+                    </smartForm:layout>
+                    <smartForm:Group>
+                        <smartForm:GroupElement>
+                            <smartField:SmartField value="{Sum}" />
+                        </smartForm:GroupElement>
+                        <smartForm:GroupElement>
+                            <smartField:SmartField value="{Description}" />
+                        </smartForm:GroupElement>
+                    </smartForm:Group>
+                </smartForm:SmartForm>
+                <smartTable:SmartTable
+                            id="DetailOrderSmartTable"
+                            entitySet="DetailOrderSet"
+                            useExportToExcel="false"
+                            tableBindingPath="DetailOrders"
+                            showRowCount="true"
+                            tableType="ResponsiveTable"
+                            showFullScreenButton="false"
+                            enableAutoBinding="true"
+                            requestAtLeastFields="Material,Order,Customer,Supplier,Eta,Etd,Ata,Atd"
+                            demandPopin="true">
+                    <smartTable:customData>
+                        <core:CustomData key="dateFormatSettings" value='\{"UTC":false, "pattern":"dd.MM.yyyy"\}'/>
+                    </smartTable:customData>
+                    <Table sticky="ColumnHeaders"
+                                growing="true"
+                                fixedLayout="false"
+                                growingThreshold="300"
+                                growingScrollToLoad="false"
+                                mode="None">
+                        <columns>
+                            <!--1 column -->
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "0",
+                                                        "columnKey": "Customer",
+                                                        "leadingProperty": "Customer",
+                                                        "sortProperty": "Customer",
+                                                        "filterProperty": "Customer"
+                                                     }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#DetailOrder/Customer/@sap:label}"/>
+                                </header>
+                            </Column>
+                            <!--2 column -->
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "1",
+                                                        "columnKey": "Supplier",
+                                                        "leadingProperty": "Supplier",
+                                                        "sortProperty": "Supplier",
+                                                        "filterProperty": "Supplier"
+                                                     }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#DetailOrder/Supplier/@sap:label}"/>
+                                </header>
+                            </Column>
+                            <!--3 column -->
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "2",
+                                                        "columnKey": "Etd",
+                                                        "leadingProperty": "Etd",
+                                                        "sortProperty": "Etd",
+                                                        "filterProperty": "Etd"
+                                                     }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{i18n>EtaColumn}"/>
+                                </header>
+                            </Column>
+                            <!--4 column -->
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "4",
+                                                        "columnKey": "Atd",
+                                                        "leadingProperty": "Atd",
+                                                        "sortProperty": "Atd",
+                                                        "filterProperty": "Atd"
+                                                     }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{i18n>AtaColumn}"/>
+                                </header>
+                            </Column>
+                        </columns>
+                        <ColumnListItem>
+                            <!--1 cells-->
+                            <cells>
+                                <smartField:SmartField value="{Customer}"/>
+                            </cells>
+                            <!--2 cells-->
+                            <cells>
+                                <smartField:SmartField value="{Supplier}"/>
+                            </cells>
+                            <!--3 cells-->
+                            <cells>
+                                <VBox>
+                                    <ObjectStatus title="{/#DetailOrder/Etd/@sap:label}" text="{Etd}"/>
+                                    <ObjectStatus title="{/#DetailOrder/Eta/@sap:label}" text="{Eta}"/>
+                                </VBox>
+                            </cells>
+                            <!--4 cells-->
+                            <cells>
+                                <VBox>
+                                    <ObjectStatus title="{/#DetailOrder/Atd/@sap:label}" text="{Atd}"/>
+                                    <ObjectStatus title="{/#DetailOrder/Ata/@sap:label}" text="{Ata}"/>
+                                </VBox>
+                            </cells>
+                        </ColumnListItem>
+                    </Table>
+                </smartTable:SmartTable>
+            </VBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

@@ -68,20 +68,28 @@
                     useTablePersonalisation="true"
                     showFullScreenButton="false"
                     enableAutoBinding="true"
-                    beforeRebindTable="onBeforeBindingTab($event,'HoursSpend','true')"
+                    beforeRebindTable="onBeforeBindingTab($event,'HoursSpend', 'Cost', 'true')"
                     requestAtLeastFields="ProjectID,ProjectName,ProjectTypeName,ProjectCatName,ProjectKey,Cost,ProjectUrl"
                     demandPopin="true">
                 <smartTable:customToolbar>
                     <OverflowToolbar design="Transparent">
                         <ToolbarSpacer/>
+                        <HBox>
+                            <ObjectNumber id="TotalHoursSum" 
+                                          number="0"
+                                          unit="Hours"
+                                          class="sapUiSmallMargin"/>
+                            <ObjectNumber id="TotalCost" 
+                                          number="0"
+                                          unit="RUB"
+                                          class="sapUiSmallMargin"/>
+                        </HBox>
                         <Button icon="sap-icon://refresh"
                                 type="Transparent"
                                 press="rebindTable('projectSmartTable')"/>
                         <Button icon="sap-icon://excel-attachment" type="Transparent" press="onDownloadExcelFiles({ uploadEntity: '/DownloadExcelSet', downloadEntity: 'ProjectSet', oControlId: 'projectSmartTable' })"/>
                     </OverflowToolbar>
                 </smartTable:customToolbar>
-
-
                 <smartTable:customData>
                     <core:CustomData key="dateFormatSettings" value='\{"UTC":false, "pattern":"dd.MM.yyyy"\}'/>
                 </smartTable:customData>
@@ -110,7 +118,7 @@
                                 <Text text="{/#Project/ProjectName/@sap:label}"/>
                             </header>
                             <footer>
-                                <Text text="{i18n>TotalSum}"/>
+                                <!-- <Text text="{i18n>TotalSum}"/> -->
                             </footer>
                         </Column>
                         <!--2 column -->
@@ -145,7 +153,7 @@
                                 <Text text="{/#Project/HoursSpend/@sap:label}"/>
                             </header>
                             <footer>
-                                <Text id='TotalHoursSum' text="test"/>
+                                <!-- <Text id='TotalHoursSum' text="test"/> -->
                             </footer>
                         </Column>
                         <!--4 column -->

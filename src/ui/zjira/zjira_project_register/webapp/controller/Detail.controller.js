@@ -135,6 +135,8 @@ sap.ui.define(
         },
 
         onPressProfitListItem: function(oEvent){
+          debugger;
+
           var oBindProjectStage = {
             Path : oEvent.mParameters.listItem.getBindingContext().getPath(),
             Object : oEvent.mParameters.listItem.getBindingContext().getObject()

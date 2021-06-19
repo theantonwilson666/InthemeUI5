@@ -51,12 +51,22 @@
                             showFullScreenButton="false"
                             persistencyKey="issuePage.PKey.SmartTable"
                             enableAutoBinding="true"
-                            beforeRebindTable="onBeforeBindingTab($event,'SpendHours')"
-                            requestAtLeastFields="ProjectID,IssueID,IssueName,IssueDescr,PriorityID,PriorityName,StatusID,StatusName,StatusCatName,StageName,SubstageName,OrigEstHours,SpendHours,FsNumber,ProjectStageID,ProjectStageName,RequestNumber,DueDate,AssignedName,TypeName,IssueKey,TypeID,Cost,IssueUrl"
+                            beforeRebindTable="onBeforeBindingTab($event,'SpendHours', 'Cost')"
+                            requestAtLeastFields="ProjectID,IssueID,IssueName,IssueDescr,PriorityID,PriorityName,StatusID,StatusName,StatusCatName,StageName,SubstageName,OrigEstHours,SpendHours,FsNumber,ProjectStageID,ProjectStageName,RequestNumber,DueDate,AssignedName,TypeName,IssueKey,TypeID,Cost,IssueUrl,Collaborators"
                             demandPopin="true">
                     <smartTable:customToolbar>
                         <OverflowToolbar design="Transparent">
                             <ToolbarSpacer/>
+                            <HBox>
+                                <ObjectNumber id="TotalHoursSum" 
+                                              number="0"
+                                              unit="Hours"
+                                              class="sapUiSmallMargin"/>
+                                <ObjectNumber id="TotalCost" 
+                                              number="0"
+                                              unit="RUB"
+                                              class="sapUiSmallMargin"/>
+                            </HBox>
                             <Button icon="sap-icon://refresh"
                                 type="Transparent"
                                 press="rebindTable('issueSmartTable')"/>
@@ -91,7 +101,7 @@
                                     <Text text="{/#Issue/IssueName/@sap:label}"/>
                                 </header>
                                 <footer>
-                                    <Text text="{i18n>TotalSum}"/>
+                                    <!-- <Text text="{i18n>TotalSum}"/> -->
                                 </footer>
                             </Column>
                             <!--2 column -->
@@ -127,7 +137,7 @@
                                 </header>
                             </Column>
                             <!--4 column -->
-                            <Column>
+                            <!-- <Column>
                                 <customData>
                                     <core:CustomData key="p13nData"
                                                  value='\{
@@ -141,7 +151,7 @@
                                 <header>
                                     <Text text="{/#Issue/AssignedName/@sap:label}"/>
                                 </header>
-                            </Column>
+                            </Column> -->
                             <!--5 column -->
                             <Column>
                                 <customData>
@@ -158,8 +168,24 @@
                                     <Text text="{/#Issue/SpendHours/@sap:label}"/>
                                 </header>
                                 <footer>
-                                    <Text id='TotalHoursSum' text="test"/>
+                                    <!-- <Text id='TotalHoursSum' text="test"/> -->
                                 </footer>
+                            </Column>
+                            <!--6 column -->
+                            <Column width="30%">
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "5",
+                                                        "columnKey": "Collaborators",
+                                                        "leadingProperty": "Collaborators",
+                                                        "sortProperty": "Collaborators",
+                                                        "filterProperty": "Collaborators"
+                                                     }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#Issue/Collaborators/@sap:label}"/>
+                                </header>
                             </Column>
                         </columns>
                         <ColumnListItem type="Navigation" highlight="{path:'PriorityID', formatter:'.commonFormatter.formatRowHighlight'}">
@@ -183,9 +209,9 @@
                                 <ObjectIdentifier title="{StageName}" text="{SubstageName}"/>
                             </cells>
                             <!--4 cells-->
-                            <cells>
+                            <!-- <cells>
                                 <smartField:SmartField value="{AssignedName}"/>
-                            </cells>
+                            </cells> -->
                             <!--5 cells-->
                             <cells>
                                 <VBox>
@@ -194,6 +220,10 @@
                                                   unit="RUB"
                                                   state="Success"/>
                                 </VBox>
+                            </cells>
+                            <!--6 cells-->
+                            <cells>
+                                <smartField:SmartField value="{Collaborators}"/>
                             </cells>
                         </ColumnListItem>
                     </Table>

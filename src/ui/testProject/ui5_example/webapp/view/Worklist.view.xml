@@ -1,0 +1,150 @@
+<mvc:View 
+    controllerName="intheme.zui5_example.controller.Main" 
+    xmlns:core="sap.ui.core" 
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true" 
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:l="sap.ui.layout"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:smartField="sap.ui.comp.smartfield">
+    <f:DynamicPage toggleHeaderOnTitleClick="true" showFooter="{state>/editMode}" headerExpanded="false" preserveHeaderStateOnScroll="true" class="sapUiNoContentPadding">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                   <DateTimeField id="todayField"/>
+                </f:heading>
+
+                <f:actions>
+                    <Button text="Обновить дату"
+                        press="onPressUpdateToday"
+                        type="Emphasized"/>
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:content>
+            <VBox fitContainer="true">
+                <smartFilterBar:SmartFilterBar
+                                id="materialFilterBar"
+                                entitySet="MaterialSet"
+                                useToolbar="false"
+                                considerSelectionVariants="true"
+                                enableBasicSearch="true"
+                                showFilterConfiguration="false"
+                                useDateRangeType="true"
+                                liveMode="false">
+                </smartFilterBar:SmartFilterBar>
+                <smartTable:SmartTable
+                        id="materialSmartTab"
+                        header="{i18n>TableTitle}"
+                        entitySet="MaterialSet"
+                        useExportToExcel="false"
+                        showRowCount="true"
+                        tableType="ResponsiveTable"
+                        useVariantManagement="false"
+                        useTablePersonalisation="true"
+                        showFullScreenButton="false"
+                        enableAutoBinding="true"
+                        requestAtLeastFields="MaterialID,MaterialDescr,Lifecycle,LifecycleDescr"
+                        demandPopin="true"
+                        editTogglable="true"
+                        editable="{state>/editMode}"
+                        editToggled="onEditToggled"
+                        smartFilterId="materialFilterBar">
+                    <smartTable:customToolbar>
+                        <OverflowToolbar design="Transparent">
+                            <ToolbarSpacer/>
+                            <Button icon="sap-icon://refresh"
+                                type="Transparent"
+                                press="rebindTable"/>
+                            <Button type="Transparent"
+                                iconFirst="false"
+                                enabled="{state>/editMode}"
+                                icon="sap-icon://add"
+                                press="onAddMaterial"/>
+                        </OverflowToolbar>
+                    </smartTable:customToolbar>
+                    <Table sticky="ColumnHeaders"
+                        alternateRowColors="true"
+                        growing="true"
+                        fixedLayout="false"
+                        growingThreshold="300"
+                        growingScrollToLoad="true"
+                        mode="{= (${state>/editMode} === true) ? 'Delete' : 'None'}"
+                        selectionChange="onSelectLine">
+                        <columns>
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                        value='\{
+                                                                    "columnIndex": "0",
+                                                                    "columnKey": "MaterialDescr",
+                                                                    "leadingProperty": "MaterialDescr",
+                                                                    "sortProperty": "MaterialDescr",
+                                                                    "filterProperty": "MaterialDescr"
+                                                                }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#Material/MaterialDescr/@sap:label}"/>
+                                </header>
+                            </Column>
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                        value='\{
+                                                                    "columnIndex": "1",
+                                                                    "columnKey": "LifecycleDescr",
+                                                                    "leadingProperty": "LifecycleDescr",
+                                                                    "sortProperty": "LifecycleDescr",
+                                                                    "filterProperty": "LifecycleDescr"
+                                                                }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#Material/LifecycleDescr/@sap:label}"/>
+                                </header>
+                            </Column>
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                        value='\{
+                                                                    "columnIndex": "2",
+                                                                    "columnKey": "Lifecycle",
+                                                                    "leadingProperty": "Lifecycle",
+                                                                    "sortProperty": "Lifecycle",
+                                                                    "filterProperty": "Lifecycle"
+                                                                }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#Material/Lifecycle/@sap:label}"/>
+                                </header>
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem   type="Active" press=".onPressColumnListItem" >
+                                <cells>
+                                    <ObjectIdentifier title="{MaterialDescr}" text="{MaterialID}"/>
+                                </cells>
+                                <cells>
+                                    <ObjectIdentifier title="{LifecycleDescr}" text="{Lifecycle}"/>
+                                </cells>
+                                <cells>
+                                    <smartField:SmartField value="{Lifecycle}" editable="{state>/editMode}"/>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </smartTable:SmartTable>
+            </VBox>
+        </f:content>
+        <f:footer>
+            <OverflowToolbar>
+                <ToolbarSpacer/>
+                <Button text="{i18n>SaveBtn}" type="Emphasized" press="onSaveChanges"/>
+                <Button text="{i18n>CancelBtn}" type="Emphasized" press="onCancel"/>
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+</mvc:View>

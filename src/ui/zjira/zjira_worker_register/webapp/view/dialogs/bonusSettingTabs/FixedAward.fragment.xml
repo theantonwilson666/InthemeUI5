@@ -29,11 +29,23 @@
                 <smartTable:customToolbar>
                     <OverflowToolbar design="Transparent">
                         <ToolbarSpacer/>
+
+                        <Button icon="sap-icon://copy"
+                        enabled="{= ${state>/PaymentSettingSTMode} === 'SingleSelectLeft' }"
+                        press="onCopyRow($event,'FixedAwardST','fixedAwardListItem', 'FixedAwardSet')"
+                        />
+
                         <Button type="Transparent"
                                 iconFirst="false"
-                                enabled="{= ${state>/BonusSettingSTMode} === 'Delete' }"
+                                enabled="{= ${state>/BonusSettingSTMode} === 'SingleSelectLeft' }"
                                 icon="sap-icon://add"
                                 press="onAddPaymentSetting($event, 'FixedAwardST', 'fixedAwardListItem', 'FixedAwardSet')"/>
+
+
+                                <Button icon="sap-icon://delete"
+                                enabled="{= ${state>/PaymentSettingSTMode} === 'SingleSelectLeft' }"
+                                press="onDeletePaymentSetting($event, 'FixedAwardST')"
+                                />
                     </OverflowToolbar>
                 </smartTable:customToolbar>
                 <Table sticky="ColumnHeaders"
@@ -42,7 +54,6 @@
                        fixedLayout="false"
                        growingThreshold="300"
                        growingScrollToLoad="true"
-                       delete="onDeletePaymentSetting($event, 'FixedAwardST')"
                        mode="{state>/BonusSettingSTMode}">
                     <columns>
                         <!--1 column -->
@@ -98,19 +109,19 @@
                         <ColumnListItem id="fixedAwardListItem">
                             <!--1 cells-->
                             <cells>
-                                <smartField:SmartField value="{WorkerName}" editable="{= ${state>/BonusSettingSTMode} === 'Delete' }"/>
+                                <smartField:SmartField value="{WorkerName}" editable="{= ${state>/BonusSettingSTMode} === 'SingleSelectLeft' }"/>
                             </cells>
                             <!--2 cells-->
                             <cells>
                                 <HBox>
-                                    <smartField:SmartField value="{DateFrom}" editable="{= ${state>/BonusSettingSTMode} === 'Delete' }"/>
+                                    <smartField:SmartField value="{DateFrom}" editable="{= ${state>/BonusSettingSTMode} === 'SingleSelectLeft' }"/>
                                     <Text text='   –   '/>
-                                    <smartField:SmartField value="{DateTo}" editable="{= ${state>/BonusSettingSTMode} === 'Delete' }"/>
+                                    <smartField:SmartField value="{DateTo}" editable="{= ${state>/BonusSettingSTMode} === 'SingleSelectLeft' }"/>
                                 </HBox>
                             </cells>
                             <!--3 cells-->
                             <cells>
-                                <smartField:SmartField value="{Sum}" editable="{= ${state>/BonusSettingSTMode} === 'Delete' }"/>
+                                <smartField:SmartField value="{Sum}" editable="{= ${state>/BonusSettingSTMode} === 'SingleSelectLeft' }"/>
                             </cells>
                         </ColumnListItem>
                     </items>

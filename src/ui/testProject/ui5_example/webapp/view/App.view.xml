@@ -1,0 +1,13 @@
+<mvc:View controllerName="intheme.zui5_example.controller.Main"
+		  xmlns:mvc="sap.ui.core.mvc"
+		  displayBlock="true"
+		  xmlns="sap.m"
+		  xmlns:f="sap.f">
+    <App id="app">
+        <f:FlexibleColumnLayout
+				id="layout"
+				layout="{state>/layout}"
+				backgroundDesign="Translucent">
+		</f:FlexibleColumnLayout>
+    </App>
+</mvc:View>

@@ -29,11 +29,19 @@
                 <smartTable:customToolbar>
                     <OverflowToolbar design="Transparent">
                         <ToolbarSpacer/>
+                        <Button icon="sap-icon://copy"
+                        enabled="{= ${state>/PaymentSettingSTMode} === 'SingleSelectLeft' }"
+                        press="onCopyRow($event,'WorkerCostConfST','workerCostListItem', 'WorkerCostConfSet')"
+                        />
                         <Button type="Transparent"
                                 iconFirst="false"
-                                enabled="{= ${state>/PaymentSettingSTMode} === 'Delete' }"
+                                enabled="{= ${state>/PaymentSettingSTMode} === 'SingleSelectLeft' }"
                                 icon="sap-icon://add"
                                 press="onAddPaymentSetting($event, 'WorkerCostConfST', 'workerCostListItem', 'WorkerCostConfSet')"/>
+                        <Button icon="sap-icon://delete"
+                                enabled="{= ${state>/PaymentSettingSTMode} === 'SingleSelectLeft' }"
+                                press="onDeletePaymentSetting($event, 'WorkerCostConfST')"
+                                />
                     </OverflowToolbar>
                 </smartTable:customToolbar>
                 <Table sticky="ColumnHeaders"
@@ -42,7 +50,6 @@
                        fixedLayout="false"
                        growingThreshold="300"
                        growingScrollToLoad="true"
-                       delete="onDeletePaymentSetting($event, 'WorkerCostConfST')"
                        mode="{state>/PaymentSettingSTMode}">
                     <columns>
                         <!--1 column -->
@@ -114,23 +121,23 @@
                         <ColumnListItem id="workerCostListItem">
                             <!--1 cells-->
                             <cells>
-                                <smartField:SmartField value="{WorkerName}" editable="{= ${state>/PaymentSettingSTMode} === 'Delete' }"/>
+                                <smartField:SmartField value="{WorkerName}" editable="{= ${state>/PaymentSettingSTMode} === 'SingleSelectLeft' }"/>
                             </cells>
                             <!--2 cells-->
                             <cells>
-                                <smartField:SmartField value="{ProjectName}" editable="{= ${state>/PaymentSettingSTMode} === 'Delete' }"/>
+                                <smartField:SmartField value="{ProjectName}" editable="{= ${state>/PaymentSettingSTMode} === 'SingleSelectLeft' }"/>
                             </cells>
                             <!--3 cells-->
                             <cells>
                                 <HBox>
-                                    <smartField:SmartField value="{DateFrom}" editable="{= ${state>/PaymentSettingSTMode} === 'Delete' }"/>
+                                    <smartField:SmartField value="{DateFrom}" editable="{= ${state>/PaymentSettingSTMode} === 'SingleSelectLeft' }"/>
                                     <Text text='   –   '/>
-                                    <smartField:SmartField value="{DateTo}" editable="{= ${state>/PaymentSettingSTMode} === 'Delete' }"/>
+                                    <smartField:SmartField value="{DateTo}" editable="{= ${state>/PaymentSettingSTMode} === 'SingleSelectLeft' }"/>
                                 </HBox>
                             </cells>
                             <!--4 cells-->
                             <cells>
-                                <smartField:SmartField value="{Cost}" editable="{= ${state>/PaymentSettingSTMode} === 'Delete' }"/>
+                                <smartField:SmartField value="{Cost}" editable="{= ${state>/PaymentSettingSTMode} === 'SingleSelectLeft' }"/>
                             </cells>
                         </ColumnListItem>
                     </items>

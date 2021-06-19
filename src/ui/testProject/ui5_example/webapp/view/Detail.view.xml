@@ -1,0 +1,134 @@
+<mvc:View 
+    controllerName="intheme.zui5_example.controller.Detail" 
+    xmlns:core="sap.ui.core" 
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true" 
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:l="sap.ui.layout"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartForm="sap.ui.comp.smartform">
+    <f:DynamicPage id="detailPage"
+                  toggleHeaderOnTitleClick="true" showFooter="false" headerExpanded="false" preserveHeaderStateOnScroll="true" class="sapUiNoContentPadding">
+        
+         <f:content>
+                    <VBox>
+                        <smartForm:SmartForm id="DetailForm" title="{Material}">
+                            <smartForm:layout>
+                                <smartForm:ColumnLayout columnsM="2" columnsL="2" columnsXL="2"/>
+                            </smartForm:layout>
+                            <smartForm:Group label="{i18n>GroupTitle}">
+                                <smartForm:GroupElement>
+                                    <smartField:SmartField value="{NetWeight}" />
+                                </smartForm:GroupElement>
+                                <smartForm:GroupElement>
+                                    <smartField:SmartField value="{GrossWeight}" />
+                                </smartForm:GroupElement>
+                                <smartForm:GroupElement>
+                                    <smartField:SmartField value="{Length}" />
+                                </smartForm:GroupElement>
+                                <smartForm:GroupElement>
+                                    <smartField:SmartField value="{Width}" />
+                                </smartForm:GroupElement>
+                                <smartForm:GroupElement>
+                                    <smartField:SmartField value="{Height}" />
+                                </smartForm:GroupElement>
+                                <smartForm:GroupElement>
+                                    <smartField:SmartField value="{Volume}" />
+                                </smartForm:GroupElement>
+                            </smartForm:Group>
+                        </smartForm:SmartForm>
+                        <smartTable:SmartTable
+                            id="OrderSmartTable"
+                            entitySet="MaterialOrdersSet"
+                            useExportToExcel="false"
+                            tableBindingPath="MaterialOrders"
+                            showRowCount="true"
+                            tableType="ResponsiveTable"
+                            showFullScreenButton="false"
+                            enableAutoBinding="true"
+                            requestAtLeastFields="Material,Order,Description,Sum"
+                            demandPopin="true">
+                            <smartTable:customData>
+                                <core:CustomData key="dateFormatSettings" value='\{"UTC":false, "pattern":"dd.MM.yyyy"\}'/>
+                            </smartTable:customData>
+                            <Table sticky="ColumnHeaders"
+                                growing="true"
+                                fixedLayout="false"
+                                growingThreshold="300"
+                                growingScrollToLoad="false"
+                                mode="None">
+                                <columns>
+                                    <!--1 column -->
+                                    <Column>
+                                        <customData>
+                                            <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "0",
+                                                        "columnKey": "Order",
+                                                        "leadingProperty": "Order",
+                                                        "sortProperty": "Order",
+                                                        "filterProperty": "Order"
+                                                     }'/>
+                                        </customData>
+                                        <header>
+                                            <Text text="{/#MaterialOrders/Order/@sap:label}"/>
+                                        </header>
+                                    </Column>
+                                    <!--2 column -->
+                                    <Column>
+                                        <customData>
+                                            <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "1",
+                                                        "columnKey": "Description",
+                                                        "leadingProperty": "Description",
+                                                        "sortProperty": "Description",
+                                                        "filterProperty": "Description"
+                                                     }'/>
+                                        </customData>
+                                        <header>
+                                            <Text text="{/#MaterialOrders/Description/@sap:label}"/>
+                                        </header>
+                                    </Column>
+                                    <!--3 column -->
+                                    <Column>
+                                        <customData>
+                                            <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "2",
+                                                        "columnKey": "Sum",
+                                                        "leadingProperty": "Sum",
+                                                        "sortProperty": "Sum",
+                                                        "filterProperty": "Sum"
+                                                     }'/>
+                                        </customData>
+                                        <header>
+                                            <Text text="{/#MaterialOrders/Sum/@sap:label}"/>
+                                        </header>
+                                    </Column>
+                                </columns>
+                                <ColumnListItem type="Active" press=".onPressDetailItem">
+                                    <!--1 cells-->
+                                    <cells>
+                                        <smartField:SmartField value="{Order}"/>
+                                    </cells>
+                                    <!--2 cells-->
+                                    <cells>
+                                        <smartField:SmartField value="{Description}"/>
+                                    </cells>
+                                    <!--3 cells-->
+                                    <cells>
+                                        <smartField:SmartField value="{Sum}"/>
+                                    </cells>
+                                </ColumnListItem>
+                            </Table>
+                        </smartTable:SmartTable>
+                    </VBox>
+                </f:content>
+    </f:DynamicPage>
+</mvc:View>

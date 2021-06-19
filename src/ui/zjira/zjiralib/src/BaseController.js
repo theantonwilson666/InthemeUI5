@@ -22,6 +22,18 @@ sap.ui.define(
     return Controller.extend("jira.lib.BaseController", {
       commonFormatter: CommonFormatter,
 
+
+      onCopyRow: function(oEvent,sSmartTab, sTab, sEntitySet){
+        var oTable = this.getView().byId(sSmartTab).getTable();
+        var lisItemForTable = this.byId(sTab).clone();
+        var oCreatedTrade = this.getModel().createEntry(sEntitySet, {
+          properties: oTable.getSelectedItem().getBindingContext().getObject(),
+        });
+
+        lisItemForTable.setBindingContext(oCreatedTrade);
+        oTable.insertItem(lisItemForTable, 0);
+      },
+
       showError: function (oError) {
         if (oError && JSON.parse(oError.statusCode) === 500) {
           MessageDialog.showError.call(this, oError);
@@ -348,7 +360,7 @@ sap.ui.define(
       },
 
       onDeletePaymentSetting: function (oEvent, sSmartTab) {
-        var oListItem = oEvent.getParameter("listItem");
+        var oListItem = this.getView().byId(sSmartTab).getTable().getSelectedItem();
         var oBindingContext = oListItem.getBindingContext();
         var oResourceBundle = sap.ui
           .getCore()

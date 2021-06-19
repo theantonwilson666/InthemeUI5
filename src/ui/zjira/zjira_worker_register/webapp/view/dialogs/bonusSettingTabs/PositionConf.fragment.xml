@@ -29,11 +29,19 @@
                 <smartTable:customToolbar>
                     <OverflowToolbar design="Transparent">
                         <ToolbarSpacer/>
+                        <Button icon="sap-icon://copy"
+                        enabled="{= ${state>/PaymentSettingSTMode} === 'SingleSelectLeft' }"
+                        press="onCopyRow($event,'PositionConfST','positionConfListItem', 'BonusPositionConfSet')"
+                        />
                         <Button type="Transparent"
                                 iconFirst="false"
-                                enabled="{= ${state>/BonusSettingSTMode} === 'Delete' }"
+                                enabled="{= ${state>/BonusSettingSTMode} === 'SingleSelectLeft' }"
                                 icon="sap-icon://add"
                                 press="onAddPaymentSetting($event, 'PositionConfST', 'positionConfListItem', 'BonusPositionConfSet')"/>
+                        <Button icon="sap-icon://delete"
+                                enabled="{= ${state>/PaymentSettingSTMode} === 'SingleSelectLeft' }"
+                                press="onDeletePaymentSetting($event, 'PositionConfST')"
+                                />
                     </OverflowToolbar>
                 </smartTable:customToolbar>
                 <Table sticky="ColumnHeaders"
@@ -42,7 +50,6 @@
                        fixedLayout="false"
                        growingThreshold="300"
                        growingScrollToLoad="true"
-                       delete="onDeletePaymentSetting($event, 'PositionConfST')"
                        mode="{state>/BonusSettingSTMode}">
                     <columns>
                         <!--1 column -->
@@ -61,7 +68,6 @@
                                 <Text text="{/#BonusPositionConf/PositionName/@sap:label}"/>
                             </header>
                         </Column>
-
                         <!--2 column -->
                         <Column>
                             <customData>
@@ -78,7 +84,6 @@
                                 <Text text="{i18n>BonusSettingPeriod}"/>
                             </header>
                         </Column>
-                        
                         <!--3 column -->
                         <Column>
                             <customData>
@@ -100,23 +105,20 @@
                         <ColumnListItem id="positionConfListItem">
                             <!--1 cells-->
                             <cells>
-                                <smartField:SmartField value="{PositionName}" editable="{= ${state>/BonusSettingSTMode} === 'Delete' }"/>
+                                <smartField:SmartField value="{PositionName}" editable="{= ${state>/BonusSettingSTMode} === 'SingleSelectLeft' }"/>
                             </cells>
-
-                             <!--2 cells-->
+                            <!--2 cells-->
                             <cells>
                                 <HBox>
-                                    <smartField:SmartField value="{DateFrom}" editable="{= ${state>/BonusSettingSTMode} === 'Delete' }"/>
+                                    <smartField:SmartField value="{DateFrom}" editable="{= ${state>/BonusSettingSTMode} === 'SingleSelectLeft' }"/>
                                     <Text text='   –   '/>
-                                    <smartField:SmartField value="{DateTo}" editable="{= ${state>/BonusSettingSTMode} === 'Delete' }"/>
+                                    <smartField:SmartField value="{DateTo}" editable="{= ${state>/BonusSettingSTMode} === 'SingleSelectLeft' }"/>
                                 </HBox>
                             </cells>
-
                             <!--3 cells-->
                             <cells>
-                                <smartField:SmartField value="{BonusPerDay}" editable="{= ${state>/BonusSettingSTMode} === 'Delete' }"/>
+                                <smartField:SmartField value="{BonusPerDay}" editable="{= ${state>/BonusSettingSTMode} === 'SingleSelectLeft' }"/>
                             </cells>
-                            
                         </ColumnListItem>
                     </items>
                 </Table>

@@ -29,11 +29,19 @@
                 <smartTable:customToolbar>
                     <OverflowToolbar design="Transparent">
                         <ToolbarSpacer/>
+                        <Button icon="sap-icon://copy"
+                                enabled="{= ${state>/PaymentSettingSTMode} === 'SingleSelectLeft' }"
+                                press="onCopyRow($event,'ProjWeekendST','projectWeekendListItem', 'ProjectWeekendSet')"
+                                />
                         <Button type="Transparent"
                                 iconFirst="false"
-                                enabled="{= ${state>/PaymentSettingSTMode} === 'Delete' }"
+                                enabled="{= ${state>/PaymentSettingSTMode} === 'SingleSelectLeft' }"
                                 icon="sap-icon://add"
                                 press="onAddPaymentSetting($event, 'ProjWeekendST', 'projectWeekendListItem', 'ProjectWeekendSet')"/>
+                        <Button icon="sap-icon://delete"
+                                enabled="{= ${state>/PaymentSettingSTMode} === 'SingleSelectLeft' }"
+                                press="onDeletePaymentSetting($event, 'ProjWeekendST')"
+                                />
                     </OverflowToolbar>
                 </smartTable:customToolbar>
                 <Table sticky="ColumnHeaders"
@@ -42,7 +50,6 @@
                        fixedLayout="false"
                        growingThreshold="300"
                        growingScrollToLoad="true"
-                       delete="onDeletePaymentSetting($event, 'ProjWeekendST')"
                        mode="{state>/PaymentSettingSTMode}">
                     <columns>
                         <!--1 column -->
@@ -82,11 +89,11 @@
                         <ColumnListItem id="projectWeekendListItem">
                             <!--1 cells-->
                             <cells>
-                                <smartField:SmartField value="{ProjectName}" editable="{= ${state>/PaymentSettingSTMode} === 'Delete' }"/>
+                                <smartField:SmartField value="{ProjectName}" editable="{= ${state>/PaymentSettingSTMode} === 'SingleSelectLeft' }"/>
                             </cells>
                             <!--2 cells-->
                             <cells>
-                                <smartField:SmartField value="{WeekendConfDescr}" editable="{= ${state>/PaymentSettingSTMode} === 'Delete' }"/>
+                                <smartField:SmartField value="{WeekendConfDescr}" editable="{= ${state>/PaymentSettingSTMode} === 'SingleSelectLeft' }"/>
                             </cells>
                         </ColumnListItem>
                     </items>

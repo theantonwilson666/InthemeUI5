@@ -274,6 +274,14 @@
                     <smartTable:customToolbar>
                         <OverflowToolbar design="Transparent">
                             <ToolbarSpacer/>
+
+                            <HBox>
+                                <ObjectNumber id="TotalHoursSum" 
+                                              number="0"
+                                              unit="Hours"
+                                              class="sapUiSmallMargin"/>
+                            </HBox>
+                            
                             <Button icon="sap-icon://refresh"
                                 type="Transparent"
                                 press="rebindTable('WorklogSmartTable')"/>
@@ -308,7 +316,7 @@
                                 </header>
 
                                 <footer>
-                                    <Text text="{i18n>TotalSum}"/>
+                                    <!-- <Text text="{i18n>TotalSum}"/> -->
                                 </footer>
                             </Column>
                             <!--2 column -->
@@ -356,7 +364,7 @@
                                     <Text text="{/#Worklog/HoursSpend/@sap:label}"/>
                                 </header>
                                 <footer>
-                                    <Text id='TotalHoursSum' text="test"/>
+                                    <!-- <Text id='TotalHoursSum' text="test"/> -->
                                 </footer>
                             </Column>
                             <!--5 column -->

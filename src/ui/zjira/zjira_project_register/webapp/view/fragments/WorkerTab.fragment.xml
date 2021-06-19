@@ -51,13 +51,26 @@
                             showFullScreenButton="false"
                             persistencyKey="workerPage.PKey.SmartTable"
                             enableAutoBinding="true"
-                            beforeRebindTable="onBeforeBindingTab($event,'SpendHours')"
+                            beforeRebindTable="onBeforeBindingTab($event,'SpendHours', 'Cost')"
                             requestAtLeastFields="ProjectID,WorkerID,WorkerName,PositionID,PositionName,TeamID,TeamName,SpendHours,EstHours,WorkRatio,Cost"
                             demandPopin="true">
 
                     <smartTable:customToolbar>
                         <OverflowToolbar design="Transparent">
                             <ToolbarSpacer/>
+
+                            <HBox>
+                                <ObjectNumber id="WorkerTotalHoursSum" 
+                                              number="0"
+                                              unit="Hours"
+                                              class="sapUiSmallMargin"/>
+
+                                <ObjectNumber id="TotalWorkerCost" 
+                                              number="0"
+                                              unit="RUB"
+                                              class="sapUiSmallMargin"/>
+                            </HBox>
+
                             <Button icon="sap-icon://refresh"
                                 type="Transparent"
                                 press="rebindTable('workerSmartTable')"/>
@@ -90,7 +103,7 @@
                                     <Text text="{/#ProjectWorker/WorkerName/@sap:label}"/>
                                 </header>
                                 <footer>
-                                    <Text text="{i18n>TotalSum}"/>
+                                    <!-- <Text text="{i18n>TotalSum}"/> -->
                                 </footer>
                             </Column>
                             <!--2 column -->
@@ -125,7 +138,7 @@
                                     <Text text="{/#ProjectWorker/SpendHours/@sap:label}"/>
                                 </header>
                                 <footer>
-                                    <Text id='WorkerTotalHoursSum' text="test"/>
+                                    <!-- <Text id='WorkerTotalHoursSum' text="test"/> -->
                                 </footer>
                             </Column>
                             <!--4 column -->

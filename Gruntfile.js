@@ -64,6 +64,20 @@ module.exports = function (grunt) {
       },
 
 
+      {
+        package: "ZUI5_LEARNING",
+        transportno: "TMDK921768",
+        project: "testProject",
+        apps: {
+          ui5_example: {
+            bspContainer: "ZTEST_APP",
+            bspDescription: "Test Deploy",
+            prefix: "intheme/zui5_example",
+          }
+        },
+      }
+
+
 
 
     ],

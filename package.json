@@ -19,6 +19,7 @@
     "deploy_zjira_worker_register": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=0 --app=zjira_worker_register",
     "deploy_zworker_schedule": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=1 --app=zworker_schedule",
     "deploy_zjiralib": "node node_modules\\grunt-cli\\bin\\grunt deploy_lib --lib=zjiralib",
+    "deploy_testApp": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=2 --app=ui5_example",
     "build": "grunt build"
   },
   "keywords": [],

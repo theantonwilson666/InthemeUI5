@@ -29,11 +29,19 @@
                 <smartTable:customToolbar>
                     <OverflowToolbar design="Transparent">
                         <ToolbarSpacer/>
+                        <Button icon="sap-icon://copy"
+                        enabled="{= ${state>/PaymentSettingSTMode} === 'SingleSelectLeft' }"
+                        press="onCopyRow($event,'ProjectConfST','projectConfListItem', 'BonusProjectConfSet')"
+                        />
                         <Button type="Transparent"
                                 iconFirst="false"
-                                enabled="{= ${state>/BonusSettingSTMode} === 'Delete' }"
+                                enabled="{= ${state>/BonusSettingSTMode} === 'SingleSelectLeft' }"
                                 icon="sap-icon://add"
                                 press="onAddPaymentSetting($event, 'ProjectConfST', 'projectConfListItem', 'BonusProjectConfSet')"/>
+                        <Button icon="sap-icon://delete"
+                                enabled="{= ${state>/PaymentSettingSTMode} === 'SingleSelectLeft' }"
+                                press="onDeletePaymentSetting($event, 'ProjectConfST')"
+                                />
                     </OverflowToolbar>
                 </smartTable:customToolbar>
                 <Table sticky="ColumnHeaders"
@@ -42,7 +50,6 @@
                        fixedLayout="false"
                        growingThreshold="300"
                        growingScrollToLoad="true"
-                       delete="onDeletePaymentSetting($event, 'ProjectConfST')"
                        mode="{state>/BonusSettingSTMode}">
                     <columns>
                         <!--1 column -->
@@ -82,13 +89,12 @@
                         <ColumnListItem id="projectConfListItem">
                             <!--1 cells-->
                             <cells>
-                                <smartField:SmartField value="{ProjectName}" editable="{= ${state>/BonusSettingSTMode} === 'Delete' }"/>
+                                <smartField:SmartField value="{ProjectName}" editable="{= ${state>/BonusSettingSTMode} === 'SingleSelectLeft' }"/>
                             </cells>
                             <!--2 cells-->
                             <cells>
-                                <smartField:SmartField value="{ProjectBonusName}" editable="{= ${state>/BonusSettingSTMode} === 'Delete' }"/>
+                                <smartField:SmartField value="{ProjectBonusName}" editable="{= ${state>/BonusSettingSTMode} === 'SingleSelectLeft' }"/>
                             </cells>
-                            
                         </ColumnListItem>
                     </items>
                 </Table>
