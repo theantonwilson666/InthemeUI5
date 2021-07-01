@@ -22,12 +22,15 @@
                 <f:content>
                     <Text text="{ProjectKey}"/>
                 </f:content>
-
                 <f:actions>
                     <Button icon="sap-icon://lead"
                             type="Emphasized"
                             text="{i18n>profitButton}"
                             press="onProfitabilyButtonPress"/>
+                    <Button icon="sap-icon://synchronize"
+                            type="Transparent"
+                            text="{i18n>syncButton}"
+                            press="onSyncButtonPress"/>
                 </f:actions>
             </f:DynamicPageTitle>
         </f:title>
@@ -50,13 +53,11 @@
                         tabDensityMode="Compact">
                 <items>
                     <IconTabFilter id="IssueTab" text="{i18n>IssueTab}" key="issues">
-                       <core:Fragment fragmentName="intheme.zjira_project_register.view.fragments.IssueTab" type="XML"/>
+                        <core:Fragment fragmentName="intheme.zjira_project_register.view.fragments.IssueTab" type="XML"/>
                     </IconTabFilter>
-
-                     <IconTabFilter id="WorkerTab" text="{i18n>WorkerTab}" key="workers">
-                       <core:Fragment fragmentName="intheme.zjira_project_register.view.fragments.WorkerTab" type="XML"/>
+                    <IconTabFilter id="WorkerTab" text="{i18n>WorkerTab}" key="workers">
+                        <core:Fragment fragmentName="intheme.zjira_project_register.view.fragments.WorkerTab" type="XML"/>
                     </IconTabFilter>
-
                 </items>
             </IconTabBar>
         </f:content>

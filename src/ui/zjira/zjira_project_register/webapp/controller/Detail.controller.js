@@ -111,7 +111,6 @@ sap.ui.define(
               );
             }
           } else {
-            
             this.setStateProperty("/rebindProj", false);
           }
         },
@@ -128,22 +127,24 @@ sap.ui.define(
             })
             .then(
               function (oPopover) {
-                var sTax = this.getView().byId("taxInput").getValue() + '%';
+                var sTax = this.getView().byId("taxInput").getValue() + "%";
                 this.getView().byId("TaxField").setText(sTax);
               }.bind(this)
             );
         },
 
-        onPressProfitListItem: function(oEvent){
-          debugger;
+        onPressProfitListItem: function (oEvent) {
+          this.getView()
+            .byId("projectStageSmartTable")
+            .getTable()
+            .removeSelections();
 
           var oBindProjectStage = {
-            Path : oEvent.mParameters.listItem.getBindingContext().getPath(),
-            Object : oEvent.mParameters.listItem.getBindingContext().getObject()
+            Path: oEvent.mParameters.listItem.getBindingContext().getPath(),
+            Object: oEvent.mParameters.listItem.getBindingContext().getObject(),
           };
 
-          this.setStateProperty("/currentProjectStage", oBindProjectStage)
-
+          this.setStateProperty("/currentProjectStage", oBindProjectStage);
 
           this.loadDialog
             .call(this, {
@@ -153,13 +154,95 @@ sap.ui.define(
             })
             .then(
               function (oDialog) {
-                var oBindProjectStage = this.getStateProperty("/currentProjectStage");
+                var oBindProjectStage = this.getStateProperty(
+                  "/currentProjectStage"
+                );
                 oDialog.bindElement({
-                  path: oBindProjectStage.Path
+                  path: oBindProjectStage.Path,
                 });
                 oDialog.open();
               }.bind(this)
             );
+        },
+
+        onSyncButtonPress: function (oEvent) {
+          this.showBusyDialog();
+          this.getModel().callFunction("/ProjectProcessing", {
+            method: "POST",
+            urlParameters: {
+              Project: this.getStateProperty(
+                "/sOpenedProjectBindingCtnx"
+              ).getObject().ProjectID,
+            },
+            success: function (oData) {
+              if (!this.isExistError()) {
+                if (oData.ProjectProcessing.Ok === true) {
+                  this.closeBusyDialog();
+                  this.byId("issueSmartTable").rebindTable();
+                  this.byId("workerSmartTable").rebindTable();
+                }
+              }
+            }.bind(this),
+            error: function (oError) {
+              this.closeBusyDialog();
+              this.showError(oError);
+            }.bind(this),
+            refreshAfterChange: false,
+          });
+        },
+
+        onCancelProfitWorker: function (oEvent) {
+          oEvent.getSource().getParent().close();
+        },
+
+        onEditProfitWorker: function (oEvent) {
+          var bEditable = oEvent.getParameter("editable");
+          this.setStateProperty(
+            "/ProfitWorkerSTMode",
+            bEditable ? true : false
+          );
+        },
+
+        onSaveProfitWorker: function (oEvent) {
+          this.showBusyDialog();
+
+          this.submitChanges({
+            success: function () {
+              if (!this.isExistError()) {
+                this.byId("profitWorkerSmartTable").rebindTable();
+                this.closeBusyDialog();
+              } else {
+                this.closeBusyDialog();
+              }
+            }.bind(this),
+            error: function (oError) {
+              this.closeBusyDialog();
+              this.showError(oError);
+            }.bind(this),
+
+            // oEvent.getSource().getParent().close();
+          });
+        },
+
+        onPressHistoryBonusPerStage: function (oEvent) {
+          this.openPopoverBy
+            .call(this, {
+              sPopoverName: "_profitWorkerHistory",
+              sViewName:
+                "intheme.zjira_project_register.view.popovers.ProfitWorkerPopover",
+              sPath: oEvent.getSource().getBindingContext().getPath(),
+              oSource: oEvent.getSource(),
+            })
+            .then(
+              function (oPopover) {
+                
+              }.bind(this)
+            );
+        },
+
+
+        onOpenProfitWorkerDialog: function(oEvent){
+          this.byId("profitWorkerSmartTable").rebindTable();
         }
       }
     );

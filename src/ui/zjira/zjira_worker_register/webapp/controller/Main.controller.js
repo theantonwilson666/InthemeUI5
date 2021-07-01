@@ -227,7 +227,7 @@ sap.ui.define(
           var bEditable = oEvent.getParameter("editable");
           this.setStateProperty(
             "/BonusSettingSTMode",
-            bEditable ? "Delete" : "None"
+            bEditable ? "SingleSelectLeft" : "None"
           );
         },
 

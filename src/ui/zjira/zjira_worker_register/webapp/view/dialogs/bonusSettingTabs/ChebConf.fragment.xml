@@ -30,8 +30,8 @@
                     <OverflowToolbar design="Transparent">
                         <ToolbarSpacer/>
                         <Button icon="sap-icon://copy"
-                        enabled="{= ${state>/PaymentSettingSTMode} === 'SingleSelectLeft' }"
-                        press="onCopyRow($event,'ChebConfST','ChebConfListItem', 'CheboksSalarySet')"
+                                enabled="{= ${state>/BonusSettingSTMode} === 'SingleSelectLeft' }"
+                                press="onCopyRow($event,'ChebConfST','ChebConfListItem', 'CheboksSalarySet')"
                         />
                         <Button type="Transparent"
                                 iconFirst="false"
@@ -39,7 +39,7 @@
                                 icon="sap-icon://add"
                                 press="onAddPaymentSetting($event, 'ChebConfST', 'ChebConfListItem', 'CheboksSalarySet')"/>
                         <Button icon="sap-icon://delete"
-                                enabled="{= ${state>/PaymentSettingSTMode} === 'SingleSelectLeft' }"
+                                enabled="{= ${state>/BonusSettingSTMode} === 'SingleSelectLeft' }"
                                 press="onDeletePaymentSetting($event, 'ChebConfST')"
                                 />
                     </OverflowToolbar>

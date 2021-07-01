@@ -48,12 +48,12 @@
                             <smartForm:GroupElement>
                                 <smartField:SmartField value ="{IssueDescr}"/>
                             </smartForm:GroupElement>
-                            <smartForm:GroupElement>
+                            <!-- <smartForm:GroupElement>
                                 <smartField:SmartField value ="{StageName}"/>
                             </smartForm:GroupElement>
                             <smartForm:GroupElement>
                                 <smartField:SmartField value ="{SubstageName}"/>
-                            </smartForm:GroupElement>
+                            </smartForm:GroupElement> -->
                             <smartForm:GroupElement>
                                 <smartField:SmartField value ="{ProjectStageName}"/>
                             </smartForm:GroupElement>
@@ -85,7 +85,7 @@
                             <smartForm:GroupElement>
                                 <smartField:SmartField value ="{DueDate}"/>
                             </smartForm:GroupElement>
-                            <smartForm:GroupElement class="sapUiTinyMargin">
+                            <!-- <smartForm:GroupElement class="sapUiTinyMargin">
                                 <smartField:SmartField value ="{PlanHoursTest}"/>
                                 <DateRangeSelection id="PlanTest" dateValue="{PlanTestStart}" secondDateValue="{PlanTestEnd}" editable="false" displayFormat="dd.MM.yyyy" visible="{= (${PlanTestStart} !== null ) ? true : false}"/>
                             </smartForm:GroupElement>
@@ -96,7 +96,7 @@
                             <smartForm:GroupElement>
                                 <smartField:SmartField value ="{PlanHoursDev}"/>
                                 <DateRangeSelection id="PlanDev" dateValue="{PlanDevStart}" secondDateValue="{PlanDevEnd}" editable="false" displayFormat="dd.MM.yyyy" visible="{= (${PlanDevStart} !== null ) ? true : false}"/>
-                            </smartForm:GroupElement>
+                            </smartForm:GroupElement> -->
                         </smartForm:Group>
                         <smartForm:Group label="{i18n>Group4Title}">
                             <smartForm:GroupElement>

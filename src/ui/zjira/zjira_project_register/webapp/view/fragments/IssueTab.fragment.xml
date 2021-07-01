@@ -51,7 +51,7 @@
                             showFullScreenButton="false"
                             persistencyKey="issuePage.PKey.SmartTable"
                             enableAutoBinding="true"
-                            beforeRebindTable="onBeforeBindingTab($event,'SpendHours', 'Cost')"
+                            beforeRebindTable="onBeforeBindingTab($event,'SpendHours', 'Cost', '', true)"
                             requestAtLeastFields="ProjectID,IssueID,IssueName,IssueDescr,PriorityID,PriorityName,StatusID,StatusName,StatusCatName,StageName,SubstageName,OrigEstHours,SpendHours,FsNumber,ProjectStageID,ProjectStageName,RequestNumber,DueDate,AssignedName,TypeName,IssueKey,TypeID,Cost,IssueUrl,Collaborators"
                             demandPopin="true">
                     <smartTable:customToolbar>
@@ -121,7 +121,7 @@
                                 </header>
                             </Column>
                             <!--3 column -->
-                            <Column>
+                            <!-- <Column>
                                 <customData>
                                     <core:CustomData key="p13nData"
                                                  value='\{
@@ -135,7 +135,7 @@
                                 <header>
                                     <Text text="{/#Issue/StageName/@sap:label}"/>
                                 </header>
-                            </Column>
+                            </Column> -->
                             <!--4 column -->
                             <!-- <Column>
                                 <customData>
@@ -205,9 +205,9 @@
                                 <ObjectIdentifier title="{StatusName}" text="{StatusCatName}"/>
                             </cells>
                             <!--3 cells-->
-                            <cells>
+                            <!-- <cells>
                                 <ObjectIdentifier title="{StageName}" text="{SubstageName}"/>
-                            </cells>
+                            </cells> -->
                             <!--4 cells-->
                             <!-- <cells>
                                 <smartField:SmartField value="{AssignedName}"/>
@@ -215,7 +215,8 @@
                             <!--5 cells-->
                             <cells>
                                 <VBox>
-                                    <smartField:SmartField value="{SpendHours}"/>
+                                    <Text text="{path:'SpendHours', formatter:'.commonFormatter.formatSecondToHours'}"/>
+
                                     <ObjectNumber number="{Cost}"
                                                   unit="RUB"
                                                   state="Success"/>

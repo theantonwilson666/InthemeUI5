@@ -43,11 +43,12 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
         }
       },
 
-      onBeforeBindingTab: function (oEvent, iSumParam, iSumCost, iFilterInit) {
+      onBeforeBindingTab: function (oEvent, iSumParam, iSumCost, iFilterInit, bSecondToHours) {
         var mBindingParams = oEvent.getParameter("bindingParams");
         //Event handlers for the binding
         this.SumParam = iSumParam;
         this.CostParam = iSumCost;
+        this.bSecondToHours = bSecondToHours;
 
         this.oTotalRow = {
           Project: {
@@ -76,7 +77,7 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
               var iSumCost = 0;
               oReceivedData.results.forEach(
                 function (oItem) {
-                  iSum += oItem[this.SumParam];
+                  iSum += parseInt(oItem[this.SumParam]);
                   iSumCost += parseInt(oItem[this.CostParam]);
                 }.bind(this)
               );
@@ -84,7 +85,7 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
               var oTotal =
                 this.oTotalRow[oEvent.getSource()._getEntityType().name];
 
-              this.getView().byId(oTotal.hours).setNumber(iSum);
+              this.getView().byId(oTotal.hours).setNumber(this.bSecondToHours == true ? (iSum / 3600).toFixed(2) : iSum );
               if (oTotal.cost) {
                 this.getView().byId(oTotal.cost).setNumber(iSumCost);
               }
@@ -98,7 +99,7 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
               var iSumCost = 0;
               oReceivedData.results.forEach(
                 function (oItem) {
-                  iSum += oItem[this.SumParam];
+                  iSum += parseInt(oItem[this.SumParam]);
                   iSumCost += parseInt(oItem[this.CostParam]);
                 }.bind(this)
               );
@@ -106,7 +107,7 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
               var oTotal =
                 this.oTotalRow[oEvent.getSource()._getEntityType().name];
 
-              this.getView().byId(oTotal.hours).setNumber(iSum);
+              this.getView().byId(oTotal.hours).setNumber(this.bSecondToHours == true ? (iSum / 3600).toFixed(2) : iSum );
 
               if (oTotal.cost) {
                 this.getView().byId(oTotal.cost).setNumber(iSumCost);

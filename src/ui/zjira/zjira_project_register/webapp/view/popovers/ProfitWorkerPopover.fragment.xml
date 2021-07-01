@@ -1,0 +1,110 @@
+<core:FragmentDefinition
+        xmlns="sap.m"
+        xmlns:core="sap.ui.core"
+        xmlns:l="sap.ui.layout"
+        xmlns:smartField="sap.ui.comp.smartfield"
+        xmlns:smartTable="sap.ui.comp.smarttable"
+        xmlns:smartForm="sap.ui.comp.smartform"
+        xmlns:smartFilterBar="sap.ui.comp.smartfilterbar">
+    <Popover
+            title="{i18n>ProfitWorkerPopOverTitle}"
+            showHeader="true"
+            contentWidth="24rem"
+            contentHeight="17rem"
+            placement="Left">
+        <content>
+            <VBox class="sapUiSmallMargin" alignItems="Stretch" fitContainer="true">
+                <smartTable:SmartTable
+                            id="profitWorkerHistoryST"
+                            entitySet="ProfitWorkerHistorySet"
+                            useExportToExcel="false"
+                            showRowCount="true"
+                            editable="true"
+                            tableBindingPath="ProfitWorkerHistories" 
+                            tableType="ResponsiveTable"
+                            useVariantManagement="true"
+                            useTablePersonalisation="true"
+                            showFullScreenButton="false"
+                            enableAutoBinding="true"
+                            beforeRebindTable="onBeforeBindingProjectStage"
+                            requestAtLeastFields="TechFilter,RequestNo,ProjectStageID,ProjectID,Worker,DateCreate,Bonus,UserName"
+                            demandPopin="true">
+                    <smartTable:customData>
+                        <core:CustomData key="dateFormatSettings" value='\{"UTC":false, "pattern":"dd.MM.yyyy"\}'/>
+                    </smartTable:customData>
+                    <Table sticky="ColumnHeaders">
+                        <columns>
+                            <!--1 column -->
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "0",
+                                                        "columnKey": "DateCreate",
+                                                        "leadingProperty": "DateCreate",
+                                                        "sortProperty": "DateCreate",
+                                                        "filterProperty": "DateCreate"
+                                                     }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#ProfitWorkerHistory/DateCreate/@sap:label}"/>
+                                </header>
+                            </Column>
+                            <!--2 column -->
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "1",
+                                                        "columnKey": "Bonus",
+                                                        "leadingProperty": "Bonus",
+                                                        "sortProperty": "Bonus",
+                                                        "filterProperty": "Bonus"
+                                                     }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#ProfitWorkerHistory/Bonus/@sap:label}"/>
+                                </header>
+                            </Column>
+
+
+                            <!--2 column -->
+                            <Column>
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                                 value='\{
+                                                        "columnIndex": "2",
+                                                        "columnKey": "UserName",
+                                                        "leadingProperty": "UserName",
+                                                        "sortProperty": "UserName",
+                                                        "filterProperty": "UserName"
+                                                     }'/>
+                                </customData>
+                                <header>
+                                    <Text text="{/#ProfitWorkerHistory/UserName/@sap:label}"/>
+                                </header>
+                            </Column>
+
+                        </columns>
+                        <ColumnListItem >
+                            <!--1 cells-->
+                            <cells>
+                                <smartField:SmartField value="{DateCreate}"/>
+                            </cells>
+                            <!--2 cells-->
+                            <cells>
+                                <smartField:SmartField value="{Bonus}"/>
+                            </cells>
+
+                            <!--3 cells-->
+                            <cells>
+                                <smartField:SmartField value="{UserName}"/>
+                            </cells>
+
+                        </ColumnListItem>
+                    </Table>
+                </smartTable:SmartTable>
+            </VBox>
+        </content>
+    </Popover>
+</core:FragmentDefinition>

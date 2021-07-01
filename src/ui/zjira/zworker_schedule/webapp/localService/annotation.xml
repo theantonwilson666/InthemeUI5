@@ -32,7 +32,7 @@
                 <Annotation Term="UI.SelectionFields">
                     <Collection>
                         <PropertyPath>Worker</PropertyPath>
-                        <PropertyPath>Position</PropertyPath>
+                        <!-- <PropertyPath>Position</PropertyPath> -->
                         <PropertyPath>Team</PropertyPath>
                     </Collection>
                 </Annotation>

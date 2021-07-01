@@ -145,7 +145,7 @@
 
                                 <!--3 cells-->
                                 <cells>
-                                    <smartField:SmartField value="{KPI}" editable="{= ${state>/BonusSettingSTMode} === 'Delete' }"/>
+                                    <smartField:SmartField value="{KPI}" editable="{= ${state>/BonusSettingSTMode} === 'SingleSelectLeft' }"/>
                                 </cells>
                                 
                             </ColumnListItem>

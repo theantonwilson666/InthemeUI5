@@ -51,7 +51,7 @@
                             showFullScreenButton="false"
                             persistencyKey="workerPage.PKey.SmartTable"
                             enableAutoBinding="true"
-                            beforeRebindTable="onBeforeBindingTab($event,'SpendHours', 'Cost')"
+                            beforeRebindTable="onBeforeBindingTab($event,'SpendHours', 'Cost','', true)"
                             requestAtLeastFields="ProjectID,WorkerID,WorkerName,PositionID,PositionName,TeamID,TeamName,SpendHours,EstHours,WorkRatio,Cost"
                             demandPopin="true">
 
@@ -186,7 +186,7 @@
                             <!--3 cells-->
                             <cells>
                                 <VBox>
-                                    <smartField:SmartField value="{SpendHours}"/>
+                                    <Text text="{path:'SpendHours', formatter:'.commonFormatter.formatSecondToHours'}"/>
                                     <ObjectNumber number="{Cost}"
                                                   unit="RUB"
                                                   state="Success"/>

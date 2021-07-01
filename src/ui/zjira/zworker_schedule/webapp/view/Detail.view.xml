@@ -95,23 +95,23 @@
                             <viz.data:FlattenedDataset data="{ChartMdl>/Chart}">
                                 <viz.data:dimensions>
                                     <viz.data:DimensionDefinition name="Date"
-                                value="{ChartMdl>Date}" />
+                                                                  value="{ChartMdl>Date}" />
                                 </viz.data:dimensions>
                                 <viz.data:measures>
                                     <viz.data:MeasureDefinition name="Fact Hours"
-                                value="{ChartMdl>FactHours}" />
+                                                                value="{ChartMdl>FactHours}" />
                                     <viz.data:MeasureDefinition name="Plan Hours"
-                                value="{ChartMdl>PlanHours}" />
+                                                                value="{ChartMdl>PlanHours}" />
                                     <viz.data:MeasureDefinition name="Jira Hours"
-                                value="{ChartMdl>JiraHours}" />
+                                                                value="{ChartMdl>JiraHours}" />
                                 </viz.data:measures>
                             </viz.data:FlattenedDataset>
                         </viz:dataset>
                         <viz:feeds>
                             <viz.feeds:FeedItem uid="valueAxis" type="Measure"
-                        values="Fact Hours,Plan Hours,Jira Hours"/>
+                                                values="Fact Hours,Plan Hours,Jira Hours"/>
                             <viz.feeds:FeedItem uid="categoryAxis" type="Dimension"
-                        values="Date" />
+                                                values="Date" />
                         </viz:feeds>
                     </viz:VizFrame>
                 </VBox>

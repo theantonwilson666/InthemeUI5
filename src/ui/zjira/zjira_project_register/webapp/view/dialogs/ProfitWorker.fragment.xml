@@ -10,10 +10,11 @@
             title="{i18n>ProfitWorkerTitle}"
             class="sapUiSizeCompact"
             contentHeight="60%"
+            afterOpen="onOpenProfitWorkerDialog"
             contentWidth="60%">
         <content>
             <VBox>
-                <smartForm:SmartForm width="100%">
+                <smartForm:SmartForm id="profitWorkerSmartForm" width="100%">
                     <smartForm:layout>
                         <smartForm:ColumnLayout columnsM="2" columnsL="2" columnsXL="2"/>
                     </smartForm:layout>
@@ -28,18 +29,19 @@
                 </smartForm:SmartForm>
                 <smartTable:SmartTable
                             id="profitWorkerSmartTable"
-                            entitySet="ProfitWorkerSet"
                             useExportToExcel="false"
                             showRowCount="true"
-                            editable="true"
                             tableBindingPath="ProfitWorkers" 
+                            editable="false"
+                            entitySet="ProfitWorkerSet"
                             tableType="ResponsiveTable"
                             useVariantManagement="true"
                             useTablePersonalisation="true"
                             showFullScreenButton="false"
-                            enableAutoBinding="true"
-                            beforeRebindTable="onBeforeBindingProjectStage"
-                            requestAtLeastFields="TechFilter,RequestNo,ProjectStageID,ProjectID,Worker,WorkerName,ClosedIssuesNum,SpendHours,HoursPercent,Bonus"
+                            enableAutoBinding="false"
+                            editTogglable="true"
+                            editToggled="onEditProfitWorker"
+                            requestAtLeastFields="TechFilter,RequestNo,ProjectStageID,ProjectID,Worker,WorkerName,ClosedIssuesNum,SpendHours,HoursPercent,Bonus,AllBonusPerStage"
                             demandPopin="true">
                     <smartTable:customToolbar>
                         <OverflowToolbar design="Solid">
@@ -158,12 +160,29 @@
                             </cells>
                             <!--5 cells-->
                             <cells>
-                                <smartField:SmartField value="{Bonus}"/>
+                                <VBox>
+                                    <smartField:SmartField value="{Bonus}" editable="{= ${state>/ProfitWorkerSTMode} === true }"/>
+                                    <core:Icon src="sap-icon://history"
+                                               press="onPressHistoryBonusPerStage"
+                                               color="#1C4C98"
+                                               visible="{= (${Bonus} !== '0' ) ? true : false}"
+                                               />
+                                    <!-- <ObjectAttribute
+                                            title="{/#ProfitWorker/AllBonusPerStage/@sap:label}"
+                                            text=""
+                                            visible="{= (${Bonus} !== '0' ) ? true : false}"
+                                            active="{= (${Bonus} !== '0' ) ? true : false}"
+                                            press="onPressAllBonusPerStage"/> -->
+                                </VBox>
                             </cells>
                         </ColumnListItem>
                     </Table>
                 </smartTable:SmartTable>
             </VBox>
         </content>
+        <buttons>
+            <Button text="{i18n>SaveBtn}" type="Emphasized" press="onSaveProfitWorker" visible="{= ${state>/ProfitWorkerSTMode} === true }" />
+            <Button text="{i18n>CancelBtn}" type="Transparent" press="onCancelProfitWorker"/>
+        </buttons>
     </Dialog>
 </core:FragmentDefinition>

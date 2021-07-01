@@ -31,7 +31,7 @@
                         <ToolbarSpacer/>
 
                         <Button icon="sap-icon://copy"
-                        enabled="{= ${state>/PaymentSettingSTMode} === 'SingleSelectLeft' }"
+                        enabled="{= ${state>/BonusSettingSTMode} === 'SingleSelectLeft' }"
                         press="onCopyRow($event,'FixedAwardST','fixedAwardListItem', 'FixedAwardSet')"
                         />
 
@@ -43,7 +43,7 @@
 
 
                                 <Button icon="sap-icon://delete"
-                                enabled="{= ${state>/PaymentSettingSTMode} === 'SingleSelectLeft' }"
+                                enabled="{= ${state>/BonusSettingSTMode} === 'SingleSelectLeft' }"
                                 press="onDeletePaymentSetting($event, 'FixedAwardST')"
                                 />
                     </OverflowToolbar>
