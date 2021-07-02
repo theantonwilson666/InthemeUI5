@@ -1,0 +1,38 @@
+[{
+        "Worker": "123",
+        "Position": "",
+        "WorkerName": "Степан Иванов",
+        "PositionName": "Стажер",
+        "MinMonths": 5,
+        "MaxMonths": 8,
+        "IsRed": false,
+        "IsYellow": false,
+        "DateIn": "/Date{1483218000}",
+        "DateOut": "/Date{1483218000}"
+    },
+    {
+        "Worker": "123",
+        "Position": "",
+        "WorkerName": "Степан Иванов",
+        "PositionName": "K1.0",
+        "MinMonths": 5,
+        "MaxMonths": 8,
+        "IsRed": false,
+        "IsYellow": false,
+        "DateIn": "/Date{1483218000}",
+        "DateOut": "/Date{1483218000}"
+    },
+    {
+        "Worker": "123",
+        "Position": "",
+        "WorkerName": "Степан Иванов",
+        "PositionName": "K1.1",
+        "MinMonths": 5,
+        "MaxMonths": 8,
+        "IsRed": false,
+        "IsYellow": false,
+        "DateIn": "/Date{1483218000}",
+        "DateOut": "/Date{1483218000}"
+    }
+
+]

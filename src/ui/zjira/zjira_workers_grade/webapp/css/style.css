@@ -1,0 +1,14 @@
+/* Enter your custom styles here */
+.sapUiPaddingTitle {
+    height: 1rem !important;
+    padding-top: 0.09rem;
+}
+
+ tr[data-colorLine="Warning"]{	
+    background:   #FABD64!important;
+  }
+          
+  tr[data-colorLine="Error"]{
+    background: #FF8888!important;
+    
+  } 

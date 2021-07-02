@@ -1,0 +1,941 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+ <edmx:DataServices m:DataServiceVersion="2.0">
+  <Schema Namespace="ZJIRA_SRV" xml:lang="ru" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+   <EntityType Name="Project" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="Filter"/>
+     <PropertyRef Name="ProjectID"/>
+    </Key>
+    <Property Name="ProjectUrl" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Ссылка на проект" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Position" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Должность" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="Team" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Филиал" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="WorklogDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:filter-restriction="interval" sap:unicode="false" sap:label="Дата" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="Worker" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Сотрудник" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="CalcCost" Type="Edm.Boolean" Nullable="false" sap:filter-restriction="single-value" sap:unicode="false" sap:label="Подсчет затрат" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="Cost" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:unicode="false" sap:label="Затраты" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="HoursSpend" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Списанное время(ч)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProjectCatName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Категория" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProjectCatID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Категория" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="ProjectTypeName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Тип" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProjectTypeID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Тип" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="ProjectName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Проект" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProjectKey" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Проект" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Filter" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Фильтр" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProjectID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Проект" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <NavigationProperty Name="Issues" Relationship="ZJIRA_SRV.ProjectToIssue" FromRole="FromRole_ProjectToIssue" ToRole="ToRole_ProjectToIssue"/>
+    <NavigationProperty Name="ProjectWorkers" Relationship="ZJIRA_SRV.ProjectToProjectWorker" FromRole="FromRole_ProjectToProjectWorker" ToRole="ToRole_ProjectToProjectWorker"/>
+    <NavigationProperty Name="ProjectStagesProfit" Relationship="ZJIRA_SRV.ProjectToProjectStageProfit" FromRole="FromRole_ProjectToProjectStageProfit" ToRole="ToRole_ProjectToProjectStageProfit"/>
+   </EntityType>
+   <EntityType Name="Issue" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="Filter"/>
+     <PropertyRef Name="IssueID"/>
+     <PropertyRef Name="ProjectID"/>
+    </Key>
+    <Property Name="IssueUrl" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Ссылка на задачу" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="WorkRatio" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Затраченное / Плановое время" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="PlanHoursDev" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Разработчик(ч)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="PlanDevStart" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Дата начала (разработка)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="PlanDevEnd" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Дата окончания (разработка)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="PlanHoursKons" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Консультант(ч)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="PlanKonsStart" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Дата начала (спецификация)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="PlanKonsEnd" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Дата окончания (спецификация)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="PlanHoursTest" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Тестировщик(ч)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="PlanTestStart" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Дата начала (тестировщик)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="PlanTestEnd" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Дата окончания (тестировщик)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="TypeName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Тип" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="TypeID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Тип" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="AssignedName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Назначено" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Collaborators" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Коллабораторы" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="AssignedID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Назначено" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="DueDate" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="План.дата завершения" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="RequestNumber" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Номер заявки" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProjectStageName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Этап проекта" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProjectStageID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Этап проекта" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="FsNumber" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Номер ФС" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="SpendHours" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Списанное время(ч)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="OrigEstHours" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Исходная оценка(ч)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="SubstageName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Подэтап" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="SubstageID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Подэтап" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="StageName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Этап" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="StageID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Этап" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="StatusCatName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Категория статуса" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="StatusCatID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Категория статуса" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="StatusName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Статус" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="StatusID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Статус" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="PriorityName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Приоритет" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="PriorityID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Приоритет" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="IssueDescr" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Описание" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="IssueName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Задача" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="IssueKey" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Задача" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Cost" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:unicode="false" sap:label="Затраты" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Filter" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Фильтр" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="IssueID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Задача" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProjectID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Проект" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <NavigationProperty Name="Worklogs" Relationship="ZJIRA_SRV.IssueToWorklog" FromRole="FromRole_IssueToWorklog" ToRole="ToRole_IssueToWorklog"/>
+    <NavigationProperty Name="Participaters" Relationship="ZJIRA_SRV.IssueToParticipater" FromRole="FromRole_IssueToParticipater" ToRole="ToRole_IssueToParticipater"/>
+    <NavigationProperty Name="IssueComments" Relationship="ZJIRA_SRV.IssueToIssueComment" FromRole="FromRole_IssueToIssueComment" ToRole="ToRole_IssueToIssueComment"/>
+   </EntityType>
+   <EntityType Name="Worklog" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="Filter"/>
+     <PropertyRef Name="ProjectID"/>
+     <PropertyRef Name="WorklogID"/>
+     <PropertyRef Name="IssueID"/>
+    </Key>
+    <Property Name="Comment" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Комментарий" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="TimeSpendText" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Время" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="HoursSpend" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Часы" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="WorklogStarted" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:filter-restriction="interval" sap:unicode="false" sap:label="Создано" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="AuthorName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Автор" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="AuthorID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Автор" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="Filter" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Фильтр" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProjectID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Проект" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="WorklogID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Трудозатраты" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="IssueID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Задача" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="Participater" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="RoleID"/>
+     <PropertyRef Name="ParticipaterID"/>
+     <PropertyRef Name="Filter"/>
+     <PropertyRef Name="IssueID"/>
+     <PropertyRef Name="ProjectID"/>
+    </Key>
+    <Property Name="PlanHours" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="План. часы" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="HoursSpend" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Факт. часы" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="RoleDescr" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Роль" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="RoleID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Роль" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ParticipaterName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Участник" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ParticipaterID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Участник" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Filter" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Фильтр" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="IssueID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Задача" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProjectID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Проект" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="Worker" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="WorkerID"/>
+    </Key>
+    <Property Name="PositionDescr" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Должность" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="PositionID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Должность" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="WorkerName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Сотрудник" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="WorkerID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Сотрудник" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="TeamSH" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="TeamID"/>
+    </Key>
+    <Property Name="TeamName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Филиал" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="TeamID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Филиал" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="IssueComment" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="CommentID"/>
+     <PropertyRef Name="Filter"/>
+     <PropertyRef Name="ProjectID"/>
+     <PropertyRef Name="IssueID"/>
+    </Key>
+    <Property Name="Comment" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Комментарий" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="CommentID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Комментарий" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Filter" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Фильтр" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProjectID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Проект" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="IssueID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Задача" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="ProjectSH" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="ProjectID"/>
+    </Key>
+    <Property Name="ProjectDescr" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Проект" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProjectKey" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Проект" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProjectID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Проект" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="ProjectCatSH" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="CatID"/>
+    </Key>
+    <Property Name="CatDescr" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Категория" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="CatID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Категория" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="ProjectTypeSH" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="TypeID"/>
+    </Key>
+    <Property Name="TypeDescr" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Тип" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="TypeID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Тип" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="IssuePrioritySH" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="PriorityID"/>
+    </Key>
+    <Property Name="PriorityDescr" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Приоритет" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="PriorityID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Приоритет" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="IssueStatusSH" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="StatusID"/>
+    </Key>
+    <Property Name="StatusDescr" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Статус" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="StatusID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Статус" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="IssueStatusCatSH" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="StatusCatID"/>
+    </Key>
+    <Property Name="StatusCatDescr" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Категория статуса" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="StatusCatID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Категория статуса" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="IssueStageSH" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="StageID"/>
+    </Key>
+    <Property Name="StageDescr" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Этап" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="StageID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Этап" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="IssueSubStageSH" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="SubStageID"/>
+    </Key>
+    <Property Name="SubStageDescr" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Подэтап" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="SubStageID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Подэтап" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="ProjectStageSH" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="StageID"/>
+    </Key>
+    <Property Name="StageDescr" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Этап проекта" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="StageID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Этап проекта" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="IssueTypeSH" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="TypeID"/>
+    </Key>
+    <Property Name="TypeDescr" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Тип задачи" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="TypeID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Тип задачи" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="WorkerSH" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="WorkerID"/>
+    </Key>
+    <Property Name="Teams" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Филиалы" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Position" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Должность" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="WorkerName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Сотрудник" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="WorkerID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="PositionSH" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="PositionID"/>
+    </Key>
+    <Property Name="PositionDescr" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Должность" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="PositionID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Должность" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="ProjectWorker" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="WorkerID"/>
+     <PropertyRef Name="Filter"/>
+     <PropertyRef Name="ProjectID"/>
+    </Key>
+    <Property Name="Cost" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:unicode="false" sap:label="Затраты" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="WorkRatio" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:unicode="false" sap:label="Факт/План(%)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="EstHours" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Плановое время(ч)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="SpendHours" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Списанное время(ч)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="TeamName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Филиал" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="TeamID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Филиал" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="PositionName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Должность" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="PositionID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Должность" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="WorkerName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Сотрудник" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="WorkerID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Сотрудник" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="Filter" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Фильтр" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProjectID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Проект" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="PaymentSetting" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="DateTo"/>
+     <PropertyRef Name="DateFrom"/>
+     <PropertyRef Name="PositionID"/>
+     <PropertyRef Name="TeamID"/>
+    </Key>
+    <Property Name="CoefWeek" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Выплата за час" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="PositionName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Должность" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="DateTo" Type="Edm.DateTime" Nullable="false" Precision="0" sap:display-format="Date" sap:filter-restriction="interval" sap:unicode="false" sap:label="По" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="DateFrom" Type="Edm.DateTime" Nullable="false" Precision="0" sap:display-format="Date" sap:filter-restriction="interval" sap:unicode="false" sap:label="С" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="PositionID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Должность" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="TeamName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Филиал" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="TeamID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Филиал" sap:updatable="false" sap:sortable="false"/>
+   </EntityType>
+   <EntityType Name="File" m:HasStream="true" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="FileName"/>
+    </Key>
+    <Property Name="FileName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Имя файла" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="MimeType" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Тип файла" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="SourceID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Источник данных" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Value" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="Содержимое файла" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="ProjectStageProfit" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="TechFilter"/>
+     <PropertyRef Name="RequestNo"/>
+     <PropertyRef Name="ProjectStageID"/>
+     <PropertyRef Name="Filter"/>
+     <PropertyRef Name="ProjectID"/>
+    </Key>
+    <Property Name="TechFilter" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Тех. фильтр" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="Hours" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:unicode="false" sap:label="Списанные часы" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Tax" Type="Edm.Double" Nullable="false" sap:unicode="false" sap:label="Налог" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProficC" Type="Edm.Double" Nullable="false" sap:unicode="false" sap:label="Чистая прибыль" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProfitB" Type="Edm.Double" Nullable="false" sap:unicode="false" sap:label="Разница - налог" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProfitA" Type="Edm.Double" Nullable="false" sap:unicode="false" sap:label="Доход - расход" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Profitability" Type="Edm.Double" Nullable="false" sap:unicode="false" sap:label="Рентабельность(%)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Cost" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:unicode="false" sap:label="Расход" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Profit" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:unicode="false" sap:label="Доход" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProjectStageDescr" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Этап проекта" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="RequestNo" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Номер заявки" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="ProjectStageID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Этап проекта" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="Filter" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Фильтр" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProjectID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Проект" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <NavigationProperty Name="ProfitWorkers" Relationship="ZJIRA_SRV.ProjectStageProfitToProfitWorker" FromRole="FromRole_ProjectStageProfitToProfitWorker" ToRole="ToRole_ProjectStageProfitToProfitWorker"/>
+   </EntityType>
+   <EntityType Name="RequestNoSH" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="RequestNo"/>
+    </Key>
+    <Property Name="RequestNo" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Номер заявки" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="WorkerRegister" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="Filter"/>
+     <PropertyRef Name="Worker"/>
+    </Key>
+    <Property Name="WithError" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Есть ошибки" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="CloseIssueDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:filter-restriction="interval" sap:unicode="false" sap:label="Дата закрытия задач" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="WorklogDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:filter-restriction="interval" sap:unicode="false" sap:label="Дата трудозатрат" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="Bonus" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:unicode="false" sap:label="Премия" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Cost" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:unicode="false" sap:label="Затраты" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="SpendHours" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Списанные время(ч.)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Team" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Филиал" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="PositionName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Должность" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Position" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Должность" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="WorkerName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Сотрудник" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProjectName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Проект" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Project" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Проект" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="Filter" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Фильтр" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="Worker" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Сотрудник" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <NavigationProperty Name="WorkerClosedIssues" Relationship="ZJIRA_SRV.WorkerRegisterToWorkerClosedIssue" FromRole="FromRole_WorkerRegisterToWorkerClosedIssue" ToRole="ToRole_WorkerRegisterToWorkerClosedIssue"/>
+    <NavigationProperty Name="WorkerLogs" Relationship="ZJIRA_SRV.WorkerRegisterToWorkerLog" FromRole="FromRole_WorkerRegisterToWorkerLog" ToRole="ToRole_WorkerRegisterToWorkerLog"/>
+   </EntityType>
+   <EntityType Name="ProjectWeekend" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="Project"/>
+    </Key>
+    <Property Name="WeekendConfDescr" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Выплаты на выходных" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="WeekendConf" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Выплаты на выходных" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProjectName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Проект" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Project" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Проект" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="WorkerCostConf" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="DateTo"/>
+     <PropertyRef Name="DateFrom"/>
+     <PropertyRef Name="Project"/>
+     <PropertyRef Name="Worker"/>
+    </Key>
+    <Property Name="Cost" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:unicode="false" sap:label="Выплата за час" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="PositionName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Должность" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Position" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Должность" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="DateTo" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="Период: По" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="DateFrom" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="Период: С" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProjectName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Проект" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Project" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Проект" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="WorkerName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Сотрудник" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Worker" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Сотрудник" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="WorkerClosedIssue" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="Issue"/>
+     <PropertyRef Name="Filter"/>
+     <PropertyRef Name="Worker"/>
+    </Key>
+    <Property Name="IssueUrl" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Ссылка на задачу" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProjectStageName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Этап проекта" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProjectStage" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Этап проекта" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="RequestNumber" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Номер заявки" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="EstHours" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Плановое время(ч)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="SpendHours" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Списанное время(ч)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProjectName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Проект" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Project" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Проект" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="BonusCalcToolTip" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Расчет премии" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Bonus" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:unicode="false" sap:label="Премия" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Cost" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:unicode="false" sap:label="Затраты" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="DueDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:filter-restriction="interval" sap:unicode="false" sap:label="Срок" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="IssueName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Задача" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Issue" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Задача" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="WorkerName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Сотрудник" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Filter" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Фильтр" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="Worker" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Сотрудник" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+   </EntityType>
+   <EntityType Name="BonusPositionConf" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="DateFrom"/>
+     <PropertyRef Name="DateTo"/>
+     <PropertyRef Name="Position"/>
+    </Key>
+    <Property Name="DateFrom" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="Период: С" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="DateTo" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="Период: По" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="BonusPerDay" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:unicode="false" sap:label="Премия за рабочий день(8ч.)" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="PositionName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Должность" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Position" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Должность" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="BonusProjectConf" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="Project"/>
+    </Key>
+    <Property Name="ProjectBonusName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Расчет премии" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProjectBonus" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Расчет премии" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProjectName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Проект" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Project" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Проект" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="WeekendConfSH" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="WeekendConf"/>
+    </Key>
+    <Property Name="WeekendConfDescr" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Выплаты на выходных" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="WeekendConf" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Выплаты на выходных" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="ProjectBonusSH" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="ProjectBonus"/>
+    </Key>
+    <Property Name="ProjectBonusName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Расчет премии" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProjectBonus" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Расчет премии" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="DownloadExcel" m:HasStream="true" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="EntitySet"/>
+     <PropertyRef Name="Filter"/>
+     <PropertyRef Name="Keys"/>
+    </Key>
+    <Property Name="EntitySet" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Entity" sap:sortable="false"/>
+    <Property Name="Filter" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Filter" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Keys" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Keys" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="MimeType" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Тип файла" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Value" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="Содержимое файла" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="FileType" Type="Edm.String" Nullable="false" sap:unicode="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="FileName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Имя файла" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="WorkerLog" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="Description"/>
+     <PropertyRef Name="HierarchyNode"/>
+     <PropertyRef Name="Error"/>
+     <PropertyRef Name="Date"/>
+     <PropertyRef Name="Filter"/>
+     <PropertyRef Name="Worker"/>
+    </Key>
+    <Property Name="Description" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Лог" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="HierarchyNode" Type="Edm.String" Nullable="false" sap:hierarchy-node-for="HierarchyNode" sap:unicode="false" sap:label="Группа" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Level" Type="Edm.Int32" Nullable="false" sap:hierarchy-level-for="HierarchyNode" sap:unicode="false" sap:label="tech field for tree" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ParentNode" Type="Edm.String" Nullable="false" sap:hierarchy-parent-node-for="HierarchyNode" sap:unicode="false" sap:label="tech field for tree" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="DrillDownState" Type="Edm.String" Nullable="false" sap:hierarchy-drill-state-for="HierarchyNode" sap:unicode="false" sap:label="tech field for tree" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Magnitude" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="tech field for tree" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="SpendHours" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Списанное время(ч)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="IssueLink" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Ссылка" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="IssueName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Задача" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Issue" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Задача" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ValueState" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="IsWeekend" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Выходной" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Error" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Ошибка" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="DateTo" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="Дата" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Date" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="Дата" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Filter" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Фильтр" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="Worker" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Сотрудник" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+   </EntityType>
+   <EntityType Name="WorkerInfo" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="Worker"/>
+    </Key>
+    <Property Name="Worker" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Сотрудник" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="WorkerName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Сотрудник" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Mentor" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Руководитель" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="MentorName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Руководитель" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Boss" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Босс" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Position" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Должность" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="PositionName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Должность" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Image" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="Фото" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Location" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Местоположение" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <NavigationProperty Name="WorkerPositionHistory" Relationship="ZJIRA_SRV.WorkerInfoToWorkerPositionHistory" FromRole="FromRole_WorkerInfoToWorkerPositionHistory" ToRole="ToRole_WorkerInfoToWorkerPositionHistory"/>
+    <NavigationProperty Name="WorkerOpenIssue" Relationship="ZJIRA_SRV.WorkerInfoToWorkerOpenIssue" FromRole="FromRole_WorkerInfoToWorkerOpenIssue" ToRole="ToRole_WorkerInfoToWorkerOpenIssue"/>
+   </EntityType>
+   <EntityType Name="WorkerPositionHistory" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="Worker"/>
+     <PropertyRef Name="Position"/>
+    </Key>
+    <Property Name="Worker" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Сотрудник" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Position" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Должность" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="PositionName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Должность" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="CurrentPosition" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Текущая должность" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="PositionFrom" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="Дата вступления в должность" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="PositionTo" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="Дата конца должности" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="WorkerOpenIssue" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="Worker"/>
+     <PropertyRef Name="Issue"/>
+    </Key>
+    <Property Name="Worker" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Сотрудник" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Issue" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Задача" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="IssueKey" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Задача" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="IssueName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Задача" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="IssueDescr" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Описание" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="SpendHours" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Списанное время(ч)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Stage" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Этап" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="StageName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Этап" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="SubStage" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Подэтап" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="SubStageName" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Подэтап" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Priority" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Приоритет" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="PriorityName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Приоритет" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Project" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Проект" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProjectName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Проект" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Status" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Статус" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="StatusName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Статус" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="PlanHours" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Плановое время(ч)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="WorkRatio" Type="Edm.Double" Nullable="false" sap:unicode="false" sap:label="Затраченное / Плановое время(%)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="IssueLink" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Ссылка" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProjectStage" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Этап проекта" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ProjectStageName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Этап проекта" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="RequestNo" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Номер заявки" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Cost" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:unicode="false" sap:label="Затраты" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="DueDate" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="План.дата завершения" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Type" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Тип" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="TypeName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Тип" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="AsCollobarator" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Коллаборатор" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="PaymentSheetPDF" m:HasStream="true" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="Conf"/>
+     <PropertyRef Name="Filter"/>
+     <PropertyRef Name="Worker"/>
+    </Key>
+    <Property Name="Conf" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="Filter" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="MimeType" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Тип файла" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Value" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="Содержимое файла" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="FileType" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="FileName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Имя файла" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Worker" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Worker" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+   </EntityType>
+   <EntityType Name="CheboksSalary" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="DateTo"/>
+     <PropertyRef Name="DateFrom"/>
+     <PropertyRef Name="Position"/>
+    </Key>
+    <Property Name="SalaryBonusWithPercent" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:unicode="false" sap:label="Премия в день" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="SalaryBonusPercent" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:unicode="false" sap:label="Премиальный процент оклада" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Salary" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:unicode="false" sap:label="Оклад" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="DateTo" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="Период: По" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="DateFrom" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="Период: С" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="PositionName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Должность" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Position" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Должность" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="WorkerKPI" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="DateTo"/>
+     <PropertyRef Name="DateFrom"/>
+     <PropertyRef Name="Worker"/>
+    </Key>
+    <Property Name="KPI" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:unicode="false" sap:label="KPI(%)" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="DateTo" Type="Edm.DateTime" Nullable="false" Precision="0" sap:display-format="Date" sap:filter-restriction="interval" sap:unicode="false" sap:label="Период: По" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="DateFrom" Type="Edm.DateTime" Nullable="false" Precision="0" sap:display-format="Date" sap:filter-restriction="interval" sap:unicode="false" sap:label="Период: С" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="PositionName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Должность" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Position" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Должность" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="Team" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Филиал" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="WorkerName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Сотрудник" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Worker" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Сотрудник" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+   </EntityType>
+   <EntityType Name="FixedAward" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="DateFrom"/>
+     <PropertyRef Name="Worker"/>
+     <PropertyRef Name="DateTo"/>
+    </Key>
+    <Property Name="DateFrom" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="С" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Worker" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Сотрудник ID" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="WorkerName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Сотрудник" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Sum" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:unicode="false" sap:label="Сумма" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="DateTo" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="По" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="ProfitWorker" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="TechFilter"/>
+     <PropertyRef Name="RequestNo"/>
+     <PropertyRef Name="ProjectStageID"/>
+     <PropertyRef Name="Filter"/>
+     <PropertyRef Name="ProjectID"/>
+     <PropertyRef Name="Worker"/>
+    </Key>
+    <Property Name="TechFilter" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Тех. фильтр" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="RequestNo" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Номер заявки" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="ProjectStageID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Этап проекта" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="Filter" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Фильтр" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="ProjectID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Проект" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+    <Property Name="Worker" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Сотрудник" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="WorkerName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Сотрудник" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="ClosedIssuesNum" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Число закрытых задач" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="SpendHours" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:unicode="false" sap:label="Списаннное время (ч.)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Bonus" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:unicode="false" sap:label="Бонус" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="HoursPercent" Type="Edm.Decimal" Nullable="false" Precision="7" Scale="2" sap:unicode="false" sap:label="Процент часов от общего времени" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <EntityType Name="WorkerGrades" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="Worker"/>
+    </Key>
+    <Property Name="Worker" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Сотрудник" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Position" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Должность ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="WorkerName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Сотрудник" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="PositionName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Должность" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="MinMonths" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Минимум месяцев" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="MaxMonths" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Максимум месяцев" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="IsRed" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Is red" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="IsYellow" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Is yellow" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <NavigationProperty Name="ToGradeDatesSet" Relationship="ZJIRA_SRV.WorkerGradesToGradeDates" FromRole="FromRole_WorkerGradesToGradeDates" ToRole="ToRole_WorkerGradesToGradeDates"/>
+   </EntityType>
+   <EntityType Name="GradeDates" sap:content-version="1">
+    <Key>
+     <PropertyRef Name="Worker"/>
+    </Key>
+    <Property Name="Worker" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Сотрудник" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Intern" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="Стажер" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="K0" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="K0" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="K10" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="K10" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="K11" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="K11" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="K12" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="K12" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="K13" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="K13" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="K21" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="K21" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="K22" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="K22" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="K23" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="K23" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="K31" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="K31" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="K32" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="K32" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="K33" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="K33" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </EntityType>
+   <ComplexType Name="FunctionResult">
+    <Property Name="Ok" Type="Edm.Boolean" Nullable="false" sap:label="Ok" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </ComplexType>
+   <ComplexType Name="CurrentQuarter">
+    <Property Name="High" Type="Edm.DateTime" Precision="0" sap:label="Метка времени" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+    <Property Name="Low" Type="Edm.DateTime" Precision="0" sap:label="Метка времени" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+   </ComplexType>
+   <Association Name="ProjectStageProfitToProfitWorker" sap:content-version="1">
+    <End Type="ZJIRA_SRV.ProjectStageProfit" Multiplicity="1" Role="FromRole_ProjectStageProfitToProfitWorker"/>
+    <End Type="ZJIRA_SRV.ProfitWorker" Multiplicity="*" Role="ToRole_ProjectStageProfitToProfitWorker"/>
+    <ReferentialConstraint>
+     <Principal Role="FromRole_ProjectStageProfitToProfitWorker">
+      <PropertyRef Name="TechFilter"/>
+      <PropertyRef Name="RequestNo"/>
+      <PropertyRef Name="ProjectStageID"/>
+      <PropertyRef Name="ProjectID"/>
+      <PropertyRef Name="Filter"/>
+     </Principal>
+     <Dependent Role="ToRole_ProjectStageProfitToProfitWorker">
+      <PropertyRef Name="TechFilter"/>
+      <PropertyRef Name="RequestNo"/>
+      <PropertyRef Name="ProjectStageID"/>
+      <PropertyRef Name="ProjectID"/>
+      <PropertyRef Name="Filter"/>
+     </Dependent>
+    </ReferentialConstraint>
+   </Association>
+   <Association Name="IssueToWorklog" sap:content-version="1">
+    <End Type="ZJIRA_SRV.Issue" Multiplicity="1" Role="FromRole_IssueToWorklog"/>
+    <End Type="ZJIRA_SRV.Worklog" Multiplicity="*" Role="ToRole_IssueToWorklog"/>
+    <ReferentialConstraint>
+     <Principal Role="FromRole_IssueToWorklog">
+      <PropertyRef Name="ProjectID"/>
+      <PropertyRef Name="IssueID"/>
+      <PropertyRef Name="Filter"/>
+     </Principal>
+     <Dependent Role="ToRole_IssueToWorklog">
+      <PropertyRef Name="ProjectID"/>
+      <PropertyRef Name="IssueID"/>
+      <PropertyRef Name="Filter"/>
+     </Dependent>
+    </ReferentialConstraint>
+   </Association>
+   <Association Name="IssueToParticipater" sap:content-version="1">
+    <End Type="ZJIRA_SRV.Issue" Multiplicity="1" Role="FromRole_IssueToParticipater"/>
+    <End Type="ZJIRA_SRV.Participater" Multiplicity="*" Role="ToRole_IssueToParticipater"/>
+    <ReferentialConstraint>
+     <Principal Role="FromRole_IssueToParticipater">
+      <PropertyRef Name="Filter"/>
+      <PropertyRef Name="ProjectID"/>
+      <PropertyRef Name="IssueID"/>
+     </Principal>
+     <Dependent Role="ToRole_IssueToParticipater">
+      <PropertyRef Name="Filter"/>
+      <PropertyRef Name="ProjectID"/>
+      <PropertyRef Name="IssueID"/>
+     </Dependent>
+    </ReferentialConstraint>
+   </Association>
+   <Association Name="IssueToIssueComment" sap:content-version="1">
+    <End Type="ZJIRA_SRV.Issue" Multiplicity="1" Role="FromRole_IssueToIssueComment"/>
+    <End Type="ZJIRA_SRV.IssueComment" Multiplicity="*" Role="ToRole_IssueToIssueComment"/>
+    <ReferentialConstraint>
+     <Principal Role="FromRole_IssueToIssueComment">
+      <PropertyRef Name="IssueID"/>
+      <PropertyRef Name="ProjectID"/>
+      <PropertyRef Name="Filter"/>
+     </Principal>
+     <Dependent Role="ToRole_IssueToIssueComment">
+      <PropertyRef Name="IssueID"/>
+      <PropertyRef Name="ProjectID"/>
+      <PropertyRef Name="Filter"/>
+     </Dependent>
+    </ReferentialConstraint>
+   </Association>
+   <Association Name="WorkerRegisterToWorkerClosedIssue" sap:content-version="1">
+    <End Type="ZJIRA_SRV.WorkerRegister" Multiplicity="1" Role="FromRole_WorkerRegisterToWorkerClosedIssue"/>
+    <End Type="ZJIRA_SRV.WorkerClosedIssue" Multiplicity="*" Role="ToRole_WorkerRegisterToWorkerClosedIssue"/>
+    <ReferentialConstraint>
+     <Principal Role="FromRole_WorkerRegisterToWorkerClosedIssue">
+      <PropertyRef Name="Filter"/>
+      <PropertyRef Name="Worker"/>
+     </Principal>
+     <Dependent Role="ToRole_WorkerRegisterToWorkerClosedIssue">
+      <PropertyRef Name="Filter"/>
+      <PropertyRef Name="Worker"/>
+     </Dependent>
+    </ReferentialConstraint>
+   </Association>
+   <Association Name="WorkerRegisterToWorkerLog" sap:content-version="1">
+    <End Type="ZJIRA_SRV.WorkerRegister" Multiplicity="1" Role="FromRole_WorkerRegisterToWorkerLog"/>
+    <End Type="ZJIRA_SRV.WorkerLog" Multiplicity="*" Role="ToRole_WorkerRegisterToWorkerLog"/>
+    <ReferentialConstraint>
+     <Principal Role="FromRole_WorkerRegisterToWorkerLog">
+      <PropertyRef Name="Worker"/>
+      <PropertyRef Name="Filter"/>
+     </Principal>
+     <Dependent Role="ToRole_WorkerRegisterToWorkerLog">
+      <PropertyRef Name="Worker"/>
+      <PropertyRef Name="Filter"/>
+     </Dependent>
+    </ReferentialConstraint>
+   </Association>
+   <Association Name="ProjectToProjectWorker" sap:content-version="1">
+    <End Type="ZJIRA_SRV.Project" Multiplicity="1" Role="FromRole_ProjectToProjectWorker"/>
+    <End Type="ZJIRA_SRV.ProjectWorker" Multiplicity="*" Role="ToRole_ProjectToProjectWorker"/>
+    <ReferentialConstraint>
+     <Principal Role="FromRole_ProjectToProjectWorker">
+      <PropertyRef Name="Filter"/>
+      <PropertyRef Name="ProjectID"/>
+     </Principal>
+     <Dependent Role="ToRole_ProjectToProjectWorker">
+      <PropertyRef Name="Filter"/>
+      <PropertyRef Name="ProjectID"/>
+     </Dependent>
+    </ReferentialConstraint>
+   </Association>
+   <Association Name="ProjectToProjectStageProfit" sap:content-version="1">
+    <End Type="ZJIRA_SRV.Project" Multiplicity="1" Role="FromRole_ProjectToProjectStageProfit"/>
+    <End Type="ZJIRA_SRV.ProjectStageProfit" Multiplicity="*" Role="ToRole_ProjectToProjectStageProfit"/>
+    <ReferentialConstraint>
+     <Principal Role="FromRole_ProjectToProjectStageProfit">
+      <PropertyRef Name="ProjectID"/>
+      <PropertyRef Name="Filter"/>
+     </Principal>
+     <Dependent Role="ToRole_ProjectToProjectStageProfit">
+      <PropertyRef Name="ProjectID"/>
+      <PropertyRef Name="Filter"/>
+     </Dependent>
+    </ReferentialConstraint>
+   </Association>
+   <Association Name="ProjectToIssue" sap:content-version="1">
+    <End Type="ZJIRA_SRV.Project" Multiplicity="1" Role="FromRole_ProjectToIssue"/>
+    <End Type="ZJIRA_SRV.Issue" Multiplicity="*" Role="ToRole_ProjectToIssue"/>
+    <ReferentialConstraint>
+     <Principal Role="FromRole_ProjectToIssue">
+      <PropertyRef Name="ProjectID"/>
+      <PropertyRef Name="Filter"/>
+     </Principal>
+     <Dependent Role="ToRole_ProjectToIssue">
+      <PropertyRef Name="ProjectID"/>
+      <PropertyRef Name="Filter"/>
+     </Dependent>
+    </ReferentialConstraint>
+   </Association>
+   <Association Name="WorkerInfoToWorkerPositionHistory" sap:content-version="1">
+    <End Type="ZJIRA_SRV.WorkerInfo" Multiplicity="1" Role="FromRole_WorkerInfoToWorkerPositionHistory"/>
+    <End Type="ZJIRA_SRV.WorkerPositionHistory" Multiplicity="*" Role="ToRole_WorkerInfoToWorkerPositionHistory"/>
+    <ReferentialConstraint>
+     <Principal Role="FromRole_WorkerInfoToWorkerPositionHistory">
+      <PropertyRef Name="Worker"/>
+     </Principal>
+     <Dependent Role="ToRole_WorkerInfoToWorkerPositionHistory">
+      <PropertyRef Name="Worker"/>
+     </Dependent>
+    </ReferentialConstraint>
+   </Association>
+   <Association Name="WorkerInfoToWorkerOpenIssue" sap:content-version="1">
+    <End Type="ZJIRA_SRV.WorkerInfo" Multiplicity="1" Role="FromRole_WorkerInfoToWorkerOpenIssue"/>
+    <End Type="ZJIRA_SRV.WorkerOpenIssue" Multiplicity="*" Role="ToRole_WorkerInfoToWorkerOpenIssue"/>
+    <ReferentialConstraint>
+     <Principal Role="FromRole_WorkerInfoToWorkerOpenIssue">
+      <PropertyRef Name="Worker"/>
+     </Principal>
+     <Dependent Role="ToRole_WorkerInfoToWorkerOpenIssue">
+      <PropertyRef Name="Worker"/>
+     </Dependent>
+    </ReferentialConstraint>
+   </Association>
+   <Association Name="WorkerGradesToGradeDates" sap:content-version="1">
+    <End Type="ZJIRA_SRV.WorkerGrades" Multiplicity="1" Role="FromRole_WorkerGradesToGradeDates"/>
+    <End Type="ZJIRA_SRV.GradeDates" Multiplicity="1" Role="ToRole_WorkerGradesToGradeDates"/>
+    <ReferentialConstraint>
+     <Principal Role="FromRole_WorkerGradesToGradeDates">
+      <PropertyRef Name="Worker"/>
+     </Principal>
+     <Dependent Role="ToRole_WorkerGradesToGradeDates">
+      <PropertyRef Name="Worker"/>
+     </Dependent>
+    </ReferentialConstraint>
+   </Association>
+   <EntityContainer Name="ZJIRA_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+    <EntitySet Name="ProjectSet" EntityType="ZJIRA_SRV.Project" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="IssueSet" EntityType="ZJIRA_SRV.Issue" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="WorklogSet" EntityType="ZJIRA_SRV.Worklog" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="ParticipaterSet" EntityType="ZJIRA_SRV.Participater" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="WorkerSet" EntityType="ZJIRA_SRV.Worker" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="TeamSHSet" EntityType="ZJIRA_SRV.TeamSH" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="IssueCommentSet" EntityType="ZJIRA_SRV.IssueComment" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="ProjectSHSet" EntityType="ZJIRA_SRV.ProjectSH" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="ProjectCatSHSet" EntityType="ZJIRA_SRV.ProjectCatSH" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="ProjectTypeSHSet" EntityType="ZJIRA_SRV.ProjectTypeSH" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="IssuePrioritySHSet" EntityType="ZJIRA_SRV.IssuePrioritySH" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="IssueStatusSHSet" EntityType="ZJIRA_SRV.IssueStatusSH" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="IssueStatusCatSHSet" EntityType="ZJIRA_SRV.IssueStatusCatSH" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="IssueStageSHSet" EntityType="ZJIRA_SRV.IssueStageSH" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="IssueSubStageSHSet" EntityType="ZJIRA_SRV.IssueSubStageSH" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="ProjectStageSHSet" EntityType="ZJIRA_SRV.ProjectStageSH" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="IssueTypeSHSet" EntityType="ZJIRA_SRV.IssueTypeSH" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="WorkerSHSet" EntityType="ZJIRA_SRV.WorkerSH" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="PositionSHSet" EntityType="ZJIRA_SRV.PositionSH" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="ProjectWorkerSet" EntityType="ZJIRA_SRV.ProjectWorker" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="PaymentSettingSet" EntityType="ZJIRA_SRV.PaymentSetting" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="FileSet" EntityType="ZJIRA_SRV.File" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="ProjectStageProfitSet" EntityType="ZJIRA_SRV.ProjectStageProfit" sap:creatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="RequestNoSHSet" EntityType="ZJIRA_SRV.RequestNoSH" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="WorkerRegisterSet" EntityType="ZJIRA_SRV.WorkerRegister" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="ProjectWeekendSet" EntityType="ZJIRA_SRV.ProjectWeekend" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="WorkerCostConfSet" EntityType="ZJIRA_SRV.WorkerCostConf" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="WorkerClosedIssueSet" EntityType="ZJIRA_SRV.WorkerClosedIssue" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="BonusPositionConfSet" EntityType="ZJIRA_SRV.BonusPositionConf" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="BonusProjectConfSet" EntityType="ZJIRA_SRV.BonusProjectConf" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="WeekendConfSHSet" EntityType="ZJIRA_SRV.WeekendConfSH" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="ProjectBonusSHSet" EntityType="ZJIRA_SRV.ProjectBonusSH" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="DownloadExcelSet" EntityType="ZJIRA_SRV.DownloadExcel" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="WorkerLogSet" EntityType="ZJIRA_SRV.WorkerLog" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="WorkerInfoSet" EntityType="ZJIRA_SRV.WorkerInfo" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="WorkerPositionHistorySet" EntityType="ZJIRA_SRV.WorkerPositionHistory" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="WorkerOpenIssueSet" EntityType="ZJIRA_SRV.WorkerOpenIssue" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="PaymentSheetPDFSet" EntityType="ZJIRA_SRV.PaymentSheetPDF" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="CheboksSalarySet" EntityType="ZJIRA_SRV.CheboksSalary" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="WorkerKPISet" EntityType="ZJIRA_SRV.WorkerKPI" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="FixedAwardSet" EntityType="ZJIRA_SRV.FixedAward" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="ProfitWorkerSet" EntityType="ZJIRA_SRV.ProfitWorker" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="WorkerGradesSet" EntityType="ZJIRA_SRV.WorkerGrades" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <EntitySet Name="GradeDatesSet" EntityType="ZJIRA_SRV.GradeDates" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+    <AssociationSet Name="IssueToParticipaterSet" Association="ZJIRA_SRV.IssueToParticipater" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+     <End EntitySet="IssueSet" Role="FromRole_IssueToParticipater"/>
+     <End EntitySet="ParticipaterSet" Role="ToRole_IssueToParticipater"/>
+    </AssociationSet>
+    <AssociationSet Name="IssueToWorklogSet" Association="ZJIRA_SRV.IssueToWorklog" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+     <End EntitySet="IssueSet" Role="FromRole_IssueToWorklog"/>
+     <End EntitySet="WorklogSet" Role="ToRole_IssueToWorklog"/>
+    </AssociationSet>
+    <AssociationSet Name="IssueToIssueCommentSet" Association="ZJIRA_SRV.IssueToIssueComment" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+     <End EntitySet="IssueSet" Role="FromRole_IssueToIssueComment"/>
+     <End EntitySet="IssueCommentSet" Role="ToRole_IssueToIssueComment"/>
+    </AssociationSet>
+    <AssociationSet Name="WorkerRegisterToWorkerClosedIssueSet" Association="ZJIRA_SRV.WorkerRegisterToWorkerClosedIssue" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+     <End EntitySet="WorkerRegisterSet" Role="FromRole_WorkerRegisterToWorkerClosedIssue"/>
+     <End EntitySet="WorkerClosedIssueSet" Role="ToRole_WorkerRegisterToWorkerClosedIssue"/>
+    </AssociationSet>
+    <AssociationSet Name="WorkerGradesToGradeDatesSet" Association="ZJIRA_SRV.WorkerGradesToGradeDates" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+     <End EntitySet="WorkerGradesSet" Role="FromRole_WorkerGradesToGradeDates"/>
+     <End EntitySet="GradeDatesSet" Role="ToRole_WorkerGradesToGradeDates"/>
+    </AssociationSet>
+    <AssociationSet Name="ProjectToIssueSet" Association="ZJIRA_SRV.ProjectToIssue" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+     <End EntitySet="ProjectSet" Role="FromRole_ProjectToIssue"/>
+     <End EntitySet="IssueSet" Role="ToRole_ProjectToIssue"/>
+    </AssociationSet>
+    <AssociationSet Name="WorkerInfoToWorkerPositionHistorySet" Association="ZJIRA_SRV.WorkerInfoToWorkerPositionHistory" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+     <End EntitySet="WorkerInfoSet" Role="FromRole_WorkerInfoToWorkerPositionHistory"/>
+     <End EntitySet="WorkerPositionHistorySet" Role="ToRole_WorkerInfoToWorkerPositionHistory"/>
+    </AssociationSet>
+    <AssociationSet Name="WorkerRegisterToWorkerLogSet" Association="ZJIRA_SRV.WorkerRegisterToWorkerLog" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+     <End EntitySet="WorkerRegisterSet" Role="FromRole_WorkerRegisterToWorkerLog"/>
+     <End EntitySet="WorkerLogSet" Role="ToRole_WorkerRegisterToWorkerLog"/>
+    </AssociationSet>
+    <AssociationSet Name="WorkerInfoToWorkerOpenIssueSet" Association="ZJIRA_SRV.WorkerInfoToWorkerOpenIssue" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+     <End EntitySet="WorkerInfoSet" Role="FromRole_WorkerInfoToWorkerOpenIssue"/>
+     <End EntitySet="WorkerOpenIssueSet" Role="ToRole_WorkerInfoToWorkerOpenIssue"/>
+    </AssociationSet>
+    <AssociationSet Name="ProjectToProjectWorkerSet" Association="ZJIRA_SRV.ProjectToProjectWorker" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+     <End EntitySet="ProjectSet" Role="FromRole_ProjectToProjectWorker"/>
+     <End EntitySet="ProjectWorkerSet" Role="ToRole_ProjectToProjectWorker"/>
+    </AssociationSet>
+    <AssociationSet Name="ProjectStageProfitToProfitWorkerSet" Association="ZJIRA_SRV.ProjectStageProfitToProfitWorker" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+     <End EntitySet="ProjectStageProfitSet" Role="FromRole_ProjectStageProfitToProfitWorker"/>
+     <End EntitySet="ProfitWorkerSet" Role="ToRole_ProjectStageProfitToProfitWorker"/>
+    </AssociationSet>
+    <AssociationSet Name="ProjectToProjectStageProfitSet" Association="ZJIRA_SRV.ProjectToProjectStageProfit" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+     <End EntitySet="ProjectSet" Role="FromRole_ProjectToProjectStageProfit"/>
+     <End EntitySet="ProjectStageProfitSet" Role="ToRole_ProjectToProjectStageProfit"/>
+    </AssociationSet>
+    <FunctionImport Name="DeletePaymentSettings" ReturnType="ZJIRA_SRV.FunctionResult" m:HttpMethod="POST" sap:label="Удалить конфиг.выплат">
+     <Parameter Name="SourceID" Type="Edm.String" Mode="In"/>
+    </FunctionImport>
+    <FunctionImport Name="GetCurrentQuarter" ReturnType="ZJIRA_SRV.CurrentQuarter" m:HttpMethod="POST" sap:label="Получить текущий квартал"/>
+    <FunctionImport Name="SendLogToTelegram" ReturnType="ZJIRA_SRV.FunctionResult" m:HttpMethod="POST" sap:label="Отправить лог в телеграм">
+     <Parameter Name="Filter" Type="Edm.String" Mode="In"/>
+     <Parameter Name="WorkerID" Type="Edm.String" Mode="In"/>
+    </FunctionImport>
+   </EntityContainer>
+   <atom:link rel="self" href="http://sap-tm.inthemelab.com:8000/sap/opu/odata/sap/ZJIRA_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+   <atom:link rel="latest-version" href="http://sap-tm.inthemelab.com:8000/sap/opu/odata/sap/ZJIRA_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+
+
+<!-- <Annotations Target="ZJIRA_SRV.WorkerGrades">
+        <Annotation Term="com.sap.vocabularies.UI.SelectionFields">
+          <Collection>
+            <PropertyPath>Worker</PropertyPath>
+          </Collection>
+        </Annotation>
+      </Annotations> -->
+
+   
+  </Schema>
+
+
+  <edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470968/UI.xml?api=v2">
+    <edmx:Include Alias="UI"
+                  Namespace="com.sap.vocabularies.UI.v1" />
+  </edmx:Reference>
+
+<Schema Namespace="com.sap.vocabularies.UI.v1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <Annotations Target="ZJIRA_SRV.WorkerGrades">
+        <Annotation Term="UI.SelectionFields">
+          <Collection>
+            <PropertyPath>Worker</PropertyPath>
+          </Collection>
+          <!-- <Collection>
+            <PropertyPath>Position</PropertyPath>
+          </Collection> -->
+        </Annotation>
+      </Annotations>
+
+       </Schema>
+
+ </edmx:DataServices>
+</edmx:Edmx>

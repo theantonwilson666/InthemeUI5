@@ -1,0 +1,11 @@
+<mvc:View controllerName="intheme.zjira_workers_grade.controller.WorkerGrades"
+          xmlns:mvc="sap.ui.core.mvc"
+          displayBlock="true"
+          xmlns="sap.m"
+          xmlns:f="sap.f">
+  <App id="app">
+    <f:FlexibleColumnLayout id="layout"
+                            layout="{state&gt;/layout}"
+                            backgroundDesign="Translucent" />
+  </App>
+</mvc:View>

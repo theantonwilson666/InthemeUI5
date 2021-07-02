@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<mvc:View xmlns:core="sap.ui.core"
+          xmlns:mvc="sap.ui.core.mvc"
+          xmlns="sap.m"
+          xmlns:smartForm="sap.ui.comp.smartform"
+          xmlns:smartField="sap.ui.comp.smartfield"
+          xmlns:smartTable="sap.ui.comp.smarttable"
+          controllerName="intheme.zjira_workers_grade.controller.GradeDates"
+          xmlns:f="sap.ui.layout.form"
+          displayBlock="true">
+  <Page id="GradeDates"
+        title="{WorkerName}"
+        enableScrolling="false">
+    <headerContent>
+      <Button icon="sap-icon://nav-back"
+              press="navToWorkerGrades" />
+    </headerContent>
+    <content>
+      <VBox fitContainer="true">
+        <smartTable:SmartTable id="GradeDatesSmartTab"
+                               entitySet="GradeDatesSet"
+                               useExportToExcel="false"
+                               showRowCount="false"
+                               tableType="ResponsiveTable"
+                               useVariantManagement="false"
+                               useTablePersonalisation="false"
+                               showFullScreenButton="false"
+                               enableAutoBinding="true"
+                               editTogglable="false"
+                               editable="true"
+                               demandPopin="true"
+                               requestAtLeastFields="Position,Worker,DateFrom,PositionName"
+                               tableBindingPath="ToGradeDatesSet">
+          <Table sticky="ColumnHeaders"
+                 alternateRowColors="true"
+                 growing="true"
+                 fixedLayout="false"
+                 growingThreshold="300"
+                 growingScrollToLoad="true">
+            <columns>
+              <Column>
+                <customData>
+                  <core:CustomData key="p13nData"
+                                   value="\{
+                                                                    &quot;columnIndex&quot;: &quot;0&quot;,
+                                                                    &quot;columnKey&quot;: &quot;PositionName&quot;,
+                                                                    &quot;leadingProperty&quot;: &quot;PositionName&quot;,
+                                                                    &quot;sortProperty&quot;: &quot;PositionName&quot;,
+                                                                    &quot;filterProperty&quot;: &quot;PositionName&quot;
+                                                                }" />
+                </customData>
+                <header>
+                  <Text text="{/#GradeDates/PositionName/@sap:label}" />
+                </header>
+              </Column>
+              <Column>
+                <customData>
+                  <core:CustomData key="p13nData"
+                                   value="\{
+                                                                    &quot;columnIndex&quot;: &quot;1&quot;,
+                                                                    &quot;columnKey&quot;: &quot;DateFrom&quot;,
+                                                                    &quot;leadingProperty&quot;: &quot;DateFrom&quot;,
+                                                                    &quot;sortProperty&quot;: &quot;DateFrom&quot;,
+                                                                    &quot;filterProperty&quot;: &quot;DateFrom&quot;
+                                                                }" />
+                </customData>
+                <header>
+                  <Text text="{/#GradeDates/DateFrom/@sap:label}" />
+                </header>
+              </Column>
+            </columns>
+            <items>
+              <ColumnListItem id="GradeDatesColumnListItem">
+                <cells>
+                  <smartField:SmartField value="{PositionName}"
+                                         editable="true" />
+                </cells>
+                <cells>
+                  <smartField:SmartField value="{DateFrom}"
+                                         editable="true" />
+                </cells>
+              </ColumnListItem>
+            </items>
+          </Table>
+        </smartTable:SmartTable>
+      </VBox>
+    </content>
+    <footer>
+      <OverflowToolbar>
+        <ToolbarSpacer />
+        <Button icon="sap-icon://accept"
+                press="saveGradeDates" />
+      </OverflowToolbar>
+    </footer>
+  </Page>
+</mvc:View>
