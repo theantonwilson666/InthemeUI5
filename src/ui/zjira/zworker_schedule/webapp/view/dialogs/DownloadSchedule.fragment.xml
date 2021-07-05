@@ -1,0 +1,61 @@
+<core:FragmentDefinition xmlns="sap.m"
+                         xmlns:core="sap.ui.core"
+                         xmlns:smartTable="sap.ui.comp.smarttable"
+                         xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+                         xmlns:sv="sap.ui.comp.smartvariants"
+                         xmlns:f="sap.ui.layout.form"
+                         xmlns:u="sap.ui.unified"
+                         xmlns:smartField="sap.ui.comp.smartfield"
+                         xmlns:l="sap.ui.layout">
+    <Dialog id="downloadScheduleDialog"
+            title="{i18n>downloadExcelSchedule}"
+            class="sapUiSizeCompact"
+            contentHeight="20%"
+            contentWidth="40%">
+        <content>
+            <VBox>
+                <f:Form id="FormChange354"
+                        editable="true">
+                    <f:title>
+                        <core:Title text="{i18n>ScheduleFormTitle}" />
+                    </f:title>
+                    <f:layout>
+                        <f:ResponsiveGridLayout
+                        columnsXL="1"
+                        columnsL="1"
+                        columnsM="1"/>
+                    </f:layout>
+                    <f:formContainers>
+                        <f:FormContainer>
+                            <f:formElements>
+                                <f:FormElement label="{i18n>SchedulePeriod}">
+                                    <f:fields>
+                                        <DateRangeSelection id="SchedulePeriod"/>
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="{i18n>ScheduleType}">
+                                    <f:fields>
+                                        <Input id="scheduleTypeInput" textFormatMode="KeyValue"
+                                                                      showValueHelp="true"
+                                                                      showSuggestion="true"
+                                                                      valueHelpRequest="onValueHelpRequest"
+                                                                      suggestionItems="{/ScheduleTypeSHSet}">
+                                            <suggestionItems>
+                                                <core:ListItem key="{Type}"
+                                                               text="{TypeDescr}"/>
+                                            </suggestionItems>
+                                        </Input>
+                                    </f:fields>
+                                </f:FormElement>
+                            </f:formElements>
+                        </f:FormContainer>
+                    </f:formContainers>
+                </f:Form>
+            </VBox>
+        </content>
+        <buttons>
+            <Button text="{i18n>downloadExcelSchedule}" type="Emphasized" press="onDownloadSchedule"/>
+            <Button text="{i18n>CloseBtn}" type="Transparent" press="onCloseDialog"/>
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

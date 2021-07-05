@@ -28,5 +28,96 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
         oSmartTable.getTable().removeSelections();
       }
     },
+
+    onPressDownloadExcel: function (oEvent) {
+      this.loadDialog
+      .call(this, {
+        sDialogName: "_oDownloadScheduleDialog",
+        sViewName:
+          "intheme.zworker_schedule.view.dialogs.DownloadSchedule",
+      })
+      .then(
+        function (oDialog) {
+          oDialog.open();
+        }.bind(this)
+      );
+    },
+
+    onValueHelpRequest: function(oEvent){
+      delete this._oDirectDialog;
+      debugger;
+
+      var fnHandleConfirm = function (oEvent) {
+        var oSelectedType = oEvent.getParameter('selectedItems')[0].getBindingContext().getObject();
+        this.byId("scheduleTypeInput").setSelectedItem(new sap.ui.core.Item({
+          key: oSelectedType.Type,
+          text: oSelectedType.TypeDescr
+        }));
+      }
+
+      var fnCancelSearch = function () {
+				// this.getView().byId('registryView').setBusy(false);
+			};
+
+			var fnHandleSearch = function (oEvent) {
+				var sQuery = oEvent.getParameter("value");
+				this._oDirectDialog.bindAggregation("items", {
+					path: '/ScheduleTypeSHSet',
+					template: new sap.m.StandardListItem({
+						title: '{TypeDescr}',
+            description: '{Type}',
+						type: "Active"
+					})
+				});
+			};
+
+
+      this._oDirectDialog = new sap.m.SelectDialog({
+				title: '{i18n>ScheduleType}',
+				confirm: fnHandleConfirm.bind(this),
+				search: fnHandleSearch.bind(this),
+				cancel: fnCancelSearch.bind(this),
+			});
+
+			this._oDirectDialog.bindAggregation("items", {
+				path: '/ScheduleTypeSHSet',
+				template: new sap.m.StandardListItem({
+					title: '{TypeDescr}',
+          description: '{Type}',
+					type: "Active"
+				})
+			});
+
+			this.getView().addDependent(this._oDirectDialog);
+			this._oDirectDialog.open();
+    },
+
+    onCloseDialog: function(oEvent){
+      oEvent.getSource().getParent().close();
+    },
+
+    onDownloadSchedule: function(oEvent){
+
+      var oModel = this.getModel();
+      var sServiceUrl = oModel.sServiceUrl;
+
+      var oFilter = {
+        type : this.byId("scheduleTypeInput").getSelectedKey(),
+        date : {
+          from : this.byId("SchedulePeriod").getFrom(),
+          to : this.byId("SchedulePeriod").getTo()
+        }
+      };
+
+      var sPath = oModel.createKey("/DownloadExcelSet", {
+        EntitySet: "WorkerRegisterSet",
+        Filter: JSON.stringify(oFilter)
+      });
+      var sUrl = sServiceUrl + sPath + "/$value";
+      sap.m.URLHelper.redirect(sUrl, true);
+      
+      oEvent.getSource().getParent().close();
+      
+    }
   });
 });
