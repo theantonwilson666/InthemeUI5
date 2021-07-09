@@ -22,12 +22,16 @@
                 <smartField:SmartField id='ProfitA' value="{path : 'ProfitA', formatter: '.commonFormatter.formatFloat'}"/>
                 <smartField:SmartLabel labelFor="ProfitB"/>
                 <smartField:SmartField id='ProfitB' value="{path : 'ProfitB', formatter: '.commonFormatter.formatFloat'}"/>
-
-                <smartField:SmartLabel labelFor="Tax"/>
-                <smartField:SmartField id='Tax' value="{path : 'Tax', formatter: '.commonFormatter.formatFloat'}"/>
-
+                
                 <smartField:SmartLabel labelFor="ProfitC"/>
                 <smartField:SmartField id='ProfitC' value="{path : 'ProficC', formatter: '.commonFormatter.formatFloat'}"/>
+                
+                <smartField:SmartLabel labelFor="ProfitD"/>
+                <smartField:SmartField id='ProfitD' value="{path : 'ProfitD', formatter: '.commonFormatter.formatFloat'}"/>
+
+                <smartField:SmartLabel labelFor="ProfitE"/>
+                <smartField:SmartField id='ProfitE' value="{path : 'ProfitE', formatter: '.commonFormatter.formatFloat'}"/>
+                
                 <smartField:SmartLabel labelFor="Profitability"/>
                 <smartField:SmartField id='Profitability' value="{path : 'Profitability', formatter: '.commonFormatter.formatFloat'}"/>
             </VBox>
