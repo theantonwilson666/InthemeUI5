@@ -11,9 +11,9 @@
                 </f:expandedContent>
                 <f:actions>
 
-                    <Button icon="sap-icon://wrench" text="{i18n>ScheduleConf}" press="onPressConfig" />
+                    <Button id = "WrenchButton" icon="sap-icon://wrench" text="{i18n>ScheduleConf}" press="onPressConfig" />
 
-                    <Button icon="sap-icon://excel-attachment" type="Emphasized" text="{i18n>downloadExcelSchedule}" press="onPressDownloadExcel" />
+                    <Button id = "excel-attachmentButton" icon="sap-icon://excel-attachment" type="Emphasized" text="{i18n>downloadExcelSchedule}" press="onPressDownloadExcel" />
 
                     <u:FileUploader id="uploadExcelSchedule" icon="sap-icon://excel-attachment" iconOnly="false" buttonOnly="true" buttonText="{i18n>uploadExcelSchedule}" fileType="xlsx,xlsm,xls" typeMissmatch="handleTypeMissmatch" change="handleFileSelected($event, '/FileSet', {SourceId: 'ScheduleUpload'})" style="Emphasized" />
                 </f:actions>
