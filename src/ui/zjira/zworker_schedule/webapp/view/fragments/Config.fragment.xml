@@ -1,0 +1,36 @@
+<core:FragmentDefinition
+        xmlns="sap.m"
+        xmlns:u="sap.ui.unified"
+        xmlns:core="sap.ui.core">
+    <Dialog id="scheduleConfigDialog"
+            title="{i18n>ConfigSchedule}"
+            class="sapUiSizeCompact"
+            contentHeight="80%"
+            contentWidth="80%">
+        <content>
+            <IconTabBar id="iconTabConfBar"
+                        selectedKey="posSchedule"
+                        applyContentPadding="false"
+                        expanded="true"
+                        expandable="false"
+                        stretchContentHeight="true"
+                        tabDensityMode="Compact"
+                        select="onIconTabConfBarSelected">
+                <items>
+                    <IconTabFilter id="PositionTab" text="{i18n>PositionSchedule}" key="posSchedule">
+                        <core:Fragment fragmentName="intheme.zworker_schedule.view.fragments.PositionSchedule" type="XML"/>
+                    </IconTabFilter>
+
+                    <IconTabFilter id="WorkerTab" text="{i18n>WorkerSchedule}" key="workerSchedule">
+                        <core:Fragment fragmentName="intheme.zworker_schedule.view.fragments.WorkerSchedule" type="XML"/>
+                    </IconTabFilter>
+
+                </items>
+            </IconTabBar>
+        </content>
+        <buttons>
+            <Button text="{i18n>SaveBtn}" type="Emphasized" press="onSaveConfigDialog"/>
+            <Button text="{i18n>CloseBtn}" type="Transparent" press="onCancelConfigDialog"/>
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

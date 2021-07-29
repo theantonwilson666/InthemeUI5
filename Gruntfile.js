@@ -11,7 +11,7 @@ module.exports = function (grunt) {
   var sApp = grunt.option("app");
   var sLevel = grunt.option("level");
   var sLib = grunt.option("lib");
-  // var sPlugin = grunt.option("plugin");
+  var sPlugin = grunt.option("plugin");
 
   if (sApp === undefined) {
     sApp = "zjira_project_register";
@@ -24,6 +24,12 @@ module.exports = function (grunt) {
   if (sLib === undefined) {
     sLib = "zjiralib";
   }
+
+  
+  if (sPlugin === undefined) {
+    sPlugin = "zjiraplugin";
+  }
+
 
   // Structure of MOL
   var oAuth = {
@@ -96,6 +102,16 @@ module.exports = function (grunt) {
         bspDescription: "JIRA LIB FOR UI5 APPLICATION",
       },
     },
+
+    plugins: {
+      zjiraplugin: {
+        package: "ZJIRA",
+        bspContainer: "ZJIRAPLUGIN",
+        transportno: "TMDK910450",
+        bspDescription: "Fiori Plugin",
+      },
+    },
+
   };
 
   grunt.initConfig({
@@ -171,6 +187,17 @@ module.exports = function (grunt) {
         components: true,
         libraries: true,
       },
+
+      zjiraplugin: {
+        options: {
+          resources: {
+            cwd: "src/ui/zjira/zjiraplugin",
+            prefix: "zJiraPlugin",
+          },
+          dest: "src/dist/ui/zjiraplugin",
+        },
+        components: true,
+      },
     },
 
     nwabap_ui5uploader: {
@@ -217,6 +244,22 @@ module.exports = function (grunt) {
           },
         },
       },
+
+      upload_plugin: {
+        options: {
+          ui5: {
+            package: oAuth.plugins[sPlugin].package,
+            transportno: oAuth.plugins[sPlugin].transportno,
+            bspcontainer: oAuth.plugins[sPlugin].bspContainer,
+            bspcontainer_text: oAuth.plugins[sPlugin].bspDescription,
+          },
+          resources: {
+            cwd: "src/dist/ui/" + sPlugin,
+            src: "**/*.*",
+          },
+        },
+      }
+
     },
   });
 
@@ -258,6 +301,11 @@ module.exports = function (grunt) {
       grunt.file.copy("src/ui/zjira/" + lib + "/src", "src/dist/ui/zjira/" + lib);
     }
 
+     // Copying remaining files of plugins
+    for (var plugin in oAuth.plugins) {
+      grunt.file.copy("src/ui/zjira/" + plugin, "src/dist/ui/" + plugin);
+    }
+
   });
 
   grunt.registerTask("serve", function () {
@@ -267,6 +315,9 @@ module.exports = function (grunt) {
   grunt.registerTask("deploy", ["nwabap_ui5uploader:upload_build"]);
   
   grunt.registerTask("deploy_lib", ["nwabap_ui5uploader:upload_library"]);
+  
+  grunt.registerTask("deploy_plugin", ["nwabap_ui5uploader:upload_plugin"]);
+
 
   grunt.registerTask("build", [
     "clean",

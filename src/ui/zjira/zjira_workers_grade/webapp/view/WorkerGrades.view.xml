@@ -1,20 +1,5 @@
-<mvc:View controllerName="intheme.zjira_workers_grade.controller.WorkerGrades"
-          xmlns:core="sap.ui.core"
-          xmlns:mvc="sap.ui.core.mvc"
-          displayBlock="true"
-          xmlns="sap.m"
-          xmlns:f="sap.f"
-          xmlns:fb="sap.ui.comp.filterbar"
-          xmlns:l="sap.ui.layout"
-          xmlns:sv="sap.ui.comp.smartvariants"
-          xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
-          xmlns:smartTable="sap.ui.comp.smarttable"
-          xmlns:smartField="sap.ui.comp.smartfield">
-    <f:DynamicPage toggleHeaderOnTitleClick="true"
-                 showFooter="{state&gt;/edit}"
-                 headerExpanded="false"
-                 preserveHeaderStateOnScroll="true"
-                 class="sapUiNoContentPadding">
+<mvc:View controllerName="intheme.zjira_workers_grade.controller.WorkerGrades" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:f="sap.f" xmlns:fb="sap.ui.comp.filterbar" xmlns:l="sap.ui.layout" xmlns:sv="sap.ui.comp.smartvariants" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" xmlns:smartTable="sap.ui.comp.smarttable" xmlns:smartField="sap.ui.comp.smartfield">
+    <f:DynamicPage toggleHeaderOnTitleClick="true" showFooter="{state&gt;/edit}" headerExpanded="false" preserveHeaderStateOnScroll="true" class="sapUiNoContentPadding">
         <f:title>
             <f:DynamicPageTitle>
                 <f:heading>
@@ -24,42 +9,11 @@
         </f:title>
         <f:content>
             <VBox fitContainer="true">
-                <smartFilterBar:SmartFilterBar id="workerFilterBar"
-                                       entitySet="WorkerGradesSet"
-                                       useToolbar="false"
-                                       considerSelectionVariants="true"
-                                       enableBasicSearch="false"
-                                       showFilterConfiguration="false"
-                                       useDateRangeType="true"
-                                       liveMode="false"
-                                       initialized="onInitSmartFilter"
-                                       persistencyKey="workerPage.PKey.FilterBar" />
-                <smartTable:SmartTable id="WorkerGradesSmartTab"
-                               entitySet="WorkerGradesSet"
-                               useExportToExcel="false"
-                               showRowCount="false"
-                               tableType="ResponsiveTable"
-                               useVariantManagement="false"
-                               useTablePersonalisation="true"
-                               showFullScreenButton="false"
-                               enableAutoBinding="true"
-                               editTogglable="true"
-                               editToggled="onEditToggled"
-                               editable="{state&gt;/edit}"
-                               demandPopin="true"
-                               requestAtLeastFields="Worker,Position,IsRed,IsYellow,WorkerName,PositionName,MinMonths,MaxMonths,DateFrom,DateTo,CurrentMonths"
-                               smartFilterId="workerFilterBar"
-                               beforeRebindTable="beforeRebindWorkerGrades">
+                <smartFilterBar:SmartFilterBar id="workerFilterBar" entitySet="WorkerGradesSet" useToolbar="false" considerSelectionVariants="true" enableBasicSearch="false" showFilterConfiguration="false" useDateRangeType="true" liveMode="false" initialized="onInitSmartFilter" persistencyKey="workerPage.PKey.FilterBar" />
+                <smartTable:SmartTable id="WorkerGradesSmartTab" entitySet="WorkerGradesSet" useExportToExcel="false" showRowCount="false" tableType="ResponsiveTable" useVariantManagement="false" useTablePersonalisation="true" showFullScreenButton="false" enableAutoBinding="true" editTogglable="true" editToggled="onEditToggled" editable="{state&gt;/edit}" demandPopin="true" requestAtLeastFields="Worker,Position,IsRed,IsYellow,WorkerName,PositionName,MinMonths,MaxMonths,DateFrom,DateTo,CurrentMonths" smartFilterId="workerFilterBar" 
+                beforeRebindTable="beforeRebindWorkerGrades">
                     <!-- <smartTable:customToolbar><OverflowToolbar design="Transparent"><ToolbarSpacer/><Button icon="sap-icon://refresh" type="Transparent" press="rebindTable" /><Button icon="sap-icon://add" enabled="{state>/edit}" iconFirst="false" type="Transparent" press="onAddLocation" /></OverflowToolbar></smartTable:customToolbar> -->
-                    <Table sticky="ColumnHeaders"
-                 alternateRowColors="true"
-                 growing="true"
-                 fixedLayout="false"
-                 growingThreshold="300"
-                 growingScrollToLoad="true"
-                 mode="{= (${state&gt;/edit} === true) ? &apos;Delete&apos; : &apos;None&apos;}"
-                 delete="onDeleteRow"
-                 selectionChange="onSelectLine">
+                    <Table sticky="ColumnHeaders" alternateRowColors="true" growing="true" fixedLayout="false" growingThreshold="300" growingScrollToLoad="true" mode="{= (${state&gt;/edit} === true) ? &apos;Delete&apos; : &apos;None&apos;}" delete="onDeleteRow" selectionChange="onSelectLine">
                         <columns>
                             <!-- <Column  mergeDuplicates="true">
                                 <customData>
@@ -72,8 +26,7 @@
                             </Column> -->
                             <Column>
                                 <customData>
-                                    <core:CustomData key="p13nData"
-                                   value="\{                                                                    &quot;columnIndex&quot;: &quot;0&quot;,                                                                    &quot;columnKey&quot;: &quot;PositionName&quot;,                                                                    &quot;leadingProperty&quot;: &quot;PositionName&quot;,                                                                    &quot;sortProperty&quot;: &quot;PositionName&quot;,                                                                    &quot;filterProperty&quot;: &quot;PositionName&quot;                                                                }" />
+                                    <core:CustomData key="p13nData" value="\{                                                                    &quot;columnIndex&quot;: &quot;0&quot;,                                                                    &quot;columnKey&quot;: &quot;PositionName&quot;,                                                                    &quot;leadingProperty&quot;: &quot;PositionName&quot;,                                                                    &quot;sortProperty&quot;: &quot;PositionName&quot;,                                                                    &quot;filterProperty&quot;: &quot;PositionName&quot;                                                                }" />
                                 </customData>
                                 <header>
                                     <Text text="{/#WorkerGrades/PositionName/@sap:label}" />
@@ -81,8 +34,7 @@
                             </Column>
                             <Column>
                                 <customData>
-                                    <core:CustomData key="p13nData"
-                                   value="\{                                                                    &quot;columnIndex&quot;: &quot;1&quot;,                                                                    &quot;columnKey&quot;: &quot;MinMonths&quot;,                                                                    &quot;leadingProperty&quot;: &quot;MinMonths&quot;,                                                                    &quot;sortProperty&quot;: &quot;MinMonths&quot;,                                                                    &quot;filterProperty&quot;: &quot;MinMonths&quot;                                                                }" />
+                                    <core:CustomData key="p13nData" value="\{                                                                    &quot;columnIndex&quot;: &quot;1&quot;,                                                                    &quot;columnKey&quot;: &quot;MinMonths&quot;,                                                                    &quot;leadingProperty&quot;: &quot;MinMonths&quot;,                                                                    &quot;sortProperty&quot;: &quot;MinMonths&quot;,                                                                    &quot;filterProperty&quot;: &quot;MinMonths&quot;                                                                }" />
                                 </customData>
                                 <header>
                                     <Text text="{i18n>DateRange}" />
@@ -90,8 +42,7 @@
                             </Column>
                             <Column>
                                 <customData>
-                                    <core:CustomData key="p13nData"
-                                   value="\{                                                                    &quot;columnIndex&quot;: &quot;2&quot;,                                                                    &quot;columnKey&quot;: &quot;MaxMonths&quot;,                                                                    &quot;leadingProperty&quot;: &quot;MaxMonths&quot;,                                                                    &quot;sortProperty&quot;: &quot;MaxMonths&quot;,                                                                    &quot;filterProperty&quot;: &quot;MaxMonths&quot;                                                                }" />
+                                    <core:CustomData key="p13nData" value="\{                                                                    &quot;columnIndex&quot;: &quot;2&quot;,                                                                    &quot;columnKey&quot;: &quot;MaxMonths&quot;,                                                                    &quot;leadingProperty&quot;: &quot;MaxMonths&quot;,                                                                    &quot;sortProperty&quot;: &quot;MaxMonths&quot;,                                                                    &quot;filterProperty&quot;: &quot;MaxMonths&quot;                                                                }" />
                                 </customData>
                                 <header>
                                     <Text text="{i18n>MonthPositionTitle}" />
@@ -99,28 +50,23 @@
                             </Column>
                             <Column>
                                 <customData>
-                                    <core:CustomData key="p13nData"
-                                                   value='\{
+                                    <core:CustomData key="p13nData" value='\{
                                                           "columnIndex": "3",
                                                           "columnKey": "CurrentMonths",
                                                           "leadingProperty": "CurrentMonths",
                                                           "sortProperty": "CurrentMonths",
                                                           "filterProperty": "CurrentMonths"
-                                                       }'/>
+                                                       }' />
                                 </customData>
                                 <header>
-                                    <Text text="{/#WorkerGrades/CurrentMonths/@sap:label}"/>
+                                    <Text text="{/#WorkerGrades/CurrentMonths/@sap:label}" />
                                 </header>
                             </Column>
                         </columns>
                         <items>
-                            <ColumnListItem id="WorkerGrades"
-                              type="Active"
-                              press=".onPressColumnListItem">
+                            <ColumnListItem id="WorkerGrades" type="Active" press=".onPressColumnListItem">
                                 <customData>
-                                    <core:CustomData key="colorLine"
-                                   value="{  parts: [{path: &apos;IsRed&apos;}, {path: &apos;IsYellow&apos;}],   formatter: &apos;.commonFormatter.rowHighlight&apos;}"
-                                   writeToDom="true" />
+                                    <core:CustomData key="colorLine" value="{  parts: [{path: &apos;IsRed&apos;}, {path: &apos;IsYellow&apos;}],   formatter: &apos;.commonFormatter.rowHighlight&apos;}" writeToDom="true" />
                                 </customData>
                                 <cells>
                                     <smartField:SmartField value="{PositionName}" editable="{state>/edit}" />
@@ -128,15 +74,15 @@
                                 <cells>
                                     <HBox>
                                         <smartField:SmartField value="{DateFrom}" editable="{state>/edit}" />
-                                        <Text text='-' visible="{= (${DateTo} !== null ) ? true : false}"/>
-                                        <smartField:SmartField value="{DateTo}" visible="{= (${DateTo} !== null ) ? true : false}" editable="{state>/edit}"/>
+                                        <Text text='-' visible="{= (${DateTo} !== null ) ? true : false}" />
+                                        <smartField:SmartField value="{DateTo}" visible="{= (${DateTo} !== null ) ? true : false}" editable="{state>/edit}" />
                                     </HBox>
                                 </cells>
                                 <cells>
-                                  <VBox>
-                                    <Text text="MIN - {MinMonths}"/>
-                                    <Text text="MAX - {MaxMonths}"/>
-                                  </VBox>
+                                    <VBox>
+                                        <Text text="MIN - {MinMonths}" />
+                                        <Text text="MAX - {MaxMonths}" />
+                                    </VBox>
                                 </cells>
                                 <cells>
                                     <smartField:SmartField value="{CurrentMonths}" editable="{state>/edit}" />
@@ -150,10 +96,10 @@
 
         <f:footer>
             <OverflowToolbar>
-                <ToolbarSpacer/>
-                <Button text="{i18n>SaveBtn}" type="Emphasized" press="onSaveChanges"/>
+                <ToolbarSpacer />
+                <Button text="{i18n>SaveBtn}" type="Emphasized" press="onSaveChanges" />
             </OverflowToolbar>
         </f:footer>
-        
+
     </f:DynamicPage>
 </mvc:View>

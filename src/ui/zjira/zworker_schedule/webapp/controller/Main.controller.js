@@ -118,6 +118,78 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
       
       oEvent.getSource().getParent().close();
       
+    },
+
+    onPressConfig: function(oEvent){
+      this.loadDialog
+      .call(this, {
+        sDialogName: "_oConfSettingDialog",
+        sViewName:
+          "intheme.zworker_schedule.view.fragments.Config",
+      })
+      .then(
+        function (oDialog) {
+          oDialog.open();
+          this.getView().byId("PositionConfST").rebindTable();
+          this.getView().byId("WorkerConfST").rebindTable();
+        }.bind(this)
+      );
+    },
+
+    onSaveConfigDialog: function(oEvent){
+      var oConf = this.getStateProperty("/smartTabConf");
+
+      Object.keys(oConf).forEach(
+        function (sKey) {
+          var oTable = this.getView().byId(oConf[sKey]).getTable();
+          var mItems = oTable.getItems();
+          mItems.forEach(
+            function (oItem) {
+              if (oItem.getBindingContext().bCreated) {
+                oTable.removeItem(oItem);
+              }
+            }.bind(this)
+          );
+        }.bind(this)
+      );
+
+      this.submitChanges({
+        success: function () {
+          this.isExistError();
+          this.rebindConfTab();
+        }.bind(this),
+        error: this.showError.bind(this),
+      });
+    },
+
+    onCancelConfigDialog: function(oEvent){
+      oEvent.getSource().getParent().close();
+      this.resetChanges();
+    },
+
+    onIconTabConfBarSelected: function(oEvent){
+      this.setStateProperty(
+        "/currentTab",
+        oEvent.getSource().getSelectedKey()
+      );
+    },
+
+    onEditToggled: function (oEvent) {
+      var bEditable = oEvent.getParameter("editable");
+      this.setStateProperty(
+        "/ConfigSTMode",
+        bEditable ? "SingleSelectLeft" : "None"
+      );
+    },
+
+    rebindConfTab: function(oEvent){
+      var oConf = this.getStateProperty("/smartTabConf");
+      Object.keys(oConf).forEach(
+        function (sKey) {
+          this.getView().byId(oConf[sKey]).rebindTable();
+        }.bind(this)
+      );
     }
+
   });
 });

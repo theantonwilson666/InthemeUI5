@@ -1,0 +1,130 @@
+<core:FragmentDefinition xmlns="sap.m"
+                         xmlns:core="sap.ui.core"
+                         xmlns:smartTable="sap.ui.comp.smarttable"
+                         xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+                         xmlns:sv="sap.ui.comp.smartvariants"
+                         xmlns:f="sap.f"
+                         xmlns:u="sap.ui.unified"
+                         xmlns:smartField="sap.ui.comp.smartfield"
+                         xmlns:l="sap.ui.layout">
+    <f:DynamicPage id="positionConfView" toggleHeaderOnTitleClick="true" showFooter="false" headerExpanded="false" preserveHeaderStateOnScroll="true">
+        <f:content>
+            <smartTable:SmartTable
+                    id="PositionConfST"
+                    entitySet="PositionScheduleSet"
+                    useExportToExcel="false"
+                    showRowCount="false"
+                    editTogglable="true"
+                    editToggled="onEditToggled"
+                    tableType="ResponsiveTable"
+                    useVariantManagement="false"
+                    useTablePersonalisation="false"
+                    enableAutoBinding="false"
+                    requestAtLeastFields="Position,PositionDescr,PercentSchdule,Team,TeamDescr"
+                    demandPopin="true">
+                <smartTable:customData>
+                    <core:CustomData key="dateFormatSettings" value='\{"pattern": "dd.MM.yyyy"\}'/>
+                    <core:CustomData key="useSmartField" value="true"/>
+                </smartTable:customData>
+                <smartTable:customToolbar>
+                    <OverflowToolbar design="Transparent">
+                        <ToolbarSpacer/>
+                        <Button icon="sap-icon://copy"
+                                enabled="{= ${state>/ConfigSTMode} === 'SingleSelectLeft' }"
+                                press="onCopyRow($event,'PositionConfST','positionConfListItem', 'PositionScheduleSet')"
+                                />
+                        <Button type="Transparent"
+                                iconFirst="false"
+                                enabled="{= ${state>/ConfigSTMode} === 'SingleSelectLeft' }"
+                                icon="sap-icon://add"
+                                press="onAddPaymentSetting($event, 'PositionConfST', 'positionConfListItem', 'PositionScheduleSet')"/>
+                        <Button icon="sap-icon://delete"
+                                enabled="{= ${state>/ConfigSTMode} === 'SingleSelectLeft' }"
+                                press="onDeletePaymentSetting($event, 'PositionConfST')"
+                                />
+                    </OverflowToolbar>
+                </smartTable:customToolbar>
+                <Table sticky="ColumnHeaders"
+                       alternateRowColors="true"
+                       growing="true"
+                       fixedLayout="false"
+                       growingThreshold="300"
+                       growingScrollToLoad="true"
+                       mode="{state>/ConfigSTMode}">
+
+                       <columns>
+                        <!--1 column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                            "columnIndex": "0",
+                                                            "columnKey": "Team",
+                                                            "leadingProperty": "Team",
+                                                            "sortProperty": "Team",
+                                                            "filterProperty": "Team"
+                                                         }'/>
+                            </customData>
+                            <header>
+                                <Text text="{/#PositionSchedule/Team/@sap:label}"/>
+                            </header>
+                        </Column>
+                        <!--2 column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                            "columnIndex": "1",
+                                                            "columnKey": "Position",
+                                                            "leadingProperty": "Position",
+                                                            "sortProperty": "Position",
+                                                            "filterProperty": "Position"
+                                                         }'/>
+                            </customData>
+                            <header>
+                                <Text text="{/#PositionSchedule/Position/@sap:label}"/>
+                            </header>
+                        </Column>
+
+                        <!--3 column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                            "columnIndex": "2",
+                                                            "columnKey": "PercentSchdule",
+                                                            "leadingProperty": "PercentSchdule",
+                                                            "sortProperty": "PercentSchdule",
+                                                            "filterProperty": "PercentSchdule"
+                                                         }'/>
+                            </customData>
+                            <header>
+                                <Text text="{/#PositionSchedule/PercentSchdule/@sap:label}"/>
+                            </header>
+                        </Column>
+
+                    </columns>
+                    <items>
+                        <ColumnListItem id="positionConfListItem">
+                            <!--1 cells-->
+                            <cells>
+                                <smartField:SmartField value="{Team}" editable="{= ${state>/ConfigSTMode} === 'SingleSelectLeft' }"/>
+                            </cells>
+                            <!--2 cells-->
+                            <cells>
+                                <smartField:SmartField value="{Position}" editable="{= ${state>/ConfigSTMode} === 'SingleSelectLeft' }"/>
+                            </cells>
+
+                             <!--3 cells-->
+                            <cells>
+                                <smartField:SmartField value="{PercentSchdule}" editable="{= ${state>/ConfigSTMode} === 'SingleSelectLeft' }"/>
+                            </cells>
+
+                        </ColumnListItem>
+                    </items>
+
+                </Table>
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</core:FragmentDefinition>

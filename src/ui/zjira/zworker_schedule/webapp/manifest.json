@@ -97,10 +97,14 @@
           },
           "layout": "OneColumn",
           "proj_filter": "",
-          "PaymentSettingSTMode" : "None",
+          "ConfigSTMode" : "None",
           "rebindProj": false,
           "currentTab": "common",
-          "showNewInterval": false
+          "showNewInterval": false,
+          "smartTabConf": {
+            "PositionTab": "PositionConfST",
+            "WorkerTab": "WorkerConfST"
+          }
         }
       }
     },
