@@ -27,116 +27,156 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
       if (oSmartTable) {
         oSmartTable.getTable().removeSelections();
       }
+
+      this.checkIsAdmin();
     },
 
     onPressDownloadExcel: function (oEvent) {
       this.loadDialog
-      .call(this, {
-        sDialogName: "_oDownloadScheduleDialog",
-        sViewName:
-          "intheme.zworker_schedule.view.dialogs.DownloadSchedule",
-      })
-      .then(
-        function (oDialog) {
-          oDialog.open();
-        }.bind(this)
-      );
+        .call(this, {
+          sDialogName: "_oDownloadScheduleDialog",
+          sViewName: "intheme.zworker_schedule.view.dialogs.DownloadSchedule",
+        })
+        .then(
+          function (oDialog) {
+            oDialog.open();
+          }.bind(this)
+        );
     },
 
-    onValueHelpRequest: function(oEvent){
+    onValueHelpRequest: function (oEvent) {
       delete this._oDirectDialog;
       debugger;
 
       var fnHandleConfirm = function (oEvent) {
-        var oSelectedType = oEvent.getParameter('selectedItems')[0].getBindingContext().getObject();
-        this.byId("scheduleTypeInput").setSelectedItem(new sap.ui.core.Item({
-          key: oSelectedType.Type,
-          text: oSelectedType.TypeDescr
-        }));
-      }
+        var oSelectedType = oEvent
+          .getParameter("selectedItems")[0]
+          .getBindingContext()
+          .getObject();
+        this.byId("scheduleTypeInput").setSelectedItem(
+          new sap.ui.core.Item({
+            key: oSelectedType.Type,
+            text: oSelectedType.TypeDescr,
+          })
+        );
+      };
 
       var fnCancelSearch = function () {
-				// this.getView().byId('registryView').setBusy(false);
-			};
+        // this.getView().byId('registryView').setBusy(false);
+      };
 
-			var fnHandleSearch = function (oEvent) {
-				var sQuery = oEvent.getParameter("value");
-				this._oDirectDialog.bindAggregation("items", {
-					path: '/ScheduleTypeSHSet',
-					template: new sap.m.StandardListItem({
-						title: '{TypeDescr}',
-            description: '{Type}',
-						type: "Active"
-					})
-				});
-			};
-
+      var fnHandleSearch = function (oEvent) {
+        var sQuery = oEvent.getParameter("value");
+        this._oDirectDialog.bindAggregation("items", {
+          path: "/ScheduleTypeSHSet",
+          template: new sap.m.StandardListItem({
+            title: "{TypeDescr}",
+            description: "{Type}",
+            type: "Active",
+          }),
+        });
+      };
 
       this._oDirectDialog = new sap.m.SelectDialog({
-				title: '{i18n>ScheduleType}',
-				confirm: fnHandleConfirm.bind(this),
-				search: fnHandleSearch.bind(this),
-				cancel: fnCancelSearch.bind(this),
-			});
+        title: "{i18n>ScheduleType}",
+        confirm: fnHandleConfirm.bind(this),
+        search: fnHandleSearch.bind(this),
+        cancel: fnCancelSearch.bind(this),
+      });
 
-			this._oDirectDialog.bindAggregation("items", {
-				path: '/ScheduleTypeSHSet',
-				template: new sap.m.StandardListItem({
-					title: '{TypeDescr}',
-          description: '{Type}',
-					type: "Active"
-				})
-			});
+      this._oDirectDialog.bindAggregation("items", {
+        path: "/ScheduleTypeSHSet",
+        template: new sap.m.StandardListItem({
+          title: "{TypeDescr}",
+          description: "{Type}",
+          type: "Active",
+        }),
+      });
 
-			this.getView().addDependent(this._oDirectDialog);
-			this._oDirectDialog.open();
+      this.getView().addDependent(this._oDirectDialog);
+      this._oDirectDialog.open();
     },
 
-    onCloseDialog: function(oEvent){
+    onCloseDialog: function (oEvent) {
       oEvent.getSource().getParent().close();
     },
 
-    onDownloadSchedule: function(oEvent){
-
+    onDownloadSchedule: function (oEvent) {
       var oModel = this.getModel();
       var sServiceUrl = oModel.sServiceUrl;
 
       var oFilter = {
-        type : this.byId("scheduleTypeInput").getSelectedKey(),
-        date : {
-          from : this.byId("SchedulePeriod").getFrom(),
-          to : this.byId("SchedulePeriod").getTo()
-        }
+        type: this.byId("scheduleTypeInput").getSelectedKey(),
+        date: {
+          from: this.byId("SchedulePeriod").getFrom(),
+          to: this.byId("SchedulePeriod").getTo(),
+        },
       };
 
       var sPath = oModel.createKey("/DownloadExcelSet", {
         EntitySet: "WorkerRegisterSet",
-        Filter: JSON.stringify(oFilter)
+        Filter: JSON.stringify(oFilter),
       });
       var sUrl = sServiceUrl + sPath + "/$value";
       sap.m.URLHelper.redirect(sUrl, true);
-      
+
       oEvent.getSource().getParent().close();
+    },
+
+    checkIsAdmin: function () {
+      this.getModel().callFunction("/isAdmin", {
+        method: "GET",
+        success: function (oData) {
+          if (oData.isAdmin.Admin) {
+            setTimeout(this.showAdminButton.bind(this), 10);
+          }
+        }.bind(this),
+      });
+    },
+
+    showAdminButton: function () {
+      
+      
+      var oScheduleButton = this.getView().byId("configScheduleButton");
+      var oExcelButton = this.getView().byId("excelScheduleButton");
+
+      if (oScheduleButton){
+        oScheduleButton.setVisible(true);
+      }
+      
+      if (oExcelButton){
+        oExcelButton.setVisible(true);
+      }
       
     },
 
-    onPressConfig: function(oEvent){
-      this.loadDialog
-      .call(this, {
-        sDialogName: "_oConfSettingDialog",
-        sViewName:
-          "intheme.zworker_schedule.view.fragments.Config",
-      })
-      .then(
-        function (oDialog) {
-          oDialog.open();
-          this.getView().byId("PositionConfST").rebindTable();
-          this.getView().byId("WorkerConfST").rebindTable();
-        }.bind(this)
+    startButtonHide: function () {
+      var WrenchButton = this.getView().byId("__xmlview0--WrenchButton");
+      var excel_attachmentButton = this.getView().byId(
+        "__xmlview0--excel-attachmentButton"
       );
+      if (WrenchButton) {
+        WrenchButton.setVisible(true);
+        excel_attachmentButton.setVisible(true);
+      }
     },
 
-    onSaveConfigDialog: function(oEvent){
+    onPressConfig: function (oEvent) {
+      this.loadDialog
+        .call(this, {
+          sDialogName: "_oConfSettingDialog",
+          sViewName: "intheme.zworker_schedule.view.fragments.Config",
+        })
+        .then(
+          function (oDialog) {
+            oDialog.open();
+            this.getView().byId("PositionConfST").rebindTable();
+            this.getView().byId("WorkerConfST").rebindTable();
+          }.bind(this)
+        );
+    },
+
+    onSaveConfigDialog: function (oEvent) {
       var oConf = this.getStateProperty("/smartTabConf");
 
       Object.keys(oConf).forEach(
@@ -162,16 +202,13 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
       });
     },
 
-    onCancelConfigDialog: function(oEvent){
+    onCancelConfigDialog: function (oEvent) {
       oEvent.getSource().getParent().close();
       this.resetChanges();
     },
 
-    onIconTabConfBarSelected: function(oEvent){
-      this.setStateProperty(
-        "/currentTab",
-        oEvent.getSource().getSelectedKey()
-      );
+    onIconTabConfBarSelected: function (oEvent) {
+      this.setStateProperty("/currentTab", oEvent.getSource().getSelectedKey());
     },
 
     onEditToggled: function (oEvent) {
@@ -182,14 +219,13 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
       );
     },
 
-    rebindConfTab: function(oEvent){
+    rebindConfTab: function (oEvent) {
       var oConf = this.getStateProperty("/smartTabConf");
       Object.keys(oConf).forEach(
         function (sKey) {
           this.getView().byId(oConf[sKey]).rebindTable();
         }.bind(this)
       );
-    }
-
+    },
   });
 });
