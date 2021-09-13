@@ -86,18 +86,30 @@
                             <smartField:SmartField value ="{WorkTo2}" editable="true" entitySet="WorkerScheduleSet"/>
                         </smartForm:GroupElement>
                     </smartForm:Group>
-
-
-                      <smartForm:Group label="{i18n>BioGroup}">
+                    <smartForm:Group label="{i18n>BioGroup}">
                         <smartForm:GroupElement >
-                            <smartField:SmartField value ="{WorkFactFrom1}" editable="false" entitySet="WorkerScheduleSet"/>
+                            <smartField:SmartField id='WorkFactFrom1' value ="{WorkFactFrom1}" editable="false" entitySet="WorkerScheduleSet"/>
+                            <core:Icon
+                            id='WorkFactFrom1-icon'
+                                color="#ff0000"
+                                 src="{
+                                    path:'WorkFactFrom1',
+                                    formatter:'.commonFormatter.showIcon'
+                                }"
+                             />
                         </smartForm:GroupElement>
-
                         <smartForm:GroupElement >
-                            <smartField:SmartField value ="{WorkFactTo1}" editable="false" entitySet="WorkerScheduleSet"/>
+                            <smartField:SmartField id='WorkFactTo1' value ="{WorkFactTo1}" editable="false" entitySet="WorkerScheduleSet"/>
+                            <core:Icon
+                           id='WorkFactTo1-icon'
+                                color="#ff0000"
+                                 src="{
+                                    path:'WorkFactTo1',
+                                    formatter:'.commonFormatter.showIcon'
+                                }"
+                             />
                         </smartForm:GroupElement>
                     </smartForm:Group>
-
                 </smartForm:SmartForm>
                 <VBox alignContent="Stretch">
                     <viz:Popover id="vizPopover"></viz:Popover>
@@ -110,18 +122,33 @@
                                                                   value="{ChartMdl>Date}" />
                                 </viz.data:dimensions>
                                 <viz.data:measures>
-                                    <viz.data:MeasureDefinition name="Fact Hours"
+                                    <!-- name="{
+                                                                    parts:[{ path: 'ChartMdl>FactHours' },
+                                                                     { path: 'ChartMdl>PlanHours' },
+                                                                     { path: 'ChartMdl>JiraHours' }],
+                                                                    formatter: '.commonFormatter.changeName'}"  -->
+                                    <viz.data:MeasureDefinition 
+                                                                name="Fact Hours" 
                                                                 value="{ChartMdl>FactHours}" />
                                     <viz.data:MeasureDefinition name="Plan Hours"
                                                                 value="{ChartMdl>PlanHours}" />
                                     <viz.data:MeasureDefinition name="Jira Hours"
                                                                 value="{ChartMdl>JiraHours}" />
+                                    <viz.data:MeasureDefinition name="Jira Hours"
+                                                                value="{ChartMdl>JiraHours}" />
+                                    <viz.data:MeasureDefinition name="TimeControl Error"
+                                                                value="{
+                                                                    path:'ChartMdl>RegError',
+                                                                    formatter: '.commonFormatter.errorDay'
+                                                                }"/>
+                                    <viz.data:MeasureDefinition name="TimeControl Redacted"
+                                                                value=""/>
                                 </viz.data:measures>
                             </viz.data:FlattenedDataset>
                         </viz:dataset>
                         <viz:feeds>
                             <viz.feeds:FeedItem uid="valueAxis" type="Measure"
-                                                values="Fact Hours,Plan Hours,Jira Hours"/>
+                                                values="Fact Hours,Plan Hours,Jira Hours,TimeControl Error,TimeControl Redacted"/>
                             <viz.feeds:FeedItem uid="categoryAxis" type="Dimension"
                                                 values="Date" />
                         </viz:feeds>

@@ -36,9 +36,21 @@ sap.ui.define([], function () {
         }
         return p;
       };
-
       return precision(iHours) != 0 ? iHours.toFixed(2) : iHours;
-
     },
+    showIcon: function (icon) {
+      if (icon !== null) {
+        if (!icon)
+          return null
+        if (icon.ms === 0)
+          return "sap-icon://alert"
+      }
+    },
+    errorDay: function (error) {
+      if (error === true)
+        return '1'
+      else
+        return null
+    }
   };
 });
