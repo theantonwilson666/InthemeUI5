@@ -46,10 +46,9 @@
                     <Collection>
                         <PropertyPath>Position</PropertyPath>
                     </Collection>
-
                     <Collection>
-                      <PropertyPath>Team</PropertyPath>
-                  </Collection>
+                        <PropertyPath>Team</PropertyPath>
+                    </Collection>
                 </Annotation>
             </Annotations>
             <Annotations Target="ZJIRA_SRV.WorkerGrades/Worker">
@@ -101,28 +100,26 @@
                     </Record>
                 </Annotation>
             </Annotations>
-
-
             <Annotations Target="ZJIRA_SRV.WorkerGrades/Team">
-              <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
-              <Annotation Term="Common.ValueList">
-                  <Record>
-                      <PropertyValue Property="CollectionPath" String="TeamSHSet"/>
-                      <PropertyValue Property="SearchSupported" Bool="true"/>
-                      <PropertyValue Property="Parameters">
-                          <Collection>
-                              <Record Type="Common.ValueListParameterDisplayOnly">
-                                  <PropertyValue Property="ValueListProperty" String="TeamName"/>
-                              </Record>
-                              <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterOut">
-                                  <PropertyValue Property="LocalDataProperty" PropertyPath="Team"/>
-                                  <PropertyValue Property="ValueListProperty" String="TeamID"/>
-                              </Record>
-                          </Collection>
-                      </PropertyValue>
-                  </Record>
-              </Annotation>
-          </Annotations>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath" String="TeamSHSet"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="TeamName"/>
+                                </Record>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Team"/>
+                                    <PropertyValue Property="ValueListProperty" String="TeamID"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
         </Schema>
     </edmx:DataServices>
 </edmx:Edmx>
