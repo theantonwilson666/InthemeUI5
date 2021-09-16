@@ -112,7 +112,7 @@
                         </smartForm:GroupElement>
                     </smartForm:Group>
                 </smartForm:SmartForm>
-                <smartFilterBar:SmartFilterBar
+                <!-- <smartFilterBar:SmartFilterBar
                     class="sapUiSmallMarginTop  sapUiLargeMarginBegin sapUiSmallMarginEnd"
                     id="dateFilterBar"
                     entitySet="WorkerDoorPassSet"
@@ -121,8 +121,8 @@
                     enableBasicSearch="true"
                     showFilterConfiguration="false"
                     useDateRangeType="true"
-                    liveMode="false">
-                </smartFilterBar:SmartFilterBar>
+                    liveMode="true">
+                </smartFilterBar:SmartFilterBar> -->
                 <smartTable:SmartTable
                     beforeRebindTable="onBeforeRebindTable"
                     class=" sapUiLargeMarginBegin sapUiSmallMarginEnd"
@@ -139,6 +139,15 @@
                     <table:Table selectionMode='None'>
                         <table:columns>
                             <table:Column width="12rem">
+                                <table:customData>
+                                    <core:CustomData key="p13nData" value='\{
+                                                        "columnIndex": "0",
+                                                        "columnKey": "EventDateTime",
+                                                        "leadingProperty": "EventDateTime",
+                                                        "sortProperty": "EventDateTime",
+                                                        "filterProperty": "EventDateTime"
+                                                     }' />
+                                </table:customData>
                                 <Label text="Время"/>
                                 <table:template>
                                     <Text text="{
