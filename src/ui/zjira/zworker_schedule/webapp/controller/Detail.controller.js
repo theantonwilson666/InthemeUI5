@@ -33,7 +33,7 @@ sap.ui.define(
       },
 
       setAutoResizeTable: function (oEvent) {
-        debugger
+
         var oSmartTable = this.getView().byId("dateSmartTable");
         var tableColumnsLength = oSmartTable.getTable().getColumns().length
         // for (var i = 0; i < tableColumnsLength; i++) {
@@ -64,7 +64,7 @@ sap.ui.define(
       },
 
       _onRouteMatched: function (oEvent) {
-        debugger
+
 
         var oArr = oEvent.getParameter("arguments")["?query"];
         this.bindView({
@@ -108,7 +108,7 @@ sap.ui.define(
         );
       },
       bindSmartTable: function (sWorkerId, sDate) {
-        debugger
+
         // var sPath = "/WorkerScheduleSet(Date=datetime'2021-09-15T14%3A05%3A05',Worker='5EEC916EAB91DC0BC9FD7BF9')"
         var sPath = "/WorkerScheduleSet(Date=datetime'" + sDate + "',Worker='" + sWorkerId + "')";
         var oSmartTable = this.getView().byId("dateSmartTable");

@@ -53,9 +53,8 @@ sap.ui.define([], function () {
         return null
     },
     formatTime: function (data) {
-      debugger
-      if(data){
-      return `${data.getHours()}:${data.getMinutes()}:${data.getSeconds()}`
+      if (data) {
+        return `${data.getHours()}:${data.getMinutes()}:${data.getSeconds()}`
       }
     }
   };

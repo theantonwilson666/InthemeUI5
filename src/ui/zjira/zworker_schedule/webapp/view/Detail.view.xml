@@ -127,7 +127,7 @@
                     beforeRebindTable="onBeforeRebindTable"
                     class=" sapUiLargeMarginBegin sapUiSmallMarginEnd"
                     id="dateSmartTable"
-                    header="{i18n>TableTitle}"
+                    header="{i18n>DetailTableTitle}"
                     entitySet="WorkerDoorPassSet"
                     tableBindingPath="WorkerDoorPasses"
                     useExportToExcel="false"
