@@ -54,7 +54,7 @@ sap.ui.define([], function () {
     },
     formatTime: function (data) {
       if (data) {
-        return `${data.getHours()}:${data.getMinutes()}:${data.getSeconds()}`
+        return `${this.underTen(data.getHours())}:${this.underTen(data.getMinutes())}:${this.underTen(data.getSeconds())}`
       }
     }
   };

@@ -107,6 +107,9 @@ sap.ui.define(
           )
         );
       },
+      underTen: function (time) {
+        return time < 10 ? '0' + time : time
+      },
       bindSmartTable: function (sWorkerId, sDate) {
 
         // var sPath = "/WorkerScheduleSet(Date=datetime'2021-09-15T14%3A05%3A05',Worker='5EEC916EAB91DC0BC9FD7BF9')"

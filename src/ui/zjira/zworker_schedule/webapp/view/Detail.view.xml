@@ -136,7 +136,7 @@
                     enableAutoBinding="true"
                     requestAtLeastFields="EventDateTime"
                     smartFilterId="dateFilterBar">
-                    <table:Table>
+                    <table:Table selectionMode='None'>
                         <table:columns>
                             <table:Column width="12rem">
                                 <Label text="Время"/>
