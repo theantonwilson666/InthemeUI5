@@ -87,28 +87,46 @@
                             <smartField:SmartField value ="{WorkTo2}" editable="true" entitySet="WorkerScheduleSet"/>
                         </smartForm:GroupElement>
                     </smartForm:Group>
+                    <!-- <smartForm:Group label="{i18n>BioGroup}">
+                        <smartField:SmartField id='WorkFactFrom1CheckBox' value ="{Redacted}" editable="true" entitySet="WorkerScheduleSet"/>
+                    </smartForm:Group> -->
                     <smartForm:Group label="{i18n>BioGroup}">
                         <smartForm:GroupElement >
-                            <smartField:SmartField id='WorkFactFrom1' value ="{WorkFactFrom1}" editable="false" entitySet="WorkerScheduleSet"/>
+                            <smartField:SmartField id='WorkFactCheckBox' value ="{Redacted}" editable="false" entitySet="WorkerScheduleSet"/>
+                        </smartForm:GroupElement >
+                        <smartForm:GroupElement >
+                            <!-- <smartField:SmartField id='WorkFactFrom1CheckBox' value ="{Redacted}" editable="true" entitySet="WorkerScheduleSet"/> -->
+                            <smartField:SmartField id='WorkFactFrom1' value ="{WorkFactFrom1}" editable="true" entitySet="WorkerScheduleSet"/>
                             <core:Icon
                             id='WorkFactFrom1-icon'
                                 color="#ff0000"
                                  src="{
-                                    path:'WorkFactFrom1',
+                                    parts:[
+                                        {path:'RegError'},
+                                        {path:'WorkFactFrom1'}
+                                    ],
                                     formatter:'.commonFormatter.showIcon'
                                 }"
                              />
                         </smartForm:GroupElement>
                         <smartForm:GroupElement >
-                            <smartField:SmartField id='WorkFactTo1' value ="{WorkFactTo1}" editable="false" entitySet="WorkerScheduleSet"/>
+                            <smartField:SmartField id='WorkFactTo1' value ="{WorkFactTo1}" editable="true" entitySet="WorkerScheduleSet"/>
                             <core:Icon
                            id='WorkFactTo1-icon'
                                 color="#ff0000"
                                  src="{
-                                    path:'WorkFactTo1',
+                                    parts:[
+                                        {path:'RegError'},
+                                        {path:'WorkFactTo1'}
+                                    ],
                                     formatter:'.commonFormatter.showIcon'
                                 }"
                              />
+                            <!-- name="{
+                                                                    parts:[{ path: 'ChartMdl>FactHours' },
+                                                                     { path: 'ChartMdl>PlanHours' },
+                                                                     { path: 'ChartMdl>JiraHours' }],
+                                                                    formatter: '.commonFormatter.changeName'}"  -->
                         </smartForm:GroupElement>
                     </smartForm:Group>
                 </smartForm:SmartForm>

@@ -38,13 +38,20 @@ sap.ui.define([], function () {
       };
       return precision(iHours) != 0 ? iHours.toFixed(2) : iHours;
     },
-    showIcon: function (icon) {
-      if (icon !== null) {
-        if (!icon)
+    showIcon: function (error, time) {
+      if (error !== null && time !== null) {
+        if (!error || !time)
           return null
-        if (icon.ms === 0)
+        if (error === true && time.ms === 0)
           return "sap-icon://alert"
       }
+      // if (icon !== null) {
+      //   if (!icon)
+      //     return null
+      //   if (icon.ms === 0)
+      //     return "sap-icon://alert"
+      // }
+
     },
     errorDay: function (error) {
       if (error === true)

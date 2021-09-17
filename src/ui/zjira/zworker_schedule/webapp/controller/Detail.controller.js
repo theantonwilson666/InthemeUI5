@@ -62,6 +62,35 @@ sap.ui.define(
         //   oSmartTable.getTable().getColumns()[n].setWidth(`${newArr[n]*6}px`)
         // }
       },
+      checkIsAdmin: function () {
+        debugger
+        this.getModel().callFunction("/isAdmin", {
+          method: "GET",
+          success: function (oData) {
+            if (oData.isAdmin.Admin) {
+              setTimeout(this.showAdminButton.bind(this), 10);
+            }
+          }.bind(this),
+        });
+      },
+
+      showAdminButton: function () {
+        var oRedactedCheckBox = this.getView().byId("WorkFactCheckBox");
+        if (oRedactedCheckBox) {
+          oRedactedCheckBox.setEditable(true)
+        }
+        // var oScheduleButton = this.getView().byId("configScheduleButton");
+        // var oExcelButton = this.getView().byId("excelScheduleButton");
+
+        // if (oScheduleButton) {
+        //   oScheduleButton.setVisible(true);
+        // }
+
+        // if (oExcelButton) {
+        //   oExcelButton.setVisible(true);
+        // }
+        debugger
+      },
 
       _onRouteMatched: function (oEvent) {
 
@@ -86,6 +115,7 @@ sap.ui.define(
           encodeURIComponent(this.convertDate(new Date()))
         );
         this.initCalendarLegend();
+        this.checkIsAdmin();
       },
 
       onDateSelect: function (oEvent) {
