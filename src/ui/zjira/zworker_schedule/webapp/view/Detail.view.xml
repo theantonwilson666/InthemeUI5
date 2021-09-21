@@ -50,9 +50,9 @@
                         <smartForm:GroupElement>
                             <smartField:SmartField value ="{DateType}" editable="true" entitySet="WorkerScheduleSet"/>
                         </smartForm:GroupElement>
-                        <smartForm:GroupElement>
+                        <!-- <smartForm:GroupElement>
                             <smartField:SmartField value ="{WorkDayType}" editable="true" entitySet="WorkerScheduleSet"/>
-                        </smartForm:GroupElement>
+                        </smartForm:GroupElement> -->
                     </smartForm:Group>
                     <smartForm:Group label="{i18n>StudentGroup}">
                         <smartForm:GroupElement>
@@ -128,6 +128,9 @@
                                                                      { path: 'ChartMdl>JiraHours' }],
                                                                     formatter: '.commonFormatter.changeName'}"  -->
                         </smartForm:GroupElement>
+                        <smartForm:GroupElement >
+                            <Button width="50%" text='Сбросить' press='resetWorkerDay' id='resetWorkerDay'/>
+                        </smartForm:GroupElement >
                     </smartForm:Group>
                 </smartForm:SmartForm>
                 <!-- <smartFilterBar:SmartFilterBar

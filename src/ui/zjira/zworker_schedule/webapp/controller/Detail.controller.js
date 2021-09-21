@@ -91,10 +91,29 @@ sap.ui.define(
         // }
         debugger
       },
-
+      resetWorkerDay: function () {
+        debugger
+        var currentDate = null;
+        if (this.byId('workerCalendar').getSelectedDates()[0]) {
+          currentDate = this.byId('workerCalendar').getSelectedDates()[0].getStartDate();
+        } else {
+          currentDate = new Date;
+        }
+        this.getModel().callFunction("/ResetWorkerDay", {
+          method: "POST",
+          urlParameters: {
+            Date: currentDate.toLocaleDateString(),
+            Worker: `${this.getCurrentWorker()}`
+          },
+          success: function (oData) {
+            console.log(oData);
+          }.bind(this),
+        });
+      },
+      resetTime: function (oData) {
+        debugger
+      },
       _onRouteMatched: function (oEvent) {
-
-
         var oArr = oEvent.getParameter("arguments")["?query"];
         this.bindView({
           entitySet: "/WorkerRegisterSet",
@@ -141,7 +160,7 @@ sap.ui.define(
         return time < 10 ? '0' + time : time
       },
       bindSmartTable: function (sWorkerId, sDate) {
-
+        debugger
         // var sPath = "/WorkerScheduleSet(Date=datetime'2021-09-15T14%3A05%3A05',Worker='5EEC916EAB91DC0BC9FD7BF9')"
         var sPath = "/WorkerScheduleSet(Date=datetime'" + sDate + "',Worker='" + sWorkerId + "')";
         var oSmartTable = this.getView().byId("dateSmartTable");
@@ -149,7 +168,6 @@ sap.ui.define(
         this.setAutoResizeTable();
       },
       bindSmartForm: function (sWorkerId, sDate) {
-
         var sPath =
           "/WorkerScheduleSet(Date=datetime'" + sDate + "',Worker='" + sWorkerId + "')";
         var oSmartForm = this.getView().byId("dateSmartForm");
@@ -227,6 +245,7 @@ sap.ui.define(
       updateCalendar: function (oEvent) {
         this.getData4VizChart();
         var oCalendar = this.getView().byId("workerCalendar");
+        debugger
         this.getModel().callFunction("/GetWorkerCalendar", {
           method: "GET",
           urlParameters: {
@@ -356,10 +375,7 @@ sap.ui.define(
           Chart: oData
         });
         oVizFrame.setModel(oJson, "ChartMdl");
-
       },
-
-
       onStartDateChange: function (oEvent) {
         this.updateCalendar(oEvent);
       }
