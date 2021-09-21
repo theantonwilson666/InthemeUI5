@@ -145,6 +145,7 @@ sap.ui.define(
         );
       },
 
+      
       getStateProperty: function (sPath, oContext) {
         return this.getModel("state").getProperty(sPath, oContext);
       },

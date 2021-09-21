@@ -1,0 +1,48 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form">
+    <Dialog contentWidth="50%" title="Список сотрудников">
+        <!-- если не получится подгрузить данные, сделаю через controller -->
+        <content>
+            <VBox class="sapUiMediumMarginBeginEnd sapUiMediumMarginTopBottom">
+                <Table inset="false" items="{
+                                    path: '/EmployeesListSet'
+                                    }">
+                    <columns>
+                        <Column width="12em">
+                            <Text text="WorkerID" />
+                        </Column>
+                        <Column>
+                            <Text text="FullName" />
+                        </Column>
+                        <Column>
+                            <Text text="Status" />
+                        </Column>
+                        <Column>
+                            <Text text="Grade" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+
+                                <Text text="{WorkerID}" />
+                                <Text text="{FullName}" />
+                                <Text text="{Status}" />
+                                <Text text="{Grade}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+        </content>
+        <beginButton>
+            <Button text="{i18n>DeleteOrgButtonText}" icon="sap-icon://delete" press="onDeleteOrgButtonPressed" type="Emphasized"/>
+        </beginButton>
+        <endButton>
+            <Button text="Выйти" press="onDialogCancelPress"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>
