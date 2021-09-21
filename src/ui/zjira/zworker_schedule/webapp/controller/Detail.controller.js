@@ -1,6 +1,7 @@
 sap.ui.define(
   [
     "intheme/zworker_schedule/controller/Main.controller",
+    // "intheme/zjiralib/formatter/CommonFormatter",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "sap/m/Dialog",
@@ -11,6 +12,7 @@ sap.ui.define(
   ],
   function (
     Controller,
+    // Formatter,
     Filter,
     FilterOperator,
     Dialog,
@@ -25,6 +27,7 @@ sap.ui.define(
       oVizFrame: null,
 
       onInit: function () {
+
         this.getRouter()
           .getRoute("DetailRoute")
           .attachPatternMatched(this._onRouteMatched, this);
@@ -36,23 +39,17 @@ sap.ui.define(
           entitySet: "/WorkerRegisterSet",
           keyParameters: oArr,
         });
-
         this.setStateProperty("/layout", "TwoColumnsMidExpanded");
         this.setStateProperty(
           "/detailBindingPath",
           this.getModel().createKey("/WorkerRegisterSet", oArr)
         );
-
         this.setCurrentWorker(oArr.Worker);
-
         this.bindSmartForm(
           oArr.Worker,
           encodeURIComponent(this.convertDate(new Date()))
         );
-
         this.initCalendarLegend();
-        
-        
       },
 
       onDateSelect: function (oEvent) {
@@ -88,8 +85,8 @@ sap.ui.define(
           },
         });
       },
-
       convertDate: function (oDate) {
+
         return oDate.toJSON().split(".")[0];
       },
 
@@ -143,9 +140,6 @@ sap.ui.define(
                     })
                   );
                 })
-
-
-                
             }.bind(this),
           });
       },
@@ -205,16 +199,14 @@ sap.ui.define(
       },
 
       getData4VizChart: function () {
+
         var oCalendar = this.getView().byId("workerCalendar");
         var oFilter = [
           new Filter("Worker", FilterOperator.EQ, this.getCurrentWorker()),
           new Filter(
-            "FirstDayOfMonth",
-            FilterOperator.EQ,
-            oCalendar.getStartDate()
+            "FirstDayOfMonth", FilterOperator.EQ, oCalendar.getStartDate()
           ),
         ];
-
         this.getModel().read("/WorkerMonthDataSet", {
           filters: oFilter,
           success: function (oData) {
@@ -227,9 +219,11 @@ sap.ui.define(
       },
 
       setChartData: function (oData) {
+
         Format.numericFormatter(ChartFormatter.getInstance());
         var formatPattern = ChartFormatter.DefaultPattern;
         var oVizFrame = (this.oVizFrame = this.getView().byId("monthPlot"));
+
         oVizFrame.setVizProperties({
           title: {
             text: this.i18n("ChartTitle"),
@@ -239,6 +233,28 @@ sap.ui.define(
               formatString: formatPattern.SHORTFLOAT_MFD2,
               visible: false,
             },
+            markerRenderer: function (oMarker) {
+              if (oMarker.ctx.measureNames === 'Fact Hours') {
+                var oData = this;
+                var currentDay = oData.filter(day => {
+                  if (oMarker.ctx.Date === day.Date)
+                    return day
+                })
+                if (currentDay[0].Redacted === true)
+                  oMarker.graphic.fill = "#945ecf"
+              }
+            }.bind(oData)
+          },
+          tooltip: {
+            preRender: function (oToolip) {
+
+            }.bind(this),
+            visible: false
+          },
+          legend: {
+            postRenderer: function (pToolip) {
+              // 
+            }.bind(this)
           },
           valueAxis: {
             title: {
@@ -256,12 +272,15 @@ sap.ui.define(
         var oPopOver = this.getView().byId("vizPopover");
         oPopOver.connect(oVizFrame.getVizUid());
         oPopOver.setFormatString(formatPattern.STANDARDFLOAT);
-        var oJson = new sap.ui.model.json.JSONModel({ Chart: oData });
+        var oJson = new sap.ui.model.json.JSONModel({
+          Chart: oData
+        });
         oVizFrame.setModel(oJson, "ChartMdl");
+
       },
 
 
-      onStartDateChange: function(oEvent){
+      onStartDateChange: function (oEvent) {
         this.updateCalendar(oEvent);
       }
     });
