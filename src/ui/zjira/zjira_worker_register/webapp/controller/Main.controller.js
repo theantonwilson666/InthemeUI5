@@ -5,8 +5,7 @@ sap.ui.define(
 
 
     return BaseController.extend(
-      "intheme.zjira_worker_register.controller.Main",
-      {
+      "intheme.zjira_worker_register.controller.Main", {
         onInit: function () {},
 
         onInitFilter: function (oEvent) {
@@ -50,14 +49,14 @@ sap.ui.define(
           });
         },
 
-        onBeforeBindingTab: function (oEvent,iSumParam) {
+        onBeforeBindingTab: function (oEvent, iSumParam) {
           var mBindingParams = oEvent.getParameter("bindingParams");
           this.SumParam = iSumParam;
           this.oTotalRow = {
             WorkerRegister: 'TotalBonusSum',
           };
 
-          
+
           var oCustom = {
             BonusClosed: this.getView()
               .byId("closedIssueBonus")
@@ -102,16 +101,17 @@ sap.ui.define(
         },
 
         onViewWorker: function (oEvent) {
+          debugger
           var oTable = this.byId("workerSmartTable").getTable();
           var sPath = oTable.getSelectedItem().getBindingContext().getPath();
           this.loadDialog
             .call(this, {
               sDialogName: "_oClosedIssueDialog",
-              sViewName:
-                "intheme.zjira_worker_register.view.dialogs.ClosedIssue",
+              sViewName: "intheme.zjira_worker_register.view.dialogs.ClosedIssue",
             })
             .then(
               function (oDialog) {
+                debugger
                 // oDialog.setBusy(true);
                 oDialog.open();
                 oDialog.bindElement({
@@ -124,6 +124,7 @@ sap.ui.define(
                   },
                   events: {
                     dataReceived: function (oEvent) {
+                      debugger
                       if (!oEvent.getParameter("data")) {
                         // this.showError();
                         oDialog.close();
@@ -137,10 +138,10 @@ sap.ui.define(
             );
         },
 
-        rebindConfTab: function(oEvent){
+        rebindConfTab: function (oEvent) {
           var oConf = this.getStateProperty("/smartTabConf");
 
-          Object.keys(oConf).forEach(function(sKey) {
+          Object.keys(oConf).forEach(function (sKey) {
             this.getView().byId(oConf[sKey]).rebindTable();
           }.bind(this));
         },
@@ -149,8 +150,7 @@ sap.ui.define(
           this.loadDialog
             .call(this, {
               sDialogName: "_oBonusSettingDialog",
-              sViewName:
-                "intheme.zjira_worker_register.view.dialogs.BonusSetting",
+              sViewName: "intheme.zjira_worker_register.view.dialogs.BonusSetting",
             })
             .then(
               function (oDialog) {
@@ -164,7 +164,9 @@ sap.ui.define(
           this.showBusyDialog();
           this.getModel().callFunction("/DeletePaymentSettings", {
             method: "POST",
-            urlParameters: { SourceID: this.getStateProperty("/currentTab") },
+            urlParameters: {
+              SourceID: this.getStateProperty("/currentTab")
+            },
             success: function (oData) {
               if (oData.DeletePaymentSettings.Ok === true) {
                 this.closeBusyDialog();
@@ -186,11 +188,11 @@ sap.ui.define(
         onSaveBonusSettingDialog: function (oEvent) {
           var oConf = this.getStateProperty("/smartTabConf");
 
-          Object.keys(oConf).forEach(function(sKey) {
+          Object.keys(oConf).forEach(function (sKey) {
             var oTable = this.getView().byId(oConf[sKey]).getTable();
             var mItems = oTable.getItems();
-            mItems.forEach(function(oItem){
-              if (oItem.getBindingContext().bCreated){
+            mItems.forEach(function (oItem) {
+              if (oItem.getBindingContext().bCreated) {
                 oTable.removeItem(oItem);
               }
             }.bind(this));
@@ -267,8 +269,7 @@ sap.ui.define(
           this.openPopoverBy
             .call(this, {
               sPopoverName: "_workerlogPopover",
-              sViewName:
-                "intheme.zjira_worker_register.view.popovers.WorkerLog",
+              sViewName: "intheme.zjira_worker_register.view.popovers.WorkerLog",
               sPath: oEvent.getSource().getBindingContext().getPath(),
               oSource: oEvent.getSource(),
             })
@@ -425,7 +426,7 @@ sap.ui.define(
         },
 
 
-        onBeforeBindingTabKPI: function(oEvent){
+        onBeforeBindingTabKPI: function (oEvent) {
           debugger
         }
       }
