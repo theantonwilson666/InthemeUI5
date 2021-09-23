@@ -37,7 +37,6 @@
                     </Collection>
                 </Annotation>
             </Annotations>
-
             <Annotations Target="ZWORKER_VISIT_SCHEDULE_SRV.WorkerRegister/Worker">
                 <Annotation Term="Common.ValueListWithFixedValues" Bool="false" />
                 <Annotation Term="Common.ValueList">
@@ -64,8 +63,6 @@
                     </Record>
                 </Annotation>
             </Annotations>
-
-
             <Annotations Target="ZWORKER_VISIT_SCHEDULE_SRV.WorkerRegister/Team">
                 <Annotation Term="Common.ValueListWithFixedValues" Bool="true" />
                 <Annotation Term="Common.ValueList">
@@ -86,7 +83,6 @@
                     </Record>
                 </Annotation>
             </Annotations>
-
             <Annotations Target="ZWORKER_VISIT_SCHEDULE_SRV.WorkerRegister/Position">
                 <Annotation Term="Common.ValueListWithFixedValues" Bool="true" />
                 <Annotation Term="Common.ValueList">
@@ -107,7 +103,6 @@
                     </Record>
                 </Annotation>
             </Annotations>
-
             <Annotations Target="ZWORKER_VISIT_SCHEDULE_SRV.PositionSchedule/Position">
                 <Annotation Term="Common.ValueListWithFixedValues" Bool="true" />
                 <Annotation Term="Common.ValueList">
@@ -129,7 +124,6 @@
                     </Record>
                 </Annotation>
             </Annotations>
-
             <Annotations Target="ZWORKER_VISIT_SCHEDULE_SRV.PositionSchedule/Team">
                 <Annotation Term="Common.ValueListWithFixedValues" Bool="true" />
                 <Annotation Term="Common.ValueList">
@@ -151,7 +145,6 @@
                     </Record>
                 </Annotation>
             </Annotations>
-
             <Annotations Target="ZWORKER_VISIT_SCHEDULE_SRV.WorkerScheduleConf/Worker">
                 <Annotation Term="Common.ValueListWithFixedValues" Bool="false" />
                 <Annotation Term="Common.ValueList">
@@ -179,8 +172,6 @@
                     </Record>
                 </Annotation>
             </Annotations>
-
-
             <Annotations Target="ZWORKER_VISIT_SCHEDULE_SRV.WorkerSchedule/DateType">
                 <Annotation Term="Common.ValueListWithFixedValues" Bool="true" />
                 <Annotation Term="Common.ValueList">
@@ -198,8 +189,6 @@
                     </Record>
                 </Annotation>
             </Annotations>
-
-
             <Annotations Target="ZWORKER_VISIT_SCHEDULE_SRV.WorkerSchedule/WorkDayType">
                 <Annotation Term="Common.ValueListWithFixedValues" Bool="true" />
                 <Annotation Term="Common.ValueList">
@@ -217,8 +206,23 @@
                     </Record>
                 </Annotation>
             </Annotations>
-
-
+            <Annotations Target="ZWORKER_VISIT_SCHEDULE_SRV.WorkerDoorPass">
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>Worker</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="RegistrResult"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="WorkerName"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
         </Schema>
     </edmx:DataServices>
 </edmx:Edmx>

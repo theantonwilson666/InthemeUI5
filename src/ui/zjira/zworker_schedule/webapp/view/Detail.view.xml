@@ -1,6 +1,7 @@
 <mvc:View controllerName="intheme.zworker_schedule.controller.Detail"
           xmlns:mvc="sap.ui.core.mvc"
           xmlns="sap.m"
+          xmlns:table="sap.ui.table"
           xmlns:core="sap.ui.core"
           xmlns:f="sap.f"
           xmlns:u="sap.ui.unified"
@@ -49,9 +50,9 @@
                         <smartForm:GroupElement>
                             <smartField:SmartField value ="{DateType}" editable="true" entitySet="WorkerScheduleSet"/>
                         </smartForm:GroupElement>
-                        <smartForm:GroupElement>
+                        <!-- <smartForm:GroupElement>
                             <smartField:SmartField value ="{WorkDayType}" editable="true" entitySet="WorkerScheduleSet"/>
-                        </smartForm:GroupElement>
+                        </smartForm:GroupElement> -->
                     </smartForm:Group>
                     <smartForm:Group label="{i18n>StudentGroup}">
                         <smartForm:GroupElement>
@@ -86,31 +87,99 @@
                             <smartField:SmartField value ="{WorkTo2}" editable="true" entitySet="WorkerScheduleSet"/>
                         </smartForm:GroupElement>
                     </smartForm:Group>
+                    <!-- <smartForm:Group label="{i18n>BioGroup}">
+                        <smartField:SmartField id='WorkFactFrom1CheckBox' value ="{Redacted}" editable="true" entitySet="WorkerScheduleSet"/>
+                    </smartForm:Group> -->
                     <smartForm:Group label="{i18n>BioGroup}">
                         <smartForm:GroupElement >
-                            <smartField:SmartField id='WorkFactFrom1' value ="{WorkFactFrom1}" editable="false" entitySet="WorkerScheduleSet"/>
+                            <smartField:SmartField id='WorkFactCheckBox' value ="{Redacted}" editable="false" entitySet="WorkerScheduleSet"/>
+                        </smartForm:GroupElement >
+                        <smartForm:GroupElement >
+                            <!-- <smartField:SmartField id='WorkFactFrom1CheckBox' value ="{Redacted}" editable="true" entitySet="WorkerScheduleSet"/> -->
+                            <smartField:SmartField id='WorkFactFrom1' value ="{WorkFactFrom1}" editable="true" entitySet="WorkerScheduleSet"/>
                             <core:Icon
                             id='WorkFactFrom1-icon'
                                 color="#ff0000"
                                  src="{
-                                    path:'WorkFactFrom1',
+                                    parts:[
+                                        {path:'RegError'},
+                                        {path:'WorkFactFrom1'}
+                                    ],
                                     formatter:'.commonFormatter.showIcon'
                                 }"
                              />
                         </smartForm:GroupElement>
                         <smartForm:GroupElement >
-                            <smartField:SmartField id='WorkFactTo1' value ="{WorkFactTo1}" editable="false" entitySet="WorkerScheduleSet"/>
+                            <smartField:SmartField id='WorkFactTo1' value ="{WorkFactTo1}" editable="true" entitySet="WorkerScheduleSet"/>
                             <core:Icon
                            id='WorkFactTo1-icon'
                                 color="#ff0000"
                                  src="{
-                                    path:'WorkFactTo1',
+                                    parts:[
+                                        {path:'RegError'},
+                                        {path:'WorkFactTo1'}
+                                    ],
                                     formatter:'.commonFormatter.showIcon'
                                 }"
                              />
+                            <!-- name="{
+                                                                    parts:[{ path: 'ChartMdl>FactHours' },
+                                                                     { path: 'ChartMdl>PlanHours' },
+                                                                     { path: 'ChartMdl>JiraHours' }],
+                                                                    formatter: '.commonFormatter.changeName'}"  -->
                         </smartForm:GroupElement>
+                        <smartForm:GroupElement >
+                            <Button width="50%" text='Сбросить' press='resetWorkerDay' id='resetWorkerDay'/>
+                        </smartForm:GroupElement >
                     </smartForm:Group>
                 </smartForm:SmartForm>
+                <!-- <smartFilterBar:SmartFilterBar
+                    class="sapUiSmallMarginTop  sapUiLargeMarginBegin sapUiSmallMarginEnd"
+                    id="dateFilterBar"
+                    entitySet="WorkerDoorPassSet"
+                    useToolbar="false"
+                    considerSelectionVariants="true"
+                    enableBasicSearch="true"
+                    showFilterConfiguration="false"
+                    useDateRangeType="true"
+                    liveMode="true">
+                </smartFilterBar:SmartFilterBar> -->
+                <smartTable:SmartTable
+                    beforeRebindTable="onBeforeRebindTable"
+                    class=" sapUiLargeMarginBegin sapUiSmallMarginEnd"
+                    id="dateSmartTable"
+                    header="{i18n>DetailTableTitle}"
+                    entitySet="WorkerDoorPassSet"
+                    tableBindingPath="WorkerDoorPasses"
+                    useExportToExcel="false"
+                    useVariantManagement="false"
+                    useTablePersonalisation="true"
+                    enableAutoBinding="true"
+                    requestAtLeastFields="EventDateTime"
+                    smartFilterId="dateFilterBar">
+                    <table:Table selectionMode='None'>
+                        <table:columns>
+                            <table:Column width="12rem">
+                                <table:customData>
+                                    <core:CustomData key="p13nData" value='\{
+                                                        "columnIndex": "0",
+                                                        "columnKey": "EventDateTime",
+                                                        "leadingProperty": "EventDateTime",
+                                                        "sortProperty": "EventDateTime",
+                                                        "filterProperty": "EventDateTime"
+                                                     }' />
+                                </table:customData>
+                                <Label text="Время"/>
+                                <table:template>
+                                    <Text text="{
+                                        path:'EventDateTime',
+                                        formatter:'.commonFormatter.formatTime'
+                                    }"/>
+                                </table:template>
+                            </table:Column>
+                        </table:columns>
+                    </table:Table>
+                </smartTable:SmartTable>
                 <VBox alignContent="Stretch">
                     <viz:Popover id="vizPopover"></viz:Popover>
                     <viz:VizFrame id="monthPlot" uiConfig="{applicationSet:'fiori'}"

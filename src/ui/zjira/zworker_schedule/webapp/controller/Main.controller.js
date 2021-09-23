@@ -17,7 +17,9 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
         Worker: oBindingObject.Worker,
       };
 
-      this.navTo("DetailRoute", { query: oParams }, false);
+      this.navTo("DetailRoute", {
+        query: oParams
+      }, false);
     },
 
     _onRouteMatched: function (oEvent) {
@@ -135,19 +137,17 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
     },
 
     showAdminButton: function () {
-      
-      
       var oScheduleButton = this.getView().byId("configScheduleButton");
       var oExcelButton = this.getView().byId("excelScheduleButton");
 
-      if (oScheduleButton){
+      if (oScheduleButton) {
         oScheduleButton.setVisible(true);
       }
-      
-      if (oExcelButton){
+
+      if (oExcelButton) {
         oExcelButton.setVisible(true);
       }
-      
+
     },
 
     startButtonHide: function () {
