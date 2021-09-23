@@ -73,8 +73,8 @@ module.exports = function (grunt) {
             prefix: "intheme/zworker_schedule",
           }
         },
-      },
 
+      },
 
       {
         package: "ZUI5_LEARNING",
@@ -85,6 +85,19 @@ module.exports = function (grunt) {
             bspContainer: "ZTEST_APP",
             bspDescription: "Test Deploy",
             prefix: "intheme/zui5_example",
+          }
+        },
+      },
+
+      {
+        package: "ZPERSON_CARD",
+        transportno: "TMDK922037",
+        project: "intheme_apps",
+        apps: {
+          zorg_hierarchy: {
+            bspContainer: "ZORG_HIERARCHY",
+            bspDescription: "Орг.структура",
+            prefix: "intheme/zorg_hierarchy",
           }
         },
       }
