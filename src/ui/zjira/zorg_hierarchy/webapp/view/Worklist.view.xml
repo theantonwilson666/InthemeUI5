@@ -14,6 +14,7 @@
 		<f:content>
 			<Panel>
 				<HBox alignItems="Center" justifyContent="End">
+					<Button id="addEmployees" text="{i18n>addEmployees}" class="sapUiSmallMarginEnd" press="onAddEmployeesButtonPress" icon="sap-icon://add-employee" type="Emphasized"/>
 					<Button id="addOrgButton" text="{i18n>addOrgButtonText}" press="onAddOrgButtonPress" icon="sap-icon://add" type="Emphasized"/>
 				</HBox>
 				<commons:ProcessFlow id="processflow" foldedCorners="false" wheelZoomable="false" class="PFLayoutSpec" nodes="{path: '/OrgHierarchySet', events: { dataReceived: '.onOrgDataRecieved' }}" lanes="{/LaneSet}" nodePress="onNodePress">

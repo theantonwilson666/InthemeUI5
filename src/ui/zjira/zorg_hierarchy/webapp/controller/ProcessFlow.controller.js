@@ -24,15 +24,48 @@ sap.ui.define(["jira/lib/BaseController"], function (Controller) {
       this.getView().byId("processflow").updateModel();
     },
 
+    onAddEmployeesButtonPress: function () {
+      this.loadDialog
+        .call(this, {
+          sDialogName: "_AddEmployeesDialog",
+          sViewName: "zorg_hierarchy.fragments.dialogAddEmployees",
+        })
+        .then(
+          function (oDialog) {
+            var oModel = this.getModel();
+            var oNewOrg = oModel.createEntry("OrgHierarchySet");
+            oDialog.setBindingContext(oNewOrg);
+            oDialog.open();
+          }.bind(this)
+        );
+    },
+
     onNodePress: function (oEvent) {
-      var oDialogFragment = this.getDialog(
-        "zorg_hierarchy.fragments.dialogWorkers"
-      );
-      oDialogFragment.open();
+      this.loadDialog
+        .call(this, {
+          sDialogName: "_ListEmployeesDialog",
+          sViewName: "zorg_hierarchy.fragments.dialogWorkers",
+        })
+        .then(
+          function (oDialog) {
+            var oModel = this.getModel();
+            var oNewOrg = oModel.createEntry("WorkerSHSet");
+            oDialog.setBindingContext(oNewOrg);
+            oDialog.open();
+          }.bind(this)
+        );
     },
     onDialogCancelPress: function (oEvent) {
       var oDialog = oEvent.getSource().getParent();
       oDialog.close();
+    },
+    onPressDelete: function () {
+      var oTable = sap.ui.getCore().byId("__table0");
+      var aSelectedItems = oTable.getSelectedItems();
+
+      for (var i = 0; i < aSelectedItems.length; i++) {
+        oTable.removeItem(aSelectedItems[i]);
+      }
     },
 
     onAddOrgButtonPress: function (oEvent) {
@@ -73,8 +106,6 @@ sap.ui.define(["jira/lib/BaseController"], function (Controller) {
       });
     },
 
-    onDeleteOrgButtonPressed: function(oEvent){
-      
-    }
+    onDeleteOrgButtonPressed: function (oEvent) {},
   });
 });
