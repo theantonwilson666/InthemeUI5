@@ -235,7 +235,7 @@ sap.ui.define(["jira/lib/BaseController"], function (Controller) {
       this.loadDialog
         .call(this, {
           sDialogName: "_ChangeDialog",
-          sViewName: "zorg_hierarchy.fragments.dialogСhange",
+          sViewName: "zorg_hierarchy.fragments.dialogChange",
         })
         .then(
           function (oDialog) {

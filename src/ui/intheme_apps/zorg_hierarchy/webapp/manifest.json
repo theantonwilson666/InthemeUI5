@@ -75,7 +75,7 @@
         "dataSource": "mainService",
         "settings": {
           "serviceUrlParams": {
-            "sap-client": "100"
+            "sap-client": "300"
           },
           "defaultBindingMode": "TwoWay",
           "useBatch": true,

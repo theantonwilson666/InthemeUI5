@@ -1,0 +1,225 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470968/UI.xml?api=v2">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470971/Communication.xml?api=v2">
+        <edmx:Include Alias="Communication" Namespace="com.sap.vocabularies.Communication.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Measures.V1.xml">
+        <edmx:Include Alias="Measures" Namespace="Org.OData.Measures.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470974/Common.xml?api=v2">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/SAP/Ports/$metadata">
+        <edmx:Include Alias="Metadata" Namespace="ZDISPATCHER_MONI_SRV"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm">
+
+            <Annotations Target="ZINTHEME_WORKER_SRV.ZSNN_PERSON_ROOTType">
+
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="Name"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Name"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Birthday"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Email"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+
+                <Annotation Term="UI.Facets">
+                    <Collection>
+
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="CorporateInfo"/>
+                            <PropertyValue Property="Label" String="Корпоративная информация"/>
+                            <PropertyValue Property="Target" AnnotationPath="to_CorporateInfo/@UI.FieldGroup" />
+                        </Record>
+
+
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="Equipment"/>
+                            <PropertyValue Property="Label" String="Оборудование"/>
+                            <PropertyValue Property="Target" AnnotationPath="to_Equipment/@UI.LineItem" />
+                        </Record>
+
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="Follower"/>
+                            <PropertyValue Property="Label" String="Кураторство"/>
+                            <PropertyValue Property="Target" AnnotationPath="to_Follower/@UI.LineItem" />
+                        </Record>
+
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="Goal"/>
+                            <PropertyValue Property="Label" String="Цели"/>
+                            <PropertyValue Property="Target" AnnotationPath="to_Goal/@UI.LineItem" />
+                        </Record>
+
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="Vacation"/>
+                            <PropertyValue Property="Label" String="Отпуска"/>
+                            <PropertyValue Property="Target" AnnotationPath="to_Vacation/@UI.LineItem" />
+                        </Record>
+
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="VacationRest"/>
+                            <PropertyValue Property="Label" String="Остаток отпуска"/>
+                            <PropertyValue Property="Target" AnnotationPath="to_VacationRest/@UI.LineItem" />
+                        </Record>
+
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="WeekendWorkDay"/>
+                            <PropertyValue Property="Label" String="Работа в выходные дни"/>
+                            <PropertyValue Property="Target" AnnotationPath="to_WeekendWorkDay/@UI.LineItem" />
+                        </Record>
+
+
+                    </Collection>
+                </Annotation>
+
+            </Annotations>
+
+            <Annotations Target="ZINTHEME_WORKER_SRV.ZSNN_PERSON_CORPORATE_INFOType">
+                <Annotation Term="UI.FieldGroup" Qualifier="DataFG">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataFieldForAnnotation">
+                                    <PropertyValue Property="Target" Path="PositionId"/>
+                                </Record>
+
+                                <Record Type="UI.DataFieldForAnnotation">
+                                    <PropertyValue Property="Target" Path="DateEmployment"/>
+                                </Record>
+
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Label" String="Corporate Info"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+            <Annotations Target="ZINTHEME_WORKER_SRV.ZSNN_PERSON_EQUIPMENTType">
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Brand"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="SerialNumber"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Type"/>
+                        </Record>
+
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="DateFrom"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+
+            <Annotations Target="ZINTHEME_WORKER_SRV.ZSNN_PERSON_FOLLOWERSType">
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Follower"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+
+            <Annotations Target="ZINTHEME_WORKER_SRV.ZSNN_PERSON_GOALType">
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Status"/>
+                        </Record>
+
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="DateFrom"/>
+                        </Record>
+
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="DateTo"/>
+                        </Record>
+
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Goal"/>
+                        </Record>
+
+                    </Collection>
+                </Annotation>
+            </Annotations>
+
+            <Annotations Target="ZINTHEME_WORKER_SRV.ZSNN_PERSON_VACATIONType">
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="VacationType"/>
+                        </Record>
+
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="DateFrom"/>
+                        </Record>
+
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="DateTo"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+
+            <Annotations Target="ZINTHEME_WORKER_SRV.ZSNN_PERSON_VACATION_RESTType">
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="VacationYear"/>
+                        </Record>
+
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="VacationRest"/>
+                        </Record>
+
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="DayOffRest"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+
+            <Annotations Target="ZINTHEME_WORKER_SRV.ZSNN_PERSON_WEEKEND_WORKDAYType">
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="WorkDate"/>
+                        </Record>
+
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="WorkHours"/>
+                        </Record>
+
+                    </Collection>
+                </Annotation>
+            </Annotations>
+
+
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

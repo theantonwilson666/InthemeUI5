@@ -172,9 +172,9 @@ module.exports = function (grunt) {
         options: {
           appresources: "src",
           resources:
-            "C:/Users/ЕвгенийСливкин/Desktop/tasks/UI5Task/sapui5-dist-static/resources",
+            "C:/Users/АнтонВильсон/Desktop/Work/InThemJira/UI5/sapui5-sdk-1.65.16/resources",
           testresources:
-            "C:/Users/ЕвгенийСливкин/Desktop/tasks/UI5Task/sapui5-dist-static/test-resources",
+            "C:/Users/АнтонВильсон/Desktop/Work/InThemJira/UI5/sapui5-sdk-1.65.16/test-resources",
           proxypath: "proxy",
         },
       },
