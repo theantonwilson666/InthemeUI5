@@ -3,38 +3,34 @@
     xmlns:smartField="sap.ui.comp.smartfield"
     xmlns:l="sap.ui.layout"
     xmlns:f="sap.ui.layout.form">
-    <Dialog contentWidth="50%" title="Список сотрудников">
+    <Dialog contentWidth="50%" title="Обновление">
         <!-- если не получится подгрузить данные, сделаю через controller -->
         <content>
             <VBox class="sapUiMediumMarginBeginEnd sapUiMediumMarginBottom">
-                <Table inset="false" mode="MultiSelect" items="{
-                                    path: '/WorkerSHSet'
+                <Table inset="false" mode="SingleSelect" items="{
+                                    path: '/OrgSHSet'
                                     }">
                     <headerToolbar>
                         <OverflowToolbar>
                             <ToolbarSpacer/>
-                            <Button icon="sap-icon://activate" text="Переместить" press="onPressMove"/>
-                            <Button icon="sap-icon://delete" text="Удалить сотрудника" press="onPressDelete"/>
+                            <Button icon="sap-icon://edit" text="Изменить параметры" press="onChangeParameters"/>
                         </OverflowToolbar>
                     </headerToolbar>
                     <columns>
                         <Column width="12em">
-                            <Text text="Имя сотрудника" />
+                            <Text text="Имя плитки" />
                         </Column>
                     </columns>
                     <items>
                         <ColumnListItem>
                             <cells>
-                                <Text text="{WorkerName}" />
+                                <Text text="{OrgName}" />
                             </cells>
                         </ColumnListItem>
                     </items>
                 </Table>
             </VBox>
         </content>
-        <beginButton>
-            <Button text="{i18n>DeleteOrgButtonText}" icon="sap-icon://delete" press="onDeleteOrgButtonPressed" type="Emphasized"/>
-        </beginButton>
         <endButton>
             <Button text="Выйти" press="onDialogCancelPress"/>
         </endButton>

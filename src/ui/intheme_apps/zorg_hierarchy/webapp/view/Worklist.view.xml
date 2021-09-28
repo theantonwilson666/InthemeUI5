@@ -14,6 +14,7 @@
 		<f:content>
 			<Panel>
 				<HBox alignItems="Center" justifyContent="End">
+					<Button id="detailOrgButton" text="Обновление" press="onDetailOrgButtonPress" class="sapUiSmallMarginEnd" icon="sap-icon://add" type="Emphasized"/>
 					<Button id="addEmployees" text="{i18n>addEmployees}" class="sapUiSmallMarginEnd" press="onAddEmployeesButtonPress" icon="sap-icon://add-employee" type="Emphasized"/>
 					<Button id="addOrgButton" text="{i18n>addOrgButtonText}" press="onAddOrgButtonPress" icon="sap-icon://add" type="Emphasized"/>
 				</HBox>

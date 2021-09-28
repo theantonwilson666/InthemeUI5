@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
-  <!-- Copyright (c) 2015 SAP AG, All Rights Reserved -->
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Manage Products</title>
-    <!-- Bootstrap the unified shell in sandbox mode for standalone usage.
+<!-- Copyright (c) 2015 SAP AG, All Rights Reserved -->
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Products</title>
+  <!-- Bootstrap the unified shell in sandbox mode for standalone usage.
 		The renderer is specified in the global Unified Shell configuration object "sap-ushell-config".
 		The fiori2 renderer will render the shell header allowing, for instance,
 		testing of additional application setting buttons.
@@ -16,94 +17,81 @@
 		it might be necessary to adapt them depending on the target runtime platform.
 		The sandbox platform is restricted to development or demo use cases and must NOT be used
 		for productive scenarios. -->
-    <script type="text/javascript">
-      window["sap-ushell-config"] = {
-        defaultRenderer: "fiori2",
-        renderers: {
-          fiori2: {
-            componentData: {
-              config: {
-                search: "hidden",
-              },
+  <script type="text/javascript">
+    window["sap-ushell-config"] = {
+      defaultRenderer: "fiori2",
+      renderers: {
+        fiori2: {
+          componentData: {
+            config: {
+              search: "hidden",
             },
           },
         },
-        applications: {
-          "zjira_project_register-display": {
-            additionalInformation:
-              "SAPUI5.Component=intheme.zjira_project_register",
-            applicationType: "URL",
-            url: "/ui/zjira/zjira_project_register/webapp/",
-            description: "Отчет по проектам",
-            title: "Jira: Проекты",
-          },
-
-          "zjira_worker_register-display": {
-            additionalInformation:
-              "SAPUI5.Component=intheme.zjira_worker_register",
-            applicationType: "URL",
-            url: "/ui/zjira/zjira_worker_register/webapp/",
-            description: "Отчет по сотрудникам",
-            title: "Jira: Сотрудники",
-          },
-
-          "zworker_schedule-display": {
-            additionalInformation:
-              "SAPUI5.Component=intheme.zworker_schedule",
-            applicationType: "URL",
-            url: "/ui/zjira/zworker_schedule/webapp/",
-            description: "Отчет",
-            title: "График посещений",
-          },
-
-          "zorg_hierarchy-display": {
-            additionalInformation:
-              "SAPUI5.Component=intheme.zorg_hierarchy",
-            applicationType: "URL",
-            url: "/ui/zjira/zorg_hierarchy/webapp/",
-            description: "Отчет",
-            title: "Орг структура",
-          }
-
-
+      },
+      applications: {
+        "zjira_project_register-display": {
+          additionalInformation: "SAPUI5.Component=intheme.zjira_project_register",
+          applicationType: "URL",
+          url: "/ui/zjira/zjira_project_register/webapp/",
+          description: "Отчет по проектам",
+          title: "Jira: Проекты",
         },
-      };
-    </script>
-    <script
-      src="/test-resources/sap/ushell/bootstrap/sandbox.js"
-      id="sap-ushell-bootstrap"
-    ></script>
-    <!-- Bootstrap the UI5 core library -->
-    <script
-      id="sap-ui-bootstrap"
-      src="/resources/sap-ui-core.js"
-      data-sap-ui-libs="sap.m, sap.ushell, sap.collaboration"
-      data-sap-ui-theme="sap_belize"
-      data-sap-ui-compatVersion="edge"
-      data-sap-ui-resourceroots='{
+
+        "zjira_worker_register-display": {
+          additionalInformation: "SAPUI5.Component=intheme.zjira_worker_register",
+          applicationType: "URL",
+          url: "/ui/zjira/zjira_worker_register/webapp/",
+          description: "Отчет по сотрудникам",
+          title: "Jira: Сотрудники",
+        },
+
+        "zworker_schedule-display": {
+          additionalInformation: "SAPUI5.Component=intheme.zworker_schedule",
+          applicationType: "URL",
+          url: "/ui/zjira/zworker_schedule/webapp/",
+          description: "Отчет",
+          title: "График посещений",
+        },
+
+        "zorg_hierarchy-display": {
+          additionalInformation: "SAPUI5.Component=intheme.zorg_hierarchy",
+          applicationType: "URL",
+          url: "/ui/intheme_apps/zorg_hierarchy/webapp/",
+          description: "Отчет",
+          title: "Орг структура",
+        }
+
+
+      },
+    };
+  </script>
+  <script src="/test-resources/sap/ushell/bootstrap/sandbox.js" id="sap-ushell-bootstrap"></script>
+  <!-- Bootstrap the UI5 core library -->
+  <script id="sap-ui-bootstrap" src="/resources/sap-ui-core.js" data-sap-ui-libs="sap.m, sap.ushell, sap.collaboration"
+    data-sap-ui-theme="sap_belize" data-sap-ui-compatVersion="edge" data-sap-ui-resourceroots='{
                 "intheme.zjira_project_register": "../zjira/zjira_project_register/webapp",
                 "intheme.zjira_worker_register": "../zjira/zjira_worker_register/webapp",
                 "intheme.zworker_schedule": "../zjira/zworker_schedule/webapp",
-                "zorg_hierarchy": "../zjira/zorg_hierarchy/webapp"
-			}'
-      data-sap-ui-frameOptions="allow"
-      data-sap-ui-language="ru"
-    >
-      // NON-SECURE setting for testing environment
-    </script>
-    <script type="text/javascript">
-      sap.ui.getCore().attachInit(function () {
-        sap.ushell.Container.createRenderer().placeAt("content");
+                "zorg_hierarchy": "../intheme_apps/zorg_hierarchy/webapp"
+			}' data-sap-ui-frameOptions="allow" data-sap-ui-language="ru">
+    // NON-SECURE setting for testing environment
+  </script>
+  <script type="text/javascript">
+    sap.ui.getCore().attachInit(function () {
+      sap.ushell.Container.createRenderer().placeAt("content");
 
-        // initialize the ushell sandbox component
-        sap.ui.loader.config({
-          paths: {
-            "jira/lib": "/sap/bc/ui5_ui5/sap/zjiralib/",
-          },
-        });
+      // initialize the ushell sandbox component
+      sap.ui.loader.config({
+        paths: {
+          "jira/lib": "/sap/bc/ui5_ui5/sap/zjiralib/",
+        },
       });
-    </script>
-  </head>
-  <!-- UI Content -->
-  <body class="sapUiBody" id="content"></body>
+    });
+  </script>
+</head>
+<!-- UI Content -->
+
+<body class="sapUiBody" id="content"></body>
+
 </html>

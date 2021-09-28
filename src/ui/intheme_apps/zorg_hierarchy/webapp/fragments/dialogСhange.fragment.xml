@@ -7,21 +7,20 @@
     <Dialog contentWidth="50%" title="{i18n>Добавить сотрудника}">
         <content>
 
-            <smartForm:SmartForm entityType="WorkerAdd" editable="true">
+            <smartForm:SmartForm entityType="OrgHierarchy" editable="true">
 
                 <smartForm:Group>
                     <smartForm:GroupElement>
-                        <smartField:SmartField value="{OrgName}" />
+                        <smartField:SmartField value="{ParentOrgID}" />
                     </smartForm:GroupElement>
 
                     <smartForm:GroupElement>
-                        <smartField:SmartField value="{OrgId}" />
+                        <smartField:SmartField value="{OrgName}" />
                     </smartForm:GroupElement>
 
                 </smartForm:Group>
 
             </smartForm:SmartForm>
-
         </content>
         <beginButton>
             <Button text="Создать" press="onAddEmployeeOrgButtonPressed"/>

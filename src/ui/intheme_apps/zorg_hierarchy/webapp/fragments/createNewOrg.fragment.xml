@@ -8,13 +8,16 @@
 
             <smartForm:SmartForm entityType="OrgHierarchy" editable="true">
 
-                <smartForm:Group label="Data">
+                <smartForm:Group>
                     <smartForm:GroupElement>
                         <smartField:SmartField value="{ParentOrgID}" />
                     </smartForm:GroupElement>
 
                     <smartForm:GroupElement>
                         <smartField:SmartField value="{OrgName}" />
+                    </smartForm:GroupElement>
+                    <smartForm:GroupElement>
+                        <smartField:SmartField value="{OrgType}" />
                     </smartForm:GroupElement>
 
 
