@@ -70,6 +70,51 @@
                                 <Text text="{/#WorkerRegister/Team/@sap:label}" />
                             </header>
                         </Column>
+                        <!--3 column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData" value='\{
+                                                        "columnIndex": "2",
+                                                        "columnKey": "IsFree",
+                                                        "leadingProperty": "IsFree",
+                                                        "sortProperty": "IsFree",
+                                                        "filterProperty": "IsFree"
+                                                     }' />
+                            </customData>
+                            <header>
+                                <Text text="{/#WorkerRegister/IsFree/@sap:label}" />
+                            </header>
+                        </Column>
+                        <!--4 column -->
+                        <Column visible="false" id='adminColumn1'>
+                            <customData>
+                                <core:CustomData key="p13nData" value='\{
+                                                        "columnIndex": "3",
+                                                        "columnKey": "IsSyuserEmpty",
+                                                        "leadingProperty": "IsSyuserEmpty",
+                                                        "sortProperty": "IsSyuserEmpty",
+                                                        "filterProperty": "IsSyuserEmpty"
+                                                     }' />
+                            </customData>
+                            <header>
+                                <Text text="{/#WorkerRegister/IsSyuserEmpty/@sap:label}" />
+                            </header>
+                        </Column>
+                        <!--5 column -->
+                        <Column visible="false" id='adminColumn2'>
+                            <customData>
+                                <core:CustomData key="p13nData" value='\{
+                                                        "columnIndex": "4",
+                                                        "columnKey": "IsDoorIdEmpty",
+                                                        "leadingProperty": "IsDoorIdEmpty",
+                                                        "sortProperty": "IsDoorIdEmpty",
+                                                        "filterProperty": "IsDoorIdEmpty"
+                                                     }' />
+                            </customData>
+                            <header>
+                                <Text text="{/#WorkerRegister/IsDoorIdEmpty/@sap:label}" />
+                            </header>
+                        </Column>
                     </columns>
                     <ColumnListItem type="Navigation">
                         <!--1 cells-->
@@ -81,6 +126,27 @@
                         <!--2 cells-->
                         <cells>
                             <Text text="{Team}" />
+                        </cells>
+                        <!--3 cells-->
+                        <cells>
+                            <Text text="{
+                                        path:'IsFree',
+                                        formatter:'.commonFormatter.formatBoolean'
+                                    }"/>
+                        </cells>
+                        <!--4 cells-->
+                        <cells>
+                            <Text text="{
+                                        path:'IsSyuserEmpty',
+                                        formatter:'.commonFormatter.formatBoolean'
+                                    }"/>
+                        </cells>
+                        <!--5 cells-->
+                        <cells>
+                            <Text text="{
+                                        path:'IsDoorIdEmpty',
+                                        formatter:'.commonFormatter.formatBoolean'
+                                    }"/>
                         </cells>
                     </ColumnListItem>
                 </Table>

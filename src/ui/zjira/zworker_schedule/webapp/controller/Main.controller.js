@@ -1,6 +1,5 @@
 sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
   "use strict";
-
   return BaseController.extend("intheme.zworker_schedule.controller.Main", {
     onInit: function () {
       this.getRouter()
@@ -130,7 +129,7 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
         method: "GET",
         success: function (oData) {
           if (oData.isAdmin.Admin) {
-            setTimeout(this.showAdminButton.bind(this), 10);
+            this.showAdminButton();
           }
         }.bind(this),
       });
@@ -139,6 +138,8 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
     showAdminButton: function () {
       var oScheduleButton = this.getView().byId("configScheduleButton");
       var oExcelButton = this.getView().byId("excelScheduleButton");
+      var adminColumn1 = this.getView().byId("adminColumn1");
+      var adminColumn2 = this.getView().byId("adminColumn2");
 
       if (oScheduleButton) {
         oScheduleButton.setVisible(true);
@@ -146,6 +147,14 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
 
       if (oExcelButton) {
         oExcelButton.setVisible(true);
+      }
+
+      if (adminColumn1) {
+        adminColumn1.setVisible(true);
+      }
+
+      if (adminColumn2) {
+        adminColumn2.setVisible(true);
       }
 
     },
