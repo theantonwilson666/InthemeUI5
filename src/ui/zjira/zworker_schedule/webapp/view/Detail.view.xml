@@ -96,7 +96,7 @@
                         </smartForm:GroupElement >
                         <smartForm:GroupElement >
                             <!-- <smartField:SmartField id='WorkFactFrom1CheckBox' value ="{Redacted}" editable="true" entitySet="WorkerScheduleSet"/> -->
-                            <smartField:SmartField id='WorkFactFrom1' value ="{WorkFactFrom1}" editable="true" entitySet="WorkerScheduleSet"/>
+                            <smartField:SmartField id='WorkFactFrom1' value ="{WorkFactFrom1}" editable="false" entitySet="WorkerScheduleSet"/>
                             <core:Icon
                             id='WorkFactFrom1-icon'
                                 color="#ff0000"
@@ -110,7 +110,7 @@
                              />
                         </smartForm:GroupElement>
                         <smartForm:GroupElement >
-                            <smartField:SmartField id='WorkFactTo1' value ="{WorkFactTo1}" editable="true" entitySet="WorkerScheduleSet"/>
+                            <smartField:SmartField id='WorkFactTo1' value ="{WorkFactTo1}" editable="false" entitySet="WorkerScheduleSet"/>
                             <core:Icon
                            id='WorkFactTo1-icon'
                                 color="#ff0000"
@@ -129,21 +129,10 @@
                                                                     formatter: '.commonFormatter.changeName'}"  -->
                         </smartForm:GroupElement>
                         <smartForm:GroupElement >
-                            <Button width="50%" text='Сбросить' press='resetWorkerDay' id='resetWorkerDay'/>
+                            <Button width="50%" text='Сбросить' visible="false" press='resetWorkerDay' id='resetWorkerDay'/>
                         </smartForm:GroupElement >
                     </smartForm:Group>
                 </smartForm:SmartForm>
-                <!-- <smartFilterBar:SmartFilterBar
-                    class="sapUiSmallMarginTop  sapUiLargeMarginBegin sapUiSmallMarginEnd"
-                    id="dateFilterBar"
-                    entitySet="WorkerDoorPassSet"
-                    useToolbar="false"
-                    considerSelectionVariants="true"
-                    enableBasicSearch="true"
-                    showFilterConfiguration="false"
-                    useDateRangeType="true"
-                    liveMode="true">
-                </smartFilterBar:SmartFilterBar> -->
                 <smartTable:SmartTable
                     beforeRebindTable="onBeforeRebindTable"
                     class=" sapUiLargeMarginBegin sapUiSmallMarginEnd"
@@ -191,11 +180,6 @@
                                                                   value="{ChartMdl>Date}" />
                                 </viz.data:dimensions>
                                 <viz.data:measures>
-                                    <!-- name="{
-                                                                    parts:[{ path: 'ChartMdl>FactHours' },
-                                                                     { path: 'ChartMdl>PlanHours' },
-                                                                     { path: 'ChartMdl>JiraHours' }],
-                                                                    formatter: '.commonFormatter.changeName'}"  -->
                                     <viz.data:MeasureDefinition 
                                                                 name="Fact Hours" 
                                                                 value="{ChartMdl>FactHours}" />

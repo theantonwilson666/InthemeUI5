@@ -51,22 +51,21 @@
                        growingThreshold="300"
                        growingScrollToLoad="true"
                        mode="{state>/ConfigSTMode}">
-
-                       <columns>
+                    <columns>
                         <!--1 column -->
                         <Column>
                             <customData>
                                 <core:CustomData key="p13nData"
                                                  value='\{
                                                             "columnIndex": "0",
-                                                            "columnKey": "Worker",
-                                                            "leadingProperty": "Worker",
-                                                            "sortProperty": "Worker",
-                                                            "filterProperty": "Worker"
+                                                            "columnKey": "WorkerName",
+                                                            "leadingProperty": "WorkerName",
+                                                            "sortProperty": "WorkerName",
+                                                            "filterProperty": "WorkerName"
                                                          }'/>
                             </customData>
                             <header>
-                                <Text text="{/#WorkerScheduleConf/Worker/@sap:label}"/>
+                                <Text text="{/#WorkerScheduleConf/WorkerName/@sap:label}"/>
                             </header>
                         </Column>
                         <!--2 column -->
@@ -85,23 +84,19 @@
                                 <Text text="{/#WorkerScheduleConf/Percent/@sap:label}"/>
                             </header>
                         </Column>
-
-                       
                     </columns>
                     <items>
                         <ColumnListItem id="workerConfListItem">
                             <!--1 cells-->
                             <cells>
-                                <smartField:SmartField value="{Worker}" editable="{= ${state>/ConfigSTMode} === 'SingleSelectLeft' }"/>
+                                <smartField:SmartField value="{WorkerName}" editable="{= ${state>/ConfigSTMode} === 'SingleSelectLeft' }"/>
                             </cells>
                             <!--2 cells-->
                             <cells>
                                 <smartField:SmartField value="{Percent}" editable="{= ${state>/ConfigSTMode} === 'SingleSelectLeft' }"/>
                             </cells>
-
                         </ColumnListItem>
                     </items>
-
                 </Table>
             </smartTable:SmartTable>
         </f:content>
