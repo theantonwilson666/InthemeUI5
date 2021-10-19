@@ -22,6 +22,8 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
     },
 
     _onRouteMatched: function (oEvent) {
+      this.startButtonHide();
+      this.checkIsAdmin();
       var oSmartTable = this.byId("workerSmartTable");
       this.setStateProperty("/layout", "OneColumn");
 
@@ -30,6 +32,34 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
       }
 
       this.checkIsAdmin();
+    },
+
+    startButtonHide:function(){
+      var WrenchButton = this.getView().byId("__xmlview0--WrenchButton")
+      var excel_attachmentButton = this.getView().byId("__xmlview0--excel-attachmentButton")
+      if(WrenchButton){
+        WrenchButton.setVisible(false);
+        excel_attachmentButton.setVisible(false);
+      }
+    },
+    checkIsAdmin:function(){
+        this.getModel().callFunction('/isAdmin',{
+          method: "GET",
+          success: function(oData){
+            if(oData.isAdmin.Admin){
+            this.showAdminButton();
+            }
+          }.bind(this)
+        }) 
+    },
+      
+    showAdminButton:function(){
+      setTimeout(() => {
+        this.getView().byId("__xmlview0--WrenchButton").setVisible(true);
+         this.getView().byId("__xmlview0--excel-attachmentButton").setVisible(true);
+      }, 0);
+
+
     },
 
     onPressDownloadExcel: function (oEvent) {
