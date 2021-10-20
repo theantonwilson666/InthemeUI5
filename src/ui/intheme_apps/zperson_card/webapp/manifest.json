@@ -18,7 +18,7 @@
         "uri": "/sap/opu/odata/sap/ZINTHEME_WORKER_SRV/",
         "type": "OData",
         "settings": {
-          "annotations": ["annotation"],
+          "annotations": ["annotation" ],
           "localUri": "localService/metadata.xml"
         }
       },
