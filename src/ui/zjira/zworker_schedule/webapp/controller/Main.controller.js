@@ -128,9 +128,19 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
       this._oDirectDialog.open();
     },
 
-    onCloseDialog: function (oEvent) {
-      oEvent.getSource().getParent().close();
+    changeDateRange:function(oEvent){
+      try {
+        if(oEvent.getSource().getTo().getMonth()!=oEvent.getSource().getFrom().getMonth()){
+          throw new Error("Данные некорректны")
+        }
+      } catch (error) {
+        new sap.m.MessageToast.show('Выберете даты в одном месяце')
+        oEvent.getSource().setTo(new Date())
+        oEvent.getSource().setFrom(new Date())
+        console.log(error);
+      }
     },
+
 
     onDownloadSchedule: function (oEvent) {
       var oModel = this.getModel();
