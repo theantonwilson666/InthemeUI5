@@ -8,9 +8,9 @@ var fioriBaseController = sap.ui.require(
 
 sap.ui.controller("zperson_card.ext.controller.ObjectPageExt", {
   onInit: function () {
-    if (this.extensionAPI.getViewId() == 'zperson_card::sap.suite.ui.generic.template.ObjectPage.view.Details::ZSNN_PERSON_ROOT') {
-      this.uiExtensions();
-    }
+    // if (this.extensionAPI.getViewId() == 'zperson_card::sap.suite.ui.generic.template.ObjectPage.view.Details::ZSNN_PERSON_ROOT') {
+    //   this.uiExtensions();
+    // }
   },
 
   uiExtensions: function () {
