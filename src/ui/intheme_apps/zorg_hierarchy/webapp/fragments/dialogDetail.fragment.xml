@@ -1,0 +1,38 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form">
+    <Dialog contentWidth="50%" title="Обновление">
+        <!-- если не получится подгрузить данные, сделаю через controller -->
+        <content>
+            <VBox class="sapUiMediumMarginBeginEnd sapUiMediumMarginBottom">
+                <Table inset="false" mode="SingleSelect" items="{
+                                    path: '/OrgSHSet'
+                                    }">
+                    <headerToolbar>
+                        <OverflowToolbar>
+                            <ToolbarSpacer/>
+                            <Button icon="sap-icon://edit" text="Изменить параметры" press="onChangeParameters"/>
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column width="12em">
+                            <Text text="Имя плитки" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{OrgName}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+        </content>
+        <endButton>
+            <Button text="Выйти" press="onDialogCancelPress"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

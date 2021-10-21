@@ -1,6 +1,7 @@
 sap.ui.define(
   [
     "intheme/zworker_schedule/controller/Main.controller",
+    // "intheme/zjiralib/formatter/CommonFormatter",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "sap/m/Dialog",
@@ -11,6 +12,7 @@ sap.ui.define(
   ],
   function (
     Controller,
+    // Formatter,
     Filter,
     FilterOperator,
     Dialog,
@@ -23,36 +25,92 @@ sap.ui.define(
 
     return Controller.extend("intheme.zworker_schedule.controller.Detail", {
       oVizFrame: null,
-
       onInit: function () {
-        this.getRouter()
-          .getRoute("DetailRoute")
+        this.getRouter().getRoute("DetailRoute")
           .attachPatternMatched(this._onRouteMatched, this);
       },
 
+      setAutoResizeTable: function (oEvent) {
+        var oSmartTable = this.getView().byId("dateSmartTable");
+        var tableColumnsLength = oSmartTable.getTable().getColumns().length
+        for (var i = 0; i < tableColumnsLength; i++) {
+          oSmartTable.getTable().getColumns()[i].setWidth(`12rem`)
+        }
+      },
+      checkIsAdmin: function () {
+        debugger
+        this.getModel().callFunction("/isAdmin", {
+          method: "GET",
+          success: function (oData) {
+            if (oData.isAdmin) {
+              this.showAdminButton(oData.isAdmin)
+            }
+          }.bind(this),
+        });
+      },
+      showAdminButton: function (oAdmin) {
+        debugger
+        var oWorkFactCheckBox = this.getView().byId("WorkFactCheckBox")
+        var oWorkFactFrom1 = this.getView().byId("WorkFactFrom1")
+        var oWorkFactTo1 = this.getView().byId("WorkFactTo1")
+        var oResetWorkerDay = this.getView().byId("resetWorkerDay")
+
+        if (oAdmin.Admin === true) {
+          oWorkFactCheckBox.setEditable(true)
+          oWorkFactFrom1.setEditable(true)
+          oWorkFactTo1.setEditable(true)
+          oResetWorkerDay.setVisible(true)
+        } else {
+          oWorkFactCheckBox.setEditable(false)
+          oWorkFactFrom1.setEditable(false)
+          oWorkFactTo1.setEditable(false)
+          oResetWorkerDay.setVisible(false)
+        }
+      },
+      resetWorkerDay: function () {
+        debugger
+        var currentDate = null;
+        if (this.byId('workerCalendar').getSelectedDates()[0]) {
+          currentDate = this.byId('workerCalendar').getSelectedDates()[0].getStartDate();
+        } else {
+          currentDate = new Date;
+        }
+        this.getModel().callFunction("/ResetWorkerDay", {
+          method: "POST",
+          urlParameters: {
+            Date: currentDate.toLocaleDateString(),
+            Worker: `${this.getCurrentWorker()}`
+          },
+          success: function (oData) {
+            console.log(oData);
+          }.bind(this),
+        });
+      },
+      resetTime: function (oData) {
+        debugger
+      },
       _onRouteMatched: function (oEvent) {
         var oArr = oEvent.getParameter("arguments")["?query"];
         this.bindView({
           entitySet: "/WorkerRegisterSet",
           keyParameters: oArr,
         });
-
         this.setStateProperty("/layout", "TwoColumnsMidExpanded");
         this.setStateProperty(
           "/detailBindingPath",
           this.getModel().createKey("/WorkerRegisterSet", oArr)
         );
-
         this.setCurrentWorker(oArr.Worker);
-
         this.bindSmartForm(
           oArr.Worker,
           encodeURIComponent(this.convertDate(new Date()))
         );
-
+        this.bindSmartTable(
+          oArr.Worker,
+          encodeURIComponent(this.convertDate(new Date()))
+        );
         this.initCalendarLegend();
-        
-        
+        this.checkIsAdmin();
       },
 
       onDateSelect: function (oEvent) {
@@ -65,15 +123,29 @@ sap.ui.define(
             )
           )
         );
+        this.bindSmartTable(
+          this.getWorker(),
+          encodeURIComponent(
+            this.convertDate(
+              oEvent.getSource().getSelectedDates()[0].getStartDate()
+            )
+          )
+        );
+        this.checkIsAdmin();
       },
-
+      underTen: function (time) {
+        return time < 10 ? '0' + time : time
+      },
+      bindSmartTable: function (sWorkerId, sDate) {
+        debugger
+        var sPath = "/WorkerScheduleSet(Date=datetime'" + sDate + "',Worker='" + sWorkerId + "')";
+        var oSmartTable = this.getView().byId("dateSmartTable");
+        oSmartTable.bindObject(sPath);
+        this.setAutoResizeTable();
+      },
       bindSmartForm: function (sWorkerId, sDate) {
         var sPath =
-          "/WorkerScheduleSet(Date=datetime'" +
-          sDate +
-          "',Worker='" +
-          sWorkerId +
-          "')";
+          "/WorkerScheduleSet(Date=datetime'" + sDate + "',Worker='" + sWorkerId + "')";
         var oSmartForm = this.getView().byId("dateSmartForm");
         oSmartForm.bindElement({
           path: sPath,
@@ -88,7 +160,6 @@ sap.ui.define(
           },
         });
       },
-
       convertDate: function (oDate) {
         return oDate.toJSON().split(".")[0];
       },
@@ -143,9 +214,6 @@ sap.ui.define(
                     })
                   );
                 })
-
-
-                
             }.bind(this),
           });
       },
@@ -153,6 +221,7 @@ sap.ui.define(
       updateCalendar: function (oEvent) {
         this.getData4VizChart();
         var oCalendar = this.getView().byId("workerCalendar");
+        debugger
         this.getModel().callFunction("/GetWorkerCalendar", {
           method: "GET",
           urlParameters: {
@@ -205,16 +274,14 @@ sap.ui.define(
       },
 
       getData4VizChart: function () {
+
         var oCalendar = this.getView().byId("workerCalendar");
         var oFilter = [
           new Filter("Worker", FilterOperator.EQ, this.getCurrentWorker()),
           new Filter(
-            "FirstDayOfMonth",
-            FilterOperator.EQ,
-            oCalendar.getStartDate()
+            "FirstDayOfMonth", FilterOperator.EQ, oCalendar.getStartDate()
           ),
         ];
-
         this.getModel().read("/WorkerMonthDataSet", {
           filters: oFilter,
           success: function (oData) {
@@ -227,9 +294,11 @@ sap.ui.define(
       },
 
       setChartData: function (oData) {
+
         Format.numericFormatter(ChartFormatter.getInstance());
         var formatPattern = ChartFormatter.DefaultPattern;
         var oVizFrame = (this.oVizFrame = this.getView().byId("monthPlot"));
+
         oVizFrame.setVizProperties({
           title: {
             text: this.i18n("ChartTitle"),
@@ -239,6 +308,17 @@ sap.ui.define(
               formatString: formatPattern.SHORTFLOAT_MFD2,
               visible: false,
             },
+            markerRenderer: function (oMarker) {
+              if (oMarker.ctx.measureNames === 'Fact Hours') {
+                var oData = this;
+                var currentDay = oData.filter(day => {
+                  if (oMarker.ctx.Date === day.Date)
+                    return day
+                })
+                if (currentDay[0].Redacted === true)
+                  oMarker.graphic.fill = "#945ecf"
+              }
+            }.bind(oData)
           },
           valueAxis: {
             title: {
@@ -256,14 +336,13 @@ sap.ui.define(
         var oPopOver = this.getView().byId("vizPopover");
         oPopOver.connect(oVizFrame.getVizUid());
         oPopOver.setFormatString(formatPattern.STANDARDFLOAT);
-        var oJson = new sap.ui.model.json.JSONModel({ Chart: oData });
+        var oJson = new sap.ui.model.json.JSONModel({
+          Chart: oData
+        });
         oVizFrame.setModel(oJson, "ChartMdl");
       },
-
-
-      onStartDateChange: function(oEvent){
+      onStartDateChange: function (oEvent) {
         this.updateCalendar(oEvent);
       }
     });
-  }
-);
+  });

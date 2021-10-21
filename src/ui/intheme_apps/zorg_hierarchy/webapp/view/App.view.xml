@@ -1,0 +1,7 @@
+<mvc:View controllerName="zorg_hierarchy.controller.ProcessFlow"
+	xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+	xmlns="sap.m"
+	xmlns:f="sap.f">
+	<App id="app">
+	</App>
+</mvc:View>

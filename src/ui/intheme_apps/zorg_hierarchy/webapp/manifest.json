@@ -1,0 +1,135 @@
+{
+  "_version": "1.12.0",
+  "sap.app": {
+    "id": "zorg_hierarchy",
+    "type": "application",
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata/sap/ZINTHEME_ORG_SRV",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "annotations": ["annotation"],
+          "localUri": "localService/metadata.xml"
+        }
+      },
+      "annotation": {
+        "type": "ODataAnnotation",
+        "uri": "annotations/annotation.xml",
+        "settings": {
+          "localUri": "annotations/annotation.xml"
+        }
+      }
+    },
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "sourceTemplate": {
+      "id": "ui5template.basicSAPUI5ApplicationProject",
+      "version": "1.40.12"
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    },
+    "supportedThemes": ["sap_hcb", "sap_belize"],
+    "fullWidth": true
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "rootView": {
+      "viewName": "zorg_hierarchy.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    },
+    "dependencies": {
+      "minUI5Version": "1.71.22",
+      "libs": {
+        "sap.ui.layout": {},
+        "sap.ui.core": {},
+        "sap.m": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "": {
+        "dataSource": "mainService",
+        "settings": {
+          "serviceUrlParams": {
+            "sap-client": "300"
+          },
+          "defaultBindingMode": "TwoWay",
+          "useBatch": true,
+          "defaultCountMode": "Inline",
+          "metadataUrlParams": {
+            "sap-value-list": "none"
+          }
+        }
+      },
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "zorg_hierarchy.i18n.i18n"
+        }
+      },
+      "state": {
+        "type": "sap.ui.model.json.JSONModel",
+        "settings": {
+          "isDraft": false,
+          "icons": {
+            "goHome": "sap-icon://home"
+          },
+          "layout": "OneColumn",
+          "pathHandle": false
+        }
+      }
+    },
+    "resources": {
+      "css": [{
+        "uri": "css/style.css"
+      }]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "zorg_hierarchy.view",
+        "controlAggregation": "pages",
+        "controlId": "app"
+      },
+      "routes": [{
+        "name": "WorklistRoute",
+        "pattern": "",
+        "target": ["WorklistTarget"]
+      }],
+      "targets": {
+        "WorklistTarget": {
+          "viewType": "XML",
+          "transition": "fade",
+          "viewName": "Worklist",
+          "ViewID": "Worklist"
+        }
+      }
+    }
+  }
+}

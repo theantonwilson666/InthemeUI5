@@ -1,0 +1,20 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Popover
+		id="myPopover"
+		title="Сумма: "
+		class="sapUiResponsivePadding--header sapUiResponsivePadding--footer"
+		placement="Bottom"
+		initialFocus="email"
+        contentHeight="30px"
+        contentWidth="100px">
+        
+        <content>
+			<Text text=""
+			id="popoverText"
+			/>
+        </content>
+
+	</Popover>
+</core:FragmentDefinition>

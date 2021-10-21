@@ -22,7 +22,8 @@
     "deploy_testApp": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=2 --app=ui5_example",
     "deploy_zjira_workers_grade": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=0 --app=zjira_workers_grade",
     "build": "grunt build",
-    "deploy_zjiraplugin": "node node_modules\\grunt-cli\\bin\\grunt deploy_plugin --plugin=zjiraplugin"
+    "deploy_zjiraplugin": "node node_modules\\grunt-cli\\bin\\grunt deploy_plugin --plugin=zjiraplugin",
+    "deploy_zorg_hierarchy": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=3 --app=zorg_hierarchy"
   },
   "keywords": [],
   "author": "Vilson A.Y.",

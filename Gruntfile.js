@@ -25,11 +25,9 @@ module.exports = function (grunt) {
     sLib = "zjiralib";
   }
 
-  
   if (sPlugin === undefined) {
     sPlugin = "zjiraplugin";
   }
-
 
   // Structure of MOL
   var oAuth = {
@@ -71,10 +69,9 @@ module.exports = function (grunt) {
             bspContainer: "ZWORKERSCHEDULE",
             bspDescription: "Worker Schedule",
             prefix: "intheme/zworker_schedule",
-          }
+          },
         },
       },
-
 
       {
         package: "ZUI5_LEARNING",
@@ -85,13 +82,22 @@ module.exports = function (grunt) {
             bspContainer: "ZTEST_APP",
             bspDescription: "Test Deploy",
             prefix: "intheme/zui5_example",
-          }
+          },
         },
-      }
+      },
 
-
-
-
+      {
+        package: "ZPERSON_CARD",
+        transportno: "TMDK922037",
+        project: "intheme_apps",
+        apps: {
+          zorg_hierarchy: {
+            bspContainer: "ZORG_HIERARCHY",
+            bspDescription: "Орг.структура",
+            prefix: "intheme/zorg_hierarchy",
+          },
+        },
+      },
     ],
 
     libs: {
@@ -111,7 +117,6 @@ module.exports = function (grunt) {
         bspDescription: "Fiori Plugin",
       },
     },
-
   };
 
   grunt.initConfig({
@@ -258,8 +263,7 @@ module.exports = function (grunt) {
             src: "**/*.*",
           },
         },
-      }
-
+      },
     },
   });
 
@@ -278,8 +282,6 @@ module.exports = function (grunt) {
             compress: true,
           },
           components: true,
-
-          
         });
       });
     });
@@ -298,14 +300,16 @@ module.exports = function (grunt) {
 
     // Copying remaining files of libs
     for (var lib in oAuth.libs) {
-      grunt.file.copy("src/ui/zjira/" + lib + "/src", "src/dist/ui/zjira/" + lib);
+      grunt.file.copy(
+        "src/ui/zjira/" + lib + "/src",
+        "src/dist/ui/zjira/" + lib
+      );
     }
 
-     // Copying remaining files of plugins
+    // Copying remaining files of plugins
     for (var plugin in oAuth.plugins) {
       grunt.file.copy("src/ui/zjira/" + plugin, "src/dist/ui/" + plugin);
     }
-
   });
 
   grunt.registerTask("serve", function () {
@@ -313,11 +317,10 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask("deploy", ["nwabap_ui5uploader:upload_build"]);
-  
-  grunt.registerTask("deploy_lib", ["nwabap_ui5uploader:upload_library"]);
-  
-  grunt.registerTask("deploy_plugin", ["nwabap_ui5uploader:upload_plugin"]);
 
+  grunt.registerTask("deploy_lib", ["nwabap_ui5uploader:upload_library"]);
+
+  grunt.registerTask("deploy_plugin", ["nwabap_ui5uploader:upload_plugin"]);
 
   grunt.registerTask("build", [
     "clean",
