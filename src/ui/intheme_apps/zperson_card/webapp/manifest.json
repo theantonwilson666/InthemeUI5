@@ -18,7 +18,7 @@
         "uri": "/sap/opu/odata/sap/ZINTHEME_WORKER_SRV/",
         "type": "OData",
         "settings": {
-          "annotations": ["annotation"],
+          "annotations": ["annotation" ],
           "localUri": "localService/metadata.xml"
         }
       },
@@ -180,14 +180,17 @@
                 "entitySet": "ZSNN_PERSON_CORPORATE_INFO",
                 "component": {
                   "name": "sap.suite.ui.generic.template.ObjectPage"
-                }
+                 }
+                
               },
 
               {
+                
                 "navigationProperty": "to_Equipment",
                 "entitySet": "ZSNN_PERSON_EQUIPMENT",
                 "component": {
                   "name": "sap.suite.ui.generic.template.ObjectPage"
+                
                 }
               },
 
