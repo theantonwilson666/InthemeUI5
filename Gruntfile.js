@@ -96,6 +96,12 @@ module.exports = function (grunt) {
             bspDescription: "Орг.структура",
             prefix: "intheme/zorg_hierarchy",
           },
+
+          zperson_card: {
+            bspContainer: "ZPERSON_CARD",
+            bspDescription: "Карточка сотрудника",
+            prefix: "intheme/zperson_card",
+          },
         },
       },
     ],

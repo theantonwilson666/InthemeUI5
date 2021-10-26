@@ -19,8 +19,21 @@
 
             <Annotations Target="ZINTHEME_WORKER_SRV.ZSNN_PERSON_ROOTType">
 
+                <Annotation Term="UI.HeaderFacets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="CorporateInfo"/>
+                            <PropertyValue Property="Label" String="Корпоративная информация"/>
+                            <PropertyValue Property="Target" AnnotationPath="to_CorporateInfo/@UI.FieldGroup#CorporateInfo"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+
+
                 <Annotation Term="UI.HeaderInfo">
-                    <Record Type="UI.HeaderInfoType">
+                    <Record>
+
+                        <PropertyValue Property="ImageUrl" Path="ImageUrl"/>
                         <PropertyValue Property="Description">
                             <Record Type="UI.DataField">
                                 <PropertyValue Property="Value" Path="Name"/>
@@ -31,6 +44,12 @@
 
                 <Annotation Term="UI.LineItem">
                     <Collection>
+
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ImageUrl"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="Name"/>
                         </Record>
@@ -49,9 +68,9 @@
                         <Record Type="UI.ReferenceFacet">
                             <PropertyValue Property="ID" String="CorporateInfo"/>
                             <PropertyValue Property="Label" String="Корпоративная информация"/>
-                            <PropertyValue Property="Target" AnnotationPath="to_CorporateInfo/@UI.FieldGroup" />
+                            <PropertyValue Property="Target" AnnotationPath="to_CorporateInfo/@UI.LineItem" />
                         </Record>
-
+                     
 
                         <Record Type="UI.ReferenceFacet">
                             <PropertyValue Property="ID" String="Equipment"/>
@@ -95,27 +114,74 @@
 
             </Annotations>
 
+
             <Annotations Target="ZINTHEME_WORKER_SRV.ZSNN_PERSON_CORPORATE_INFOType">
-                <Annotation Term="UI.FieldGroup" Qualifier="DataFG">
+
+              
+
+                <Annotation Term="UI.FieldGroup" Qualifier="CorporateInfo">
                     <Record>
+                        <PropertyValue Property="Label" String="Corporate Info"/>
                         <PropertyValue Property="Data">
                             <Collection>
-                                <Record Type="UI.DataFieldForAnnotation">
-                                    <PropertyValue Property="Target" Path="PositionId"/>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="PositionId"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
                                 </Record>
 
-                                <Record Type="UI.DataFieldForAnnotation">
-                                    <PropertyValue Property="Target" Path="DateEmployment"/>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="DateEmployment"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
                                 </Record>
 
                             </Collection>
                         </PropertyValue>
-                        <PropertyValue Property="Label" String="Corporate Info"/>
+
                     </Record>
                 </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="PositionId"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="DateEmployment"/>
+                        </Record>
+                     
+                    </Collection>
+                </Annotation>
+
+
             </Annotations>
+           
+
+
+
 
             <Annotations Target="ZINTHEME_WORKER_SRV.ZSNN_PERSON_EQUIPMENTType">
+
+                <Annotation Term="UI.HeaderInfo">
+                    <Record>
+
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="Type"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+
+                <Annotation Term="UI.HeaderFacets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="CorporateInfom"/>
+                            <PropertyValue Property="Label" String="Корпоративная информация"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#GeneralInformation"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+         
+
                 <Annotation Term="UI.LineItem">
                     <Collection>
                         <Record Type="UI.DataField">
@@ -133,9 +199,57 @@
                         </Record>
                     </Collection>
                 </Annotation>
+
+                <Annotation Term="UI.FieldGroup"  Qualifier ="GeneralInformation">
+                    <Record>
+                        <PropertyValue Property="Label" String="Equipment"/>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="Brand"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="SerialNumber"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="Type"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="DateFrom"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+
+                            </Collection>
+                        </PropertyValue>
+
+                    </Record>
+                </Annotation>
+
+
+                 <Annotation Term="UI.Facets">
+                    <Collection>
+
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="Equipment1"/>
+                            <PropertyValue Property="Label" String="Оборудование"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#GeneralInformation" />
+                        </Record>
+                    
+
+                    </Collection>
+                </Annotation>
+
+           
+
             </Annotations>
 
             <Annotations Target="ZINTHEME_WORKER_SRV.ZSNN_PERSON_FOLLOWERSType">
+
+
                 <Annotation Term="UI.LineItem">
                     <Collection>
                         <Record Type="UI.DataField">
@@ -143,6 +257,51 @@
                         </Record>
                     </Collection>
                 </Annotation>
+
+
+                <Annotation Term="UI.HeaderInfo">
+                    <Record>
+
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="Follower"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+
+
+                <Annotation Term="UI.FieldGroup"  Qualifier ="follower">
+                    <Record>
+                        <PropertyValue Property="Label" String="follower"/>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                              
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="Follower"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+
+                            </Collection>
+                        </PropertyValue>
+
+                    </Record>
+                </Annotation>
+
+                <Annotation Term="UI.Facets">
+                    <Collection>
+
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="Follower1"/>
+                            <PropertyValue Property="Label" String="Кураторство"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#follower" />
+                        </Record>
+                    
+
+                    </Collection>
+                </Annotation>
+
+
             </Annotations>
 
             <Annotations Target="ZINTHEME_WORKER_SRV.ZSNN_PERSON_GOALType">
@@ -166,6 +325,51 @@
 
                     </Collection>
                 </Annotation>
+
+                <Annotation Term="UI.FieldGroup"  Qualifier ="goal">
+                    <Record>
+                        <PropertyValue Property="Label" String="goal"/>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                              
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="Status"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="DateFrom"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="DateTo"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="Goal"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+
+                            </Collection>
+                        </PropertyValue>
+
+                    </Record>
+                </Annotation>
+
+                
+                <Annotation Term="UI.Facets">
+                    <Collection>
+
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="goal1"/>
+                            <PropertyValue Property="Label" String="Цели"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#goal" />
+                        </Record>
+                    
+
+                    </Collection>
+                </Annotation>
+
+
             </Annotations>
 
             <Annotations Target="ZINTHEME_WORKER_SRV.ZSNN_PERSON_VACATIONType">
@@ -184,6 +388,49 @@
                         </Record>
                     </Collection>
                 </Annotation>
+
+
+                <Annotation Term="UI.FieldGroup"  Qualifier ="Vacation">
+                    <Record>
+                        <PropertyValue Property="Label" String="Vacation"/>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                              
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="VacationType"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="DateFrom"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="DateTo"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                             
+
+                            </Collection>
+                        </PropertyValue>
+
+                    </Record>
+                </Annotation>
+
+
+                <Annotation Term="UI.Facets">
+                    <Collection>
+
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="Vacation1"/>
+                            <PropertyValue Property="Label" String="Отпуска"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Vacation" />
+                        </Record>
+                    
+
+                    </Collection>
+                </Annotation>
+
+
             </Annotations>
 
             <Annotations Target="ZINTHEME_WORKER_SRV.ZSNN_PERSON_VACATION_RESTType">
@@ -202,6 +449,50 @@
                         </Record>
                     </Collection>
                 </Annotation>
+
+
+
+                <Annotation Term="UI.FieldGroup"  Qualifier ="VacationRest">
+                    <Record>
+                        <PropertyValue Property="Label" String="VacationRest"/>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                              
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="VacationYear"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="VacationRest"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="DayOffRest"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                             
+
+                            </Collection>
+                        </PropertyValue>
+
+                    </Record>
+                </Annotation>
+
+
+                <Annotation Term="UI.Facets">
+                    <Collection>
+
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="VacationRest1"/>
+                            <PropertyValue Property="Label" String="Остаток отпуска"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#VacationRest" />
+                        </Record>
+                    
+
+                    </Collection>
+                </Annotation>
+
+
             </Annotations>
 
             <Annotations Target="ZINTHEME_WORKER_SRV.ZSNN_PERSON_WEEKEND_WORKDAYType">
@@ -217,8 +508,52 @@
 
                     </Collection>
                 </Annotation>
+
+
+                <Annotation Term="UI.FieldGroup"  Qualifier ="Weekend_workday">
+                    <Record>
+                        <PropertyValue Property="Label" String="Weekend_workday"/>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                              
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="WorkDate"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="WorkHours"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                               
+                             
+
+                            </Collection>
+                        </PropertyValue>
+
+                    </Record>
+                </Annotation>
+
+
+                <Annotation Term="UI.Facets">
+                    <Collection>
+
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="Weekend_workday1"/>
+                            <PropertyValue Property="Label" String="Работа в выходные дни"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Weekend_workday" />
+                        </Record>
+                    
+
+                    </Collection>
+                </Annotation>
+
             </Annotations>
 
+
+            <Annotations Target="ZINTHEME_WORKER_SRV.ZSNN_PERSON_ROOTType/ImageUrl">
+                <Annotation Term="UI.IsImageUrl" />
+                <!-- <Annotation Term="Common.Text" String="{Product}" /> -->
+            </Annotations>
 
         </Schema>
     </edmx:DataServices>
