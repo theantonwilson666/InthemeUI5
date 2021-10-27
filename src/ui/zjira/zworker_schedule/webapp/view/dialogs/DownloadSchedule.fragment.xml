@@ -30,7 +30,7 @@
                             <f:formElements>
                                 <f:FormElement label="{i18n>SchedulePeriod}">
                                     <f:fields>
-                                        <DateRangeSelection id="SchedulePeriod"/>
+                                        <DateRangeSelection change='changeDateRange' id="SchedulePeriod"/>
                                     </f:fields>
                                 </f:FormElement>
                                 <f:FormElement label="{i18n>ScheduleType}">

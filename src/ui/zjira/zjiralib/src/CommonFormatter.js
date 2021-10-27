@@ -63,6 +63,12 @@ sap.ui.define([], function () {
       if (data) {
         return `${this.underTen(data.getHours())}:${this.underTen(data.getMinutes())}:${this.underTen(data.getSeconds())}`
       }
+    },
+    formatBoolean: function (bool) {
+      if (typeof (bool) === 'boolean') {
+        debugger
+        return bool === false ? 'Нет' : 'Да'
+      }
     }
   };
 });

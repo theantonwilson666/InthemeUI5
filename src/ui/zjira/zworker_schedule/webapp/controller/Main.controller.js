@@ -1,6 +1,5 @@
 sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
   "use strict";
-
   return BaseController.extend("intheme.zworker_schedule.controller.Main", {
     onInit: function () {
       this.getRouter()
@@ -23,6 +22,8 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
     },
 
     _onRouteMatched: function (oEvent) {
+      this.startButtonHide();
+      this.checkIsAdmin();
       var oSmartTable = this.byId("workerSmartTable");
       this.setStateProperty("/layout", "OneColumn");
 
@@ -31,6 +32,34 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
       }
 
       this.checkIsAdmin();
+    },
+
+    startButtonHide:function(){
+      var WrenchButton = this.getView().byId("__xmlview0--WrenchButton")
+      var excel_attachmentButton = this.getView().byId("__xmlview0--excel-attachmentButton")
+      if(WrenchButton){
+        WrenchButton.setVisible(false);
+        excel_attachmentButton.setVisible(false);
+      }
+    },
+    checkIsAdmin:function(){
+        this.getModel().callFunction('/isAdmin',{
+          method: "GET",
+          success: function(oData){
+            if(oData.isAdmin.Admin){
+            this.showAdminButton();
+            }
+          }.bind(this)
+        }) 
+    },
+      
+    showAdminButton:function(){
+      setTimeout(() => {
+        this.getView().byId("__xmlview0--WrenchButton").setVisible(true);
+         this.getView().byId("__xmlview0--excel-attachmentButton").setVisible(true);
+      }, 0);
+
+
     },
 
     onPressDownloadExcel: function (oEvent) {
@@ -99,9 +128,19 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
       this._oDirectDialog.open();
     },
 
-    onCloseDialog: function (oEvent) {
-      oEvent.getSource().getParent().close();
+    changeDateRange:function(oEvent){
+      try {
+        if(oEvent.getSource().getTo().getMonth()!=oEvent.getSource().getFrom().getMonth()){
+          throw new Error("Данные некорректны")
+        }
+      } catch (error) {
+        new sap.m.MessageToast.show('Выберете даты в одном месяце')
+        oEvent.getSource().setTo(new Date())
+        oEvent.getSource().setFrom(new Date())
+        console.log(error);
+      }
     },
+
 
     onDownloadSchedule: function (oEvent) {
       var oModel = this.getModel();
@@ -130,7 +169,7 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
         method: "GET",
         success: function (oData) {
           if (oData.isAdmin.Admin) {
-            setTimeout(this.showAdminButton.bind(this), 10);
+            this.showAdminButton();
           }
         }.bind(this),
       });
@@ -139,6 +178,8 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
     showAdminButton: function () {
       var oScheduleButton = this.getView().byId("configScheduleButton");
       var oExcelButton = this.getView().byId("excelScheduleButton");
+      var adminColumn1 = this.getView().byId("adminColumn1");
+      var adminColumn2 = this.getView().byId("adminColumn2");
 
       if (oScheduleButton) {
         oScheduleButton.setVisible(true);
@@ -146,6 +187,14 @@ sap.ui.define(["jira/lib/BaseController"], function (BaseController) {
 
       if (oExcelButton) {
         oExcelButton.setVisible(true);
+      }
+
+      if (adminColumn1) {
+        adminColumn1.setVisible(true);
+      }
+
+      if (adminColumn2) {
+        adminColumn2.setVisible(true);
       }
 
     },

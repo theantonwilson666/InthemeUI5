@@ -25,71 +25,47 @@ sap.ui.define(
 
     return Controller.extend("intheme.zworker_schedule.controller.Detail", {
       oVizFrame: null,
-
       onInit: function () {
         this.getRouter().getRoute("DetailRoute")
           .attachPatternMatched(this._onRouteMatched, this);
-
       },
 
       setAutoResizeTable: function (oEvent) {
-
         var oSmartTable = this.getView().byId("dateSmartTable");
         var tableColumnsLength = oSmartTable.getTable().getColumns().length
-        // for (var i = 0; i < tableColumnsLength; i++) {
-        //   oSmartTable.getTable().autoResizeColumn(i)
-        // }
         for (var i = 0; i < tableColumnsLength; i++) {
           oSmartTable.getTable().getColumns()[i].setWidth(`12rem`)
         }
-
-
-        // var arrOfLength = []
-        // for (var i = 0; i < oSmartTable.getTable().getColumns().length; i++) {
-        //   var cell = []
-        //   for (var k = 0; k < oSmartTable.getTable().getRows().length; k++) {
-        //     cell.push(oSmartTable.getTable().getRows()[k].getCells()[i].getText())
-        //   }
-        //   arrOfLength.push(cell)
-        // }
-
-        // var newArr = []
-        // for (var len of arrOfLength) {
-        //   newArr.push(Math.max.apply(Math, len.map(ev => ev.length)))
-        // }
-
-        // for (let n = 0; n < oSmartTable.getTable().getColumns().length; n++) {
-        //   oSmartTable.getTable().getColumns()[n].setWidth(`${newArr[n]*6}px`)
-        // }
       },
       checkIsAdmin: function () {
         debugger
         this.getModel().callFunction("/isAdmin", {
           method: "GET",
           success: function (oData) {
-            if (oData.isAdmin.Admin) {
-              setTimeout(this.showAdminButton.bind(this), 10);
+            if (oData.isAdmin) {
+              this.showAdminButton(oData.isAdmin)
             }
           }.bind(this),
         });
       },
-
-      showAdminButton: function () {
-        var oRedactedCheckBox = this.getView().byId("WorkFactCheckBox");
-        if (oRedactedCheckBox) {
-          oRedactedCheckBox.setEditable(true)
-        }
-        // var oScheduleButton = this.getView().byId("configScheduleButton");
-        // var oExcelButton = this.getView().byId("excelScheduleButton");
-
-        // if (oScheduleButton) {
-        //   oScheduleButton.setVisible(true);
-        // }
-
-        // if (oExcelButton) {
-        //   oExcelButton.setVisible(true);
-        // }
+      showAdminButton: function (oAdmin) {
         debugger
+        var oWorkFactCheckBox = this.getView().byId("WorkFactCheckBox")
+        var oWorkFactFrom1 = this.getView().byId("WorkFactFrom1")
+        var oWorkFactTo1 = this.getView().byId("WorkFactTo1")
+        var oResetWorkerDay = this.getView().byId("resetWorkerDay")
+
+        if (oAdmin.Admin === true) {
+          oWorkFactCheckBox.setEditable(true)
+          oWorkFactFrom1.setEditable(true)
+          oWorkFactTo1.setEditable(true)
+          oResetWorkerDay.setVisible(true)
+        } else {
+          oWorkFactCheckBox.setEditable(false)
+          oWorkFactFrom1.setEditable(false)
+          oWorkFactTo1.setEditable(false)
+          oResetWorkerDay.setVisible(false)
+        }
       },
       resetWorkerDay: function () {
         debugger
@@ -155,13 +131,13 @@ sap.ui.define(
             )
           )
         );
+        this.checkIsAdmin();
       },
       underTen: function (time) {
         return time < 10 ? '0' + time : time
       },
       bindSmartTable: function (sWorkerId, sDate) {
         debugger
-        // var sPath = "/WorkerScheduleSet(Date=datetime'2021-09-15T14%3A05%3A05',Worker='5EEC916EAB91DC0BC9FD7BF9')"
         var sPath = "/WorkerScheduleSet(Date=datetime'" + sDate + "',Worker='" + sWorkerId + "')";
         var oSmartTable = this.getView().byId("dateSmartTable");
         oSmartTable.bindObject(sPath);
@@ -343,17 +319,6 @@ sap.ui.define(
                   oMarker.graphic.fill = "#945ecf"
               }
             }.bind(oData)
-          },
-          tooltip: {
-            preRender: function (oToolip) {
-
-            }.bind(this),
-            visible: false
-          },
-          legend: {
-            postRenderer: function (pToolip) {
-              // 
-            }.bind(this)
           },
           valueAxis: {
             title: {
