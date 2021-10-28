@@ -1,6 +1,6 @@
 sap.ui.loader.config({
     paths: {
-        "fa/lib": "/sap/bc/ui5_ui5/sap/zfalib"
+        "jira/lib": "/sap/bc/ui5_ui5/sap/zjiralib"
     }
 });
 
