@@ -96,6 +96,12 @@ module.exports = function (grunt) {
             bspDescription: "Орг.структура",
             prefix: "intheme/zorg_hierarchy",
           },
+
+          zperson_card: {
+            bspContainer: "ZPERSON_CARD",
+            bspDescription: "Карточка сотрудника",
+            prefix: "intheme/zperson_card",
+          },
         },
       },
     ],
@@ -172,9 +178,11 @@ module.exports = function (grunt) {
         options: {
           appresources: "src",
           resources:
-          "C:/Users/ИванОлинов/Desktop/FA_TM-DEV--main/sapui5-dist-static/resources",
-        testresources:
-          "C:/Users/ИванОлинов/Desktop/FA_TM-DEV--main/sapui5-dist-static/test-resources",
+
+            "C:/Users/АнтонВильсон/Desktop/Work/InThemJira/UI5/sapui5-sdk-1.65.16/resources",
+          testresources:
+            "C:/Users/АнтонВильсон/Desktop/Work/InThemJira/UI5/sapui5-sdk-1.65.16/test-resources",
+
           proxypath: "proxy",
         },
       },

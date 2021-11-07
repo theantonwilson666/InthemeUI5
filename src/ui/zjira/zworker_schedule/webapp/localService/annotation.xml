@@ -153,7 +153,7 @@
                         <PropertyValue Property="SearchSupported" Bool="true" />
                         <PropertyValue Property="Parameters">
                             <Collection>
-                                <Record Type="Common.ValueListParameterOut">
+                                <Record Type="Common.ValueListParameterInOut">
                                     <PropertyValue Property="LocalDataProperty" PropertyPath="WorkerName" />
                                     <PropertyValue Property="ValueListProperty" String="WorkerName" />
                                 </Record>
@@ -163,7 +163,7 @@
                                 <Record Type="Common.ValueListParameterDisplayOnly">
                                     <PropertyValue Property="ValueListProperty" String="Team" />
                                 </Record>
-                                <Record Type="Common.ValueListParameterOut">
+                                <Record Type="Common.ValueListParameterInOut">
                                     <PropertyValue Property="LocalDataProperty" PropertyPath="Worker" />
                                     <PropertyValue Property="ValueListProperty" String="Worker" />
                                 </Record>

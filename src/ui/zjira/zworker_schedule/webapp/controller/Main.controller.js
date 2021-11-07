@@ -137,6 +137,7 @@ sap.ui.define(["jira/lib/BaseController",
       });
       var sUrl = sServiceUrl + sPath + "/$value";    
       sap.m.URLHelper.redirect(sUrl, true);
+
       oEvent.getSource().getParent().close();
     },
 

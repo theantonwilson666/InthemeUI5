@@ -1,3 +1,4 @@
+
 $.sap.require("jira/lib/fiorielementslib/fioriBaseController");
 var fioriBaseController = sap.ui.require(
     "jira/lib/fiorielementslib/fioriBaseController"
@@ -110,3 +111,4 @@ sap.ui.controller("zperson_card.ext.controller.ObjectPageExt", {
     }
 
 });
+

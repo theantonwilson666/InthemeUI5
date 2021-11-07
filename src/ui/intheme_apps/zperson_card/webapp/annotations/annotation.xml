@@ -64,13 +64,13 @@
 
                 <Annotation Term="UI.Facets">
                     <Collection>
-
                         <Record Type="UI.ReferenceFacet">
                             <PropertyValue Property="ID" String="CorporateInfo"/>
                             <PropertyValue Property="Label" String="Корпоративная информация"/>
                             <PropertyValue Property="Target" AnnotationPath="to_CorporateInfo/@UI.LineItem" />
                         </Record>
                      
+
 
                         <Record Type="UI.ReferenceFacet">
                             <PropertyValue Property="ID" String="Equipment"/>
@@ -116,9 +116,6 @@
 
 
             <Annotations Target="ZINTHEME_WORKER_SRV.ZSNN_PERSON_CORPORATE_INFOType">
-
-              
-
                 <Annotation Term="UI.FieldGroup" Qualifier="CorporateInfo">
                     <Record>
                         <PropertyValue Property="Label" String="Corporate Info"/>
@@ -139,6 +136,7 @@
 
                     </Record>
                 </Annotation>
+
                 <Annotation Term="UI.LineItem">
                     <Collection>
                         <Record Type="UI.DataField">
@@ -154,8 +152,6 @@
 
             </Annotations>
            
-
-
 
 
             <Annotations Target="ZINTHEME_WORKER_SRV.ZSNN_PERSON_EQUIPMENTType">
