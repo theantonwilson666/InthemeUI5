@@ -9,6 +9,7 @@ sap.ui.define(
     "sap/ui/unified/DateTypeRange",
     "sap/viz/ui5/format/ChartFormatter",
     "sap/viz/ui5/api/env/Format",
+    "../model/formatter/formatter"
   ],
   function (
     Controller,
@@ -19,16 +20,29 @@ sap.ui.define(
     CalendarLegendItem,
     DateTypeRange,
     ChartFormatter,
-    Format
+    Format,
+    formatter
   ) {
     "use strict";
 
     return Controller.extend("intheme.zworker_schedule.controller.Detail", {
       oVizFrame: null,
+      formatter:formatter,
       onInit: function () {
         this.getRouter().getRoute("DetailRoute")
           .attachPatternMatched(this._onRouteMatched, this);
+          var addWorkDayButton = this.byId('addWorkIntervalButton')
+          if(addWorkDayButton){
+            addWorkDayButton.setVisible(false)
+          }
+         
+          
       },
+
+      /**
+       * @override
+       */
+     
 
       setAutoResizeTable: function (oEvent) {
         var oSmartTable = this.getView().byId("dateSmartTable");
@@ -38,7 +52,7 @@ sap.ui.define(
         }
       },
       checkIsAdmin: function () {
-        debugger
+        // debugger
         this.getModel().callFunction("/isAdmin", {
           method: "GET",
           success: function (oData) {
@@ -49,7 +63,7 @@ sap.ui.define(
         });
       },
       showAdminButton: function (oAdmin) {
-        debugger
+        //debugger
         var oWorkFactCheckBox = this.getView().byId("WorkFactCheckBox")
         var oWorkFactFrom1 = this.getView().byId("WorkFactFrom1")
         var oWorkFactTo1 = this.getView().byId("WorkFactTo1")
@@ -68,7 +82,7 @@ sap.ui.define(
         }
       },
       resetWorkerDay: function () {
-        debugger
+        //debugger
         var currentDate = null;
         if (this.byId('workerCalendar').getSelectedDates()[0]) {
           currentDate = this.byId('workerCalendar').getSelectedDates()[0].getStartDate();
@@ -87,7 +101,7 @@ sap.ui.define(
         });
       },
       resetTime: function (oData) {
-        debugger
+     //   debugger
       },
       _onRouteMatched: function (oEvent) {
         var oArr = oEvent.getParameter("arguments")["?query"];
@@ -137,7 +151,7 @@ sap.ui.define(
         return time < 10 ? '0' + time : time
       },
       bindSmartTable: function (sWorkerId, sDate) {
-        debugger
+       // debugger
         var sPath = "/WorkerScheduleSet(Date=datetime'" + sDate + "',Worker='" + sWorkerId + "')";
         var oSmartTable = this.getView().byId("dateSmartTable");
         oSmartTable.bindObject(sPath);
@@ -221,7 +235,7 @@ sap.ui.define(
       updateCalendar: function (oEvent) {
         this.getData4VizChart();
         var oCalendar = this.getView().byId("workerCalendar");
-        debugger
+        //debugger
         this.getModel().callFunction("/GetWorkerCalendar", {
           method: "GET",
           urlParameters: {

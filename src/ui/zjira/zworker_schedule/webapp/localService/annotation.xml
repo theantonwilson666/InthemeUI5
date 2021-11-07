@@ -145,7 +145,7 @@
                     </Record>
                 </Annotation>
             </Annotations>
-            <Annotations Target="ZWORKER_VISIT_SCHEDULE_SRV.WorkerScheduleConf/Worker">
+            <Annotations Target="ZWORKER_VISIT_SCHEDULE_SRV.WorkerScheduleConf/WorkerName">
                 <Annotation Term="Common.ValueListWithFixedValues" Bool="false" />
                 <Annotation Term="Common.ValueList">
                     <Record>

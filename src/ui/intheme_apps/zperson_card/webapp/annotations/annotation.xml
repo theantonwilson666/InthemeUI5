@@ -19,6 +19,16 @@
 
             <Annotations Target="ZINTHEME_WORKER_SRV.ZSNN_PERSON_ROOTType">
 
+                <Annotation Term="UI.HeaderFacets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="CorporateInfo"/>
+                            <PropertyValue Property="Label" String="Корпоративная информация"/>
+                            <PropertyValue Property="Target" AnnotationPath="to_CorporateInfo/@UI.FieldGroup#CorporateInfo"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+
 
                 <Annotation Term="UI.HeaderInfo">
                     <Record>
@@ -57,8 +67,10 @@
                         <Record Type="UI.ReferenceFacet">
                             <PropertyValue Property="ID" String="CorporateInfo"/>
                             <PropertyValue Property="Label" String="Корпоративная информация"/>
-                            <PropertyValue Property="Target" AnnotationPath="to_CorporateInfo/@UI.FieldGroup#CorporateInfo" />
+                            <PropertyValue Property="Target" AnnotationPath="to_CorporateInfo/@UI.LineItem" />
                         </Record>
+                     
+
 
                         <Record Type="UI.ReferenceFacet">
                             <PropertyValue Property="ID" String="Equipment"/>
@@ -104,7 +116,6 @@
 
 
             <Annotations Target="ZINTHEME_WORKER_SRV.ZSNN_PERSON_CORPORATE_INFOType">
-
                 <Annotation Term="UI.FieldGroup" Qualifier="CorporateInfo">
                     <Record>
                         <PropertyValue Property="Label" String="Corporate Info"/>
@@ -126,12 +137,21 @@
                     </Record>
                 </Annotation>
 
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="PositionId"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="DateEmployment"/>
+                        </Record>
+                     
+                    </Collection>
+                </Annotation>
+
+
             </Annotations>
            
-
-
-
-
 
 
             <Annotations Target="ZINTHEME_WORKER_SRV.ZSNN_PERSON_EQUIPMENTType">

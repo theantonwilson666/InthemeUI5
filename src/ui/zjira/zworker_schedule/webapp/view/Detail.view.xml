@@ -21,7 +21,7 @@
             <f:DynamicPageTitle>
                 <f:heading>
                     <u:Calendar width="40em" id="workerCalendar" legend="calendarLegend" intervalSelection="false"
-                                select="onDateSelect"
+                                select="onDateSelect" 
                                 startDateChange="onStartDateChange"/>
                 </f:heading>
                 <f:content>
@@ -36,7 +36,10 @@
         </f:title>
         <f:content>
             <VBox alignContent="Stretch">
-                <smartForm:SmartForm id="dateSmartForm" title="{Date}" editable="true">
+                <smartForm:SmartForm id="dateSmartForm" title="{
+                                path:'Date',
+                                formatter: '.formatter.DateTimeCorrectTitle'
+                }" editable="true">
                     <smartForm:layout>
                         <smartForm:ColumnLayout columnsM="2" columnsL="2" columnsXL="2"/>
                     </smartForm:layout>
@@ -45,8 +48,13 @@
                             <smartField:SmartField value ="{WorkerName}"/>
                         </smartForm:GroupElement>
                         <smartForm:GroupElement>
-                            <smartField:SmartField value ="{Date}"/>
+                            <smartField:SmartField value ="{
+                                path:'Date'
+                               
+                            }"/>
+                       
                         </smartForm:GroupElement>
+                       
                         <smartForm:GroupElement>
                             <smartField:SmartField value ="{DateType}" editable="true" entitySet="WorkerScheduleSet"/>
                         </smartForm:GroupElement>
@@ -65,6 +73,7 @@
                                 change="onTimeChange($event, 'StudyFrom')"/>
                             <!-- <smartField:SmartField value ="{StudyFrom}" editable="true" entitySet="WorkerScheduleSet"/> -->
                         </smartForm:GroupElement>
+                      
                         <smartForm:GroupElement>
                             <Text text='{i18n>StudyTo}'/>
                             <TimePicker
@@ -75,12 +84,43 @@
                                 change="onTimeChange($event, 'StudyTo')"/>
                             <!-- <smartField:SmartField value ="{StudyTo}" editable="true" entitySet="WorkerScheduleSet"/> -->
                         </smartForm:GroupElement>
+                       
+                    </smartForm:Group>
+                    <smartForm:Group label="Удаленные дни">
+                    <!-- <smartForm:Group label="{i18n>Distant}"> -->
+                        <smartForm:GroupElement>
+                            <smartField:SmartField value ="{
+                                path:'DIstantPercent',
+                                formatter: '.formatter.Percent'
+                            }"/>
+                            
+                       
+                        </smartForm:GroupElement>
+                        <smartForm:GroupElement>
+                            
+                            <smartField:SmartField value ="{
+                                path:'PlanFactPercent',
+                                formatter: '.formatter.Percent'
+                            }"/>
+                           
+                       
+                        </smartForm:GroupElement>
+                        <smartForm:GroupElement>
+                           
+                            <smartField:SmartField value ="{
+                                path:'DistantAllowedPercent',
+                                formatter: '.formatter.Percent'
+                            }"/>
+                       
+                        </smartForm:GroupElement>
+                       
                     </smartForm:Group>
                     <smartForm:Group label="{i18n>WorkDayGroup}">
                         <smartForm:GroupElement >
                             <smartField:SmartField value ="{WorkFrom1}" editable="true" entitySet="WorkerScheduleSet"/>
                             <smartField:SmartField value ="{WorkTo1}" editable="true" entitySet="WorkerScheduleSet"/>
-                            <Button icon="sap-icon://add" press="onAddWorkIntervalPress" width="3em" visible="{= !${state>/showNewInterval} }"/>
+                            <Button id="addWorkIntervalButton" icon="sap-icon://add" press="onAddWorkIntervalPress" width="3em" />
+                            <!-- visible="{= !${state>/showNewInterval} }" -->
                         </smartForm:GroupElement>
                         <smartForm:GroupElement id="SecondWorkInterval" visible="{state>/showNewInterval}">
                             <smartField:SmartField value ="{WorkFrom2}" editable="true" entitySet="WorkerScheduleSet"/>
@@ -92,7 +132,7 @@
                     </smartForm:Group> -->
                     <smartForm:Group label="{i18n>BioGroup}">
                         <smartForm:GroupElement >
-                            <smartField:SmartField id='WorkFactCheckBox' value ="{Redacted}" editable="false" entitySet="WorkerScheduleSet"/>
+                            <smartField:SmartField id='WorkFactCheckBox'  enabled='false' value ="{Redacted}" editable="false" entitySet="WorkerScheduleSet"/>
                         </smartForm:GroupElement >
                         <smartForm:GroupElement >
                             <!-- <smartField:SmartField id='WorkFactFrom1CheckBox' value ="{Redacted}" editable="true" entitySet="WorkerScheduleSet"/> -->
@@ -189,19 +229,19 @@
                                                                 value="{ChartMdl>JiraHours}" />
                                     <viz.data:MeasureDefinition name="Jira Hours"
                                                                 value="{ChartMdl>JiraHours}" />
-                                    <viz.data:MeasureDefinition name="TimeControl Error"
+                                    <viz.data:MeasureDefinition name="  Error"
                                                                 value="{
                                                                     path:'ChartMdl>RegError',
                                                                     formatter: '.commonFormatter.errorDay'
                                                                 }"/>
-                                    <viz.data:MeasureDefinition name="TimeControl Redacted"
+                                    <viz.data:MeasureDefinition name="  Redacted"
                                                                 value=""/>
                                 </viz.data:measures>
                             </viz.data:FlattenedDataset>
                         </viz:dataset>
                         <viz:feeds>
                             <viz.feeds:FeedItem uid="valueAxis" type="Measure"
-                                                values="Fact Hours,Plan Hours,Jira Hours,TimeControl Error,TimeControl Redacted"/>
+                                                values="Fact Hours,Plan Hours,Jira Hours,  Error,  Redacted"/>
                             <viz.feeds:FeedItem uid="categoryAxis" type="Dimension"
                                                 values="Date" />
                         </viz:feeds>
