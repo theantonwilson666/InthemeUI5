@@ -3,9 +3,9 @@ sap.ui.define(
   function (BaseController, PDFViewer) {
     "use strict";
 
-
     return BaseController.extend(
-      "intheme.zjira_worker_register.controller.Main", {
+      "intheme.zjira_worker_register.controller.Main",
+      {
         onInit: function () {},
 
         onInitFilter: function (oEvent) {
@@ -53,9 +53,8 @@ sap.ui.define(
           var mBindingParams = oEvent.getParameter("bindingParams");
           this.SumParam = iSumParam;
           this.oTotalRow = {
-            WorkerRegister: 'TotalBonusSum',
+            WorkerRegister: "TotalBonusSum",
           };
-
 
           var oCustom = {
             BonusClosed: this.getView()
@@ -101,30 +100,47 @@ sap.ui.define(
         },
 
         onViewWorker: function (oEvent) {
-          debugger
+          debugger;
           var oTable = this.byId("workerSmartTable").getTable();
           var sPath = oTable.getSelectedItem().getBindingContext().getPath();
           this.loadDialog
             .call(this, {
               sDialogName: "_oClosedIssueDialog",
-              sViewName: "intheme.zjira_worker_register.view.dialogs.ClosedIssue",
+              sViewName:
+                "intheme.zjira_worker_register.view.dialogs.ClosedIssue",
             })
             .then(
               function (oDialog) {
-                debugger
-                // oDialog.setBusy(true);
                 oDialog.open();
                 oDialog.bindElement({
                   path: sPath,
                   parameters: {
                     custom: {
                       Filter: this.getStateProperty("/worker_filter"),
-                      Test: "11",
+                      BonusClosed: this.getView()
+                        .byId("closedIssueBonus")
+                        .getSelected()
+                        .toString(),
+
+                      ManagmentTaskBonus: this.getView()
+                        .byId("bonusWithManagmentTask")
+                        .getSelected()
+                        .toString(),
+
+                      ShowEmptyWorker: this.getView()
+                        .byId("showEmptyWorker")
+                        .getSelected()
+                        .toString(),
+
+                      CalcWithError: this.getView()
+                        .byId("calcWithError")
+                        .getSelected()
+                        .toString(),
                     },
                   },
                   events: {
                     dataReceived: function (oEvent) {
-                      debugger
+                      debugger;
                       if (!oEvent.getParameter("data")) {
                         // this.showError();
                         oDialog.close();
@@ -141,16 +157,19 @@ sap.ui.define(
         rebindConfTab: function (oEvent) {
           var oConf = this.getStateProperty("/smartTabConf");
 
-          Object.keys(oConf).forEach(function (sKey) {
-            this.getView().byId(oConf[sKey]).rebindTable();
-          }.bind(this));
+          Object.keys(oConf).forEach(
+            function (sKey) {
+              this.getView().byId(oConf[sKey]).rebindTable();
+            }.bind(this)
+          );
         },
 
         onOpenBonusSettingDialog: function (oEvent) {
           this.loadDialog
             .call(this, {
               sDialogName: "_oBonusSettingDialog",
-              sViewName: "intheme.zjira_worker_register.view.dialogs.BonusSetting",
+              sViewName:
+                "intheme.zjira_worker_register.view.dialogs.BonusSetting",
             })
             .then(
               function (oDialog) {
@@ -165,7 +184,7 @@ sap.ui.define(
           this.getModel().callFunction("/DeletePaymentSettings", {
             method: "POST",
             urlParameters: {
-              SourceID: this.getStateProperty("/currentTab")
+              SourceID: this.getStateProperty("/currentTab"),
             },
             success: function (oData) {
               if (oData.DeletePaymentSettings.Ok === true) {
@@ -188,15 +207,19 @@ sap.ui.define(
         onSaveBonusSettingDialog: function (oEvent) {
           var oConf = this.getStateProperty("/smartTabConf");
 
-          Object.keys(oConf).forEach(function (sKey) {
-            var oTable = this.getView().byId(oConf[sKey]).getTable();
-            var mItems = oTable.getItems();
-            mItems.forEach(function (oItem) {
-              if (oItem.getBindingContext().bCreated) {
-                oTable.removeItem(oItem);
-              }
-            }.bind(this));
-          }.bind(this));
+          Object.keys(oConf).forEach(
+            function (sKey) {
+              var oTable = this.getView().byId(oConf[sKey]).getTable();
+              var mItems = oTable.getItems();
+              mItems.forEach(
+                function (oItem) {
+                  if (oItem.getBindingContext().bCreated) {
+                    oTable.removeItem(oItem);
+                  }
+                }.bind(this)
+              );
+            }.bind(this)
+          );
 
           this.submitChanges({
             success: function () {
@@ -269,7 +292,8 @@ sap.ui.define(
           this.openPopoverBy
             .call(this, {
               sPopoverName: "_workerlogPopover",
-              sViewName: "intheme.zjira_worker_register.view.popovers.WorkerLog",
+              sViewName:
+                "intheme.zjira_worker_register.view.popovers.WorkerLog",
               sPath: oEvent.getSource().getBindingContext().getPath(),
               oSource: oEvent.getSource(),
             })
@@ -388,11 +412,10 @@ sap.ui.define(
                 value2: oData.GetCurrentQuarter.High,
               });
 
-
               var aTeam = [];
               aTeam.push({
                 key: "3763699611210895198",
-                text: "Чебоксары"
+                text: "Чебоксары",
               });
 
               var oDefaultFilter = {
@@ -413,8 +436,8 @@ sap.ui.define(
 
                 Team: {
                   items: aTeam,
-                  value: null
-                }
+                  value: null,
+                },
               };
               oFilter.setFilterData(oDefaultFilter, true);
               this.getView().byId("WorkerKPI_ST").rebindTable();
@@ -425,10 +448,9 @@ sap.ui.define(
           });
         },
 
-
         onBeforeBindingTabKPI: function (oEvent) {
-          debugger
-        }
+          debugger;
+        },
       }
     );
   }
