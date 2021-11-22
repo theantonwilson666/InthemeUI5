@@ -439,7 +439,16 @@ sap.ui.define(
           Filter: sFilterData,
           Keys: JSON.stringify(oKeys),
         });
+
         var sUrl = sServiceUrl + sPath + "/$value";
+
+        
+        if (oParams.oUrlParam){
+          var sUrl = sUrl + "?" + new URLSearchParams(oParams.oUrlParam).toString();
+        }
+
+
+        debugger;
         sap.m.URLHelper.redirect(sUrl, true);
       },
     });

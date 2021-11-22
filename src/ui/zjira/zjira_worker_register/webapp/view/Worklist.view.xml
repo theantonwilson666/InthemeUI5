@@ -79,7 +79,7 @@
                         <Button icon="sap-icon://refresh"
                                 type="Transparent"
                                 press="rebindTable('workerSmartTable')"/>
-                        <Button icon="sap-icon://excel-attachment" type="Transparent" press="onDownloadExcelFiles({ uploadEntity: '/DownloadExcelSet', downloadEntity: 'WorkerRegisterSet', oControlId: 'workerSmartTable' })"/>
+                        <Button icon="sap-icon://excel-attachment" type="Transparent" press="onDownloadMyExcelFiles"/>
                     </OverflowToolbar>
                 </smartTable:customToolbar>
                 <smartTable:customData>

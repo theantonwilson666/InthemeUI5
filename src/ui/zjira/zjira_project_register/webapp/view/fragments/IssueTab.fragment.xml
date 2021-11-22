@@ -17,13 +17,6 @@
                 </f:heading>
             </f:DynamicPageTitle>
         </f:title>
-        <f:header>
-            <f:DynamicPageHeader pinnable="false" class="sapUiNoContentPadding">
-                <f:content>
-                    <Text text='zz'/>
-                </f:content>
-            </f:DynamicPageHeader>
-        </f:header>
         <f:content>
             <VBox>
                 <smartFilterBar:SmartFilterBar

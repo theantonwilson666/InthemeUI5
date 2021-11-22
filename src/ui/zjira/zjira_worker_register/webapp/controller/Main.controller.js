@@ -396,6 +396,37 @@ sap.ui.define(
           oPDFViewer.open();
         },
 
+        onDownloadMyExcelFiles: function (oEvent) {
+          var oConf = {
+            BonusClosed: this.getView()
+              .byId("closedIssueBonus")
+              .getSelected()
+              .toString(),
+
+            ManagmentTaskBonus: this.getView()
+              .byId("bonusWithManagmentTask")
+              .getSelected()
+              .toString(),
+
+            ShowEmptyWorker: this.getView()
+              .byId("showEmptyWorker")
+              .getSelected()
+              .toString(),
+
+            CalcWithError: this.getView()
+              .byId("calcWithError")
+              .getSelected()
+              .toString(),
+          };
+
+          this.onDownloadExcelFiles({
+            uploadEntity: "/DownloadExcelSet",
+            downloadEntity: "WorkerRegisterSet",
+            oControlId: "workerSmartTable",
+            oUrlParam: oConf,
+          });
+        },
+
         onInitFilterKPI: function (oEvent) {
           this.getModel().callFunction("/GetCurrentQuarter", {
             method: "POST",
