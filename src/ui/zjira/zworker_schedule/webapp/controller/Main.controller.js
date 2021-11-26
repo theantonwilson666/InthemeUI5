@@ -1,9 +1,13 @@
 sap.ui.define(["jira/lib/BaseController",
-	"sap/m/MessageToast"], function (BaseController,
-	MessageToast) {
+	"sap/m/MessageToast",    "../model/formatter/formatter"
+], function (BaseController,
+	MessageToast,    formatter
+  ) {
   "use strict";
   return BaseController.extend("intheme.zworker_schedule.controller.Main", {
+    formatter:formatter,
     onInit: function () {
+
       this.getRouter()
         .getRoute("WorklistRoute")
         .attachPatternMatched(this._onRouteMatched, this);
@@ -52,7 +56,7 @@ sap.ui.define(["jira/lib/BaseController",
 
     onValueHelpRequest: function (oEvent) {
       delete this._oDirectDialog;
-      debugger;
+       ;
 
       var fnHandleConfirm = function (oEvent) {
         var oSelectedType = oEvent
@@ -137,7 +141,6 @@ sap.ui.define(["jira/lib/BaseController",
       });
       var sUrl = sServiceUrl + sPath + "/$value";    
       sap.m.URLHelper.redirect(sUrl, true);
-
       oEvent.getSource().getParent().close();
     },
 
