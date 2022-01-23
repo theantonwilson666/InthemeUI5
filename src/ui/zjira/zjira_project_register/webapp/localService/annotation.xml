@@ -32,11 +32,11 @@
                 <Annotation Term="UI.SelectionFields">
                     <Collection>
                         <PropertyPath>ProjectID</PropertyPath>
-                        <PropertyPath>ProjectCatID</PropertyPath>
+                        <!-- <PropertyPath>ProjectCatID</PropertyPath>
                         <PropertyPath>ProjectTypeID</PropertyPath>
-                        <PropertyPath>Worker</PropertyPath>
+                        <PropertyPath>Worker</PropertyPath> -->
                         <PropertyPath>WorklogDate</PropertyPath>
-                        <PropertyPath>Team</PropertyPath>
+                        <!-- <PropertyPath>Team</PropertyPath> -->
                         <!-- <PropertyPath>Position</PropertyPath> -->
                     </Collection>
                 </Annotation>
@@ -175,16 +175,53 @@
             <Annotations Target="ZJIRA_SRV.Issue">
                 <Annotation Term="UI.SelectionFields">
                     <Collection>
-                        <PropertyPath>PriorityID</PropertyPath>
-                        <PropertyPath>StatusID</PropertyPath>
-                        <PropertyPath>StatusCatID</PropertyPath>
-                        <!-- <PropertyPath>StageID</PropertyPath>
-                        <PropertyPath>SubstageID</PropertyPath> -->
-                        <PropertyPath>ProjectStageID</PropertyPath>
-                        <PropertyPath>TypeID</PropertyPath>
+                        <PropertyPath>Label</PropertyPath>
+                        <PropertyPath>ActDate</PropertyPath>
+                        <PropertyPath>ActNumber</PropertyPath>
                     </Collection>
                 </Annotation>
             </Annotations>
+
+
+             <Annotations Target="ZJIRA_SRV.Issue/Label">
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath" String="IssueLabelSHSet"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Label"/>
+                                    <PropertyValue Property="ValueListProperty" String="Label"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+            
+            
+             <Annotations Target="ZJIRA_SRV.Issue/ActNumber">
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath" String="ActNumberSHSet"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ActNumber"/>
+                                    <PropertyValue Property="ValueListProperty" String="ActNumber"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+
             <Annotations Target="ZJIRA_SRV.Issue/PriorityID">
                 <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
                 <Annotation Term="Common.ValueList">
@@ -415,7 +452,7 @@
                     <Collection>
                         <PropertyPath>WorkerID</PropertyPath>
                         <PropertyPath>PositionID</PropertyPath>
-                        <PropertyPath>TeamID</PropertyPath>
+                        <!-- <PropertyPath>TeamID</PropertyPath> -->
                     </Collection>
                 </Annotation>
             </Annotations>

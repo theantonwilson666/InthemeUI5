@@ -12,7 +12,6 @@
     "grunt-openui5": "^0.18.2",
     "grunt-zip": "^0.18.2"
   },
-  "devDependencies": {},
   "scripts": {
     "serve": "grunt serve",
     "deploy_zjira_project_register": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=0 --app=zjira_project_register",

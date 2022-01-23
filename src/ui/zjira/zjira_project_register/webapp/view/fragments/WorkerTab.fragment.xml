@@ -100,7 +100,7 @@
                                 </footer>
                             </Column>
                             <!--2 column -->
-                            <Column>
+                            <!-- <Column>
                                 <customData>
                                     <core:CustomData key="p13nData"
                                                  value='\{
@@ -114,7 +114,7 @@
                                 <header>
                                     <Text text="{/#ProjectWorker/EstHours/@sap:label}"/>
                                 </header>
-                            </Column>
+                            </Column> -->
                             <!--3 column -->
                             <Column>
                                 <customData>
@@ -135,7 +135,7 @@
                                 </footer>
                             </Column>
                             <!--4 column -->
-                            <Column>
+                            <!-- <Column>
                                 <customData>
                                     <core:CustomData key="p13nData"
                                                  value='\{
@@ -149,9 +149,9 @@
                                 <header>
                                     <Text text="{/#ProjectWorker/WorkRatio/@sap:label}"/>
                                 </header>
-                            </Column>
+                            </Column> -->
                             <!--5 column -->
-                            <Column>
+                            <!-- <Column>
                                 <customData>
                                     <core:CustomData key="p13nData"
                                                  value='\{
@@ -165,7 +165,7 @@
                                 <header>
                                     <Text text="{/#ProjectWorker/TeamName/@sap:label}"/>
                                 </header>
-                            </Column>
+                            </Column> -->
                         </columns>
                         <ColumnListItem>
                             <!--1 cells-->
@@ -173,9 +173,9 @@
                                 <ObjectIdentifier title="{WorkerName}" text="{PositionName}"/>
                             </cells>
                             <!--2 cells-->
-                            <cells>
+                            <!-- <cells>
                                 <smartField:SmartField value="{EstHours}"/>
-                            </cells>
+                            </cells> -->
                             <!--3 cells-->
                             <cells>
                                 <VBox>
@@ -186,13 +186,13 @@
                                 </VBox>
                             </cells>
                             <!--4 cells-->
-                            <cells>
+                            <!-- <cells>
                                 <smartField:SmartField value="{WorkRatio}"/>
-                            </cells>
+                            </cells> -->
                             <!--5 cells-->
-                            <cells>
+                            <!-- <cells>
                                 <smartField:SmartField value="{TeamName}"/>
-                            </cells>
+                            </cells> -->
                         </ColumnListItem>
                     </Table>
                 </smartTable:SmartTable>

@@ -18,20 +18,20 @@ sap.ui.define(
 
               aRanges.push({
                 exclude: false,
-                keyField: "CloseIssueDate",
+                keyField: "WorklogDate",
                 operation: "BT",
                 value1: oData.GetCurrentQuarter.Low,
                 value2: oData.GetCurrentQuarter.High,
               });
 
               var oDefaultFilter = {
-                CloseIssueDate: {
+                WorklogDate: {
                   conditionTypeInfo: {
                     data: {
                       operation: "THISQUARTER",
                       value1: null,
                       value2: null,
-                      key: "CloseIssueDate",
+                      key: "WorklogDate",
                       calendarType: "Gregorian",
                     },
                     name: "sap.ui.comp.config.condition.DateRangeType",
