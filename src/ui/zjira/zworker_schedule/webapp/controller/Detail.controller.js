@@ -345,17 +345,42 @@ sap.ui.define(
 
       },
 
+      parseTimePicker: function (sTimePickerValue) {
+        var aBuff = sTimePickerValue.split(":");
+        return {
+          hours: aBuff[0],
+          minutes: aBuff[1]
+        }
+      },
+
       handleIntervalSelect: function (oEvent) {
         var oModel = this.getConfigModel();
         var oConfigData = oModel.getData();
 
-        debugger;
-        
+        var oStartDate = new Date(
+          oEvent.mParameters.startDate.getFullYear(),
+          oEvent.mParameters.startDate.getMonth(),
+          oEvent.mParameters.startDate.getDate(),
+          this.parseTimePicker(this.byId("DateTimeFromSchedule").getValue()).hours,
+          this.parseTimePicker(this.byId("DateTimeFromSchedule").getValue()).minutes,
+        );
+
+        var oEndDate = new Date(
+          oEvent.mParameters.startDate.getFullYear(),
+          oEvent.mParameters.startDate.getMonth(),
+          oEvent.mParameters.startDate.getDate(),
+          this.parseTimePicker(this.byId("DateTimeToSchedule").getValue()).hours,
+          this.parseTimePicker(this.byId("DateTimeToSchedule").getValue()).minutes,
+        );
+
         oConfigData.people[0].Schedule.push({
           IntervalType: this.byId("selectTypeDaySchedule").getSelectedItem().getBindingContext().getObject().Type,
-          IntervalInternalType : this.byId("selectTypeDaySchedule").getSelectedItem().getBindingContext().getObject().InternalType,
-          EndDate: oEvent.mParameters.endDate,
-          StartDate: oEvent.mParameters.startDate,
+          IntervalInternalType: this.byId("selectTypeDaySchedule").getSelectedItem().getBindingContext().getObject().InternalType,
+          EndDate: oEndDate,
+          StartDate: oStartDate,
+          weekType: this.byId("configCalendar").getViewKey(),
+          EndDateOut: oEvent.mParameters.endDate,
+          StartDateOut: oEvent.mParameters.startDate,
           Title: this.byId("selectTypeDaySchedule").getSelectedItem().getBindingContext().getObject().Text,
           Info: this.byId("DateTimeFromSchedule").getValue() + " - " + this.byId("DateTimeToSchedule").getValue(),
           Color: this.byId("selectTypeDaySchedule").getSelectedItem().getBindingContext().getObject().Color
@@ -474,20 +499,91 @@ sap.ui.define(
 
 
       onCalcScheduleButtonPress: function () {
+        debugger;
+        this.byId("inputScheduleDialog").setBusy(true);
+
         var oConfigData = this.byId("configCalendar").getModel("configData").getData();
         var aSchedules = oConfigData.people[0].Schedule;
-
-        debugger;
 
         var oFIInputData = {
           WORKER: oConfigData.people[0].WorkerID,
           MONTH: oConfigData.startDate.getMonth().toString().padStart(2, "0"),
           YEAR: oConfigData.startDate.getFullYear().toString(),
-          SCHEDULE: this.buildSchedulesOut(aSchedules)
+          EVEN_WEEK: this.buildWeek("even"),
+          ODD_WEEK: this.buildWeek("odd"),
+          DAY_DEFAULT: {
+            TYPE: this.byId("selectTypeDaySchedule").getSelectedItem().getBindingContext().getObject().InternalType,
+            TIMEFROM: `${this.parseTimePicker(this.byId("DateTimeFromSchedule").getValue()).hours}${this.parseTimePicker(this.byId("DateTimeFromSchedule").getValue()).minutes}`,
+            TIMETO: `${this.parseTimePicker(this.byId("DateTimeToSchedule").getValue()).hours}${this.parseTimePicker(this.byId("DateTimeToSchedule").getValue()).minutes}`
+          }
         }
+
+        var sFIInputData = JSON.stringify(oFIInputData);
+
+        this.getModel().callFunction("/RecalcScheduleTable", {
+          method: "POST",
+          urlParameters: {
+            inputDataJSON: sFIInputData
+          },
+          success: function (oData) {
+
+            this.byId("inputScheduleDialog").setBusy(false);
+            this.showMessageToast("Успех");
+          }.bind(this),
+
+          error: function (oError) {
+            this.byId("inputScheduleDialog").setBusy(false);
+            this.showError(oError);
+          }.bind(this)
+        });
 
       },
 
+      getWeek: function () {
+        var aOut = [];
+        for (var i = 0; i < 7; i++) {
+          aOut.push({
+            DAY: i + 1,
+            INTERVALS: []
+          })
+        }
+        return aOut;
+      },
+
+      buildWeek: function (sWeekType) {
+        var oModel = this.getConfigModel();
+        var oConfigData = oModel.getData();
+
+        var aOut = this.getWeek();
+
+        oConfigData.people[0].Schedule.forEach(function (oSchedule, index, array) {
+          if (oSchedule.weekType === this.weekType) {
+            this.out[this.controller.convertDay(oSchedule.StartDate.getDay())].INTERVALS.push({
+              START: this.controller.convertTimeFromDateTime(oSchedule.StartDate),
+              END: this.controller.convertTimeFromDateTime(oSchedule.EndDate),
+              TENTATIVE: false,
+              TITLE: oSchedule.Title,
+              TYPE: oSchedule.IntervalInternalType
+            });
+          }
+        }, {
+          out: aOut,
+          weekType: sWeekType,
+          controller: this
+        });
+
+
+        return aOut;
+
+      },
+
+      convertDay: function (iDay) {
+        if (iDay === 0) {
+          return 6
+        }
+
+        return iDay - 1;
+      },
 
       buildSchedulesOut: function (aSchedules) {
 
@@ -525,7 +621,7 @@ sap.ui.define(
 
       getIntervalFromSchedule: function (oSchedule) {
 
-        
+
         return {
           INTERVAL_TYPE: oSchedule.IntervalType,
           TIME_BEGIN: this.convertTimeFromDateTime(oSchedule.StartDate),
@@ -534,7 +630,7 @@ sap.ui.define(
 
       },
 
-      convertTimeFromDateTime: function(oDate){
+      convertTimeFromDateTime: function (oDate) {
         var sHours = oDate.getHours().toString().padStart(2, "0");
         var sMinutes = oDate.getMinutes().toString().padStart(2, "0");
         return `${sHours}${sMinutes}`;
