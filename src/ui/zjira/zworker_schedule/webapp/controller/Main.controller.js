@@ -114,10 +114,10 @@ sap.ui.define(["jira/lib/BaseController",
     changeDateRange:function(oEvent){
       try {
         if(oEvent.getSource().getTo().getMonth()!=oEvent.getSource().getFrom().getMonth()){
-          throw new Error("Р”Р°РЅРЅС‹Рµ РЅРµРєРѕСЂСЂРµРєС‚РЅС‹")
+          throw new Error("Данные некорректны")
         }
       } catch (error) {
-        new sap.m.MessageToast.show('Р’С‹Р±РµСЂРµС‚Рµ РґР°С‚С‹ РІ РѕРґРЅРѕРј РјРµСЃСЏС†Рµ')
+        new sap.m.MessageToast.show('Выберете даты в одном месяце')
         oEvent.getSource().setTo(new Date())
         oEvent.getSource().setFrom(new Date())
         console.log(error);

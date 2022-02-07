@@ -1,7 +1,7 @@
 sap.ui.define(
   [
     "intheme/zworker_schedule/controller/Main.controller",
-    // "intheme/zjiralib/formatter/CommonFormatter",
+    // "intheme/zjiralib/formatter/CommonFormatter", 
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "sap/m/Dialog",
@@ -35,6 +35,11 @@ sap.ui.define(
           if(addWorkDayButton){
             addWorkDayButton.setVisible(false)
           }
+          if(this.byId("calendarLegend")){
+             
+          }
+                  // sap.ui.getCore().byId('application-zworker_schedule-display-component---Detail--calendarLegend').getItems()[7].setColor('black')
+
          
           
       },
@@ -52,7 +57,7 @@ sap.ui.define(
         }
       },
       checkIsAdmin: function () {
-        // debugger
+        //  
         this.getModel().callFunction("/isAdmin", {
           method: "GET",
           success: function (oData) {
@@ -63,7 +68,7 @@ sap.ui.define(
         });
       },
       showAdminButton: function (oAdmin) {
-        //debugger
+        // 
         var oWorkFactCheckBox = this.getView().byId("WorkFactCheckBox")
         var oWorkFactFrom1 = this.getView().byId("WorkFactFrom1")
         var oWorkFactTo1 = this.getView().byId("WorkFactTo1")
@@ -82,7 +87,7 @@ sap.ui.define(
         }
       },
       resetWorkerDay: function () {
-        //debugger
+        // 
         var currentDate = null;
         if (this.byId('workerCalendar').getSelectedDates()[0]) {
           currentDate = this.byId('workerCalendar').getSelectedDates()[0].getStartDate();
@@ -96,12 +101,13 @@ sap.ui.define(
             Worker: `${this.getCurrentWorker()}`
           },
           success: function (oData) {
+            debugger
             console.log(oData);
           }.bind(this),
         });
       },
       resetTime: function (oData) {
-     //   debugger
+     //    
       },
       _onRouteMatched: function (oEvent) {
         var oArr = oEvent.getParameter("arguments")["?query"];
@@ -151,7 +157,7 @@ sap.ui.define(
         return time < 10 ? '0' + time : time
       },
       bindSmartTable: function (sWorkerId, sDate) {
-       // debugger
+       //  
         var sPath = "/WorkerScheduleSet(Date=datetime'" + sDate + "',Worker='" + sWorkerId + "')";
         var oSmartTable = this.getView().byId("dateSmartTable");
         oSmartTable.bindObject(sPath);
@@ -195,6 +201,7 @@ sap.ui.define(
         this.showBusyDialog();
         this.getModel().submitChanges({
           success: function () {
+            this.updateCalendar()
             this.closeBusyDialog();
             if (!this.isExistError()) {
               this.showMessageToast("zzz");
@@ -233,9 +240,16 @@ sap.ui.define(
       },
 
       updateCalendar: function (oEvent) {
+        var date = new Date().getDate()-1
+        var month = new Date().getMonth()+1
+        var year = new Date().getFullYear()
+        var newTime = `${year}-${month}-${date}T21%3A00%3A00`
+        this.bindSmartForm(this.getWorker(),newTime)
+
+        debugger
         this.getData4VizChart();
         var oCalendar = this.getView().byId("workerCalendar");
-        //debugger
+        // 
         this.getModel().callFunction("/GetWorkerCalendar", {
           method: "GET",
           urlParameters: {
@@ -243,10 +257,14 @@ sap.ui.define(
             StartOfMonth: oCalendar.getStartDate(),
           },
           success: function (oData) {
+
+            debugger
+            
             if (!this.isExistError()) {
               var oCalendar = this.getView().byId("workerCalendar");
               oCalendar.destroySpecialDates();
               oData.results.forEach((oElem) => {
+                if(oElem.Type!='None'){
                 oCalendar.addSpecialDate(
                   new DateTypeRange({
                     startDate: oElem.Date,
@@ -254,6 +272,16 @@ sap.ui.define(
                     // color: oElem.Color
                   })
                 );
+                }
+                else{
+                  oCalendar.addSpecialDate(
+                    new DateTypeRange({
+                      startDate: oElem.Date,
+                      type: "NonWorking",
+                      // color: oElem.Color
+                    })
+                  );
+                }
               });
             }
           }.bind(this),

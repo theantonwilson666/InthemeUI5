@@ -51,7 +51,7 @@
                 <Label text = "C"/>
 		<TimePicker
 				id="TP1"
-				value="9:00"
+				value="19:15"
 				valueFormat="HH:mm"
 				displayFormat="HH:mm"
 				placeholder="Enter meeting start time"/>
@@ -59,20 +59,15 @@
                 <Label text = "По "/>
 		<TimePicker
 				id="TPd1"
-				value="18:00"
+				value="19:15"
 				valueFormat="HH:mm"
 				displayFormat="HH:mm"
 				placeholder="Enter meeting start time"/>
-
-                <Button
-                text='Заполнить календарь'
-                press="callFITest"
-                />
             </FlexBox>
                 <PlanningCalendar
                 id="PC1"
                 startDate="{path: '/startDate'}"
-                viewKey="odd"
+                viewKey="D"
 
                 rows="{path: '/people'}"
                 appointmentsVisualization="Filled"
@@ -83,7 +78,7 @@
                 </toolbarContent>
                 <views>
                     <PlanningCalendarView
-                        key="even"
+                        key="A"
                         intervalType="Day"
                         description="Четная"
                         intervalsS="7"
@@ -92,7 +87,7 @@
                      >
                     </PlanningCalendarView>
                     <PlanningCalendarView
-                        key="odd"
+                        key="D"
                         intervalType="Day"
                         description="Нечетная"
                         intervalsS="7"
@@ -104,27 +99,33 @@
                 </views>
                 <rows>
                     <PlanningCalendarRow
-                        title="{WORKER}"
-                        appointments="{path : 'SCHEDULE', templateShareable: true}"
+                        icon="{pic}"
+                        title="{name}"
+                        text="{role}"
+                        appointments="{path : 'appointments', templateShareable: true}"
                         intervalHeaders="{path: 'headers', templateShareable: true}">
                        
                         <customData>
-                            <core:CustomData key="emp-name" value="{WORKER}" writeToDom="true"/>
+                            <core:CustomData key="emp-name" value="{name}" writeToDom="true"/>
                         </customData>
-                        <appointments >
+                        <appointments>
                             <unified:CalendarAppointment
-                                startDate="{TIME_BEGIN}"
-                                title="{TITLE}"
-                                text="{INFO}"
-                                endDate="{TIME_END}"
-                                type="{INTERVAL_TYPE}"
-                                >
+                                startDate="{start}"
+                                endDate="{end}"
+                                icon="{pic}"
+                                title="{title}"
+                                text="{info}"
+                                type="{type}"
+                                tentative="{tentative}">
                             </unified:CalendarAppointment>
                         </appointments>
                         <intervalHeaders>
                             <unified:CalendarAppointment
-                            
-                                >
+                                startDate="{start}"
+                                endDate="{end}"
+                                icon="{pic}"
+                                title="{title}"
+                                type="{type}">
                             </unified:CalendarAppointment>
                         </intervalHeaders>
                     </PlanningCalendarRow>

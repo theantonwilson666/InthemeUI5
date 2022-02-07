@@ -43,57 +43,46 @@
                     <smartForm:layout>
                         <smartForm:ColumnLayout columnsM="2" columnsL="2" columnsXL="2"/>
                     </smartForm:layout>
-                    <smartForm:Group label="{i18n>GroupTitle}">
-                        <smartForm:GroupElement>
-                            <smartField:SmartField value ="{WorkerName}"/>
-                        </smartForm:GroupElement>
-                        <smartForm:GroupElement>
-                            <smartField:SmartField value ="{
-                                path:'Date'
-                               
-                            }"/>
-                       
-                        </smartForm:GroupElement>
-                       
-                        <smartForm:GroupElement>
-                            <smartField:SmartField value ="{DateType}" editable="true" entitySet="WorkerScheduleSet"/>
-                        </smartForm:GroupElement>
-                        <!-- <smartForm:GroupElement>
-                            <smartField:SmartField value ="{WorkDayType}" editable="true" entitySet="WorkerScheduleSet"/>
-                        </smartForm:GroupElement> -->
-                    </smartForm:Group>
-                    <smartForm:Group label="{i18n>StudentGroup}">
-                        <smartForm:GroupElement>
-                            <Text text='{i18n>StudyFrom}'/>
-                            <TimePicker
-                                id="TP1"
-                                title="{i18n>StudyFrom}"
-                                value="{StudyFrom}"
-                                valueFormat="HH:mm"
-                                change="onTimeChange($event, 'StudyFrom')"/>
-                            <!-- <smartField:SmartField value ="{StudyFrom}" editable="true" entitySet="WorkerScheduleSet"/> -->
-                        </smartForm:GroupElement>
-                      
-                        <smartForm:GroupElement>
-                            <Text text='{i18n>StudyTo}'/>
-                            <TimePicker
-                                id="TP2"
-                                title="{i18n>StudyTo}"
-                                value="{StudyTo}"
-                                valueFormat="HH:mm"
-                                change="onTimeChange($event, 'StudyTo')"/>
-                            <!-- <smartField:SmartField value ="{StudyTo}" editable="true" entitySet="WorkerScheduleSet"/> -->
-                        </smartForm:GroupElement>
-                       
-                    </smartForm:Group>
-                    <smartForm:Group label="Удаленные дни">
+                  
+                    <smartForm:Group label="��������� ���">
                     <!-- <smartForm:Group label="{i18n>Distant}"> -->
                         <smartForm:GroupElement>
-                            <smartField:SmartField value ="{
+                                <smartField:SmartField value ="{
                                 path:'DIstantPercent',
                                 formatter: '.formatter.Percent'
                             }"/>
                             
+                       
+                        </smartForm:GroupElement>
+                      
+                        <smartForm:GroupElement>
+                           
+                             
+                                 <smartField:SmartField value ="{
+                                path:'DistantAllowedPercent',
+                                formatter: '.formatter.Percent'
+                            }"/>
+                       
+                        </smartForm:GroupElement>
+                        <smartForm:GroupElement>
+                           
+                            <smartField:SmartField value ="{
+                                path:'MinOfficePercent',
+                                formatter: '.formatter.Percent'
+
+                            }"/>
+                       
+                        </smartForm:GroupElement>
+                       
+                    </smartForm:Group>
+                    <smartForm:Group label="����/����">
+                    <!-- <smartForm:Group label="{i18n>StudentGroup}"> -->
+                        <smartForm:GroupElement>
+                             
+                            <smartField:SmartField value ="{
+                                path:'PlanFactPercentCurr'
+                            }"/>
+                           
                        
                         </smartForm:GroupElement>
                         <smartForm:GroupElement>
@@ -102,19 +91,97 @@
                                 path:'PlanFactPercent',
                                 formatter: '.formatter.Percent'
                             }"/>
-                           
-                       
-                        </smartForm:GroupElement>
-                        <smartForm:GroupElement>
-                           
-                            <smartField:SmartField value ="{
-                                path:'DistantAllowedPercent',
-                                formatter: '.formatter.Percent'
-                            }"/>
                        
                         </smartForm:GroupElement>
                        
                     </smartForm:Group>
+                    <smartForm:Group label="��� ���">
+                        <!-- <smartForm:Group label="{i18n>GroupTitle}"> -->
+                            <smartForm:GroupElement>
+                                <smartField:SmartField value ="{WorkerName}"/>
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement>
+                                <smartField:SmartField value ="{
+                                    path:'Date'
+                                   
+                                }"/>
+                           
+                            </smartForm:GroupElement>
+                           
+                            <smartForm:GroupElement>
+                                <smartField:SmartField value ="{DateType}" editable="true" entitySet="WorkerScheduleSet"/>
+                            </smartForm:GroupElement>
+                            <!-- <smartForm:GroupElement>
+                                <smartField:SmartField value ="{WorkDayType}" editable="true" entitySet="WorkerScheduleSet"/>
+                            </smartForm:GroupElement> -->
+                        </smartForm:Group>
+                        <smartForm:Group label="{i18n>StudentGroup}">
+                            <smartForm:GroupElement>
+                                <Text text='{i18n>StudyFrom}'/>
+                                <TimePicker
+                                    id="TP1"
+                                    title="{i18n>StudyFrom}"
+                                    value="{StudyFrom}"
+                                    valueFormat="HH:mm"
+                                    change="onTimeChange($event, 'StudyFrom')"/>
+                                <!-- <smartField:SmartField value ="{StudyFrom}" editable="true" entitySet="WorkerScheduleSet"/> -->
+                            </smartForm:GroupElement>
+                          
+                            <smartForm:GroupElement>
+
+                                <Text text='{i18n>StudyTo}'/>
+                                <TimePicker
+                                    id="TP2"
+                                    title="{i18n>StudyTo}"
+                                    value="{StudyTo}"
+                                    valueFormat="HH:mm"
+                                    change="onTimeChange($event, 'StudyTo')"/>
+                                <!-- <smartField:SmartField value ="{StudyTo}" editable="true" entitySet="WorkerScheduleSet"/> -->
+                            </smartForm:GroupElement>
+                           
+                        </smartForm:Group>
+                        <smartForm:Group label="{i18n>BioGroup}">
+                            <smartForm:GroupElement >
+                                <smartField:SmartField id='WorkFactCheckBox'  enabled='false' value ="{Redacted}" editable="false" entitySet="WorkerScheduleSet"/>
+                            </smartForm:GroupElement >
+                            <smartForm:GroupElement >
+                                <!-- <smartField:SmartField id='WorkFactFrom1CheckBox' value ="{Redacted}" editable="true" entitySet="WorkerScheduleSet"/> -->
+                                <smartField:SmartField id='WorkFactFrom1' value ="{WorkFactFrom1}" editable="false" entitySet="WorkerScheduleSet"/>
+                                <core:Icon
+                                id='WorkFactFrom1-icon'
+                                    color="#ff0000"
+                                     src="{
+                                        parts:[
+                                            {path:'RegError'},
+                                            {path:'WorkFactFrom1'}
+                                        ],
+                                        formatter:'.commonFormatter.showIcon'
+                                    }"
+                                 />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement >
+                                <smartField:SmartField id='WorkFactTo1' value ="{WorkFactTo1}" editable="false" entitySet="WorkerScheduleSet"/>
+                                <core:Icon
+                               id='WorkFactTo1-icon'
+                                    color="#ff0000"
+                                     src="{
+                                        parts:[
+                                            {path:'RegError'},
+                                            {path:'WorkFactTo1'}
+                                        ],
+                                        formatter:'.commonFormatter.showIcon'
+                                    }"
+                                 />
+                                <!-- name="{
+                                                                        parts:[{ path: 'ChartMdl>FactHours' },
+                                                                         { path: 'ChartMdl>PlanHours' },
+                                                                         { path: 'ChartMdl>JiraHours' }],
+                                                                        formatter: '.commonFormatter.changeName'}"  -->
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement >
+                                <Button width="50%" text='��������' visible="false" press='resetWorkerDay' id='resetWorkerDay'/>
+                            </smartForm:GroupElement >
+                        </smartForm:Group>
                     <smartForm:Group label="{i18n>WorkDayGroup}">
                         <smartForm:GroupElement >
                             <smartField:SmartField value ="{WorkFrom1}" editable="true" entitySet="WorkerScheduleSet"/>
@@ -130,48 +197,7 @@
                     <!-- <smartForm:Group label="{i18n>BioGroup}">
                         <smartField:SmartField id='WorkFactFrom1CheckBox' value ="{Redacted}" editable="true" entitySet="WorkerScheduleSet"/>
                     </smartForm:Group> -->
-                    <smartForm:Group label="{i18n>BioGroup}">
-                        <smartForm:GroupElement >
-                            <smartField:SmartField id='WorkFactCheckBox'  enabled='false' value ="{Redacted}" editable="false" entitySet="WorkerScheduleSet"/>
-                        </smartForm:GroupElement >
-                        <smartForm:GroupElement >
-                            <!-- <smartField:SmartField id='WorkFactFrom1CheckBox' value ="{Redacted}" editable="true" entitySet="WorkerScheduleSet"/> -->
-                            <smartField:SmartField id='WorkFactFrom1' value ="{WorkFactFrom1}" editable="false" entitySet="WorkerScheduleSet"/>
-                            <core:Icon
-                            id='WorkFactFrom1-icon'
-                                color="#ff0000"
-                                 src="{
-                                    parts:[
-                                        {path:'RegError'},
-                                        {path:'WorkFactFrom1'}
-                                    ],
-                                    formatter:'.commonFormatter.showIcon'
-                                }"
-                             />
-                        </smartForm:GroupElement>
-                        <smartForm:GroupElement >
-                            <smartField:SmartField id='WorkFactTo1' value ="{WorkFactTo1}" editable="false" entitySet="WorkerScheduleSet"/>
-                            <core:Icon
-                           id='WorkFactTo1-icon'
-                                color="#ff0000"
-                                 src="{
-                                    parts:[
-                                        {path:'RegError'},
-                                        {path:'WorkFactTo1'}
-                                    ],
-                                    formatter:'.commonFormatter.showIcon'
-                                }"
-                             />
-                            <!-- name="{
-                                                                    parts:[{ path: 'ChartMdl>FactHours' },
-                                                                     { path: 'ChartMdl>PlanHours' },
-                                                                     { path: 'ChartMdl>JiraHours' }],
-                                                                    formatter: '.commonFormatter.changeName'}"  -->
-                        </smartForm:GroupElement>
-                        <smartForm:GroupElement >
-                            <Button width="50%" text='Сбросить' visible="false" press='resetWorkerDay' id='resetWorkerDay'/>
-                        </smartForm:GroupElement >
-                    </smartForm:Group>
+                   
                 </smartForm:SmartForm>
                 <smartTable:SmartTable
                     beforeRebindTable="onBeforeRebindTable"
@@ -198,7 +224,7 @@
                                                         "filterProperty": "EventDateTime"
                                                      }' />
                                 </table:customData>
-                                <Label text="Время"/>
+                                <Label text="�����"/>
                                 <table:template>
                                     <Text text="{
                                         path:'EventDateTime',

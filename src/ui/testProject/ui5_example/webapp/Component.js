@@ -1,5 +1,7 @@
+sap.ui.loader.config({paths: {"jira/lib": "/sap/bc/ui5_ui5/sap/zjiralib"}});
+
 sap.ui.define([
-    "sap/ui/core/UIComponent",
+    "jira/lib/Component",
     "intheme/zui5_example/model/models",
     "sap/ui/Device"
 
