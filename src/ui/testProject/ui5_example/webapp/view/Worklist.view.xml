@@ -113,11 +113,11 @@
                         </customData>
                         <appointments >
                             <unified:CalendarAppointment
-                                startDate="{TIME_BEGIN}"
-                                title="{TITLE}"
-                                text="{INFO}"
-                                endDate="{TIME_END}"
-                                type="{INTERVAL_TYPE}"
+                                startDate="{StartDate}"
+                                title="{Title}"
+                                text="{Info}"
+                                endDate="{EndDate}"
+                                type="{IntervalType}"
                                 >
                             </unified:CalendarAppointment>
                         </appointments>

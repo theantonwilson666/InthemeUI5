@@ -28,6 +28,9 @@
                     <u:CalendarLegend id="calendarLegend"/>
                 </f:content>
                 <f:actions>
+
+                    <Button id="configSheduleUIButton" icon="sap-icon://wrench" text="{i18n>ScheduleConfUI}" press="onPressConfigUI"/>
+                    
                     <Button icon="sap-icon://refresh"
                             type="Transparent"
                             press="updateCalendar"/>
@@ -44,7 +47,7 @@
                         <smartForm:ColumnLayout columnsM="2" columnsL="2" columnsXL="2"/>
                     </smartForm:layout>
                   
-                    <smartForm:Group label="��������� ���">
+                    <smartForm:Group label="Удаленные дни">
                     <!-- <smartForm:Group label="{i18n>Distant}"> -->
                         <smartForm:GroupElement>
                                 <smartField:SmartField value ="{
@@ -75,7 +78,7 @@
                         </smartForm:GroupElement>
                        
                     </smartForm:Group>
-                    <smartForm:Group label="����/����">
+                    <smartForm:Group label="План/Факт">
                     <!-- <smartForm:Group label="{i18n>StudentGroup}"> -->
                         <smartForm:GroupElement>
                              
@@ -95,7 +98,7 @@
                         </smartForm:GroupElement>
                        
                     </smartForm:Group>
-                    <smartForm:Group label="��� ���">
+                    <smartForm:Group label="Тип дня">
                         <!-- <smartForm:Group label="{i18n>GroupTitle}"> -->
                             <smartForm:GroupElement>
                                 <smartField:SmartField value ="{WorkerName}"/>
@@ -179,7 +182,7 @@
                                                                         formatter: '.commonFormatter.changeName'}"  -->
                             </smartForm:GroupElement>
                             <smartForm:GroupElement >
-                                <Button width="50%" text='��������' visible="false" press='resetWorkerDay' id='resetWorkerDay'/>
+                                <Button width="50%" text='Сбросить' visible="false" press='resetWorkerDay' id='resetWorkerDay'/>
                             </smartForm:GroupElement >
                         </smartForm:Group>
                     <smartForm:Group label="{i18n>WorkDayGroup}">
@@ -224,7 +227,7 @@
                                                         "filterProperty": "EventDateTime"
                                                      }' />
                                 </table:customData>
-                                <Label text="�����"/>
+                                <Label text="Время"/>
                                 <table:template>
                                     <Text text="{
                                         path:'EventDateTime',

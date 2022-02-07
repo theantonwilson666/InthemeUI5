@@ -9,7 +9,8 @@ sap.ui.define(
     "sap/ui/unified/DateTypeRange",
     "sap/viz/ui5/format/ChartFormatter",
     "sap/viz/ui5/api/env/Format",
-    "../model/formatter/formatter"
+    "../model/formatter/formatter",
+    'sap/ui/model/json/JSONModel'
   ],
   function (
     Controller,
@@ -21,33 +22,34 @@ sap.ui.define(
     DateTypeRange,
     ChartFormatter,
     Format,
-    formatter
+    formatter,
+    JSONModel
   ) {
     "use strict";
 
     return Controller.extend("intheme.zworker_schedule.controller.Detail", {
       oVizFrame: null,
-      formatter:formatter,
+      formatter: formatter,
       onInit: function () {
         this.getRouter().getRoute("DetailRoute")
           .attachPatternMatched(this._onRouteMatched, this);
-          var addWorkDayButton = this.byId('addWorkIntervalButton')
-          if(addWorkDayButton){
-            addWorkDayButton.setVisible(false)
-          }
-          if(this.byId("calendarLegend")){
-             
-          }
-                  // sap.ui.getCore().byId('application-zworker_schedule-display-component---Detail--calendarLegend').getItems()[7].setColor('black')
+        var addWorkDayButton = this.byId('addWorkIntervalButton')
+        if (addWorkDayButton) {
+          addWorkDayButton.setVisible(false)
+        }
+        if (this.byId("calendarLegend")) {
 
-         
-          
+        }
+        // sap.ui.getCore().byId('application-zworker_schedule-display-component---Detail--calendarLegend').getItems()[7].setColor('black')
+
+
+
       },
 
       /**
        * @override
        */
-     
+
 
       setAutoResizeTable: function (oEvent) {
         var oSmartTable = this.getView().byId("dateSmartTable");
@@ -107,7 +109,7 @@ sap.ui.define(
         });
       },
       resetTime: function (oData) {
-     //    
+        //    
       },
       _onRouteMatched: function (oEvent) {
         var oArr = oEvent.getParameter("arguments")["?query"];
@@ -157,7 +159,7 @@ sap.ui.define(
         return time < 10 ? '0' + time : time
       },
       bindSmartTable: function (sWorkerId, sDate) {
-       //  
+        //  
         var sPath = "/WorkerScheduleSet(Date=datetime'" + sDate + "',Worker='" + sWorkerId + "')";
         var oSmartTable = this.getView().byId("dateSmartTable");
         oSmartTable.bindObject(sPath);
@@ -240,13 +242,12 @@ sap.ui.define(
       },
 
       updateCalendar: function (oEvent) {
-        var date = new Date().getDate()-1
-        var month = new Date().getMonth()+1
+        var date = new Date().getDate() - 1
+        var month = new Date().getMonth() + 1
         var year = new Date().getFullYear()
         var newTime = `${year}-${month}-${date}T21%3A00%3A00`
-        this.bindSmartForm(this.getWorker(),newTime)
+        this.bindSmartForm(this.getWorker(), newTime)
 
-        debugger
         this.getData4VizChart();
         var oCalendar = this.getView().byId("workerCalendar");
         // 
@@ -258,22 +259,21 @@ sap.ui.define(
           },
           success: function (oData) {
 
-            debugger
-            
+
             if (!this.isExistError()) {
               var oCalendar = this.getView().byId("workerCalendar");
               oCalendar.destroySpecialDates();
               oData.results.forEach((oElem) => {
-                if(oElem.Type!='None'){
-                oCalendar.addSpecialDate(
-                  new DateTypeRange({
-                    startDate: oElem.Date,
-                    type: oElem.Type,
-                    // color: oElem.Color
-                  })
-                );
+                if (oElem.Type != 'None') {
+                  oCalendar.addSpecialDate(
+                    new DateTypeRange({
+                      startDate: oElem.Date,
+                      type: oElem.Type,
+                      // color: oElem.Color
+                    })
+                  );
                 }
-                else{
+                else {
                   oCalendar.addSpecialDate(
                     new DateTypeRange({
                       startDate: oElem.Date,
@@ -315,6 +315,118 @@ sap.ui.define(
         this.setStateProperty("/showNewInterval", false);
       },
 
+      getFirstMondayCurrentMonth: function () {
+        var iYear = new Date().getFullYear();
+        var iMonth = new Date().getMonth(); //- 1;
+        var firstMondayDate = (iYear, iMonth) => {
+          var firstDate = new Date(`${iYear}`, `${iMonth}`, '1', '0', '0')
+          while (firstDate.getDay() != 1) {
+            firstDate = new Date(`${iYear}`, `${iMonth}`, `${firstDate.getDate() + 1}`, '0', '0')
+          }
+          return firstDate.getDate()
+        }
+        return new Date(`${iYear}`, `${iMonth}`, `${firstMondayDate(iYear, iMonth)}`, "0", "0")
+      },
+
+      handleAppointmentSelect: function (oEvent) {
+        var oModel = this.getConfigModel();
+        var oConfigData = oModel.getData();
+
+        var oClickedAppointment = oEvent.mParameters.appointment.getBindingContext("configData").getObject();
+
+        oConfigData.people[0].Schedule.forEach(function (oAppointment, sIndex, aAppointments) {
+          if (oAppointment === this) {
+            debugger;
+            aAppointments.splice(sIndex, 1);
+          };
+        }, oClickedAppointment);
+
+        oModel.updateBindings(true);
+
+      },
+
+      handleIntervalSelect: function (oEvent) {
+        var oModel = this.getConfigModel();
+        var oConfigData = oModel.getData();
+
+        debugger;
+        
+        oConfigData.people[0].Schedule.push({
+          IntervalType: this.byId("selectTypeDaySchedule").getSelectedItem().getBindingContext().getObject().Type,
+          IntervalInternalType : this.byId("selectTypeDaySchedule").getSelectedItem().getBindingContext().getObject().InternalType,
+          EndDate: oEvent.mParameters.endDate,
+          StartDate: oEvent.mParameters.startDate,
+          Title: this.byId("selectTypeDaySchedule").getSelectedItem().getBindingContext().getObject().Text,
+          Info: this.byId("DateTimeFromSchedule").getValue() + " - " + this.byId("DateTimeToSchedule").getValue(),
+          Color: this.byId("selectTypeDaySchedule").getSelectedItem().getBindingContext().getObject().Color
+        });
+
+        oModel.updateBindings(true);
+      },
+
+      getConfigCalendar: function () {
+        return this.getView().byId("configCalendar");
+      },
+
+      getConfigModel: function () {
+        return this.getConfigCalendar().getModel("configData");
+      },
+
+      getFirstDayOfMonth: function () {
+        var iYear = new Date().getFullYear();
+        var iMonth = new Date().getMonth();
+        return new Date(`${iYear}`, `${iMonth}`, `1`, "0", "0")
+      },
+
+      onPressConfigUI: function (oEvent) {
+        this.loadDialog
+          .call(this, {
+            sDialogName: "_ScheduleInputDialog",
+            sViewName:
+              "intheme.zworker_schedule.view.fragments.ScheduleInput",
+          })
+          .then(
+            function (oDialog) {
+
+              var oConfigData = {
+                startDate: this.getFirstMondayCurrentMonth(),
+                people: [
+                  {
+                    WorkerID: oDialog.getBindingContext().getObject().Worker,
+                    WorkerText: oDialog.getBindingContext().getObject().WorkerName,
+                    Schedule: [
+                    ],
+
+                    headers: [
+
+                    ]
+                  }
+                ]
+              };
+
+              var oConfigModel = new JSONModel(oConfigData);
+              this.getView().byId("configCalendar").setModel(oConfigModel, "configData");
+              oConfigModel.updateBindings(true);
+
+              this.getView().byId("configCalendar").setStartDate(oConfigData.startDate);
+
+              var oResultData = {
+                StartDate: this.getFirstDayOfMonth(),
+                Appointments: [
+
+                ]
+
+              };
+
+              var oResultModel = new JSONModel(oResultData);
+              this.byId("resultCalendar").setModel(oResultModel, "resultData");
+
+              oDialog.open();
+            }.bind(this)
+          );
+
+      },
+
       getData4VizChart: function () {
 
         var oCalendar = this.getView().byId("workerCalendar");
@@ -334,6 +446,108 @@ sap.ui.define(
           }.bind(this),
         });
       },
+
+
+      addDaysToDateTime: function (oDate, iDays) {
+        var sYear = oDate.getFullYear();
+        var sMonth = oDate.getMonth();
+        var sDate = oDate.getDate();
+        return new Date(sYear + "", sMonth + "", sDate + iDays + "", "0", "0");
+
+      },
+
+      handleConfigViewChange: function (oEvent) {
+
+        var oOddStartDate = oEvent.getSource().getModel("configData").getData().startDate;
+
+        switch (oEvent.getSource().getViewKey()) {
+          case "even":
+            var oDate = this.addDaysToDateTime(oOddStartDate, 7);
+            oEvent.getSource().setStartDate(oDate);
+            break;
+
+          case "odd":
+            oEvent.getSource().setStartDate(oOddStartDate);
+            break;
+        }
+      },
+
+
+      onCalcScheduleButtonPress: function () {
+        var oConfigData = this.byId("configCalendar").getModel("configData").getData();
+        var aSchedules = oConfigData.people[0].Schedule;
+
+        debugger;
+
+        var oFIInputData = {
+          WORKER: oConfigData.people[0].WorkerID,
+          MONTH: oConfigData.startDate.getMonth().toString().padStart(2, "0"),
+          YEAR: oConfigData.startDate.getFullYear().toString(),
+          SCHEDULE: this.buildSchedulesOut(aSchedules)
+        }
+
+      },
+
+
+      buildSchedulesOut: function (aSchedules) {
+
+        debugger;
+
+        var aOut = [];
+        var oDateIndex = {};
+
+        aSchedules.forEach(function (oSchedule, index, array) {
+
+          debugger;
+
+          var sDate = this.controller.convernDateTimeToChar(oSchedule.StartDate);
+          if (this.oDateIndex[sDate]) {
+            this.aOut[this.oDateIndex[sDate]].push(this.controller.getIntervalFromSchedule(oSchedule));
+          } else {
+            var newSchedule = {
+              DATE: sDate,
+              INTERVALS: [
+                this.controller.getIntervalFromSchedule(oSchedule).bind(this.controller)
+              ]
+            };
+            this.aOut.push(newSchedule);
+            this.oDateIndex[sDate] = this.aOut.length() - 1;
+          }
+        }, {
+          aOut: aOut,
+          oDateIndex: oDateIndex,
+          controller: this
+        });
+
+        return aOut;
+      },
+
+
+      getIntervalFromSchedule: function (oSchedule) {
+
+        
+        return {
+          INTERVAL_TYPE: oSchedule.IntervalType,
+          TIME_BEGIN: this.convertTimeFromDateTime(oSchedule.StartDate),
+          TIME_END: this.convertTimeFromDateTime(oSchedule.EndDate)
+        }
+
+      },
+
+      convertTimeFromDateTime: function(oDate){
+        var sHours = oDate.getHours().toString().padStart(2, "0");
+        var sMinutes = oDate.getMinutes().toString().padStart(2, "0");
+        return `${sHours}${sMinutes}`;
+      },
+
+      convernDateTimeToChar: function (oDate) {
+        var sYear = oDate.getFullYear();
+        var sMonth = oDate.getMonth().padStart(2, "0");
+        var sDay = oDate.getDate();
+
+        return `${sYear}${sMonth}${sDay}`
+      },
+
 
       setChartData: function (oData) {
 

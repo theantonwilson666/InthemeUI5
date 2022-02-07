@@ -16,7 +16,6 @@ sap.ui.define([], function () {
     },
 
     formatSumHours: function (oValue) {
-      debugger;
     },
 
     formatFloat: function (value) {
@@ -66,7 +65,6 @@ sap.ui.define([], function () {
     },
     formatBoolean: function (bool) {
       if (typeof (bool) === 'boolean') {
-        debugger
         return bool === false ? 'Нет' : 'Да'
       }
     }

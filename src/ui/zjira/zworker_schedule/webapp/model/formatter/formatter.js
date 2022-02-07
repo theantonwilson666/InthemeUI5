@@ -1,15 +1,14 @@
 sap.ui.define([], function () {
 	return {
-		
 		DateTimeCorrectTitle:function(dateTime){
 			var weekDays = {
-				0:'Воскресенье',
-				1:'Понедельник',
-				2:"Вторник",
-				3:'Среда',
-				4:'Четверг',
-				5:'Пятница',
-				6:'Суббота'
+				0:'Р’РѕСЃРєСЂРµСЃРµРЅСЊРµ',
+				1:'РџРѕРЅРµРґРµР»СЊРЅРёРє',
+				2:"Р’С‚РѕСЂРЅРёРє",
+				3:'РЎСЂРµРґР°',
+				4:'Р§РµС‚РІРµСЂРі',
+				5:'РџСЏС‚РЅРёС†Р°',
+				6:'РЎСѓР±Р±РѕС‚Р°'
 			}
 			if(dateTime){
 				var currentWeekDay = weekDays[dateTime.getDay()],
@@ -40,7 +39,6 @@ sap.ui.define([], function () {
 		},
 		Percent:function(percent){
 			if(percent){
-				  
 				return `${percent}%`
 			}
 		},

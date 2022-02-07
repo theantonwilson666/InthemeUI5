@@ -1,17 +1,17 @@
 sap.ui.define(["jira/lib/BaseController",
-	"sap/m/MessageToast",    "../model/formatter/formatter"
+  "sap/m/MessageToast", "../model/formatter/formatter"
 ], function (BaseController,
-	MessageToast,    formatter
-  ) {
+  MessageToast, formatter
+) {
   "use strict";
   return BaseController.extend("intheme.zworker_schedule.controller.Main", {
-    formatter:formatter,
+    formatter: formatter,
     onInit: function () {
 
       this.getRouter()
         .getRoute("WorklistRoute")
         .attachPatternMatched(this._onRouteMatched, this);
-        
+
 
 
     },
@@ -56,7 +56,7 @@ sap.ui.define(["jira/lib/BaseController",
 
     onValueHelpRequest: function (oEvent) {
       delete this._oDirectDialog;
-       ;
+      ;
 
       var fnHandleConfirm = function (oEvent) {
         var oSelectedType = oEvent
@@ -111,13 +111,13 @@ sap.ui.define(["jira/lib/BaseController",
       oEvent.getSource().getParent().close();
     },
 
-    changeDateRange:function(oEvent){
+    changeDateRange: function (oEvent) {
       try {
-        if(oEvent.getSource().getTo().getMonth()!=oEvent.getSource().getFrom().getMonth()){
-          throw new Error("Данные некорректны")
+        if (oEvent.getSource().getTo().getMonth() != oEvent.getSource().getFrom().getMonth()) {
+          throw new Error("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ")
         }
       } catch (error) {
-        new sap.m.MessageToast.show('Выберете даты в одном месяце')
+        new sap.m.MessageToast.show('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ')
         oEvent.getSource().setTo(new Date())
         oEvent.getSource().setFrom(new Date())
         console.log(error);
@@ -139,7 +139,7 @@ sap.ui.define(["jira/lib/BaseController",
         EntitySet: "WorkerRegisterSet",
         Filter: JSON.stringify(oFilter),
       });
-      var sUrl = sServiceUrl + sPath + "/$value";    
+      var sUrl = sServiceUrl + sPath + "/$value";
       sap.m.URLHelper.redirect(sUrl, true);
       oEvent.getSource().getParent().close();
     },
@@ -231,6 +231,7 @@ sap.ui.define(["jira/lib/BaseController",
       });
     },
 
+  
     onCancelConfigDialog: function (oEvent) {
       oEvent.getSource().getParent().close();
       this.resetChanges();
