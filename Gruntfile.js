@@ -62,7 +62,7 @@ module.exports = function (grunt) {
 
       {
         package: "ZWORKER_SCHEDULE",
-        transportno: "TMDK921753",
+        transportno: "TMDK922192",
         project: "zjira",
         apps: {
           zworker_schedule: {
