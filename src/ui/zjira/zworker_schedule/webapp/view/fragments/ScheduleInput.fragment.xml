@@ -120,6 +120,7 @@
                         <unified:CalendarAppointment title="{resultData&gt;Title}({resultData&gt;Text})"
                                                      text="{resultData&gt;Text}"
                                                      type="{resultData&gt;Type}"
+                                                     color="{resultData&gt;Color}"
                                                      startDate="{resultData&gt;StartDate}"
                                                      endDate="{resultData&gt;EndDate}" />
                     </appointments>
@@ -133,5 +134,15 @@
                 </SinglePlanningCalendar>
             </VBox>
         </VBox>
+
+          <beginButton>
+            <Button text="Загрузить график"
+                    press="onUploadScheduleButtonPress" />
+        </beginButton>
+        <endButton>
+            <Button text="Отмена"
+                    press="onCancelUploadSchedulePress" />
+        </endButton>
+
     </Dialog>
 </core:FragmentDefinition>

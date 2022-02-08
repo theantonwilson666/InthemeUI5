@@ -546,21 +546,22 @@ sap.ui.define(
         var oData = oModel.getData();
 
         oData.Appointments = [];
-        
+
         for (var i = 0; i < oResultData.SCHEDULE.length; i++) {
           var oSchedule = oResultData.SCHEDULE[i];
 
           for (var j = 0; j < oSchedule.INTERVALS.length; j++) {
             var oInterval = oSchedule.INTERVALS[j];
             oData.Appointments.push({
-              Title: oInterval.INTERVAL_TYPE,
-              Text : this.convertTimeToPretty(oInterval.TIME_BEGIN) + " - " + this.convertTimeToPretty(oInterval.TIME_END),
-              Type: "Type" + oSchedule.DATE_TYPE,
+              Title: oInterval.INTERVAL_TYPE_TEXT,
+              Text: this.convertTimeToPretty(oInterval.TIME_BEGIN) + " - " + this.convertTimeToPretty(oInterval.TIME_END),
+              Type: oInterval.INTERVAL_TYPE,
+              Color: oInterval.INTERVAL_COLOR,
               StartDate: this.convertSAPDateTimeToJS(oSchedule.DATE, oInterval.TIME_BEGIN),
               EndDate: this.convertSAPDateTimeToJS(oSchedule.DATE, oInterval.TIME_END),
-              StartDateOut : this.convertSAPDateTimeToJS(oSchedule.DATE, oInterval.TIME_BEGIN),
+              StartDateOut: this.convertSAPDateTimeToJS(oSchedule.DATE, oInterval.TIME_BEGIN),
               EndDateOut: this.convertSAPDateTimeToJS(oSchedule.DATE, oInterval.TIME_END),
-              Icon : ""
+              Icon: ""
             })
 
           }
@@ -570,19 +571,19 @@ sap.ui.define(
         oModel.updateBindings(true);
       },
 
-      convertSAPDateTimeToJS: function(sDate, sTime){
-        var sYear = sDate.substr(0,4);
-        var sMonth = sDate.substr(4,2) - 1;
-        var sDay = sDate.substr(6,2);
+      convertSAPDateTimeToJS: function (sDate, sTime) {
+        var sYear = sDate.substr(0, 4);
+        var sMonth = sDate.substr(4, 2) - 1;
+        var sDay = sDate.substr(6, 2);
         var sHour = sTime.substr(0, 2);
-        var sMinutes = sTime.substr(2,2);
+        var sMinutes = sTime.substr(2, 2);
 
         return new Date(sYear, sMonth, sDay, sHour, sMinutes);
 
       },
 
-      convertTimeToPretty : function(sTime){
-        return sTime.substr(0, 2) + ":" + sTime.substr(2,2);
+      convertTimeToPretty: function (sTime) {
+        return sTime.substr(0, 2) + ":" + sTime.substr(2, 2);
       },
 
       getWeek: function () {
@@ -631,42 +632,8 @@ sap.ui.define(
         return iDay - 1;
       },
 
-      buildSchedulesOut: function (aSchedules) {
-
-        debugger;
-
-        var aOut = [];
-        var oDateIndex = {};
-
-        aSchedules.forEach(function (oSchedule, index, array) {
-
-          debugger;
-
-          var sDate = this.controller.convernDateTimeToChar(oSchedule.StartDate);
-          if (this.oDateIndex[sDate]) {
-            this.aOut[this.oDateIndex[sDate]].push(this.controller.getIntervalFromSchedule(oSchedule));
-          } else {
-            var newSchedule = {
-              DATE: sDate,
-              INTERVALS: [
-                this.controller.getIntervalFromSchedule(oSchedule).bind(this.controller)
-              ]
-            };
-            this.aOut.push(newSchedule);
-            this.oDateIndex[sDate] = this.aOut.length() - 1;
-          }
-        }, {
-          aOut: aOut,
-          oDateIndex: oDateIndex,
-          controller: this
-        });
-
-        return aOut;
-      },
-
 
       getIntervalFromSchedule: function (oSchedule) {
-
 
         return {
           INTERVAL_TYPE: oSchedule.IntervalType,
@@ -684,8 +651,8 @@ sap.ui.define(
 
       convernDateTimeToChar: function (oDate) {
         var sYear = oDate.getFullYear();
-        var sMonth = oDate.getMonth().padStart(2, "0");
-        var sDay = oDate.getDate();
+        var sMonth = oDate.getMonth().toString().padStart(2, "0");
+        var sDay = oDate.getDate().toString().padStart(2, "0");
 
         return `${sYear}${sMonth}${sDay}`
       },
@@ -704,6 +671,118 @@ sap.ui.define(
             }.bind(this)
           );
 
+      },
+
+      // oData.Appointments.push({
+      //   Title: oInterval.INTERVAL_TYPE_TEXT,
+      //   Text: this.convertTimeToPretty(oInterval.TIME_BEGIN) + " - " + this.convertTimeToPretty(oInterval.TIME_END),
+      //   Type: oInterval.INTERVAL_TYPE,
+      //   Color: oInterval.INTERVAL_COLOR,
+      //   StartDate: this.convertSAPDateTimeToJS(oSchedule.DATE, oInterval.TIME_BEGIN),
+      //   EndDate: this.convertSAPDateTimeToJS(oSchedule.DATE, oInterval.TIME_END),
+      //   StartDateOut: this.convertSAPDateTimeToJS(oSchedule.DATE, oInterval.TIME_BEGIN),
+      //   EndDateOut: this.convertSAPDateTimeToJS(oSchedule.DATE, oInterval.TIME_END),
+      //   Icon: ""
+      // })
+
+      buildMonth: function (sDate) {
+        var aMonth = [];
+
+        var oDateIndex = {};
+
+        var oDate = sDate;
+        var sCurrentMonth = sDate.getMonth();
+        var sMonth = oDate.getMonth();
+
+        while (sCurrentMonth === sMonth) {
+          var sYear = oDate.getFullYear();
+          var sMonth = oDate.getMonth();
+          var sDay = oDate.getDate() + 1;
+
+          if (sCurrentMonth === sMonth) {
+
+            aMonth.push({
+              DATE: this.convernDateTimeToChar(oDate),
+              INTERVALS: [
+              ]
+            })
+
+            oDateIndex[this.convernDateTimeToChar(oDate)] = aMonth.length - 1;
+            oDate = new Date(sYear, sMonth, sDay);
+          }
+        };
+
+        return {
+          monthArr: aMonth,
+          monthIndex: oDateIndex
+        };
+      },
+
+      buildSchedulesOut: function (aAppointments, sDate) {
+        var aOut = [];
+
+        var oConfigMonth = this.buildMonth(sDate);
+
+        aOut = oConfigMonth.monthArr;
+
+        var oDateIndex = oConfigMonth.monthIndex;
+
+        for (var i = 0; i < aAppointments.length; i++) {
+          var oAppointment = aAppointments[i];
+          var oSchedule = aOut[oDateIndex[this.convernDateTimeToChar(oAppointment.StartDate)]];
+
+          oSchedule.INTERVALS.push({
+            INTERVAL_TYPE: oAppointment.Type,
+            TIME_BEGIN: this.convertTimeFromDateTime(oAppointment.StartDate),
+            TIME_END: this.convertTimeFromDateTime(oAppointment.EndDate)
+          });
+
+        }
+
+        return aOut;
+      },
+
+
+      onUploadScheduleButtonPress: function () {
+
+        this.byId("inputScheduleDialog").setBusy(true);
+
+        var oModel = this.byId("resultCalendar").getModel("resultData");
+        var oScheduleData = oModel.getData();
+
+        var oConfigData = this.byId("configCalendar").getModel("configData").getData();
+
+        var oScheduleOutData = {
+          WORKER: oConfigData.people[0].WorkerID,
+          MONTH: (oConfigData.startDate.getMonth() + 1).toString().padStart(2, "0"),
+          YEAR: oConfigData.startDate.getFullYear().toString(),
+          SCHEDULE: this.buildSchedulesOut(oScheduleData.Appointments, oScheduleData.StartDate)
+        };
+
+        var sScheduleData = JSON.stringify(oScheduleOutData);
+
+        this.getModel().callFunction("/SaveScheduleTable", {
+          method: "POST",
+          urlParameters: {
+            inputDataJSON: sScheduleData,
+          },
+          success: function (oData) {
+            this.byId("inputScheduleDialog").setBusy(false);
+            this.byId("inputScheduleDialog").close();
+            this.showMessageToast("Успех!!!!");
+          }.bind(this),
+
+          error: function (oError) {
+            this.byId("inputScheduleDialog").setBusy(false);
+            this.showMessageToast("Косяк");
+          }
+        });
+
+
+      },
+
+      onCancelUploadSchedulePress: function (oEvent) {
+        oEvent.getSource().getParent().close();
       },
 
       onCancelInputDefaultPress: function (oEvent) {
