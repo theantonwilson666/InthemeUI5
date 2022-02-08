@@ -499,7 +499,7 @@ sap.ui.define(
 
 
       onCalcScheduleButtonPress: function () {
-        debugger;
+        this.byId("inputScheduleDefaultDialog").close();
         this.byId("inputScheduleDialog").setBusy(true);
 
         var oConfigData = this.byId("configCalendar").getModel("configData").getData();
@@ -507,14 +507,14 @@ sap.ui.define(
 
         var oFIInputData = {
           WORKER: oConfigData.people[0].WorkerID,
-          MONTH: oConfigData.startDate.getMonth().toString().padStart(2, "0"),
+          MONTH: (oConfigData.startDate.getMonth() + 1).toString().padStart(2, "0"),
           YEAR: oConfigData.startDate.getFullYear().toString(),
           EVEN_WEEK: this.buildWeek("even"),
           ODD_WEEK: this.buildWeek("odd"),
           DAY_DEFAULT: {
-            TYPE: this.byId("selectTypeDaySchedule").getSelectedItem().getBindingContext().getObject().InternalType,
-            TIMEFROM: `${this.parseTimePicker(this.byId("DateTimeFromSchedule").getValue()).hours}${this.parseTimePicker(this.byId("DateTimeFromSchedule").getValue()).minutes}`,
-            TIMETO: `${this.parseTimePicker(this.byId("DateTimeToSchedule").getValue()).hours}${this.parseTimePicker(this.byId("DateTimeToSchedule").getValue()).minutes}`
+            TYPE: this.byId("selectTypeDayScheduleDefault").getSelectedItem().getBindingContext().getObject().InternalType,
+            TIMEFROM: `${this.parseTimePicker(this.byId("DateTimeFromScheduleDefault").getValue()).hours}${this.parseTimePicker(this.byId("DateTimeFromSchedule").getValue()).minutes}`,
+            TIMETO: `${this.parseTimePicker(this.byId("DateTimeToScheduleDefault").getValue()).hours}${this.parseTimePicker(this.byId("DateTimeToSchedule").getValue()).minutes}`
           }
         }
 
@@ -526,6 +526,8 @@ sap.ui.define(
             inputDataJSON: sFIInputData
           },
           success: function (oData) {
+            var oRecalcData = JSON.parse(oData.RecalcScheduleTable.dataJSON);
+            this.updateResultCalendar(oRecalcData);
 
             this.byId("inputScheduleDialog").setBusy(false);
             this.showMessageToast("Успех");
@@ -537,6 +539,50 @@ sap.ui.define(
           }.bind(this)
         });
 
+      },
+
+      updateResultCalendar: function (oResultData) {
+        var oModel = this.byId("resultCalendar").getModel("resultData");
+        var oData = oModel.getData();
+
+        oData.Appointments = [];
+        
+        for (var i = 0; i < oResultData.SCHEDULE.length; i++) {
+          var oSchedule = oResultData.SCHEDULE[i];
+
+          for (var j = 0; j < oSchedule.INTERVALS.length; j++) {
+            var oInterval = oSchedule.INTERVALS[j];
+            oData.Appointments.push({
+              Title: oInterval.INTERVAL_TYPE,
+              Text : this.convertTimeToPretty(oInterval.TIME_BEGIN) + " - " + this.convertTimeToPretty(oInterval.TIME_END),
+              Type: "Type" + oSchedule.DATE_TYPE,
+              StartDate: this.convertSAPDateTimeToJS(oSchedule.DATE, oInterval.TIME_BEGIN),
+              EndDate: this.convertSAPDateTimeToJS(oSchedule.DATE, oInterval.TIME_END),
+              StartDateOut : this.convertSAPDateTimeToJS(oSchedule.DATE, oInterval.TIME_BEGIN),
+              EndDateOut: this.convertSAPDateTimeToJS(oSchedule.DATE, oInterval.TIME_END),
+              Icon : ""
+            })
+
+          }
+        }
+
+
+        oModel.updateBindings(true);
+      },
+
+      convertSAPDateTimeToJS: function(sDate, sTime){
+        var sYear = sDate.substr(0,4);
+        var sMonth = sDate.substr(4,2) - 1;
+        var sDay = sDate.substr(6,2);
+        var sHour = sTime.substr(0, 2);
+        var sMinutes = sTime.substr(2,2);
+
+        return new Date(sYear, sMonth, sDay, sHour, sMinutes);
+
+      },
+
+      convertTimeToPretty : function(sTime){
+        return sTime.substr(0, 2) + ":" + sTime.substr(2,2);
       },
 
       getWeek: function () {
@@ -644,6 +690,25 @@ sap.ui.define(
         return `${sYear}${sMonth}${sDay}`
       },
 
+
+      onDisplayDefaultInputPress: function () {
+        this.loadDialog
+          .call(this, {
+            sDialogName: "_ScheduleDefaultInputDialog",
+            sViewName:
+              "intheme.zworker_schedule.view.fragments.dayDefaultInput",
+          })
+          .then(
+            function (oDialog) {
+              oDialog.open();
+            }.bind(this)
+          );
+
+      },
+
+      onCancelInputDefaultPress: function (oEvent) {
+        oEvent.getSource().getParent().close();
+      },
 
       setChartData: function (oData) {
 
