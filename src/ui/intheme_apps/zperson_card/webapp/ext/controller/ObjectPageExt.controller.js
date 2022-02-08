@@ -1,45 +1,49 @@
-$.sap.require("jira/lib/fiorielementslib/fioriBaseController");
-var fioriBaseController = sap.ui.require(
-  "jira/lib/fiorielementslib/fioriBaseController"
-);
+// $.sap.require("jira/lib/fiorielementslib/fioriBaseController");
+// var fioriBaseController = sap.ui.require(
+//   "jira/lib/fiorielementslib/fioriBaseController"
+// );
 
 
 
 
 sap.ui.controller("zperson_card.ext.controller.ObjectPageExt", {
   onInit: function () {
-    // if (this.extensionAPI.getViewId() == 'zperson_card::sap.suite.ui.generic.template.ObjectPage.view.Details::ZSNN_PERSON_ROOT') {
-    //   this.uiExtensions();
-    // }
+    debugger
+    if (this.getView().sId == 'zperson_card::sap.suite.ui.generic.template.ObjectPage.view.Details::ZSNN_PERSON_ROOT') {
+
+      this.uiExtensions();
+    }
+  
+  
   },
 
-  uiExtensions: function () {
-    this.uiExtensionAddUploader();
+  uiExtensions:function(){
+    this.ImageUploader();
   },
 
-  uiExtensionAddUploader: function () {
-    var sExcelButtonText = fioriBaseController.getTextFromI18n(
-      this,
-      "ImageUpload"
-    );
-    var oObjectPageHeader = this.byId("objectPageHeader");
-    var oUpload = new sap.ui.unified.FileUploader({
-      buttonOnly: true,
+  ImageUploader:function(){
+  var oObjectPageHeader = this.byId("objectPageHeader");
+  var oUpload = new sap.ui.unified.FileUploader({
+    buttonOnly: true,
       id: "fileUploader",
       style: "Emphasized",
       name: "myFileUpload",
-      buttonText: sExcelButtonText,
-      fileType: "png",
+      mimeType:'image',
+      buttonText: "ImageUpload",
+      fileType: "png.jpeg,jpg,RAW,SVG,WebP",
       change: this.onUploadFile.bind(this),
       visible: {
         path: "ui>/editable",
       },
     });
-
+    
+    debugger
     oObjectPageHeader.insertAction(oUpload, 0);
   },
+  
 
   onUploadFile: function (oEvent) {
+    debugger
     this.getFileContent(oEvent);
   },
 
@@ -54,13 +58,16 @@ sap.ui.controller("zperson_card.ext.controller.ObjectPageExt", {
               "data:" + oFile.type + ";base64,",
               ""
             );
-            
-            this.callLoadFileAction(vContent);
+            var DbKey = this.getView().getBindingContext().getObject()['DbKeyString'];
+            var mimeType = 'image'
+            debugger
+            this.getOwnerComponent().getModel().create('/PersonImageSet/',{PersonKey:DbKey, Image:vContent, MimeType:mimeType})                             
           }.bind(this);
 
           oReader.readAsDataURL(oFile);
         }
       }.bind(this)
+      
     );
   },
 

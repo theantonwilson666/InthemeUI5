@@ -3,3 +3,4 @@ src/dist
 package-lock.json
 Gruntfile.js
 workspace.code-workspace
+testProject

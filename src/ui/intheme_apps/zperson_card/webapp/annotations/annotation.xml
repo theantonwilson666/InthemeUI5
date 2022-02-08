@@ -19,6 +19,16 @@
 
             <Annotations Target="ZINTHEME_WORKER_SRV.ZSNN_PERSON_ROOTType">
 
+                <Annotation Term="UI.HeaderFacets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="CorporateInfo"/>
+                            <PropertyValue Property="Label" String="Корпоративная информация"/>
+                            <PropertyValue Property="Target" AnnotationPath="to_CorporateInfo/@UI.FieldGroup#CorporateInfo"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+
 
                 <Annotation Term="UI.HeaderInfo">
                     <Record>
@@ -54,11 +64,13 @@
 
                 <Annotation Term="UI.Facets">
                     <Collection>
-                        <Record Type="UI.ReferenceFacet">
+
+                        <!-- <Record Type="UI.ReferenceFacet">
                             <PropertyValue Property="ID" String="CorporateInfo"/>
                             <PropertyValue Property="Label" String="Корпоративная информация"/>
                             <PropertyValue Property="Target" AnnotationPath="to_CorporateInfo/@UI.FieldGroup#CorporateInfo" />
-                        </Record>
+                        </Record> -->
+                     
 
                         <Record Type="UI.ReferenceFacet">
                             <PropertyValue Property="ID" String="Equipment"/>
@@ -127,6 +139,8 @@
                 </Annotation>
 
             </Annotations>
+           
+
 
 
 
@@ -148,6 +162,34 @@
                         </Record>
                     </Collection>
                 </Annotation>
+                <Annotation Term="UI.FieldGroup" >
+                    <Record>
+                        <PropertyValue Property="Label" String="Equipment"/>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="Brand"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="SerialNumber"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="Type"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="DateFrom"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+
+                            </Collection>
+                        </PropertyValue>
+
+                    </Record>
+                </Annotation>
             </Annotations>
 
             <Annotations Target="ZINTHEME_WORKER_SRV.ZSNN_PERSON_FOLLOWERSType">
@@ -157,6 +199,22 @@
                             <PropertyValue Property="Value" Path="Follower"/>
                         </Record>
                     </Collection>
+                </Annotation>
+
+
+                <Annotation Term="UI.FieldGroup" >
+                    <Record>
+                        <PropertyValue Property="Label" String="follower"/>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="Follower"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+
+                    </Record>
                 </Annotation>
             </Annotations>
 
@@ -180,6 +238,34 @@
                         </Record>
 
                     </Collection>
+                </Annotation>
+
+                 
+                <Annotation Term="UI.FieldGroup" >
+                    <Record>
+                        <PropertyValue Property="Label" String="person goal"/>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="Status"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="DateFrom"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="DateTo"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="Goal"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+
+                    </Record>
                 </Annotation>
             </Annotations>
 
