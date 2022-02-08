@@ -17,13 +17,6 @@
                 </f:heading>
             </f:DynamicPageTitle>
         </f:title>
-        <f:header>
-            <f:DynamicPageHeader pinnable="false" class="sapUiNoContentPadding">
-                <f:content>
-                    <Text text='zz'/>
-                </f:content>
-            </f:DynamicPageHeader>
-        </f:header>
         <f:content>
             <VBox>
                 <smartFilterBar:SmartFilterBar
@@ -120,38 +113,6 @@
                                     <Text text="{/#Issue/StatusName/@sap:label}"/>
                                 </header>
                             </Column>
-                            <!--3 column -->
-                            <!-- <Column>
-                                <customData>
-                                    <core:CustomData key="p13nData"
-                                                 value='\{
-                                                        "columnIndex": "2",
-                                                        "columnKey": "StageName",
-                                                        "leadingProperty": "StageName",
-                                                        "sortProperty": "StageName",
-                                                        "filterProperty": "StageName"
-                                                     }'/>
-                                </customData>
-                                <header>
-                                    <Text text="{/#Issue/StageName/@sap:label}"/>
-                                </header>
-                            </Column> -->
-                            <!--4 column -->
-                            <!-- <Column>
-                                <customData>
-                                    <core:CustomData key="p13nData"
-                                                 value='\{
-                                                        "columnIndex": "3",
-                                                        "columnKey": "AssignedName",
-                                                        "leadingProperty": "AssignedName",
-                                                        "sortProperty": "AssignedName",
-                                                        "filterProperty": "AssignedName"
-                                                     }'/>
-                                </customData>
-                                <header>
-                                    <Text text="{/#Issue/AssignedName/@sap:label}"/>
-                                </header>
-                            </Column> -->
                             <!--5 column -->
                             <Column>
                                 <customData>

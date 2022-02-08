@@ -1,0 +1,137 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+                         xmlns:mvc="sap.ui.core.mvc"
+                         displayBlock="true"
+                         xmlns="sap.m"
+                         xmlns:f="sap.f"
+                         xmlns:fb="sap.ui.comp.filterbar"
+                         xmlns:l="sap.ui.layout"
+                         xmlns:sv="sap.ui.comp.smartvariants"
+                         xmlns:unified="sap.ui.unified"
+                         xmlns:dnd="sap.ui.core.dnd"
+                         xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+                         xmlns:smartTable="sap.ui.comp.smarttable"
+                         xmlns:smartField="sap.ui.comp.smartfield">
+    <Dialog id="inputScheduleDialog"
+            title="Тест"
+            class="sapUiSizeCompact"
+            contentHeight="100%"
+            contentWidth="100%">
+        <VBox class="sapUiMediumMargin">
+            <Title text="Заполнение графика работы" />
+            <VBox fitContainer="true">
+                <FlexBox class="sapUiContentPadding">
+                    <Label class="sapUiTinyMargin"
+                           text="Вводный интервал"
+                           labelFor="selectTypeDaySchedule" />
+                    <Select class="sapUiTinyMargin"
+                            id="selectTypeDaySchedule"
+                            items="{
+&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;path: '/IntervalTypesLegendSet'
+&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}">
+                        <core:Item key="{Type}"
+                                   text="{Text}" />
+                    </Select>
+                    <Label text="C"
+                           class="sapUiTinyMargin" />
+                    <TimePicker id="DateTimeFromSchedule"
+                                value="9:00"
+                                valueFormat="HH:mm"
+                                class="sapUiTinyMargin"
+                                displayFormat="HH:mm"
+                                placeholder="Enter meeting start time" />
+                    <Label text="По "
+                           class="sapUiTinyMargin" />
+                    <TimePicker id="DateTimeToSchedule"
+                                value="18:00"
+                                class="sapUiTinyMargin"
+                                valueFormat="HH:mm"
+                                displayFormat="HH:mm"
+                                placeholder="Enter meeting start time" />
+                    <Button text="Заполнить календарь"
+                            class="sapUiTinyMargin"
+                            press="onDisplayDefaultInputPress" />
+                </FlexBox>
+                <PlanningCalendar id="configCalendar"
+                                  viewKey="odd"
+                                  viewChange="handleConfigViewChange"
+                                  intervalSelect="handleIntervalSelect"
+                                  appointmentSelect="handleAppointmentSelect"
+                                  rows="{path: 'configData&gt;/people' }"
+                                  appointmentsVisualization="Filled"
+                                  showEmptyIntervalHeaders="false"
+                                  showWeekNumbers="true">
+                    <toolbarContent>
+                        <Title text="Настройка"
+                               titleStyle="H4" />
+                    </toolbarContent>
+                    <views>
+                        <PlanningCalendarView key="even"
+                                              intervalType="Day"
+                                              description="Четная"
+                                              intervalsS="7"
+                                              intervalsM="7"
+                                              intervalsL="7" />
+                        <PlanningCalendarView key="odd"
+                                              intervalType="Day"
+                                              description="Нечетная"
+                                              intervalsS="7"
+                                              intervalsM="7"
+                                              intervalsL="7" />
+                    </views>
+                    <rows>
+                        <PlanningCalendarRow title="{configData&gt;WorkerText}"
+                                             appointments="{path : 'configData&gt;Schedule', templateShareable: true}"
+                                             intervalHeaders="{path: 'configData&gt;headers', templateShareable: true}">
+                            <customData>
+                                <core:CustomData key="emp-name"
+                                                 value="{configData&gt;WorkerText}"
+                                                 writeToDom="true" />
+                            </customData>
+                            <appointments>
+                                <unified:CalendarAppointment startDate="{configData&gt;StartDateOut}"
+                                                             title="{configData&gt;Title}"
+                                                             text="{configData&gt;Info}"
+                                                             endDate="{configData&gt;EndDateOut}"
+                                                             type="{configData&gt;IntervalType}"
+                                                             color="{configData&gt;Color}" />
+                            </appointments>
+                            <intervalHeaders>
+                                <unified:CalendarAppointment />
+                            </intervalHeaders>
+                        </PlanningCalendarRow>
+                    </rows>
+                </PlanningCalendar>
+            </VBox>
+            <Title text="Результат" />
+            <VBox>
+                <SinglePlanningCalendar id="resultCalendar"
+                                        fullDay="false"
+                                        enableAppointmentsDragAndDrop="true"
+                                        startDate="{path: 'resultData&gt;StartDate'}"
+                                        appointments="{path: 'resultData&gt;/Appointments'}">
+                    <dragDropConfig>
+                        <dnd:DragInfo sourceAggregation="appointments" />
+                    </dragDropConfig>
+                    <views>
+                        <SinglePlanningCalendarMonthView key="MonthView"
+                                                         title="Month" />
+                    </views>
+                    <appointments>
+                        <unified:CalendarAppointment title="{resultData&gt;Title}({resultData&gt;Text})"
+                                                     text="{resultData&gt;Text}"
+                                                     type="{resultData&gt;Type}"
+                                                     startDate="{resultData&gt;StartDate}"
+                                                     endDate="{resultData&gt;EndDate}" />
+                    </appointments>
+                    <actions>
+                        <Button text="text">
+                            <dragDropConfig>
+                                <dnd:DropInfo drop="onDrop" />
+                            </dragDropConfig>
+                        </Button>
+                    </actions>
+                </SinglePlanningCalendar>
+            </VBox>
+        </VBox>
+    </Dialog>
+</core:FragmentDefinition>

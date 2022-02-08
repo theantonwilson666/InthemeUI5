@@ -5,7 +5,7 @@
     "type": "application",
     "dataSources": {
       "mainService": {
-        "uri": "/sap/opu/odata/sap/ZMATERIAL_SERVICE_SRV",
+        "uri": "/sap/opu/odata/sap/ZWORKER_VISIT_SCHEDULE_SRV",
         "type": "OData",
         "settings": {
           "odataVersion": "2.0",
@@ -74,7 +74,7 @@
         "dataSource": "mainService",
         "settings": {
           "serviceUrlParams": {
-            "sap-client": "100"
+            "sap-client": "300"
           },
           "defaultBindingMode": "TwoWay",
           "useBatch": true,

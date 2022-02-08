@@ -1,0 +1,56 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+                         xmlns:mvc="sap.ui.core.mvc"
+                         displayBlock="true"
+                         xmlns="sap.m"
+                         xmlns:f="sap.f"
+                         xmlns:fb="sap.ui.comp.filterbar"
+                         xmlns:l="sap.ui.layout"
+                         xmlns:sv="sap.ui.comp.smartvariants"
+                         xmlns:unified="sap.ui.unified"
+                         xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+                         xmlns:smartTable="sap.ui.comp.smarttable"
+                         xmlns:smartField="sap.ui.comp.smartfield">
+    <Dialog id="inputScheduleDefaultDialog"
+            title="День по умолчанию"
+            class="sapUiSizeCompact"
+            contentHeight="30%"
+            contentWidth="15%">
+        <VBox class="sapUiSmallMargin">
+            <Label class="sapUiTinyMargin"
+                   text="День по умолчанию"
+                   labelFor="selectTypeDaySchedule" />
+            <Select class="sapUiTinyMargin"
+                    id="selectTypeDayScheduleDefault"
+                    items="{
+&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;path: '/IntervalTypesLegendSet'
+&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}">
+                <core:Item key="{Type}"
+                           text="{Text}" />
+            </Select>
+            <Label text="C"
+                   class="sapUiTinyMargin" />
+            <TimePicker id="DateTimeFromScheduleDefault"
+                        value="9:00"
+                        valueFormat="HH:mm"
+                        class="sapUiTinyMargin"
+                        displayFormat="HH:mm"
+                        placeholder="Enter meeting start time" />
+            <Label text="По "
+                   class="sapUiTinyMargin" />
+            <TimePicker id="DateTimeToScheduleDefault"
+                        value="18:00"
+                        class="sapUiTinyMargin"
+                        valueFormat="HH:mm"
+                        displayFormat="HH:mm"
+                        placeholder="Enter meeting start time" />
+        </VBox>
+        <beginButton>
+            <Button text="OK"
+                    press="onCalcScheduleButtonPress" />
+        </beginButton>
+        <endButton>
+            <Button text="Отмена"
+                    press="onCancelInputDefaultPress" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

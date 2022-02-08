@@ -10,11 +10,8 @@
                     <Label text="{i18n>appDescription}" />
                 </f:expandedContent>
                 <f:actions>
-
                     <Button id="configScheduleButton" icon="sap-icon://wrench" visible="false" text="{i18n>ScheduleConf}" press="onPressConfig" />
                     <Button id="excelScheduleButton" icon="sap-icon://excel-attachment" visible="false" type="Emphasized" text="{i18n>downloadExcelSchedule}" press="onPressDownloadExcel" />
-
-
                     <u:FileUploader id="uploadExcelSchedule" icon="sap-icon://excel-attachment" iconOnly="false" buttonOnly="true" buttonText="{i18n>uploadExcelSchedule}" fileType="xlsx,xlsm,xls" typeMissmatch="handleTypeMissmatch" change="handleFileSelected($event, '/FileSet', {SourceId: 'ScheduleUpload'})" style="Emphasized" />
                 </f:actions>
             </f:DynamicPageTitle>
@@ -31,7 +28,7 @@
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
-            <smartTable:SmartTable id="workerSmartTable" smartVariant="workerPageVariant" smartFilterId="workerFilterBar" header="{i18n>SmartTableTitle}" entitySet="WorkerRegisterSet" useExportToExcel="false" showRowCount="true" tableType="ResponsiveTable" useVariantManagement="true" persistencyKey="workerPage.PKey.SmartTable" useTablePersonalisation="true" showFullScreenButton="false" enableAutoBinding="true" requestAtLeastFields="Worker,WorkerName,Position,PositionName,Team" demandPopin="true">
+            <smartTable:SmartTable id="workerSmartTable" smartVariant="workerPageVariant" smartFilterId="workerFilterBar" header="{i18n>SmartTableTitle}" entitySet="WorkerRegisterSet" useExportToExcel="false" showRowCount="true" tableType="ResponsiveTable" useVariantManagement="true" persistencyKey="workerPage.PKey.SmartTable" useTablePersonalisation="true" showFullScreenButton="false" enableAutoBinding="true" requestAtLeastFields="Worker,WorkerName,Position,PositionName,Team,Color" demandPopin="true">
                 <smartTable:customToolbar>
                     <OverflowToolbar design="Transparent">
                         <ToolbarSpacer />
@@ -119,7 +116,7 @@
                             </header>
                         </Column>
                     </columns>
-                    <ColumnListItem type="Navigation">
+                    <ColumnListItem highlight="{path:'Color', formatter:'.formatter.FormatRowHighlight'}" type='Navigation'>
                         <!--1 cells-->
                         <cells>
                             <HBox>

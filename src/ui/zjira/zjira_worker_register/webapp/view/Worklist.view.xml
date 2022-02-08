@@ -24,6 +24,7 @@
                 <f:actions>
                     <Button icon="sap-icon://monitor-payments"
                             text="{i18n>BonusConfigButtonTitle}"
+                            visible="false"
                             press="onOpenBonusSettingDialog"
                             type="Emphasized"/>
                 </f:actions>
@@ -71,15 +72,15 @@
                     demandPopin="true">
                 <smartTable:customToolbar>
                     <OverflowToolbar design="Transparent">
-                        <CheckBox id="showEmptyWorker" text="{i18n>ShowEmptyWorker}" selected="false"/>
-                        <CheckBox id="closedIssueBonus" text="{i18n>ClosedIssueBonus}" selected="true"/>
-                        <CheckBox id="bonusWithManagmentTask" text="{i18n>ManagmentTaskBonus}" selected="true"/>
-                        <CheckBox id="calcWithError" text="{i18n>CalcWithError}" selected="false"/>
+                        <CheckBox id="showEmptyWorker" text="{i18n>ShowEmptyWorker}" selected="false" visible="false"/>
+                        <CheckBox id="closedIssueBonus" text="{i18n>ClosedIssueBonus}" selected="false" visible="false"/>
+                        <CheckBox id="bonusWithManagmentTask" text="{i18n>ManagmentTaskBonus}" selected="false" visible="false"/>
+                        <CheckBox id="calcWithError" text="{i18n>CalcWithError}" selected="true" visible="false"/>
                         <ToolbarSpacer/>
                         <Button icon="sap-icon://refresh"
                                 type="Transparent"
                                 press="rebindTable('workerSmartTable')"/>
-                        <Button icon="sap-icon://excel-attachment" type="Transparent" press="onDownloadExcelFiles({ uploadEntity: '/DownloadExcelSet', downloadEntity: 'WorkerRegisterSet', oControlId: 'workerSmartTable' })"/>
+                        <Button icon="sap-icon://excel-attachment" type="Transparent" press="onDownloadMyExcelFiles"/>
                     </OverflowToolbar>
                 </smartTable:customToolbar>
                 <smartTable:customData>

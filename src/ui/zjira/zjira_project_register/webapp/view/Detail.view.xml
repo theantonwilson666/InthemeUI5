@@ -23,10 +23,10 @@
                     <Text text="{ProjectKey}"/>
                 </f:content>
                 <f:actions>
-                    <Button icon="sap-icon://lead"
+                    <!-- <Button icon="sap-icon://lead"
                             type="Emphasized"
                             text="{i18n>profitButton}"
-                            press="onProfitabilyButtonPress"/>
+                            press="onProfitabilyButtonPress"/> -->
                     <Button icon="sap-icon://synchronize"
                             type="Transparent"
                             text="{i18n>syncButton}"
