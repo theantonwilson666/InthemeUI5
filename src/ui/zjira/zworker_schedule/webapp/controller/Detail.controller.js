@@ -775,7 +775,7 @@ sap.ui.define(
           error: function (oError) {
             this.byId("inputScheduleDialog").setBusy(false);
             this.showMessageToast("Косяк");
-          }
+          }.bind(this)
         });
 
 
