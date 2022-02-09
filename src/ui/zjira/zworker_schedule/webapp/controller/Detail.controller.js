@@ -781,6 +781,88 @@ sap.ui.define(
 
       },
 
+
+      onAppointmentDrop: function (oEvent) {
+        var oModel = this.byId("resultCalendar").getModel("resultData");
+        var oScheduleData = oModel.getData();
+
+        var oAppointmentFrom = oEvent.mParameters.appointment.getBindingContext("resultData").getObject();
+
+        for (var i = 0; i < oScheduleData.Appointments.length; i++) {
+          var oAppointment = oScheduleData.Appointments[i];
+
+          if (oAppointment === oAppointmentFrom) {
+
+            var iYear = oEvent.mParameters.startDate.getFullYear();
+            var iMonth = oEvent.mParameters.startDate.getMonth();
+            var iDay = oEvent.mParameters.startDate.getDate();
+
+            oAppointment.StartDate = new Date(iYear, iMonth, iDay, oAppointment.StartDate.getHours(), oAppointment.StartDate.getMinutes());
+            oAppointment.StartDateOut = new Date(iYear, iMonth, iDay, oAppointment.StartDate.getHours(), oAppointment.StartDate.getMinutes());
+
+            oAppointment.EndDate = new Date(iYear, iMonth, iDay, oAppointment.EndDate.getHours(), oAppointment.EndDate.getMinutes());
+            oAppointment.EndDateOut = new Date(iYear, iMonth, iDay, oAppointment.EndDate.getHours(), oAppointment.EndDate.getMinutes());
+
+          }
+
+        }
+
+        oModel.updateBindings(true);
+      },
+
+      onAppoitmentSelect: function(oEvent){
+          
+        var oModel = this.byId("resultCalendar").getModel("resultData");
+        var oResultData = oModel.getData();
+
+        var oClickedAppointment = oEvent.mParameters.appointment.getBindingContext("resultData").getObject();
+
+        oResultData.Appointments.forEach(function (oAppointment, sIndex, aAppointments) {
+          if (oAppointment === this) {
+            debugger;
+            aAppointments.splice(sIndex, 1);
+          };
+        }, oClickedAppointment);
+
+        oModel.updateBindings(true);
+      },
+
+      onAppointmentCreate: function (oEvent) {
+
+        var oModel = this.byId("resultCalendar").getModel("resultData");
+        var oResultData = oModel.getData();
+
+        var oStartDate = new Date(
+          oEvent.mParameters.startDate.getFullYear(),
+          oEvent.mParameters.startDate.getMonth(),
+          oEvent.mParameters.startDate.getDate(),
+          this.parseTimePicker(this.byId("DateTimeFromSchedule").getValue()).hours,
+          this.parseTimePicker(this.byId("DateTimeFromSchedule").getValue()).minutes,
+        );
+
+        var oEndDate = new Date(
+          oEvent.mParameters.startDate.getFullYear(),
+          oEvent.mParameters.startDate.getMonth(),
+          oEvent.mParameters.startDate.getDate(),
+          this.parseTimePicker(this.byId("DateTimeToSchedule").getValue()).hours,
+          this.parseTimePicker(this.byId("DateTimeToSchedule").getValue()).minutes,
+        );
+
+        oResultData.Appointments.push({
+          Title: `${this.byId("selectTypeDaySchedule").getSelectedItem().getBindingContext().getObject().Text}`,
+          Text : this.byId("DateTimeFromSchedule").getValue() + " - " + this.byId("DateTimeToSchedule").getValue(),
+          Type: this.byId("selectTypeDaySchedule").getSelectedItem().getBindingContext().getObject().Type,
+          Color: this.byId("selectTypeDaySchedule").getSelectedItem().getBindingContext().getObject().Color,
+          StartDate: oStartDate,
+          EndDate: oEndDate,
+          StartDateOut: oStartDate,
+          EndDateOut: oEndDate
+        })
+
+        oModel.updateBindings(true);
+
+      },
+
       onCancelUploadSchedulePress: function (oEvent) {
         oEvent.getSource().getParent().close();
       },
