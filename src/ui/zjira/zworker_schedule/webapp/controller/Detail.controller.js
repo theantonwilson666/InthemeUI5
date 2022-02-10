@@ -386,6 +386,20 @@ sap.ui.define(
           Color: this.byId("selectTypeDaySchedule").getSelectedItem().getBindingContext().getObject().Color
         });
 
+        oConfigData.people[0].headers.push({
+          IntervalType: this.byId("selectTypeDaySchedule").getSelectedItem().getBindingContext().getObject().Type,
+          IntervalInternalType: this.byId("selectTypeDaySchedule").getSelectedItem().getBindingContext().getObject().InternalType,
+          EndDate: oEndDate,
+          StartDate: oStartDate,
+          weekType: this.byId("configCalendar").getViewKey(),
+          EndDateOut: oEvent.mParameters.endDate,
+          StartDateOut: oEvent.mParameters.startDate,
+          Title: this.byId("selectTypeDaySchedule").getSelectedItem().getBindingContext().getObject().Text,
+          Info: this.byId("DateTimeFromSchedule").getValue() + " - " + this.byId("DateTimeToSchedule").getValue(),
+          Color: this.byId("selectTypeDaySchedule").getSelectedItem().getBindingContext().getObject().Color
+        });
+
+
         oModel.updateBindings(true);
       },
 
