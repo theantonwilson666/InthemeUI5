@@ -1,0 +1,170 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+                         xmlns:mvc="sap.ui.core.mvc"
+                         displayBlock="true"
+                         xmlns="sap.m"
+                         xmlns:f="sap.f"
+                         xmlns:fb="sap.ui.comp.filterbar"
+                         xmlns:l="sap.ui.layout"
+                         xmlns:sv="sap.ui.comp.smartvariants"
+                         xmlns:unified="sap.ui.unified"
+                         xmlns:dnd="sap.ui.core.dnd"
+                         xmlns:smartForm="sap.ui.comp.smartform"
+                         xmlns:table="sap.ui.table"
+                         xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+                         xmlns:smartTable="sap.ui.comp.smarttable"
+                         xmlns:smartField="sap.ui.comp.smartfield">
+    <Dialog id="inputScheduleDialogtest"
+            title="{WorkerName}"
+            class="sapUiSizeCompact"
+            contentHeight="100%"
+            contentWidth="100%">
+        <smartForm:SmartForm id="dateSmartForm"
+                             title="{
+&#xA;&#xA;                                path:'Date',
+&#xA;&#xA;                                formatter: '.formatter.DateTimeCorrectTitle'
+&#xA;&#xA;                }"
+                             editable="true">
+            <smartForm:layout>
+                <smartForm:ColumnLayout columnsM="2"
+                                        columnsL="2"
+                                        columnsXL="2" />
+            </smartForm:layout>
+            <smartForm:Group label="Удаленные дни">
+                <!-- <smartForm:Group label="{i18n>Distant}"> -->
+                <smartForm:GroupElement>
+                    <smartField:SmartField value="{
+&#xA;&#xA;                                path:'DIstantPercent',
+&#xA;&#xA;                                formatter: '.formatter.Percent'
+&#xA;&#xA;                            }" />
+                </smartForm:GroupElement>
+                <smartForm:GroupElement>
+                    <smartField:SmartField value="{
+&#xA;&#xA;                                path:'DistantAllowedPercent',
+&#xA;&#xA;                                formatter: '.formatter.Percent'
+&#xA;&#xA;                            }" />
+                </smartForm:GroupElement>
+                <smartForm:GroupElement>
+                    <smartField:SmartField value="{
+&#xA;&#xA;                                path:'MinOfficePercent',
+&#xA;&#xA;                                formatter: '.formatter.Percent'
+&#xA;&#xA;
+&#xA;&#xA;                            }" />
+                </smartForm:GroupElement>
+            </smartForm:Group>
+            <smartForm:Group label="План/Факт">
+                <!-- <smartForm:Group label="{i18n>StudentGroup}"> -->
+                <smartForm:GroupElement>
+                    <smartField:SmartField value="{
+&#xA;&#xA;                                path:'PlanFactPercentCurr'
+&#xA;&#xA;                            }" />
+                </smartForm:GroupElement>
+                <smartForm:GroupElement>
+                    <smartField:SmartField value="{
+&#xA;&#xA;                                path:'PlanFactPercent',
+&#xA;&#xA;                                formatter: '.formatter.Percent'
+&#xA;&#xA;                            }" />
+                </smartForm:GroupElement>
+            </smartForm:Group>
+            <smartForm:Group label="Тип дня">
+                <!-- <smartForm:Group label="{i18n>GroupTitle}"> -->
+                <smartForm:GroupElement>
+                    <smartField:SmartField value="{WorkerName}" />
+                </smartForm:GroupElement>
+                <smartForm:GroupElement>
+                    <smartField:SmartField value="{
+&#xA;&#xA;                                    path:'Date'
+&#xA;&#xA;                                   
+&#xA;&#xA;                                }" />
+                </smartForm:GroupElement>
+                <smartForm:GroupElement>
+                    <smartField:SmartField value="{DateType}"
+                                           editable="true"
+                                           entitySet="WorkerScheduleSet" />
+                </smartForm:GroupElement>
+                <!-- <smartForm:GroupElement>
+                                <smartField:SmartField value ="{WorkDayType}" editable="true" entitySet="WorkerScheduleSet"/>
+                            </smartForm:GroupElement> -->
+            </smartForm:Group>
+            <smartForm:Group label="{i18n&gt;BioGroup}">
+                <smartForm:GroupElement>
+                    <smartField:SmartField id="WorkFactCheckBox"
+                                           enabled="false"
+                                           value="{Redacted}"
+                                           editable="false"
+                                           entitySet="WorkerScheduleSet" />
+                </smartForm:GroupElement>
+                <smartForm:GroupElement>
+                    <Button width="50%"
+                            text="Сбросить"
+                            visible="false"
+                            press="resetWorkerDay"
+                            id="resetWorkerDay" />
+                </smartForm:GroupElement>
+            </smartForm:Group>
+            <!-- <smartForm:Group label="{i18n>BioGroup}">
+                        <smartField:SmartField id='WorkFactFrom1CheckBox' value ="{Redacted}" editable="true" entitySet="WorkerScheduleSet"/>
+                    </smartForm:Group> -->
+        </smartForm:SmartForm>
+        <HBox>
+            <smartTable:SmartTable beforeRebindTable="onBeforeRebindTable"
+                                   class=" sapUiLargeMarginBegin sapUiSmallMarginEnd"
+                                   id="dateSmartTable"
+                                   width="50%"
+                                   header="{i18n&gt;DetailTableTitle}"
+                                   entitySet="WorkerDoorPassSet"
+                                   tableBindingPath="WorkerDoorPasses"
+                                   useExportToExcel="false"
+                                   useVariantManagement="false"
+                                   useTablePersonalisation="true"
+                                   enableAutoBinding="true"
+                                   requestAtLeastFields="EventDateTime"
+                                   smartFilterId="dateFilterBar">
+                <table:Table selectionMode="None">
+                    <table:columns>
+                        <table:Column width="12rem">
+                            <table:customData>
+                                <core:CustomData key="p13nData"
+                                                 value="\{
+&#xA;&#xA;                                                        &quot;columnIndex&quot;: &quot;0&quot;,
+&#xA;&#xA;                                                        &quot;columnKey&quot;: &quot;EventDateTime&quot;,
+&#xA;&#xA;                                                        &quot;leadingProperty&quot;: &quot;EventDateTime&quot;,
+&#xA;&#xA;                                                        &quot;sortProperty&quot;: &quot;EventDateTime&quot;,
+&#xA;&#xA;                                                        &quot;filterProperty&quot;: &quot;EventDateTime&quot;
+&#xA;&#xA;                                                     }" />
+                            </table:customData>
+                            <Label text="Время" />
+                            <table:template>
+                                <Text text="{
+&#xA;&#xA;                                        path:'EventDateTime',
+&#xA;&#xA;                                        formatter:'.commonFormatter.formatTime'
+&#xA;&#xA;                                    }" />
+                            </table:template>
+                        </table:Column>
+                    </table:columns>
+                </table:Table>
+            </smartTable:SmartTable>
+            
+
+            <smartTable:SmartTable class=" sapUiLargeMarginBegin sapUiSmallMarginEnd"
+                                   id="dateSmartTabletest"
+                                   width="50%"
+                                   header="План/Факт подробно"
+                                   entitySet="workerDayPlanFactSet"
+                                   tableBindingPath="toWorkerDayPlanFact"
+                                   useExportToExcel="false"
+                                   useVariantManagement="false"
+                                   useTablePersonalisation="true"
+                                   initiallyVisibleFields="IntervalTypeID, PlanTimeFrom,PlanTimeTo,FactTimeFrom,FactTimeTo"
+                                   enableAutoBinding="true"/>
+                                   
+        </HBox>
+        <beginButton>
+            <Button text="Сохранить"
+                    press="onUploadScheduleButtonPress" />
+        </beginButton>
+        <endButton>
+            <Button text="Отмена"
+                    press="onCancelUploadSchedulePress" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

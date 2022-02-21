@@ -12,8 +12,6 @@ sap.ui.define(["jira/lib/BaseController",
         .getRoute("WorklistRoute")
         .attachPatternMatched(this._onRouteMatched, this);
 
-
-
     },
     onViewDetail: function (oEvent) {
       var oBindingObject = oEvent

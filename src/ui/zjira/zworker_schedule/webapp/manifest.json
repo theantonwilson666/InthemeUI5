@@ -97,6 +97,7 @@
           },
           "layout": "OneColumn",
           "proj_filter": "",
+          "datePressed" : "",
           "ConfigSTMode" : "None",
           "rebindProj": false,
           "currentTab": "common",
