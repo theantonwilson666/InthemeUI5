@@ -98,6 +98,7 @@
           "layout": "OneColumn",
           "proj_filter": "",
           "datePressed" : "",
+          "TechPlanningDate" : "",
           "ConfigSTMode" : "None",
           "rebindProj": false,
           "currentTab": "common",

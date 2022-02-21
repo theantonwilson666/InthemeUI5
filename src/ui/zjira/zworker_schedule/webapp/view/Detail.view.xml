@@ -59,8 +59,8 @@
                     <IconTabFilter id="ScheduleTab" text="График посещений" key="scheduleTab">
                         <core:Fragment fragmentName="intheme.zworker_schedule.view.fragments.scheduleTab" type="XML"/>
                     </IconTabFilter>
-                    <IconTabFilter id="JiraInfoTab" text="Статистика за месяц" key="jiraInfoTab">
-                        <core:Fragment fragmentName="intheme.zworker_schedule.view.fragments.jiraInfoTab" type="XML"/>
+                    <IconTabFilter id="monthStatTab" text="Статистика за месяц" key="monthStatTab">
+                        <core:Fragment fragmentName="intheme.zworker_schedule.view.fragments.monthStatTab" type="XML"/>
                     </IconTabFilter>
                 </items>
             </IconTabBar>

@@ -13,7 +13,7 @@
                          xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
                          xmlns:smartTable="sap.ui.comp.smarttable"
                          xmlns:smartField="sap.ui.comp.smartfield">
-    <Dialog id="inputScheduleDialogtest"
+    <Dialog id="dayViewDialog"
             title="{WorkerName}"
             class="sapUiSizeCompact"
             contentHeight="100%"
@@ -29,42 +29,6 @@
                                         columnsL="2"
                                         columnsXL="2" />
             </smartForm:layout>
-            <smartForm:Group label="Удаленные дни">
-                <!-- <smartForm:Group label="{i18n>Distant}"> -->
-                <smartForm:GroupElement>
-                    <smartField:SmartField value="{
-&#xA;&#xA;                                path:'DIstantPercent',
-&#xA;&#xA;                                formatter: '.formatter.Percent'
-&#xA;&#xA;                            }" />
-                </smartForm:GroupElement>
-                <smartForm:GroupElement>
-                    <smartField:SmartField value="{
-&#xA;&#xA;                                path:'DistantAllowedPercent',
-&#xA;&#xA;                                formatter: '.formatter.Percent'
-&#xA;&#xA;                            }" />
-                </smartForm:GroupElement>
-                <smartForm:GroupElement>
-                    <smartField:SmartField value="{
-&#xA;&#xA;                                path:'MinOfficePercent',
-&#xA;&#xA;                                formatter: '.formatter.Percent'
-&#xA;&#xA;
-&#xA;&#xA;                            }" />
-                </smartForm:GroupElement>
-            </smartForm:Group>
-            <smartForm:Group label="План/Факт">
-                <!-- <smartForm:Group label="{i18n>StudentGroup}"> -->
-                <smartForm:GroupElement>
-                    <smartField:SmartField value="{
-&#xA;&#xA;                                path:'PlanFactPercentCurr'
-&#xA;&#xA;                            }" />
-                </smartForm:GroupElement>
-                <smartForm:GroupElement>
-                    <smartField:SmartField value="{
-&#xA;&#xA;                                path:'PlanFactPercent',
-&#xA;&#xA;                                formatter: '.formatter.Percent'
-&#xA;&#xA;                            }" />
-                </smartForm:GroupElement>
-            </smartForm:Group>
             <smartForm:Group label="Тип дня">
                 <!-- <smartForm:Group label="{i18n>GroupTitle}"> -->
                 <smartForm:GroupElement>
@@ -146,7 +110,7 @@
             
 
             <smartTable:SmartTable class=" sapUiLargeMarginBegin sapUiSmallMarginEnd"
-                                   id="dateSmartTabletest"
+                                   id="planFactST"
                                    width="50%"
                                    header="План/Факт подробно"
                                    entitySet="workerDayPlanFactSet"

@@ -129,22 +129,24 @@ sap.ui.define(
 
 
         this.initPlanningCalendar();
-
+        
         this.getSchedulePlanningCalendar(this.getCurrentWorker(), this.getMonthYearFromDate(new Date()).Year, this.getMonthYearFromDate(new Date()).Month);
 
-        // this.bindSmartForm(
-        //   oArr.Worker,
-        //   encodeURIComponent(this.convertDate(new Date()))
-        // );
-        // this.bindSmartTable(
-        //   oArr.Worker,
-        //   encodeURIComponent(this.convertDate(new Date()))
-        // );
-        // this.initCalendarLegend();
-        // this.checkIsAdmin();
+        var oDatePicker = this.byId("monthPicker");
+        if (oDatePicker.getValue() === ''){
+          var oToday = new Date();
+          var sYear = oToday.getFullYear();
+          var sMonth = oToday.getMonth();
+          
+          oDatePicker.setValue(`${oToday.getFullYear()}.${(oToday.getMonth() + 1).toString().padStart(2, "0")}.${oToday.getDate()}`)
+          this.getData4VizChart(new Date(sYear, sMonth, 1));
+        }
       },
 
       initPlanningCalendar: function () {
+
+        this.setStateProperty("/TechPlanningDate", new Date());
+
         var oResultData = {
           StartDate: new Date(),
           Appointments: [
@@ -153,6 +155,8 @@ sap.ui.define(
 
         var oResultModel = new JSONModel(oResultData);
         this.byId("planningScheduleCalendar").setModel(oResultModel, "scheduleData");
+        oResultModel.updateBindings(true);
+
       },
 
 
@@ -164,8 +168,13 @@ sap.ui.define(
       },
 
       onHeaderDateChange: function (oEvent) {
+
+        debugger
         if (this.isNewMonth(oEvent)) {
           var oNewDate = oEvent.getParameter('date');
+
+          this.setStateProperty("/TechPlanningDate", oNewDate);
+
           this.getSchedulePlanningCalendar(this.getCurrentWorker(), this.getMonthYearFromDate(oNewDate).Year, this.getMonthYearFromDate(oNewDate).Month);
         }
       },
@@ -200,7 +209,8 @@ sap.ui.define(
 
 
       isNewMonth: function (oEvent) {
-        var oOldDate = oEvent.getSource().getStartDate();
+
+        var oOldDate = this.getStateProperty("/TechPlanningDate");
         var oChangedDate = oEvent.getParameter('date');
 
         return oOldDate.getMonth() != oChangedDate.getMonth() ? true : false;
@@ -210,6 +220,7 @@ sap.ui.define(
       bindDayDialog: function (sWorker, sDate) {
         this.bindSmartForm(sWorker, sDate);
         this.bindSmartTable(sWorker, sDate);
+      
       },
 
 
@@ -242,7 +253,15 @@ sap.ui.define(
         var sPath = "/WorkerScheduleSet(Date=datetime'" + sDate + "',Worker='" + sWorkerId + "')";
         var oSmartTable = this.getView().byId("dateSmartTable");
         oSmartTable.bindObject(sPath);
+
+
+        var oSmartTable = this.getView().byId("planFactST");
+        oSmartTable.bindObject(sPath);
+
         this.setAutoResizeTable();
+
+
+
       },
       bindSmartForm: function (sWorkerId, sDate) {
         var sPath =
@@ -260,6 +279,9 @@ sap.ui.define(
             }.bind(this),
           },
         });
+
+
+        debugger;
       },
       convertDate: function (oDate) {
         return oDate.toJSON().split(".")[0];
@@ -322,7 +344,7 @@ sap.ui.define(
       },
 
       updateCalendar: function (oEvent) {
-
+        this.getData4VizChart();
         return;
 
         var date = new Date().getDate() - 1
@@ -549,22 +571,26 @@ sap.ui.define(
 
       },
 
-      getData4VizChart: function () {
-        return;
-        var oCalendar = this.getView().byId("workerCalendar");
+      getData4VizChart: function (oFirstDayOfMonth) {
+
+        this.byId("monthPlot").setBusy(true);
+
         var oFilter = [
           new Filter("Worker", FilterOperator.EQ, this.getCurrentWorker()),
           new Filter(
-            "FirstDayOfMonth", FilterOperator.EQ, oCalendar.getStartDate()
+            "FirstDayOfMonth", FilterOperator.EQ,oFirstDayOfMonth
           ),
         ];
         this.getModel().read("/WorkerMonthDataSet", {
           filters: oFilter,
           success: function (oData) {
             this.setChartData(oData.results);
+            this.byId("monthPlot").setBusy(false);
+        
           }.bind(this),
           error: function () {
             this.showError.bind(this);
+            this.byId("monthPlot").setBusy(false);
           }.bind(this),
         });
       },
@@ -1043,6 +1069,17 @@ sap.ui.define(
               oDialog.open();
             }.bind(this)
           );
+      },
+
+
+      onMonthChange: function(oEvent){
+        var sDate = oEvent.getParameter("newValue");
+
+        var sYear = sDate.split(".")[2];
+        var sMonth = sDate.split(".")[1] - 1;
+
+        this.getData4VizChart(new Date(sYear, sMonth, 1));
       }
+
     });
   });

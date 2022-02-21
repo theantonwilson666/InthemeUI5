@@ -1,0 +1,115 @@
+<core:FragmentDefinition xmlns="sap.m"
+                         xmlns:core="sap.ui.core"
+                         xmlns:smartTable="sap.ui.comp.smarttable"
+                         xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+                         xmlns:sv="sap.ui.comp.smartvariants"
+                         xmlns:f="sap.f"
+                         xmlns:smartForm="sap.ui.comp.smartform"
+                         xmlns:unified="sap.ui.unified"
+                         xmlns:dnd="sap.ui.core.dnd"
+                         xmlns:viz="sap.viz.ui5.controls"
+                         xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+                         xmlns:viz.data="sap.viz.ui5.data"
+                         xmlns:smartField="sap.ui.comp.smartfield"
+                         xmlns:l="sap.ui.layout">
+    <VBox>
+        <smartForm:SmartForm id="monthStatForm"
+                             title="{
+&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;                                path:'Date',
+&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;                                formatter: '.formatter.DateTimeCorrectTitle'
+&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;                }"
+                             editable="true">
+            <smartForm:customToolbar>
+                <Toolbar height="3rem">
+                    <DatePicker id="monthPicker"
+                                width="20%"
+                                change="onMonthChange"
+                                displayFormat="MM-y"
+                                placeholder="Введите месяц"
+                                class="sapUiMediumMargin"
+                                showFooter="true" />
+                </Toolbar>
+            </smartForm:customToolbar>
+            <smartForm:layout>
+                <smartForm:ColumnLayout columnsM="2"
+                                        columnsL="2"
+                                        columnsXL="2" />
+            </smartForm:layout>
+            <smartForm:Group label="Удаленные дни">
+                <smartForm:GroupElement>
+                    <smartField:SmartField value="{
+&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;                                path:'DIstantPercent',
+&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;                                formatter: '.formatter.Percent'
+&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;                            }" />
+                </smartForm:GroupElement>
+                <smartForm:GroupElement>
+                    <smartField:SmartField value="{
+&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;                                path:'DistantAllowedPercent',
+&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;                                formatter: '.formatter.Percent'
+&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;                            }" />
+                </smartForm:GroupElement>
+                <smartForm:GroupElement>
+                    <smartField:SmartField value="{
+&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;                                path:'MinOfficePercent',
+&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;                                formatter: '.formatter.Percent'
+&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;
+&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;                            }" />
+                </smartForm:GroupElement>
+            </smartForm:Group>
+            <smartForm:Group label="План/Факт">
+                <smartForm:GroupElement>
+                    <smartField:SmartField value="{
+&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;                                path:'PlanFactPercentCurr'
+&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;                            }" />
+                </smartForm:GroupElement>
+                <smartForm:GroupElement>
+                    <smartField:SmartField value="{
+&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;                                path:'PlanFactPercent',
+&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;                                formatter: '.formatter.Percent'
+&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;                            }" />
+                </smartForm:GroupElement>
+            </smartForm:Group>
+        </smartForm:SmartForm>
+        <VBox alignContent="Stretch">
+            <viz:Popover id="vizPopover" />
+            <viz:VizFrame id="monthPlot"
+                          uiConfig="{applicationSet:'fiori'}"
+                          vizType="column"
+                          width="100%">
+                <viz:dataset>
+                    <viz.data:FlattenedDataset data="{ChartMdl&gt;/Chart}">
+                        <viz.data:dimensions>
+                            <viz.data:DimensionDefinition name="Date"
+                                                          value="{ChartMdl&gt;Date}" />
+                        </viz.data:dimensions>
+                        <viz.data:measures>
+                            <viz.data:MeasureDefinition name="Fact Hours"
+                                                        value="{ChartMdl&gt;FactHours}" />
+                            <viz.data:MeasureDefinition name="Plan Hours"
+                                                        value="{ChartMdl&gt;PlanHours}" />
+                            <viz.data:MeasureDefinition name="Jira Hours"
+                                                        value="{ChartMdl&gt;JiraHours}" />
+                            <viz.data:MeasureDefinition name="Jira Hours"
+                                                        value="{ChartMdl&gt;JiraHours}" />
+                            <viz.data:MeasureDefinition name="  Error"
+                                                        value="{
+&#xA;                                                                    path:'ChartMdl&gt;RegError',
+&#xA;                                                                    formatter: '.commonFormatter.errorDay'
+&#xA;                                                                }" />
+                            <viz.data:MeasureDefinition name="  Redacted"
+                                                        value="" />
+                        </viz.data:measures>
+                    </viz.data:FlattenedDataset>
+                </viz:dataset>
+                <viz:feeds>
+                    <viz.feeds:FeedItem uid="valueAxis"
+                                        type="Measure"
+                                        values="Fact Hours,Plan Hours,Jira Hours,  Error,  Redacted" />
+                    <viz.feeds:FeedItem uid="categoryAxis"
+                                        type="Dimension"
+                                        values="Date" />
+                </viz:feeds>
+            </viz:VizFrame>
+        </VBox>
+    </VBox>
+</core:FragmentDefinition>

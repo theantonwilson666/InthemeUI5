@@ -13,11 +13,9 @@
     <VBox>
         <SinglePlanningCalendar id="planningScheduleCalendar"
                                 fullDay="false"
-                                headerDateSelect="onHeaderDateChange"
                                 startDateChange="onHeaderDateChange"
                                 enableAppointmentsDragAndDrop="true"
                                 cellPress="onDayCalendayPress"
-                                startDate="{path: 'scheduleData&gt;StartDate'}"
                                 appointments="{path: 'scheduleData&gt;/Appointments'}">
             <views>
                 <SinglePlanningCalendarMonthView key="MonthView"
