@@ -12,7 +12,7 @@
                          xmlns:l="sap.ui.layout">
     <VBox>
         <SinglePlanningCalendar id="planningScheduleCalendar"
-                                fullDay="false"
+                                fullDay="true"
                                 startDateChange="onHeaderDateChange"
                                 enableAppointmentsDragAndDrop="true"
                                 cellPress="onDayCalendayPress"
@@ -22,7 +22,7 @@
                                                  title="Month" />
             </views>
             <appointments>
-                <unified:CalendarAppointment title="{scheduleData&gt;Title}({resultData&gt;Text})"
+                <unified:CalendarAppointment title="{scheduleData&gt;Title}({scheduleData&gt;Text})"
                                              text="{scheduleData&gt;Text}"
                                              type="{scheduleData&gt;Type}"
                                              color="{scheduleData&gt;Color}"

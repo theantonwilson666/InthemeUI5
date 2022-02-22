@@ -110,7 +110,7 @@
       <Title text="Результат" />
       <VBox>
         <SinglePlanningCalendar id="resultCalendar"
-                                fullDay="false"
+                                fullDay="true"
                                 appointmentSelect="onAppoitmentSelect"
                                 enableAppointmentsDragAndDrop="true"
                                 cellPress="onAppointmentCreate"
