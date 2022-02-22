@@ -137,8 +137,8 @@ sap.ui.define(
           var oToday = new Date();
           var sYear = oToday.getFullYear();
           var sMonth = oToday.getMonth();
-          
-          oDatePicker.setValue(`${oToday.getFullYear()}.${(oToday.getMonth() + 1).toString().padStart(2, "0")}.${oToday.getDate()}`)
+
+          // oDatePicker.setValue(`${oToday.getFullYear()}.${(oToday.getMonth() + 1).toString().padStart(2, "0")}.${oToday.getDate()}`)
           this.getData4VizChart(new Date(sYear, sMonth, 1));
         }
       },
@@ -668,6 +668,8 @@ sap.ui.define(
       updateResultCalendar: function (oModel, oResultData) {
         // var oModel = this.byId("resultCalendar").getModel("resultData");
         var oData = oModel.getData();
+
+        debugger;
 
         oData.Appointments = [];
 
