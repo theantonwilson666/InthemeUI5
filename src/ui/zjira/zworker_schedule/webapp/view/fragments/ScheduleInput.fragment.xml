@@ -96,7 +96,12 @@
                                              color="{configData&gt;Color}" />
               </appointments>
               <intervalHeaders>
-                <unified:CalendarAppointment />
+                <unified:CalendarAppointment startDate="{configData&gt;StartDateOut}"
+                                             title="{configData&gt;Title}"
+                                             text="{configData&gt;Info}"
+                                             endDate="{configData&gt;EndDateOut}"
+                                             type="{configData&gt;IntervalType}"
+                                             color="{configData&gt;Color}"/>
               </intervalHeaders>
             </PlanningCalendarRow>
           </rows>
@@ -105,7 +110,7 @@
       <Title text="Результат" />
       <VBox>
         <SinglePlanningCalendar id="resultCalendar"
-                                fullDay="false"
+                                fullDay="true"
                                 appointmentSelect="onAppoitmentSelect"
                                 enableAppointmentsDragAndDrop="true"
                                 cellPress="onAppointmentCreate"

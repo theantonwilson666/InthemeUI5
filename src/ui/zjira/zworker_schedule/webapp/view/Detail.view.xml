@@ -10,279 +10,68 @@
           xmlns:sv="sap.ui.comp.smartvariants"
           xmlns:smartForm="sap.ui.comp.smartform"
           xmlns:smartTable="sap.ui.comp.smarttable"
+        
           xmlns:smartField="sap.ui.comp.smartfield"
           xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
           xmlns:viz="sap.viz.ui5.controls"
           xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
           xmlns:viz.data="sap.viz.ui5.data"
           height="100%">
-    <f:DynamicPage id="issueView" toggleHeaderOnTitleClick="true" showFooter="true" preserveHeaderStateOnScroll="true">
+    <f:DynamicPage id="issueView"
+                   toggleHeaderOnTitleClick="true"
+                   showFooter="true"
+                   preserveHeaderStateOnScroll="true">
         <f:title>
             <f:DynamicPageTitle>
                 <f:heading>
-                    <u:Calendar width="40em" id="workerCalendar" legend="calendarLegend" intervalSelection="false"
+                    <Title text="{WorkerName}" />
+                </f:heading>
+                <f:expandedContent>
+                    <Label text="{PositionName}" />
+                </f:expandedContent>
+                <!-- <f:content>
+                 <u:Calendar width="40em" id="workerCalendar" legend="calendarLegend" intervalSelection="false"
                                 select="onDateSelect" 
                                 startDateChange="onStartDateChange"/>
-                </f:heading>
-                <f:content>
-                    <u:CalendarLegend id="calendarLegend"/>
-                </f:content>
-                <f:actions>
 
-                    <Button id="configSheduleUIButton" icon="sap-icon://wrench" text="{i18n>ScheduleConfUI}" press="onPressConfigUI"/>
-                    
+                    <u:CalendarLegend id="calendarLegend"/>
+                </f:content> -->
+                <f:actions>
+                    <Button id="configSheduleUIButton"
+                            icon="sap-icon://wrench"
+                            text="{i18n&gt;ScheduleConfUI}"
+                            press="onPressConfigUI" />
                     <Button icon="sap-icon://refresh"
                             type="Transparent"
-                            press="updateCalendar"/>
+                            press="updateCalendar" />
                 </f:actions>
             </f:DynamicPageTitle>
         </f:title>
         <f:content>
-            <VBox alignContent="Stretch">
-                <smartForm:SmartForm id="dateSmartForm" title="{
-                                path:'Date',
-                                formatter: '.formatter.DateTimeCorrectTitle'
-                }" editable="true">
-                    <smartForm:layout>
-                        <smartForm:ColumnLayout columnsM="2" columnsL="2" columnsXL="2"/>
-                    </smartForm:layout>
-                  
-                    <smartForm:Group label="Удаленные дни">
-                    <!-- <smartForm:Group label="{i18n>Distant}"> -->
-                        <smartForm:GroupElement>
-                                <smartField:SmartField value ="{
-                                path:'DIstantPercent',
-                                formatter: '.formatter.Percent'
-                            }"/>
-                            
-                       
-                        </smartForm:GroupElement>
-                      
-                        <smartForm:GroupElement>
-                           
-                             
-                                 <smartField:SmartField value ="{
-                                path:'DistantAllowedPercent',
-                                formatter: '.formatter.Percent'
-                            }"/>
-                       
-                        </smartForm:GroupElement>
-                        <smartForm:GroupElement>
-                           
-                            <smartField:SmartField value ="{
-                                path:'MinOfficePercent',
-                                formatter: '.formatter.Percent'
-
-                            }"/>
-                       
-                        </smartForm:GroupElement>
-                       
-                    </smartForm:Group>
-                    <smartForm:Group label="План/Факт">
-                    <!-- <smartForm:Group label="{i18n>StudentGroup}"> -->
-                        <smartForm:GroupElement>
-                             
-                            <smartField:SmartField value ="{
-                                path:'PlanFactPercentCurr'
-                            }"/>
-                           
-                       
-                        </smartForm:GroupElement>
-                        <smartForm:GroupElement>
-                            
-                            <smartField:SmartField value ="{
-                                path:'PlanFactPercent',
-                                formatter: '.formatter.Percent'
-                            }"/>
-                       
-                        </smartForm:GroupElement>
-                       
-                    </smartForm:Group>
-                    <smartForm:Group label="Тип дня">
-                        <!-- <smartForm:Group label="{i18n>GroupTitle}"> -->
-                            <smartForm:GroupElement>
-                                <smartField:SmartField value ="{WorkerName}"/>
-                            </smartForm:GroupElement>
-                            <smartForm:GroupElement>
-                                <smartField:SmartField value ="{
-                                    path:'Date'
-                                   
-                                }"/>
-                           
-                            </smartForm:GroupElement>
-                           
-                            <smartForm:GroupElement>
-                                <smartField:SmartField value ="{DateType}" editable="true" entitySet="WorkerScheduleSet"/>
-                            </smartForm:GroupElement>
-                            <!-- <smartForm:GroupElement>
-                                <smartField:SmartField value ="{WorkDayType}" editable="true" entitySet="WorkerScheduleSet"/>
-                            </smartForm:GroupElement> -->
-                        </smartForm:Group>
-                        <smartForm:Group label="{i18n>StudentGroup}">
-                            <smartForm:GroupElement>
-                                <Text text='{i18n>StudyFrom}'/>
-                                <TimePicker
-                                    id="TP1"
-                                    title="{i18n>StudyFrom}"
-                                    value="{StudyFrom}"
-                                    valueFormat="HH:mm"
-                                    change="onTimeChange($event, 'StudyFrom')"/>
-                                <!-- <smartField:SmartField value ="{StudyFrom}" editable="true" entitySet="WorkerScheduleSet"/> -->
-                            </smartForm:GroupElement>
-                          
-                            <smartForm:GroupElement>
-
-                                <Text text='{i18n>StudyTo}'/>
-                                <TimePicker
-                                    id="TP2"
-                                    title="{i18n>StudyTo}"
-                                    value="{StudyTo}"
-                                    valueFormat="HH:mm"
-                                    change="onTimeChange($event, 'StudyTo')"/>
-                                <!-- <smartField:SmartField value ="{StudyTo}" editable="true" entitySet="WorkerScheduleSet"/> -->
-                            </smartForm:GroupElement>
-                           
-                        </smartForm:Group>
-                        <smartForm:Group label="{i18n>BioGroup}">
-                            <smartForm:GroupElement >
-                                <smartField:SmartField id='WorkFactCheckBox'  enabled='false' value ="{Redacted}" editable="false" entitySet="WorkerScheduleSet"/>
-                            </smartForm:GroupElement >
-                            <smartForm:GroupElement >
-                                <!-- <smartField:SmartField id='WorkFactFrom1CheckBox' value ="{Redacted}" editable="true" entitySet="WorkerScheduleSet"/> -->
-                                <smartField:SmartField id='WorkFactFrom1' value ="{WorkFactFrom1}" editable="false" entitySet="WorkerScheduleSet"/>
-                                <core:Icon
-                                id='WorkFactFrom1-icon'
-                                    color="#ff0000"
-                                     src="{
-                                        parts:[
-                                            {path:'RegError'},
-                                            {path:'WorkFactFrom1'}
-                                        ],
-                                        formatter:'.commonFormatter.showIcon'
-                                    }"
-                                 />
-                            </smartForm:GroupElement>
-                            <smartForm:GroupElement >
-                                <smartField:SmartField id='WorkFactTo1' value ="{WorkFactTo1}" editable="false" entitySet="WorkerScheduleSet"/>
-                                <core:Icon
-                               id='WorkFactTo1-icon'
-                                    color="#ff0000"
-                                     src="{
-                                        parts:[
-                                            {path:'RegError'},
-                                            {path:'WorkFactTo1'}
-                                        ],
-                                        formatter:'.commonFormatter.showIcon'
-                                    }"
-                                 />
-                                <!-- name="{
-                                                                        parts:[{ path: 'ChartMdl>FactHours' },
-                                                                         { path: 'ChartMdl>PlanHours' },
-                                                                         { path: 'ChartMdl>JiraHours' }],
-                                                                        formatter: '.commonFormatter.changeName'}"  -->
-                            </smartForm:GroupElement>
-                            <smartForm:GroupElement >
-                                <Button width="50%" text='Сбросить' visible="false" press='resetWorkerDay' id='resetWorkerDay'/>
-                            </smartForm:GroupElement >
-                        </smartForm:Group>
-                    <smartForm:Group label="{i18n>WorkDayGroup}">
-                        <smartForm:GroupElement >
-                            <smartField:SmartField value ="{WorkFrom1}" editable="true" entitySet="WorkerScheduleSet"/>
-                            <smartField:SmartField value ="{WorkTo1}" editable="true" entitySet="WorkerScheduleSet"/>
-                            <Button id="addWorkIntervalButton" icon="sap-icon://add" press="onAddWorkIntervalPress" width="3em" />
-                            <!-- visible="{= !${state>/showNewInterval} }" -->
-                        </smartForm:GroupElement>
-                        <smartForm:GroupElement id="SecondWorkInterval" visible="{state>/showNewInterval}">
-                            <smartField:SmartField value ="{WorkFrom2}" editable="true" entitySet="WorkerScheduleSet"/>
-                            <smartField:SmartField value ="{WorkTo2}" editable="true" entitySet="WorkerScheduleSet"/>
-                        </smartForm:GroupElement>
-                    </smartForm:Group>
-                    <!-- <smartForm:Group label="{i18n>BioGroup}">
-                        <smartField:SmartField id='WorkFactFrom1CheckBox' value ="{Redacted}" editable="true" entitySet="WorkerScheduleSet"/>
-                    </smartForm:Group> -->
-                   
-                </smartForm:SmartForm>
-                <smartTable:SmartTable
-                    beforeRebindTable="onBeforeRebindTable"
-                    class=" sapUiLargeMarginBegin sapUiSmallMarginEnd"
-                    id="dateSmartTable"
-                    header="{i18n>DetailTableTitle}"
-                    entitySet="WorkerDoorPassSet"
-                    tableBindingPath="WorkerDoorPasses"
-                    useExportToExcel="false"
-                    useVariantManagement="false"
-                    useTablePersonalisation="true"
-                    enableAutoBinding="true"
-                    requestAtLeastFields="EventDateTime"
-                    smartFilterId="dateFilterBar">
-                    <table:Table selectionMode='None'>
-                        <table:columns>
-                            <table:Column width="12rem">
-                                <table:customData>
-                                    <core:CustomData key="p13nData" value='\{
-                                                        "columnIndex": "0",
-                                                        "columnKey": "EventDateTime",
-                                                        "leadingProperty": "EventDateTime",
-                                                        "sortProperty": "EventDateTime",
-                                                        "filterProperty": "EventDateTime"
-                                                     }' />
-                                </table:customData>
-                                <Label text="Время"/>
-                                <table:template>
-                                    <Text text="{
-                                        path:'EventDateTime',
-                                        formatter:'.commonFormatter.formatTime'
-                                    }"/>
-                                </table:template>
-                            </table:Column>
-                        </table:columns>
-                    </table:Table>
-                </smartTable:SmartTable>
-                <VBox alignContent="Stretch">
-                    <viz:Popover id="vizPopover"></viz:Popover>
-                    <viz:VizFrame id="monthPlot" uiConfig="{applicationSet:'fiori'}"
-                                   vizType='column' width="100%">
-                        <viz:dataset>
-                            <viz.data:FlattenedDataset data="{ChartMdl>/Chart}">
-                                <viz.data:dimensions>
-                                    <viz.data:DimensionDefinition name="Date"
-                                                                  value="{ChartMdl>Date}" />
-                                </viz.data:dimensions>
-                                <viz.data:measures>
-                                    <viz.data:MeasureDefinition 
-                                                                name="Fact Hours" 
-                                                                value="{ChartMdl>FactHours}" />
-                                    <viz.data:MeasureDefinition name="Plan Hours"
-                                                                value="{ChartMdl>PlanHours}" />
-                                    <viz.data:MeasureDefinition name="Jira Hours"
-                                                                value="{ChartMdl>JiraHours}" />
-                                    <viz.data:MeasureDefinition name="Jira Hours"
-                                                                value="{ChartMdl>JiraHours}" />
-                                    <viz.data:MeasureDefinition name="  Error"
-                                                                value="{
-                                                                    path:'ChartMdl>RegError',
-                                                                    formatter: '.commonFormatter.errorDay'
-                                                                }"/>
-                                    <viz.data:MeasureDefinition name="  Redacted"
-                                                                value=""/>
-                                </viz.data:measures>
-                            </viz.data:FlattenedDataset>
-                        </viz:dataset>
-                        <viz:feeds>
-                            <viz.feeds:FeedItem uid="valueAxis" type="Measure"
-                                                values="Fact Hours,Plan Hours,Jira Hours,  Error,  Redacted"/>
-                            <viz.feeds:FeedItem uid="categoryAxis" type="Dimension"
-                                                values="Date" />
-                        </viz:feeds>
-                    </viz:VizFrame>
-                </VBox>
-            </VBox>
+              <IconTabBar id="iconTabBar"
+                        selectedKey="scheduleTab"
+                        applyContentPadding="false"
+                        expanded="true"
+                        expandable="false"
+                        stretchContentHeight="true"
+                        tabDensityMode="Compact">
+                <items>
+                    <IconTabFilter id="ScheduleTab" text="График посещений" key="scheduleTab">
+                        <core:Fragment fragmentName="intheme.zworker_schedule.view.fragments.scheduleTab" type="XML"/>
+                    </IconTabFilter>
+                    <IconTabFilter id="monthStatTab" text="Статистика за месяц" key="monthStatTab">
+                        <core:Fragment fragmentName="intheme.zworker_schedule.view.fragments.monthStatTab" type="XML"/>
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
         </f:content>
-        <f:footer>
+        <!-- <f:footer>
             <OverflowToolbar>
-                <ToolbarSpacer/>
-                <Button text="{i18n>SaveBtn}" type="Emphasized" press="onSaveChanges"/>
+                <ToolbarSpacer />
+                <Button text="{i18n&gt;SaveBtn}"
+                        type="Emphasized"
+                        press="onSaveChanges" />
             </OverflowToolbar>
-        </f:footer>
+        </f:footer> -->
     </f:DynamicPage>
 </mvc:View>
