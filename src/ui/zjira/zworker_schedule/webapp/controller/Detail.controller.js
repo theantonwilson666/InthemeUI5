@@ -751,7 +751,7 @@ sap.ui.define(
         var oScheduleData = oModel.getData();
 
         var oConfigData = this.byId("configCalendar").getModel("configData").getData();
-
+        
         var oScheduleOutData = {
           WORKER: oConfigData.people[0].WorkerID,
           MONTH: (oConfigData.startDate.getMonth() + 1).toString().padStart(2, "0"),
