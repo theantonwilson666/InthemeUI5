@@ -129,17 +129,18 @@ sap.ui.define(
 
 
         this.initPlanningCalendar();
-        
+
         this.getSchedulePlanningCalendar(this.getCurrentWorker(), this.getMonthYearFromDate(new Date()).Year, this.getMonthYearFromDate(new Date()).Month);
 
         var oDatePicker = this.byId("monthPicker");
-        if (oDatePicker.getValue() === ''){
+        if (oDatePicker.getValue() === '') {
           var oToday = new Date();
           var sYear = oToday.getFullYear();
           var sMonth = oToday.getMonth();
 
           // oDatePicker.setValue(`${oToday.getFullYear()}.${(oToday.getMonth() + 1).toString().padStart(2, "0")}.${oToday.getDate()}`)
           this.getData4VizChart(new Date(sYear, sMonth, 1));
+          this.rebindMonthStatForm(this.getCurrentWorker(), sYear, sMonth + 1);
         }
       },
 
@@ -220,7 +221,7 @@ sap.ui.define(
       bindDayDialog: function (sWorker, sDate) {
         this.bindSmartForm(sWorker, sDate);
         this.bindSmartTable(sWorker, sDate);
-      
+
       },
 
 
@@ -491,18 +492,18 @@ sap.ui.define(
           Color: this.byId("selectTypeDaySchedule").getSelectedItem().getBindingContext().getObject().Color
         });
 
-        oConfigData.people[0].headers.push({
-          IntervalType: this.byId("selectTypeDaySchedule").getSelectedItem().getBindingContext().getObject().Type,
-          IntervalInternalType: this.byId("selectTypeDaySchedule").getSelectedItem().getBindingContext().getObject().InternalType,
-          EndDate: oEndDate,
-          StartDate: oStartDate,
-          weekType: this.byId("configCalendar").getViewKey(),
-          EndDateOut: oEvent.mParameters.endDate,
-          StartDateOut: oEvent.mParameters.startDate,
-          Title: this.byId("selectTypeDaySchedule").getSelectedItem().getBindingContext().getObject().Text,
-          Info: this.byId("DateTimeFromSchedule").getValue() + " - " + this.byId("DateTimeToSchedule").getValue(),
-          Color: this.byId("selectTypeDaySchedule").getSelectedItem().getBindingContext().getObject().Color
-        });
+        // oConfigData.people[0].headers.push({
+        //   IntervalType: this.byId("selectTypeDaySchedule").getSelectedItem().getBindingContext().getObject().Type,
+        //   IntervalInternalType: this.byId("selectTypeDaySchedule").getSelectedItem().getBindingContext().getObject().InternalType,
+        //   EndDate: oEndDate,
+        //   StartDate: oStartDate,
+        //   weekType: this.byId("configCalendar").getViewKey(),
+        //   EndDateOut: oEvent.mParameters.endDate,
+        //   StartDateOut: oEvent.mParameters.startDate,
+        //   Title: this.byId("selectTypeDaySchedule").getSelectedItem().getBindingContext().getObject().Text,
+        //   Info: this.byId("DateTimeFromSchedule").getValue() + " - " + this.byId("DateTimeToSchedule").getValue(),
+        //   Color: this.byId("selectTypeDaySchedule").getSelectedItem().getBindingContext().getObject().Color
+        // });
 
 
         oModel.updateBindings(true);
@@ -531,6 +532,8 @@ sap.ui.define(
           })
           .then(
             function (oDialog) {
+
+              sap.ui.getCore().byId("application-zworker_schedule-display-component---Detail--configCalendar-Header-NavToolbar").setVisible(false)
 
               var oConfigData = {
                 startDate: this.getFirstMondayCurrentMonth(),
@@ -578,7 +581,7 @@ sap.ui.define(
         var oFilter = [
           new Filter("Worker", FilterOperator.EQ, this.getCurrentWorker()),
           new Filter(
-            "FirstDayOfMonth", FilterOperator.EQ,oFirstDayOfMonth
+            "FirstDayOfMonth", FilterOperator.EQ, oFirstDayOfMonth
           ),
         ];
         this.getModel().read("/WorkerMonthDataSet", {
@@ -586,7 +589,7 @@ sap.ui.define(
           success: function (oData) {
             this.setChartData(oData.results);
             this.byId("monthPlot").setBusy(false);
-        
+
           }.bind(this),
           error: function () {
             this.showError.bind(this);
@@ -775,9 +778,15 @@ sap.ui.define(
         return `${sHours}${sMinutes}`;
       },
 
-      convernDateTimeToChar: function (oDate) {
+      convernDateTimeToChar: function (oDate, bPlusMonth) {
         var sYear = oDate.getFullYear();
-        var sMonth = oDate.getMonth().toString().padStart(2, "0");
+
+        if (bPlusMonth) {
+          var sMonth = (oDate.getMonth() + 1).toString().padStart(2, "0");
+        } else {
+          var sMonth = (oDate.getMonth() + 1).toString().padStart(2, "0");
+        }
+
         var sDay = oDate.getDate().toString().padStart(2, "0");
 
         return `${sYear}${sMonth}${sDay}`
@@ -828,12 +837,12 @@ sap.ui.define(
           if (sCurrentMonth === sMonth) {
 
             aMonth.push({
-              DATE: this.convernDateTimeToChar(oDate),
+              DATE: this.convernDateTimeToChar(oDate, true),
               INTERVALS: [
               ]
             })
 
-            oDateIndex[this.convernDateTimeToChar(oDate)] = aMonth.length - 1;
+            oDateIndex[this.convernDateTimeToChar(oDate, true)] = aMonth.length - 1;
             oDate = new Date(sYear, sMonth, sDay);
           }
         };
@@ -877,7 +886,7 @@ sap.ui.define(
         var oScheduleData = oModel.getData();
 
         var oConfigData = this.byId("configCalendar").getModel("configData").getData();
-        
+
         var oScheduleOutData = {
           WORKER: oConfigData.people[0].WorkerID,
           MONTH: (oConfigData.startDate.getMonth() + 1).toString().padStart(2, "0"),
@@ -895,6 +904,12 @@ sap.ui.define(
           success: function (oData) {
             this.byId("inputScheduleDialog").setBusy(false);
             this.byId("inputScheduleDialog").close();
+
+
+
+            this.getSchedulePlanningCalendar(this.getCurrentWorker(), this.getMonthYearFromDate(new Date()).Year, this.getMonthYearFromDate(new Date()).Month);
+
+
             this.showMessageToast("Успех!!!!");
           }.bind(this),
 
@@ -1074,14 +1089,158 @@ sap.ui.define(
       },
 
 
-      onMonthChange: function(oEvent){
+      onMonthChange: function (oEvent) {
         var sDate = oEvent.getParameter("newValue");
 
         var sYear = sDate.split(".")[2];
         var sMonth = sDate.split(".")[1] - 1;
 
         this.getData4VizChart(new Date(sYear, sMonth, 1));
-      }
+        this.rebindMonthStatForm(this.getCurrentWorker(), sYear, sMonth + 1);
+      },
 
+      onEditPlanningCalendarButtonPress: function () {
+        this.setStateProperty("/planningEditMode", !this.getStateProperty("/planningEditMode"));
+      },
+
+      rebindMonthStatForm: function (sWorkerID, sYear, sMonth) {
+        var sPath =
+          "/MonthStatisticSet(Worker='" + sWorkerID + "',Year='" + sYear + "',Month='" + sMonth + "')";
+        var oSmartForm = this.getView().byId("monthStatForm");
+        oSmartForm.bindElement({
+          path: sPath
+        });
+      },
+
+      onAppointmentPlanCreate: function (oEvent) {
+        if (this.getStateProperty("/planningEditMode")) {
+
+          var oModel = this.byId("planningScheduleCalendar").getModel("scheduleData");
+          var oResultData = oModel.getData();
+
+          var oStartDate = new Date(
+            oEvent.mParameters.startDate.getFullYear(),
+            oEvent.mParameters.startDate.getMonth(),
+            oEvent.mParameters.startDate.getDate(),
+            this.parseTimePicker(this.byId("DateTimeFromSchedulePlan").getValue()).hours,
+            this.parseTimePicker(this.byId("DateTimeFromSchedulePlan").getValue()).minutes,
+          );
+
+          var oEndDate = new Date(
+            oEvent.mParameters.startDate.getFullYear(),
+            oEvent.mParameters.startDate.getMonth(),
+            oEvent.mParameters.startDate.getDate(),
+            this.parseTimePicker(this.byId("DateTimeToSchedulePlan").getValue()).hours,
+            this.parseTimePicker(this.byId("DateTimeToSchedulePlan").getValue()).minutes,
+          );
+
+          oResultData.Appointments.push({
+            Title: `${this.byId("selectTypeDaySchedulePlan").getSelectedItem().getBindingContext().getObject().Text}`,
+            Text: this.byId("DateTimeFromSchedulePlan").getValue() + " - " + this.byId("DateTimeToSchedulePlan").getValue(),
+            Type: this.byId("selectTypeDaySchedulePlan").getSelectedItem().getBindingContext().getObject().Type,
+            Color: this.byId("selectTypeDaySchedulePlan").getSelectedItem().getBindingContext().getObject().Color,
+            StartDate: oStartDate,
+            EndDate: oEndDate,
+            StartDateOut: oStartDate,
+            EndDateOut: oEndDate
+          })
+
+          oModel.updateBindings(true);
+
+        } else {
+          this.onDayCalendayPress(oEvent);
+        }
+      },
+
+      onAppoitmentPlanSelect: function (oEvent) {
+        if (this.getStateProperty("/planningEditMode")) {
+          var oModel = this.byId("planningScheduleCalendar").getModel("scheduleData");
+          var oResultData = oModel.getData();
+
+          var oClickedAppointment = oEvent.mParameters.appointment.getBindingContext("scheduleData").getObject();
+
+          oResultData.Appointments.forEach(function (oAppointment, sIndex, aAppointments) {
+            if (oAppointment === this) {
+              debugger;
+              aAppointments.splice(sIndex, 1);
+            };
+          }, oClickedAppointment);
+
+          oModel.updateBindings(true);
+        }
+      },
+
+      getFirstDayOfMonthByDate: function (oDate) {
+        var sYear = oDate.getFullYear();
+        var sMonth = oDate.getMonth();
+
+        return new Date(sYear, sMonth, 1);
+      },
+
+      onAppointmentPlanDrop: function (oEvent) {
+
+        debugger;
+
+        var oModel = this.byId("planningScheduleCalendar").getModel("scheduleData");
+        var oScheduleData = oModel.getData();
+
+        var oAppointmentFrom = oEvent.mParameters.appointment.getBindingContext("scheduleData").getObject();
+
+        for (var i = 0; i < oScheduleData.Appointments.length; i++) {
+          var oAppointment = oScheduleData.Appointments[i];
+
+          if (oAppointment === oAppointmentFrom) {
+
+            var iYear = oEvent.mParameters.startDate.getFullYear();
+            var iMonth = oEvent.mParameters.startDate.getMonth();
+            var iDay = oEvent.mParameters.startDate.getDate();
+
+            oAppointment.StartDate = new Date(iYear, iMonth, iDay, oAppointment.StartDate.getHours(), oAppointment.StartDate.getMinutes());
+            oAppointment.StartDateOut = new Date(iYear, iMonth, iDay, oAppointment.StartDate.getHours(), oAppointment.StartDate.getMinutes());
+
+            oAppointment.EndDate = new Date(iYear, iMonth, iDay, oAppointment.EndDate.getHours(), oAppointment.EndDate.getMinutes());
+            oAppointment.EndDateOut = new Date(iYear, iMonth, iDay, oAppointment.EndDate.getHours(), oAppointment.EndDate.getMinutes());
+
+          }
+
+        }
+
+        oModel.updateBindings(true);
+      },
+
+      onSaveCalendarChanges: function () {
+        this.byId("planningScheduleCalendar").setBusy(true);
+
+        var oModel = this.byId("planningScheduleCalendar").getModel("scheduleData");
+        var oScheduleData = oModel.getData();
+
+        var oStartDate = this.getFirstDayOfMonth(this.byId("planningScheduleCalendar").getStartDate());
+
+        var oScheduleOutData = {
+          WORKER: this.getCurrentWorker(),
+          MONTH: (oStartDate.getMonth() + 1).toString().padStart(2, "0"),
+          YEAR: oStartDate.getFullYear().toString(),
+          SCHEDULE: this.buildSchedulesOut(oScheduleData.Appointments, oStartDate)
+        };
+
+        var sScheduleData = JSON.stringify(oScheduleOutData);
+
+        this.getModel().callFunction("/SaveScheduleTable", {
+          method: "POST",
+          urlParameters: {
+            inputDataJSON: sScheduleData,
+          },
+          success: function (oData) {
+            this.byId("planningScheduleCalendar").setBusy(false);
+            this.showMessageToast("Успех!!!!");
+          }.bind(this),
+
+          error: function (oError) {
+            this.byId("planningScheduleCalendar").setBusy(false);
+            this.showMessageToast("Косяк");
+          }.bind(this)
+        });
+
+      }
     });
   });

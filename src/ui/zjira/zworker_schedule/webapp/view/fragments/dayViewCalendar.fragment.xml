@@ -112,6 +112,7 @@
             <smartTable:SmartTable class=" sapUiLargeMarginBegin sapUiSmallMarginEnd"
                                    id="planFactST"
                                    width="50%"
+                                   tableType="ResponsiveTable"
                                    header="План/Факт подробно"
                                    entitySet="workerDayPlanFactSet"
                                    tableBindingPath="toWorkerDayPlanFact"

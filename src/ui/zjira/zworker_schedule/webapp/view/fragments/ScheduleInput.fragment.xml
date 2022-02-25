@@ -109,6 +109,8 @@
       </VBox>
       <Title text="Результат" />
       <VBox>
+
+
         <SinglePlanningCalendar id="resultCalendar"
                                 fullDay="true"
                                 appointmentSelect="onAppoitmentSelect"
@@ -117,6 +119,9 @@
                                 appointmentDrop="onAppointmentDrop"
                                 startDate="{path: 'resultData&gt;StartDate'}"
                                 appointments="{path: 'resultData&gt;/Appointments'}">
+         
+       
+         
           <dragDropConfig>
             <dnd:DragInfo sourceAggregation="appointments" />
           </dragDropConfig>
