@@ -109,6 +109,8 @@
       </VBox>
       <Title text="Результат" />
       <VBox>
+
+
         <SinglePlanningCalendar id="resultCalendar"
                                 fullDay="true"
                                 appointmentSelect="onAppoitmentSelect"
