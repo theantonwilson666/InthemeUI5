@@ -49,7 +49,7 @@
                                 <smartField:SmartField value ="{WorkDayType}" editable="true" entitySet="WorkerScheduleSet"/>
                             </smartForm:GroupElement> -->
             </smartForm:Group>
-            <smartForm:Group label="{i18n&gt;BioGroup}">
+            <smartForm:Group label="{i18n>BioGroup}">
                 <smartForm:GroupElement>
                     <smartField:SmartField id="WorkFactCheckBox"
                                            enabled="false"
@@ -74,7 +74,7 @@
                                    class=" sapUiLargeMarginBegin sapUiSmallMarginEnd"
                                    id="dateSmartTable"
                                    width="50%"
-                                   header="{i18n&gt;DetailTableTitle}"
+                                   header="{i18n>DetailTableTitle}"
                                    entitySet="WorkerDoorPassSet"
                                    tableBindingPath="WorkerDoorPasses"
                                    useExportToExcel="false"
@@ -88,13 +88,13 @@
                         <table:Column width="12rem">
                             <table:customData>
                                 <core:CustomData key="p13nData"
-                                                 value="\{
-&#xA;&#xA;                                                        &quot;columnIndex&quot;: &quot;0&quot;,
-&#xA;&#xA;                                                        &quot;columnKey&quot;: &quot;EventDateTime&quot;,
-&#xA;&#xA;                                                        &quot;leadingProperty&quot;: &quot;EventDateTime&quot;,
-&#xA;&#xA;                                                        &quot;sortProperty&quot;: &quot;EventDateTime&quot;,
-&#xA;&#xA;                                                        &quot;filterProperty&quot;: &quot;EventDateTime&quot;
-&#xA;&#xA;                                                     }" />
+                                                 value='\{
+&#xA;&#xA;                                                        "columnIndex": "0",
+&#xA;&#xA;                                                        "columnKey": "EventDateTime",
+&#xA;&#xA;                                                        "leadingProperty": "EventDateTime",
+&#xA;&#xA;                                                        "sortProperty": "EventDateTime",
+&#xA;&#xA;                                                        "filterProperty": "EventDateTime"
+&#xA;&#xA;                                                     }' />
                             </table:customData>
                             <Label text="Время" />
                             <table:template>
@@ -112,19 +112,20 @@
             <smartTable:SmartTable class=" sapUiLargeMarginBegin sapUiSmallMarginEnd"
                                    id="planFactST"
                                    width="50%"
+                                   tableType="ResponsiveTable"
                                    header="План/Факт подробно"
                                    entitySet="workerDayPlanFactSet"
                                    tableBindingPath="toWorkerDayPlanFact"
                                    useExportToExcel="false"
                                    useVariantManagement="false"
                                    useTablePersonalisation="true"
-                                   initiallyVisibleFields="IntervalTypeID, PlanTimeFrom,PlanTimeTo,FactTimeFrom,FactTimeTo"
+                                   initiallyVisibleFields="IntervalTypeText,PlanTimeFrom,PlanTimeTo,FactTimeFrom,FactTimeTo,IntervalDivergence,IsCounted"
                                    enableAutoBinding="true"/>
                                    
         </HBox>
         <beginButton>
             <Button text="Сохранить"
-                    press="onUploadScheduleButtonPress" />
+                    press="onUploadScheduleButtonPersonalPress" />
         </beginButton>
         <endButton>
             <Button text="Отмена"

@@ -9,11 +9,11 @@
                 <f:expandedContent>
                     <Label text="{i18n>appDescription}" />
                 </f:expandedContent>
-                <f:actions>
+                <!-- <f:actions>
                     <Button id="configScheduleButton" icon="sap-icon://wrench" visible="false" text="{i18n>ScheduleConf}" press="onPressConfig" />
                     <Button id="excelScheduleButton" icon="sap-icon://excel-attachment" visible="false" type="Emphasized" text="{i18n>downloadExcelSchedule}" press="onPressDownloadExcel" />
                     <u:FileUploader id="uploadExcelSchedule" icon="sap-icon://excel-attachment" iconOnly="false" buttonOnly="true" buttonText="{i18n>uploadExcelSchedule}" fileType="xlsx,xlsm,xls" typeMissmatch="handleTypeMissmatch" change="handleFileSelected($event, '/FileSet', {SourceId: 'ScheduleUpload'})" style="Emphasized" />
-                </f:actions>
+                </f:actions> -->
             </f:DynamicPageTitle>
         </f:title>
         <f:header>

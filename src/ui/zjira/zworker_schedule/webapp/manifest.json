@@ -103,6 +103,7 @@
           "rebindProj": false,
           "currentTab": "common",
           "showNewInterval": false,
+          "planningEditMode" : false,
           "smartTabConf": {
             "PositionTab": "PositionConfST",
             "WorkerTab": "WorkerConfST"

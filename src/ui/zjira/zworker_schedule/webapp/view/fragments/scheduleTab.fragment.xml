@@ -10,25 +10,69 @@
                          xmlns:dnd="sap.ui.core.dnd"
                          xmlns:smartField="sap.ui.comp.smartfield"
                          xmlns:l="sap.ui.layout">
-    <VBox>
-        <SinglePlanningCalendar id="planningScheduleCalendar"
-                                fullDay="true"
-                                startDateChange="onHeaderDateChange"
-                                enableAppointmentsDragAndDrop="true"
-                                cellPress="onDayCalendayPress"
-                                appointments="{path: 'scheduleData&gt;/Appointments'}">
-            <views>
-                <SinglePlanningCalendarMonthView key="MonthView"
-                                                 title="Month" />
-            </views>
-            <appointments>
-                <unified:CalendarAppointment title="{scheduleData&gt;Title}({scheduleData&gt;Text})"
-                                             text="{scheduleData&gt;Text}"
-                                             type="{scheduleData&gt;Type}"
-                                             color="{scheduleData&gt;Color}"
-                                             startDate="{scheduleData&gt;StartDate}"
-                                             endDate="{scheduleData&gt;EndDate}" />
-            </appointments>
-        </SinglePlanningCalendar>
-    </VBox>
+  <VBox>
+    <SinglePlanningCalendar id="planningScheduleCalendar"
+                            fullDay="true"
+                            startDateChange="onHeaderDateChange"
+                            appointmentDrop="onAppointmentPlanDrop"
+                            appointmentResize="onAppointmentPlanResize"
+                            enableAppointmentsDragAndDrop="true"
+                            enableAppointmentsResize="true"
+                            appointmentSelect="onAppoitmentPlanSelect"
+                            cellPress="onAppointmentPlanCreate"
+                            appointments="{path: 'scheduleData>/Appointments'}">
+      <actions>
+        <FlexBox class="sapUiContentPadding"
+                 visible="{= ${state>/planningEditMode} === true }">
+          <Label class="sapUiTinyMargin"
+                 text="Вводный интервал"
+                 labelFor="selectTypeDaySchedule" />
+          <Select class="sapUiTinyMargin"
+                  id="selectTypeDaySchedulePlan"
+                  items="{path: '/IntervalTypesLegendSet'}">
+            <core:Item key="{Type}"
+                       text="{Text}" />
+          </Select>
+          <Label text="C"
+                 class="sapUiTinyMargin" />
+          <TimePicker id="DateTimeFromSchedulePlan"
+                      value="9:00"
+                      valueFormat="HH:mm"
+                      class="sapUiTinyMargin"
+                      displayFormat="HH:mm"
+                      placeholder="Enter meeting start time" />
+          <Label text="По "
+                 class="sapUiTinyMargin" />
+          <TimePicker id="DateTimeToSchedulePlan"
+                      value="18:00"
+                      class="sapUiTinyMargin"
+                      valueFormat="HH:mm"
+                      displayFormat="HH:mm"
+                      placeholder="Enter meeting start time" />
+        </FlexBox>
+        <Button text="Редактировать"
+                icon="sap-icon://edit"
+                visible="{= ${state>/planningEditMode} === false }"
+                press="onEditPlanningCalendarButtonPress" />
+        <Button text="Просмотреть"
+                icon="sap-icon://display"
+                visible="{= ${state>/planningEditMode} === true }"
+                press="onEditPlanningCalendarButtonPress" />
+      </actions>
+      <views>
+        <SinglePlanningCalendarMonthView key="MonthView"
+                                         title="Month" />
+        <SinglePlanningCalendarDayView key="DayView"
+                                       title="Day" />
+      </views>
+      <appointments>
+        <unified:CalendarAppointment title="{scheduleData>Title}({scheduleData>Text})"
+                                     text="{scheduleData>Text}"
+                                     type="{scheduleData>Type}"
+                                     color="{scheduleData>Color}"
+                                     startDate="{scheduleData>StartDate}"
+                                     endDate="{scheduleData>EndDate}" />
+      </appointments>
+    </SinglePlanningCalendar>
+  </VBox>
 </core:FragmentDefinition>

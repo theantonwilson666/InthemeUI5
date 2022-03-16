@@ -19,7 +19,7 @@
           height="100%">
     <f:DynamicPage id="issueView"
                    toggleHeaderOnTitleClick="true"
-                   showFooter="true"
+                   showFooter="{state>/planningEditMode}"
                    preserveHeaderStateOnScroll="true">
         <f:title>
             <f:DynamicPageTitle>
@@ -38,12 +38,13 @@
                 </f:content> -->
                 <f:actions>
                     <Button id="configSheduleUIButton"
-                            icon="sap-icon://wrench"
-                            text="{i18n&gt;ScheduleConfUI}"
-                            press="onPressConfigUI" />
-                    <Button icon="sap-icon://refresh"
                             type="Transparent"
-                            press="updateCalendar" />
+                            icon="sap-icon://wrench"
+                            text="{i18n>ScheduleConfUI}"
+                            press="onPressConfigUI" />
+                    <!-- <Button icon="sap-icon://refresh"
+                            type="Transparent"
+                            press="updateCalendar" /> -->
                 </f:actions>
             </f:DynamicPageTitle>
         </f:title>
@@ -65,13 +66,13 @@
                 </items>
             </IconTabBar>
         </f:content>
-        <!-- <f:footer>
+        <f:footer>
             <OverflowToolbar>
                 <ToolbarSpacer />
                 <Button text="{i18n&gt;SaveBtn}"
                         type="Emphasized"
-                        press="onSaveChanges" />
+                        press="onSaveCalendarChanges" />
             </OverflowToolbar>
-        </f:footer> -->
+        </f:footer>
     </f:DynamicPage>
 </mvc:View>
