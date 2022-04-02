@@ -1153,7 +1153,30 @@ sap.ui.define(
                 });
             },
 
+            checkDateInMonth : function(oDate){
+                var oStartDate = this.byId("planningScheduleCalendar").getStartDate();
+                var iYear = oStartDate.getFullYear();
+                var iMonth = oStartDate.getMonth();
+                
+                oStartDate = new Date(iYear, iMonth, 1, 0, 0, 0);
+                var oEndDate = new Date(iYear, iMonth + 1, 0, 23, 59, 59);
+
+                if ( (oDate >= oStartDate) && (oDate <= oEndDate) ){
+                    return true;
+                } else {
+                    return false;
+                }
+            },
+
             onAppointmentPlanCreate: function (oEvent) {
+
+                debugger;
+                
+                if (!this.checkDateInMonth(oEvent.getParameter("startDate"))) {
+                    return;
+                }
+
+
                 if (this.getStateProperty("/planningEditMode")) {
 
                     var oModel = this.byId("planningScheduleCalendar").getModel("scheduleData");
