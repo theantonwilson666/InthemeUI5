@@ -1153,15 +1153,15 @@ sap.ui.define(
                 });
             },
 
-            checkDateInMonth : function(oDate){
+            checkDateInMonth: function (oDate) {
                 var oStartDate = this.byId("planningScheduleCalendar").getStartDate();
                 var iYear = oStartDate.getFullYear();
                 var iMonth = oStartDate.getMonth();
-                
+
                 oStartDate = new Date(iYear, iMonth, 1, 0, 0, 0);
                 var oEndDate = new Date(iYear, iMonth + 1, 0, 23, 59, 59);
 
-                if ( (oDate >= oStartDate) && (oDate <= oEndDate) ){
+                if ((oDate >= oStartDate) && (oDate <= oEndDate)) {
                     return true;
                 } else {
                     return false;
@@ -1171,7 +1171,7 @@ sap.ui.define(
             onAppointmentPlanCreate: function (oEvent) {
 
                 debugger;
-                
+
                 if (!this.checkDateInMonth(oEvent.getParameter("startDate"))) {
                     return;
                 }
@@ -1217,6 +1217,9 @@ sap.ui.define(
             },
 
             onAppoitmentPlanSelect: function (oEvent) {
+
+                return;
+
                 debugger;
                 if (this.getStateProperty("/planningEditMode")) {
                     var oModel = this.byId("planningScheduleCalendar").getModel("scheduleData");
@@ -1245,6 +1248,27 @@ sap.ui.define(
 
                         oModel.updateBindings(true);
                     }
+
+                }
+            },
+
+            onDeleteAppointpmentDrop: function (oEvent) {
+                oEvent.getParameter("draggedControl")
+
+                if (this.getStateProperty("/planningEditMode")) {
+                    var oModel = this.byId("planningScheduleCalendar").getModel("scheduleData");
+                    var oResultData = oModel.getData();
+
+                    var oClickedAppointment = oEvent.getParameter("draggedControl").getBindingContext("scheduleData").getObject();
+
+                    oResultData.Appointments.forEach(function (oAppointment, sIndex, aAppointments) {
+                        if (oAppointment === this) {
+                            debugger;
+                            aAppointments.splice(sIndex, 1);
+                        };
+                    }, oClickedAppointment);
+
+                    oModel.updateBindings(true);
 
                 }
             },
@@ -1284,9 +1308,9 @@ sap.ui.define(
 
                             oAppointment.EndDate = new Date(iYear, iMonth, iDay, iHour, iMinutes);
                             oAppointment.EndDateOut = new Date(iYear, iMonth, iDay, iHour, iMinutes);
-                            
+
                             oAppointment.Text = this.convertTimeFromDateTimePretty(oAppointment.StartDate) + " - " + this.convertTimeFromDateTimePretty(oAppointment.EndDate);
-                            
+
                         }
 
                     }
@@ -1336,7 +1360,7 @@ sap.ui.define(
                 }
             },
 
-            convertPrettyTime : function(oDateTimeFrom, oDateTimeto){
+            convertPrettyTime: function (oDateTimeFrom, oDateTimeto) {
                 var iHourFrom = oDateTimeFrom.getHours();
                 var iMinutesFrom = oDateTimeFrom.getMinutes();
 
@@ -1345,7 +1369,7 @@ sap.ui.define(
 
 
             onSaveCalendarChanges: function () {
-                
+
                 debugger;
 
                 this.byId("planningScheduleCalendar").setBusy(true);

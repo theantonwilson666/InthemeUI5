@@ -1,26 +1,23 @@
 <mvc:View controllerName="intheme.zworker_schedule.controller.Detail"
-          xmlns:mvc="sap.ui.core.mvc"
-          xmlns="sap.m"
-          xmlns:table="sap.ui.table"
-          xmlns:core="sap.ui.core"
-          xmlns:f="sap.f"
-          xmlns:u="sap.ui.unified"
-          xmlns:layout="sap.ui.layout"
-          xmlns:form="sap.ui.layout.form"
-          xmlns:sv="sap.ui.comp.smartvariants"
-          xmlns:smartForm="sap.ui.comp.smartform"
-          xmlns:smartTable="sap.ui.comp.smarttable"
-        
-          xmlns:smartField="sap.ui.comp.smartfield"
-          xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
-          xmlns:viz="sap.viz.ui5.controls"
-          xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
-          xmlns:viz.data="sap.viz.ui5.data"
-          height="100%">
-    <f:DynamicPage id="issueView"
-                   toggleHeaderOnTitleClick="true"
-                   showFooter="{state>/planningEditMode}"
-                   preserveHeaderStateOnScroll="true">
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:control="intheme.zworker_schedule.controls"
+    xmlns:table="sap.ui.table"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:u="sap.ui.unified"
+    xmlns:layout="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:dnd="sap.ui.core.dnd"
+    xmlns:smartForm="sap.ui.comp.smartform"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:viz.data="sap.viz.ui5.data" height="100%">
+    <f:DynamicPage id="issueView" toggleHeaderOnTitleClick="true" showFooter="{state>/planningEditMode}" preserveHeaderStateOnScroll="true">
         <f:title>
             <f:DynamicPageTitle>
                 <f:heading>
@@ -30,32 +27,18 @@
                     <Label text="{PositionName}" />
                 </f:expandedContent>
                 <!-- <f:content>
-                 <u:Calendar width="40em" id="workerCalendar" legend="calendarLegend" intervalSelection="false"
-                                select="onDateSelect" 
-                                startDateChange="onStartDateChange"/>
+                 <u:Calendar width="40em" id="workerCalendar" legend="calendarLegend" intervalSelection="false" select="onDateSelect" startDateChange="onStartDateChange"/>
 
                     <u:CalendarLegend id="calendarLegend"/>
                 </f:content> -->
                 <f:actions>
-                    <Button id="configSheduleUIButton"
-                            type="Transparent"
-                            icon="sap-icon://wrench"
-                            text="{i18n>ScheduleConfUI}"
-                            press="onPressConfigUI" />
-                    <!-- <Button icon="sap-icon://refresh"
-                            type="Transparent"
-                            press="updateCalendar" /> -->
+                    <Button id="configSheduleUIButton" type="Transparent" icon="sap-icon://wrench" text="{i18n>ScheduleConfUI}" press="onPressConfigUI" />
+                    <!-- <Button icon="sap-icon://refresh" type="Transparent" press="updateCalendar" /> -->
                 </f:actions>
             </f:DynamicPageTitle>
         </f:title>
         <f:content>
-              <IconTabBar id="iconTabBar"
-                        selectedKey="scheduleTab"
-                        applyContentPadding="false"
-                        expanded="true"
-                        expandable="false"
-                        stretchContentHeight="true"
-                        tabDensityMode="Compact">
+            <IconTabBar id="iconTabBar" selectedKey="scheduleTab" applyContentPadding="false" expanded="true" expandable="false" stretchContentHeight="true" tabDensityMode="Compact">
                 <items>
                     <IconTabFilter id="ScheduleTab" text="График посещений" key="scheduleTab">
                         <core:Fragment fragmentName="intheme.zworker_schedule.view.fragments.scheduleTab" type="XML"/>
@@ -69,10 +52,21 @@
         <f:footer>
             <OverflowToolbar>
                 <ToolbarSpacer />
-                <Button text="{i18n&gt;SaveBtn}"
-                        type="Emphasized"
-                        press="onSaveCalendarChanges" />
-            </OverflowToolbar>
-        </f:footer>
-    </f:DynamicPage>
+
+                <control:DeleteButton id="deleteButtonId" text="Delete" type="Reject" icon="sap-icon://delete" width="30%">
+                    <control:dragDropConfig>
+                        <dnd:DropInfo drop="onDeleteAppointpmentDrop"/>
+                    </control:dragDropConfig>
+                </control:DeleteButton>
+
+                <!-- <dragDropConfig>
+                    <dnd:DropInfo drop="onDrop"/>
+                </dragDropConfig> -->
+
+            <!-- </Button> -->
+
+            <Button text="{i18n&gt;SaveBtn}" type="Emphasized" press="onSaveCalendarChanges" />
+        </OverflowToolbar>
+    </f:footer>
+</f:DynamicPage>
 </mvc:View>
