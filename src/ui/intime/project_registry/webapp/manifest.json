@@ -13,7 +13,7 @@
         "ach": "ach",
         "dataSources": {
             "mainService": {
-                "uri": "/sap/opu/odata/sap/ZJIRA_SRV/",
+                "uri": "/sap/opu/odata/sap/ZINT_UI_PARTNERS_SRV/",
                 "type": "OData",
                 "settings": {
                     "odataVersion": "2.0",
