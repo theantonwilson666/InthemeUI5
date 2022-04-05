@@ -1,29 +1,153 @@
-<View controllerName="intime.zproject_registry.controller.App" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:form="sap.ui.layout.form">
+<View controllerName="intime.zproject_registry.controller.App"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:form="sap.ui.layout.form">
 	<Shell id="shell" appWidthLimited="false">
 		<App id="app">
 			<pages>
 				<Page showHeader="false" id="page">
+
+
+					<subHeader>
+						<OverflowToolbar>
+							<ToolbarSpacer/>
+							<Button text="test"/>
+						</OverflowToolbar>
+					</subHeader>
+
 					<content>
-						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" subheader="Nikolay Perov" wrappingType="Normal" press="press" frameType="Auto">
-							<!-- <TileContent>
-								<FeedContent contentText="Nikolay Perov" />
-							</TileContent> -->
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="press" frameType="Auto">
 							<TileContent>
-								<ImageContent src="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" />
+								<VBox>
+									<ImageContent src="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" />
+									<FeedContent contentText="Nikolay Perov" />
+								</VBox>
 							</TileContent>
 						</GenericTile>
+
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="press" frameType="Auto">
+							<TileContent>
+								<VBox>
+									<ImageContent src="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" />
+									<FeedContent contentText="Nikolay Perov" />
+								</VBox>
+							</TileContent>
+						</GenericTile>
+
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="press" frameType="Auto">
+							<TileContent>
+								<VBox>
+									<ImageContent src="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" />
+									<FeedContent contentText="Nikolay Perov" />
+								</VBox>
+							</TileContent>
+						</GenericTile>
+
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="press" frameType="Auto">
+							<TileContent>
+								<VBox>
+									<ImageContent src="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" />
+									<FeedContent contentText="Nikolay Perov" />
+								</VBox>
+							</TileContent>
+						</GenericTile>
+
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="press" frameType="Auto">
+							<TileContent>
+								<VBox>
+									<ImageContent src="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" />
+									<FeedContent contentText="Nikolay Perov" />
+								</VBox>
+							</TileContent>
+						</GenericTile>
+
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="press" frameType="Auto">
+							<TileContent>
+								<VBox>
+									<ImageContent src="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" />
+									<FeedContent contentText="Nikolay Perov" />
+								</VBox>
+							</TileContent>
+						</GenericTile>
+
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="press" frameType="Auto">
+							<TileContent>
+								<VBox>
+									<ImageContent src="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" />
+									<FeedContent contentText="Nikolay Perov" />
+								</VBox>
+							</TileContent>
+						</GenericTile>
+
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="press" frameType="Auto">
+							<TileContent>
+								<VBox>
+									<ImageContent src="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" />
+									<FeedContent contentText="Nikolay Perov" />
+								</VBox>
+							</TileContent>
+						</GenericTile>
+
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="press" frameType="Auto">
+							<TileContent>
+								<VBox>
+									<ImageContent src="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" />
+									<FeedContent contentText="Nikolay Perov" />
+								</VBox>
+							</TileContent>
+						</GenericTile>
+
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="press" frameType="Auto">
+							<TileContent>
+								<VBox>
+									<ImageContent src="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" />
+									<FeedContent contentText="Nikolay Perov" />
+								</VBox>
+							</TileContent>
+						</GenericTile>
+
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="press" frameType="Auto">
+							<TileContent>
+								<VBox>
+									<ImageContent src="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" />
+									<FeedContent contentText="Nikolay Perov" />
+								</VBox>
+							</TileContent>
+						</GenericTile>
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="press" frameType="Auto">
+							<TileContent>
+								<VBox>
+									<ImageContent src="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" />
+									<FeedContent contentText="Nikolay Perov" />
+								</VBox>
+							</TileContent>
+						</GenericTile>
+
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="press" frameType="Auto">
+							<TileContent>
+								<VBox>
+									<ImageContent src="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" />
+									<FeedContent contentText="Nikolay Perov" />
+								</VBox>
+							</TileContent>
+						</GenericTile>
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="press" frameType="Auto">
+							<TileContent>
+								<VBox>
+									<ImageContent src="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" />
+									<FeedContent contentText="Nikolay Perov" />
+								</VBox>
+							</TileContent>
+						</GenericTile>
+
 						<!--
-						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО"  press="onPress"
-						frameType="OneByHalf" >
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" press="onPress" frameType="OneByHalf">
 						</GenericTile>
 						-->
 						<!--
-						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout"
-						backgroundImage="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png"
-						frameType="OneByHalf" width="100px">
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" backgroundImage="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" frameType="OneByHalf" width="100px">
 						</GenericTile>
-						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Nikolay Perov"
-						press="press" frameType= "TwoByHalf">
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Nikolay Perov" press="press" frameType= "TwoByHalf">
 						<TileContent />
 						</GenericTile>
 						-->

@@ -94,7 +94,18 @@
             "": {
                 "dataSource": "mainService",
                 "preload": true
-            }
+            },
+            "state": {
+                "type": "sap.ui.model.json.JSONModel",
+                "settings": {
+                  "isDraft": false,
+                  "icons": {
+                    "goHome": "sap-icon://home"
+                  },
+
+                  "editMode" : false
+                }
+              }
         },
         "resources": {
             "css": [
