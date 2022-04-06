@@ -5,7 +5,7 @@
 	xmlns:l="sap.ui.layout"
 	xmlns:f="sap.ui.layout.form"
 	xmlns:m="sap.m">
-    <Dialog id="Dialog">
+    <Dialog id="EditDialog">
         <content>
 
         <VBox class="sapUiSmallMargin">

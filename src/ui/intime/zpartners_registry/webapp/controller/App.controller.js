@@ -45,8 +45,8 @@ sap.ui.define([
 
                 this.loadDialog
                 .call(this, {
-                    sDialogName: "Dialog",
-                    sViewName: "intime.zpartners_registry.view.fragment.Dialog"
+                    sDialogName: "EditDialog",
+                    sViewName: "intime.zpartners_registry.view.fragment.EditDialog"
                 })
                 .then(
                     function(oDialog) {
