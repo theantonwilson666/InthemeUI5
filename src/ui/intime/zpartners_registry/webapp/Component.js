@@ -1,11 +1,11 @@
 sap.ui.define([
 	"sap/ui/core/UIComponent",
 	"sap/ui/Device",
-	"intime/zproject_registry/model/models"
+	"intime/zpartners_registry/model/models"
 ], function (UIComponent, Device, models) {
 	"use strict";
 
-	return UIComponent.extend("intime.zproject_registry.Component", {
+	return UIComponent.extend("intime.zpartners_registry.Component", {
 
 		metadata: {
 			manifest: "json"

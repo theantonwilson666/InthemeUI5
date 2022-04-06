@@ -1,4 +1,4 @@
-<View controllerName="intime.zproject_registry.controller.App"
+<View controllerName="intime.zpartners_registry.controller.App"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:form="sap.ui.layout.form">
@@ -6,17 +6,17 @@
 		<App id="app">
 			<pages>
 				<Page showHeader="false" id="page">
-
-
 					<subHeader>
 						<OverflowToolbar>
 							<ToolbarSpacer/>
-							<Button text="test"/>
+							<Button id="EditButton" icon="sap-icon://edit" press="OnEdit"/>
+							<Button id="DisplayButton" icon="sap-icon://display" visible="false" press="OnDisplay"/>
+							<Button icon="sap-icon://create"/>
 						</OverflowToolbar>
 					</subHeader>
 
 					<content>
-						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="press" frameType="Auto">
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="OpenDialog" frameType="Auto" >
 							<TileContent>
 								<VBox>
 									<ImageContent src="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" />
@@ -25,7 +25,7 @@
 							</TileContent>
 						</GenericTile>
 
-						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="press" frameType="Auto">
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="OpenDialog" frameType="Auto" >
 							<TileContent>
 								<VBox>
 									<ImageContent src="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" />
@@ -34,7 +34,7 @@
 							</TileContent>
 						</GenericTile>
 
-						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="press" frameType="Auto">
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="OpenDialog" frameType="Auto">
 							<TileContent>
 								<VBox>
 									<ImageContent src="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" />
@@ -43,7 +43,7 @@
 							</TileContent>
 						</GenericTile>
 
-						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="press" frameType="Auto">
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="OpenDialog" frameType="Auto">
 							<TileContent>
 								<VBox>
 									<ImageContent src="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" />
@@ -52,7 +52,7 @@
 							</TileContent>
 						</GenericTile>
 
-						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="press" frameType="Auto">
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="OpenDialog" frameType="Auto">
 							<TileContent>
 								<VBox>
 									<ImageContent src="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" />
@@ -61,7 +61,7 @@
 							</TileContent>
 						</GenericTile>
 
-						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="press" frameType="Auto">
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="OpenDialog" frameType="Auto">
 							<TileContent>
 								<VBox>
 									<ImageContent src="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" />
@@ -70,7 +70,7 @@
 							</TileContent>
 						</GenericTile>
 
-						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="press" frameType="Auto">
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="OpenDialog" frameType="Auto">
 							<TileContent>
 								<VBox>
 									<ImageContent src="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" />
@@ -79,7 +79,7 @@
 							</TileContent>
 						</GenericTile>
 
-						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="press" frameType="Auto">
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="OpenDialog" frameType="Auto">
 							<TileContent>
 								<VBox>
 									<ImageContent src="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" />
@@ -88,7 +88,7 @@
 							</TileContent>
 						</GenericTile>
 
-						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="press" frameType="Auto">
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="OpenDialog" frameType="Auto">
 							<TileContent>
 								<VBox>
 									<ImageContent src="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" />
@@ -97,7 +97,7 @@
 							</TileContent>
 						</GenericTile>
 
-						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="press" frameType="Auto">
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="OpenDialog" frameType="Auto">
 							<TileContent>
 								<VBox>
 									<ImageContent src="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" />
@@ -106,7 +106,7 @@
 							</TileContent>
 						</GenericTile>
 
-						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="press" frameType="Auto">
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="OpenDialog" frameType="Auto">
 							<TileContent>
 								<VBox>
 									<ImageContent src="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" />
@@ -114,7 +114,7 @@
 								</VBox>
 							</TileContent>
 						</GenericTile>
-						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="press" frameType="Auto">
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="OpenDialog" frameType="Auto">
 							<TileContent>
 								<VBox>
 									<ImageContent src="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" />
@@ -122,24 +122,6 @@
 								</VBox>
 							</TileContent>
 						</GenericTile>
-
-						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="press" frameType="Auto">
-							<TileContent>
-								<VBox>
-									<ImageContent src="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" />
-									<FeedContent contentText="Nikolay Perov" />
-								</VBox>
-							</TileContent>
-						</GenericTile>
-						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" wrappingType="Normal" press="press" frameType="Auto">
-							<TileContent>
-								<VBox>
-									<ImageContent src="https://reduktor-ptp.ru/wp-content/uploads/2020/11/5.png" />
-									<FeedContent contentText="Nikolay Perov" />
-								</VBox>
-							</TileContent>
-						</GenericTile>
-
 						<!--
 						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="ФОСАГРО" press="onPress" frameType="OneByHalf">
 						</GenericTile>

@@ -1,7 +1,7 @@
 {
     "_version": "1.32.0",
     "sap.app": {
-        "id": "intime.zproject_registry",
+        "id": "intime.zpartners_registry",
         "type": "application",
         "i18n": "i18n/i18n.properties",
         "applicationVersion": {
@@ -33,7 +33,7 @@
         },
         "crossNavigation": {
             "inbounds": {
-                "intime.zproject_registry-inbound": {
+                "intime.zpartners_registry-inbound": {
                     "signature": {
                         "parameters": {},
                         "additionalParameters": "allowed"
@@ -67,7 +67,7 @@
     "sap.ui5": {
         "flexEnabled": false,
         "rootView": {
-            "viewName": "intime.zproject_registry.view.App",
+            "viewName": "intime.zpartners_registry.view.App",
             "type": "XML",
             "async": true,
             "id": "App"
@@ -88,7 +88,7 @@
             "i18n": {
                 "type": "sap.ui.model.resource.ResourceModel",
                 "settings": {
-                    "bundleName": "intime.zproject_registry.i18n.i18n"
+                    "bundleName": "intime.zpartners_registry.i18n.i18n"
                 }
             },
             "": {
@@ -119,7 +119,7 @@
                 "routerClass": "sap.m.routing.Router",
                 "viewType": "XML",
                 "async": true,
-                "viewPath": "intime.zproject_registry.view",
+                "viewPath": "intime.zpartners_registry.view",
                 "controlAggregation": "pages",
                 "controlId": "app",
                 "clearControlAggregation": false
