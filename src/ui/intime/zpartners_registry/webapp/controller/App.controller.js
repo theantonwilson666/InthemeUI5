@@ -12,6 +12,10 @@ sap.ui.define([
                 this.changeEditMode();
             },
 
+            isChangeMode: function(){
+                return this.getStateProperty("/editMode") ? true : false;
+            },
+
             changeEditMode: function(){
                 this.setStateProperty("/editMode", !this.getStateProperty("/editMode"));
             },
