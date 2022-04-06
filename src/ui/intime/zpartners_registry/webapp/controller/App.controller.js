@@ -9,12 +9,15 @@ sap.ui.define([
             onInit: function () { },
 
             OnEdit: function () {
-                // this.byId('EditButton').setIcon('sap-icon://display');
-                this.byId('EditButton').setVisible(false) && this.byId('DisplayButton').setVisible(true)
+                this.changeEditMode();
+            },
+
+            changeEditMode: function(){
+                this.setStateProperty("/editMode", !this.getStateProperty("/editMode"));
             },
 
             OnDisplay: function () {
-                this.byId('DisplayButton').setVisible(false) && this.byId('EditButton').setVisible(true);
+                this.changeEditMode();
             },
 
             OpenDialog: function(oEvent) {
