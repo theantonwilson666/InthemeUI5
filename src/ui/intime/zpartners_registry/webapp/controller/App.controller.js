@@ -37,23 +37,43 @@ sap.ui.define([
                 this.changeColor();
             },
 
+            onTilePress: function() {
+                var oCrossAppNav = sap.ushell.Container.getService("CrossApplicationNavigation");
+
+                var sLinkForwWindow = oCrossAppNav.hrefForExternal({
+                    target: { semanticObject: "ztest_project", action: "display" }
+                });
+
+                window.open(sLinkForwWindow, true);
+            },
+
             OpenDialog: function(oEvent) {
 
                 var isChangeMode = this.isChangeMode();
 
                 if ( isChangeMode === true ) {
 
-                this.loadDialog
-                .call(this, {
-                    sDialogName: "EditDialog",
-                    sViewName: "intime.zpartners_registry.view.fragment.EditDialog"
-                })
-                .then(
-                    function(oDialog) {
-                        oDialog.open();
-                    }.bind(this)
-                );
-            } }, 
+                    this.loadDialog
+                    .call(this, {
+                        sDialogName: "EditDialog",
+                        sViewName: "intime.zpartners_registry.view.fragment.EditDialog"
+                    })
+                    .then(
+                        function(oDialog) {
+                            oDialog.open();
+                        }.bind(this)
+                    );
+                } 
+                // else {
+                //     var oCrossAppNav = sap.ushell.Container.getService("CrossApplicationNavigation");
+
+                //     var sLinkForwWindow = oCrossAppNav.hrefForExternal({
+                //         target: { semanticObject: "ztest_project", action: "display" }
+                //     });
+    
+                //     window.open(sLinkForwWindow, true);
+                // }
+            }, 
 
 
         });
