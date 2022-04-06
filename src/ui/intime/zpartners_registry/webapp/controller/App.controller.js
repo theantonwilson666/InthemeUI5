@@ -10,6 +10,18 @@ sap.ui.define([
 
             OnEdit: function () {
                 this.changeEditMode();
+                this.changeColor();
+            },
+
+            changeColor: function() { 
+
+            var isChangeMode = this.isChangeMode();
+
+                if ( isChangeMode === true ) { 
+                     document.getElementById("application-zpartners_registry-display-component---App--page-cont").style.backgroundColor = "#DEDDD8";
+                } else {
+                     document.getElementById("application-zpartners_registry-display-component---App--page-cont").style.backgroundColor = "#fafafa";
+                }
             },
 
             isChangeMode: function(){
@@ -22,9 +34,14 @@ sap.ui.define([
 
             OnDisplay: function () {
                 this.changeEditMode();
+                this.changeColor();
             },
 
             OpenDialog: function(oEvent) {
+
+                var isChangeMode = this.isChangeMode();
+
+                if ( isChangeMode === true ) {
 
                 this.loadDialog
                 .call(this, {
@@ -36,7 +53,7 @@ sap.ui.define([
                         oDialog.open();
                     }.bind(this)
                 );
-            },
+            } }, 
 
 
         });

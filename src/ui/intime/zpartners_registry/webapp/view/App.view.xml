@@ -16,7 +16,7 @@
 					</subHeader>
 
 					<content>
-						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{PartnerName}" wrappingType="Normal" press="press" frameType="Auto">
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{PartnerName}" wrappingType="Normal" press="OpenDialog" frameType="Auto">
 							<TileContent>
 								<VBox>
 									<ImageContent src="/sap/opu/odata/sap/ZINT_UI_PARTNERS_SRV/ZSNN_PARTNER_ROOT('{PartnerId}')/$value"/>
