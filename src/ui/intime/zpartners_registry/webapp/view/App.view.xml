@@ -6,7 +6,6 @@
 		<App id="app">
 			<pages>
 				<Page showHeader="false" id="page" content="{/ZSNN_PARTNER_ROOT}">
-
 					<subHeader>
 						<OverflowToolbar>
 							<ToolbarSpacer/>

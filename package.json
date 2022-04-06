@@ -4,7 +4,7 @@
   "main": "Gruntfile.js",
   "dependencies": {
     "grunt": "^1.4.1",
-    "grunt-connect-proxy": "^0.1.5",
+    "grunt-connect-proxy": "^0.1.11",
     "grunt-contrib-clean": "^2.0.0",
     "grunt-contrib-connect": "^3.0.0",
     "grunt-contrib-watch": "^1.1.0",
