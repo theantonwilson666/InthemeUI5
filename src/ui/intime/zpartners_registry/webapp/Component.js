@@ -1,3 +1,5 @@
+sap.ui.loader.config({paths: {"jira/lib": "/sap/bc/ui5_ui5/sap/zjiralib"}});
+
 sap.ui.define([
 	"sap/ui/core/UIComponent",
 	"sap/ui/Device",
