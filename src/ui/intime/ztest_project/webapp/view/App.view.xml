@@ -1,4 +1,4 @@
-<View controllerName="intime.zpartners_registry.controller.App"
+<View controllerName="intime.ztest_project.controller.App"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:form="sap.ui.layout.form">
@@ -11,7 +11,7 @@
 							<ToolbarSpacer/>
 							<Button id="EditButton" icon="sap-icon://edit" visible="{= ${state>/editMode} === false }" press="OnEdit"/>
 							<Button id="DisplayButton" icon="sap-icon://display" visible="{state>/editMode}" press="OnDisplay"/>
-							<Button icon="sap-icon://create" press="onCreatePartnerButtonPress"/>
+							<Button icon="sap-icon://create" press="OpenDialog"/>
 						</OverflowToolbar>
 					</subHeader>
 
