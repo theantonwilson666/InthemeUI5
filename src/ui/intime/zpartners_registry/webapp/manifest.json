@@ -93,19 +93,22 @@
             },
             "": {
                 "dataSource": "mainService",
-                "preload": true
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+                    "useBatch": true,
+                    "defaultCountMode": "Inline"
+                }
             },
             "state": {
                 "type": "sap.ui.model.json.JSONModel",
                 "settings": {
-                  "isDraft": false,
-                  "icons": {
-                    "goHome": "sap-icon://home"
-                  },
-
-                  "editMode" : false
+                    "isDraft": false,
+                    "icons": {
+                        "goHome": "sap-icon://home"
+                    },
+                    "editMode": false
                 }
-              }
+            }
         },
         "resources": {
             "css": [

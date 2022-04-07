@@ -11,7 +11,7 @@
 							<ToolbarSpacer/>
 							<Button id="EditButton" icon="sap-icon://edit" visible="{= ${state>/editMode} === false }" press="OnEdit"/>
 							<Button id="DisplayButton" icon="sap-icon://display" visible="{state>/editMode}" press="OnDisplay"/>
-							<Button icon="sap-icon://create" press="OpenDialog"/>
+							<Button icon="sap-icon://create" press="onCreatePartnerButtonPress"/>
 						</OverflowToolbar>
 					</subHeader>
 

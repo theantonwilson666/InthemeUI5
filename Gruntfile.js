@@ -178,9 +178,9 @@ module.exports = function (grunt) {
         options: {
           appresources: "src",
           resources:
-            "C:/work/InthemeUI5/sapui5-dist-static/resources",
+            "C:/work/ui5_resources/sap-ui5-1.71.44/resources",
           testresources:
-            "C:/work/InthemeUI5/sapui5-dist-static/test-resources",
+            "C:/work/ui5_resources/sap-ui5-1.71.44/test-resources",
 
           proxypath: "proxy",
         },

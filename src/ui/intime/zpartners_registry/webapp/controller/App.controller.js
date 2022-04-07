@@ -12,11 +12,11 @@ sap.ui.define([
                 this.changeEditMode();
             },
 
-            isChangeMode: function(){
+            isChangeMode: function () {
                 return this.getStateProperty("/editMode") ? true : false;
             },
 
-            changeEditMode: function(){
+            changeEditMode: function () {
                 this.setStateProperty("/editMode", !this.getStateProperty("/editMode"));
             },
 
@@ -24,19 +24,47 @@ sap.ui.define([
                 this.changeEditMode();
             },
 
-            OpenDialog: function(oEvent) {
+            OpenDialog: function (oEvent) {
 
                 this.loadDialog
-                .call(this, {
-                    sDialogName: "Dialog",
-                    sViewName: "intime.zpartners_registry.view.fragment.Dialog"
-                })
-                .then(
-                    function(oDialog) {
-                        oDialog.open();
-                    }.bind(this)
-                );
+                    .call(this, {
+                        sDialogName: "Dialog",
+                        sViewName: "intime.zpartners_registry.view.fragment.EditParnterDialog"
+                    })
+                    .then(
+                        function (oDialog) {
+                            oDialog.open();
+                        }.bind(this)
+                    );
             },
+
+
+            onOkPartnerDialog: function () {
+
+            },
+
+            onCancelPartnerDialog: function (oEvent) {
+                oEvent.getSource().getParent().close();
+            },
+
+            onCreatePartnerButtonPress: function () {
+                this.loadDialog
+                    .call(this, {
+                        sDialogName: "Dialog",
+                        sViewName: "intime.zpartners_registry.view.fragment.EditParnterDialog"
+                    })
+                    .then(
+                        function (oDialog) {
+                            
+                            debugger;
+
+                            var oPartnerContext = this.getModel().createEntry("/ZSNN_PARTNER_ROOT");
+                            oDialog.setBindingContext(oPartnerContext);
+                            oDialog.open();
+                        }.bind(this)
+                    );
+
+            }
 
 
         });
