@@ -5,7 +5,7 @@
     xmlns:f="sap.ui.layout.form"
     xmlns:u="sap.ui.unified"
     xmlns:m="sap.m">
-    <Dialog id="Dialog" title="Партнер {PartnerName}">
+    <Dialog id="partnerDialog" title="Партнер {PartnerName}">
         <content>
 
             <VBox class="sapUiSmallMargin">

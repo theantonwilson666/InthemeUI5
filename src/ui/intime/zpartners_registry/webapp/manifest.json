@@ -106,16 +106,15 @@
                     "icons": {
                         "goHome": "sap-icon://home"
                     },
-                    "editMode": false
+                    "editMode": false,
+                    "editablePartner": null
                 }
             }
         },
         "resources": {
-            "css": [
-                {
-                    "uri": "css/style.css"
-                }
-            ]
+            "css": [{
+                "uri": "css/style.css"
+            }]
         },
         "routing": {
             "config": {
@@ -127,15 +126,13 @@
                 "controlId": "app",
                 "clearControlAggregation": false
             },
-            "routes": [
-                {
-                    "name": "RouteApp",
-                    "pattern": "RouteApp",
-                    "target": [
-                        "TargetApp"
-                    ]
-                }
-            ],
+            "routes": [{
+                "name": "RouteApp",
+                "pattern": "RouteApp",
+                "target": [
+                    "TargetApp"
+                ]
+            }],
             "targets": {
                 "TargetApp": {
                     "viewType": "XML",
