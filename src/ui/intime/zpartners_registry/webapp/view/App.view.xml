@@ -1,0 +1,32 @@
+<View controllerName="intime.zpartners_registry.controller.App"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:form="sap.ui.layout.form">
+	<Shell id="shell" appWidthLimited="false">
+		<App id="app">
+			<pages>
+				<Page showHeader="false" id="page" content="{/ZSNN_PARTNER_ROOT}">
+					<subHeader>
+						<OverflowToolbar>
+							<ToolbarSpacer/>
+							<Button id="EditButton" icon="sap-icon://edit" visible="{= ${state>/editMode} === false }" press="OnEdit"/>
+							<Button id="DisplayButton" icon="sap-icon://display" visible="{state>/editMode}" press="OnDisplay"/>
+							<Button icon="sap-icon://create" press="onCreatePartnerButtonPress"/>
+						</OverflowToolbar>
+					</subHeader>
+
+					<content>
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{PartnerName}" wrappingType="Normal" press="OpenDialog" frameType="Auto">
+							<TileContent>
+								<VBox>
+									<ImageContent src="/sap/opu/odata/sap/ZINT_UI_PARTNERS_SRV/ZSNN_PARTNER_ROOT('{PartnerId}')/$value"/>
+									<FeedContent contentText="Nikolay Perov" />
+								</VBox>
+							</TileContent>
+						</GenericTile>
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</View>
