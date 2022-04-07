@@ -50,9 +50,9 @@ sap.ui.define([
             },
 
             OpenDialog: function(oEvent) {
+                this.setStateProperty('/editablePartner', oEvent.getSource().getBindingContext());
 
                 var isChangeMode = this.isChangeMode();
-
                 if (isChangeMode === true) {
 
                     this.loadDialog
@@ -62,6 +62,7 @@ sap.ui.define([
                         })
                         .then(
                             function(oDialog) {
+                                oDialog.setBindingContext(this.getStateProperty("/editablePartner"));
                                 oDialog.open();
                             }.bind(this)
                         );
@@ -89,34 +90,39 @@ sap.ui.define([
                             ""
                         );
 
+                        debugger;
+
                         this.getModel().setProperty(this.getStateProperty('/editablePartner').getPath() + "/LogoTechValue", vContent);
                         this.getModel().setProperty(this.getStateProperty('/editablePartner').getPath() + "/FilePath", oFile.name);
 
-                        this.submitChanges({
-                            success: function(oData) {
-                                this.byId("partnerDialog").setBusy(false);
-
-                                if (!this.isExistError()) {
-                                    this.clearFileUploader();
-                                }
-                            }.bind(this),
-
-                            error: function(oError) {
-                                this.byId("partnerDialog").setBusy(false);
-                                this.showError(oError);
-                                this.clearFileUploader();
-                            }.bind(this)
-                        })
+                        this.savePartnerChanges(vContent);
 
                     }.bind(this);
 
                     oReader.readAsDataURL(oFile);
+                } else {
+                    this.savePartnerChanges();
                 }
 
+            },
 
 
+            savePartnerChanges: function(sUpdateLogoBase64) {
+                this.submitChanges({
+                    success: function(oData) {
+                        this.byId("partnerDialog").setBusy(false);
 
+                        if (!this.isExistError()) {
+                            this.clearFileUploader();
+                        }
+                    }.bind(this),
 
+                    error: function(oError) {
+                        this.byId("partnerDialog").setBusy(false);
+                        this.showError(oError);
+                        this.clearFileUploader();
+                    }.bind(this)
+                })
             },
 
             onDeletePartnerDrop: function(oEvent) {
@@ -152,7 +158,7 @@ sap.ui.define([
             onCreatePartnerButtonPress: function() {
                 this.loadDialog
                     .call(this, {
-                        sDialogName: "Dialog",
+                        sDialogName: "EditParnterDialog",
                         sViewName: "intime.zpartners_registry.view.fragment.EditParnterDialog"
                     })
                     .then(
