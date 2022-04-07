@@ -8,7 +8,8 @@ sap.ui.define([
         "use strict";
 
         return BaseController.extend("intime.zpartners_registry.controller.App", {
-            onInit: function() {},
+            onInit: function() {
+            },
 
             OnEdit: function() {
                 this.changeEditMode();
@@ -20,9 +21,9 @@ sap.ui.define([
                 var isChangeMode = this.isChangeMode();
 
                 if (isChangeMode === true) {
-                    document.getElementById("application-zpartners_registry-display-component---App--page-cont").style.backgroundColor = "#DEDDD8";
+                    document.getElementById("__xmlview0--page").style.backgroundColor = "#DEDDD8";
                 } else {
-                    document.getElementById("application-zpartners_registry-display-component---App--page-cont").style.backgroundColor = "#fafafa";
+                    document.getElementById("__xmlview0--page").style.backgroundColor = "#fafafa";
                 }
             },
 
@@ -67,8 +68,9 @@ sap.ui.define([
                             }.bind(this)
                         );
                 } else {
+                    debugger
                     var oRouter = this.getOwnerComponent().getRouter();
-                    oRouter.navTo("detail");
+                    oRouter.navTo("project"); 
                 }
             },
 

@@ -1,0 +1,69 @@
+<mvc:View controllerName="intime.zpartners_registry.controller.App"
+      xmlns="sap.m"
+      xmlns:mvc="sap.ui.core.mvc"
+      xmlns:dnd="sap.ui.core.dnd"
+      xmlns:control="intime.zpartners_registry.controls"
+      xmlns:form="sap.ui.layout.form"
+      displayBlock="true">
+  <!-- <Shell id="shell"
+         appWidthLimited="false">
+    <App id="MainPage">
+      <pages> -->
+        <Page showHeader="false"
+              id="page"
+              floatingFooter="true"
+              showFooter="{state&gt;/editMode}"
+              content="{/ZSNN_PARTNER_ROOT}">
+          <subHeader>
+            <OverflowToolbar>
+              <ToolbarSpacer />
+              <Button id="EditButton"
+                      icon="sap-icon://edit"
+                      visible="{= ${state&gt;/editMode} === false }"
+                      press="OnEdit" />
+              <Button id="DisplayButton"
+                      icon="sap-icon://display"
+                      visible="{state&gt;/editMode}"
+                      press="OnDisplay" />
+              <Button icon="sap-icon://create"
+                      press="onCreatePartnerButtonPress" />
+            </OverflowToolbar>
+          </subHeader>
+          <content>
+            <control:Tile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout"
+                          header="{PartnerName}"
+                          wrappingType="Normal"
+                          press="OpenDialog"
+                          frameType="Auto">
+              <control:dragDropConfig>
+                <dnd:DragInfo />
+              </control:dragDropConfig>
+              <TileContent>
+                <VBox>
+                  <ImageContent src="/sap/opu/odata/sap/ZINT_UI_PARTNERS_SRV/ZSNN_PARTNER_ROOT(&apos;{PartnerId}&apos;)/$value" />
+                  <FeedContent contentText="Nikolay Perov" />
+                </VBox>
+              </TileContent>
+            </control:Tile>
+          </content>
+          <footer>
+            <OverflowToolbar>
+              <ToolbarSpacer />
+              <VBox>
+                <control:DeleteButton id="deleteButtonId"
+                                      text="Delete"
+                                      type="Reject"
+                                      icon="sap-icon://delete"
+                                      width="30%">
+                  <control:dragDropConfig>
+                    <dnd:DropInfo drop="onDeletePartnerDrop" />
+                  </control:dragDropConfig>
+                </control:DeleteButton>
+              </VBox>
+            </OverflowToolbar>
+          </footer>
+        </Page>
+      <!-- </pages>
+    </App>
+  </Shell> -->
+</mvc:View>

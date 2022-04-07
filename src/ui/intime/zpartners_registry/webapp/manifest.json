@@ -70,7 +70,7 @@
             "viewName": "intime.zpartners_registry.view.App",
             "type": "XML",
             "async": true,
-            "id": "App"
+            "id": "app"
         },
         "dependencies": {
             "minUI5Version": "1.93.0",
@@ -91,42 +91,6 @@
                     "bundleName": "intime.zpartners_registry.i18n.i18n"
                 }
             },
-            "routing": {
-                "config": {
-                  "routerClass": "sap.m.routing.Router",
-                  "type": "View",
-                  "viewType": "XML",
-                  "path": "intime.zpartners_registry.view",
-                  "controlId": "app",
-                  "controlAggregation": "pages"
-                },
-                "routes": [
-                  {
-                    "pattern": "ProjectRoute",
-                    "name": "",
-                    "target": "[ProjectTarget]"
-                  },
-                  {
-                    "pattern": "detail",
-                    "name": "detail",
-                    "target": "detail"
-                  }
-                ],
-                "targets": {
-                    "ProjectTarget": {
-                        "viewType": "XML",
-                        "transition": "fade",
-                        "viewName": "Projectlist",
-                        "ViewID": "Projectlist",
-                        "controlAggregation": "beginColumnPages",
-                        "viewLevel": 1
-                      },
-                  "detail": {
-                    "id": "detail",
-                    "name": "Detail"
-                  }
-                }
-              },
             "": {
                 "dataSource": "mainService",
                 "settings": {
@@ -154,30 +118,38 @@
         },
         "routing": {
             "config": {
-                "routerClass": "sap.m.routing.Router",
-                "viewType": "XML",
-                "async": true,
-                "viewPath": "intime.zpartners_registry.view",
-                "controlAggregation": "pages",
-                "controlId": "app",
-                "clearControlAggregation": false
+              "routerClass": "sap.m.routing.Router",
+              "type": "View",
+              "viewType": "XML",
+              "async": true,
+              "viewPath": "intime.zpartners_registry.view",
+              "controlId": "app",
+              "controlAggregation": "pages"
             },
-            "routes": [{
-                "name": "RouteApp",
-                "pattern": "RouteApp",
-                "target": [
-                    "TargetApp"
-                ]
-            }],
+            "routes": [
+              {
+                "pattern": "",
+                "name": "mainpage",
+                "target": "mainpage"
+              },
+      
+              {
+                "pattern": "project",
+                "name": "project",
+                "target": "project"
+              }
+            ],
             "targets": {
-                "TargetApp": {
-                    "viewType": "XML",
-                    "transition": "slide",
-                    "clearControlAggregation": false,
-                    "viewId": "App",
-                    "viewName": "App"
-                }
+              "mainpage": {
+                "viewid": "mainpage",
+                "viewName": "MainPage"
+              },
+      
+              "project": {
+                "viewid": "project",
+                "viewName": "Project"
+              }
             }
-        }
+        } 
     }
 }
