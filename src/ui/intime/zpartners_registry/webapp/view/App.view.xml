@@ -3,7 +3,7 @@
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:form="sap.ui.layout.form">
 	<Shell id="shell" appWidthLimited="false">
-		<App id="app">
+		<App class="myAppDemoWT" id="app">
 			<pages>
 				<Page showHeader="false" id="page" content="{/ZSNN_PARTNER_ROOT}">
 					<subHeader>
@@ -16,7 +16,7 @@
 					</subHeader>
 
 					<content>
-						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{PartnerName}" wrappingType="Normal" press="OpenDialog" frameType="Auto">
+						<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{PartnerName}" wrappingType="Normal" type="Navigation" press="OpenDialog" frameType="Auto">
 							<TileContent>
 								<VBox>
 									<ImageContent src="/sap/opu/odata/sap/ZINT_UI_PARTNERS_SRV/ZSNN_PARTNER_ROOT('{PartnerId}')/$value"/>

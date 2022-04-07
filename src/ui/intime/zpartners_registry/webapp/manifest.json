@@ -91,6 +91,42 @@
                     "bundleName": "intime.zpartners_registry.i18n.i18n"
                 }
             },
+            "routing": {
+                "config": {
+                  "routerClass": "sap.m.routing.Router",
+                  "type": "View",
+                  "viewType": "XML",
+                  "path": "intime.zpartners_registry.view",
+                  "controlId": "app",
+                  "controlAggregation": "pages"
+                },
+                "routes": [
+                  {
+                    "pattern": "ProjectRoute",
+                    "name": "",
+                    "target": "[ProjectTarget]"
+                  },
+                  {
+                    "pattern": "detail",
+                    "name": "detail",
+                    "target": "detail"
+                  }
+                ],
+                "targets": {
+                    "ProjectTarget": {
+                        "viewType": "XML",
+                        "transition": "fade",
+                        "viewName": "Projectlist",
+                        "ViewID": "Projectlist",
+                        "controlAggregation": "beginColumnPages",
+                        "viewLevel": 1
+                      },
+                  "detail": {
+                    "id": "detail",
+                    "name": "Detail"
+                  }
+                }
+              },
             "": {
                 "dataSource": "mainService",
                 "settings": {
