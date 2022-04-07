@@ -65,6 +65,9 @@ sap.ui.define([
                                 oDialog.open();
                             }.bind(this)
                         );
+                } else {
+                    var oRouter = this.getOwnerComponent().getRouter();
+                    oRouter.navTo("detail");
                 }
             },
 
