@@ -68,7 +68,6 @@ sap.ui.define([
                             }.bind(this)
                         );
                 } else {
-                    debugger
                     var oRouter = this.getOwnerComponent().getRouter();
                     oRouter.navTo("project"); 
                 }

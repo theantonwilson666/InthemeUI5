@@ -13,7 +13,7 @@
                 <Input id="partnerNameInput" value="{PartnerName}" type="Text" width="15em"/>
 
                 <Label text="Логотип" labelFor="logoUploader" design="Bold" />
-                <u:FileUploader id="logoUploader" width="15em" name="myFileUpload" uploadUrl="upload/"/>
+                <u:FileUploader id="logoUploader" width="15em" name="myFileUpload" uploadUrl="upload/" fileType="jpg,png,jpeg"/>
 
             </VBox>
 
