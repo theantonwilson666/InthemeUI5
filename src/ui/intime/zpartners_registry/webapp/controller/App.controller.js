@@ -18,12 +18,13 @@ sap.ui.define([
 
             changeColor: function() {
 
-                var isChangeMode = this.isChangeMode();
+                var isChangeMode = this.isChangeMode(),
+                oPage = this.byId("page");
 
                 if (isChangeMode === true) {
-                    document.getElementById("__xmlview0--page").style.backgroundColor = "#DEDDD8";
+                    oPage.addStyleClass("backColor");
                 } else {
-                    document.getElementById("__xmlview0--page").style.backgroundColor = "#fafafa";
+                    oPage.removeStyleClass("backColor");
                 }
             },
 

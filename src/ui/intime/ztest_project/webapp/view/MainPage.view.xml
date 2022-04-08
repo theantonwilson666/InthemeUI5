@@ -1,8 +1,8 @@
-<mvc:View controllerName="intime.zpartners_registry.controller.App"
+<mvc:View controllerName="intime.ztest_project.controller.App"
       xmlns="sap.m"
       xmlns:mvc="sap.ui.core.mvc"
       xmlns:dnd="sap.ui.core.dnd"
-      xmlns:control="intime.zpartners_registry.controls"
+      xmlns:control="intime.ztest_project.controls"
       xmlns:form="sap.ui.layout.form"
       displayBlock="true">
   <!-- <Shell id="shell"
@@ -48,8 +48,7 @@
           </content>
           <footer>
             <OverflowToolbar>
-              <ToolbarSpacer />
-              <!-- <VBox> -->
+              <ToolbarSpacer/>
                 <control:DeleteButton id="deleteButtonId"
                                       text=""
                                       type="Reject"
@@ -59,7 +58,9 @@
                     <dnd:DropInfo drop="onDeletePartnerDrop" />
                   </control:dragDropConfig>
                 </control:DeleteButton>
-              <!-- </VBox> -->
+              <ToolbarSpacer />
+              <!-- <VBox>
+              </VBox> -->
             </OverflowToolbar>
           </footer>
         </Page>

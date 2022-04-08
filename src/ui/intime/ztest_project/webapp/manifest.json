@@ -70,7 +70,7 @@
             "viewName": "intime.ztest_project.view.App",
             "type": "XML",
             "async": true,
-            "id": "App"
+            "id": "app"
         },
         "dependencies": {
             "minUI5Version": "1.93.0",
@@ -93,53 +93,61 @@
             },
             "": {
                 "dataSource": "mainService",
-                "preload": true
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+                    "useBatch": true,
+                    "defaultCountMode": "Inline"
+                }
             },
             "state": {
                 "type": "sap.ui.model.json.JSONModel",
                 "settings": {
-                  "isDraft": false,
-                  "icons": {
-                    "goHome": "sap-icon://home"
-                  },
-
-                  "editMode" : false
+                    "isDraft": false,
+                    "icons": {
+                        "goHome": "sap-icon://home"
+                    },
+                    "editMode": false,
+                    "editablePartner": null
                 }
-              }
+            }
         },
         "resources": {
-            "css": [
-                {
-                    "uri": "css/style.css"
-                }
-            ]
+            "css": [{
+                "uri": "css/style.css"
+            }]
         },
         "routing": {
             "config": {
+                "fullWidth": true,
                 "routerClass": "sap.m.routing.Router",
+                "type": "View",
                 "viewType": "XML",
                 "async": true,
                 "viewPath": "intime.ztest_project.view",
-                "controlAggregation": "pages",
                 "controlId": "app",
-                "clearControlAggregation": false
+                "controlAggregation": "pages"
             },
-            "routes": [
+            "routes": [{
+                    "pattern": "",
+                    "name": "mainpage",
+                    "target": "mainpage"
+                },
+
                 {
-                    "name": "RouteApp",
-                    "pattern": "RouteApp",
-                    "target": [
-                        "TargetApp"
-                    ]
+                    "pattern": "project",
+                    "name": "project",
+                    "target": "project"
                 }
             ],
             "targets": {
-                "TargetApp": {
-                    "viewType": "XML",
-                    "transition": "slide",
-                    "clearControlAggregation": false,
-                    "viewId": "App",
-                    "viewName": "App"
+                "mainpage": {
+                    "viewid": "mainpage",
+                    "viewName": "MainPage"
+                },
+
+                "project": {
+                    "viewid": "project",
+                    "viewName": "Project"
                 }
             }
         }

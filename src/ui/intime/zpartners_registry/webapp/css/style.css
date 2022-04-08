@@ -1,8 +1,8 @@
-#__xmlview0--deleteButtonId-inner {
- width: 100%;
- padding-left: 1200px;
+.deleteButtonId {
+    width: 100% !important; 
+    padding-left: 1200px !important;
 }
 
-.sapUiIcon::before {
-    padding-left: 5px;
+.backColor {
+    background-color: #DEDDD8 !important;
 }
