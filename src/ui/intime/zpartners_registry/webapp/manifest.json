@@ -118,38 +118,38 @@
         },
         "routing": {
             "config": {
-              "routerClass": "sap.m.routing.Router",
-              "type": "View",
-              "viewType": "XML",
-              "async": true,
-              "viewPath": "intime.zpartners_registry.view",
-              "controlId": "app",
-              "controlAggregation": "pages"
+                "fullWidth": true,
+                "routerClass": "sap.m.routing.Router",
+                "type": "View",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "intime.zpartners_registry.view",
+                "controlId": "app",
+                "controlAggregation": "pages"
             },
-            "routes": [
-              {
-                "pattern": "",
-                "name": "mainpage",
-                "target": "mainpage"
-              },
-      
-              {
-                "pattern": "project",
-                "name": "project",
-                "target": "project"
-              }
+            "routes": [{
+                    "pattern": "",
+                    "name": "mainpage",
+                    "target": "mainpage"
+                },
+
+                {
+                    "pattern": "project",
+                    "name": "project",
+                    "target": "project"
+                }
             ],
             "targets": {
-              "mainpage": {
-                "viewid": "mainpage",
-                "viewName": "MainPage"
-              },
-      
-              "project": {
-                "viewid": "project",
-                "viewName": "Project"
-              }
+                "mainpage": {
+                    "viewid": "mainpage",
+                    "viewName": "MainPage"
+                },
+
+                "project": {
+                    "viewid": "project",
+                    "viewName": "Project"
+                }
             }
-        } 
+        }
     }
 }
