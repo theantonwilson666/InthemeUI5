@@ -1,4 +1,8 @@
-/* .tileLayout {
-	float: left;
-} */
+#__xmlview0--deleteButtonId-inner {
+ width: 100%;
+ padding-left: 1200px;
+}
 
+.sapUiIcon::before {
+    padding-left: 5px;
+}
