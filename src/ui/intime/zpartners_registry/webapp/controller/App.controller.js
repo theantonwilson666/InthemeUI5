@@ -8,8 +8,7 @@ sap.ui.define([
         "use strict";
 
         return BaseController.extend("intime.zpartners_registry.controller.App", {
-            onInit: function() {
-            },
+            onInit: function() {},
 
             OnEdit: function() {
                 this.changeEditMode();
@@ -19,7 +18,7 @@ sap.ui.define([
             changeColor: function() {
 
                 var isChangeMode = this.isChangeMode(),
-                oPage = this.byId("page");
+                    oPage = this.byId("page");
 
                 if (isChangeMode === true) {
                     oPage.addStyleClass("backColor");
@@ -69,10 +68,18 @@ sap.ui.define([
                             }.bind(this)
                         );
                 } else {
-                    var oRouter = this.getOwnerComponent().getRouter();
-                    oRouter.navTo("project"); 
+                    // var oRouter = this.getOwnerComponent().getRouter();
+                    // oRouter.navTo("project");
+
+                    var oParams = {
+                        PartnerId: oEvent.getSource().getBindingContext().getObject().PartnerId
+                    };
+
+                    this.navTo("project", { query: oParams }, false);
+
                 }
             },
+
 
 
             clearFileUploader: function() {

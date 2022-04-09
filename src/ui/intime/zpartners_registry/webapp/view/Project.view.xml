@@ -1,8 +1,124 @@
-<mvc:View
-		controllerName="intime.zpartners_registry.controller.App"
-		xmlns="sap.m"
-		xmlns:mvc="sap.ui.core.mvc">
-	<Page title="test">
-	   <Text text="hello" />
-	</Page>
+<mvc:View controllerName="intime.zpartners_registry.controller.Detail"
+          xmlns="sap.m"
+          xmlns:f="sap.f"
+          xmlns:sv="sap.ui.comp.smartvariants"
+          xmlns:layout="sap.ui.layout"
+          xmlns:smartTable="sap.ui.comp.smarttable"
+          xmlns:table="sap.ui.table"
+          xmlns:core="sap.ui.core"
+          xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+          xmlns:mvc="sap.ui.core.mvc">
+  <f:DynamicPage id="projectPage"
+                 showFooter="{state&gt;/editProjectMode}">
+    <f:title>
+      <f:DynamicPageTitle>
+        <f:heading>
+          <VBox>
+            <Title text="{PartnerName}" />
+            <Image src="/sap/opu/odata/sap/ZINT_UI_PARTNERS_SRV/ZSNN_PARTNER_ROOT(&apos;{PartnerId}&apos;)/$value"
+                   width="4em"
+                   height="4em" />
+          </VBox>
+        </f:heading>
+        <f:content>
+          <OverflowToolbar>
+            <sv:SmartVariantManagement id="partnerVariant"
+                                       persistencyKey="partner.PKey"
+                                       showShare="true"
+                                       showExecuteOnSelection="true" />
+          </OverflowToolbar>
+        </f:content>
+      </f:DynamicPageTitle>
+    </f:title>
+    <f:header>
+      <f:DynamicPageHeader pinnable="true">
+        <smartFilterBar:SmartFilterBar id="projectFilterBar"
+                                       entityType="ZSNN_INT_PROJECTType"
+                                       useToolbar="false"
+                                       smartVariant="partnerVariant"
+                                       considerSelectionVariants="true"
+                                       enableBasicSearch="false"
+                                       showFilterConfiguration="false"
+                                       persistencyKey="partner.PKey.FilterBar"
+                                       liveMode="false" />
+      </f:DynamicPageHeader>
+    </f:header>
+    <f:content>
+      <VBox>
+        <smartTable:SmartTable id="projectSmartTable"
+                               entitySet="ZSNN_INT_PROJECT"
+                               tableType="TreeTable"
+                               useExportToExcel="false"
+                               useVariantManagement="false"
+                               useTablePersonalisation="true"
+                               header="Проекты"
+                               showRowCount="false"
+                               enableAutoBinding="true"
+                               tableBindingPath="to_Project"
+                               enableAutoColumnWidth="true">
+          <smartTable:customToolbar>
+            <OverflowToolbar design="Transparent">
+              <ToolbarSpacer />
+              <Button icon="sap-icon://add"
+                      tooltip="Sort"
+					  visible="{state>/projectSelection}"
+                      text="Добавить этап"
+                      press="onAddNewProjectStageButtonPress" />
+              <Button icon="sap-icon://add"
+                      tooltip="Sort"
+                      text="Новый проект"
+                      press="onAddNewProjectButtonPress" />
+            </OverflowToolbar>
+          </smartTable:customToolbar>
+          <smartTable:layoutData>
+            <FlexItemData growFactor="1" />
+          </smartTable:layoutData>
+          <table:TreeTable id="TreeTableBasic"
+                           selectionBehavior="Row"
+                           selectionMode="Single"
+                           rowSelectionChange="onSelectRow"
+                           expandFirstLevel="true" />
+        </smartTable:SmartTable>
+        <IconTabBar id="iconTabBar"
+                    applyContentPadding="false"
+                    expanded="true"
+                    expandable="false"
+                    stretchContentHeight="true"
+                    tabDensityMode="Compact">
+          <items>
+            <IconTabFilter id="projectTab"
+                           text="Проект"
+                           visible="{state&gt;/projectSelection}"
+                           key="project">
+              <core:Fragment fragmentName="intime.zpartners_registry.view.fragment.ProjectSection"
+                             type="XML" />
+            </IconTabFilter>
+            <IconTabFilter id="stageTab"
+                           text="Этап проекта"
+                           visible="{state&gt;/stageSelection}"
+                           key="stage">
+              <core:Fragment fragmentName="intime.zpartners_registry.view.fragment.StageSection"
+                             type="XML" />
+            </IconTabFilter>
+          </items>
+        </IconTabBar>
+      </VBox>
+    </f:content>
+    <f:footer>
+      <OverflowToolbar>
+        <!-- <Button icon="sap-icon://message-popup"
+                text="{/messagesLength}"
+                type="Emphasized"
+                press="onMessageButtonPress"
+                visible="{= !!${/messagesLength}}" /> -->
+        <ToolbarSpacer />
+        <Button type="Accept"
+                text="Сохранить"
+                press="onSaveButtonPress" />
+        <Button type="Reject"
+                text="Отменить"
+                press="onRejectButtonPress" />
+      </OverflowToolbar>
+    </f:footer>
+  </f:DynamicPage>
 </mvc:View>

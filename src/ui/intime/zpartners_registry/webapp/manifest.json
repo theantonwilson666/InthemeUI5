@@ -107,7 +107,11 @@
                         "goHome": "sap-icon://home"
                     },
                     "editMode": false,
-                    "editablePartner": null
+                    "editablePartner": null,
+                    "projectSelection": false,
+                    "stageSelection": false,
+                    "currentSelection": null,
+                    "editProjectMode": false
                 }
             }
         },
@@ -134,7 +138,7 @@
                 },
 
                 {
-                    "pattern": "project",
+                    "pattern": "project/:?query:",
                     "name": "project",
                     "target": "project"
                 }
