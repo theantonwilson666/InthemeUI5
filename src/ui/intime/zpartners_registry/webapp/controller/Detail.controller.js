@@ -81,6 +81,7 @@ sap.ui.define([
                     }
                 });
                 this.setProjectSelection();
+                this.byId("projectTab").unbindObject();
                 this.byId("projectTab").setBindingContext(oNewEntryContext);
                 this.setStateProperty("/editProjectMode", true);
                 this.byId("projectForm").focus();
