@@ -59,12 +59,16 @@
           <smartTable:customToolbar>
             <OverflowToolbar design="Transparent">
               <ToolbarSpacer />
-              <Button icon="sap-icon://add"
+              <Button 
+                      id="NewStage"
+                      icon="sap-icon://add"
                       tooltip="Sort"
 					  visible="{state>/projectSelection}"
                       text="Добавить этап"
                       press="onAddNewProjectStageButtonPress" />
-              <Button icon="sap-icon://add"
+              <Button 
+                      id="NewProject"
+                      icon="sap-icon://add"
                       tooltip="Sort"
                       text="Новый проект"
                       press="onAddNewProjectButtonPress" />

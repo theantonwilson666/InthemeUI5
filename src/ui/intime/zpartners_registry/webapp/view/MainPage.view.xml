@@ -54,7 +54,7 @@
                                       text=""
                                       type="Reject"
                                       icon="sap-icon://delete"
-                                      width="98%">
+                                      width="99%">
                   <control:dragDropConfig>
                     <dnd:DropInfo drop="onDeletePartnerDrop" />
                   </control:dragDropConfig>

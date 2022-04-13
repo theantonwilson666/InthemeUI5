@@ -19,12 +19,14 @@
       <smartForm:Group label="Основные данные">
         <smartForm:GroupElement>
           <smartField:SmartField value="{Name}"
-                                 entitySet="ZSNN_INT_PROJECT" />
+                                 entitySet="ZSNN_INT_PROJECT"
+                                 id="name" />
         </smartForm:GroupElement>
         <smartForm:GroupElement>
           <smartField:SmartField value="{ProjectStatus}"
                                  entitySet="ZSNN_INT_PROJECT"
-                                 textInEditModeSource="ValueList">
+                                 textInEditModeSource="ValueList"
+                                 id="status">
             <smartField:configuration>
               <smartField:Configuration preventInitialDataFetchInValueHelpDialog="false"
                                         displayBehaviour="descriptionAndId" />
@@ -34,7 +36,8 @@
         <smartForm:GroupElement>
           <smartField:SmartField value="{ProjectType}"
                                  entitySet="ZSNN_INT_PROJECT"
-                                 textInEditModeSource="ValueList">
+                                 textInEditModeSource="ValueList"
+                                 id="type">
             <smartField:configuration>
               <smartField:Configuration preventInitialDataFetchInValueHelpDialog="false"
                                         displayBehaviour="descriptionAndId" />
@@ -45,11 +48,13 @@
       <smartForm:Group label="Сроки">
         <smartForm:GroupElement>
           <smartField:SmartField value="{StartDate}"
-                                 entitySet="ZSNN_INT_PROJECT" />
+                                 entitySet="ZSNN_INT_PROJECT"
+                                 id="start" />
         </smartForm:GroupElement>
         <smartForm:GroupElement>
           <smartField:SmartField value="{EndDate}"
-                                 entitySet="ZSNN_INT_PROJECT" />
+                                 entitySet="ZSNN_INT_PROJECT"
+                                 id="end" />
         </smartForm:GroupElement>
       </smartForm:Group>
     </smartForm:SmartForm>
