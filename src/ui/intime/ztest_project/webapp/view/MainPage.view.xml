@@ -1,70 +1,155 @@
 <mvc:View controllerName="intime.ztest_project.controller.App"
-      xmlns="sap.m"
-      xmlns:mvc="sap.ui.core.mvc"
-      xmlns:dnd="sap.ui.core.dnd"
-      xmlns:control="intime.ztest_project.controls"
-      xmlns:form="sap.ui.layout.form"
-      displayBlock="true">
-  <!-- <Shell id="shell"
-         appWidthLimited="false">
-    <App id="MainPage">
-      <pages> -->
-        <Page showHeader="false"
-              id="page"
-              floatingFooter="true"
-              showFooter="{state&gt;/editMode}"
-              content="{/ZSNN_PARTNER_ROOT}">
-          <subHeader>
-            <OverflowToolbar>
-              <ToolbarSpacer />
-              <Button id="EditButton"
-                      icon="sap-icon://edit"
-                      visible="{= ${state&gt;/editMode} === false }"
-                      press="OnEdit" />
-              <Button id="DisplayButton"
-                      icon="sap-icon://display"
-                      visible="{state&gt;/editMode}"
-                      press="OnDisplay" />
-              <Button icon="sap-icon://create"
-                      press="onCreatePartnerButtonPress" />
-            </OverflowToolbar>
-          </subHeader>
-          <content>
-            <control:Tile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout"
-                          header="{PartnerName}"
-                          wrappingType="Normal"
-                          press="OpenDialog"
-                          frameType="Auto">
-              <control:dragDropConfig>
-                <dnd:DragInfo />
-              </control:dragDropConfig>
-              <TileContent>
-                <VBox>
-                  <ImageContent src="/sap/opu/odata/sap/ZINT_UI_PARTNERS_SRV/ZSNN_PARTNER_ROOT(&apos;{PartnerId}&apos;)/$value" />
-                  <FeedContent contentText="Nikolay Perov" />
-                </VBox>
-              </TileContent>
-            </control:Tile>
-          </content>
-          <footer>
-            <OverflowToolbar>
-              <ToolbarSpacer/>
-                <control:DeleteButton id="deleteButtonId"
-                                      text=""
-                                      type="Reject"
-                                      icon="sap-icon://delete"
-                                      width="98%">
-                  <control:dragDropConfig>
-                    <dnd:DropInfo drop="onDeletePartnerDrop" />
-                  </control:dragDropConfig>
-                </control:DeleteButton>
-              <ToolbarSpacer />
-              <!-- <VBox>
-              </VBox> -->
-            </OverflowToolbar>
-          </footer>
-        </Page>
-      <!-- </pages>
-    </App>
-  </Shell> -->
+	xmlns="sap.m"
+		xmlns:mvc="sap.ui.core.mvc"
+	    xmlns:grid="sap.ui.layout.cssgrid"
+	    xmlns:f="sap.f"
+	    xmlns:dnd="sap.ui.core.dnd"
+	    xmlns:dnd-grid="sap.f.dnd">
+	<Page id="page">
+		<f:GridList
+			id="gridList">
+      <!-- Открыть -->
+      <f:GridListItem>
+				<VBox height="100%" justifyContent="SpaceBetween">
+					<layoutData>
+						<FlexItemData growFactor="1" shrinkFactor="0" />
+					</layoutData>
+
+					<VBox class="sapUiSmallMargin">
+						<Title text="Открыть" wrapping="true" />
+					</VBox>
+				</VBox>
+			</f:GridListItem>
+      <!-- "К выполнению" -->
+      <f:GridListItem>
+				<VBox height="100%" justifyContent="SpaceBetween">
+					<layoutData>
+						<FlexItemData growFactor="1" shrinkFactor="0" />
+					</layoutData>
+
+					<VBox class="sapUiSmallMargin">
+						<Title text="К выполнению" wrapping="true" />
+					</VBox>
+          <!-- "Подзадача 1" -->
+          <VBox>
+            <f:GridList
+			        id="gridTask1">
+                  <f:GridListItem>
+                    <VBox height="100%" justifyContent="SpaceBetween">
+                      <layoutData>
+                        <FlexItemData growFactor="1" shrinkFactor="0" />
+                      </layoutData>
+
+                      <VBox class="sapUiSmallMargin">
+                        <Title text="ЗАДАЧА №1" wrapping="true" />
+                        	<Text text="A great description with useful information about this project. 
+                          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy." wrapping="true" />
+                      </VBox>
+                    </VBox>
+                  </f:GridListItem>
+              </f:GridList>
+          </VBox>
+
+          <!-- "Подзадача 2" -->
+
+                    <VBox>
+            <f:GridList
+			        id="gridTask2">
+                  <f:GridListItem>
+                    <VBox height="100%" justifyContent="SpaceBetween">
+                      <layoutData>
+                        <FlexItemData growFactor="1" shrinkFactor="0" />
+                      </layoutData>
+
+                      <VBox class="sapUiSmallMargin">
+                        <Title text="ЗАДАЧА №2" wrapping="true" />
+                      </VBox>
+                    </VBox>
+                  </f:GridListItem>
+              </f:GridList>
+          </VBox>
+
+				</VBox>
+			</f:GridListItem>
+
+      <!-- "В работе" -->
+
+            <f:GridListItem>
+				<VBox height="100%" justifyContent="SpaceBetween">
+					<layoutData>
+						<FlexItemData growFactor="1" shrinkFactor="0" />
+					</layoutData>
+
+					<VBox class="sapUiSmallMargin">
+						<Title text="В работе" wrapping="true" />
+					</VBox>
+
+  <!-- "Подзадача 1" -->
+          <VBox>
+            <f:GridList
+			        id="InWorkgridTask1">
+                  <f:GridListItem>
+                    <VBox height="100%" justifyContent="SpaceBetween">
+                      <layoutData>
+                        <FlexItemData growFactor="1" shrinkFactor="0" />
+                      </layoutData>
+
+                      <VBox class="sapUiSmallMargin">
+                        <Title text="ЗАДАЧА №1" wrapping="true" />
+                      </VBox>
+                    </VBox>
+                  </f:GridListItem>
+              </f:GridList>
+          </VBox>
+
+          <!-- "Подзадача 2" -->
+          <VBox>
+            <f:GridList
+			        id="InWorkgridTask2">
+                  <f:GridListItem>
+                    <VBox height="100%" justifyContent="SpaceBetween">
+                      <layoutData>
+                        <FlexItemData growFactor="1" shrinkFactor="0" />
+                      </layoutData>
+
+                      <VBox class="sapUiSmallMargin">
+                        <Title text="ЗАДАЧА №1" wrapping="true" />
+                      </VBox>
+                    </VBox>
+                  </f:GridListItem>
+              </f:GridList>
+          </VBox>
+
+				</VBox>
+			</f:GridListItem>
+
+      <!-- "Готово" -->
+            <f:GridListItem>
+				<VBox height="100%" justifyContent="SpaceBetween">
+					<layoutData>
+						<FlexItemData growFactor="1" shrinkFactor="0" />
+					</layoutData>
+
+					<VBox class="sapUiSmallMargin">
+						<Title text="Готово" wrapping="true" />
+					</VBox>
+
+				</VBox>
+			</f:GridListItem>
+
+      <!-- "Закрыто" -->
+            <f:GridListItem>
+				<VBox height="100%" justifyContent="SpaceBetween">
+					<layoutData>
+						<FlexItemData growFactor="1" shrinkFactor="0" />
+					</layoutData>
+
+					<VBox class="sapUiSmallMargin">
+						<Title text="Закрыто" wrapping="true" />
+
+					</VBox>
+				</VBox>
+			</f:GridListItem>
+		</f:GridList>
+	</Page>
 </mvc:View>

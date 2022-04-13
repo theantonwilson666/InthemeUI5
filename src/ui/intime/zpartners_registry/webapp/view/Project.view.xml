@@ -46,6 +46,7 @@
     <f:content>
       <VBox>
         <smartTable:SmartTable id="projectSmartTable"
+                               smartFilterId="projectFilterBar"
                                entitySet="ZSNN_INT_PROJECT"
                                tableType="TreeTable"
                                useExportToExcel="false"

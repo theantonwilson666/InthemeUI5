@@ -75,14 +75,11 @@ function(AppController, Fragment, MessageBox, Button, TableRow, fioriBaseControl
 
 
         onSaveButtonPress: function(oEvent) {
-            
-            this.buttonId;
 
             if (this.buttonId == "NewProject") {
 
-            debugger;
-
             var oBindingContext = this.byId('projectForm').getBindingContext();
+            
             var s = this.getView().getModel().createEntry(this.getSmartTable().getEntitySet(), {
                 properties: { Name: oBindingContext.getObject().Name,  
                               ProjectStatus: oBindingContext.getObject().ProjectStatus, 
@@ -97,8 +94,6 @@ function(AppController, Fragment, MessageBox, Button, TableRow, fioriBaseControl
         } 
             
             else if (this.buttonId == "NewStage") {
-
-                debugger;
 
                 var oBindingContext = this.byId('stageForm').getBindingContext();
                 var s = this.getView().getModel().createEntry(this.getSmartTable().getEntitySet(), {
