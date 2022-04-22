@@ -524,15 +524,15 @@ sap.ui.define(
                 return new Date(`${iYear}`, `${iMonth}`, `1`, "0", "0")
             },
 
-            testDateChange: function(oEvent){
+            testDateChange: function (oEvent) {
                 debugger;
             },
 
-            addOneMonth : function(oDate){
+            addOneMonth: function (oDate) {
 
                 var sYear = oDate.getFullYear();
                 var sMonth = oDate.getMonth();
-                
+
                 var sDate = oDate.getDate();
 
                 return new Date(sYear, sMonth + 1, sDate);
@@ -552,8 +552,8 @@ sap.ui.define(
                             sap.ui.getCore().byId("application-zworker_schedule-display-component---Detail--resultCalendar-Header-NavToolbar").setVisible(false)
 
                             var oConfigData = {
-                                monthText : this.getFirstDayOfMonthByDate(this.getView().byId("planningScheduleCalendar").getStartDate()).toLocaleDateString("ru-RU", {year: 'numeric', month: 'long' }),
-                                startDate: this.getFirstMondayCurrentMonth(),
+                                monthText: this.getFirstDayOfMonthByDate(this.getView().byId("planningScheduleCalendar").getStartDate()).toLocaleDateString("ru-RU", { year: 'numeric', month: 'long' }),
+                                startDate: this.getView().byId("planningScheduleCalendar").getStartDate(), //this.getFirstMondayCurrentMonth(),
                                 people: [{
                                     WorkerID: oDialog.getBindingContext().getObject().Worker,
                                     WorkerText: oDialog.getBindingContext().getObject().WorkerName,
@@ -582,12 +582,12 @@ sap.ui.define(
 
                             var oResultModel = new JSONModel(oResultData);
                             this.byId("resultCalendar").setModel(oResultModel, "resultData");
-                            
+
                             oResultModel.updateBindings(true);
-                            
+
                             this.getView().byId("resultCalendar").setStartDate(this.addOneMonth(oResultData.StartDate)); // ??????????
-                            
-               
+
+
 
                             oDialog.open();
                         }.bind(this)
@@ -930,8 +930,11 @@ sap.ui.define(
                         inputDataJSON: sScheduleData,
                     },
                     success: function (oData) {
+
+                        debugger;
+
                         oDialog.setBusy(false).close();
-                        this.getSchedulePlanningCalendar(this.getCurrentWorker(), this.getMonthYearFromDate(new Date()).Year, this.getMonthYearFromDate(new Date()).Month);
+                        this.getSchedulePlanningCalendar(this.getCurrentWorker(), this.getMonthYearFromDate(this.byId("configCalendar").getModel("configData").getData().startDate).Year, this.getMonthYearFromDate(this.byId("configCalendar").getModel("configData").getData().startDate).Month);
                         this.showMessageToast("Сохранено");
                     }.bind(this),
                     error: function (oError) {
