@@ -12,7 +12,7 @@
                          xmlns:smartTable="sap.ui.comp.smarttable"
                          xmlns:smartField="sap.ui.comp.smartfield">
   <Dialog id="inputScheduleDialog"
-          title="Тест"
+          title="Заполнение графика за {configData>/monthText}"
           class="sapUiSizeCompact"
           contentHeight="100%"
           contentWidth="100%">
@@ -116,8 +116,8 @@
                                 appointmentSelect="onAppoitmentSelect"
                                 enableAppointmentsDragAndDrop="true"
                                 cellPress="onAppointmentCreate"
+                                startDateChange="testDateChange"
                                 appointmentDrop="onAppointmentDrop"
-                                startDate="{path: 'resultData>StartDate'}"
                                 appointments="{path: 'resultData>/Appointments'}">
          
        

@@ -524,6 +524,21 @@ sap.ui.define(
                 return new Date(`${iYear}`, `${iMonth}`, `1`, "0", "0")
             },
 
+            testDateChange: function(oEvent){
+                debugger;
+            },
+
+            addOneMonth : function(oDate){
+
+                var sYear = oDate.getFullYear();
+                var sMonth = oDate.getMonth();
+                
+                var sDate = oDate.getDate();
+
+                return new Date(sYear, sMonth + 1, sDate);
+
+            },
+
             onPressConfigUI: function (oEvent) {
                 this.loadDialog
                     .call(this, {
@@ -534,8 +549,10 @@ sap.ui.define(
                         function (oDialog) {
 
                             sap.ui.getCore().byId("application-zworker_schedule-display-component---Detail--configCalendar-Header-NavToolbar").setVisible(false)
+                            sap.ui.getCore().byId("application-zworker_schedule-display-component---Detail--resultCalendar-Header-NavToolbar").setVisible(false)
 
                             var oConfigData = {
+                                monthText : this.getFirstDayOfMonthByDate(this.getView().byId("planningScheduleCalendar").getStartDate()).toLocaleDateString("ru-RU", {year: 'numeric', month: 'long' }),
                                 startDate: this.getFirstMondayCurrentMonth(),
                                 people: [{
                                     WorkerID: oDialog.getBindingContext().getObject().Worker,
@@ -550,12 +567,13 @@ sap.ui.define(
 
                             var oConfigModel = new JSONModel(oConfigData);
                             this.getView().byId("configCalendar").setModel(oConfigModel, "configData");
+                            this.getView().byId("inputScheduleDialog").setModel(oConfigModel, "configData");
                             oConfigModel.updateBindings(true);
 
                             this.getView().byId("configCalendar").setStartDate(oConfigData.startDate);
 
                             var oResultData = {
-                                StartDate: this.getFirstDayOfMonth(),
+                                StartDate: this.getFirstDayOfMonthByDate(this.getView().byId("planningScheduleCalendar").getStartDate()), //this.getFirstDayOfMonth(),
                                 Appointments: [
 
                                 ]
@@ -564,6 +582,12 @@ sap.ui.define(
 
                             var oResultModel = new JSONModel(oResultData);
                             this.byId("resultCalendar").setModel(oResultModel, "resultData");
+                            
+                            oResultModel.updateBindings(true);
+                            
+                            this.getView().byId("resultCalendar").setStartDate(this.addOneMonth(oResultData.StartDate)); // ??????????
+                            
+               
 
                             oDialog.open();
                         }.bind(this)

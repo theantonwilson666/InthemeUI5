@@ -53,7 +53,7 @@
             <OverflowToolbar>
                 <ToolbarSpacer />
 
-                <control:DeleteButton id="deleteButtonId" text="Delete" type="Reject" icon="sap-icon://delete" width="30%">
+                <control:DeleteButton id="deleteButtonId" text="Перенесите, чтобы удалить" type="Emphasized" icon="sap-icon://delete" width="30%">
                     <control:dragDropConfig>
                         <dnd:DropInfo drop="onDeleteAppointpmentDrop"/>
                     </control:dragDropConfig>
