@@ -77,6 +77,7 @@
             "libs": {
                 "sap.ui.core": {},
                 "sap.m": {},
+                "sap.f": {},
                 "sap.ui.layout": {}
             }
         },
@@ -118,6 +119,14 @@
         },
         "routing": {
             "config": {
+                "sample": {
+                    "files": [
+                        "MainPage.view.xml",
+                        "App.controller.js",
+                        "model/items.json",
+                        "manifest.json"
+                    ]
+                },
                 "fullWidth": true,
                 "routerClass": "sap.m.routing.Router",
                 "type": "View",
