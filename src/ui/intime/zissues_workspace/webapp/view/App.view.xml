@@ -1,5 +1,5 @@
 <mvc:View
-  controllerName="intime.ztest_project.controller.App"
+  controllerName="intime.zissues_workspace.controller.Main"
   xmlns="sap.m"
   xmlns:mvc="sap.ui.core.mvc"
   displayBlock="true">

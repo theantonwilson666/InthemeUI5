@@ -16,6 +16,8 @@ function(AppController, Fragment, MessageBox, Button, TableRow, fioriBaseControl
             this.getRouter()
                 .getRoute("project")
                 .attachPatternMatched(this._onRouteMatched, this);
+
+
         },
 
 
@@ -25,10 +27,14 @@ function(AppController, Fragment, MessageBox, Button, TableRow, fioriBaseControl
             this.setStateProperty("/projectSelection", false);
             this.setStateProperty("/stageSelection", false);
 
+            this.getView().getModel().setDeferredGroups(["projectChange"])
+            
         },
 
         onSelectRow: function(oEvent) {
             var oRowData = oEvent.getParameter("rowContext").getObject();
+
+            this._selectedRowContext = oEvent.getParameter("rowContext");
 
             //Проект
             if (oRowData.HierLevel === 0) {
@@ -74,54 +80,48 @@ function(AppController, Fragment, MessageBox, Button, TableRow, fioriBaseControl
         },
 
 
-        onSaveButtonPress: function(oEvent) {
-
-            if (this.buttonId == "NewProject") {
-
-            var oBindingContext = this.byId('projectForm').getBindingContext();
+        onSaveProjectButtonPress: function(oEvent) {
             
-            var s = this.getView().getModel().createEntry(this.getSmartTable().getEntitySet(), {
-                properties: { Name: oBindingContext.getObject().Name,  
-                              ProjectStatus: oBindingContext.getObject().ProjectStatus, 
-                              ProjectType: oBindingContext.getObject().ProjectType,
-                              StartDate: oBindingContext.getObject().StartDate,
-                              EndDate: oBindingContext.getObject().EndDate
-                            },
-                batchGroupId: "changes",
-                changeSetId: "changes"
-            });
-            this.getView().getModel().updateBindings(true);
-        } 
-            
-            else if (this.buttonId == "NewStage") {
+            this.byId("projectPage").setBusy(true);
 
-                var oBindingContext = this.byId('stageForm').getBindingContext();
-                var s = this.getView().getModel().createEntry(this.getSmartTable().getEntitySet(), {
-                properties: { Name: oBindingContext.getObject().Name,  
-                              StageStatus: oBindingContext.getObject().StageStatus, 
-                              StageType: oBindingContext.getObject().StageType,
-                              StartDate: oBindingContext.getObject().StartDate,
-                              EndDate: oBindingContext.getObject().EndDate
-                            },
-                batchGroupId: "changes",
-                changeSetId: "changes"
+            this.submitChanges({
+                groupId : "projectChange",
+                success: function() {
+                    this.byId("projectPage").setBusy(false);
+                    
+                    if (!this.isExistError()) {
+                        // this.clearFileUploader();
+                    }
+
+                    // if (!this.isExistError()) {
+                    //     this.byId("profitWorkerSmartTable").rebindTable();
+                    //     this.closeBusyDialog();
+                    // } else {
+                    //     this.closeBusyDialog();
+                    // }
+                }.bind(this),
+                error: function(oError) {
+
+                    this.byId("projectPage").setBusy(false);
+                    this.showError(oError);
+                    // this.closeBusyDialog();
+                    // this.showError(oError);
+                }.bind(this),
+
             });
-            this.getView().getModel().updateBindings(true);
-                
-            }
+
         },
 
         onRejectButtonPress: function() {
         },
 
         onAddNewProjectButtonPress: function(oEvent) {
-
-            this.isSelected("NewProject");
-
             var oNewEntryContext = this.getView().getModel().createEntry(this.getBindingPath() + "/to_Project", {
                 properties: {
-                    Name: 'Новый проект'
-                }
+                    Name: 'Новый проект',
+                    PartnerID : this.getView().getBindingContext().getObject().PartnerId
+                },
+                groupId : "projectChange"
             });
             this.setProjectSelection();
             this.byId("projectTab").setBindingContext(oNewEntryContext);
@@ -132,12 +132,13 @@ function(AppController, Fragment, MessageBox, Button, TableRow, fioriBaseControl
 
         onAddNewProjectStageButtonPress: function(oEvent) {
 
-            this.isSelected("NewStage"); 
-
             var oNewEntryContext = this.getView().getModel().createEntry(this.getBindingPath() + "/to_Project", {
                 properties: {
-                    Name: 'Новый этап'
-                }
+                    Name: 'Новый этап',
+                    ParentID : this._selectedRowContext.getObject().ID,
+                    PartnerID : this._selectedRowContext.getObject().PartnerId
+                },
+                groupId : "projectChange"
             });
             this.setStageSelection();
             this.byId("stageTab").unbindObject();

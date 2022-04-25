@@ -1,5 +1,5 @@
 sap.ui.define([
-    // "intime.ztest_project.controller.App",
+    // "intime.zissues_workspace.controller.App",
     "jira/lib/BaseController",
     'sap/ui/core/Fragment',
     'sap/m/MessageBox',
@@ -8,7 +8,7 @@ sap.ui.define([
 function(BaseController, Fragment, MessageBox, Button) {
     "use strict";
 
-    return BaseController.extend("intime.ztest_project.controller.Project", {
+    return BaseController.extend("intime.zissues_workspace.controller.Main", {
         onInit: function() {
         }
 

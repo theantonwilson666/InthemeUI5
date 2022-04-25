@@ -1195,49 +1195,80 @@ sap.ui.define(
                 }
             },
 
-            onAppointmentPlanCreate: function (oEvent) {
+            checkOnDateAppointmentCreate: function (oEvent) {
+               
+                var oStartDate = new Date(
+                    oEvent.mParameters.startDate.getFullYear(),
+                    oEvent.mParameters.startDate.getMonth(),
+                    oEvent.mParameters.startDate.getDate(),
+                    this.parseTimePicker(this.byId("DateTimeFromSchedulePlan").getValue()).hours,
+                    this.parseTimePicker(this.byId("DateTimeFromSchedulePlan").getValue()).minutes,
+                );
 
-                debugger;
+                var oEndDate = new Date(
+                    oEvent.mParameters.startDate.getFullYear(),
+                    oEvent.mParameters.startDate.getMonth(),
+                    oEvent.mParameters.startDate.getDate(),
+                    this.parseTimePicker(this.byId("DateTimeToSchedulePlan").getValue()).hours,
+                    this.parseTimePicker(this.byId("DateTimeToSchedulePlan").getValue()).minutes,
+                );
+
+                
+                this._inputAppointmentEvent = {
+                    startDate : oStartDate,
+                    endDate : oEndDate,
+                    Type : this.byId("selectTypeDaySchedulePlan").getSelectedItem().getBindingContext().getObject().Type
+                }
+
+                this.byId("planningScheduleCalendar").setBusy(true);
+
+                this.getModel().callFunction("/CheckDateCreate", {
+                    method: "GET",
+                    urlParameters: {
+                        Type: this._inputAppointmentEvent.Type,
+                        DateFrom: this._inputAppointmentEvent.startDate,
+                        DateTo: this._inputAppointmentEvent.endDate
+                    },
+                    success: function (oData) {
+
+                        this.byId("planningScheduleCalendar").setBusy(false);
+
+                        if (!this.isExistError()) {
+                            var oModel = this.byId("planningScheduleCalendar").getModel("scheduleData");
+                            var oResultData = oModel.getData();
+
+                            oResultData.Appointments.push({
+                                Title: `${this.byId("selectTypeDaySchedulePlan").getSelectedItem().getBindingContext().getObject().Text}`,
+                                Text: this.byId("DateTimeFromSchedulePlan").getValue() + " - " + this.byId("DateTimeToSchedulePlan").getValue(),
+                                Type: this.byId("selectTypeDaySchedulePlan").getSelectedItem().getBindingContext().getObject().Type,
+                                Color: this.byId("selectTypeDaySchedulePlan").getSelectedItem().getBindingContext().getObject().Color,
+                                StartDate: this._inputAppointmentEvent.startDate,
+                                EndDate: this._inputAppointmentEvent.endDate,
+                                StartDateOut: this._inputAppointmentEvent.startDate,
+                                EndDateOut: this._inputAppointmentEvent.endDate
+                            })
+
+                            oModel.updateBindings(true);
+                        }
+                    }.bind(this),
+
+                    error: function (oError) {
+                        this.byId("planningScheduleCalendar").setBusy(false);
+                        this.showError();
+                    }.bind(this)
+                });
+
+            },
+
+
+            onAppointmentPlanCreate: function (oEvent) {
 
                 if (!this.checkDateInMonth(oEvent.getParameter("startDate"))) {
                     return;
                 }
 
-
                 if (this.getStateProperty("/planningEditMode")) {
-
-                    var oModel = this.byId("planningScheduleCalendar").getModel("scheduleData");
-                    var oResultData = oModel.getData();
-
-                    var oStartDate = new Date(
-                        oEvent.mParameters.startDate.getFullYear(),
-                        oEvent.mParameters.startDate.getMonth(),
-                        oEvent.mParameters.startDate.getDate(),
-                        this.parseTimePicker(this.byId("DateTimeFromSchedulePlan").getValue()).hours,
-                        this.parseTimePicker(this.byId("DateTimeFromSchedulePlan").getValue()).minutes,
-                    );
-
-                    var oEndDate = new Date(
-                        oEvent.mParameters.startDate.getFullYear(),
-                        oEvent.mParameters.startDate.getMonth(),
-                        oEvent.mParameters.startDate.getDate(),
-                        this.parseTimePicker(this.byId("DateTimeToSchedulePlan").getValue()).hours,
-                        this.parseTimePicker(this.byId("DateTimeToSchedulePlan").getValue()).minutes,
-                    );
-
-                    oResultData.Appointments.push({
-                        Title: `${this.byId("selectTypeDaySchedulePlan").getSelectedItem().getBindingContext().getObject().Text}`,
-                        Text: this.byId("DateTimeFromSchedulePlan").getValue() + " - " + this.byId("DateTimeToSchedulePlan").getValue(),
-                        Type: this.byId("selectTypeDaySchedulePlan").getSelectedItem().getBindingContext().getObject().Type,
-                        Color: this.byId("selectTypeDaySchedulePlan").getSelectedItem().getBindingContext().getObject().Color,
-                        StartDate: oStartDate,
-                        EndDate: oEndDate,
-                        StartDateOut: oStartDate,
-                        EndDateOut: oEndDate
-                    })
-
-                    oModel.updateBindings(true);
-
+                    this.checkOnDateAppointmentCreate(oEvent);
                 } else {
                     this.onDayCalendayPress(oEvent);
                 }

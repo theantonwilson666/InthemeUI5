@@ -3,11 +3,11 @@ sap.ui.loader.config({ paths: { "jira/lib": "/sap/bc/ui5_ui5/sap/zjiralib" } });
 sap.ui.define([
     "jira/lib/Component",
     "sap/ui/Device",
-    "intime/ztest_project/model/models"
+    "intime/zissues_workspace/model/models"
 ], function(UIComponent, Device, models) {
     "use strict";
 
-    return UIComponent.extend("intime.ztest_project.Component", {
+    return UIComponent.extend("intime.zissues_workspace.Component", {
 
         metadata: {
             manifest: "json"

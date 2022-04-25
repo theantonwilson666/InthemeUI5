@@ -1,7 +1,7 @@
 {
     "_version": "1.32.0",
     "sap.app": {
-        "id": "intime.ztest_project",
+        "id": "intime.zissues_workspace",
         "type": "application",
         "i18n": "i18n/i18n.properties",
         "applicationVersion": {
@@ -33,7 +33,7 @@
         },
         "crossNavigation": {
             "inbounds": {
-                "intime.ztest_project-inbound": {
+                "intime.zissues_workspace-inbound": {
                     "signature": {
                         "parameters": {},
                         "additionalParameters": "allowed"
@@ -67,7 +67,7 @@
     "sap.ui5": {
         "flexEnabled": false,
         "rootView": {
-            "viewName": "intime.ztest_project.view.App",
+            "viewName": "intime.zissues_workspace.view.App",
             "type": "XML",
             "async": true,
             "id": "app"
@@ -89,7 +89,7 @@
             "i18n": {
                 "type": "sap.ui.model.resource.ResourceModel",
                 "settings": {
-                    "bundleName": "intime.ztest_project.i18n.i18n"
+                    "bundleName": "intime.zissues_workspace.i18n.i18n"
                 }
             },
             "": {
@@ -132,7 +132,7 @@
                 "type": "View",
                 "viewType": "XML",
                 "async": true,
-                "viewPath": "intime.ztest_project.view",
+                "viewPath": "intime.zissues_workspace.view",
                 "controlId": "app",
                 "controlAggregation": "pages"
             },

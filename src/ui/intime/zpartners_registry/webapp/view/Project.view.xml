@@ -119,7 +119,7 @@
         <ToolbarSpacer />
         <Button type="Accept"
                 text="Сохранить"
-                press="onSaveButtonPress" />
+                press="onSaveProjectButtonPress" />
         <Button type="Reject"
                 text="Отменить"
                 press="onRejectButtonPress" />
