@@ -11,7 +11,8 @@
     xmlns:dnd-grid="sap.f.dnd">
 
 
-    <f:DynamicPage>
+    <f:DynamicPage id="taskPage"
+        showFooter="{state&gt;/taskEditMode}">
         <f:title>
             <f:DynamicPageTitle>
                 <f:heading>
@@ -27,11 +28,18 @@
                 </f:content>
 
                 <f:actions>
-                    <Button text="Edit"
-                        icon="sap-icon://edit"
+                    <Button icon="{= ${state>/taskEditMode} === true ? 'sap-icon://display' : 'sap-icon://edit'}"
+                        text="{= ${state>/taskEditMode} === true ? 'Просмотреть' : 'Изменить'}"
                         type="Emphasized"
-                        press="toggleAreaPriority">
-                    </Button>
+
+                        press="onTaskEditButtonPress"/>
+
+
+                    <Button icon="sap-icon://delete"
+                        text="Удалить"
+                        type="Reject"
+                        press="onTaskEditButtonPress"/>
+
                 </f:actions>
 
             </f:DynamicPageTitle>
@@ -81,6 +89,13 @@
         </f:content>
         <f:footer>
             <OverflowToolbar>
+                <ToolbarSpacer />
+                <Button type="Accept"
+                    text="Сохранить"
+                    press="onSaveTaskButtonPress" />
+                <Button type="Reject"
+                    text="Отменить"
+                    press="onRejectButtonPress" />
             </OverflowToolbar>
         </f:footer>
     </f:DynamicPage>

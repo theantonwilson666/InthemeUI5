@@ -1,40 +1,40 @@
 <edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
-           Version="4.0">
+  Version="4.0">
   <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata-data-aggregation-ext/v4.0/cs02/vocabularies/Org.OData.Aggregation.V1.xml">
     <edmx:Include Alias="Aggregation"
-                  Namespace="Org.OData.Aggregation.V1" />
+      Namespace="Org.OData.Aggregation.V1" />
   </edmx:Reference>
   <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Capabilities.V1.xml">
     <edmx:Include Alias="Capabilities"
-                  Namespace="Org.OData.Capabilities.V1" />
+      Namespace="Org.OData.Capabilities.V1" />
   </edmx:Reference>
   <edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470974/Common.xml?api=v2">
     <edmx:Include Alias="Common"
-                  Namespace="com.sap.vocabularies.Common.v1" />
+      Namespace="com.sap.vocabularies.Common.v1" />
   </edmx:Reference>
   <edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470971/Communication.xml?api=v2">
     <edmx:Include Alias="vCard"
-                  Namespace="com.sap.vocabularies.Communication.v1" />
+      Namespace="com.sap.vocabularies.Communication.v1" />
   </edmx:Reference>
   <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Core.V1.xml">
     <edmx:Include Alias="Core"
-                  Namespace="Org.OData.Core.V1" />
+      Namespace="Org.OData.Core.V1" />
   </edmx:Reference>
   <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Measures.V1.xml">
     <edmx:Include Alias="CQP"
-                  Namespace="Org.OData.Measures.V1" />
+      Namespace="Org.OData.Measures.V1" />
   </edmx:Reference>
   <edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470968/UI.xml?api=v2">
     <edmx:Include Alias="UI"
-                  Namespace="com.sap.vocabularies.UI.v1" />
+      Namespace="com.sap.vocabularies.UI.v1" />
   </edmx:Reference>
   <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Authorization.V1.xml">
     <edmx:Include Alias="Auth"
-                  Namespace="Org.OData.Authorization.V1" />
+      Namespace="Org.OData.Authorization.V1" />
   </edmx:Reference>
   <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.xml">
     <edmx:Include Alias="Validation"
-                  Namespace="Org.OData.Validation.V1" />
+      Namespace="Org.OData.Validation.V1" />
   </edmx:Reference>
   <edmx:Reference Uri="/">
     <edmx:Include Namespace="ZJIRA_SRV" />
@@ -55,28 +55,28 @@
       </Annotations>
 
 
-      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_TASKType/ProjectStatus">
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_TASKType/Status">
         <Annotation Term="Common.ValueListWithFixedValues"
-                    Bool="true" />
+          Bool="true" />
         <Annotation Term="Common.ValueList">
           <Record>
             <PropertyValue Property="CollectionPath"
-                           String="ZBNN_PROJECT_STATUS" />
+              String="ZBNN_TASK_STATUS" />
             <PropertyValue Property="SearchSupported"
-                           Bool="true" />
+              Bool="true" />
             <PropertyValue Property="Parameters">
               <Collection>
                 <Record Type="Common.ValueListParameterInOut">
                   <PropertyValue Property="LocalDataProperty"
-                                 PropertyPath="ProjectStatus" />
+                    PropertyPath="Status" />
                   <PropertyValue Property="ValueListProperty"
-                                 String="ProjectStatus" />
+                    String="TaskStatus" />
                 </Record>
                 <Record Type="Common.ValueListParameterOut">
                   <PropertyValue Property="LocalDataProperty"
-                                 PropertyPath="ProjectStatusText" />
+                    PropertyPath="StatusText" />
                   <PropertyValue Property="ValueListProperty"
-                                 String="ProjectStatusText" />
+                    String="TaskStatusText" />
                 </Record>
               </Collection>
             </PropertyValue>
@@ -85,7 +85,230 @@
       </Annotations>
 
 
-    
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_TASKType/EstimateTimeU">
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="true" />
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZBNN_TIME_UNIT" />
+            <PropertyValue Property="SearchSupported"
+              Bool="true" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="EstimateTimeU" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="Unit" />
+                </Record>
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="EstimateTimeUText" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="UnitText" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+
+
+      <!-- <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INT_PROJECT_STAGE_SHType/StageID">
+        <Annotation Term="UI.Hidden"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INT_PROJECT_STAGE_SHType/StageName">
+        <Annotation Term="UI.Hidden"/>
+      </Annotations> -->
+
+
+      <!-- <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INT_PROJECT_STAGE_SHType/ProjectName">
+        <Annotation Term="UI.Hidden"/>
+      </Annotations>
+
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INT_PROJECT_STAGE_SHType/PartnerName">
+        <Annotation Term="UI.Hidden"/>
+      </Annotations> -->
+
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_TASKType/ProjectId">
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="false"/>
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZSNN_INT_PROJECT_SH"/>
+            <PropertyValue Property="SearchSupported"
+              Bool="true"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerName"/>
+                </Record>
+
+
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="PartnerID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerId"/>
+                </Record>
+
+
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="ProjectId"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectID"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+
+
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_TASKType/ProjectStageId">
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="false"/>
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZSNN_INT_PROJECT_STAGE_SH"/>
+            <PropertyValue Property="SearchSupported"
+              Bool="true"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="StageName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="ProjectName"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectName"/>
+                </Record>
+
+
+
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="PartnerName"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerName"/>
+                </Record>
+
+
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="PartnerID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerId"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="ProjectId"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectID"/>
+                </Record>
+
+
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="ProjectStageId"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="StageID"/>
+                </Record>
+
+
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+
+
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZBNN_TASK_CHANGE_DOCUMENTType">
+
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="ChangedField" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="ChangedDate" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="ChangedTime" />
+            </Record>
+
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="ChangedUser" />
+            </Record>
+
+
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="OldValue" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="NewValue" />
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_SUBTASKType">
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="Name" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="StartDate" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="EndDate" />
+            </Record>
+
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="Status" />
+            </Record>
+
+
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="EstimateTime" />
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+
+
     </Schema>
   </edmx:DataServices>
 </edmx:Edmx>

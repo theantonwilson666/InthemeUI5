@@ -8,28 +8,41 @@
     xmlns:m="sap.m">
 
 
-    <smartForm:SmartForm editable="false">
+    <smartForm:SmartForm editable="{state>/taskEditMode}"
+        entityType="ZSNN_INTIME_TASKType">
         <smartForm:Group label="Общая информация">
             <smartForm:GroupElement>
                 <smartField:SmartField value="{Name}"
                     editable="true"/>
             </smartForm:GroupElement>
 
-            <smartForm:GroupElement>
-                <smartField:SmartField value="{ProjectId}"
-                    editable="true"/>
+            <smartForm:GroupElement label="Контрагент">
+                <Text text="{PartnerName}"/>
+            </smartForm:GroupElement>
+
+            <smartForm:GroupElement label="Проект">
+                <Text text="{ProjectName}"/>
             </smartForm:GroupElement>
 
             <smartForm:GroupElement>
                 <smartField:SmartField value="{ProjectStageId}"
-                    editable="true"/>
+                    editable="true"
+                    textInEditModeSource="ValueList"
+                    entitySet="ZSNN_INTIME_TASK">
+
+
+                    <smartField:configuration>
+                        <smartField:Configuration preventInitialDataFetchInValueHelpDialog="false"
+                            displayBehaviour="descriptionOnly" />
+                    </smartField:configuration>
+
+                </smartField:SmartField>
             </smartForm:GroupElement>
-
-
 
             <smartForm:GroupElement>
                 <smartField:SmartField value="{Status}"
-                    editable="true"/>
+                    editable="true"
+                    textInEditModeSource="ValueList"/>
             </smartForm:GroupElement>
 
 
@@ -59,6 +72,7 @@
         <smartForm:Group label="Доп.инфо">
             <smartForm:GroupElement>
                 <smartField:SmartField value="{DocNum}"
+                    entitySet="ZSNN_INTIME_TASK"
                     editable="true"/>
             </smartForm:GroupElement>
 
@@ -78,5 +92,14 @@
             </smartForm:GroupElement>
         </smartForm:Group>
 
+
     </smartForm:SmartForm>
+
+
+    <core:Fragment fragmentName="intime.zissues_workspace.view.taskSections.SubTaskSection"
+                            type="XML" />
+
+
+
+
 </core:FragmentDefinition>
