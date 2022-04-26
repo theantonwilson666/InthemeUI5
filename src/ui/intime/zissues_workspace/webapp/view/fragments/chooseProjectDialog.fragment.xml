@@ -1,0 +1,26 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:u="sap.ui.unified"
+    xmlns:m="sap.m">
+    <Dialog id="partnerDialog"
+        title="Партнер">
+        <content>
+            <Text text="test"/>
+
+        </content>
+        <beginButton>
+            <Button id="beginBtn"
+                text="Сохранить"
+                type="Emphasized"
+                press=".onOkPartnerDialog"/>
+        </beginButton>
+        <endButton>
+            <Button id="endBtn"
+                text="Отменить"
+                press=".onCancelPartnerDialog"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

@@ -4,6 +4,8 @@
   xmlns:grid="sap.ui.layout.cssgrid"
   xmlns:layout="sap.ui.layout"
   xmlns:f="sap.f"
+  xmlns:sv="sap.ui.comp.smartvariants"
+  xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
   xmlns:dnd="sap.ui.core.dnd"
   xmlns:dnd-grid="sap.f.dnd">
 
@@ -12,55 +14,49 @@
     <f:title>
       <f:DynamicPageTitle>
         <f:heading>
-          <Title text="Header Title"/>
-        </f:heading>
+          <sv:SmartVariantManagement id="__SVM01"
+            persistencyKey="fiori.test.application2.view.S4"
+            showShare="true"
+            showExecuteOnSelection="true"
+            entitySet="ZSNN_INTIME_TASK"/>
 
-        <f:expandedContent>
-          <Label text="This is a subheading"/>
-        </f:expandedContent>
+
+          <!-- <ObjectIdentifier title="Выберите проект" text="" titleActive="true" titlePress="onChooseProjectTitlePress"/> -->
+
+        </f:heading>
 
         <f:content>
           <OverflowToolbar>
-            <GenericTag text="SR"
-              status="Error"
-              press="onPressOpenPopover"
-              design="StatusIconHidden">
-              <ObjectNumber number="2"
-                unit="M"
-                emphasized="false"
-                state="Error"/>
-            </GenericTag>
           </OverflowToolbar>
         </f:content>
+
+        <!-- <f:actions>
+          <Button text="Edit" type="Emphasized" press="toggleAreaPriority"/>
+        </f:actions> -->
 
       </f:DynamicPageTitle>
 
     </f:title>
 
     <f:header>
-      <f:DynamicPageHeader pinnable="true">
-        <layout:HorizontalLayout allowWrapping="true">
-          <layout:VerticalLayout class="sapUiMediumMarginEnd">
-            <ObjectAttribute title="Location"
-              text="Warehouse A"/>
-            <ObjectAttribute title="Halway"
-              text="23L"/>
-            <ObjectAttribute title="Rack"
-              text="34"/>
-          </layout:VerticalLayout>
+      <f:DynamicPageHeader>
+        <smartFilterBar:SmartFilterBar id="issueSmartFilter"
+          considerSelectionVariants="true"
+          entitySet="ZSNN_INTIME_TASK"
+          showClearButton="true">
+          <!-- layout data used to make the table growing but the filter bar fixed -->
+          <!-- <smartFilterBar:layoutData>
+              <FlexItemData shrinkFactor="0"/>
+            </smartFilterBar:layoutData> -->
 
-          <layout:VerticalLayout>
-            <ObjectAttribute title="Availability"/>
-            <ObjectStatus text="In Stock"
-              state="Success" />
-          </layout:VerticalLayout>
-        </layout:HorizontalLayout>
+        </smartFilterBar:SmartFilterBar>
+
       </f:DynamicPageHeader>
     </f:header>
 
     <f:content>
-      <f:GridList id="gridList">
-        <!-- Открыть -->
+      <f:GridList id="statusGridList"
+        items="{/ZBNN_TASK_STATUS}">
         <f:GridListItem>
           <VBox height="100%"
             justifyContent="SpaceBetween">
@@ -69,167 +65,38 @@
                 shrinkFactor="0" />
             </layoutData>
 
-            <VBox class="sapUiSmallMargin">
-              <Title text="Открыть"
-                wrapping="true" />
-            </VBox>
-          </VBox>
-        </f:GridListItem>
-        <!-- "К выполнению" -->
-        <f:GridListItem>
-          <VBox height="100%"
-            justifyContent="SpaceBetween">
-            <layoutData>
-              <FlexItemData growFactor="1"
-                shrinkFactor="0" />
-            </layoutData>
-
-            <VBox class="sapUiSmallMargin">
-              <Title text="К выполнению"
-                wrapping="true" />
-            </VBox>
-            <!-- "Подзадача 1" -->
-            <VBox>
-              <f:GridList id="gridTask1">
-                <f:GridListItem>
-                  <VBox height="100%"
-                    justifyContent="SpaceBetween">
-                    <layoutData>
-                      <FlexItemData growFactor="1"
-                        shrinkFactor="0" />
-                    </layoutData>
-
-
-                    <Title text="ЗАДАЧА №1"
-                      wrapping="true" />
-
-                    <f:GridList id="gridSubTaskTask1">
-                      <f:GridListItem>
-                        <VBox class="sapUiSmallMargin">
-                          <Title text="Подзадача  №1"
-                            wrapping="true" />
-                        </VBox>
-
-                      </f:GridListItem>
-                    </f:GridList>
-                  </VBox>
-                </f:GridListItem>
-              </f:GridList>
-            </VBox>
-
-            <!-- "Подзадача 2" -->
-
-            <VBox>
-              <f:GridList id="gridTask2">
-                <f:GridListItem>
-                  <VBox height="100%"
-                    justifyContent="SpaceBetween">
-                    <layoutData>
-                      <FlexItemData growFactor="1"
-                        shrinkFactor="0" />
-                    </layoutData>
-
-                    <VBox class="sapUiSmallMargin">
-                      <Title text="ЗАДАЧА №2"
-                        wrapping="true" />
-                    </VBox>
-                  </VBox>
-                </f:GridListItem>
-              </f:GridList>
-            </VBox>
-
-          </VBox>
-        </f:GridListItem>
-
-        <!-- "В работе" -->
-
-        <f:GridListItem>
-          <VBox height="100%"
-            justifyContent="SpaceBetween">
-            <layoutData>
-              <FlexItemData growFactor="1"
-                shrinkFactor="0" />
-            </layoutData>
-
-            <VBox class="sapUiSmallMargin">
-              <Title text="В работе"
+            <VBox class= "sapUiSmallMargin">
+              <Title text="{TaskStatusText}"
                 wrapping="true" />
             </VBox>
 
-            <!-- "Подзадача 1" -->
-            <VBox>
-              <f:GridList id="InWorkgridTask1">
-                <f:GridListItem>
-                  <VBox height="100%"
-                    justifyContent="SpaceBetween">
-                    <layoutData>
-                      <FlexItemData growFactor="1"
-                        shrinkFactor="0" />
-                    </layoutData>
+            <f:GridList>
+              <f:GridListItem>
+                <VBox height="100%"
+                  justifyContent="SpaceBetween">
+                  <layoutData>
+                    <FlexItemData growFactor="1"
+                      shrinkFactor="0" />
+                  </layoutData>
 
-                    <VBox class="sapUiSmallMargin">
-                      <Title text="ЗАДАЧА №1"
-                        wrapping="true" />
-                    </VBox>
-                  </VBox>
-                </f:GridListItem>
-              </f:GridList>
-            </VBox>
 
-            <!-- "Подзадача 2" -->
-            <VBox>
-              <f:GridList id="InWorkgridTask2">
-                <f:GridListItem>
-                  <VBox height="100%"
-                    justifyContent="SpaceBetween">
-                    <layoutData>
-                      <FlexItemData growFactor="1"
-                        shrinkFactor="0" />
-                    </layoutData>
+                  <Title text="ЗАДАЧА №1"
+                    wrapping="true"
+                    class="sapUiSmallMargin"/>
 
-                    <VBox class="sapUiSmallMargin">
-                      <Title text="ЗАДАЧА №1"
-                        wrapping="true" />
-                    </VBox>
-                  </VBox>
-                </f:GridListItem>
-              </f:GridList>
-            </VBox>
+                  <f:GridList id="gridSubTaskTask1">
+                    <f:GridListItem>
+                      <VBox class="sapUiSmallMargin">
+                        <Title text="Подзадача  №1"
+                          wrapping="true" />
+                      </VBox>
 
-          </VBox>
-        </f:GridListItem>
+                    </f:GridListItem>
+                  </f:GridList>
+                </VBox>
+              </f:GridListItem>
+            </f:GridList>
 
-        <!-- "Готово" -->
-        <f:GridListItem>
-          <VBox height="100%"
-            justifyContent="SpaceBetween">
-            <layoutData>
-              <FlexItemData growFactor="1"
-                shrinkFactor="0" />
-            </layoutData>
-
-            <VBox class="sapUiSmallMargin">
-              <Title text="Готово"
-                wrapping="true" />
-            </VBox>
-
-          </VBox>
-        </f:GridListItem>
-
-        <!-- "Закрыто" -->
-        <f:GridListItem>
-          <VBox height="100%"
-            justifyContent="SpaceBetween">
-            <layoutData>
-              <FlexItemData growFactor="1"
-                shrinkFactor="0" />
-            </layoutData>
-
-            <VBox class="sapUiSmallMargin">
-              <Title text="Закрыто"
-                wrapping="true" />
-
-            </VBox>
           </VBox>
         </f:GridListItem>
       </f:GridList>
@@ -238,10 +105,6 @@
     <!-- DynamicPage Footer -->
     <f:footer>
       <OverflowToolbar>
-        <!-- <Button icon="sap-icon://message-popup" text="{/messagesLength}" type="Emphasized" press="onMessageButtonPress" visible="{= !!${/messagesLength}}"/> -->
-        <!-- <ToolbarSpacer/>
-					<Button type="Accept" text="Accept"/>
-					<Button type="Reject" text="Reject"/> -->
       </OverflowToolbar>
     </f:footer>
   </f:DynamicPage>

@@ -13,7 +13,7 @@
         "ach": "ach",
         "dataSources": {
             "mainService": {
-                "uri": "/sap/opu/odata/sap/ZINT_UI_PARTNERS_SRV/",
+                "uri": "/sap/opu/odata/sap/ZINT_UI_TASK_SRV/",
                 "type": "OData",
                 "settings": {
                     "odataVersion": "2.0",
@@ -107,8 +107,9 @@
                     "icons": {
                         "goHome": "sap-icon://home"
                     },
-                    "editMode": false,
-                    "editablePartner": null
+
+                    "currentProjectStage" : null
+
                 }
             }
         },
