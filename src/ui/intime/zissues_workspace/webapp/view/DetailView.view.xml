@@ -1,0 +1,51 @@
+<mvc:View controllerName="intime.zissues_workspace.controller.Detail"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:grid="sap.ui.layout.cssgrid"
+    xmlns:layout="sap.ui.layout"
+    xmlns:f="sap.f"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:dnd="sap.ui.core.dnd"
+    xmlns:dnd-grid="sap.f.dnd">
+
+
+    <f:DynamicPage>
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Text text="test title"/>
+                </f:heading>
+
+                <f:content>
+                    <OverflowToolbar>
+                    </OverflowToolbar>
+                </f:content>
+
+            </f:DynamicPageTitle>
+
+        </f:title>
+
+        <f:header>
+            <f:DynamicPageHeader>
+                <Text text="test header"/>
+                <!-- <smartFilterBar:SmartFilterBar id="issueSmartFilter" considerSelectionVariants="true" entitySet="ZSNN_INTIME_TASK" showClearButton="true">
+
+                </smartFilterBar:SmartFilterBar> -->
+
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+
+            <Text text="test"/>
+
+        </f:content>
+        <!-- DynamicPage Footer -->
+        <f:footer>
+            <OverflowToolbar>
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+
+</mvc:View>

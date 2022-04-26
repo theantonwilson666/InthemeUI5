@@ -19,20 +19,12 @@
             showShare="true"
             showExecuteOnSelection="true"
             entitySet="ZSNN_INTIME_TASK"/>
-
-
-          <!-- <ObjectIdentifier title="Выберите проект" text="" titleActive="true" titlePress="onChooseProjectTitlePress"/> -->
-
         </f:heading>
 
         <f:content>
           <OverflowToolbar>
           </OverflowToolbar>
         </f:content>
-
-        <!-- <f:actions>
-          <Button text="Edit" type="Emphasized" press="toggleAreaPriority"/>
-        </f:actions> -->
 
       </f:DynamicPageTitle>
 
@@ -44,10 +36,6 @@
           considerSelectionVariants="true"
           entitySet="ZSNN_INTIME_TASK"
           showClearButton="true">
-          <!-- layout data used to make the table growing but the filter bar fixed -->
-          <!-- <smartFilterBar:layoutData>
-              <FlexItemData shrinkFactor="0"/>
-            </smartFilterBar:layoutData> -->
 
         </smartFilterBar:SmartFilterBar>
 
@@ -65,12 +53,19 @@
                 shrinkFactor="0" />
             </layoutData>
 
-            <VBox class= "sapUiSmallMargin">
-              <Title text="{TaskStatusText}"
-                wrapping="true" />
-            </VBox>
+            <HBox alignItems="Start"
+              justifyContent="SpaceBetween">
+              <VBox class= "sapUiSmallMargin">
+                <Title text="{TaskStatusText}"
+                  wrapping="true" />
+              </VBox>
 
-            <f:GridList>
+              <HBox class="sapUiTinyMargin">
+                <Button icon="sap-icon://add" visible="{CreateTaskEnabled}"/>
+              </HBox>
+            </HBox>
+
+            <f:GridList items="{to_Task}">
               <f:GridListItem>
                 <VBox height="100%"
                   justifyContent="SpaceBetween">
@@ -79,23 +74,54 @@
                       shrinkFactor="0" />
                   </layoutData>
 
+                  <VBox>
+                    <HBox alignItems="Start"
+                      justifyContent="SpaceBetween">
+                      <ObjectIdentifier title="{Name}"
+                        text="{ProjectStageName}({ProjectName})"
+                        titleActive="false"
+                        class="sapUiTinyMargin"/>
+                      <HBox class="sapUiTinyMargin">
+                        <Button icon="sap-icon://arrow-bottom"
+                          press="onShowSubTaskListButtonPress"/>
+                        <Button icon="sap-icon://add"/>
+                        <Button icon="sap-icon://delete"/>
+                      </HBox>
 
-                  <Title text="ЗАДАЧА №1"
-                    wrapping="true"
-                    class="sapUiSmallMargin"/>
+                    </HBox>
 
-                  <f:GridList id="gridSubTaskTask1">
-                    <f:GridListItem>
-                      <VBox class="sapUiSmallMargin">
-                        <Title text="Подзадача  №1"
-                          wrapping="true" />
-                      </VBox>
+                    <Text text="{path : 'EndDate', formatter:'.commonFormatter.formatDateTimeToShortDate'}" class="sapUiTinyMarginBegin"/>
 
-                    </f:GridListItem>
-                  </f:GridList>
+                  </VBox>
+
+                  <List items="{to_SubTask}"
+                    visible="false">
+                    <items>
+                      <StandardListItem title="{Name}"
+                        info="{StatusText}"/>
+                    </items>
+                  </List>
+                  <!-- <Title text="{Name}" wrapping="true" class="sapUiSmallMargin"/> -->
+
+
                 </VBox>
+
               </f:GridListItem>
             </f:GridList>
+
+
+            <!-- <f:GridList>
+              <f:GridListItem>
+                <VBox height="100%" justifyContent="SpaceBetween">
+                  <layoutData>
+                    <FlexItemData growFactor="1" shrinkFactor="0" />
+                  </layoutData>
+
+
+                  <Title text="ЗАДАЧА №2" wrapping="true" class="sapUiSmallMargin"/>
+                </VBox>
+              </f:GridListItem>
+            </f:GridList> -->
 
           </VBox>
         </f:GridListItem>
@@ -109,11 +135,4 @@
     </f:footer>
   </f:DynamicPage>
 
-
-
-
-
-  <Page id="page">
-
-  </Page>
 </mvc:View>

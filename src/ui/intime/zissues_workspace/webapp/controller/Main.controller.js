@@ -23,6 +23,19 @@ sap.ui.define([
                             oDialog.open();
                         }.bind(this)
                     );
+            },
+
+            onShowSubTaskListButtonPress: function(oEvent){
+                var oList = oEvent.getSource().getParent().getParent().getParent().getParent().getItems()[1];
+                oList.setVisible(!oList.getVisible());
+
+                debugger;
+
+                if (oList.getVisible()){
+                    oEvent.getSource().setIcon("sap-icon://hide");
+                } else {
+                    oEvent.getSource().setIcon("sap-icon://arrow-bottom")
+                }
             }
 
         });

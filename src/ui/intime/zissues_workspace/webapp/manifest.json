@@ -144,9 +144,9 @@
                 },
 
                 {
-                    "pattern": "project",
-                    "name": "project",
-                    "target": "project"
+                    "pattern": "task/:?query:",
+                    "name": "task",
+                    "target": "task"
                 }
             ],
             "targets": {
@@ -155,9 +155,9 @@
                     "viewName": "MainPage"
                 },
 
-                "project": {
-                    "viewid": "project",
-                    "viewName": "Project"
+                "task": {
+                    "viewid": "task",
+                    "viewName": "task"
                 }
             }
         }
