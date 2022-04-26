@@ -10,13 +10,15 @@ sap.ui.define([
 
         return BaseController.extend("intime.zissues_workspace.controller.Main", {
             onInit: function () {
+
+               
             },
 
             onChooseProjectTitlePress: function () {
                 this.loadDialog
                     .call(this, {
                         sDialogName: "_chooseProjectDialog",
-                        sViewName: "intime.zissues_workspace.view.fragments.chooseProjectDialog"
+                        sViewName: "intime.zissues_workspace.view.dialogs.chooseProjectDialog"
                     })
                     .then(
                         function (oDialog) {
@@ -36,6 +38,15 @@ sap.ui.define([
                 } else {
                     oEvent.getSource().setIcon("sap-icon://arrow-bottom")
                 }
+            },
+
+
+            onTaskTitlePress: function(oEvent){
+                 var oParams = {
+                    TaskId: oEvent.getSource().getBindingContext().getObject().TaskId
+                };
+
+                this.navTo("task", { query: oParams }, false);
             }
 
         });

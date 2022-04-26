@@ -108,7 +108,8 @@
                         "goHome": "sap-icon://home"
                     },
 
-                    "currentProjectStage" : null
+                    "currentProjectStage" : null,
+                    "taskEditMode" : false
 
                 }
             }
@@ -156,8 +157,7 @@
                 },
 
                 "task": {
-                    "viewid": "task",
-                    "viewName": "task"
+                    "viewName": "DetailView"
                 }
             }
         }

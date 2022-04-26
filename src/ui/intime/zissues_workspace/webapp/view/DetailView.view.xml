@@ -4,8 +4,9 @@
     xmlns:grid="sap.ui.layout.cssgrid"
     xmlns:layout="sap.ui.layout"
     xmlns:f="sap.f"
-    xmlns:sv="sap.ui.comp.smartvariants"
-    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:core="sap.ui.core"
+    xmlns:smartForm="sap.ui.comp.smartform"
+    xmlns:smartField="sap.ui.comp.smartfield"
     xmlns:dnd="sap.ui.core.dnd"
     xmlns:dnd-grid="sap.f.dnd">
 
@@ -14,7 +15,10 @@
         <f:title>
             <f:DynamicPageTitle>
                 <f:heading>
-                    <Text text="test title"/>
+
+                    <ObjectIdentifier title="{Name}"
+                        text="{ProjectStageName}({ProjectName})"
+                        titleActive="false"/>
                 </f:heading>
 
                 <f:content>
@@ -22,26 +26,59 @@
                     </OverflowToolbar>
                 </f:content>
 
+                <f:actions>
+                    <Button text="Edit"
+                        icon="sap-icon://edit"
+                        type="Emphasized"
+                        press="toggleAreaPriority">
+                    </Button>
+                </f:actions>
+
             </f:DynamicPageTitle>
 
         </f:title>
 
         <f:header>
             <f:DynamicPageHeader>
-                <Text text="test header"/>
-                <!-- <smartFilterBar:SmartFilterBar id="issueSmartFilter" considerSelectionVariants="true" entitySet="ZSNN_INTIME_TASK" showClearButton="true">
-
-                </smartFilterBar:SmartFilterBar> -->
 
             </f:DynamicPageHeader>
         </f:header>
 
         <f:content>
 
-            <Text text="test"/>
+            <IconTabBar id="taskIconTabBar"
+                applyContentPadding="false"
+                expanded="true"
+                expandable="false"
+                stretchContentHeight="true"
+                tabDensityMode="Compact">
+                <items>
+                    <IconTabFilter id="taskTab"
+                        text="Задача"
+                        key="task">
+                        <core:Fragment fragmentName="intime.zissues_workspace.view.taskSections.TaskInfo"
+                            type="XML" />
+                    </IconTabFilter>
+                    <IconTabFilter id="taskChangeDocTab"
+                        text="История изменений"
+                        key="changeDocuments">
+                        <core:Fragment fragmentName="intime.zissues_workspace.view.taskSections.TaskDocumentChange"
+                            type="XML" />
+                    </IconTabFilter>
+
+                    <IconTabFilter id="taskAttachments"
+                        text="Вложения"
+                        key="attachments">
+                        <core:Fragment fragmentName="intime.zissues_workspace.view.taskSections.TaskAttachments"
+                            type="XML" />
+                    </IconTabFilter>
+
+                </items>
+            </IconTabBar>
+
+
 
         </f:content>
-        <!-- DynamicPage Footer -->
         <f:footer>
             <OverflowToolbar>
             </OverflowToolbar>

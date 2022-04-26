@@ -1,0 +1,82 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:smartForm="sap.ui.comp.smartform"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:u="sap.ui.unified"
+    xmlns:m="sap.m">
+
+
+    <smartForm:SmartForm editable="false">
+        <smartForm:Group label="Общая информация">
+            <smartForm:GroupElement>
+                <smartField:SmartField value="{Name}"
+                    editable="true"/>
+            </smartForm:GroupElement>
+
+            <smartForm:GroupElement>
+                <smartField:SmartField value="{ProjectId}"
+                    editable="true"/>
+            </smartForm:GroupElement>
+
+            <smartForm:GroupElement>
+                <smartField:SmartField value="{ProjectStageId}"
+                    editable="true"/>
+            </smartForm:GroupElement>
+
+
+
+            <smartForm:GroupElement>
+                <smartField:SmartField value="{Status}"
+                    editable="true"/>
+            </smartForm:GroupElement>
+
+
+        </smartForm:Group>
+
+
+        <smartForm:Group label="Сроки">
+            <smartForm:GroupElement>
+                <smartField:SmartField value="{StartDate}"
+                    editable="true"/>
+            </smartForm:GroupElement>
+
+            <smartForm:GroupElement>
+                <smartField:SmartField value="{EndDate}"
+                    editable="true"/>
+            </smartForm:GroupElement>
+
+            <smartForm:GroupElement>
+                <smartField:SmartField value="{FactStartDate}"
+                    editable="true"/>
+            </smartForm:GroupElement>
+
+
+        </smartForm:Group>
+
+
+        <smartForm:Group label="Доп.инфо">
+            <smartForm:GroupElement>
+                <smartField:SmartField value="{DocNum}"
+                    editable="true"/>
+            </smartForm:GroupElement>
+
+            <smartForm:GroupElement>
+                <smartField:SmartField value="{ManagedTask}"
+                    editable="true"/>
+            </smartForm:GroupElement>
+
+
+        </smartForm:Group>
+
+
+        <smartForm:Group label="Время">
+            <smartForm:GroupElement>
+                <smartField:SmartField value="{EstimateTime}"
+                    editable="true"/>
+            </smartForm:GroupElement>
+        </smartForm:Group>
+
+    </smartForm:SmartForm>
+</core:FragmentDefinition>

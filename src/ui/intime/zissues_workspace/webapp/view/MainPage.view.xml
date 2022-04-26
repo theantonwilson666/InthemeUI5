@@ -79,7 +79,8 @@
                       justifyContent="SpaceBetween">
                       <ObjectIdentifier title="{Name}"
                         text="{ProjectStageName}({ProjectName})"
-                        titleActive="false"
+                        titleActive="true"
+                        titlePress="onTaskTitlePress"
                         class="sapUiTinyMargin"/>
                       <HBox class="sapUiTinyMargin">
                         <Button icon="sap-icon://arrow-bottom"
