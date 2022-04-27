@@ -107,28 +107,20 @@
                     "icons": {
                         "goHome": "sap-icon://home"
                     },
-
-                    "currentProjectStage" : null,
-                    "taskEditMode" : false
-
+                    "currentProjectStage": null,
+                    "taskEditMode": false
                 }
             }
         },
         "resources": {
-            "css": [{
-                "uri": "css/style.css"
-            }]
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
         },
         "routing": {
             "config": {
-                "sample": {
-                    "files": [
-                        "MainPage.view.xml",
-                        "App.controller.js",
-                        "model/items.json",
-                        "manifest.json"
-                    ]
-                },
                 "fullWidth": true,
                 "routerClass": "sap.m.routing.Router",
                 "type": "View",
@@ -136,28 +128,40 @@
                 "async": true,
                 "viewPath": "intime.zissues_workspace.view",
                 "controlId": "app",
-                "controlAggregation": "pages"
+                "controlAggregation": "pages",
+                "transition": "slide"
             },
-            "routes": [{
+            "routes": [
+                {
                     "pattern": "",
                     "name": "mainpage",
                     "target": "mainpage"
                 },
-
                 {
-                    "pattern": "task/:?query:",
+                    "pattern": "task/{taskId}",
                     "name": "task",
                     "target": "task"
+                },
+                {
+                    "pattern": "task/{taskId}/subTask/{subTaskId}",
+                    "name": "subtask",
+                    "target": "subtask"
                 }
             ],
             "targets": {
                 "mainpage": {
                     "viewid": "mainpage",
-                    "viewName": "MainPage"
+                    "viewName": "MainPage",
+                    "viewLevel": 1
                 },
-
                 "task": {
-                    "viewName": "DetailView"
+                    "viewName": "DetailView",
+                    "viewLevel": 2
+                },
+                "subtask": {
+                    "viewName": "SubTaskView",
+                    "viewLevel": 3,
+                    "viewid": "DetailDetailView"
                 }
             }
         }

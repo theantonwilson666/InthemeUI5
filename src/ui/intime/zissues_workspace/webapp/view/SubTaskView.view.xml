@@ -1,0 +1,144 @@
+<mvc:View controllerName="intime.zissues_workspace.controller.SubTask"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:grid="sap.ui.layout.cssgrid"
+    xmlns:layout="sap.ui.layout"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:smartForm="sap.ui.comp.smartform"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:dnd="sap.ui.core.dnd"
+    xmlns:dnd-grid="sap.f.dnd">
+
+
+    <f:DynamicPage id="subTaskPage"
+        showFooter="{state&gt;/taskEditMode}">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+
+                    <ObjectIdentifier title="{Name}"
+                        text="{StatusText}"
+                        titleActive="false"/>
+                </f:heading>
+
+                <f:content>
+                    <OverflowToolbar>
+                    </OverflowToolbar>
+                </f:content>
+
+                <f:actions>
+                    <Button icon="{= ${state>/taskEditMode} === true ? 'sap-icon://display' : 'sap-icon://edit'}"
+                        text="{= ${state>/taskEditMode} === true ? 'Просмотреть' : 'Изменить'}"
+                        type="Emphasized"
+                        press="onTaskEditButtonPress"/>
+
+
+                    <Button icon="sap-icon://delete"
+                        text="Удалить"
+                        type="Reject"
+                        press="onTaskEditButtonPress"/>
+
+                </f:actions>
+
+            </f:DynamicPageTitle>
+
+        </f:title>
+
+        <f:header>
+            <f:DynamicPageHeader>
+
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+
+            <smartForm:SmartForm editable="{state>/taskEditMode}"
+                entityType="ZSNN_INTIME_SUBTASKType">
+                <smartForm:Group label="Общая информация">
+                    <smartForm:GroupElement>
+                        <smartField:SmartField value="{Name}"
+                            editable="true"/>
+                    </smartForm:GroupElement>
+
+                    <smartForm:GroupElement label="Контрагент">
+                        <Text text="{to_Task/PartnerName}"/>
+                    </smartForm:GroupElement>
+
+                    <smartForm:GroupElement label="Проект">
+                        <Text text="{to_Task/ProjectName}"/>
+                    </smartForm:GroupElement>
+
+                    <smartForm:GroupElement label="Этап проекта">
+                        <Text text="{to_Task/ProjectStageName}"/>
+                    </smartForm:GroupElement>
+
+                    <smartForm:GroupElement>
+                        <smartField:SmartField value="{Status}"
+                            editable="true"
+                            textInEditModeSource="ValueList"/>
+                    </smartForm:GroupElement>
+
+
+                </smartForm:Group>
+
+
+                <smartForm:Group label="Сроки">
+                    <smartForm:GroupElement>
+                        <smartField:SmartField value="{StartDate}"
+                            editable="true"/>
+                    </smartForm:GroupElement>
+
+                    <smartForm:GroupElement>
+                        <smartField:SmartField value="{EndDate}"
+                            editable="true"/>
+                    </smartForm:GroupElement>
+
+                    <!-- <smartForm:GroupElement>
+                        <smartField:SmartField value="{FactStartDate}" editable="true"/>
+                    </smartForm:GroupElement> -->
+
+
+                </smartForm:Group>
+
+
+                <!-- <smartForm:Group label="Доп.инфо">
+                    <smartForm:GroupElement>
+                        <smartField:SmartField value="{DocNum}" entitySet="ZSNN_INTIME_TASK" editable="true"/>
+                    </smartForm:GroupElement>
+
+                    <smartForm:GroupElement>
+                        <smartField:SmartField value="{ManagedTask}" editable="true"/>
+                    </smartForm:GroupElement>
+
+
+                </smartForm:Group> -->
+
+
+                <smartForm:Group label="Время">
+                    <smartForm:GroupElement>
+                        <smartField:SmartField value="{EstimateTime}"
+                            editable="true"/>
+                    </smartForm:GroupElement>
+                </smartForm:Group>
+
+
+            </smartForm:SmartForm>
+
+
+
+        </f:content>
+        <f:footer>
+            <OverflowToolbar>
+                <ToolbarSpacer />
+                <Button type="Accept"
+                    text="Сохранить"
+                    press="onSaveTaskButtonPress" />
+                <Button type="Reject"
+                    text="Отменить"
+                    press="onRejectButtonPress" />
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+
+</mvc:View>

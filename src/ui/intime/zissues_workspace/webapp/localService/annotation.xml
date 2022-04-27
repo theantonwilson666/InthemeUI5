@@ -306,6 +306,47 @@
             </Record>
           </Collection>
         </Annotation>
+
+        <Annotation Term="UI.PresentationVariant">
+          <Record>
+            <PropertyValue Property="RequestAtLeast">
+              <Collection>
+                <PropertyPath>SubtaskId</PropertyPath>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+
+      </Annotations>
+
+  
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_SUBTASKType/Status">
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="true" />
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZBNN_SUBTASK_STATUS" />
+            <PropertyValue Property="SearchSupported"
+              Bool="true" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="Status" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="SubTaskStatus" />
+                </Record>
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="StatusText" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="SubTaskStatusText" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
       </Annotations>
 
 

@@ -20,7 +20,15 @@
         useTablePersonalisation="true"
         showRowCount="false"
         enableAutoBinding="true"
-        tableBindingPath="to_SubTask"/>
+        tableBindingPath="to_SubTask">
+
+        <Table
+            growing="true"
+            rememberSelections="false"
+            mode="SingleSelectMaster"
+            selectionChange="onSubTaskItemPress"/>
+
+    </smartTable:SmartTable>
 
 
 

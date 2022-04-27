@@ -42,11 +42,12 @@ sap.ui.define([
 
 
             onTaskTitlePress: function(oEvent){
-                 var oParams = {
-                    TaskId: oEvent.getSource().getBindingContext().getObject().TaskId
-                };
+                //  var oParams = {
+                //     TaskId: oEvent.getSource().getBindingContext().getObject().TaskId
+                // };
 
-                this.navTo("task", { query: oParams }, false);
+                this.navTo("task", { 
+                    taskId: btoa(oEvent.getSource().getBindingContext().getObject().TaskId) }, false);
             }
 
         });

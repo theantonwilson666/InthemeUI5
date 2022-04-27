@@ -17,18 +17,19 @@ sap.ui.define([
             },
 
             _onRouteMatched: function (oEvent) {
-                var oArr = oEvent.getParameter("arguments")["?query"];
-                this.getView().bindObject(`/ZSNN_INTIME_TASK('${oArr.TaskId}')`);
+
+
+                this.getView().bindObject(`/ZSNN_INTIME_TASK('${atob(oEvent.getParameter("arguments").taskId)}')`);
 
                 this.byId("subTaskSmartTable").bindProperty("editable", "state>/taskEditMode");
-                
+
                 this.byId("__xmlview0--subTaskSmartTable-btnEditToggle").setVisible(false); // ???????????
 
-                
+
             },
 
             onTaskEditButtonPress: function (oEvent) {
-                this.setStateProperty("/taskEditMode", !this.getStateProperty("/taskEditMode"));    
+                this.setStateProperty("/taskEditMode", !this.getStateProperty("/taskEditMode"));
                 // this.getView().getModel("state").updateBindings(true);
             },
 
@@ -63,9 +64,20 @@ sap.ui.define([
                 });
             },
 
-            
+
             onRejectButtonPress: function () {
                 this.setStateProperty("/taskEditMode", !this.getStateProperty("/taskEditMode"));
+            },
+
+
+            onSubTaskItemPress: function (oEvent) {
+                oEvent.getParameter("listItem").setSelected(false);
+
+                this.navTo("subtask", { 
+                    taskId: btoa(this.getView().getBindingContext().getObject().TaskId),
+                    subTaskId : btoa(oEvent.getParameter("listItem").getBindingContext().getObject().SubtaskId)
+                }, false);
+
             }
 
         });
