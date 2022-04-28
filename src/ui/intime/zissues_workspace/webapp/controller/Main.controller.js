@@ -11,7 +11,7 @@ sap.ui.define([
         return BaseController.extend("intime.zissues_workspace.controller.Main", {
             onInit: function () {
 
-               
+
             },
 
             onChooseProjectTitlePress: function () {
@@ -27,13 +27,13 @@ sap.ui.define([
                     );
             },
 
-            onShowSubTaskListButtonPress: function(oEvent){
+            onShowSubTaskListButtonPress: function (oEvent) {
                 var oList = oEvent.getSource().getParent().getParent().getParent().getParent().getItems()[1];
                 oList.setVisible(!oList.getVisible());
 
                 debugger;
 
-                if (oList.getVisible()){
+                if (oList.getVisible()) {
                     oEvent.getSource().setIcon("sap-icon://hide");
                 } else {
                     oEvent.getSource().setIcon("sap-icon://arrow-bottom")
@@ -41,13 +41,72 @@ sap.ui.define([
             },
 
 
-            onTaskTitlePress: function(oEvent){
+            onTaskTitlePress: function (oEvent) {
                 //  var oParams = {
                 //     TaskId: oEvent.getSource().getBindingContext().getObject().TaskId
                 // };
 
-                this.navTo("task", { 
-                    taskId: btoa(oEvent.getSource().getBindingContext().getObject().TaskId) }, false);
+                this.navTo("task", {
+                    taskId: btoa(oEvent.getSource().getBindingContext().getObject().TaskId)
+                }, false);
+            },
+
+            onNewTaskButtonPress: function (oEvent) {
+
+                this.navTo("task", {
+                    taskId: btoa("new"),
+                    query: {
+                        status: oEvent.getSource().getBindingContext().getObject().TaskStatus,
+                        project: "" // TODO
+                    }
+                }, false);
+
+            },
+
+            onChangeTaskStatusDrop: function (oEvent) {
+                var oTask = oEvent.getParameter("draggedControl").getBindingContext();
+                var sStatus = oEvent.getParameter("droppedControl").getBindingContext().getObject().TaskStatus;
+
+                this.getView().getModel().update(oTask.getPath(), {
+                    Status: sStatus
+                }, {
+                    success: function () {
+                        debugger;
+                    }.bind(this),
+
+                    error: function (oError) {
+                        this.showError(oError);
+                    }.bind(this)
+                })
+            },
+
+            onDeleteTaskButtonPress: function (oEvent) {
+                this._delTask = oEvent.getSource().getBindingContext();
+
+                this.getView().setBusy(true);
+
+                MessageBox.warning(`Удалить задачу "${this._delTask.getObject().Name}"?`, {
+                    actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
+                    onClose: function (sAction) {
+
+
+                        this.getView().setBusy(false);
+
+                        if (sAction === 'OK') {
+
+                            this.getModel().remove(this._delTask.getPath(), {
+                                success: function (oData) {
+                                    this.isExistError();
+                                }.bind(this),
+
+                                error: function (oError) {
+                                    this.showError(oError);
+                                }.bind(this)
+                            });
+
+                        }
+                    }.bind(this)
+                });
             }
 
         });

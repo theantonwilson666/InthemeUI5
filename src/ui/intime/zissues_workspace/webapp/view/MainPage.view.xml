@@ -7,6 +7,7 @@
   xmlns:sv="sap.ui.comp.smartvariants"
   xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
   xmlns:dnd="sap.ui.core.dnd"
+  xmlns:control="intime.zissues_workspace.controls"
   xmlns:dnd-grid="sap.f.dnd">
 
 
@@ -44,14 +45,27 @@
 
     <f:content>
       <f:GridList id="statusGridList"
+        showNoData="false"
+        growingDirection="Upwards"
         items="{/ZBNN_TASK_STATUS}">
-        <f:GridListItem>
+
+        <!-- <f:customLayout>
+          <grid:GridBoxLayout boxWidth="20em" />
+        </f:customLayout> -->
+
+        <control:GridListStatus>
+
+          <control:dragDropConfig>
+            <dnd:DropInfo drop="onChangeTaskStatusDrop" />
+          </control:dragDropConfig>
+
           <VBox height="100%"
-            justifyContent="SpaceBetween">
-            <layoutData>
-              <FlexItemData growFactor="1"
-                shrinkFactor="0" />
-            </layoutData>
+            direction="Column"
+            alignContent="Start"
+            justifyContent="Start">
+            <!-- <layoutData>
+              <FlexItemData growFactor="1" shrinkFactor="0" />
+            </layoutData> -->
 
             <HBox alignItems="Start"
               justifyContent="SpaceBetween">
@@ -61,12 +75,22 @@
               </VBox>
 
               <HBox class="sapUiTinyMargin">
-                <Button icon="sap-icon://add" visible="{CreateTaskEnabled}"/>
+                <Button icon="sap-icon://add"
+                  visible="{CreateTaskEnabled}"
+                  press="onNewTaskButtonPress"/>
               </HBox>
             </HBox>
+            <!-- <Panel/> -->
+            <f:GridList items="{to_Task}"
+              showNoData="false"
+              growingDirection="Upwards">
 
-            <f:GridList items="{to_Task}">
-              <f:GridListItem>
+              <control:GridListTask>
+
+                <control:dragDropConfig>
+                  <dnd:DragInfo />
+                </control:dragDropConfig>
+
                 <VBox height="100%"
                   justifyContent="SpaceBetween">
                   <layoutData>
@@ -85,13 +109,15 @@
                       <HBox class="sapUiTinyMargin">
                         <Button icon="sap-icon://arrow-bottom"
                           press="onShowSubTaskListButtonPress"/>
-                        <Button icon="sap-icon://add"/>
-                        <Button icon="sap-icon://delete"/>
+                        <!-- <Button icon="sap-icon://add"/> -->
+                        <Button icon="sap-icon://delete"
+                          press="onDeleteTaskButtonPress"/>
                       </HBox>
 
                     </HBox>
 
-                    <Text text="{path : 'EndDate', formatter:'.commonFormatter.formatDateTimeToShortDate'}" class="sapUiTinyMarginBegin"/>
+                    <Text text="{path : 'EndDate', formatter:'.commonFormatter.formatDateTimeToShortDate'}"
+                      class="sapUiTinyMarginBegin"/>
 
                   </VBox>
 
@@ -107,25 +133,11 @@
 
                 </VBox>
 
-              </f:GridListItem>
+              </control:GridListTask>
             </f:GridList>
 
-
-            <!-- <f:GridList>
-              <f:GridListItem>
-                <VBox height="100%" justifyContent="SpaceBetween">
-                  <layoutData>
-                    <FlexItemData growFactor="1" shrinkFactor="0" />
-                  </layoutData>
-
-
-                  <Title text="ЗАДАЧА №2" wrapping="true" class="sapUiSmallMargin"/>
-                </VBox>
-              </f:GridListItem>
-            </f:GridList> -->
-
           </VBox>
-        </f:GridListItem>
+        </control:GridListStatus>
       </f:GridList>
 
     </f:content>

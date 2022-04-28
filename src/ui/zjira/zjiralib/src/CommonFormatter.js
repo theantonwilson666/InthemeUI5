@@ -15,12 +15,15 @@ sap.ui.define([], function () {
       }
     },
 
-    formatDateTimeToShortDate : function(oValue){
-      return oValue.toLocaleDateString('ru-RU', {
-        day : 'numeric',
-        month : 'short',
-        year: 'numeric'
-      });
+    formatDateTimeToShortDate: function (oValue) {
+      if (oValue) {
+        return oValue.toLocaleDateString('ru-RU', {
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric'
+        });
+
+      }
     },
 
     formatSumHours: function (oValue) {

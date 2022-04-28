@@ -12,7 +12,7 @@
 
 
     <f:DynamicPage id="subTaskPage"
-        showFooter="{state&gt;/taskEditMode}">
+        showFooter="{state&gt;/subTaskEditMode}">
         <f:title>
             <f:DynamicPageTitle>
                 <f:heading>
@@ -28,16 +28,16 @@
                 </f:content>
 
                 <f:actions>
-                    <Button icon="{= ${state>/taskEditMode} === true ? 'sap-icon://display' : 'sap-icon://edit'}"
-                        text="{= ${state>/taskEditMode} === true ? 'Просмотреть' : 'Изменить'}"
+                    <Button icon="{= ${state>/subTaskEditMode} === true ? 'sap-icon://display' : 'sap-icon://edit'}"
+                        text="{= ${state>/subTaskEditMode} === true ? 'Просмотреть' : 'Изменить'}"
                         type="Emphasized"
-                        press="onTaskEditButtonPress"/>
+                        press="onSubTaskEditButtonPress"/>
 
 
                     <Button icon="sap-icon://delete"
                         text="Удалить"
                         type="Reject"
-                        press="onTaskEditButtonPress"/>
+                        press="onSubTaskDeleteButtonPress"/>
 
                 </f:actions>
 
@@ -53,7 +53,7 @@
 
         <f:content>
 
-            <smartForm:SmartForm editable="{state>/taskEditMode}"
+            <smartForm:SmartForm editable="{state>/subTaskEditMode}"
                 entityType="ZSNN_INTIME_SUBTASKType">
                 <smartForm:Group label="Общая информация">
                     <smartForm:GroupElement>
@@ -133,10 +133,10 @@
                 <ToolbarSpacer />
                 <Button type="Accept"
                     text="Сохранить"
-                    press="onSaveTaskButtonPress" />
+                    press="onSaveSubTaskButtonPress" />
                 <Button type="Reject"
                     text="Отменить"
-                    press="onRejectButtonPress" />
+                    press="onRejectSubTaskButtonPress" />
             </OverflowToolbar>
         </f:footer>
     </f:DynamicPage>

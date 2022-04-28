@@ -108,7 +108,10 @@
                         "goHome": "sap-icon://home"
                     },
                     "currentProjectStage": null,
-                    "taskEditMode": false
+                    "taskEditMode": false,
+                    "subTaskEditMode" : false,
+                    "newTaskContext" : null,
+                    "newSubTaskContext" : null
                 }
             }
         },
@@ -138,7 +141,7 @@
                     "target": "mainpage"
                 },
                 {
-                    "pattern": "task/{taskId}",
+                    "pattern": "task/{taskId}:?query:",
                     "name": "task",
                     "target": "task"
                 },
