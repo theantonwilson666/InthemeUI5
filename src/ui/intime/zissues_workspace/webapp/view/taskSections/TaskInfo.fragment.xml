@@ -97,7 +97,7 @@
 
 
     <core:Fragment fragmentName="intime.zissues_workspace.view.taskSections.SubTaskSection"
-                            type="XML" />
+                            type="XML"/>
 
 
 

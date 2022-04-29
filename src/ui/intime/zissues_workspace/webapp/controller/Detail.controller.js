@@ -14,7 +14,6 @@ sap.ui.define([
                 this.getRouter()
                     .getRoute("task")
                     .attachPatternMatched(this._onRouteMatched, this);
-
             },
 
             _onRouteMatched: function (oEvent) {
@@ -27,6 +26,8 @@ sap.ui.define([
                 this.getView().getModel().metadataLoaded().then(function () {
 
                     if (this._routeParam.taskId === 'new') {
+
+                        this.setStateProperty("/taskCreated", true);
 
                         var oParam = this._routeParam.param;
 
@@ -51,6 +52,7 @@ sap.ui.define([
                         this.setStateProperty("/taskContext", this.getView().getBindingContext());
 
                     } else {
+                        this.setStateProperty("/taskCreated", false);
                         this.getView().bindObject({
                             path: `/ZSNN_INTIME_TASK('${this._routeParam.taskId}')`,
                             events: {
@@ -78,7 +80,6 @@ sap.ui.define([
             },
 
             getPage: function () {
-
                 return this.byId("taskPage");
             },
 
@@ -93,7 +94,7 @@ sap.ui.define([
                     groupId: "changes",
                     success: function () {
                         this.getPage().setBusy(false);
-
+                        
                         if (!this.isExistError()) {
                             this.setStateProperty("/taskEditMode", !this.getStateProperty("/taskEditMode"));
                             this.refreshPage();
@@ -110,6 +111,7 @@ sap.ui.define([
 
 
             onRejectButtonPress: function () {
+                
                 this.setStateProperty("/taskEditMode", !this.getStateProperty("/taskEditMode"));
             },
 
@@ -125,17 +127,9 @@ sap.ui.define([
             },
 
             onAddNewSubTask: function () {
-
-
-
                 this.navTo("subtask", {
                     taskId: btoa(this.getView().getBindingContext().getObject().TaskId),
-                    subTaskId: btoa("new")//btoa(oEvent.getParameter("listItem").getBindingContext().getObject().SubtaskId)
-                    // query: {
-                    //     partnerId: btoa(this.getView().getBindingContext().getObject().PartnerID),
-                    //     projectId: btoa(this.getView().getBindingContext().getObject().ProjectId),
-                    //     stageId: btoa(this.getView().getBindingContext().getObject().ProjectStageId)
-                    // }
+                    subTaskId: btoa("new")
                 }, false);
             }
 

@@ -12,6 +12,7 @@
     <smartTable:SmartTable id="subTaskSmartTable"
         entitySet="ZSNN_INTIME_SUBTASK"
         tableType="ResponsiveTable"
+        visible="{= ${state>/taskCreated} === true ? false : true}"
         header="Подзадачи"
         useExportToExcel="false"
         useVariantManagement="false"

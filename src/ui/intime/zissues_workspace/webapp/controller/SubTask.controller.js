@@ -32,6 +32,12 @@ sap.ui.define([
                     }
 
                     if (this._routeSubTaskParam.subTaskId === 'new') {
+
+                        if (!oTaskContext) {
+                            this.goToMainPage(true);
+                            return;
+                        }
+
                         //todo : stage project
                         var oNewSubTaskContext = this.getView().getModel().createEntry(`/ZSNN_INTIME_SUBTASK`, {
                             properties: {
@@ -39,18 +45,11 @@ sap.ui.define([
                                 TaskId: this._routeSubTaskParam.taskId
                             },
                             groupId: "changes",
-
                             success: function (oData) {
-
-                                debugger;
-
                                 this.navTo("subtask", {
                                     taskId: btoa(oData.TaskId),
                                     subTaskId: btoa(oData.SubtaskId)
-
                                 }, true);
-
-                                // this.getView().bindObject(`/ZSNN_INTIME_TASK('${oData.TaskId}')`);
                             }.bind(this)
                         });
 
@@ -65,6 +64,13 @@ sap.ui.define([
                             path: `/ZSNN_INTIME_SUBTASK('${this._routeSubTaskParam.subTaskId}')`,
                             parameters: {
                                 expand: "to_Task"
+                            },
+                            events: {
+                                dataReceived: function (oData) {
+                                    var oTaskModel = new JSONModel(oData.getParameter("data").to_Task);
+                                    this.getView().setModel(oTaskModel, "taskData");
+                                    // oTaskModel.updateBindings(true);
+                                }.bind(this)
                             }
                         });
                     }
@@ -73,11 +79,52 @@ sap.ui.define([
 
             },
 
+
+            getTaskData: function () {
+
+                if (this.getView().getBindingContext().bCreated) {
+                    this.goToMainPage(true);
+                    return;
+                }
+
+                return new Promise(function (resolve, reject) {
+                    this.getModel().read(this.getModel().getBindingContext().getPath() + "/to_Task", {
+                        success: resolve,
+                        error: reject
+                    })
+                }.bind(this));
+            },
+
+
             onSubTaskEditButtonPress: function () {
                 this.setStateProperty("/subTaskEditMode", !this.getStateProperty("/subTaskEditMode"));
             },
 
-            onSubTaskDeleteButtonPress: function () {
+            onSubTaskDeleteButtonPress: function (oEvent) {
+
+                this._delSubTask = oEvent.getSource().getBindingContext();
+
+                this.getView().setBusy(true);
+
+                MessageBox.warning(`Удалить подзадачу "${this._delSubTask.getObject().Name}"?`, {
+                    actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
+                    onClose: function (sAction) {
+                        this.getView().setBusy(false);
+                        if (sAction === 'OK') {
+
+                            this.getModel().remove(this._delSubTask.getPath(), {
+                                success: function (oData) {
+                                    this.isExistError();
+                                }.bind(this),
+
+                                error: function (oError) {
+                                    this.showError(oError);
+                                }.bind(this)
+                            });
+
+                        }
+                    }.bind(this)
+                });
 
             },
 

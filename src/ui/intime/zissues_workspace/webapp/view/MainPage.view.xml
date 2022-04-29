@@ -33,8 +33,9 @@
 
     <f:header>
       <f:DynamicPageHeader>
-        <smartFilterBar:SmartFilterBar id="issueSmartFilter"
+        <smartFilterBar:SmartFilterBar id="taskSmartFilter"
           considerSelectionVariants="true"
+          search="onSmartFilterGoPress"
           entitySet="ZSNN_INTIME_TASK"
           showClearButton="true">
 
@@ -46,12 +47,9 @@
     <f:content>
       <f:GridList id="statusGridList"
         showNoData="false"
-        growingDirection="Upwards"
-        items="{/ZBNN_TASK_STATUS}">
-
-        <!-- <f:customLayout>
-          <grid:GridBoxLayout boxWidth="20em" />
-        </f:customLayout> -->
+        items="{/ZBNN_TASK_STATUS}"
+        updateFinished="updateFinished"
+        growingDirection="Upwards">
 
         <control:GridListStatus>
 
@@ -63,6 +61,8 @@
             direction="Column"
             alignContent="Start"
             justifyContent="Start">
+
+
             <!-- <layoutData>
               <FlexItemData growFactor="1" shrinkFactor="0" />
             </layoutData> -->
@@ -80,62 +80,10 @@
                   press="onNewTaskButtonPress"/>
               </HBox>
             </HBox>
-            <!-- <Panel/> -->
-            <f:GridList items="{to_Task}"
-              showNoData="false"
+
+            <f:GridList showNoData="false"
               growingDirection="Upwards">
-
-              <control:GridListTask>
-
-                <control:dragDropConfig>
-                  <dnd:DragInfo />
-                </control:dragDropConfig>
-
-                <VBox height="100%"
-                  justifyContent="SpaceBetween">
-                  <layoutData>
-                    <FlexItemData growFactor="1"
-                      shrinkFactor="0" />
-                  </layoutData>
-
-                  <VBox>
-                    <HBox alignItems="Start"
-                      justifyContent="SpaceBetween">
-                      <ObjectIdentifier title="{Name}"
-                        text="{ProjectStageName}({ProjectName})"
-                        titleActive="true"
-                        titlePress="onTaskTitlePress"
-                        class="sapUiTinyMargin"/>
-                      <HBox class="sapUiTinyMargin">
-                        <Button icon="sap-icon://arrow-bottom"
-                          press="onShowSubTaskListButtonPress"/>
-                        <!-- <Button icon="sap-icon://add"/> -->
-                        <Button icon="sap-icon://delete"
-                          press="onDeleteTaskButtonPress"/>
-                      </HBox>
-
-                    </HBox>
-
-                    <Text text="{path : 'EndDate', formatter:'.commonFormatter.formatDateTimeToShortDate'}"
-                      class="sapUiTinyMarginBegin"/>
-
-                  </VBox>
-
-                  <List items="{to_SubTask}"
-                    visible="false">
-                    <items>
-                      <StandardListItem title="{Name}"
-                        info="{StatusText}"/>
-                    </items>
-                  </List>
-                  <!-- <Title text="{Name}" wrapping="true" class="sapUiSmallMargin"/> -->
-
-
-                </VBox>
-
-              </control:GridListTask>
             </f:GridList>
-
           </VBox>
         </control:GridListStatus>
       </f:GridList>

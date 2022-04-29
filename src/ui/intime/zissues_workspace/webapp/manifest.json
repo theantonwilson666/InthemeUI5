@@ -110,7 +110,8 @@
                     "currentProjectStage": null,
                     "taskEditMode": false,
                     "subTaskEditMode" : false,
-                    "taskContext" : null
+                    "taskContext" : null,
+                    "taskCreated" : false
                 }
             }
         },
