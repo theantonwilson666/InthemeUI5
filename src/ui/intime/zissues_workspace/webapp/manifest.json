@@ -110,8 +110,7 @@
                     "currentProjectStage": null,
                     "taskEditMode": false,
                     "subTaskEditMode" : false,
-                    "newTaskContext" : null,
-                    "newSubTaskContext" : null
+                    "taskContext" : null
                 }
             }
         },
@@ -146,7 +145,7 @@
                     "target": "task"
                 },
                 {
-                    "pattern": "task/{taskId}/subTask/{subTaskId}",
+                    "pattern": "task/{taskId}/subTask/{subTaskId}:?query:",
                     "name": "subtask",
                     "target": "subtask"
                 }

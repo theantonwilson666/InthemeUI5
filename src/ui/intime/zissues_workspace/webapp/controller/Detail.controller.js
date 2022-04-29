@@ -39,39 +39,42 @@ sap.ui.define([
                             groupId: "changes",
 
                             success: function (oData) {
-
-                                // var oHistory = History.getInstance();
-                                
-                                // debugger;
-
-                                // this.getView().unbindObject()
-
-
-                                // debugger;
-
                                 this.navTo("task", {
                                     taskId: btoa(oData.TaskId)
                                 }, true);
-
-                                // this.getView().bindObject(`/ZSNN_INTIME_TASK('${oData.TaskId}')`);
                             }.bind(this)
                         });
 
                         this.getView().unbindObject();
                         this.getView().setBindingContext(oNewTaskContext);
 
+                        this.setStateProperty("/taskContext", this.getView().getBindingContext());
 
                     } else {
-                        this.getView().bindObject(`/ZSNN_INTIME_TASK('${this._routeParam.taskId}')`);
+                        this.getView().bindObject({
+                            path: `/ZSNN_INTIME_TASK('${this._routeParam.taskId}')`,
+                            events: {
+                                dataReceived: function (oEvent) {
+                                    this.setStateProperty("/taskContext", this.getView().getBindingContext());
+                                }.bind(this)
+                            }
+                        });
+
+                        if (this.getView().getBindingContext()) {
+                            this.setStateProperty("/taskContext", this.getView().getBindingContext());
+                        }
+
+
                     }
                     this.byId("subTaskSmartTable").bindProperty("editable", "state>/taskEditMode");
+
+                    debugger;
 
                 }.bind(this))
             },
 
             onTaskEditButtonPress: function (oEvent) {
                 this.setStateProperty("/taskEditMode", !this.getStateProperty("/taskEditMode"));
-                // this.getView().getModel("state").updateBindings(true);
             },
 
             getPage: function () {
@@ -119,7 +122,23 @@ sap.ui.define([
                     subTaskId: btoa(oEvent.getParameter("listItem").getBindingContext().getObject().SubtaskId)
                 }, false);
 
+            },
+
+            onAddNewSubTask: function () {
+
+
+
+                this.navTo("subtask", {
+                    taskId: btoa(this.getView().getBindingContext().getObject().TaskId),
+                    subTaskId: btoa("new")//btoa(oEvent.getParameter("listItem").getBindingContext().getObject().SubtaskId)
+                    // query: {
+                    //     partnerId: btoa(this.getView().getBindingContext().getObject().PartnerID),
+                    //     projectId: btoa(this.getView().getBindingContext().getObject().ProjectId),
+                    //     stageId: btoa(this.getView().getBindingContext().getObject().ProjectStageId)
+                    // }
+                }, false);
             }
+
 
         });
     });

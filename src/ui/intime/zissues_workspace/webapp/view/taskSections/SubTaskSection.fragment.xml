@@ -22,8 +22,17 @@
         enableAutoBinding="true"
         tableBindingPath="to_SubTask">
 
-        <Table
-            growing="true"
+        <smartTable:customToolbar>
+            <OverflowToolbar design="Transparent">
+                <ToolbarSpacer />
+                <Button icon="sap-icon://add"
+                    enabled="{state>/taskEditMode}"
+                    text="Добавить подзадачу"
+                    press="onAddNewSubTask" />
+            </OverflowToolbar>
+        </smartTable:customToolbar>
+
+        <Table growing="true"
             rememberSelections="false"
             mode="SingleSelectMaster"
             selectionChange="onSubTaskItemPress"/>

@@ -3,9 +3,10 @@ sap.ui.define([
     "intime/zissues_workspace/controller/Detail.controller",
     'sap/ui/core/Fragment',
     'sap/m/MessageBox',
-    'sap/m/Button'
+    'sap/m/Button',
+    "sap/ui/model/json/JSONModel"
 ],
-    function (DetailController, Fragment, MessageBox, Button) {
+    function (DetailController, Fragment, MessageBox, Button, JSONModel) {
         "use strict";
 
         return DetailController.extend("intime.zissues_workspace.controller.SubTask", {
@@ -17,19 +18,58 @@ sap.ui.define([
             },
 
             _onRouteMatched: function (oEvent) {
+                this._routeSubTaskParam = {
+                    taskId: atob(oEvent.getParameter("arguments").taskId),
+                    subTaskId: atob(oEvent.getParameter("arguments").subTaskId),
+                    param: oEvent.getParameter("arguments")["?query"]
+                };
 
+                this.getView().getModel().metadataLoaded().then(function () {
 
-                this.getView().bindObject({
-                    path: `/ZSNN_INTIME_SUBTASK('${atob(oEvent.getParameter("arguments").subTaskId)}')`,
-                    parameters: {
-                        expand: "to_Task"
+                    var oTaskContext = this.getStateProperty("/taskContext");
+                    if (oTaskContext) {
+                        this.getView().setModel(new JSONModel(oTaskContext.getObject()), "taskData");
                     }
-                });
 
-                // this.byId("subTaskSmartTable").bindProperty("editable", "state>/taskEditMode");
+                    if (this._routeSubTaskParam.subTaskId === 'new') {
+                        //todo : stage project
+                        var oNewSubTaskContext = this.getView().getModel().createEntry(`/ZSNN_INTIME_SUBTASK`, {
+                            properties: {
+                                Name: 'Новая подзадача',
+                                TaskId: this._routeSubTaskParam.taskId
+                            },
+                            groupId: "changes",
 
-                // this.byId("__xmlview0--subTaskSmartTable-btnEditToggle").setVisible(false); // ???????????
+                            success: function (oData) {
 
+                                debugger;
+
+                                this.navTo("subtask", {
+                                    taskId: btoa(oData.TaskId),
+                                    subTaskId: btoa(oData.SubtaskId)
+
+                                }, true);
+
+                                // this.getView().bindObject(`/ZSNN_INTIME_TASK('${oData.TaskId}')`);
+                            }.bind(this)
+                        });
+
+
+                        this.getView().unbindObject();
+                        this.getView().setBindingContext(oNewSubTaskContext);
+                        this.setStateProperty("/subTaskEditMode", true);
+
+
+                    } else {
+                        this.getView().bindObject({
+                            path: `/ZSNN_INTIME_SUBTASK('${this._routeSubTaskParam.subTaskId}')`,
+                            parameters: {
+                                expand: "to_Task"
+                            }
+                        });
+                    }
+
+                }.bind(this));
 
             },
 

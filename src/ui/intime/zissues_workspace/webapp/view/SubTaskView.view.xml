@@ -62,16 +62,21 @@
                     </smartForm:GroupElement>
 
                     <smartForm:GroupElement label="Контрагент">
-                        <Text text="{to_Task/PartnerName}"/>
+                        <Text text="{taskData>/PartnerName}"/>
                     </smartForm:GroupElement>
 
                     <smartForm:GroupElement label="Проект">
-                        <Text text="{to_Task/ProjectName}"/>
+                        <Text text="{taskData>/ProjectName}"/>
                     </smartForm:GroupElement>
 
                     <smartForm:GroupElement label="Этап проекта">
-                        <Text text="{to_Task/ProjectStageName}"/>
+                        <Text text="{taskData>/ProjectStageName}"/>
                     </smartForm:GroupElement>
+
+                    <smartForm:GroupElement label="Задача">
+                        <Text text="{taskData>/Name}"/>
+                    </smartForm:GroupElement>
+
 
                     <smartForm:GroupElement>
                         <smartField:SmartField value="{Status}"

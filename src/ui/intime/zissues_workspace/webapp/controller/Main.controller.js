@@ -67,11 +67,18 @@ sap.ui.define([
                 var oTask = oEvent.getParameter("draggedControl").getBindingContext();
                 var sStatus = oEvent.getParameter("droppedControl").getBindingContext().getObject().TaskStatus;
 
+
+                this._droppedStatus = oEvent.getParameter("droppedControl");
+
                 this.getView().getModel().update(oTask.getPath(), {
                     Status: sStatus
                 }, {
                     success: function () {
-                        debugger;
+                        
+                        this._droppedStatus.getContent()[0].getItems()[1].getBinding("items").refresh(); // todo : опасно
+
+                        // this.byId("statusGridList").refreshItems(true);
+                    
                     }.bind(this),
 
                     error: function (oError) {

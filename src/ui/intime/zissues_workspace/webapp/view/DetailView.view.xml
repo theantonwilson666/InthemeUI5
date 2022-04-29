@@ -38,7 +38,7 @@
                     <Button icon="sap-icon://delete"
                         text="Удалить"
                         type="Reject"
-                        press="onTaskEditButtonPress"/>
+                        press="onDeleteTaskButtonPress"/>
 
                 </f:actions>
 
