@@ -23,16 +23,15 @@ sap.ui.define([
             _onRouteMatched: function() {
                 this.getView().getModel().metadataLoaded().then(function() {
                     if (this.byId("statusGridList")) {
-                        // this.byId("statusGridList").bindItems({
-                        //     path: "/ZBNN_TASK_STATUS",
-                        //     template: this.getGridListStatus()
-                        // });
-
-                        // debugger;
-
+                        var oUrlParam = jQuery.sap.getUriParameters().mParams;
+                        this.handleParams(oUrlParam);
                     };
 
                 }.bind(this));
+            },
+
+            handleParams: function(oParam) {
+
             },
 
             onSmartFilterGoPress: function() {

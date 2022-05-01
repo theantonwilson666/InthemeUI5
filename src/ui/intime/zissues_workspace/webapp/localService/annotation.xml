@@ -46,6 +46,7 @@
       <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_TASKType">
         <Annotation Term="UI.SelectionFields">
           <Collection>
+            <PropertyPath>PartnerID</PropertyPath>
             <PropertyPath>ProjectId</PropertyPath>
             <PropertyPath>ProjectStageId</PropertyPath>
             <PropertyPath>Status</PropertyPath>
