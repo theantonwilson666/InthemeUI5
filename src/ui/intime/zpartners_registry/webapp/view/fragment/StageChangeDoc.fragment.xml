@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:u="sap.ui.unified"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:m="sap.m">
+
+
+    <smartTable:SmartTable id="stageChangeDocumentSmartTable"
+        entitySet="ZBNN_TASK_CHANGE_DOCUMENT"
+        tableType="ResponsiveTable"
+        useExportToExcel="false"
+        useVariantManagement="false"
+        useTablePersonalisation="true"
+        showRowCount="false"
+        enableAutoBinding="true"
+        tableBindingPath="to_ChangeDocument"/>
+</core:FragmentDefinition>

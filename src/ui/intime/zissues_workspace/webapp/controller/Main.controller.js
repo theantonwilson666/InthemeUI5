@@ -116,7 +116,7 @@ sap.ui.define([
                                     path: 'to_SubTask',
                                     template: new sap.m.StandardListItem({
                                         title: "{Name}",
-                                        info: "StatusText"
+                                        info: "{StatusText}"
                                     })
                                 })
                             ]

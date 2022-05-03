@@ -55,6 +55,15 @@ sap.ui.define(
                 return false;
             },
 
+            setFaviconIconByPartner: function(sProject) {
+                this.setFaviconIconUrl(`/sap/opu/odata/sap/ZINT_UI_PARTNERS_SRV/ZSNN_PARTNER_ROOT('${sProject}')/$value`);
+            },
+
+            setFaviconIconUrl: function(sUrl) {
+                jQuery.sap.setIcons({ favicon: sUrl });
+            },
+
+
             loadDialog: function(oParams) {
                 if (!this[oParams.sDialogName]) {
                     return Fragment.load({

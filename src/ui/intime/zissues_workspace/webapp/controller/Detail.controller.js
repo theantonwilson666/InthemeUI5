@@ -1,29 +1,29 @@
 sap.ui.define([
-    // "intime.zissues_workspace.controller.App",
-    "intime/zissues_workspace/controller/Main.controller",
-    'sap/ui/core/Fragment',
-    'sap/m/MessageBox',
-    'sap/m/Button',
-    "sap/ui/core/routing/History"
-],
-    function (MainController, Fragment, MessageBox, Button, History) {
+        // "intime.zissues_workspace.controller.App",
+        "intime/zissues_workspace/controller/Main.controller",
+        'sap/ui/core/Fragment',
+        'sap/m/MessageBox',
+        'sap/m/Button',
+        "sap/ui/core/routing/History"
+    ],
+    function(MainController, Fragment, MessageBox, Button, History) {
         "use strict";
 
         return MainController.extend("intime.zissues_workspace.controller.Detail", {
-            onInit: function () {
+            onInit: function() {
                 this.getRouter()
                     .getRoute("task")
                     .attachPatternMatched(this._onRouteMatched, this);
             },
 
-            _onRouteMatched: function (oEvent) {
+            _onRouteMatched: function(oEvent) {
 
                 this._routeParam = {
                     taskId: atob(oEvent.getParameter("arguments").taskId),
                     param: oEvent.getParameter("arguments")["?query"]
                 };
 
-                this.getView().getModel().metadataLoaded().then(function () {
+                this.getView().getModel().metadataLoaded().then(function() {
 
                     if (this._routeParam.taskId === 'new') {
 
@@ -39,7 +39,7 @@ sap.ui.define([
                             },
                             groupId: "changes",
 
-                            success: function (oData) {
+                            success: function(oData) {
                                 this.navTo("task", {
                                     taskId: btoa(oData.TaskId)
                                 }, true);
@@ -56,7 +56,8 @@ sap.ui.define([
                         this.getView().bindObject({
                             path: `/ZSNN_INTIME_TASK('${this._routeParam.taskId}')`,
                             events: {
-                                dataReceived: function (oEvent) {
+                                dataReceived: function(oEvent) {
+                                    this.setFaviconIconByPartner(this.getView().getBindingContext().getObject().PartnerID);
                                     this.setStateProperty("/taskContext", this.getView().getBindingContext());
                                 }.bind(this)
                             }
@@ -64,6 +65,7 @@ sap.ui.define([
 
                         if (this.getView().getBindingContext()) {
                             this.setStateProperty("/taskContext", this.getView().getBindingContext());
+                            this.setFaviconIconByPartner(this.getView().getBindingContext().getObject().PartnerID);
                         }
 
 
@@ -75,32 +77,32 @@ sap.ui.define([
                 }.bind(this))
             },
 
-            onTaskEditButtonPress: function (oEvent) {
+            onTaskEditButtonPress: function(oEvent) {
                 this.setStateProperty("/taskEditMode", !this.getStateProperty("/taskEditMode"));
             },
 
-            getPage: function () {
+            getPage: function() {
                 return this.byId("taskPage");
             },
 
-            refreshPage: function () {
+            refreshPage: function() {
                 this.getView().getElementBinding().refresh(true)
             },
 
-            onSaveTaskButtonPress: function () {
+            onSaveTaskButtonPress: function() {
                 this.getPage().setBusy(true);
 
                 this.submitChanges({
                     groupId: "changes",
-                    success: function () {
+                    success: function() {
                         this.getPage().setBusy(false);
-                        
+
                         if (!this.isExistError()) {
                             this.setStateProperty("/taskEditMode", !this.getStateProperty("/taskEditMode"));
                             this.refreshPage();
                         }
                     }.bind(this),
-                    error: function (oError) {
+                    error: function(oError) {
                         this.getPage().setBusy(false);
                         this.showError(oError);
                         this.refreshPage();
@@ -110,13 +112,13 @@ sap.ui.define([
             },
 
 
-            onRejectButtonPress: function () {
-                
+            onRejectButtonPress: function() {
+
                 this.setStateProperty("/taskEditMode", !this.getStateProperty("/taskEditMode"));
             },
 
 
-            onSubTaskItemPress: function (oEvent) {
+            onSubTaskItemPress: function(oEvent) {
                 oEvent.getParameter("listItem").setSelected(false);
 
                 this.navTo("subtask", {
@@ -126,7 +128,7 @@ sap.ui.define([
 
             },
 
-            onAddNewSubTask: function () {
+            onAddNewSubTask: function() {
                 this.navTo("subtask", {
                     taskId: btoa(this.getView().getBindingContext().getObject().TaskId),
                     subTaskId: btoa("new")

@@ -103,13 +103,33 @@ module.exports = function(grunt) {
                     },
                 },
             },
+
+            {
+                package: "ZINTIME",
+                transportno: "TMDK922445",
+                project: "intime",
+                apps: {
+                    zissues_workspace: {
+                        bspContainer: "ZISS_WORKSPACE",
+                        bspDescription: "Intime : Задачи",
+                        prefix: "intime/zissues_workspace",
+                    },
+
+                    zpartners_registry: {
+                        bspContainer: "ZPARTN_REG",
+                        bspDescription: "Intime : Партнеры",
+                        prefix: "intime/zpartners_registry",
+                    },
+                },
+            }
+
         ],
 
         libs: {
             zjiralib: {
                 package: "ZJIRA",
                 bspContainer: "ZJIRALIB",
-                transportno: "TMDK910450",
+                transportno: "TMDK922445",
                 bspDescription: "JIRA LIB FOR UI5 APPLICATION",
             },
         },
