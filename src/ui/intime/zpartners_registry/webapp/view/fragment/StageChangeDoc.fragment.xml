@@ -8,7 +8,7 @@
     xmlns:m="sap.m">
 
 
-    <smartTable:SmartTable id="stageChangeDocumentSmartTable"
+    <!-- <smartTable:SmartTable id="stageChangeDocumentSmartTable"
         entitySet="ZBNN_TASK_CHANGE_DOCUMENT"
         tableType="ResponsiveTable"
         useExportToExcel="false"
@@ -16,5 +16,5 @@
         useTablePersonalisation="true"
         showRowCount="false"
         enableAutoBinding="true"
-        tableBindingPath="to_ChangeDocument"/>
+        tableBindingPath="to_ChangeDocument"/> -->
 </core:FragmentDefinition>
