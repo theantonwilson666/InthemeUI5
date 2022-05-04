@@ -9,12 +9,14 @@
 
 
     <smartTable:SmartTable id="stageChangeDocumentSmartTable"
-        entitySet="ZBNN_TASK_CHANGE_DOCUMENT"
+        entitySet="ZBNN_STAGE_CHANGE_DOC"
         tableType="ResponsiveTable"
         useExportToExcel="false"
         useVariantManagement="false"
         useTablePersonalisation="true"
         showRowCount="false"
         enableAutoBinding="true"
-        tableBindingPath="to_ChangeDocument"/>
+        requestAtLeastFields="Username"
+        initiallyVisibleFields="ChangedField,Udate,Utime,Username,OldValue,NewValue"
+        tableBindingPath="to_ChangeStageDocument"/>
 </core:FragmentDefinition>
