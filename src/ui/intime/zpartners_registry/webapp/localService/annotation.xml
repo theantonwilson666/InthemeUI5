@@ -198,11 +198,10 @@
 
 
 
-      <Annotations Target="ZINT_UI_PARTNERS_SRV.ZSNN_INT_PROJECTType/Name">
+      <!-- <Annotations Target="ZINT_UI_PARTNERS_SRV.ZSNN_INT_PROJECTType/Name">
         <Annotation Term="UI.SemanticObject"
-          String="zissues_workspace">
-        </Annotation>
-      </Annotations>
+          String="zissues_workspace"/>
+      </Annotations> -->
 
 
       <Annotations Target="ZINT_UI_PARTNERS_SRV.ZSNN_INT_PROJECTType">
@@ -215,6 +214,18 @@
         </Annotation>
         <Annotation Term="UI.LineItem">
           <Collection>
+            <!-- <Record Type="UI.DataFieldWithIntentBasedNavigation">
+              <PropertyValue Property="Label"
+                String="My Link for navigation" />
+              <PropertyValue Property="Value"
+                Path="Name" />
+              <PropertyValue Property="SemanticObject"
+                String="zissues_workspace"/>
+              <PropertyValue Property="Action"
+                String="display"/>
+            </Record> -->
+
+
             <Record Type="UI.DataField">
               <PropertyValue Property="Value"
                 Path="Name" />
