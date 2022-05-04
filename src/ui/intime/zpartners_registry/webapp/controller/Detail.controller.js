@@ -149,6 +149,19 @@ sap.ui.define([
 
             getSmartTable: function() {
                 return this.byId("projectSmartTable");
+            },
+
+            onDocumentNavigate: function(oEvent) {
+                debugger;
+                var oLinkData = oEvent.getSource().getBindingContext().getObject();
+
+                var oCrossAppNav = sap.ushell.Container.getService("CrossApplicationNavigation");
+                 
+                var sLinkForWinow = oCrossAppNav.hrefForExternal({
+                    target: { semanticObject: "zissues_workspace", action: "display"},
+                    params: oLinkData   
+                });
+                window.open(sLinkForWinow, true);
             }
         });
     });
