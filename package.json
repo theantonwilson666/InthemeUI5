@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "main": "Gruntfile.js",
     "dependencies": {
-        "grunt": "^1.4.1",
+        "grunt": "^1.5.2",
         "grunt-connect-proxy": "^0.1.11",
         "grunt-contrib-clean": "^2.0.0",
         "grunt-contrib-connect": "^3.0.0",
@@ -26,7 +26,6 @@
         "deploy_zperson_card": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=3 --app=zperson_card",
         "deploy_zpartners_registry": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=4 --app=zpartners_registry",
         "deploy_zissues_workspace": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=4 --app=zissues_workspace"
-
     },
     "keywords": [],
     "author": "Vilson A.Y.",
@@ -39,5 +38,6 @@
     "bugs": {
         "url": "https://github.com/theantonwilson666/InthemeUI5/issues"
     },
-    "homepage": "https://github.com/theantonwilson666/InthemeUI5#readme"
+    "homepage": "https://github.com/theantonwilson666/InthemeUI5#readme",
+    "devDependencies": {}
 }
