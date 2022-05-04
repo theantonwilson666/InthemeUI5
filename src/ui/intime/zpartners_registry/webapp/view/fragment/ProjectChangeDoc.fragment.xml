@@ -8,13 +8,15 @@
     xmlns:m="sap.m">
 
 
-    <smartTable:SmartTable id="projectChangeDocumentSmartTable"
-        entitySet="ZBNN_TASK_CHANGE_DOCUMENT"
+    <smartTable:SmartTable id="ProjectChangeDocumentSmartTable"
+        entitySet="ZBNN_PROJECT_CHANGE_DOC"
         tableType="ResponsiveTable"
-        useExportToExcel="false"
+        useExportToExcel="false"    
         useVariantManagement="false"
         useTablePersonalisation="true"
         showRowCount="false"
         enableAutoBinding="true"
-        tableBindingPath="to_ChangeDocument"/>
+        tableBindingPath="to_ChangeDocument"
+        requestAtLeastFields="Username"
+        initiallyVisibleFields="ChangedField,Udate,Utime,Username,OldValue,NewValue"/>
 </core:FragmentDefinition>
