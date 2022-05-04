@@ -20,7 +20,7 @@
         <smartForm:GroupElement>
           <smartField:SmartField value="{Name}"
                                  entitySet="ZSNN_INT_PROJECT"
-                                 id="name" />
+                                 id="name"/>
         </smartForm:GroupElement>
         <smartForm:GroupElement>
           <smartField:SmartField value="{ProjectStatus}"
