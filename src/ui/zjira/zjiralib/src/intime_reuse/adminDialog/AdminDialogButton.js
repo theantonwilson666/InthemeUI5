@@ -69,10 +69,9 @@ sap.ui.define([
                     {
                         vAlign: "Middle",
                         cells: [
-
                             new sap.ui.comp.smartfield.SmartField({
                                 value: "{Username}",
-                                editable: false//"{control>/edit}"
+                                editable: "{control>/edit}"
                             }),
                             new sap.m.Switch({
                                 state: "{CreateEnabled}",
@@ -101,8 +100,14 @@ sap.ui.define([
         },
 
         onAddPress: function (oEvent) {
+
+            debugger;
+
             var oNewContext = this.getModel().createEntry("/" + this.getProperty("entitySet"), {
-                groupId: this.getProperty("groupID")
+                groupId: this.getProperty("groupID"),
+                properties: {
+                    PartnerID: this.getBindingContext().getObject().PartnerId
+                }
             })
 
             var oItem = oEvent.getSource().getParent().getParent().getBindingInfo("items").template.clone();
@@ -147,6 +152,39 @@ sap.ui.define([
 
         onCancelButtonPress: function () {
             this.getDialog().close();
+        },
+
+        onDeleteAdminPress: function (oEvent) {
+            var oDeletedContext = oEvent.getParameter("listItem").getBindingContext();
+            this.getDialog().setBusy(true);
+            this.getModel().remove(oDeletedContext.getPath(), {
+                success: function (oData) {
+                    this.Lib.showMessage("Удалено");
+                    this.getDialog().setBusy(false);
+                }.bind(this),
+                error: function (oError) {
+                    this.Lib.showMessage("Ошибка");
+                    this.getDialog().setBusy(false);
+                }.bind(this)
+            });
+
+            MessageBox.confirm("Удалить контрагента - " + oContext.getObject().PartnerName, {
+                onClose: function (sAction) {
+                    if (sAction === 'OK') {
+                        this.getView().setBusy(true);
+                        this.getModel().remove(this._deletedPartnerContext.getPath(), {
+                            success: function (oData) {
+                                this.isExistError();
+                                this.getView().setBusy(false);
+                            }.bind(this),
+                            error: function (oError) {
+                                this.getView().setBusy(false);
+                                this.showError(oError);
+                            }.bind(this)
+                        });
+                    }
+                }.bind(this)
+            });;
         }
     });
 });

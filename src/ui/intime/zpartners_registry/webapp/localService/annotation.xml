@@ -196,12 +196,53 @@
         </Annotation>
       </Annotations>
 
+      <Annotations Target="ZINT_UI_PARTNERS_SRV.ZSNN_PARTNER_ADMINType/Username">
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="false" />
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZSNN_TM_USER" />
+            <PropertyValue Property="SearchSupported"
+              Bool="true" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="Username" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="UserName" />
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="FullName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="LastName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="FirstName"/>
+                </Record>
 
 
-      <!-- <Annotations Target="ZINT_UI_PARTNERS_SRV.ZSNN_INT_PROJECTType/Name">
-        <Annotation Term="UI.SemanticObject" String="zissues_workspace"/>
-      </Annotations> -->
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
 
+
+
+
+
+      <Annotations Target="ZINT_UI_PARTNERS_SRV.ZSNN_INT_PROJECTType/Name">
+        <Annotation Term="Common.SemanticObject"
+          String="zissues_workspace"/>
+      </Annotations>
 
       <Annotations Target="ZINT_UI_PARTNERS_SRV.ZSNN_INT_PROJECTType">
         <Annotation Term="UI.SelectionFields">

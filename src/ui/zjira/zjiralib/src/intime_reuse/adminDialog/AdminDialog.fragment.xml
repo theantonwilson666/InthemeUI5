@@ -10,7 +10,7 @@
     <Dialog
         contentWidth="30%">
         <content>
-            <Table>
+            <Table delete="onDeleteAdminPress">
                 <headerToolbar>
                     <OverflowToolbar>
                         <content>

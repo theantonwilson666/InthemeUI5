@@ -8,6 +8,7 @@
   xmlns:core="sap.ui.core"
   xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
   xmlns:adminDialog="jira.lib.intime_reuse.adminDialog"
+  xmlns:navpopover="sap.ui.comp.navpopover"
   xmlns:mvc="sap.ui.core.mvc">
   <f:DynamicPage id="projectPage"
     showFooter="{state&gt;/editProjectMode}">
@@ -55,6 +56,9 @@
     </f:title>
     <f:header>
       <f:DynamicPageHeader pinnable="true">
+
+        <!-- <adminDialog:AdminDialogButton text="Админы" type="Emphasized" dialogTitle="Админы - {PartnerName}" bindingPath="{to_Admins}" entitySet="ZSNN_PARTNER_ADMIN" groupID="changes" onAccept="onAcceptAdminDialog"/> -->
+
         <smartFilterBar:SmartFilterBar id="projectFilterBar"
           entityType="ZSNN_INT_PROJECTType"
           useToolbar="false"
@@ -78,8 +82,13 @@
           header="Проекты"
           showRowCount="false"
           enableAutoBinding="true"
-          tableBindingPath="to_Project"
-          enableAutoColumnWidth="true">
+          tableBindingPath="to_Project">
+
+          
+          <smartTable:semanticObjectController>
+            <navpopover:SemanticObjectController entitySet="ZSNN_INT_PROJECT" />
+          </smartTable:semanticObjectController>
+
           <smartTable:customToolbar>
             <OverflowToolbar design="Transparent">
               <ToolbarSpacer />
