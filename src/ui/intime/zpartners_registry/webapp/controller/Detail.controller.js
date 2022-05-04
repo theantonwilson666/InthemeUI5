@@ -160,25 +160,17 @@ sap.ui.define([
                 return this.byId("projectSmartTable");
             },
 
-            onAdminPartnerButtonPress: function (oEvent) {
-                this.loadDialog
-                    .call(this, {
-                        sDialogName: "_adminPartnerDialog",
-                        sViewName: "intime.zpartners_registry.view.fragment.PartnerAdminsDialog"
-                    })
-                    .then(
-                        function (oDialog) {
-                            var oControlModel = this.newJSONModel({
-                                edit: false
-                            });
-                            oDialog.setModel(oControlModel, "control");
-                            oDialog.open();
-                        }.bind(this)
-                    );
-            },
-
-            onAcceptAdminDialog: function(oEvent){
+            onDocumentNavigate: function(oEvent) {
                 debugger;
+                var oLinkData = oEvent.getSource().getBindingContext().getObject();
+
+                var oCrossAppNav = sap.ushell.Container.getService("CrossApplicationNavigation");
+                 
+                var sLinkForWinow = oCrossAppNav.hrefForExternal({
+                    target: { semanticObject: "zissues_workspace", action: "display"},
+                    params: oLinkData   
+                });
+                window.open(sLinkForWinow, true);
             }
         });
     });

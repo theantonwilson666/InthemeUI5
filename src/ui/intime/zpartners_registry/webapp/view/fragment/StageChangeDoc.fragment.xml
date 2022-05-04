@@ -8,8 +8,8 @@
     xmlns:m="sap.m">
 
 
-    <!-- <smartTable:SmartTable id="stageChangeDocumentSmartTable"
-        entitySet="ZBNN_TASK_CHANGE_DOCUMENT"
+    <smartTable:SmartTable id="stageChangeDocumentSmartTable"
+        entitySet="ZBNN_STAGE_CHANGE_DOC"
         tableType="ResponsiveTable"
         useExportToExcel="false"
         useVariantManagement="false"

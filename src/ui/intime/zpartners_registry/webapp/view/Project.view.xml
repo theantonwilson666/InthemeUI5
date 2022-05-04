@@ -17,7 +17,7 @@
         <f:heading>
           <VBox>
             <Title text="{PartnerName}" />
-            <Image src="/sap/opu/odata/sap/ZINT_UI_PARTNERS_SRV/ZSNN_PARTNER_ROOT(&apos;{PartnerId}&apos;)/$value"
+            <Image src="/sap/opu/odata/sap/ZINT_UI_PARTNERS_SRV/ZSNN_PARTNER_ROOT('{PartnerId}')/$value"
               width="4em"
               height="4em" />
           </VBox>
@@ -108,11 +108,27 @@
           <smartTable:layoutData>
             <FlexItemData growFactor="1" />
           </smartTable:layoutData>
-          <table:TreeTable id="TreeTableBasic"
+          <table:TreeTable 
+            id="TreeTableBasic"
             selectionBehavior="Row"
             selectionMode="Single"
             rowSelectionChange="onSelectRow"
-            expandFirstLevel="true" />
+            expandFirstLevel="true">
+              <table:columns>
+                <table:Column width="350px">
+                  <Label text="Проект" />
+                  <table:customData>
+                    <core:CustomData key="p13nData"
+                                    value="\{'columnKey': 'Name', 'leadingProperty':'Name', 'columnIndex' : '0', 'sortProperty': 'Name', 'filterProperty': 'Name'}"/>
+                  </table:customData>
+                  <table:template>
+                      <HBox direction="Column">
+                        <ObjectIdentifier title="{Name}" titleActive="{=(${HierLevel} === 0) ? true : false }" titlePress="onDocumentNavigate" />
+                      </HBox>
+                  </table:template>
+                </table:Column>
+			        </table:columns> 
+          </table:TreeTable>
         </smartTable:SmartTable>
         <IconTabBar id="iconTabBar"
           applyContentPadding="false"
