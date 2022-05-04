@@ -226,10 +226,10 @@
             </Record> -->
 
 
-            <Record Type="UI.DataField">
+            <!-- <Record Type="UI.DataField">
               <PropertyValue Property="Value"
                 Path="Name" />
-            </Record>
+            </Record> -->
             <Record Type="UI.DataField">
               <PropertyValue Property="Value"
                 Path="Status" />
@@ -252,6 +252,7 @@
           <Record>
             <PropertyValue Property="RequestAtLeast">
               <Collection>
+                <PropertyPath>Name</PropertyPath>
                 <PropertyPath>ProjectID</PropertyPath>
                 <PropertyPath>ProjectStageID</PropertyPath>
                 <PropertyPath>ProjectStatus</PropertyPath>
