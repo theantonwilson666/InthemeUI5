@@ -262,10 +262,10 @@
             </Record> -->
 
 
-            <!-- <Record Type="UI.DataField">
+            <Record Type="UI.DataField">
               <PropertyValue Property="Value"
                 Path="Name" />
-            </Record> -->
+            </Record>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value"
                 Path="Status" />
@@ -327,6 +327,76 @@
           </Collection>
         </Annotation>
       </Annotations>
+
+
+      <Annotations Target="ZINT_UI_PARTNERS_SRV.ZBNN_PROJECT_CHANGE_DOCType">
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="ChangedField" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="ChangedDate" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="ChangedTime" />
+            </Record>
+
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="ChangedUser" />
+            </Record>
+
+
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="OldValue" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="NewValue" />
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_PARTNERS_SRV.ZBNN_STAGE_CHANGE_DOCType">
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="ChangedField" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="ChangedDate" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="ChangedTime" />
+            </Record>
+
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="ChangedUser" />
+            </Record>
+
+
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="OldValue" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="NewValue" />
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+
 
 
     </Schema>
