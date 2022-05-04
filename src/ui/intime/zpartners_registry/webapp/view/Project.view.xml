@@ -39,12 +39,8 @@
             dialogTitle="Админы - {PartnerName}"
             bindingPath="{to_Admins}"
             entitySet="ZSNN_PARTNER_ADMIN"
-            groupID="projectChange"
+            groupID="changes"
             onAccept="onAcceptAdminDialog"/>
-
-          <!-- <Button text="Админы"
-            type="Emphasized"
-            press="onAdminPartnerButtonPress"/> -->
 
           <Button text="Выгрузить в эксель"/>
 

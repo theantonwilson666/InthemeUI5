@@ -25,6 +25,10 @@ sap.ui.define([
 
                 "title": {
                     type: "string"
+                },
+
+                "dialog": {
+                    type: "object"
                 }
             },
 
@@ -47,12 +51,17 @@ sap.ui.define([
                 sViewName: "jira.lib.intime_reuse.adminDialog.AdminDialog",
                 controller: this
             }).then(function (oDialog) {
+
+                this.setProperty("dialog", oDialog);
+
                 oDialog.setModel(this.getModel());
                 oDialog.setBindingContext(this.getBindingContext());
 
                 oDialog.setModel(this.Lib.newJSONModel({
                     edit: false
                 }), "control");
+
+                oDialog.getModel("control").updateBindings(true);
 
                 oDialog.setTitle(this.getProperty("dialogTitle"));
 
@@ -63,7 +72,7 @@ sap.ui.define([
 
                             new sap.ui.comp.smartfield.SmartField({
                                 value: "{Username}",
-                                editable: "{control>/edit}"
+                                editable: false//"{control>/edit}"
                             }),
                             new sap.m.Switch({
                                 state: "{CreateEnabled}",
@@ -101,12 +110,32 @@ sap.ui.define([
             oEvent.getSource().getParent().getParent().insertItem(oItem, 0);
         },
 
-        onOkButtonPress: function(oEvent){
-            this.fireEvent("onAccept");
-            oEvent.getSource().getParent().close();
+        getDialog: function () {
+            return this.getProperty("dialog");
         },
 
-        
+        onOkButtonPress: function (oEvent) {
+
+            this.getDialog().setBusy(true);
+
+            this.getModel().submitChanges({
+                groupId: this.getProperty("groupID"),
+                success: function () {
+                    this.getDialog().setBusy(false);
+                    this.Lib.showMessage("Сохранено");
+                    this.getDialog().close();
+                    this.fireEvent("onAccept", {});
+                }.bind(this),
+                error: function (oError) {
+                    this.Lib.showMessage("Ошибка");
+                    this.getDialog().setBusy(false);
+
+                }.bind(this),
+
+            });
+        },
+
+
         onEditPress: function (oEvent) {
             var oControlModel = oEvent.getSource().getModel("control");
             var oData = oControlModel.getData();
@@ -114,6 +143,10 @@ sap.ui.define([
             oControlModel.updateBindings(true);
             oEvent.getSource().setIcon(oData.edit === true ? "sap-icon://display" : "sap-icon://edit")
             oEvent.getSource().getParent().getParent().setMode(oData.edit === true ? "Delete" : "None");
+        },
+
+        onCancelButtonPress: function () {
+            this.getDialog().close();
         }
     });
 });

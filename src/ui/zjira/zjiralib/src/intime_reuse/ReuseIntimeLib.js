@@ -1,4 +1,5 @@
-sap.ui.define(["sap/ui/core/Fragment", "sap/ui/model/json/JSONModel"], function (Fragment, JSONModel) {
+sap.ui.define(["sap/ui/core/Fragment", "sap/ui/model/json/JSONModel", "sap/m/MessageToast"], function (Fragment, JSONModel, MessageToast) {
+
     return {
         loadDialog: function (oParams) {
             if (!this[oParams.sDialogName]) {
@@ -27,8 +28,38 @@ sap.ui.define(["sap/ui/core/Fragment", "sap/ui/model/json/JSONModel"], function 
             }
         },
 
-        newJSONModel :function(oData){
+        showMessage: function (sText) {
+            MessageToast.show(sText);
+        },
+
+        newJSONModel: function (oData) {
             return new JSONModel(oData);
-        }
+        },
+
+        isExistError: function () {
+            return this.baseController.isExistError();
+            // var aMassages = sap.ui
+            //     .getCore()
+            //     .getMessageManager()
+            //     .getMessageModel()
+            //     .getProperty("/");
+            // if (aMassages.length > 0) {
+            //     MessageDialog.showCurrentState();
+            //     return true;
+            // }
+            // return false;
+        },
+
+        showError: function (oError) {
+
+            debugger;
+
+            return this.baseController.showError(oError);
+            // if (oError && JSON.parse(oError.statusCode) === 500) {
+            //     MessageDialog.showError.call(this, oError);
+            //     return;
+            // }
+            // MessageDialog.showCurrentState();
+        },
     };
 });

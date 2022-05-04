@@ -44,14 +44,14 @@
         </content>
         <beginButton>
             <Button id="beginBtn"
-                text="Сохранить"
+                text="Ок"
                 type="Emphasized"
                 press=".onOkButtonPress"/>
         </beginButton>
         <endButton>
             <Button id="endBtn"
                 text="Отменить"
-                press=".onCancelPartnerDialog"/>
+                press=".onCancelButtonPress"/>
         </endButton>
     </Dialog>
 </core:FragmentDefinition>

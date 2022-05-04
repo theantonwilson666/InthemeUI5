@@ -28,7 +28,9 @@ sap.ui.define([
                 this.setStateProperty("/projectSelection", false);
                 this.setStateProperty("/stageSelection", false);
 
-                this.getView().getModel().setDeferredGroups(["projectChange"])
+                debugger;
+
+                // this.getView().getModel().setDeferredGroups(["changes"])
 
             },
 
@@ -86,11 +88,15 @@ sap.ui.define([
 
             onSaveProjectButtonPress: function (oEvent) {
 
+                debugger;
+                
                 this.byId("projectPage").setBusy(true);
 
                 this.submitChanges({
-                    groupId: "projectChange",
+                    groupId: "changes",
                     success: function () {
+                        debugger;
+
                         this.byId("projectPage").setBusy(false);
 
                         if (!this.isExistError()) {
@@ -124,7 +130,7 @@ sap.ui.define([
                         Name: 'Новый проект',
                         PartnerID: this.getView().getBindingContext().getObject().PartnerId
                     },
-                    groupId: "projectChange"
+                    groupId: "changes"
                 });
                 this.setProjectSelection();
                 this.byId("projectTab").setBindingContext(oNewEntryContext);
@@ -141,7 +147,7 @@ sap.ui.define([
                         ParentID: this._selectedRowContext.getObject().ID,
                         PartnerID: this._selectedRowContext.getObject().PartnerId
                     },
-                    groupId: "projectChange"
+                    groupId: "changes"
                 });
                 this.setStageSelection();
                 this.byId("stageTab").unbindObject();
@@ -173,29 +179,6 @@ sap.ui.define([
 
             onAcceptAdminDialog: function(oEvent){
                 debugger;
-            },
-
-            onPartnerAdminEditPress: function (oEvent) {
-                var oControlModel = oEvent.getSource().getModel("control");
-                var oData = oControlModel.getData();
-                oData.edit = !oData.edit;
-                oControlModel.updateBindings(true);
-
-                oEvent.getSource().setIcon(oData.edit === true ? "sap-icon://display" : "sap-icon://edit")
-                this.byId("_PartnerAdmins-Table").setMode(oData.edit === true ? "Delete" : "None")
-            },
-
-            onPartnerAdminAddPress: function (oEvent) {
-                var oNewContext = this.getModel().createEntry("/ZSNN_PARTNER_ADMIN", {
-                    groupId: "projectChange"
-                })
-
-                var oItem = this.byId("_PartnerAdmins-ColumnListItem").clone();
-
-                oItem.setBindingContext(oNewContext);
-
-                this.byId("_PartnerAdmins-Table").insertItem(oItem, 0);
-
             }
         });
     });
