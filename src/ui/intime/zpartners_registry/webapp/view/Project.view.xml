@@ -43,6 +43,8 @@
             groupID="changes"
             onAccept="onAcceptAdminDialog"/>
 
+          <Button text="К Задачам" press="onDocumentNavigate"/>
+
           <Button text="Выгрузить в эксель"/>
 
           <Button text="Удалить"

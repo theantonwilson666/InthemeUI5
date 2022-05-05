@@ -168,7 +168,9 @@ sap.ui.define([
                  
                 var sLinkForWinow = oCrossAppNav.hrefForExternal({
                     target: { semanticObject: "zissues_workspace", action: "display"},
-                    params: oLinkData   
+                    params: { 
+                        PartnerId: oLinkData.PartnerId  
+                    } 
                 });
                 window.open(sLinkForWinow, true);
             }
