@@ -84,7 +84,7 @@
           enableAutoBinding="true"
           tableBindingPath="to_Project">
 
-          
+
           <smartTable:semanticObjectController>
             <navpopover:SemanticObjectController entitySet="ZSNN_INT_PROJECT" />
           </smartTable:semanticObjectController>
@@ -108,8 +108,7 @@
           <smartTable:layoutData>
             <FlexItemData growFactor="1" />
           </smartTable:layoutData>
-          <table:TreeTable 
-            id="TreeTableBasic"
+          <table:TreeTable id="TreeTableBasic"
             selectionBehavior="Row"
             selectionMode="Single"
             rowSelectionChange="onSelectRow"
@@ -130,6 +129,7 @@
               <core:Fragment fragmentName="intime.zpartners_registry.view.fragment.ProjectSection"
                 type="XML" />
             </IconTabFilter>
+
 
             <IconTabFilter id="projectChangeDocTab"
               text="История изменений"
@@ -158,6 +158,9 @@
             </IconTabFilter>
 
 
+
+
+
             <IconTabFilter id="stageChangeDocTab"
               text="История изменений"
               visible="{state&gt;/stageSelection}"
@@ -174,7 +177,13 @@
                 type="XML" />
             </IconTabFilter>
 
-
+            <IconTabFilter id="adminTab"
+              text="Админы"
+              visible="{= ${state&gt;/projectSelection} === true || ${state&gt;/stageSelection}}"
+              key="admins">
+              <core:Fragment fragmentName="intime.zpartners_registry.view.fragment.Admins"
+                type="XML" />
+            </IconTabFilter>
 
           </items>
         </IconTabBar>

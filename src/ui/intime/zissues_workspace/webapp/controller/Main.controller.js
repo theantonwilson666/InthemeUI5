@@ -23,6 +23,9 @@ sap.ui.define([
             _onRouteMatched: function() {
                 this.getView().getModel().metadataLoaded().then(function() {
                     if (this.byId("statusGridList")) {
+                        
+                        debugger;
+
                         var oUrlParam = jQuery.sap.getUriParameters().mParams;
                         this.handleParams(oUrlParam);
                     };
@@ -31,6 +34,8 @@ sap.ui.define([
             },
 
             handleParams: function(oParam) {
+                
+                debugger;
 
             },
 

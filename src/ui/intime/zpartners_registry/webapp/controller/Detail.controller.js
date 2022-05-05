@@ -39,6 +39,11 @@ sap.ui.define([
 
                 this._selectedRowContext = oEvent.getParameter("rowContext");
 
+
+                this.bindSections({
+                    ID: oRowData.ID
+                });
+
                 //Проект
                 if (oRowData.HierLevel === 0) {
                     this.setProjectSelection();
@@ -48,15 +53,93 @@ sap.ui.define([
                     this.setStageSelection();
                 };
 
-                this.bindSections({
-                    ID: oRowData.ID
-                });
-
-
+                this.refreshAdminSection();
                 this.setStateProperty("/editProjectMode", false);
 
                 debugger;
             },
+
+            refreshAdminSection: function () {
+                var oTable = this.byId("_ProjectAdmins-Table");
+
+                oTable.setModel(this.newJSONModel({
+                    edit: false
+                }), "control");
+
+
+                oTable.getModel("control").updateBindings(true);
+
+                var oTemplate = new sap.m.ColumnListItem(
+                    {
+                        vAlign: "Middle",
+                        cells: [
+                            new sap.ui.comp.smartfield.SmartField({
+                                value: "{Username}",
+                                editable: "{control>/edit}"
+                            }),
+                            new sap.m.Switch({
+                                state: "{CreateEnabled}",
+                                type: "AcceptReject",
+                                enabled: "{control>/edit}"
+                            }),
+
+                            new sap.m.Switch({
+                                state: "{UpdateEnabled}",
+                                type: "AcceptReject",
+                                enabled: "{control>/edit}"
+                            }),
+
+                            new sap.m.Switch({
+                                state: "{DeleteEnabled}",
+                                type: "AcceptReject",
+                                enabled: "{control>/edit}"
+                            })
+
+                        ]
+                    });
+
+                oTable.bindItems("to_Admins", oTemplate);
+
+            },
+
+            onDeleteAdminPress: function (oEvent) {
+                var oDeletedContext = oEvent.getParameter("listItem").getBindingContext();
+                this.getDialog().setBusy(true);
+                this.getModel().remove(oDeletedContext.getPath(), {
+                    success: function (oData) {
+                        // this.Lib.showMessage("Удалено");
+                        // this.getDialog().setBusy(false);
+                    }.bind(this),
+                    error: function (oError) {
+                        // this.Lib.showMessage("Ошибка");
+                        // this.getDialog().setBusy(false);
+                    }.bind(this)
+                });
+            },
+
+            onAddAdminPress: function (oEvent) {
+
+                var oNewContext = this.getModel().createEntry(oEvent.getSource().getBindingContext().getPath() + "/to_Admins", {
+                    groupId: "changes",
+                    properties: {
+                        ID: oEvent.getSource().getBindingContext().getObject().ID
+                    }
+                })
+
+                var oItem = oEvent.getSource().getParent().getParent().getBindingInfo("items").template.clone();
+                oItem.setBindingContext(oNewContext);
+                oEvent.getSource().getParent().getParent().insertItem(oItem, 0);
+            },
+
+            onEditAdminPress: function (oEvent) {
+                var oControlModel = oEvent.getSource().getModel("control");
+                var oData = oControlModel.getData();
+                oData.edit = !oData.edit;
+                oControlModel.updateBindings(true);
+                oEvent.getSource().setIcon(oData.edit === true ? "sap-icon://display" : "sap-icon://edit")
+                oEvent.getSource().getParent().getParent().setMode(oData.edit === true ? "Delete" : "None");
+            },
+
 
             bindSections: function (oKey) {
                 var aItems = this.byId("iconTabBar").getItems();
@@ -70,11 +153,14 @@ sap.ui.define([
                 this.setStateProperty("/projectSelection", true);
                 this.setStateProperty("/stageSelection", false);
 
+                this.byId("ProjectChangeDocumentSmartTable").rebindTable();
             },
 
             setStageSelection: function () {
                 this.setStateProperty("/projectSelection", false);
                 this.setStateProperty("/stageSelection", true);
+
+                this.byId("stageChangeDocumentSmartTable").rebindTable();
             },
 
             isSelected: function (ID) {
@@ -89,7 +175,7 @@ sap.ui.define([
             onSaveProjectButtonPress: function (oEvent) {
 
                 debugger;
-                
+
                 this.byId("projectPage").setBusy(true);
 
                 this.submitChanges({
@@ -160,15 +246,15 @@ sap.ui.define([
                 return this.byId("projectSmartTable");
             },
 
-            onDocumentNavigate: function(oEvent) {
+            onDocumentNavigate: function (oEvent) {
                 debugger;
                 var oLinkData = oEvent.getSource().getBindingContext().getObject();
 
                 var oCrossAppNav = sap.ushell.Container.getService("CrossApplicationNavigation");
-                 
+
                 var sLinkForWinow = oCrossAppNav.hrefForExternal({
-                    target: { semanticObject: "zissues_workspace", action: "display"},
-                    params: oLinkData   
+                    target: { semanticObject: "zissues_workspace", action: "display" },
+                    params: oLinkData
                 });
                 window.open(sLinkForWinow, true);
             }

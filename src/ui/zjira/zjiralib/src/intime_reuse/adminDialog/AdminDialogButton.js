@@ -168,23 +168,6 @@ sap.ui.define([
                 }.bind(this)
             });
 
-            MessageBox.confirm("Удалить контрагента - " + oContext.getObject().PartnerName, {
-                onClose: function (sAction) {
-                    if (sAction === 'OK') {
-                        this.getView().setBusy(true);
-                        this.getModel().remove(this._deletedPartnerContext.getPath(), {
-                            success: function (oData) {
-                                this.isExistError();
-                                this.getView().setBusy(false);
-                            }.bind(this),
-                            error: function (oError) {
-                                this.getView().setBusy(false);
-                                this.showError(oError);
-                            }.bind(this)
-                        });
-                    }
-                }.bind(this)
-            });;
         }
     });
 });
