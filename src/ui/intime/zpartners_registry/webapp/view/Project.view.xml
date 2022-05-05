@@ -11,7 +11,7 @@
   xmlns:navpopover="sap.ui.comp.navpopover"
   xmlns:mvc="sap.ui.core.mvc">
   <f:DynamicPage id="projectPage"
-    showFooter="{state&gt;/editProjectMode}">
+    showFooter="{state>/editProjectMode}">
     <f:title>
       <f:DynamicPageTitle>
         <f:heading>
@@ -31,8 +31,6 @@
           </OverflowToolbar>
 
         </f:content>
-
-
         <f:actions>
 
           <adminDialog:AdminDialogButton text="Админы"
@@ -49,8 +47,6 @@
             type="Reject"
             press="onDeletePartnerButtonPress"/>
         </f:actions>
-
-
 
       </f:DynamicPageTitle>
     </f:title>
@@ -83,8 +79,7 @@
           showRowCount="false"
           enableAutoBinding="true"
           tableBindingPath="to_Project">
-
-          
+        
           <smartTable:semanticObjectController>
             <navpopover:SemanticObjectController entitySet="ZSNN_INT_PROJECT" />
           </smartTable:semanticObjectController>
@@ -125,7 +120,7 @@
           <items>
             <IconTabFilter id="projectTab"
               text="Проект"
-              visible="{state&gt;/projectSelection}"
+              visible="{state>/projectSelection}"
               key="project">
               <core:Fragment fragmentName="intime.zpartners_registry.view.fragment.ProjectSection"
                 type="XML" />
@@ -133,7 +128,7 @@
 
             <IconTabFilter id="projectChangeDocTab"
               text="История изменений"
-              visible="{state&gt;/projectSelection}"
+              visible="{state>/projectSelection}"
               key="projectChangeDoc">
               <core:Fragment fragmentName="intime.zpartners_registry.view.fragment.ProjectChangeDoc"
                 type="XML" />
@@ -141,26 +136,23 @@
 
             <IconTabFilter id="projectAttachment"
               text="Вложения"
-              visible="{state&gt;/projectSelection}"
+              visible="{state>/projectSelection}"
               key="projectAttach">
               <core:Fragment fragmentName="intime.zpartners_registry.view.fragment.ProjectAttachment"
                 type="XML" />
             </IconTabFilter>
 
-
-
             <IconTabFilter id="stageTab"
               text="Этап проекта"
-              visible="{state&gt;/stageSelection}"
+              visible="{state>/stageSelection}"
               key="stage">
               <core:Fragment fragmentName="intime.zpartners_registry.view.fragment.StageSection"
                 type="XML" />
             </IconTabFilter>
 
-
             <IconTabFilter id="stageChangeDocTab"
               text="История изменений"
-              visible="{state&gt;/stageSelection}"
+              visible="{state>/stageSelection}"
               key="stageChangeDoc">
               <core:Fragment fragmentName="intime.zpartners_registry.view.fragment.StageChangeDoc"
                 type="XML" />
@@ -168,13 +160,11 @@
 
             <IconTabFilter id="stageAttachment"
               text="Вложения"
-              visible="{state&gt;/stageSelection}"
+              visible="{state>/stageSelection}"
               key="stageAttach">
               <core:Fragment fragmentName="intime.zpartners_registry.view.fragment.StageAttachments"
                 type="XML" />
             </IconTabFilter>
-
-
 
           </items>
         </IconTabBar>
