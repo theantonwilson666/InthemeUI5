@@ -1,27 +1,28 @@
 sap.ui.define([
-        // "intime.zissues_workspace.controller.App",
-        "jira/lib/BaseController",
-        'sap/ui/core/Fragment',
-        'sap/m/MessageBox',
-        'sap/m/Button',
-        'sap/ui/model/Filter',
-        'intime/zissues_workspace/controls/GridListTask',
-        'sap/m/VBox',
-        'sap/m/HBox'
+    // "intime.zissues_workspace.controller.App",
+    "jira/lib/BaseController",
+    'sap/ui/core/Fragment',
+    'sap/m/MessageBox',
+    'sap/m/Button',
+    'sap/ui/model/Filter',
+    'intime/zissues_workspace/controls/GridListTask',
+    'sap/m/VBox',
+    'sap/m/HBox'
 
-    ],
-    function(BaseController, Fragment, MessageBox, Button, Filter, GridListTask, VBox, HBox) {
+],
+    function (BaseController, Fragment, MessageBox, Button, Filter, GridListTask, VBox, HBox) {
         "use strict";
 
         return BaseController.extend("intime.zissues_workspace.controller.Main", {
-            onInit: function() {
+            onInit: function () {
                 this.getRouter()
                     .getRoute("mainpage")
                     .attachPatternMatched(this._onRouteMatched, this);
+                // this.getRouter().getRoute("mainpage").attachPatternMatched(this._onMasterMatched, this);
             },
 
-            _onRouteMatched: function() {
-                this.getView().getModel().metadataLoaded().then(function() {
+            _onRouteMatched: function () {
+                this.getView().getModel().metadataLoaded().then(function () {
                     if (this.byId("statusGridList")) {
                         var oUrlParam = jQuery.sap.getUriParameters().mParams;
                         this.handleParams(oUrlParam);
@@ -30,15 +31,15 @@ sap.ui.define([
                 }.bind(this));
             },
 
-            handleParams: function(oParam) {
+            handleParams: function (oParam) {
 
             },
 
-            onSmartFilterGoPress: function() {
+            onSmartFilterGoPress: function () {
                 this.byId("statusGridList").getBinding("items").refresh(true);
             },
 
-            updateFinished: function(oEvent) {
+            updateFinished: function (oEvent) {
                 var aItem = oEvent.getSource().getItems();
                 for (var i = 0; i < aItem.length; i++) {
                     var oItem = aItem[i];
@@ -52,11 +53,11 @@ sap.ui.define([
                 }
             },
 
-            getFilters: function() {
+            getFilters: function () {
                 return this.byId("taskSmartFilter").getFilters();
             },
 
-            getGridListTask: function() {
+            getGridListTask: function () {
                 return new GridListTask({
 
                     dragDropConfig: [
@@ -128,20 +129,20 @@ sap.ui.define([
                 })
             },
 
-            onChooseProjectTitlePress: function() {
+            onChooseProjectTitlePress: function () {
                 this.loadDialog
                     .call(this, {
                         sDialogName: "_chooseProjectDialog",
                         sViewName: "intime.zissues_workspace.view.dialogs.chooseProjectDialog"
                     })
                     .then(
-                        function(oDialog) {
+                        function (oDialog) {
                             oDialog.open();
                         }.bind(this)
                     );
             },
 
-            onShowSubTaskListButtonPress: function(oEvent) {
+            onShowSubTaskListButtonPress: function (oEvent) {
                 var oList = oEvent.getSource().getParent().getParent().getParent().getParent().getItems()[1];
                 oList.setVisible(!oList.getVisible());
 
@@ -155,13 +156,13 @@ sap.ui.define([
             },
 
 
-            onTaskTitlePress: function(oEvent) {
+            onTaskTitlePress: function (oEvent) {
                 this.navTo("task", {
                     taskId: btoa(oEvent.getSource().getBindingContext().getObject().TaskId)
                 }, false);
             },
 
-            onNewTaskButtonPress: function(oEvent) {
+            onNewTaskButtonPress: function (oEvent) {
 
                 this.navTo("task", {
                     taskId: btoa("new"),
@@ -173,12 +174,12 @@ sap.ui.define([
 
             },
 
-            goToMainPage: function(bHistory) {
+            goToMainPage: function (bHistory) {
                 this.navTo("mainpage", {}, bHistory);
             },
 
 
-            onChangeTaskStatusDrop: function(oEvent) {
+            onChangeTaskStatusDrop: function (oEvent) {
                 var oTask = oEvent.getParameter("draggedControl").getBindingContext();
                 var sStatus = oEvent.getParameter("droppedControl").getBindingContext().getObject().TaskStatus;
 
@@ -188,12 +189,12 @@ sap.ui.define([
                 this.getView().getModel().update(oTask.getPath(), {
                     Status: sStatus
                 }, {
-                    success: function() {
+                    success: function () {
 
                         this._droppedStatus.getContent()[0].getItems()[1].getBinding("items").refresh();
                     }.bind(this),
 
-                    error: function(oError) {
+                    error: function (oError) {
                         this.showError(oError);
                     }.bind(this)
                 })
@@ -201,14 +202,14 @@ sap.ui.define([
 
 
 
-            onDeleteTaskButtonPress: function(oEvent) {
+            onDeleteTaskButtonPress: function (oEvent) {
                 this._delTask = oEvent.getSource().getBindingContext();
 
                 this.getView().setBusy(true);
 
                 MessageBox.warning(`Удалить задачу "${this._delTask.getObject().Name}"?`, {
                     actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
-                    onClose: function(sAction) {
+                    onClose: function (sAction) {
 
 
                         this.getView().setBusy(false);
@@ -216,11 +217,11 @@ sap.ui.define([
                         if (sAction === 'OK') {
 
                             this.getModel().remove(this._delTask.getPath(), {
-                                success: function(oData) {
+                                success: function (oData) {
                                     this.isExistError();
                                 }.bind(this),
 
-                                error: function(oError) {
+                                error: function (oError) {
                                     this.showError(oError);
                                 }.bind(this)
                             });
@@ -230,7 +231,7 @@ sap.ui.define([
                 });
             },
 
-            onTaskDataRequested: function(oEvent) {
+            onTaskDataRequested: function (oEvent) {
                 debugger;
 
                 var aFilter = [
@@ -241,9 +242,61 @@ sap.ui.define([
                 oEvent.getSource().filter(aFilter);
             },
 
-            createContent: function(oEvent) {
+            createContent: function (oEvent) {
                 debugger;
-            }
+            },
 
+            _onMasterMatched: function (oEvent) {
+                
+            },
+
+            onTaskFilterinitialized: function(oEvent) {
+                var startupParams = this.getOwnerComponent().getComponentData().startupParameters,
+                    oSmartFilterBar = this.byId("taskSmartFilter");
+                if (oSmartFilterBar) {
+                    var oFilter = {
+                        PartnerID: {
+                            value: null,
+                            ranges: [
+                                {
+                                    exclude: false,
+                                    operation: "EQ",
+                                    value1: startupParams.PartnerId && startupParams.PartnerId[0],
+                                    keyField: "PartnerID",
+                                    tokenText: `=${startupParams.PartnerId && startupParams.PartnerId[0].replaceAll('0','')}`
+                                }
+                            ],
+                            items: []
+                        },
+                        ProjectId: {
+                            value: null,
+                            ranges: [
+                                {
+                                    exclude: false,
+                                    operation: "EQ",
+                                    value1: startupParams.ProjectID[0],
+                                    keyField: "ProjectId",
+                                    tokenText: `=${startupParams.ProjectID[0].replaceAll('0','')}`
+                                }
+                            ],
+                            items: []
+                        },
+                        ProjectStageId: {
+                            value: null,
+                            ranges: [
+                                {
+                                    exclude: false,
+                                    operation: "EQ",
+                                    value1: startupParams.ProjectStageID[0],
+                                    keyField: "ProjectStageId",
+                                    tokenText: `=${startupParams.ProjectStageID[0].replaceAll('0','')}`
+                                }
+                            ],
+                            items: []
+                        }
+                }
+                    oSmartFilterBar.setFilterData(oFilter, true);
+                }
+            }
         });
     });
