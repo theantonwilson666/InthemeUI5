@@ -7,14 +7,15 @@
     xmlns:smartTable="sap.ui.comp.smarttable"
     xmlns:m="sap.m">
 
-    <Table id="_ProjectAdmins-Table" delete=".onDeleteAdminPress">
+    <Table id="_ProjectAdmins-Table"
+        delete=".onDeleteAdminPress">
         <headerToolbar>
             <OverflowToolbar>
                 <content>
                     <ToolbarSpacer/>
                     <Button icon="sap-icon://add"
                         press=".onAddAdminPress"
-                        enabled="{control>/edit}"/>
+                        enabled="{state>/editProjectMode}"/>
                     <Button icon="sap-icon://edit"
                         press=".onEditAdminPress"/>
                 </content>

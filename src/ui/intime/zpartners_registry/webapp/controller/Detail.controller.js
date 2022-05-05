@@ -61,38 +61,30 @@ sap.ui.define([
 
             refreshAdminSection: function () {
                 var oTable = this.byId("_ProjectAdmins-Table");
-
-                oTable.setModel(this.newJSONModel({
-                    edit: false
-                }), "control");
-
-
-                oTable.getModel("control").updateBindings(true);
-
                 var oTemplate = new sap.m.ColumnListItem(
                     {
                         vAlign: "Middle",
                         cells: [
                             new sap.ui.comp.smartfield.SmartField({
                                 value: "{Username}",
-                                editable: "{control>/edit}"
+                                editable: "{state>/editProjectMode}"
                             }),
                             new sap.m.Switch({
                                 state: "{CreateEnabled}",
                                 type: "AcceptReject",
-                                enabled: "{control>/edit}"
+                                enabled: "{state>/editProjectMode}"
                             }),
 
                             new sap.m.Switch({
                                 state: "{UpdateEnabled}",
                                 type: "AcceptReject",
-                                enabled: "{control>/edit}"
+                                enabled: "{state>/editProjectMode}"
                             }),
 
                             new sap.m.Switch({
                                 state: "{DeleteEnabled}",
                                 type: "AcceptReject",
-                                enabled: "{control>/edit}"
+                                enabled: "{state>/editProjectMode}"
                             })
 
                         ]
@@ -104,25 +96,28 @@ sap.ui.define([
 
             onDeleteAdminPress: function (oEvent) {
                 var oDeletedContext = oEvent.getParameter("listItem").getBindingContext();
-                this.getDialog().setBusy(true);
+                this.byId("_ProjectAdmins-Table").setBusy(true);
                 this.getModel().remove(oDeletedContext.getPath(), {
                     success: function (oData) {
-                        // this.Lib.showMessage("Удалено");
-                        // this.getDialog().setBusy(false);
+                        this.byId("_ProjectAdmins-Table").setBusy(false);
                     }.bind(this),
                     error: function (oError) {
-                        // this.Lib.showMessage("Ошибка");
-                        // this.getDialog().setBusy(false);
+                        this.byId("_ProjectAdmins-Table").setBusy(false);
+                        this.showError(oError);
+
                     }.bind(this)
                 });
             },
 
             onAddAdminPress: function (oEvent) {
 
+                var oProjectData = oEvent.getSource().getBindingContext().getObject();
+
                 var oNewContext = this.getModel().createEntry(oEvent.getSource().getBindingContext().getPath() + "/to_Admins", {
                     groupId: "changes",
                     properties: {
-                        ID: oEvent.getSource().getBindingContext().getObject().ID
+                        ID: oProjectData.ID,
+                        Type: oProjectData.HierLevel === 0 ? "project" : "stage"
                     }
                 })
 
@@ -132,12 +127,17 @@ sap.ui.define([
             },
 
             onEditAdminPress: function (oEvent) {
-                var oControlModel = oEvent.getSource().getModel("control");
-                var oData = oControlModel.getData();
-                oData.edit = !oData.edit;
-                oControlModel.updateBindings(true);
-                oEvent.getSource().setIcon(oData.edit === true ? "sap-icon://display" : "sap-icon://edit")
-                oEvent.getSource().getParent().getParent().setMode(oData.edit === true ? "Delete" : "None");
+
+                this.setStateProperty("/editProjectMode", !this.getStateProperty("/editProjectMode"));
+                oEvent.getSource().getParent().getParent().setMode(this.getStateProperty("/editProjectMode") === true ? "Delete" : "None");
+
+                // {state>/editProjectMode}
+
+                // var oControlModel = oEvent.getSource().getModel("control");
+                // var oData = oControlModel.getData();
+                // oData.edit = !oData.edit;
+                // oControlModel.updateBindings(true);
+                // oEvent.getSource().setIcon(oData.edit === true ? "sap-icon://display" : "sap-icon://edit")
             },
 
 
