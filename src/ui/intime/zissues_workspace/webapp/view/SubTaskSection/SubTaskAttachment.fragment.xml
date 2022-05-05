@@ -1,0 +1,9 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:u="sap.ui.unified"
+    xmlns:m="sap.m">
+        <Text text="test"/>
+</core:FragmentDefinition>
