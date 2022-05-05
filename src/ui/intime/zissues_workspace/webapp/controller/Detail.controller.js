@@ -16,6 +16,11 @@ sap.ui.define([
                     .attachPatternMatched(this._onRouteMatched, this);
             },
 
+            // onAfterRendering: function() {
+            //     debugger;
+            //     sap.ui.getCore().byId('__xmlview0--subTaskSmartTable-btnEditToggle').setVisible(false);
+            // },
+
             _onRouteMatched: function(oEvent) {
 
                 this._routeParam = {
