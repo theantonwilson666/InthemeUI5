@@ -196,13 +196,53 @@
         </Annotation>
       </Annotations>
 
+      <Annotations Target="ZINT_UI_PARTNERS_SRV.ZSNN_PARTNER_ADMINType/Username">
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="false" />
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZSNN_TM_USER" />
+            <PropertyValue Property="SearchSupported"
+              Bool="true" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="Username" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="UserName" />
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="FullName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="LastName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="FirstName"/>
+                </Record>
 
 
-      <!-- <Annotations Target="ZINT_UI_PARTNERS_SRV.ZSNN_INT_PROJECTType/Name">
-        <Annotation Term="UI.SemanticObject"
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+
+
+
+
+
+      <Annotations Target="ZINT_UI_PARTNERS_SRV.ZSNN_INT_PROJECTType/Name">
+        <Annotation Term="Common.SemanticObject"
           String="zissues_workspace"/>
-      </Annotations> -->
-
+      </Annotations>
 
       <Annotations Target="ZINT_UI_PARTNERS_SRV.ZSNN_INT_PROJECTType">
         <Annotation Term="UI.SelectionFields">
@@ -215,21 +255,17 @@
         <Annotation Term="UI.LineItem">
           <Collection>
             <!-- <Record Type="UI.DataFieldWithIntentBasedNavigation">
-              <PropertyValue Property="Label"
-                String="My Link for navigation" />
-              <PropertyValue Property="Value"
-                Path="Name" />
-              <PropertyValue Property="SemanticObject"
-                String="zissues_workspace"/>
-              <PropertyValue Property="Action"
-                String="display"/>
+              <PropertyValue Property="Label" String="My Link for navigation" />
+              <PropertyValue Property="Value" Path="Name" />
+              <PropertyValue Property="SemanticObject" String="zissues_workspace"/>
+              <PropertyValue Property="Action" String="display"/>
             </Record> -->
 
 
-            <!-- <Record Type="UI.DataField">
+            <Record Type="UI.DataField">
               <PropertyValue Property="Value"
                 Path="Name" />
-            </Record> -->
+            </Record>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value"
                 Path="Status" />
@@ -268,6 +304,101 @@
           </Record>
         </Annotation>
       </Annotations>
+
+      <Annotations Target="ZINT_UI_PARTNERS_SRV.ZSNN_PARTNER_ADMINType">
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="Username" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="CreateEnabled" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="UpdateEnabled" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="DeleteEnabled" />
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+
+
+      <Annotations Target="ZINT_UI_PARTNERS_SRV.ZBNN_PROJECT_CHANGE_DOCType">
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="ChangedField" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="ChangedDate" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="ChangedTime" />
+            </Record>
+
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="ChangedUser" />
+            </Record>
+
+
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="OldValue" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="NewValue" />
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_PARTNERS_SRV.ZBNN_STAGE_CHANGE_DOCType">
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="ChangedField" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="ChangedDate" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="ChangedTime" />
+            </Record>
+
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="ChangedUser" />
+            </Record>
+
+
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="OldValue" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="NewValue" />
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+
+
+
     </Schema>
   </edmx:DataServices>
 </edmx:Edmx>

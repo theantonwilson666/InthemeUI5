@@ -7,7 +7,6 @@
     xmlns:smartTable="sap.ui.comp.smarttable"
     xmlns:m="sap.m">
 
-
     <smartTable:SmartTable id="ProjectChangeDocumentSmartTable"
         entitySet="ZBNN_PROJECT_CHANGE_DOC"
         tableType="ResponsiveTable"
@@ -16,7 +15,5 @@
         useTablePersonalisation="true"
         showRowCount="false"
         enableAutoBinding="true"
-        tableBindingPath="to_ChangeDocument"
-        requestAtLeastFields="Username"
-        initiallyVisibleFields="ChangedField,Udate,Utime,Username,OldValue,NewValue"/>
+        tableBindingPath="to_ChangeDocument"/>
 </core:FragmentDefinition>

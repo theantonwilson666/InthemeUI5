@@ -24,6 +24,10 @@ sap.ui.define([
             this.getRouter().initialize();
 
             this.setModel(models.createDeviceModel(), "device");
+
+            this.getModel().metadataLoaded().then(function (){
+                // this.getModel().setDeferredGroups(["changes", "projectChange", "adminChange"]);
+            }.bind(this));
         }
     });
 });

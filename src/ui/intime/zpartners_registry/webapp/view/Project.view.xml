@@ -7,6 +7,8 @@
   xmlns:table="sap.ui.table"
   xmlns:core="sap.ui.core"
   xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+  xmlns:adminDialog="jira.lib.intime_reuse.adminDialog"
+  xmlns:navpopover="sap.ui.comp.navpopover"
   xmlns:mvc="sap.ui.core.mvc">
   <f:DynamicPage id="projectPage"
     showFooter="{state&gt;/editProjectMode}">
@@ -27,11 +29,36 @@
               showShare="true"
               showExecuteOnSelection="true" />
           </OverflowToolbar>
+
         </f:content>
+
+
+        <f:actions>
+
+          <adminDialog:AdminDialogButton text="Админы"
+            type="Emphasized"
+            dialogTitle="Админы - {PartnerName}"
+            bindingPath="{to_Admins}"
+            entitySet="ZSNN_PARTNER_ADMIN"
+            groupID="changes"
+            onAccept="onAcceptAdminDialog"/>
+
+          <Button text="Выгрузить в эксель"/>
+
+          <Button text="Удалить"
+            type="Reject"
+            press="onDeletePartnerButtonPress"/>
+        </f:actions>
+
+
+
       </f:DynamicPageTitle>
     </f:title>
     <f:header>
       <f:DynamicPageHeader pinnable="true">
+
+        <!-- <adminDialog:AdminDialogButton text="Админы" type="Emphasized" dialogTitle="Админы - {PartnerName}" bindingPath="{to_Admins}" entitySet="ZSNN_PARTNER_ADMIN" groupID="changes" onAccept="onAcceptAdminDialog"/> -->
+
         <smartFilterBar:SmartFilterBar id="projectFilterBar"
           entityType="ZSNN_INT_PROJECTType"
           useToolbar="false"
@@ -55,8 +82,13 @@
           header="Проекты"
           showRowCount="false"
           enableAutoBinding="true"
-          tableBindingPath="to_Project"
-          enableAutoColumnWidth="true">
+          tableBindingPath="to_Project">
+
+          
+          <smartTable:semanticObjectController>
+            <navpopover:SemanticObjectController entitySet="ZSNN_INT_PROJECT" />
+          </smartTable:semanticObjectController>
+
           <smartTable:customToolbar>
             <OverflowToolbar design="Transparent">
               <ToolbarSpacer />
@@ -82,20 +114,6 @@
             selectionMode="Single"
             rowSelectionChange="onSelectRow"
             expandFirstLevel="true">
-              <table:columns>
-                <table:Column width="350px">
-                  <Label text="Проект" />
-                  <table:customData>
-                    <core:CustomData key="p13nData"
-                                    value="\{'columnKey': 'Name', 'leadingProperty':'Name', 'columnIndex' : '0', 'sortProperty': 'Name', 'filterProperty': 'Name'}"/>
-                  </table:customData>
-                  <table:template>
-                      <HBox direction="Column">
-                        <ObjectIdentifier title="{Name}" titleActive="{=(${HierLevel} === 0) ? true : false }" titlePress="onDocumentNavigate" />
-                      </HBox>
-                  </table:template>
-                </table:Column>
-			        </table:columns> 
           </table:TreeTable>
         </smartTable:SmartTable>
         <IconTabBar id="iconTabBar"

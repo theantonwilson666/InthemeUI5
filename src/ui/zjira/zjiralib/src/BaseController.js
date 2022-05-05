@@ -6,6 +6,7 @@ sap.ui.define(
         "jira/lib/MessageDialog",
         "sap/base/Log",
         "sap/m/MessageBox",
+        "sap/ui/model/json/JSONModel"
     ],
     function(
         Controller,
@@ -13,7 +14,8 @@ sap.ui.define(
         Fragment,
         MessageDialog,
         Log,
-        MessageBox
+        MessageBox,
+        JSONModel
     ) {
         "use strict";
 
@@ -40,6 +42,10 @@ sap.ui.define(
                     return;
                 }
                 MessageDialog.showCurrentState();
+            },
+
+            newJSONModel : function(oJSON){
+                return new JSONModel(oJSON);
             },
 
             isExistError: function() {

@@ -1,18 +1,18 @@
 sap.ui.define([
-        "intime/zpartners_registry/controller/App.controller",
-        'sap/ui/core/Fragment',
-        'sap/m/MessageBox',
-        'sap/m/Button',
-        "sap/ui/table/Row",
-        "jira/lib/fiorielementslib/fioriBaseController"
-    ],
-    function(AppController, Fragment, MessageBox, Button, TableRow, fioriBaseController) {
+    "intime/zpartners_registry/controller/App.controller",
+    'sap/ui/core/Fragment',
+    'sap/m/MessageBox',
+    'sap/m/Button',
+    "sap/ui/table/Row",
+    "jira/lib/fiorielementslib/fioriBaseController"
+],
+    function (AppController, Fragment, MessageBox, Button, TableRow, fioriBaseController) {
         "use strict";
 
         return AppController.extend("intime.zpartners_registry.controller.Detail", {
 
             buttonId: null,
-            onInit: function() {
+            onInit: function () {
                 this.getRouter()
                     .getRoute("project")
                     .attachPatternMatched(this._onRouteMatched, this);
@@ -21,18 +21,20 @@ sap.ui.define([
             },
 
 
-            _onRouteMatched: function(oEvent) {
+            _onRouteMatched: function (oEvent) {
                 var oArr = oEvent.getParameter("arguments")["?query"];
                 this.getView().bindObject(`/ZSNN_PARTNER_ROOT('${oArr.PartnerId}')`);
                 this.setFaviconIconByPartner(oArr.PartnerId);
                 this.setStateProperty("/projectSelection", false);
                 this.setStateProperty("/stageSelection", false);
 
-                this.getView().getModel().setDeferredGroups(["projectChange"])
+                debugger;
+
+                // this.getView().getModel().setDeferredGroups(["changes"])
 
             },
 
-            onSelectRow: function(oEvent) {
+            onSelectRow: function (oEvent) {
                 var oRowData = oEvent.getParameter("rowContext").getObject();
 
                 this._selectedRowContext = oEvent.getParameter("rowContext");
@@ -56,7 +58,7 @@ sap.ui.define([
                 debugger;
             },
 
-            bindSections: function(oKey) {
+            bindSections: function (oKey) {
                 var aItems = this.byId("iconTabBar").getItems();
                 for (var i = 0; i < aItems.length; i++) {
                     var oItem = aItems[i];
@@ -64,30 +66,37 @@ sap.ui.define([
                 };
             },
 
-            setProjectSelection: function() {
+            setProjectSelection: function () {
                 this.setStateProperty("/projectSelection", true);
                 this.setStateProperty("/stageSelection", false);
 
             },
 
-            setStageSelection: function() {
+            setStageSelection: function () {
                 this.setStateProperty("/projectSelection", false);
                 this.setStateProperty("/stageSelection", true);
             },
 
-            isSelected: function(ID) {
+            isSelected: function (ID) {
                 debugger;
                 this.buttonId = `${ID}`;
             },
 
+            onDeletePartnerButtonPress: function (oEvent) {
+                this.deletePartner(oEvent.getSource().getBindingContext());
+            },
 
-            onSaveProjectButtonPress: function(oEvent) {
+            onSaveProjectButtonPress: function (oEvent) {
 
+                debugger;
+                
                 this.byId("projectPage").setBusy(true);
 
                 this.submitChanges({
-                    groupId: "projectChange",
-                    success: function() {
+                    groupId: "changes",
+                    success: function () {
+                        debugger;
+
                         this.byId("projectPage").setBusy(false);
 
                         if (!this.isExistError()) {
@@ -101,7 +110,7 @@ sap.ui.define([
                         //     this.closeBusyDialog();
                         // }
                     }.bind(this),
-                    error: function(oError) {
+                    error: function (oError) {
 
                         this.byId("projectPage").setBusy(false);
                         this.showError(oError);
@@ -113,15 +122,15 @@ sap.ui.define([
 
             },
 
-            onRejectButtonPress: function() {},
+            onRejectButtonPress: function () { },
 
-            onAddNewProjectButtonPress: function(oEvent) {
+            onAddNewProjectButtonPress: function (oEvent) {
                 var oNewEntryContext = this.getView().getModel().createEntry(this.getBindingPath() + "/to_Project", {
                     properties: {
                         Name: 'Новый проект',
                         PartnerID: this.getView().getBindingContext().getObject().PartnerId
                     },
-                    groupId: "projectChange"
+                    groupId: "changes"
                 });
                 this.setProjectSelection();
                 this.byId("projectTab").setBindingContext(oNewEntryContext);
@@ -130,7 +139,7 @@ sap.ui.define([
             },
 
 
-            onAddNewProjectStageButtonPress: function(oEvent) {
+            onAddNewProjectStageButtonPress: function (oEvent) {
 
                 var oNewEntryContext = this.getView().getModel().createEntry(this.getBindingPath() + "/to_Project", {
                     properties: {
@@ -138,7 +147,7 @@ sap.ui.define([
                         ParentID: this._selectedRowContext.getObject().ID,
                         PartnerID: this._selectedRowContext.getObject().PartnerId
                     },
-                    groupId: "projectChange"
+                    groupId: "changes"
                 });
                 this.setStageSelection();
                 this.byId("stageTab").unbindObject();
@@ -147,7 +156,7 @@ sap.ui.define([
                 this.byId("stageForm").focus();
             },
 
-            getSmartTable: function() {
+            getSmartTable: function () {
                 return this.byId("projectSmartTable");
             },
 

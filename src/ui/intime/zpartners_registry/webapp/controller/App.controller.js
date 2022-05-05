@@ -1,21 +1,21 @@
 sap.ui.define([
-        "jira/lib/BaseController",
-        'sap/ui/core/Fragment',
-        'sap/m/MessageBox',
-        'sap/m/Button'
-    ],
-    function(BaseController, Fragment, MessageBox, Button) {
+    "jira/lib/BaseController",
+    'sap/ui/core/Fragment',
+    'sap/m/MessageBox',
+    'sap/m/Button'
+],
+    function (BaseController, Fragment, MessageBox, Button) {
         "use strict";
 
         return BaseController.extend("intime.zpartners_registry.controller.App", {
-            onInit: function() {},
+            onInit: function () { },
 
-            OnEdit: function() {
+            OnEdit: function () {
                 this.changeEditMode();
                 this.changeColor();
             },
 
-            changeColor: function() {
+            changeColor: function () {
 
                 var isChangeMode = this.isChangeMode(),
                     oPage = this.byId("page");
@@ -27,20 +27,20 @@ sap.ui.define([
                 }
             },
 
-            isChangeMode: function() {
+            isChangeMode: function () {
                 return this.getStateProperty("/editMode") ? true : false;
             },
 
-            changeEditMode: function() {
+            changeEditMode: function () {
                 this.setStateProperty("/editMode", !this.getStateProperty("/editMode"));
             },
 
-            OnDisplay: function() {
+            OnDisplay: function () {
                 this.changeEditMode();
                 this.changeColor();
             },
 
-            onTilePress: function() {
+            onTilePress: function () {
                 var oCrossAppNav = sap.ushell.Container.getService("CrossApplicationNavigation");
 
                 var sLinkForwWindow = oCrossAppNav.hrefForExternal({
@@ -50,7 +50,7 @@ sap.ui.define([
                 window.open(sLinkForwWindow, true);
             },
 
-            OpenDialog: function(oEvent) {
+            OpenDialog: function (oEvent) {
                 this.setStateProperty('/editablePartner', oEvent.getSource().getBindingContext());
 
                 var isChangeMode = this.isChangeMode();
@@ -62,7 +62,7 @@ sap.ui.define([
                             sViewName: "intime.zpartners_registry.view.fragment.EditParnterDialog"
                         })
                         .then(
-                            function(oDialog) {
+                            function (oDialog) {
                                 oDialog.setBindingContext(this.getStateProperty("/editablePartner"));
                                 oDialog.open();
                             }.bind(this)
@@ -82,17 +82,17 @@ sap.ui.define([
 
 
 
-            clearFileUploader: function() {
+            clearFileUploader: function () {
                 this.byId("logoUploader").clear();
             },
 
-            onOkPartnerDialog: function(oEvent) {
+            onOkPartnerDialog: function (oEvent) {
                 oEvent.getSource().getParent().setBusy(true);
 
                 var oFile = this.byId("logoUploader").getFocusDomRef().files[0];
                 if (oFile) {
                     var oReader = new FileReader();
-                    oReader.onload = function(e) {
+                    oReader.onload = function (e) {
 
                         var vContent = e.currentTarget.result.replace(
                             "data:" + oFile.type + ";base64,",
@@ -116,9 +116,9 @@ sap.ui.define([
             },
 
 
-            savePartnerChanges: function(sUpdateLogoBase64) {
+            savePartnerChanges: function (sUpdateLogoBase64) {
                 this.submitChanges({
-                    success: function(oData) {
+                    success: function (oData) {
                         this.byId("partnerDialog").setBusy(false);
 
                         if (!this.isExistError()) {
@@ -126,7 +126,7 @@ sap.ui.define([
                         }
                     }.bind(this),
 
-                    error: function(oError) {
+                    error: function (oError) {
                         this.byId("partnerDialog").setBusy(false);
                         this.showError(oError);
                         this.clearFileUploader();
@@ -134,25 +134,25 @@ sap.ui.define([
                 })
             },
 
-            onDeletePartnerDrop: function(oEvent) {
-                this._DraggedTile = oEvent.getParameter('draggedControl');
+            onDeletePartnerDrop: function (oEvent) {
+                this.deletePartner(oEvent.getParameter('draggedControl').getBindingContext());
+            },
 
-                MessageBox.confirm("Удалить контрагента - " + this._DraggedTile.getBindingContext().getObject().PartnerName, {
-                    onClose: function(sAction) {
+            deletePartner: function (oContext) {
+                this._deletedPartnerContext = oContext;
+
+                MessageBox.confirm("Удалить контрагента - " + oContext.getObject().PartnerName, {
+                    onClose: function (sAction) {
                         if (sAction === 'OK') {
-                            this.byId("page").setBusy(true);
-
-                            this.getModel().remove(this._DraggedTile.getBindingContext().getPath(), {
-                                success: function(oData) {
+                            this.getView().setBusy(true);
+                            this.getModel().remove(this._deletedPartnerContext.getPath(), {
+                                success: function (oData) {
                                     this.isExistError();
-                                    this.byId("page").setBusy(false);
+                                    this.getView().setBusy(false);
                                 }.bind(this),
-
-                                error: function(oError) {
-
-                                    this.byId("page").setBusy(false);
+                                error: function (oError) {
+                                    this.getView().setBusy(false);
                                     this.showError(oError);
-                                    debugger;
                                 }.bind(this)
                             });
                         }
@@ -160,18 +160,18 @@ sap.ui.define([
                 });
             },
 
-            onCancelPartnerDialog: function(oEvent) {
+            onCancelPartnerDialog: function (oEvent) {
                 oEvent.getSource().getParent().close();
             },
 
-            onCreatePartnerButtonPress: function() {
+            onCreatePartnerButtonPress: function () {
                 this.loadDialog
                     .call(this, {
                         sDialogName: "EditParnterDialog",
                         sViewName: "intime.zpartners_registry.view.fragment.EditParnterDialog"
                     })
                     .then(
-                        function(oDialog) {
+                        function (oDialog) {
 
                             var oPartnerContext = this.getModel().createEntry("/ZSNN_PARTNER_ROOT", {
                                 groupId: "changes"

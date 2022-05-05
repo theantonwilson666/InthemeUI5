@@ -16,7 +16,5 @@
         useTablePersonalisation="true"
         showRowCount="false"
         enableAutoBinding="true"
-        requestAtLeastFields="Username"
-        initiallyVisibleFields="ChangedField,Udate,Utime,Username,OldValue,NewValue"
-        tableBindingPath="to_ChangeStageDocument"/>
+        tableBindingPath="to_ChangeDocument"/> -->
 </core:FragmentDefinition>
