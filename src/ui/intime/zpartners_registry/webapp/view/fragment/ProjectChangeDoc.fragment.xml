@@ -14,6 +14,6 @@
         useVariantManagement="false"
         useTablePersonalisation="true"
         showRowCount="false"
-        enableAutoBinding="true"
+        enableAutoBinding="false"
         tableBindingPath="to_ChangeDocument"/>
 </core:FragmentDefinition>

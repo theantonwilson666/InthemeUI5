@@ -1,0 +1,42 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:u="sap.ui.unified"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:m="sap.m">
+
+    <Table id="_ProjectAdmins-Table"
+        delete=".onDeleteAdminPress">
+        <headerToolbar>
+            <OverflowToolbar>
+                <content>
+                    <ToolbarSpacer/>
+                    <Button icon="sap-icon://add"
+                        press=".onAddAdminPress"
+                        enabled="{state>/editProjectMode}"/>
+                    <Button icon="sap-icon://edit"
+                        press=".onEditAdminPress"/>
+                </content>
+            </OverflowToolbar>
+        </headerToolbar>
+        <columns>
+            <Column width="12em">
+                <Text text="Пользователь" />
+            </Column>
+
+            <Column width="7em">
+                <Text text="Создание" />
+            </Column>
+
+            <Column width="7em">
+                <Text text="Изменение" />
+            </Column>
+
+            <Column width="7em">
+                <Text text="Удаление" />
+            </Column>
+        </columns>
+    </Table>
+</core:FragmentDefinition>

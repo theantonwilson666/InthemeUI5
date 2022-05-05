@@ -5,7 +5,6 @@
   <VBox>
     <smartForm:SmartForm id="stageForm"
                          title="{Name}"
-                         width="50%"
                          checkButton="true"
                          editTogglable="true"
                          entityType="ZSNN_INT_PROJECTType"

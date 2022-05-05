@@ -7,5 +7,5 @@
     xmlns:m="sap.m">
    
 
-   <Text text="test"/>
+   <Text text="Функционал не реализован"/>
 </core:FragmentDefinition>
