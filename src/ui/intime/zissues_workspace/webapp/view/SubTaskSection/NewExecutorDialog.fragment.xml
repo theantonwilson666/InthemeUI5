@@ -1,0 +1,64 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:u="sap.ui.unified"
+    xmlns:m="sap.m">
+    <Dialog id="_newExecutor-Dialog"
+        title="Назначить исполнителя">
+        <content>
+            <VBox class="sapUiTinyMargin">
+
+                <Label text="{/#ZSNN_SUBTASK_EXECUTORSType/Executor/@sap:label}"
+                    labelFor="_Executor-SmartField"
+                    design="Bold" />
+                <smartField:SmartField id="_Executor-SmartField"
+                    entitySet="ZSNN_SUBTASK_EXECUTORS"
+                    value="{Executor}"/>
+
+                <Label text="{/#ZSNN_SUBTASK_EXECUTORSType/StartDate/@sap:label}"
+                    labelFor="_StartDate-SmartField"
+                    design="Bold" />
+                <smartField:SmartField id="_StartDate-SmartField"
+                    entitySet="ZSNN_SUBTASK_EXECUTORS"
+                    value="{StartDate}"/>
+
+
+                <Label text="{/#ZSNN_SUBTASK_EXECUTORSType/EndDate/@sap:label}"
+                    labelFor="_EndDate-SmartField"
+                    design="Bold" />
+                <smartField:SmartField id="_EndDate-SmartField"
+                    entitySet="ZSNN_SUBTASK_EXECUTORS"
+                    value="{EndDate}"/>
+
+                <Label text="{/#ZSNN_SUBTASK_EXECUTORSType/EstimateTime/@sap:label}"
+                    labelFor="_EstimateTime-SmartField"
+                    design="Bold" />
+                <smartField:SmartField id="_EstimateTime-SmartField"
+                    entitySet="ZSNN_SUBTASK_EXECUTORS"
+                    value="{EstimateTime}"/>
+
+
+                <Label text="{/#ZSNN_SUBTASK_EXECUTORSType/WorkDescr/@sap:label}"
+                    labelFor="_WorkDescr-SmartField"
+                    design="Bold" />
+                <smartField:SmartField id="_WorkDescr-SmartField"
+                    entitySet="ZSNN_SUBTASK_EXECUTORS"
+                    value="{WorkDescr}"/>
+
+            </VBox>
+
+
+        </content>
+        <beginButton>
+            <Button text="Ок"
+                type="Emphasized"
+                press=".onOkNewExecutorDialog"/>
+        </beginButton>
+        <endButton>
+            <Button text="Отменить"
+                press=".onCancelNewExecutorDialog"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

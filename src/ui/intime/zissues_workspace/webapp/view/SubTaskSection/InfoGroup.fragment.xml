@@ -1,5 +1,4 @@
-<core:FragmentDefinition 
-    xmlns="sap.m"
+<core:FragmentDefinition xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:grid="sap.ui.layout.cssgrid"
     xmlns:layout="sap.ui.layout"
@@ -7,11 +6,13 @@
     xmlns:core="sap.ui.core"
     xmlns:smartForm="sap.ui.comp.smartform"
     xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    xmlns:smartTable="sap.ui.comp.smarttable"
     xmlns:dnd="sap.ui.core.dnd"
     xmlns:dnd-grid="sap.f.dnd">
 
     <smartForm:SmartForm editable="{state>/subTaskEditMode}"
-                entityType="ZSNN_INTIME_SUBTASKType">
+        entityType="ZSNN_INTIME_SUBTASKType">
         <smartForm:Group label="Общая информация">
             <smartForm:GroupElement>
                 <smartField:SmartField value="{Name}"
@@ -29,7 +30,7 @@
             <smartForm:GroupElement label="Задача">
                 <Text text="{taskData>/Name}"/>
             </smartForm:GroupElement>
-             <smartForm:GroupElement>
+            <smartForm:GroupElement>
                 <smartField:SmartField value="{Status}"
                     editable="true"
                     textInEditModeSource="ValueList"/>
@@ -44,11 +45,11 @@
                 <smartField:SmartField value="{EndDate}"
                     editable="true"/>
             </smartForm:GroupElement>
-                    <!-- <smartForm:GroupElement>
+            <!-- <smartForm:GroupElement>
                         <smartField:SmartField value="{FactStartDate}" editable="true"/>
                     </smartForm:GroupElement> -->
         </smartForm:Group>
-                <!-- <smartForm:Group label="Доп.инфо">
+        <!-- <smartForm:Group label="Доп.инфо">
                     <smartForm:GroupElement>
                         <smartField:SmartField value="{DocNum}" entitySet="ZSNN_INTIME_TASK" editable="true"/>
                     </smartForm:GroupElement>
@@ -64,4 +65,32 @@
             </smartForm:GroupElement>
         </smartForm:Group>
     </smartForm:SmartForm>
+
+    <smartTable:SmartTable id="_SubTaskExecutors-SmartTable"
+        entitySet="ZSNN_SUBTASK_EXECUTORS"
+        tableType="ResponsiveTable"
+        header="Исполнители"
+        useExportToExcel="false"
+        useVariantManagement="false"
+        useTablePersonalisation="true"
+        showRowCount="false"
+        enableAutoBinding="true"
+        editTogglable="true"
+        app:useSmartToggle="true"
+        tableBindingPath="to_Executors">
+
+
+        <smartTable:customToolbar>
+            <OverflowToolbar design="Transparent">
+                <ToolbarSpacer />
+                <Button icon="sap-icon://add"
+                    enabled="{state>/subTaskEditMode}"
+                    text="Назначить исполнителя"
+                    press="onAddSubTaskExecutor" />
+            </OverflowToolbar>
+        </smartTable:customToolbar>
+
+
+    </smartTable:SmartTable>
+
 </core:FragmentDefinition>

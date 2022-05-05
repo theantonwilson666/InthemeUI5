@@ -40,31 +40,43 @@
         </f:header>
         <f:content>
             <IconTabBar id="iconTabBar"
-            applyContentPadding="false"
-            expanded="true"
-            expandable="false"
-            stretchContentHeight="true"
-            tabDensityMode="Compact">
-            <items>
-                <IconTabFilter id="SubTasckTab"
-                text="Подзадача"
-                key="project">
-                <core:Fragment fragmentName="intime.zissues_workspace.view.SubTaskSection.InfoGroup"
-                    type="XML" />
-                </IconTabFilter>
-                <IconTabFilter id="SubTaskChangeDocTab"
-                text="История изменений"
-                key="projectChangeDoc">
-                <core:Fragment fragmentName="intime.zissues_workspace.view.SubTaskSection.SubTaskChangeDoc"
-                    type="XML" />
-                </IconTabFilter>
-                <IconTabFilter id="SubTaskAttachment"
-                text="Вложения"
-                key="projectAttach">
-                <core:Fragment fragmentName="intime.zissues_workspace.view.SubTaskSection.SubTaskAttachment"
-                    type="XML" />
-                </IconTabFilter>
-            </items>
+                applyContentPadding="false"
+                expanded="true"
+                expandable="false"
+                stretchContentHeight="true"
+                tabDensityMode="Compact">
+                <items>
+                    <IconTabFilter id="SubTasckTab"
+                        text="Подзадача"
+                        key="project">
+                        <core:Fragment fragmentName="intime.zissues_workspace.view.SubTaskSection.InfoGroup"
+                            type="XML" />
+                    </IconTabFilter>
+
+
+                    <IconTabFilter id="SubTaskTimeSheet"
+                        text="Списание времени"
+                        key="timeSheet">
+                        <core:Fragment fragmentName="intime.zissues_workspace.view.SubTaskSection.SubTaskTimeSheet"
+                            type="XML" />
+                    </IconTabFilter>
+
+                    <IconTabFilter id="SubTaskChangeDocTab"
+                        text="История изменений"
+                        key="projectChangeDoc">
+                        <core:Fragment fragmentName="intime.zissues_workspace.view.SubTaskSection.SubTaskChangeDoc"
+                            type="XML" />
+                    </IconTabFilter>
+                    <IconTabFilter id="SubTaskAttachment"
+                        text="Вложения"
+                        key="projectAttach">
+                        <core:Fragment fragmentName="intime.zissues_workspace.view.SubTaskSection.SubTaskAttachment"
+                            type="XML" />
+                    </IconTabFilter>
+
+
+
+                </items>
             </IconTabBar>
         </f:content>
         <f:footer>
