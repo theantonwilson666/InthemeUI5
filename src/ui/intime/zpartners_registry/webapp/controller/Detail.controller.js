@@ -253,8 +253,12 @@ sap.ui.define([
                 var oCrossAppNav = sap.ushell.Container.getService("CrossApplicationNavigation");
 
                 var sLinkForWinow = oCrossAppNav.hrefForExternal({
-                    target: { semanticObject: "zissues_workspace", action: "display" },
-                    params: oLinkData
+                    target: { semanticObject: "zissues_workspace", action: "display"},
+                    params: { 
+                        PartnerId: oLinkData.PartnerId,
+                        ProjectID: oLinkData.ProjectID,
+                        ProjectStageID: oLinkData.ProjectStageID
+                    } 
                 });
                 window.open(sLinkForWinow, true);
             }

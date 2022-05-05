@@ -21,7 +21,6 @@
           <smartField:SmartField value="{Name}"
             entitySet="ZSNN_INT_PROJECT"
             id="name">
-
           </smartField:SmartField>
         </smartForm:GroupElement>
         <smartForm:GroupElement>
