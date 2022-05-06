@@ -16,7 +16,7 @@
         header="Подзадачи"
         useExportToExcel="false"
         useVariantManagement="false"
-        editTogglable="true"
+        editTogglable="false"
         app:useSmartToggle="true"
         useTablePersonalisation="true"
         showRowCount="false"
