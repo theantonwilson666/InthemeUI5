@@ -1,18 +1,18 @@
 sap.ui.define([
-    "intime/zpartners_registry/controller/App.controller",
-    'sap/ui/core/Fragment',
-    'sap/m/MessageBox',
-    'sap/m/Button',
-    "sap/ui/table/Row",
-    "jira/lib/fiorielementslib/fioriBaseController"
-],
-    function (AppController, Fragment, MessageBox, Button, TableRow, fioriBaseController) {
+        "intime/zpartners_registry/controller/App.controller",
+        'sap/ui/core/Fragment',
+        'sap/m/MessageBox',
+        'sap/m/Button',
+        "sap/ui/table/Row",
+        "jira/lib/fiorielementslib/fioriBaseController"
+    ],
+    function(AppController, Fragment, MessageBox, Button, TableRow, fioriBaseController) {
         "use strict";
 
         return AppController.extend("intime.zpartners_registry.controller.Detail", {
 
             buttonId: null,
-            onInit: function () {
+            onInit: function() {
                 this.getRouter()
                     .getRoute("project")
                     .attachPatternMatched(this._onRouteMatched, this);
@@ -21,7 +21,7 @@ sap.ui.define([
             },
 
 
-            _onRouteMatched: function (oEvent) {
+            _onRouteMatched: function(oEvent) {
                 var oArr = oEvent.getParameter("arguments")["?query"];
                 this.getView().bindObject(`/ZSNN_PARTNER_ROOT('${oArr.PartnerId}')`);
                 this.setFaviconIconByPartner(oArr.PartnerId);
@@ -34,7 +34,7 @@ sap.ui.define([
 
             },
 
-            onSelectRow: function (oEvent) {
+            onSelectRow: function(oEvent) {
                 var oRowData = oEvent.getParameter("rowContext").getObject();
 
                 this._selectedRowContext = oEvent.getParameter("rowContext");
@@ -59,49 +59,53 @@ sap.ui.define([
                 debugger;
             },
 
-            refreshAdminSection: function () {
+            onDeleteSelection: function(oEvent) {
+                debugger
+                this._selectedRowContext;
+            },
+
+            refreshAdminSection: function() {
                 var oTable = this.byId("_ProjectAdmins-Table");
-                var oTemplate = new sap.m.ColumnListItem(
-                    {
-                        vAlign: "Middle",
-                        cells: [
-                            new sap.ui.comp.smartfield.SmartField({
-                                value: "{Username}",
-                                editable: "{state>/editProjectMode}"
-                            }),
-                            new sap.m.Switch({
-                                state: "{CreateEnabled}",
-                                type: "AcceptReject",
-                                enabled: "{state>/editProjectMode}"
-                            }),
+                var oTemplate = new sap.m.ColumnListItem({
+                    vAlign: "Middle",
+                    cells: [
+                        new sap.ui.comp.smartfield.SmartField({
+                            value: "{Username}",
+                            editable: "{state>/editProjectMode}"
+                        }),
+                        new sap.m.Switch({
+                            state: "{CreateEnabled}",
+                            type: "AcceptReject",
+                            enabled: "{state>/editProjectMode}"
+                        }),
 
-                            new sap.m.Switch({
-                                state: "{UpdateEnabled}",
-                                type: "AcceptReject",
-                                enabled: "{state>/editProjectMode}"
-                            }),
+                        new sap.m.Switch({
+                            state: "{UpdateEnabled}",
+                            type: "AcceptReject",
+                            enabled: "{state>/editProjectMode}"
+                        }),
 
-                            new sap.m.Switch({
-                                state: "{DeleteEnabled}",
-                                type: "AcceptReject",
-                                enabled: "{state>/editProjectMode}"
-                            })
+                        new sap.m.Switch({
+                            state: "{DeleteEnabled}",
+                            type: "AcceptReject",
+                            enabled: "{state>/editProjectMode}"
+                        })
 
-                        ]
-                    });
+                    ]
+                });
 
                 oTable.bindItems("to_Admins", oTemplate);
 
             },
 
-            onDeleteAdminPress: function (oEvent) {
+            onDeleteAdminPress: function(oEvent) {
                 var oDeletedContext = oEvent.getParameter("listItem").getBindingContext();
                 this.byId("_ProjectAdmins-Table").setBusy(true);
                 this.getModel().remove(oDeletedContext.getPath(), {
-                    success: function (oData) {
+                    success: function(oData) {
                         this.byId("_ProjectAdmins-Table").setBusy(false);
                     }.bind(this),
-                    error: function (oError) {
+                    error: function(oError) {
                         this.byId("_ProjectAdmins-Table").setBusy(false);
                         this.showError(oError);
 
@@ -109,7 +113,7 @@ sap.ui.define([
                 });
             },
 
-            onAddAdminPress: function (oEvent) {
+            onAddAdminPress: function(oEvent) {
 
                 var oProjectData = oEvent.getSource().getBindingContext().getObject();
 
@@ -126,7 +130,7 @@ sap.ui.define([
                 oEvent.getSource().getParent().getParent().insertItem(oItem, 0);
             },
 
-            onEditAdminPress: function (oEvent) {
+            onEditAdminPress: function(oEvent) {
 
                 this.setStateProperty("/editProjectMode", !this.getStateProperty("/editProjectMode"));
                 oEvent.getSource().getParent().getParent().setMode(this.getStateProperty("/editProjectMode") === true ? "Delete" : "None");
@@ -141,7 +145,7 @@ sap.ui.define([
             },
 
 
-            bindSections: function (oKey) {
+            bindSections: function(oKey) {
                 var aItems = this.byId("iconTabBar").getItems();
                 for (var i = 0; i < aItems.length; i++) {
                     var oItem = aItems[i];
@@ -149,30 +153,30 @@ sap.ui.define([
                 };
             },
 
-            setProjectSelection: function () {
+            setProjectSelection: function() {
                 this.setStateProperty("/projectSelection", true);
                 this.setStateProperty("/stageSelection", false);
 
                 this.byId("ProjectChangeDocumentSmartTable").rebindTable();
             },
 
-            setStageSelection: function () {
+            setStageSelection: function() {
                 this.setStateProperty("/projectSelection", false);
                 this.setStateProperty("/stageSelection", true);
 
                 this.byId("stageChangeDocumentSmartTable").rebindTable();
             },
 
-            isSelected: function (ID) {
+            isSelected: function(ID) {
                 debugger;
                 this.buttonId = `${ID}`;
             },
 
-            onDeletePartnerButtonPress: function (oEvent) {
+            onDeletePartnerButtonPress: function(oEvent) {
                 this.deletePartner(oEvent.getSource().getBindingContext());
             },
 
-            onSaveProjectButtonPress: function (oEvent) {
+            onSaveProjectButtonPress: function(oEvent) {
 
                 debugger;
 
@@ -180,7 +184,7 @@ sap.ui.define([
 
                 this.submitChanges({
                     groupId: "changes",
-                    success: function () {
+                    success: function() {
                         debugger;
 
                         this.byId("projectPage").setBusy(false);
@@ -196,7 +200,7 @@ sap.ui.define([
                         //     this.closeBusyDialog();
                         // }
                     }.bind(this),
-                    error: function (oError) {
+                    error: function(oError) {
 
                         this.byId("projectPage").setBusy(false);
                         this.showError(oError);
@@ -208,9 +212,9 @@ sap.ui.define([
 
             },
 
-            onRejectButtonPress: function () { },
+            onRejectButtonPress: function() {},
 
-            onAddNewProjectButtonPress: function (oEvent) {
+            onAddNewProjectButtonPress: function(oEvent) {
                 var oNewEntryContext = this.getView().getModel().createEntry(this.getBindingPath() + "/to_Project", {
                     properties: {
                         Name: 'Новый проект',
@@ -225,7 +229,7 @@ sap.ui.define([
             },
 
 
-            onAddNewProjectStageButtonPress: function (oEvent) {
+            onAddNewProjectStageButtonPress: function(oEvent) {
 
                 var oNewEntryContext = this.getView().getModel().createEntry(this.getBindingPath() + "/to_Project", {
                     properties: {
@@ -242,21 +246,21 @@ sap.ui.define([
                 this.byId("stageForm").focus();
             },
 
-            getSmartTable: function () {
+            getSmartTable: function() {
                 return this.byId("projectSmartTable");
             },
 
-            onDocumentNavigate: function (oEvent) {
+            onDocumentNavigate: function(oEvent) {
                 debugger;
                 var oLinkData = oEvent.getSource().getBindingContext().getObject();
 
                 var oCrossAppNav = sap.ushell.Container.getService("CrossApplicationNavigation");
 
                 var sLinkForWinow = oCrossAppNav.hrefForExternal({
-                    target: { semanticObject: "zissues_workspace", action: "display"},
-                    params: { 
+                    target: { semanticObject: "zissues_workspace", action: "display" },
+                    params: {
                         PartnerId: oLinkData.PartnerId
-                    } 
+                    }
                 });
                 window.open(sLinkForWinow, true);
             }
