@@ -258,7 +258,45 @@ sap.ui.define([
             onTaskFilterinitialized: function(oEvent) {
                 var startupParams = this.getOwnerComponent().getComponentData().startupParameters,
                     oSmartFilterBar = this.byId("taskSmartFilter");
-                if (oSmartFilterBar) {
+                if(startupParams.ProjectID && startupParams.HierLevel[0] == "0") {
+                    var oFilterProject  = {
+                        ProjectId: {
+                            value: null,
+                            ranges: [
+                                {
+                                    exclude: false,
+                                    operation: "EQ",
+                                    value1: startupParams.ProjectID && startupParams.ProjectID[0],
+                                    keyField: "ProjectId",
+                                    tokenText: `=${startupParams.ProjectID && startupParams.ProjectID[0].replaceAll('0','')}`
+                                }
+                            ],
+                            items: []
+                        }
+                    }
+                    oSmartFilterBar.setFilterData(oFilterProject, true);
+                }
+
+                if(startupParams.ProjectStageID && startupParams.HierLevel[0] !== "0") {
+                    var oFilterProjectStage  = {
+                        ProjectStageId: {
+                            value: null,
+                            ranges: [
+                                {
+                                    exclude: false,
+                                    operation: "EQ",
+                                    value1: startupParams.ProjectStageID && startupParams.ProjectStageID[0],
+                                    keyField: "ProjectStageId",
+                                    tokenText: `=${startupParams.ProjectStageID && startupParams.ProjectStageID[0].replaceAll('0','')}`
+                                }
+                            ],
+                            items: []
+                        }
+                    }
+                    oSmartFilterBar.setFilterData(oFilterProjectStage, true);
+                }
+               
+                if (startupParams.PartnerId) {
                     var oFilter = {
                         PartnerID: {
                             value: null,
@@ -266,35 +304,9 @@ sap.ui.define([
                                 {
                                     exclude: false,
                                     operation: "EQ",
-                                    value1: startupParams.PartnerId && startupParams.PartnerId[0],
+                                    value1: startupParams.PartnerId[0],
                                     keyField: "PartnerID",
-                                    tokenText: `=${startupParams.PartnerId && startupParams.PartnerId[0].replaceAll('0','')}`
-                                }
-                            ],
-                            items: []
-                        },
-                        ProjectId: {
-                            value: null,
-                            ranges: [
-                                {
-                                    exclude: false,
-                                    operation: "EQ",
-                                    value1: startupParams.ProjectID[0],
-                                    keyField: "ProjectId",
-                                    tokenText: `=${startupParams.ProjectID[0].replaceAll('0','')}`
-                                }
-                            ],
-                            items: []
-                        },
-                        ProjectStageId: {
-                            value: null,
-                            ranges: [
-                                {
-                                    exclude: false,
-                                    operation: "EQ",
-                                    value1: startupParams.ProjectStageID[0],
-                                    keyField: "ProjectStageId",
-                                    tokenText: `=${startupParams.ProjectStageID[0].replaceAll('0','')}`
+                                    tokenText: `=${startupParams.PartnerId[0].replaceAll('0','')}`
                                 }
                             ],
                             items: []
