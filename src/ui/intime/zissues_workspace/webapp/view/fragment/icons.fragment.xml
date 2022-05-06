@@ -1,0 +1,11 @@
+<core:FragmentDefinition xmlns="sap.m"
+  xmlns:core="sap.ui.core">
+  <VBox>
+              <Button id="SeeMoreButton"
+                      icon: "sap-icon://arrow-bottom"
+                      press="onShowSubTaskListButtonPress" />
+              <Button id="TrashButton"
+                      icon: "sap-icon://delete"
+                      press="onDeleteTaskButtonPress" />
+  </VBox>
+</core:FragmentDefinition>

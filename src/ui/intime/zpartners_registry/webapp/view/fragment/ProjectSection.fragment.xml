@@ -6,7 +6,6 @@
   <VBox>
     <smartForm:SmartForm id="projectForm"
       title="{Name}"
-      width="50%"
       checkButton="true"
       editTogglable="true"
       entityType="ZSNN_INT_PROJECTType"
@@ -22,7 +21,6 @@
           <smartField:SmartField value="{Name}"
             entitySet="ZSNN_INT_PROJECT"
             id="name">
-
           </smartField:SmartField>
         </smartForm:GroupElement>
         <smartForm:GroupElement>

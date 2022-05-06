@@ -114,6 +114,35 @@
         </Annotation>
       </Annotations>
 
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_SUBTASK_EXECUTORSType/EstimateTimeU">
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="true" />
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZBNN_TIME_UNIT" />
+            <PropertyValue Property="SearchSupported"
+              Bool="true" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="EstimateTimeU" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="Unit" />
+                </Record>
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="EstimateTimeUText" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="UnitText" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+
 
       <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_TASKType/EstimateTimeU">
         <Annotation Term="Common.ValueListWithFixedValues"
@@ -272,6 +301,46 @@
 
 
 
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_SUBTASK_EXECUTORSType/Executor">
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="false" />
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZSNN_TM_USER" />
+            <PropertyValue Property="SearchSupported"
+              Bool="true" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="Executor" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="UserName" />
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="FullName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="LastName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="FirstName"/>
+                </Record>
+
+
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+
+
       <Annotations Target="ZINT_UI_TASK_SRV.ZBNN_TASK_CHANGE_DOCUMENTType">
 
         <Annotation Term="UI.LineItem">
@@ -306,6 +375,41 @@
           </Collection>
         </Annotation>
       </Annotations>
+
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_SUBTASK_EXECUTORSType">
+
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="Executor" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="StartDate" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="EndDate" />
+            </Record>
+
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="EstimateTime" />
+            </Record>
+
+
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="WorkDescr" />
+            </Record>
+
+
+          </Collection>
+        </Annotation>
+      </Annotations>
+
 
 
       <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_SUBTASKType">

@@ -37,6 +37,7 @@
           considerSelectionVariants="true"
           search="onSmartFilterGoPress"
           entitySet="ZSNN_INTIME_TASK"
+          initialized="onTaskFilterinitialized"
           showClearButton="true">
 
         </smartFilterBar:SmartFilterBar>
