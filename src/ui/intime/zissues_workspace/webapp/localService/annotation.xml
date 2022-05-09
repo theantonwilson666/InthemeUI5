@@ -41,8 +41,6 @@
   </edmx:Reference>
   <edmx:DataServices>
     <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm">
-
-
       <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_TASKType">
         <Annotation Term="UI.SelectionFields">
           <Collection>
@@ -143,7 +141,6 @@
         </Annotation>
       </Annotations>
 
-
       <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_TASKType/EstimateTimeU">
         <Annotation Term="Common.ValueListWithFixedValues"
           Bool="true" />
@@ -235,7 +232,20 @@
         </Annotation>
       </Annotations>
 
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_TASKType/ProjectName">
+        <Annotation Term="Common.SemanticObject"
+          String="zpartners_registry"/>
+      </Annotations>
 
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_TASKType/ProjectStageId">
+        <Annotation Term="Common.SemanticObject"
+          String="zpartners_registry"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_TASKType/PartnerName">
+        <Annotation Term="Common.SemanticObject"
+          String="zpartners_registry"/>
+      </Annotations>
 
       <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_TASKType/ProjectStageId">
         <Annotation Term="Common.ValueListWithFixedValues"

@@ -5,6 +5,7 @@
     xmlns:smartForm="sap.ui.comp.smartform"
     xmlns:smartField="sap.ui.comp.smartfield"
     xmlns:u="sap.ui.unified"
+    xmlns:navpopover="sap.ui.comp.navpopover"
     xmlns:m="sap.m">
 
 
@@ -17,12 +18,21 @@
             </smartForm:GroupElement>
 
             <smartForm:GroupElement label="Контрагент">
-                <Text text="{PartnerName}"/>
+                <!-- <Text text="{PartnerName}"/> -->
+            <smartField:SmartField value="{PartnerName}"
+            entitySet="ZSNN_INTIME_TASK"
+            id="PartnerName">
+            </smartField:SmartField>
             </smartForm:GroupElement>
 
             <smartForm:GroupElement label="Проект">
-                <Text text="{ProjectName}"/>
+                <!-- <Text text="{ProjectName}"/> -->
+            <smartField:SmartField value="{ProjectName}"
+            entitySet="ZSNN_INTIME_TASK"
+            id="ProjectName">
+            </smartField:SmartField>
             </smartForm:GroupElement>
+            
 
             <smartForm:GroupElement>
                 <smartField:SmartField value="{ProjectStageId}"
@@ -91,6 +101,21 @@
                     editable="true"/>
             </smartForm:GroupElement>
         </smartForm:Group>
+
+      <smartForm:semanticObjectController>
+        <navpopover:SemanticObjectController entitySet="ZSNN_INTIME_TASK"
+          enableAvailableActionsPersonalization='\{"ProjectName":false\}'/>
+      </smartForm:semanticObjectController>
+
+      <smartForm:semanticObjectController>
+        <navpopover:SemanticObjectController entitySet="ZSNN_INTIME_TASK"
+          enableAvailableActionsPersonalization='\{"ProjectStageId":false\}'/>
+      </smartForm:semanticObjectController>
+
+      <smartForm:semanticObjectController>
+        <navpopover:SemanticObjectController entitySet="ZSNN_INTIME_TASK"
+          enableAvailableActionsPersonalization='\{"PartnerName":false\}'/>
+      </smartForm:semanticObjectController>
 
 
     </smartForm:SmartForm>

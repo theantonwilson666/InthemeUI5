@@ -8,7 +8,13 @@ sap.ui.define([
         "use strict";
 
         return BaseController.extend("intime.zpartners_registry.controller.App", {
-            onInit: function () { },
+            onInit: function () {
+                var startupParams = this.getOwnerComponent().getComponentData().startupParameters;
+                var sPartnerId = startupParams && startupParams.PartnerID && startupParams.PartnerID[0];
+                if (sPartnerId) {
+                    this.navTo("project", { query: { PartnerId: sPartnerId } }, false);
+                }
+             },
 
             OnEdit: function () {
                 this.changeEditMode();

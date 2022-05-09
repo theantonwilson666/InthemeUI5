@@ -268,7 +268,7 @@ sap.ui.define([
                                     operation: "EQ",
                                     value1: startupParams.ProjectID && startupParams.ProjectID[0],
                                     keyField: "ProjectId",
-                                    tokenText: `=${startupParams.ProjectID && startupParams.ProjectID[0].replaceAll('0','')}`
+                                    tokenText: `=${startupParams.ProjectID && startupParams.ProjectID[0]}`
                                 }
                             ],
                             items: []
@@ -287,7 +287,7 @@ sap.ui.define([
                                     operation: "EQ",
                                     value1: startupParams.ProjectStageID && startupParams.ProjectStageID[0],
                                     keyField: "ProjectStageId",
-                                    tokenText: `=${startupParams.ProjectStageID && startupParams.ProjectStageID[0].replaceAll('0','')}`
+                                    tokenText: `=${startupParams.ProjectStageID && startupParams.ProjectStageID[0]}`
                                 }
                             ],
                             items: []
@@ -306,7 +306,7 @@ sap.ui.define([
                                     operation: "EQ",
                                     value1: startupParams.PartnerId[0],
                                     keyField: "PartnerID",
-                                    tokenText: `=${startupParams.PartnerId[0].replaceAll('0','')}`
+                                    tokenText: `=${startupParams.PartnerId[0]}`
                                 }
                             ],
                             items: []

@@ -61,7 +61,22 @@ sap.ui.define([
 
             onDeleteSelection: function(oEvent) {
                 debugger
-                this._selectedRowContext;
+                sap.m.MessageBox.warning(`Вы уверены, что хотите удалить ${this._selectedRowContext.getObject().Name}`, {
+                    actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
+                    emphasizedAction: MessageBox.Action.OK,
+                    onClose: function (sAction) {
+                      switch (sAction) {
+                        case MessageBox.Action.OK:
+                            this.getModel().remove(this._selectedRowContext.getPath());
+                          debugger;
+                          break;
+                        case MessageBox.Action.CANCEL:
+                          sap.m.MessageToast.show("Операция отменена");
+                        default:
+                          break;
+                      }
+                    }.bind(this)
+                  });
             },
 
             refreshAdminSection: function() {

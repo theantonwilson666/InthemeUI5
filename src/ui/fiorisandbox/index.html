@@ -78,13 +78,21 @@
           title: "Intime : Проекты",
         },
 
-          "zissues_workspace-display": {
-            additionalInformation: "SAPUI5.Component=intime.zissues_workspace",
-            applicationType: "URL",
-            url: "/ui/intime/zissues_workspace/webapp/",
-            description: "Просмотр",
-            title: "Intime : Задачи",
-          }
+        "zissues_workspace-display": {
+          additionalInformation: "SAPUI5.Component=intime.zissues_workspace",
+          applicationType: "URL",
+          url: "/ui/intime/zissues_workspace/webapp/",
+          description: "Просмотр",
+          title: "Intime : Задачи",
+        },
+
+        "zusers_list-display": {
+          additionalInformation: "SAPUI5.Component=intime.zusers_list",
+          applicationType: "URL",
+          url: "/ui/intime/zusers_list/webapp/",
+          description: "Просмотр",
+          title: "Intime : Пользователи",
+        }
 
 
       },
@@ -102,7 +110,7 @@
                 "intime.zpartners_registry" : "../intime/project_registry/webapp"
 			}' data-sap-ui-frameOptions="allow" data-sap-ui-language="ru">
     // NON-SECURE setting for testing environment
-  </script>
+      </script>
   <script type="text/javascript">
     sap.ui.getCore().attachInit(function () {
       sap.ushell.Container.createRenderer().placeAt("content");
