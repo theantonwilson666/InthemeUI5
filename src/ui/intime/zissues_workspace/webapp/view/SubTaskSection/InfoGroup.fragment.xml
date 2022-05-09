@@ -83,7 +83,7 @@
         useTablePersonalisation="true"
         showRowCount="false"
         enableAutoBinding="true"
-        editTogglable="true"
+        editTogglable="false"
         app:useSmartToggle="true"
         tableBindingPath="to_Executors">
 
@@ -95,9 +95,17 @@
                     enabled="{state>/subTaskEditMode}"
                     text="Назначить исполнителя"
                     press="onAddSubTaskExecutor" />
+                <Button id="Delete"
+                    icon="sap-icon://delete"
+                    tooltip="Sort"
+                    text="Удалить"
+                    press="onDeleteSelection" />
             </OverflowToolbar>
         </smartTable:customToolbar>
-
+      
+        <Table growing="true"
+            mode="SingleSelectMaster"
+            selectionChange="onAddSubTaskExecutor"/>
     </smartTable:SmartTable>
 
 </core:FragmentDefinition>
