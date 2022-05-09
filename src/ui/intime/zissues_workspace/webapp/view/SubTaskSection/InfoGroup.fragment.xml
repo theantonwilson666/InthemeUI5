@@ -9,6 +9,7 @@
     xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
     xmlns:smartTable="sap.ui.comp.smarttable"
     xmlns:dnd="sap.ui.core.dnd"
+    xmlns:navpopover="sap.ui.comp.navpopover"
     xmlns:dnd-grid="sap.f.dnd">
 
     <smartForm:SmartForm editable="{state>/subTaskEditMode}"
@@ -23,6 +24,7 @@
             </smartForm:GroupElement>
             <smartForm:GroupElement label="Проект">
                 <Text text="{taskData>/ProjectName}"/>
+            <!-- <smartField:SmartField value="{taskData>/ProjectName}" entitySet="ZSNN_INTIME_TASK"/> -->
             </smartForm:GroupElement>
             <smartForm:GroupElement label="Этап проекта">
                 <Text text="{taskData>/ProjectStageName}"/>
@@ -64,6 +66,12 @@
                     editable="true"/>
             </smartForm:GroupElement>
         </smartForm:Group>
+
+      <!-- <smartForm:semanticObjectController>
+        <navpopover:SemanticObjectController entitySet="ZSNN_INTIME_TASK"
+          enableAvailableActionsPersonalization='\{"ProjectName":false\}'/>
+      </smartForm:semanticObjectController> -->
+
     </smartForm:SmartForm>
 
     <smartTable:SmartTable id="_SubTaskExecutors-SmartTable"
@@ -89,7 +97,6 @@
                     press="onAddSubTaskExecutor" />
             </OverflowToolbar>
         </smartTable:customToolbar>
-
 
     </smartTable:SmartTable>
 
