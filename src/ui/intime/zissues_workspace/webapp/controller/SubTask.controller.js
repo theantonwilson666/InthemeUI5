@@ -164,6 +164,7 @@ sap.ui.define([
 
 
             onAddSubTaskExecutor: function(oEvent) {
+                debugger;
                 this.loadDialog
                     .call(this, {
                         sDialogName: "_newSubTaskExecutorDialog",
@@ -194,11 +195,26 @@ sap.ui.define([
 
             onCancelNewExecutorDialog: function(oEvent) {
                 oEvent.getSource().getParent().close();
-            }
+            },
 
-
-
-
-
+            onDeleteSelection: function(oEvent) {
+                debugger
+                sap.m.MessageBox.warning(`Вы уверены, что хотите удалить ${this._selectedRowContext.getObject().Name}`, {
+                    actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
+                    emphasizedAction: MessageBox.Action.OK,
+                    onClose: function(sAction) {
+                        switch (sAction) {
+                            case MessageBox.Action.OK:
+                                this.getModel().remove(this._selectedRowContext.getPath());
+                                debugger;
+                                break;
+                            case MessageBox.Action.CANCEL:
+                                sap.m.MessageToast.show("Операция отменена");
+                            default:
+                                break;
+                        }
+                    }.bind(this)
+                });
+            },
         });
     });
