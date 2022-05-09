@@ -75,7 +75,7 @@
         useTablePersonalisation="true"
         showRowCount="false"
         enableAutoBinding="true"
-        editTogglable="true"
+        editTogglable="false"
         app:useSmartToggle="true"
         tableBindingPath="to_Executors">
 
