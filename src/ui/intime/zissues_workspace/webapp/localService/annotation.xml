@@ -247,6 +247,11 @@
           String="zpartners_registry"/>
       </Annotations>
 
+      <!-- <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_SUBTASKType/ProjectName">
+        <Annotation Term="Common.SemanticObject"
+          String="zpartners_registry"/>
+      </Annotations> -->
+
       <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_TASKType/ProjectStageId">
         <Annotation Term="Common.ValueListWithFixedValues"
           Bool="false"/>
