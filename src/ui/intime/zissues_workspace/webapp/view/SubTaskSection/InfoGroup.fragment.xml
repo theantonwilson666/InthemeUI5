@@ -87,8 +87,17 @@
                     enabled="{state>/subTaskEditMode}"
                     text="Назначить исполнителя"
                     press="onAddSubTaskExecutor" />
+                <Button id="Delete"
+                    icon="sap-icon://delete"
+                    tooltip="Sort"
+                    text="Удалить"
+                    press="onDeleteSelection" />
             </OverflowToolbar>
         </smartTable:customToolbar>
+
+        <Table growing="true"
+            mode="SingleSelectMaster"
+            selectionChange="onAddSubTaskExecutor"/>
 
 
     </smartTable:SmartTable>

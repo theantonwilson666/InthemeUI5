@@ -24,7 +24,6 @@
                     entitySet="ZSNN_SUBTASK_EXECUTORS"
                     value="{StartDate}"/>
 
-
                 <Label text="{/#ZSNN_SUBTASK_EXECUTORSType/EndDate/@sap:label}"
                     labelFor="_EndDate-SmartField"
                     design="Bold" />
@@ -46,6 +45,13 @@
                 <smartField:SmartField id="_WorkDescr-SmartField"
                     entitySet="ZSNN_SUBTASK_EXECUTORS"
                     value="{WorkDescr}"/>
+
+                <Label text="Причина"
+                    labelFor="_WorkDescr-SmartField"
+                    design="Bold" />
+                <smartField:SmartField id="_Cause-SmartField"
+                    entitySet="ZSNN_SUBTASK_EXECUTORS"
+                    value="{Cause}"/>
 
             </VBox>
 
