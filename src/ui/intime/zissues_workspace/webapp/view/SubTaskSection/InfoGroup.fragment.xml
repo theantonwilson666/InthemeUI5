@@ -95,17 +95,32 @@
                     enabled="{state>/subTaskEditMode}"
                     text="Назначить исполнителя"
                     press="onAddSubTaskExecutor" />
-                <Button id="Delete"
+                <!-- <Button id="Delete"
                     icon="sap-icon://delete"
                     tooltip="Sort"
                     text="Удалить"
-                    press="onDeleteSelection" />
+                    press="onDeleteSelection" /> -->
             </OverflowToolbar>
         </smartTable:customToolbar>
       
         <Table growing="true"
             mode="SingleSelectMaster"
-            selectionChange="onAddSubTaskExecutor"/>
+            selectionChange="onAddSubTaskExecutor">
+        <columns>
+            <column width="80px" id="deleteColumnForForwarder" demandPopin="true" vAlign="Middle">
+                <customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey": "Delete", "columnIndex": 10}' />
+                </customData>
+            </column>
+        </columns>
+        <items>
+            <ColumnListItem>
+                <cells>
+                    <Button id="deleteButtonForForwarder" icon="sap-icon://delete" type="Transparent" press="onDeleteSelection"/>
+                </cells>
+            </ColumnListItem>
+        </items>
+        </Table>
     </smartTable:SmartTable>
 
 </core:FragmentDefinition>
