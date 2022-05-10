@@ -25,7 +25,8 @@
         "deploy_zorg_hierarchy": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=3 --app=zorg_hierarchy",
         "deploy_zperson_card": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=3 --app=zperson_card",
         "deploy_zpartners_registry": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=4 --app=zpartners_registry",
-        "deploy_zissues_workspace": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=4 --app=zissues_workspace"
+        "deploy_zissues_workspace": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=4 --app=zissues_workspace",
+        "deploy_zusers_list": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=4 --app=zusers_list"
     },
     "keywords": [],
     "author": "Vilson A.Y.",
