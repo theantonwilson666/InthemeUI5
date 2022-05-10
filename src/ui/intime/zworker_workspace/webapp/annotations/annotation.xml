@@ -1,0 +1,271 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+	Version="4.0">
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470968/UI.xml?api=v2">
+		<edmx:Include Alias="UI"
+			Namespace="com.sap.vocabularies.UI.v1" />
+	</edmx:Reference>
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470971/Communication.xml?api=v2">
+		<edmx:Include Alias="Communication"
+			Namespace="com.sap.vocabularies.Communication.v1" />
+	</edmx:Reference>
+	<edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Measures.V1.xml">
+		<edmx:Include Alias="Measures"
+			Namespace="Org.OData.Measures.V1" />
+	</edmx:Reference>
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470974/Common.xml?api=v2">
+		<edmx:Include Alias="Common"
+			Namespace="com.sap.vocabularies.Common.v1" />
+	</edmx:Reference>
+	<edmx:DataServices>
+		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm">
+
+
+			<Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/PartnerImageURL">
+				<Annotation Term="UI.IsImageUrl"/>
+			</Annotations>
+
+			<Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType">
+				<Annotation Term="UI.LineItem">
+					<Collection>
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="PartnerImageURL"/>
+							<Annotation Term="UI.Importance"
+								EnumMember="UI.ImportanceType/High"/>
+						</Record>
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="SubTaskID" />
+						</Record>
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="SubTaskStatus" />
+						</Record>
+
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="TaskID" />
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="StageID" />
+						</Record>
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="ProjectID" />
+						</Record>
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="StartDate" />
+						</Record>
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="EndDate" />
+						</Record>
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="EstimateTime" />
+						</Record>
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="WorkDescr" />
+						</Record>
+
+
+
+					</Collection>
+				</Annotation>
+			</Annotations>
+
+			<Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_LISTType">
+
+				<Annotation Term="UI.FieldGroup"
+					Qualifier="Activities">
+					<Record>
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value"
+										Path="OpenAssignedSubTask"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Label"
+							String="Текущиче активности"/>
+					</Record>
+				</Annotation>
+
+				<Annotation Term="UI.FieldGroup"
+					Qualifier="NameInfoHeader">
+					<Record>
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value"
+										Path="Surname"/>
+									<Annotation Term="UI.Importance"
+										EnumMember="UI.ImportanceType/Low"/>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value"
+										Path="Name"/>
+									<Annotation Term="UI.Importance"
+										EnumMember="UI.ImportanceType/High"/>
+								</Record>
+
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value"
+										Path="Branch"/>
+									<Annotation Term="UI.Importance"
+										EnumMember="UI.ImportanceType/Low"/>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value"
+										Path="PositionID"/>
+									<Annotation Term="UI.Importance"
+										EnumMember="UI.ImportanceType/High"/>
+								</Record>
+
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Label"
+							String="Общая инофрмация"/>
+					</Record>
+				</Annotation>
+
+				<Annotation Term="UI.Facets">
+					<Collection>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Label"
+								String="Назначенные задачи"/>
+							<PropertyValue Property="Target"
+								AnnotationPath="to_AssignedSubTask/@UI.LineItem" />
+						</Record>
+					</Collection>
+				</Annotation>
+
+
+
+
+				<Annotation Term="UI.HeaderFacets">
+					<Collection>
+
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Label"
+								String="Общая информация"/>
+							<PropertyValue Property="Target"
+								AnnotationPath="@UI.FieldGroup#NameInfoHeader" />
+						</Record>
+
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Label"
+								String="Текущие активности"/>
+							<PropertyValue Property="Target"
+								AnnotationPath="@UI.FieldGroup#Activities" />
+						</Record>
+
+
+
+
+					</Collection>
+				</Annotation>
+
+				<Annotation Term="UI.SelectionFields">
+					<Collection>
+						<PropertyPath>UserID</PropertyPath>
+						<PropertyPath>Branch</PropertyPath>
+						<PropertyPath>PositionID</PropertyPath>
+					</Collection>
+				</Annotation>
+
+				<Annotation Term="UI.HeaderInfo">
+
+					<Record>
+						<PropertyValue Property="ImageUrl"
+							Path="ImageURL"/>
+
+						<PropertyValue Property="Title">
+							<Record Type="UI.DataField">
+
+								<PropertyValue Property="Value">
+									<Apply Function="odata.concat">
+										<Path>Surname</Path>
+										<String></String>
+										<Path>Name</Path>
+									</Apply>
+								</PropertyValue>
+							</Record>
+						</PropertyValue>
+						<PropertyValue Property="Description">
+							<Record Type="UI.DataField">
+								<PropertyValue Property="Value"
+									Path="UserID"/>
+
+							</Record>
+						</PropertyValue>
+
+
+					</Record>
+				</Annotation>
+
+				<Annotation Term="UI.LineItem">
+					<Collection>
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="ImageURL"/>
+							<Annotation Term="UI.Importance"
+								EnumMember="UI.ImportanceType/High"/>
+						</Record>
+
+						<!-- <Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="UserID" />
+						</Record> -->
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="Name" />
+						</Record>
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="Surname" />
+						</Record>
+
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="Branch" />
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="PositionID" />
+						</Record>
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="OpenAssignedSubTask" />
+						</Record>
+
+					</Collection>
+				</Annotation>
+			</Annotations>
+
+			<Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_LISTType/ImageURL">
+				<Annotation Term="UI.IsImageUrl"/>
+			</Annotations>
+
+
+
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>
