@@ -2,6 +2,8 @@ sap.ui.define(["sap/ui/core/Fragment", "sap/ui/model/json/JSONModel", "sap/m/Mes
 
     return {
         loadDialog: function (oParams) {
+
+
             if (!this[oParams.sDialogName]) {
                 return Fragment.load({
                     type: "XML",
@@ -21,13 +23,17 @@ sap.ui.define(["sap/ui/core/Fragment", "sap/ui/model/json/JSONModel", "sap/m/Mes
                 );
             } else {
                 return new Promise(
-                    function (res) {
+                    function (res) {    
                         res(this[oParams.sDialogName]);
                     }.bind(this)
                 );
             }
         },
 
+        byId: function(sId){
+            return sap.ui.getCore().byId(sId);
+        },
+        
         showMessage: function (sText) {
             MessageToast.show(sText);
         },

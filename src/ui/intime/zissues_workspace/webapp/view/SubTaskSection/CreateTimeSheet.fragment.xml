@@ -1,0 +1,37 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:u="sap.ui.unified"
+    xmlns:timeSheet="jira.lib.intime_reuse.timeSheet"
+    xmlns:m="sap.m">
+
+
+    <timeSheet:TimeSheetDialog title="Списать время - {ExecutorName}" executorID="{Executor}" subTaskID="{SubTaskID}" contentWidth="50%"/>
+
+    <!-- <Dialog id="_CreateTimeSheet-Dialog" title="Списать время - {ExecutorName}">
+        <content>
+
+
+            <Label text="Подзадача" labelFor="_inputTimeSheetDate-DatePicker" design="Bold" />
+            <DatePicker id="_inputTimeSheetDate-DatePicker" displayFormat="short" change="handleChange" class="sapUiSmallMarginBottom"/>
+
+
+            <Label text="Дата" labelFor="_inputTimeSheetDate-DatePicker" design="Bold" />
+            <DatePicker id="_inputTimeSheetDate-DatePicker" displayFormat="short" change="handleChange" class="sapUiSmallMarginBottom"/>
+
+
+
+            <Label text="Дата" labelFor="_inputTimeSheetDate-DatePicker" design="Bold" />
+            <DatePicker id="_inputTimeSheetDate-DatePicker" displayFormat="short" change="handleChange" class="sapUiSmallMarginBottom"/>
+
+        </content>
+        <beginButton>
+            <Button id="beginBtn" text="Сохранить" type="Emphasized" press=".onOkPartnerDialog"/>
+        </beginButton>
+        <endButton>
+            <Button id="endBtn" text="Отменить" press=".onCancelPartnerDialog"/>
+        </endButton>
+    </Dialog> -->
+</core:FragmentDefinition>
