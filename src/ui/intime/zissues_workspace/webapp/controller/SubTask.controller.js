@@ -68,6 +68,7 @@ sap.ui.define([
                             },
                             events: {
                                 dataReceived: function(oData) {
+                                    debugger;
                                     var oTaskModel = new JSONModel(oData.getParameter("data").to_Task);
                                     this.getView().setModel(oTaskModel, "taskData");
                                     this.setFaviconIconByPartner(oData.getParameter("data").to_Task.PartnerID);
@@ -199,13 +200,17 @@ sap.ui.define([
 
             onDeleteSelection: function(oEvent) {
                 debugger
-                sap.m.MessageBox.warning(`Вы уверены, что хотите удалить ${this._selectedRowContext.getObject().Name}`, {
+
+                var oItem = oEvent.getSource().getParent();
+                var oEntry = oItem.getBindingContext().getObject();
+
+                sap.m.MessageBox.warning(`Вы уверены, что хотите удалить исполнителя ${oEntry.ExecutorName}`, {
                     actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
                     emphasizedAction: MessageBox.Action.OK,
                     onClose: function(sAction) {
                         switch (sAction) {
                             case MessageBox.Action.OK:
-                                this.getModel().remove(this._selectedRowContext.getPath());
+                                this.getModel().remove(oItem.getBindingContextPath());
                                 debugger;
                                 break;
                             case MessageBox.Action.CANCEL:
