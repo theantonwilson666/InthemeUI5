@@ -12,8 +12,7 @@
     xmlns:navpopover="sap.ui.comp.navpopover"
     xmlns:dnd-grid="sap.f.dnd">
 
-    <smartForm:SmartForm editable="{state>/subTaskEditMode}"
-        entityType="ZSNN_INTIME_SUBTASKType">
+    <smartForm:SmartForm editable="{state>/subTaskEditMode}" entityType="ZSNN_INTIME_SUBTASKType">
         <smartForm:Group label="Общая информация">
             <smartForm:GroupElement>
                 <smartField:SmartField value="{Name}"
@@ -24,7 +23,6 @@
             </smartForm:GroupElement>
             <smartForm:GroupElement label="Проект">
                 <Text text="{taskData>/ProjectName}"/>
-                <!-- <smartField:SmartField value="{taskData>/ProjectName}" entitySet="ZSNN_INTIME_TASK"/> -->
             </smartForm:GroupElement>
             <smartForm:GroupElement label="Этап проекта">
                 <Text text="{taskData>/ProjectStageName}"/>
@@ -67,8 +65,14 @@
             </smartForm:GroupElement>
         </smartForm:Group>
 
+
         <!-- <smartForm:semanticObjectController>
         <navpopover:SemanticObjectController entitySet="ZSNN_INTIME_TASK" enableAvailableActionsPersonalization='\{"ProjectName":false\}'/>
+
+      <! <smartForm:semanticObjectController>
+        <navpopover:SemanticObjectController entitySet="ZSNN_INTIME_TASK"
+          enableAvailableActionsPersonalization='\{"taskData>/ProjectName":false\}'/>
+
       </smartForm:semanticObjectController> -->
 
     </smartForm:SmartForm>
@@ -94,7 +98,6 @@
                     enabled="{state>/subTaskEditMode}"
                     text="Назначить исполнителя"
                     press="onAddSubTaskExecutor" />
-                <!-- <Button id="Delete" icon="sap-icon://delete" tooltip="Sort" text="Удалить" press="onDeleteSelection" /> -->
             </OverflowToolbar>
         </smartTable:customToolbar>
 
