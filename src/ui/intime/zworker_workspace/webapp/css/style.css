@@ -1,0 +1,8 @@
+.sapFDynamicPageTitleMain>.sapFDynamicPageTitleMainInner .sapFDynamicPageTitleMainHeading .sapFDynamicPageTitleMainHeadingInner .sapMTitle {
+    font-size: 0.85rem;
+}
+
+.sapUiCompVarMngmt .sapUICompVarMngmtTriggerBtn>span>span {
+    font-size: 0.975rem;
+    line-height: 1.2rem;
+}

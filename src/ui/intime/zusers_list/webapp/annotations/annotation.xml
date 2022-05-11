@@ -21,6 +21,28 @@
 
 			<Annotations Target="ZINT_UI_USERS_SRV.ZSNN_INTIME_USER_POSITION_HISTType">
 
+				<Annotation Term="UI.HeaderInfo">
+
+					<Record>
+						<PropertyValue Property="Title">
+							<Record Type="UI.DataField">
+
+								<PropertyValue Property="Value"
+									Path="PositionText"/>
+
+							</Record>
+						</PropertyValue>
+						<PropertyValue Property="Description">
+							<Record Type="UI.DataField">
+								<PropertyValue Property="Value"
+									Path="BranchText"/>
+
+							</Record>
+						</PropertyValue>
+
+					</Record>
+				</Annotation>
+
 				<Annotation Term="UI.FieldGroup"
 					Qualifier="mainInfo">
 					<Record>
@@ -350,6 +372,128 @@
 			<Annotations Target="ZINT_UI_USERS_SRV.ZSNN_INTIME_USERType/ImageURL">
 				<Annotation Term="UI.IsImageUrl"/>
 			</Annotations>
+
+
+			<Annotations Target="ZINT_UI_USERS_SRV.ZSNN_INTIME_USERType/Branch">
+				<Annotation Term="Common.ValueListWithFixedValues"
+					Bool="true" />
+				<Annotation Term="Common.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath"
+							String="ZBNN_INTIME_BRANCH" />
+						<PropertyValue Property="SearchSupported"
+							Bool="true" />
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty"
+										PropertyPath="Branch" />
+									<PropertyValue Property="ValueListProperty"
+										String="BranchID" />
+								</Record>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty"
+										PropertyPath="BranchText" />
+									<PropertyValue Property="ValueListProperty"
+										String="BranchText" />
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+
+
+			<Annotations Target="ZINT_UI_USERS_SRV.ZSNN_INTIME_USERType/PositionID">
+				<Annotation Term="Common.ValueListWithFixedValues"
+					Bool="true" />
+				<Annotation Term="Common.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath"
+							String="ZBNN_INTIME_POSITION" />
+						<PropertyValue Property="SearchSupported"
+							Bool="true" />
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty"
+										PropertyPath="PositionID" />
+									<PropertyValue Property="ValueListProperty"
+										String="PositionID" />
+								</Record>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty"
+										PropertyPath="PositionText" />
+									<PropertyValue Property="ValueListProperty"
+										String="PositionText" />
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+
+
+			<Annotations Target="ZINT_UI_USERS_SRV.ZSNN_INTIME_USER_POSITION_HISTType/BranchID">
+				<Annotation Term="Common.ValueListWithFixedValues"
+					Bool="true" />
+				<Annotation Term="Common.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath"
+							String="ZBNN_INTIME_BRANCH" />
+						<PropertyValue Property="SearchSupported"
+							Bool="true" />
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty"
+										PropertyPath="BranchID" />
+									<PropertyValue Property="ValueListProperty"
+										String="BranchID" />
+								</Record>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty"
+										PropertyPath="BranchText" />
+									<PropertyValue Property="ValueListProperty"
+										String="BranchText" />
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+
+
+			<Annotations Target="ZINT_UI_USERS_SRV.ZSNN_INTIME_USER_POSITION_HISTType/PositionID">
+				<Annotation Term="Common.ValueListWithFixedValues"
+					Bool="true" />
+				<Annotation Term="Common.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath"
+							String="ZBNN_INTIME_POSITION" />
+						<PropertyValue Property="SearchSupported"
+							Bool="true" />
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty"
+										PropertyPath="PositionID" />
+									<PropertyValue Property="ValueListProperty"
+										String="PositionID" />
+								</Record>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty"
+										PropertyPath="PositionText" />
+									<PropertyValue Property="ValueListProperty"
+										String="PositionText" />
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+
+
 
 
 

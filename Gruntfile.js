@@ -120,6 +120,12 @@ module.exports = function(grunt) {
                         bspDescription: "Intime : Партнеры",
                         prefix: "intime/zpartners_registry",
                     },
+
+                    zusers_list: {
+                        bspContainer: "ZUSER_LIST",
+                        bspDescription: "Intime : Сотрудники",
+                        prefix: "intime/zusers_list",
+                    }
                 },
             }
 
