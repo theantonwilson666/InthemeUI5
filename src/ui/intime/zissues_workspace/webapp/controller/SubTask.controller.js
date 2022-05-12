@@ -214,7 +214,7 @@ sap.ui.define([
                     onClose: function (sAction) {
                         switch (sAction) {
                             case MessageBox.Action.OK:
-                                this.getModel().remove(oItem.getBindingContextPath());
+                                this.getModel().remove(oItem.getBindingContext().sPath);
                                 debugger;
                                 break;
                             case MessageBox.Action.CANCEL:
