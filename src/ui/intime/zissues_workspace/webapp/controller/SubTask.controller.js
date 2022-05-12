@@ -163,6 +163,10 @@ sap.ui.define([
 
             },
 
+            afterCloseDialog: function(oEvent) {
+                debugger;
+            },
+
 
             onAddSubTaskExecutor: function (oEvent) {
                 debugger;
