@@ -65,6 +65,10 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
     var oEndDate = oEvent.getParameter("to");
 
     var oDataSet = new sap.viz.ui5.data.FlattenedDataset({
+      data: {
+        path: oEvent.getSource().getBindingContext().getPath() + "/to_SpendHours"
+      },
+
       dimensions: [
         new sap.viz.ui5.data.DimensionDefinition({
           name: "DateSheet",
@@ -103,8 +107,9 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
       },
     });
 
+    this.byId("_TimeSheet-VizFrame").setDataset(oDataSet);
 
-    this.byId("_TimeSheet-VizFrame").bindAggregation("dataset", oEvent.getSource().getBindingContext().getPath() + "/to_SpendHours", oDataSet);
+    // this.byId("_TimeSheet-VizFrame").bindAggregation("dataset", oEvent.getSource().getBindingContext().getPath() + "/to_SpendHours", oDataSet);
 
 
   }
