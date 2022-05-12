@@ -74,6 +74,7 @@ sap.ui.define([
 
                 if (this.getExecutorID() && this.getSubTaskID()) {
                     this.Lib.byId("_SubTask-SmartField").setEditable(false);
+                    this.Lib.byId("_SubTaskName-Text").setVisible(false);
                     this._readAssignedTask(this.getExecutorID(), this.getSubTaskID());
                 }
 
@@ -86,15 +87,19 @@ sap.ui.define([
         },
 
         _onOkButtonPress: function (oEvent) {
+
+            this.setBusy(true);
             
             this._getModel().submitChanges({
-                success : function(){
-                    debugger;
-                },
+                success: function () {
+                    this.setBusy(false);
+                    this.close();
+                }.bind(this),
 
-                error : function(){
-                    debugger;
-                }
+                error: function () {
+
+                    this.setBusy(false);;
+                }.bind(this)
             });
 
         },
@@ -147,7 +152,6 @@ sap.ui.define([
                         this._getModel().setProperty(sPath + "/ProjectName", oSubTaskEntry.ProjectName);
                         this._getModel().setProperty(sPath + "/PartnerName", oSubTaskEntry.PartnerName);
 
-
                         this.setIcon(oSubTaskEntry.PartnerImageURL);
 
 
@@ -159,6 +163,7 @@ sap.ui.define([
         _getModel: function () {
             if (!this.ODataModel) {
                 this.ODataModel = new sap.ui.model.odata.v2.ODataModel(this.ODataUrl, {
+                    defaultBindingMode : "TwoWay",
                     annotationURI: "/sap/bc/ui5_ui5/sap/zjiralib/intime_reuse/timeSheet/localService/annotations.xml"
                 });
             }

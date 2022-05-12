@@ -136,7 +136,30 @@
             "controllerName": "intime.zworker_workspace.ext.controller.ObjectPageExt",
             "sap.ui.generic.app": {
               "ZSNN_WORKER_LIST": {
-                "EntitySet": "ZSNN_WORKER_LIST"
+                "EntitySet": "ZSNN_WORKER_LIST",
+                "Header": {
+                  "Actions": {
+                    "createTimeSheetHeader": {
+                      "id": "createTimeSheetHeader",
+                      "text": "Списать время",
+                      "press": "onCreateTimeSheetHeaderButtonPress"
+                    }
+                  }
+                },
+                "Sections": {
+                  "to_AssignedSubTask::com.sap.vocabularies.UI.v1.LineItem": {
+                    "id": "to_AssignedSubTask::com.sap.vocabularies.UI.v1.LineItem",
+                    "Actions": {
+                      "createTimeSheet": {
+                        "id": "createTimeSheet",
+                        "press": "onCreateTimeSheetButtonPress",
+                        "text": "Списать время",
+                        "determining": true,
+                        "requiresSelection": true
+                      }
+                    }
+                  }
+                }
               }
             }
           }

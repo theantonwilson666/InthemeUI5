@@ -13,17 +13,19 @@
         editable="true">
         <smartForm:Group>
             <smartForm:GroupElement>
-                <smartField:SmartField value="{Executor}" id="_Executor-SmartField"
+                <smartField:SmartField value="{Executor}"
+                    id="_Executor-SmartField"
                     textInEditModeSource="ValueList">
                 </smartField:SmartField>
             </smartForm:GroupElement>
 
 
             <smartForm:GroupElement>
-                <smartField:SmartField value="{SubTaskID}" id="_SubTask-SmartField"
-                    textInEditModeSource="ValueList">
-
+                <smartField:SmartField value="{SubTaskID}"
+                    id="_SubTask-SmartField"
+                    textInEditModeSource="None">
                 </smartField:SmartField>
+                <Text id="_SubTaskName-Text" text="{SubTaskName}"/>
             </smartForm:GroupElement>
 
             <smartForm:GroupElement>

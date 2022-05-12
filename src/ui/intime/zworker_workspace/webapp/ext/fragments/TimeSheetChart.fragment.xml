@@ -1,5 +1,32 @@
 <core:FragmentDefinition xmlns="sap.m"
-    xmlns:core="sap.ui.core">
+    xmlns:core="sap.ui.core"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:viz="sap.viz.ui5.controls">
 
-    <Text text="test"/>
+    <VBox>
+        <Label text="Интервал"
+            labelFor="_TimeSheetIntervalSelection-DateRangeSelection"
+            design="Bold" />
+        <DateRangeSelection id="_TimeSheetIntervalSelection-DateRangeSelection"
+            width="20%"
+            change="onChangeDateRangeSelection" />
+
+        <VBox alignContent="Stretch">
+            <viz:VizFrame id="_TimeSheet-VizFrame"
+                uiConfig="{applicationSet:'fiori'}"
+                height='100%'
+                width="100%"
+                vizType='column'>
+
+                <viz:feeds>
+                    <viz.feeds:FeedItem uid="valueAxis"
+                        type="Measure"
+                        values="SpendHours" />
+                    <viz.feeds:FeedItem uid="categoryAxis"
+                        type="Dimension"
+                        values="DateSheet" />
+                </viz:feeds>
+            </viz:VizFrame>
+        </VBox>
+    </VBox>
 </core:FragmentDefinition>

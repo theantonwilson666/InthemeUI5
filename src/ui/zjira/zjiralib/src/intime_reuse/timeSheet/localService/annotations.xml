@@ -44,6 +44,11 @@
 
 
 
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/Executor">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
       <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_INTIME_USERType/Name">
         <Annotation Term="UI.HiddenFilter"
           Bool="true"/>
