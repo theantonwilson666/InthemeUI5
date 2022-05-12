@@ -196,7 +196,7 @@
         </Annotation>
       </Annotations>
 
-      <Annotations Target="ZINT_UI_PARTNERS_SRV.ZSNN_PARTNER_ADMINType/Username">
+      <Annotations Target="ZINT_UI_PARTNERS_SRV.ZSNN_PARTNER_ADMINType/UserName">
         <Annotation Term="Common.ValueListWithFixedValues"
           Bool="false" />
         <Annotation Term="Common.ValueList">
@@ -209,7 +209,7 @@
               <Collection>
                 <Record Type="Common.ValueListParameterInOut">
                   <PropertyValue Property="LocalDataProperty"
-                    PropertyPath="Username" />
+                    PropertyPath="UserName" />
                   <PropertyValue Property="ValueListProperty"
                     String="UserName" />
                 </Record>
@@ -236,7 +236,12 @@
       </Annotations>
 
 
-      <Annotations Target="ZINT_UI_PARTNERS_SRV.ZSNN_PROJECT_ADMINType/Username">
+      <Annotations Target="ZINT_UI_PARTNERS_SRV.ZSNN_PROJECT_ADMINType/UserName">
+        <Annotation Term="Common.SemanticObject"
+          String="zusers_list"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_PARTNERS_SRV.ZSNN_PROJECT_ADMINType/UserName">
         <Annotation Term="Common.ValueListWithFixedValues"
           Bool="false" />
         <Annotation Term="Common.ValueList">
@@ -249,7 +254,7 @@
               <Collection>
                 <Record Type="Common.ValueListParameterInOut">
                   <PropertyValue Property="LocalDataProperty"
-                    PropertyPath="Username" />
+                    PropertyPath="UserName" />
                   <PropertyValue Property="ValueListProperty"
                     String="UserName" />
                 </Record>
@@ -351,7 +356,7 @@
           <Collection>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value"
-                Path="Username" />
+                Path="UserName" />
             </Record>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value"

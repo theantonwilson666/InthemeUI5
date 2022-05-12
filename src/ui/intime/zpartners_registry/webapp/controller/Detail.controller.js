@@ -85,7 +85,7 @@ sap.ui.define([
                     vAlign: "Middle",
                     cells: [
                         new sap.ui.comp.smartfield.SmartField({
-                            value: "{Username}",
+                            value: "{UserName}",
                             editable: "{state>/editProjectMode}"
                         }),
                         new sap.m.Switch({

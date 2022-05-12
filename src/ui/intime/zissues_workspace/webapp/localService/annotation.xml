@@ -232,6 +232,12 @@
         </Annotation>
       </Annotations>
 
+
+      <Annotations Target="ZINT_UI_USERS_SRV.ZSNN_SUBTASK_EXECUTORSType/Executor">
+        <Annotation Term="Common.SemanticObject"
+          String="zusers_list"/>
+      </Annotations>
+
       <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_TASKType/ProjectName">
         <Annotation Term="Common.SemanticObject"
           String="zpartners_registry"/>
@@ -248,8 +254,7 @@
       </Annotations>
 
       <!-- <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_SUBTASKType/ProjectName">
-        <Annotation Term="Common.SemanticObject"
-          String="zpartners_registry"/>
+        <Annotation Term="Common.SemanticObject" String="zpartners_registry"/>
       </Annotations> -->
 
       <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_TASKType/ProjectStageId">
