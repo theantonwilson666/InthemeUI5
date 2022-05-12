@@ -1,0 +1,461 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+  Version="4.0">
+  <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata-data-aggregation-ext/v4.0/cs02/vocabularies/Org.OData.Aggregation.V1.xml">
+    <edmx:Include Alias="Aggregation"
+      Namespace="Org.OData.Aggregation.V1" />
+  </edmx:Reference>
+  <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Capabilities.V1.xml">
+    <edmx:Include Alias="Capabilities"
+      Namespace="Org.OData.Capabilities.V1" />
+  </edmx:Reference>
+  <edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470974/Common.xml?api=v2">
+    <edmx:Include Alias="Common"
+      Namespace="com.sap.vocabularies.Common.v1" />
+  </edmx:Reference>
+  <edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470971/Communication.xml?api=v2">
+    <edmx:Include Alias="vCard"
+      Namespace="com.sap.vocabularies.Communication.v1" />
+  </edmx:Reference>
+  <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Alias="Core"
+      Namespace="Org.OData.Core.V1" />
+  </edmx:Reference>
+  <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Measures.V1.xml">
+    <edmx:Include Alias="CQP"
+      Namespace="Org.OData.Measures.V1" />
+  </edmx:Reference>
+  <edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470968/UI.xml?api=v2">
+    <edmx:Include Alias="UI"
+      Namespace="com.sap.vocabularies.UI.v1" />
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Authorization.V1.xml">
+    <edmx:Include Alias="Auth"
+      Namespace="Org.OData.Authorization.V1" />
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.xml">
+    <edmx:Include Alias="Validation"
+      Namespace="Org.OData.Validation.V1" />
+  </edmx:Reference>
+  <edmx:Reference Uri="/">
+    <edmx:Include Namespace="ZJIRA_SRV" />
+  </edmx:Reference>
+  <edmx:DataServices>
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm">
+
+
+
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_INTIME_USERType/Name">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_INTIME_USERType/Surname">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
+
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_INTIME_USERType/BranchText">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_INTIME_USERType/PositionText">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_INTIME_USERType/ImageURL">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
+
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_INTIME_USERType/TelephonNumber">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_INTIME_USERType/Email">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_INTIME_USERType/JiraID">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_INTIME_USERType/TelegramID">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
+
+
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_INTIME_USERType/Branch">
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="true" />
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZBNN_INTIME_BRANCH" />
+            <PropertyValue Property="SearchSupported"
+              Bool="true" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="Branch" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="BranchID" />
+                </Record>
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="BranchText" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="BranchText" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_INTIME_USERType/PositionID">
+
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="true" />
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZBNN_INTIME_POSITION" />
+            <PropertyValue Property="SearchSupported"
+              Bool="true" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="PositionID" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="PositionID" />
+                </Record>
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="PositionText" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="PositionText" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+
+
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_INTIME_USERType">
+
+        <Annotation Term="UI.FieldGroup"
+          Qualifier="user">
+          <Record>
+            <PropertyValue Property="Data">
+              <Collection>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value"
+                    Path="UserID"/>
+                </Record>
+
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value"
+                    Path="FullName"/>
+                </Record>
+
+
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="Label"
+              String="Пользователь"/>
+          </Record>
+        </Annotation>
+
+        <Annotation Term="UI.FieldGroup"
+          Qualifier="position">
+          <Record>
+            <PropertyValue Property="Data">
+              <Collection>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value"
+                    Path="Branch"/>
+                </Record>
+
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value"
+                    Path="PositionID"/>
+                </Record>
+
+
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="Label"
+              String="Должность"/>
+          </Record>
+        </Annotation>
+
+
+        <Annotation Term="UI.FieldGroup"
+          Qualifier="contact">
+          <Record>
+            <PropertyValue Property="Data">
+              <Collection>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value"
+                    Path="TelephonNumber"/>
+                </Record>
+
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value"
+                    Path="Email"/>
+                </Record>
+
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="Label"
+              String="Контакты"/>
+          </Record>
+        </Annotation>
+
+        <Annotation Term="UI.FieldGroup"
+          Qualifier="extID">
+          <Record>
+            <PropertyValue Property="Data">
+              <Collection>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value"
+                    Path="JiraID"/>
+                </Record>
+
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value"
+                    Path="TelegramID"/>
+                </Record>
+
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="Label"
+              String="Внешние ID"/>
+          </Record>
+        </Annotation>
+
+
+
+
+        <Annotation Term="UI.FilterFacets">
+          <Collection>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Target"
+                AnnotationPath="@UI.FieldGroup#user"/>
+            </Record>
+
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Target"
+                AnnotationPath="@UI.FieldGroup#position"/>
+            </Record>
+
+            <!-- <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#contact"/>
+            </Record>
+
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#extID"/>
+            </Record> -->
+          </Collection>
+        </Annotation>
+
+
+
+        <!-- <Annotation Term="UI.SelectionFields">
+          <Collection>
+            <PropertyPath>UserID</PropertyPath>
+            <PropertyPath>FullName</PropertyPath>
+          </Collection>
+        </Annotation> -->
+      </Annotations>
+
+      <!-- <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_INTIME_TIMESHEETType/Executor">
+        <Annotation Term="Common.FieldControl" Path="FieldToGetHideOrShowValue"/>
+      </Annotations> -->
+
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_INTIME_TIMESHEETType/Executor">
+
+        <Annotation Term="Common.Text"
+          Path="ExecutorName">
+          <Annotation Term="UI.TextArrangement"
+            EnumMember="UI.TextArrangementType/TextOnly"/>
+        </Annotation>
+
+
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="false" />
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZSNN_INTIME_USER" />
+            <PropertyValue Property="SearchSupported"
+              Bool="true" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="Executor" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="UserID" />
+                </Record>
+
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="ExecutorName" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="FullName" />
+                </Record>
+                <!-- <Record Type="Common.ValueListParameterDisplayOnly">
+                    <PropertyValue Property="ValueListProperty" String="FullName"/>
+                  </Record> -->
+
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="BranchText"/>
+                </Record>
+
+
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="PositionText"/>
+                </Record>
+
+
+              </Collection>
+            </PropertyValue>
+
+            <!-- <PropertyValue Property="SelectionVariantQualifier" String="test" /> -->
+          </Record>
+        </Annotation>
+      </Annotations>
+
+
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_INTIME_TIMESHEETType/Comment">
+        <Annotation Term="UI.MultiLineText"
+          Bool="true"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_INTIME_TIMESHEETType/TimeSpentU">
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="true" />
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZBNN_TIME_UNIT" />
+            <PropertyValue Property="SearchSupported"
+              Bool="true" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="TimeSpentU" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="Unit" />
+                </Record>
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="TimeSpentUText" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="UnitText" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+
+
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_INTIME_TIMESHEETType/SubTaskID">
+
+
+        <Annotation Term="Common.Text"
+          Path="SubTaskName">
+          <Annotation Term="UI.TextArrangement"
+            EnumMember="UI.TextArrangementType/TextOnly"/>
+        </Annotation>
+
+
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="false" />
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZSNN_WORKER_ASSIGNED_SUBTASK" />
+            <PropertyValue Property="SearchSupported"
+              Bool="true" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="Executor" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="Executor" />
+                </Record>
+
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="SubTaskID" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="SubTaskID" />
+                </Record>
+
+
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="SubTaskName" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="SubTaskName" />
+                </Record>
+
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="TaskName" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="TaskName" />
+                </Record>
+
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="StageName" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="StageName" />
+                </Record>
+
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="ProjectName" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectName" />
+                </Record>
+
+
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="PartnerName" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerName" />
+                </Record>
+
+
+              </Collection>
+            </PropertyValue>
+
+          </Record>
+        </Annotation>
+      </Annotations>
+
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

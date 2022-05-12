@@ -1,30 +1,30 @@
 sap.ui.define([
-        // "intime.zissues_workspace.controller.App",
-        "intime/zissues_workspace/controller/Detail.controller",
-        'sap/ui/core/Fragment',
-        'sap/m/MessageBox',
-        'sap/m/Button',
-        "sap/ui/model/json/JSONModel"
-    ],
-    function(DetailController, Fragment, MessageBox, Button, JSONModel) {
+    // "intime.zissues_workspace.controller.App",
+    "intime/zissues_workspace/controller/Detail.controller",
+    'sap/ui/core/Fragment',
+    'sap/m/MessageBox',
+    'sap/m/Button',
+    "sap/ui/model/json/JSONModel"
+],
+    function (DetailController, Fragment, MessageBox, Button, JSONModel) {
         "use strict";
 
         return DetailController.extend("intime.zissues_workspace.controller.SubTask", {
-            onInit: function() {
+            onInit: function () {
                 this.getRouter()
                     .getRoute("subtask")
                     .attachPatternMatched(this._onRouteMatched, this);
 
             },
 
-            _onRouteMatched: function(oEvent) {
+            _onRouteMatched: function (oEvent) {
                 this._routeSubTaskParam = {
                     taskId: atob(oEvent.getParameter("arguments").taskId),
                     subTaskId: atob(oEvent.getParameter("arguments").subTaskId),
                     param: oEvent.getParameter("arguments")["?query"]
                 };
 
-                this.getView().getModel().metadataLoaded().then(function() {
+                this.getView().getModel().metadataLoaded().then(function () {
 
                     var oTaskContext = this.getStateProperty("/taskContext");
                     if (oTaskContext) {
@@ -46,7 +46,7 @@ sap.ui.define([
                                 TaskId: this._routeSubTaskParam.taskId
                             },
                             groupId: "changes",
-                            success: function(oData) {
+                            success: function (oData) {
                                 this.navTo("subtask", {
                                     taskId: btoa(oData.TaskId),
                                     subTaskId: btoa(oData.SubtaskId)
@@ -67,8 +67,8 @@ sap.ui.define([
                                 expand: "to_Task"
                             },
                             events: {
+
                                 dataReceived: function(oData) {
-                                    debugger;
                                     var oTaskModel = new JSONModel(oData.getParameter("data").to_Task);
                                     this.getView().setModel(oTaskModel, "taskData");
                                     this.setFaviconIconByPartner(oData.getParameter("data").to_Task.PartnerID);
@@ -85,14 +85,14 @@ sap.ui.define([
             },
 
 
-            getTaskData: function() {
+            getTaskData: function () {
 
                 if (this.getView().getBindingContext().bCreated) {
                     this.goToMainPage(true);
                     return;
                 }
 
-                return new Promise(function(resolve, reject) {
+                return new Promise(function (resolve, reject) {
                     this.getModel().read(this.getModel().getBindingContext().getPath() + "/to_Task", {
                         success: resolve,
                         error: reject
@@ -101,11 +101,11 @@ sap.ui.define([
             },
 
 
-            onSubTaskEditButtonPress: function() {
+            onSubTaskEditButtonPress: function () {
                 this.setStateProperty("/subTaskEditMode", !this.getStateProperty("/subTaskEditMode"));
             },
 
-            onSubTaskDeleteButtonPress: function(oEvent) {
+            onSubTaskDeleteButtonPress: function (oEvent) {
 
                 this._delSubTask = oEvent.getSource().getBindingContext();
 
@@ -113,16 +113,16 @@ sap.ui.define([
 
                 MessageBox.warning(`Удалить подзадачу "${this._delSubTask.getObject().Name}"?`, {
                     actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
-                    onClose: function(sAction) {
+                    onClose: function (sAction) {
                         this.getView().setBusy(false);
                         if (sAction === 'OK') {
 
                             this.getModel().remove(this._delSubTask.getPath(), {
-                                success: function(oData) {
+                                success: function (oData) {
                                     this.isExistError();
                                 }.bind(this),
 
-                                error: function(oError) {
+                                error: function (oError) {
                                     this.showError(oError);
                                 }.bind(this)
                             });
@@ -133,16 +133,16 @@ sap.ui.define([
 
             },
 
-            getPage: function() {
+            getPage: function () {
                 return this.byId("subTaskPage");
             },
 
-            onSaveSubTaskButtonPress: function() {
+            onSaveSubTaskButtonPress: function () {
                 this.getPage().setBusy(true);
 
                 this.submitChanges({
                     groupId: "changes",
-                    success: function() {
+                    success: function () {
                         this.getPage().setBusy(false);
 
                         if (!this.isExistError()) {
@@ -150,7 +150,7 @@ sap.ui.define([
                             this.refreshPage();
                         }
                     }.bind(this),
-                    error: function(oError) {
+                    error: function (oError) {
                         this.getPage().setBusy(false);
                         this.showError(oError);
                         this.refreshPage();
@@ -159,12 +159,12 @@ sap.ui.define([
                 });
             },
 
-            onRejectSubTaskButtonPress: function() {
+            onRejectSubTaskButtonPress: function () {
 
             },
 
 
-            onAddSubTaskExecutor: function(oEvent) {
+            onAddSubTaskExecutor: function (oEvent) {
                 debugger;
                 this.loadDialog
                     .call(this, {
@@ -172,7 +172,7 @@ sap.ui.define([
                         sViewName: "intime.zissues_workspace.view.SubTaskSection.NewExecutorDialog"
                     })
                     .then(
-                        function(oDialog) {
+                        function (oDialog) {
 
                             var oExecutorContext = this.getModel().createEntry(this.getPage().getBindingContext().getPath() + "/to_Executors", {
                                 groupId: "changes",
@@ -188,17 +188,17 @@ sap.ui.define([
             },
 
 
-            onOkNewExecutorDialog: function(oEvent) {
+            onOkNewExecutorDialog: function (oEvent) {
                 this.onSaveSubTaskButtonPress();
                 oEvent.getSource().getParent().close();
 
             },
 
-            onCancelNewExecutorDialog: function(oEvent) {
+            onCancelNewExecutorDialog: function (oEvent) {
                 oEvent.getSource().getParent().close();
             },
 
-            onDeleteSelection: function(oEvent) {
+            onDeleteSelection: function (oEvent) {
                 debugger
 
                 var oItem = oEvent.getSource().getParent();
@@ -207,7 +207,7 @@ sap.ui.define([
                 sap.m.MessageBox.warning(`Вы уверены, что хотите удалить исполнителя ${oEntry.ExecutorName}`, {
                     actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
                     emphasizedAction: MessageBox.Action.OK,
-                    onClose: function(sAction) {
+                    onClose: function (sAction) {
                         switch (sAction) {
                             case MessageBox.Action.OK:
                                 this.getModel().remove(oItem.getBindingContextPath());
@@ -221,5 +221,24 @@ sap.ui.define([
                     }.bind(this)
                 });
             },
+
+
+            onTimeSheetCreateButtonPress: function (oEvent) {
+
+                debugger;
+                
+                this.loadDialog
+                    .call(this, {
+                        sDialogName: "_createTimeSheetDialog",
+                        sViewName: "intime.zissues_workspace.view.SubTaskSection.CreateTimeSheet",
+                        sPath : oEvent.getSource().getBindingContext().getPath()
+                    
+                    })
+                    .then(
+                        function (oDialog) {
+                            oDialog.open();
+                        }.bind(this)
+                    );;
+            }
         });
     });

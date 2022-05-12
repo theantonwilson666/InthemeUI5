@@ -8,7 +8,7 @@ sap.ui.define(
         "sap/m/MessageBox",
         "sap/ui/model/json/JSONModel"
     ],
-    function(
+    function (
         Controller,
         CommonFormatter,
         Fragment,
@@ -25,7 +25,7 @@ sap.ui.define(
             commonFormatter: CommonFormatter,
 
 
-            onCopyRow: function(oEvent, sSmartTab, sTab, sEntitySet) {
+            onCopyRow: function (oEvent, sSmartTab, sTab, sEntitySet) {
                 var oTable = this.getView().byId(sSmartTab).getTable();
                 var lisItemForTable = this.byId(sTab).clone();
                 var oCreatedTrade = this.getModel().createEntry(sEntitySet, {
@@ -36,7 +36,7 @@ sap.ui.define(
                 oTable.insertItem(lisItemForTable, 0);
             },
 
-            showError: function(oError) {
+            showError: function (oError) {
                 if (oError && JSON.parse(oError.statusCode) === 500) {
                     MessageDialog.showError.call(this, oError);
                     return;
@@ -44,11 +44,11 @@ sap.ui.define(
                 MessageDialog.showCurrentState();
             },
 
-            newJSONModel : function(oJSON){
+            newJSONModel: function (oJSON) {
                 return new JSONModel(oJSON);
             },
 
-            isExistError: function() {
+            isExistError: function () {
                 var aMassages = sap.ui
                     .getCore()
                     .getMessageManager()
@@ -61,16 +61,16 @@ sap.ui.define(
                 return false;
             },
 
-            setFaviconIconByPartner: function(sProject) {
+            setFaviconIconByPartner: function (sProject) {
                 this.setFaviconIconUrl(`/sap/opu/odata/sap/ZINT_UI_PARTNERS_SRV/ZSNN_PARTNER_ROOT('${sProject}')/$value`);
             },
 
-            setFaviconIconUrl: function(sUrl) {
+            setFaviconIconUrl: function (sUrl) {
                 jQuery.sap.setIcons({ favicon: sUrl });
             },
 
 
-            loadDialog: function(oParams) {
+            loadDialog: function (oParams) {
                 if (!this[oParams.sDialogName]) {
                     return Fragment.load({
                         id: this.getView().sId,
@@ -78,7 +78,7 @@ sap.ui.define(
                         name: oParams.sViewName,
                         controller: oParams.controller ? oParams.controller : this,
                     }).then(
-                        function(oDialog) {
+                        function (oDialog) {
                             this[oParams.sDialogName] = oDialog;
                             if (oParams.sPath) {
                                 this[oParams.sDialogName].bindElement(oParams.sPath);
@@ -97,14 +97,19 @@ sap.ui.define(
                     );
                 } else {
                     return new Promise(
-                        function(res) {
+                        function (res) {
+
+                            if (oParams.sPath) {
+                                this[oParams.sDialogName].bindElement(oParams.sPath);
+                            }
+                            
                             res(this[oParams.sDialogName]);
                         }.bind(this)
                     );
                 }
             },
 
-            onFireSearchAfterSelectSmartVariant: function(sFilterBarId) {
+            onFireSearchAfterSelectSmartVariant: function (sFilterBarId) {
                 if (typeof sFilterBarId === "string" && sFilterBarId.length > 0) {
                     this.byId(sFilterBarId).fireSearch();
                     return true;
@@ -113,11 +118,11 @@ sap.ui.define(
                 return false;
             },
 
-            navTo: function(sName, oParameters, bReplace) {
+            navTo: function (sName, oParameters, bReplace) {
                 this.getRouter().navTo(sName, oParameters, bReplace);
             },
 
-            addBindingListener: function(oBindingInfo, sEventName, fHandler) {
+            addBindingListener: function (oBindingInfo, sEventName, fHandler) {
                 oBindingInfo.events = oBindingInfo.events || {};
 
                 if (!oBindingInfo.events[sEventName]) {
@@ -125,19 +130,19 @@ sap.ui.define(
                 } else {
                     // Wrap the event handler of the other party to add our handler.
                     var fOriginalHandler = oBindingInfo.events[sEventName];
-                    oBindingInfo.events[sEventName] = function() {
+                    oBindingInfo.events[sEventName] = function () {
                         fHandler.apply(this, arguments);
                         fOriginalHandler.apply(this, arguments);
                     };
                 }
             },
 
-            bindView: function(mParameters) {
+            bindView: function (mParameters) {
                 this._initViewBinder();
                 return this.viewBinder.bind(mParameters);
             },
 
-            _initViewBinder: function() {
+            _initViewBinder: function () {
                 var ViewBinderClass = this.getOwnerComponent()
                     .getViewBinder()
                     .getMetadata()
@@ -147,11 +152,11 @@ sap.ui.define(
                 this.viewBinder.setView(this.getView());
             },
 
-            getViewBinder: function() {
+            getViewBinder: function () {
                 return this.viewBinder;
             },
 
-            setStateProperty: function(sPath, oValue, oContext, bAsyncUpdate) {
+            setStateProperty: function (sPath, oValue, oContext, bAsyncUpdate) {
                 return this.getModel("state").setProperty(
                     sPath,
                     oValue,
@@ -161,62 +166,62 @@ sap.ui.define(
             },
 
 
-            getStateProperty: function(sPath, oContext) {
+            getStateProperty: function (sPath, oContext) {
                 return this.getModel("state").getProperty(sPath, oContext);
             },
 
-            getModel: function(sName) {
+            getModel: function (sName) {
                 return (
                     this.getOwnerComponent().getModel(sName) ||
                     this.getView().getModel(sName)
                 );
             },
 
-            onDataRequested: function(oEvent) {
+            onDataRequested: function (oEvent) {
                 debugger;
             },
 
-            getBindingPath: function() {
+            getBindingPath: function () {
                 return this.getView().getBindingContext().getPath();
             },
 
-            getRouter: function() {
+            getRouter: function () {
                 return this.getOwnerComponent().getRouter();
             },
 
-            showBusyDialog: function() {
+            showBusyDialog: function () {
                 this.oBusyDialog = new sap.m.BusyDialog({
                     title: this.i18n("PleaseWait"),
                     showCancelButton: true,
-                    close: function(oEvent) {
+                    close: function (oEvent) {
                         oEvent.getSource().close();
                     },
                 });
                 this.oBusyDialog.open();
                 this.oBusyDialog.attachClose(
-                    function() {
+                    function () {
                         this.oBusyDialog.destroy();
                         this.oBusyDialog = null;
                     }.bind(this)
                 );
             },
 
-            closeBusyDialog: function() {
+            closeBusyDialog: function () {
                 if (this.oBusyDialog) {
                     this.oBusyDialog.close();
                 }
             },
 
-            handleTypeMissmatch: function(oEvent) {
+            handleTypeMissmatch: function (oEvent) {
                 var aFileTypes = oEvent.getSource().getFileType();
-                $.each(aFileTypes, function(key, value) {
+                $.each(aFileTypes, function (key, value) {
                     aFileTypes[key] = "*." + value;
                 });
                 var sMessage = this.i18n("FileMissmatch") + aFileTypes.join(", ");
                 sap.m.MessageToast.show(sMessage);
             },
 
-            handleFileSelected: function(
+            handleFileSelected: function (
                 oEvent,
                 sEntitySet,
                 oProperty,
@@ -224,12 +229,12 @@ sap.ui.define(
                 oUriParam
             ) {
                 return new Promise(
-                    function(res, rej) {
+                    function (res, rej) {
                         var oUploadInput = oEvent.getSource();
                         var oFile = oEvent.getSource().getFocusDomRef().files[0];
                         if (oFile) {
                             var oReader = new FileReader();
-                            oReader.onload = function(e) {
+                            oReader.onload = function (e) {
                                 var oModel = this.getModel();
                                 var vContent = e.currentTarget.result.replace(
                                     "data:" + oFile.type + ";base64,",
@@ -264,13 +269,13 @@ sap.ui.define(
                                 this.showBusyDialog();
                                 return oModel.create(sEntitySet, oObj, {
                                     urlParameters: oUriParam,
-                                    success: function() {
+                                    success: function () {
                                         this.closeBusyDialog();
                                         oUploadInput.clear();
                                         this.showMessageToast(oResourceBundle.getText("FILE_SUCCESSFUL_LOAD"));
                                         res(true);
                                     }.bind(this),
-                                    error: function(oError) {
+                                    error: function (oError) {
                                         this.closeBusyDialog();
                                         oUploadInput.clear();
                                         this.showError(oError);
@@ -287,7 +292,7 @@ sap.ui.define(
                 );
             },
 
-            openPopoverBy: function(oParams) {
+            openPopoverBy: function (oParams) {
                 if (!this[oParams.sPopoverName]) {
                     return Fragment.load({
                         id: this.getView().sId,
@@ -295,7 +300,7 @@ sap.ui.define(
                         name: oParams.sViewName,
                         controller: this,
                     }).then(
-                        function(oPopover) {
+                        function (oPopover) {
                             this[oParams.sPopoverName] = oPopover;
                             this.getView().addDependent(oPopover);
                             return this._openPopoverBy(oParams);
@@ -315,7 +320,7 @@ sap.ui.define(
                         }
 
                         return new Promise(
-                            function(res) {
+                            function (res) {
                                 res(this[oParams.sPopoverName]);
                             }.bind(this)
                         );
@@ -325,7 +330,7 @@ sap.ui.define(
                 }
             },
 
-            _openPopoverBy: function(oParams) {
+            _openPopoverBy: function (oParams) {
                 if (oParams.sPath) {
                     this[oParams.sPopoverName].setBindingContext(
                         new sap.ui.model.Context(this.getModel(), oParams.sPath)
@@ -335,29 +340,29 @@ sap.ui.define(
                 this[oParams.sPopoverName].openBy(oParams.oSource);
 
                 return new Promise(
-                    function(res) {
+                    function (res) {
                         res(this[oParams.sPopoverName]);
                     }.bind(this)
                 );
             },
 
-            submitChanges: function(oEvents) {
+            submitChanges: function (oEvents) {
                 return this.getModel().submitChanges(oEvents);
             },
 
-            i18n: function(sKey, aArgs) {
+            i18n: function (sKey, aArgs) {
                 return this.getResourceBundle().getText(sKey, aArgs);
             },
 
-            getResourceBundle: function() {
+            getResourceBundle: function () {
                 return this.getOwnerComponent().getModel("i18n").getResourceBundle();
             },
 
-            showMessageToast: function(sText) {
+            showMessageToast: function (sText) {
                 return sap.m.MessageToast.show(sText);
             },
 
-            resetChanges: function(aPath) {
+            resetChanges: function (aPath) {
                 if (this.getModel().hasPendingChanges()) {
                     if ($.isArray(aPath)) {
                         return this.getModel().resetChanges(aPath);
@@ -368,7 +373,7 @@ sap.ui.define(
                 return false;
             },
 
-            onAddPaymentSetting: function(oEvent, sSmartTab, sTab, sEntitySet) {
+            onAddPaymentSetting: function (oEvent, sSmartTab, sTab, sEntitySet) {
                 var oTable = this.getView().byId(sSmartTab).getTable();
                 var lisItemForTable = this.byId(sTab).clone();
                 var oCreatedTrade = this.getModel().createEntry(sEntitySet, {
@@ -379,7 +384,7 @@ sap.ui.define(
                 oTable.insertItem(lisItemForTable, 0);
             },
 
-            onDeletePaymentSetting: function(oEvent, sSmartTab) {
+            onDeletePaymentSetting: function (oEvent, sSmartTab) {
                 var oListItem = this.getView().byId(sSmartTab).getTable().getSelectedItem();
                 var oBindingContext = oListItem.getBindingContext();
                 var oResourceBundle = sap.ui
@@ -388,43 +393,43 @@ sap.ui.define(
 
                 MessageBox.confirm(
                     oResourceBundle.getText("ConfirmDeletePaymentSetting"), {
-                        styleClass: "sapUiSizeCompact",
-                        onClose: function(sAction) {
-                            if (MessageBox.Action.OK === sAction) {
-                                if (oBindingContext.bCreated) {
-                                    this.getView()
-                                        .byId(sSmartTab)
-                                        .getTable()
-                                        .removeItem(oListItem);
-                                    this.getModel().deleteCreatedEntry(oBindingContext);
-                                } else {
-                                    this.getModel().remove(oBindingContext.getPath(), {
-                                        success: function() {
-                                            this.showMessageToast(this.i18n("SuccessfullyDeleted"));
-                                        }.bind(this),
-                                        error: function() {
-                                            this.showMessageToast(this.i18n("MessageError"));
-                                        }.bind(this),
-                                    });
-                                }
+                    styleClass: "sapUiSizeCompact",
+                    onClose: function (sAction) {
+                        if (MessageBox.Action.OK === sAction) {
+                            if (oBindingContext.bCreated) {
+                                this.getView()
+                                    .byId(sSmartTab)
+                                    .getTable()
+                                    .removeItem(oListItem);
+                                this.getModel().deleteCreatedEntry(oBindingContext);
+                            } else {
+                                this.getModel().remove(oBindingContext.getPath(), {
+                                    success: function () {
+                                        this.showMessageToast(this.i18n("SuccessfullyDeleted"));
+                                    }.bind(this),
+                                    error: function () {
+                                        this.showMessageToast(this.i18n("MessageError"));
+                                    }.bind(this),
+                                });
                             }
-                        }.bind(this),
-                    }
+                        }
+                    }.bind(this),
+                }
                 );
             },
 
-            onUrlPress: function(oEvent, sUrlField) {
+            onUrlPress: function (oEvent, sUrlField) {
                 var sUrl = oEvent.getSource().getBindingContext().getObject()[
                     sUrlField
                 ];
                 window.open(sUrl, "_blank").focus();
             },
 
-            rebindTable: function(oSmartTable) {
+            rebindTable: function (oSmartTable) {
                 this.byId(oSmartTable).rebindTable(true);
             },
 
-            onDownloadExcelFiles: function(oParams) {
+            onDownloadExcelFiles: function (oParams) {
                 var oModel = this.getModel();
                 var sServiceUrl = oModel.sServiceUrl;
                 var oControl = this.byId(oParams.oControlId);

@@ -140,6 +140,20 @@
               }
             }
           }
+        },
+        "sap.ui.viewExtensions": {
+          "sap.suite.ui.generic.template.ObjectPage.view.Details": {
+            "AfterFacet|ZSNN_WORKER_LIST|to_AssignedSubTask::com.sap.vocabularies.UI.v1.LineItem": {
+              "className": "sap.ui.core.Fragment",
+              "fragmentName": "intime.zworker_workspace.ext.fragments.TimeSheetChart",
+              "type": "XML",
+              "sap.ui.generic.app": {
+                "id": "timesheetSection",
+                "title": "Списание времени",
+                "enableLazyLoading": true
+              }
+            }
+          }
         }
       }
     },
