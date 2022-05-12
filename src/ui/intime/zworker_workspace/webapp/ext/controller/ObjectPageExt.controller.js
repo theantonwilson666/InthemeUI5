@@ -82,11 +82,12 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
         this.byId("_TimeSheet-VizFrame").destroyFeeds()
 
         this.byId("_TimeSheet-VizFrame").setVizProperties({
-            interaction: {
-                selectability: {
-                    mode: "SINGLE" //only one data point can be selected at a time
-                }
-            },
+
+            // interaction: {
+            //     selectability: {
+            //         mode: "SINGLE" //only one data point can be selected at a time
+            //     }
+            // },
 
             title: {
                 text: "Диаграмма списания",
