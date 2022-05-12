@@ -12,20 +12,17 @@
             change="onChangeDateRangeSelection" />
 
         <VBox alignContent="Stretch">
+            <viz:Popover id="_TimeSheet-Popover"></viz:Popover>
+
             <viz:VizFrame id="_TimeSheet-VizFrame"
                 uiConfig="{applicationSet:'fiori'}"
-                height='100%'
                 width="100%"
                 vizType='column'>
 
-                <viz:feeds>
-                    <viz.feeds:FeedItem uid="valueAxis"
-                        type="Measure"
-                        values="SpendHours" />
-                    <viz.feeds:FeedItem uid="categoryAxis"
-                        type="Dimension"
-                        values="DateSheet" />
-                </viz:feeds>
+                <!-- <viz:feeds>
+                    <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="SpendHours" />
+                    <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="DateSheet" />
+                </viz:feeds> -->
             </viz:VizFrame>
         </VBox>
     </VBox>

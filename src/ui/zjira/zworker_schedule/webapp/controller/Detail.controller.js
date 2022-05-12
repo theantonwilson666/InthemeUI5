@@ -13,7 +13,7 @@ sap.ui.define(
         'sap/ui/model/json/JSONModel',
         "jira/lib/MessageDialog"
     ],
-    function (
+    function(
         Controller,
         // Formatter,
         Filter,
@@ -32,7 +32,7 @@ sap.ui.define(
         return Controller.extend("intheme.zworker_schedule.controller.Detail", {
             oVizFrame: null,
             formatter: formatter,
-            onInit: function () {
+            onInit: function() {
                 debugger;
                 this.getRouter().getRoute("DetailRoute")
                     .attachPatternMatched(this._onRouteMatched, this);
@@ -54,25 +54,25 @@ sap.ui.define(
              */
 
 
-            setAutoResizeTable: function (oEvent) {
+            setAutoResizeTable: function(oEvent) {
                 var oSmartTable = this.getView().byId("dateSmartTable");
                 var tableColumnsLength = oSmartTable.getTable().getColumns().length
                 for (var i = 0; i < tableColumnsLength; i++) {
                     oSmartTable.getTable().getColumns()[i].setWidth(`12rem`)
                 }
             },
-            checkIsAdmin: function () {
+            checkIsAdmin: function() {
                 //  
                 this.getModel().callFunction("/isAdmin", {
                     method: "GET",
-                    success: function (oData) {
+                    success: function(oData) {
                         if (oData.isAdmin) {
                             this.showAdminButton(oData.isAdmin)
                         }
                     }.bind(this),
                 });
             },
-            showAdminButton: function (oAdmin) {
+            showAdminButton: function(oAdmin) {
                 // 
                 var oWorkFactCheckBox = this.getView().byId("WorkFactCheckBox")
                 var oWorkFactFrom1 = this.getView().byId("WorkFactFrom1")
@@ -91,7 +91,7 @@ sap.ui.define(
                     oResetWorkerDay.setVisible(false)
                 }
             },
-            resetWorkerDay: function () {
+            resetWorkerDay: function() {
                 return;
                 // 
                 var currentDate = null;
@@ -106,17 +106,17 @@ sap.ui.define(
                         Date: currentDate.toLocaleDateString(),
                         Worker: `${this.getCurrentWorker()}`
                     },
-                    success: function (oData) {
+                    success: function(oData) {
                         debugger
                         console.log(oData);
                     }.bind(this),
                 });
             },
-            resetTime: function (oData) {
+            resetTime: function(oData) {
                 //    
             },
 
-            _onRouteMatched: function (oEvent) {
+            _onRouteMatched: function(oEvent) {
                 var oArr = oEvent.getParameter("arguments")["?query"];
                 this.bindView({
                     entitySet: "/WorkerRegisterSet",
@@ -146,7 +146,7 @@ sap.ui.define(
                 }
             },
 
-            initPlanningCalendar: function () {
+            initPlanningCalendar: function() {
 
                 this.setStateProperty("/TechPlanningDate", new Date());
 
@@ -169,7 +169,7 @@ sap.ui.define(
                 }
             },
 
-            onHeaderDateChange: function (oEvent) {
+            onHeaderDateChange: function(oEvent) {
 
                 debugger
                 if (this.isNewMonth(oEvent)) {
@@ -181,7 +181,7 @@ sap.ui.define(
                 }
             },
 
-            getSchedulePlanningCalendar: function (sWorkerID, sYear, sMonth) {
+            getSchedulePlanningCalendar: function(sWorkerID, sYear, sMonth) {
 
                 this.byId("planningScheduleCalendar").setBusy(true);
 
@@ -193,7 +193,7 @@ sap.ui.define(
                         Month: sMonth
 
                     },
-                    success: function (oData) {
+                    success: function(oData) {
                         debugger;
                         if (oData.GetSchedulePlanningCalendar.dataJSON) {
                             var oRecalcData = JSON.parse(oData.GetSchedulePlanningCalendar.dataJSON);
@@ -202,7 +202,7 @@ sap.ui.define(
                         this.byId("planningScheduleCalendar").setBusy(false);
                     }.bind(this),
 
-                    error: function (oError) {
+                    error: function(oError) {
                         debugger;
                         this.byId("planningScheduleCalendar").setBusy(false);
                     }.bind(this)
@@ -210,7 +210,7 @@ sap.ui.define(
             },
 
 
-            isNewMonth: function (oEvent) {
+            isNewMonth: function(oEvent) {
 
                 var oOldDate = this.getStateProperty("/TechPlanningDate");
                 var oChangedDate = oEvent.getParameter('date');
@@ -219,14 +219,14 @@ sap.ui.define(
             },
 
 
-            bindDayDialog: function (sWorker, sDate) {
+            bindDayDialog: function(sWorker, sDate) {
                 this.bindSmartForm(sWorker, sDate);
                 this.bindSmartTable(sWorker, sDate);
 
             },
 
 
-            onDateSelect: function (oEvent) {
+            onDateSelect: function(oEvent) {
                 return;
                 this.hideSecondWorkInterval();
                 this.bindSmartForm(
@@ -247,10 +247,10 @@ sap.ui.define(
                 );
                 this.checkIsAdmin();
             },
-            underTen: function (time) {
+            underTen: function(time) {
                 return time < 10 ? '0' + time : time
             },
-            bindSmartTable: function (sWorkerId, sDate) {
+            bindSmartTable: function(sWorkerId, sDate) {
                 //  
                 var sPath = "/WorkerScheduleSet(Date=datetime'" + sDate + "',Worker='" + sWorkerId + "')";
                 var oSmartTable = this.getView().byId("dateSmartTable");
@@ -265,14 +265,14 @@ sap.ui.define(
 
 
             },
-            bindSmartForm: function (sWorkerId, sDate) {
+            bindSmartForm: function(sWorkerId, sDate) {
                 var sPath =
                     "/WorkerScheduleSet(Date=datetime'" + sDate + "',Worker='" + sWorkerId + "')";
                 var oSmartForm = this.getView().byId("dateSmartForm");
                 oSmartForm.bindElement({
                     path: sPath,
                     events: {
-                        dataReceived: function (oData) {
+                        dataReceived: function(oData) {
                             if (oData.getParameter("data").WorkFrom2.ms == 0) {
                                 this.hideSecondWorkInterval();
                             } else {
@@ -285,15 +285,15 @@ sap.ui.define(
 
                 debugger;
             },
-            convertDate: function (oDate) {
+            convertDate: function(oDate) {
                 return oDate.toJSON().split(".")[0];
             },
 
-            getWorker: function () {
+            getWorker: function() {
                 return this.getView().getBindingContext().getObject().Worker;
             },
 
-            onTimeChange: function (oEvent, sPropName) {
+            onTimeChange: function(oEvent, sPropName) {
                 var oBindingWorker = this.getView()
                     .byId("dateSmartForm")
                     .getBindingContext()
@@ -302,10 +302,10 @@ sap.ui.define(
                 oBindingWorker.StudyTo = new Date();
             },
 
-            onSaveChanges: function (oEvent) {
+            onSaveChanges: function(oEvent) {
                 this.showBusyDialog();
                 this.getModel().submitChanges({
-                    success: function () {
+                    success: function() {
                         this.updateCalendar()
                         this.closeBusyDialog();
                         if (!this.isExistError()) {
@@ -313,7 +313,7 @@ sap.ui.define(
                         }
                         this.resetChanges();
                     }.bind(this),
-                    error: function () {
+                    error: function() {
                         this.closeBusyDialog();
                         this.showError();
                         this.resetChanges();
@@ -321,12 +321,12 @@ sap.ui.define(
                 });
             },
 
-            initCalendarLegend: function () {
+            initCalendarLegend: function() {
                 return;
                 this.getView()
                     .getModel()
                     .read("/CalendarLegendSet", {
-                        success: function (oData, response) {
+                        success: function(oData, response) {
                             this.updateCalendar()
                             var oLegend = this.getView().byId("calendarLegend");
                             oLegend.destroyItems();
@@ -345,7 +345,7 @@ sap.ui.define(
                     });
             },
 
-            updateCalendar: function (oEvent) {
+            updateCalendar: function(oEvent) {
                 this.getData4VizChart();
                 return;
 
@@ -364,7 +364,7 @@ sap.ui.define(
                         Worker: this.getCurrentWorker(),
                         StartOfMonth: oCalendar.getStartDate(),
                     },
-                    success: function (oData) {
+                    success: function(oData) {
 
 
                         if (!this.isExistError()) {
@@ -392,7 +392,7 @@ sap.ui.define(
                         }
                     }.bind(this),
 
-                    error: function (oError) {
+                    error: function(oError) {
                         this.closeBusyDialog();
                         this.showError(oError);
                     }.bind(this),
@@ -401,27 +401,27 @@ sap.ui.define(
                 });
             },
 
-            setCurrentWorker: function (sWorker) {
+            setCurrentWorker: function(sWorker) {
                 this.setStateProperty("/currentWorker", sWorker);
             },
 
-            getCurrentWorker: function () {
+            getCurrentWorker: function() {
                 return this.getStateProperty("/currentWorker");
             },
 
-            onAddWorkIntervalPress: function (oEvent) {
+            onAddWorkIntervalPress: function(oEvent) {
                 this.showSecondWorkInterval();
             },
 
-            showSecondWorkInterval: function () {
+            showSecondWorkInterval: function() {
                 this.setStateProperty("/showNewInterval", true);
             },
 
-            hideSecondWorkInterval: function () {
+            hideSecondWorkInterval: function() {
                 this.setStateProperty("/showNewInterval", false);
             },
 
-            getFirstMondayCurrentMonth: function () {
+            getFirstMondayCurrentMonth: function() {
                 var iYear = new Date().getFullYear();
                 var iMonth = new Date().getMonth(); //- 1;
                 var firstMondayDate = (iYear, iMonth) => {
@@ -434,13 +434,13 @@ sap.ui.define(
                 return new Date(`${iYear}`, `${iMonth}`, `${firstMondayDate(iYear, iMonth)}`, "0", "0")
             },
 
-            handleAppointmentSelect: function (oEvent) {
+            handleAppointmentSelect: function(oEvent) {
                 var oModel = this.getConfigModel();
                 var oConfigData = oModel.getData();
 
                 var oClickedAppointment = oEvent.mParameters.appointment.getBindingContext("configData").getObject();
 
-                oConfigData.people[0].Schedule.forEach(function (oAppointment, sIndex, aAppointments) {
+                oConfigData.people[0].Schedule.forEach(function(oAppointment, sIndex, aAppointments) {
                     if (oAppointment === this) {
                         debugger;
                         aAppointments.splice(sIndex, 1);
@@ -451,7 +451,7 @@ sap.ui.define(
 
             },
 
-            parseTimePicker: function (sTimePickerValue) {
+            parseTimePicker: function(sTimePickerValue) {
                 var aBuff = sTimePickerValue.split(":");
                 return {
                     hours: aBuff[0],
@@ -459,7 +459,7 @@ sap.ui.define(
                 }
             },
 
-            handleIntervalSelect: function (oEvent) {
+            handleIntervalSelect: function(oEvent) {
                 debugger
                 var oModel = this.getConfigModel();
                 var oConfigData = oModel.getData();
@@ -510,25 +510,25 @@ sap.ui.define(
                 oModel.updateBindings(true);
             },
 
-            getConfigCalendar: function () {
+            getConfigCalendar: function() {
                 return this.getView().byId("configCalendar");
             },
 
-            getConfigModel: function () {
+            getConfigModel: function() {
                 return this.getConfigCalendar().getModel("configData");
             },
 
-            getFirstDayOfMonth: function () {
+            getFirstDayOfMonth: function() {
                 var iYear = new Date().getFullYear();
                 var iMonth = new Date().getMonth();
                 return new Date(`${iYear}`, `${iMonth}`, `1`, "0", "0")
             },
 
-            testDateChange: function (oEvent) {
+            testDateChange: function(oEvent) {
                 debugger;
             },
 
-            addOneMonth: function (oDate) {
+            addOneMonth: function(oDate) {
 
                 var sYear = oDate.getFullYear();
                 var sMonth = oDate.getMonth();
@@ -539,14 +539,14 @@ sap.ui.define(
 
             },
 
-            onPressConfigUI: function (oEvent) {
+            onPressConfigUI: function(oEvent) {
                 this.loadDialog
                     .call(this, {
                         sDialogName: "_ScheduleInputDialog",
                         sViewName: "intheme.zworker_schedule.view.fragments.ScheduleInput",
                     })
                     .then(
-                        function (oDialog) {
+                        function(oDialog) {
 
                             sap.ui.getCore().byId("application-zworker_schedule-display-component---Detail--configCalendar-Header-NavToolbar").setVisible(false)
                             sap.ui.getCore().byId("application-zworker_schedule-display-component---Detail--resultCalendar-Header-NavToolbar").setVisible(false)
@@ -595,7 +595,7 @@ sap.ui.define(
 
             },
 
-            getData4VizChart: function (oFirstDayOfMonth) {
+            getData4VizChart: function(oFirstDayOfMonth) {
 
                 this.byId("monthPlot").setBusy(true);
 
@@ -607,12 +607,12 @@ sap.ui.define(
                 ];
                 this.getModel().read("/WorkerMonthDataSet", {
                     filters: oFilter,
-                    success: function (oData) {
+                    success: function(oData) {
                         this.setChartData(oData.results);
                         this.byId("monthPlot").setBusy(false);
 
                     }.bind(this),
-                    error: function () {
+                    error: function() {
                         this.showError.bind(this);
                         this.byId("monthPlot").setBusy(false);
                     }.bind(this),
@@ -620,7 +620,7 @@ sap.ui.define(
             },
 
 
-            addDaysToDateTime: function (oDate, iDays) {
+            addDaysToDateTime: function(oDate, iDays) {
                 var sYear = oDate.getFullYear();
                 var sMonth = oDate.getMonth();
                 var sDate = oDate.getDate();
@@ -628,7 +628,7 @@ sap.ui.define(
 
             },
 
-            handleConfigViewChange: function (oEvent) {
+            handleConfigViewChange: function(oEvent) {
 
                 var oOddStartDate = oEvent.getSource().getModel("configData").getData().startDate;
 
@@ -645,7 +645,7 @@ sap.ui.define(
             },
 
 
-            onCalcScheduleButtonPress: function () {
+            onCalcScheduleButtonPress: function() {
                 this.byId("inputScheduleDefaultDialog").close();
                 this.byId("inputScheduleDialog").setBusy(true);
 
@@ -672,7 +672,7 @@ sap.ui.define(
                     urlParameters: {
                         inputDataJSON: sFIInputData
                     },
-                    success: function (oData) {
+                    success: function(oData) {
                         var oRecalcData = JSON.parse(oData.RecalcScheduleTable.dataJSON);
 
                         this.updateResultCalendar(this.byId("resultCalendar").getModel("resultData"), oRecalcData);
@@ -681,7 +681,7 @@ sap.ui.define(
                         this.showMessageToast("Успех");
                     }.bind(this),
 
-                    error: function (oError) {
+                    error: function(oError) {
                         this.byId("inputScheduleDialog").setBusy(false);
                         this.showError(oError);
                     }.bind(this)
@@ -689,7 +689,7 @@ sap.ui.define(
 
             },
 
-            updateResultCalendar: function (oModel, oResultData) {
+            updateResultCalendar: function(oModel, oResultData) {
                 // var oModel = this.byId("resultCalendar").getModel("resultData");
                 debugger
                 var oData = oModel.getData();
@@ -722,7 +722,7 @@ sap.ui.define(
                 oModel.updateBindings(true);
             },
 
-            convertSAPDateTimeToJS: function (sDate, sTime) {
+            convertSAPDateTimeToJS: function(sDate, sTime) {
                 var sYear = sDate.substr(0, 4);
                 var sMonth = sDate.substr(4, 2) - 1;
                 var sDay = sDate.substr(6, 2);
@@ -733,11 +733,11 @@ sap.ui.define(
 
             },
 
-            convertTimeToPretty: function (sTime) {
+            convertTimeToPretty: function(sTime) {
                 return sTime.substr(0, 2) + ":" + sTime.substr(2, 2);
             },
 
-            getWeek: function () {
+            getWeek: function() {
                 var aOut = [];
                 for (var i = 0; i < 7; i++) {
                     aOut.push({
@@ -748,13 +748,13 @@ sap.ui.define(
                 return aOut;
             },
 
-            buildWeek: function (sWeekType) {
+            buildWeek: function(sWeekType) {
                 var oModel = this.getConfigModel();
                 var oConfigData = oModel.getData();
 
                 var aOut = this.getWeek();
 
-                oConfigData.people[0].Schedule.forEach(function (oSchedule, index, array) {
+                oConfigData.people[0].Schedule.forEach(function(oSchedule, index, array) {
                     if (oSchedule.weekType === this.weekType) {
                         this.out[this.controller.convertDay(oSchedule.StartDate.getDay())].INTERVALS.push({
                             START: this.controller.convertTimeFromDateTime(oSchedule.StartDate),
@@ -775,7 +775,7 @@ sap.ui.define(
 
             },
 
-            convertDay: function (iDay) {
+            convertDay: function(iDay) {
                 if (iDay === 0) {
                     return 6
                 }
@@ -784,7 +784,7 @@ sap.ui.define(
             },
 
 
-            getIntervalFromSchedule: function (oSchedule) {
+            getIntervalFromSchedule: function(oSchedule) {
 
                 return {
                     INTERVAL_TYPE: oSchedule.IntervalType,
@@ -794,19 +794,19 @@ sap.ui.define(
 
             },
 
-            convertTimeFromDateTime: function (oDate) {
+            convertTimeFromDateTime: function(oDate) {
                 var sHours = oDate.getHours().toString().padStart(2, "0");
                 var sMinutes = oDate.getMinutes().toString().padStart(2, "0");
                 return `${sHours}${sMinutes}`;
             },
 
-            convertTimeFromDateTimePretty: function (oDate) {
+            convertTimeFromDateTimePretty: function(oDate) {
                 var sHours = oDate.getHours().toString().padStart(2, "0");
                 var sMinutes = oDate.getMinutes().toString().padStart(2, "0");
                 return `${sHours}:${sMinutes}`;
             },
 
-            convernDateTimeToChar: function (oDate, bPlusMonth) {
+            convernDateTimeToChar: function(oDate, bPlusMonth) {
                 var sYear = oDate.getFullYear();
 
                 if (bPlusMonth) {
@@ -821,14 +821,14 @@ sap.ui.define(
             },
 
 
-            onDisplayDefaultInputPress: function () {
+            onDisplayDefaultInputPress: function() {
                 this.loadDialog
                     .call(this, {
                         sDialogName: "_ScheduleDefaultInputDialog",
                         sViewName: "intheme.zworker_schedule.view.fragments.dayDefaultInput",
                     })
                     .then(
-                        function (oDialog) {
+                        function(oDialog) {
                             oDialog.open();
                         }.bind(this)
                     );
@@ -847,7 +847,7 @@ sap.ui.define(
             //   Icon: ""
             // })
 
-            buildMonth: function (sDate) {
+            buildMonth: function(sDate) {
                 var aMonth = [];
 
                 var oDateIndex = {};
@@ -879,7 +879,7 @@ sap.ui.define(
                 };
             },
 
-            buildSchedulesOut: function (aAppointments, sDate) {
+            buildSchedulesOut: function(aAppointments, sDate) {
                 debugger;
                 var aOut = [];
 
@@ -905,7 +905,7 @@ sap.ui.define(
             },
 
 
-            onUploadScheduleButtonPress: function (oEvent) {
+            onUploadScheduleButtonPress: function(oEvent) {
                 debugger;
                 var oDialog = oEvent.getSource().getParent().setBusy(true);
                 // this.byId("inputScheduleDialog").setBusy(true);
@@ -929,7 +929,7 @@ sap.ui.define(
                     urlParameters: {
                         inputDataJSON: sScheduleData,
                     },
-                    success: function (oData) {
+                    success: function(oData) {
 
                         debugger;
 
@@ -937,7 +937,7 @@ sap.ui.define(
                         this.getSchedulePlanningCalendar(this.getCurrentWorker(), this.getMonthYearFromDate(this.byId("configCalendar").getModel("configData").getData().startDate).Year, this.getMonthYearFromDate(this.byId("configCalendar").getModel("configData").getData().startDate).Month);
                         this.showMessageToast("Сохранено");
                     }.bind(this),
-                    error: function (oError) {
+                    error: function(oError) {
                         oDialog.setBusy(false);
                         debugger;
                         // this.byId("inputScheduleDialog").setBusy(false);
@@ -947,7 +947,7 @@ sap.ui.define(
                 });
 
             },
-            onUploadScheduleButtonPersonalPress: function (oEvent) {
+            onUploadScheduleButtonPersonalPress: function(oEvent) {
                 debugger;
                 var oDialog = oEvent.getSource().getParent().setBusy(true);
 
@@ -962,10 +962,10 @@ sap.ui.define(
                     MONTH: (oScheduleData.StartDate.getMonth() + 1).toString().padStart(2, "0"),
                     YEAR: oScheduleData.StartDate.getFullYear().toString(),
                     SCHEDULE: this.buildSchedulesOut(oScheduleData.Appointments, oScheduleData.StartDate)
-                    // WORKER: oConfigData.people[0].WorkerID,
-                    // MONTH: (oConfigData.startDate.getMonth() + 1).toString().padStart(2, "0"),
-                    // YEAR: oConfigData.startDate.getFullYear().toString(),
-                    // SCHEDULE: this.buildSchedulesOut(oScheduleData.Appointments, oScheduleData.StartDate)
+                        // WORKER: oConfigData.people[0].WorkerID,
+                        // MONTH: (oConfigData.startDate.getMonth() + 1).toString().padStart(2, "0"),
+                        // YEAR: oConfigData.startDate.getFullYear().toString(),
+                        // SCHEDULE: this.buildSchedulesOut(oScheduleData.Appointments, oScheduleData.StartDate)
                 };
 
                 var sScheduleData = JSON.stringify(oScheduleOutData);
@@ -975,7 +975,7 @@ sap.ui.define(
                     urlParameters: {
                         inputDataJSON: sScheduleData,
                     },
-                    success: function (oData) {
+                    success: function(oData) {
                         oDialog.setBusy(false).close();
 
                         this.getSchedulePlanningCalendar(this.getCurrentWorker(), this.getMonthYearFromDate(new Date()).Year, this.getMonthYearFromDate(new Date()).Month);
@@ -983,7 +983,7 @@ sap.ui.define(
                         this.showMessageToast("Сохранено");
                     }.bind(this),
 
-                    error: function (oError) {
+                    error: function(oError) {
                         oDialog.setBusy(false);
                         // this.showMessageToast("Косяк");
                         MessageDialog.checkAndShow("Ошибки")
@@ -991,7 +991,7 @@ sap.ui.define(
                 });
             },
 
-            onAppointmentDrop: function (oEvent) {
+            onAppointmentDrop: function(oEvent) {
                 debugger;
                 var oModel = this.byId("resultCalendar").getModel("resultData");
                 var oScheduleData = oModel.getData();
@@ -1020,14 +1020,14 @@ sap.ui.define(
                 oModel.updateBindings(true);
             },
 
-            onAppoitmentSelect: function (oEvent) {
+            onAppoitmentSelect: function(oEvent) {
 
                 var oModel = this.byId("resultCalendar").getModel("resultData");
                 var oResultData = oModel.getData();
 
                 var oClickedAppointment = oEvent.mParameters.appointment.getBindingContext("resultData").getObject();
 
-                oResultData.Appointments.forEach(function (oAppointment, sIndex, aAppointments) {
+                oResultData.Appointments.forEach(function(oAppointment, sIndex, aAppointments) {
                     if (oAppointment === this) {
                         debugger;
                         aAppointments.splice(sIndex, 1);
@@ -1037,7 +1037,7 @@ sap.ui.define(
                 oModel.updateBindings(true);
             },
 
-            onAppointmentCreate: function (oEvent) {
+            onAppointmentCreate: function(oEvent) {
 
                 var oModel = this.byId("resultCalendar").getModel("resultData");
                 var oResultData = oModel.getData();
@@ -1073,15 +1073,15 @@ sap.ui.define(
 
             },
 
-            onCancelUploadSchedulePress: function (oEvent) {
+            onCancelUploadSchedulePress: function(oEvent) {
                 oEvent.getSource().getParent().close();
             },
 
-            onCancelInputDefaultPress: function (oEvent) {
+            onCancelInputDefaultPress: function(oEvent) {
                 oEvent.getSource().getParent().close();
             },
 
-            setChartData: function (oData) {
+            setChartData: function(oData) {
 
                 Format.numericFormatter(ChartFormatter.getInstance());
                 var formatPattern = ChartFormatter.DefaultPattern;
@@ -1096,7 +1096,7 @@ sap.ui.define(
                             formatString: formatPattern.SHORTFLOAT_MFD2,
                             visible: false,
                         },
-                        markerRenderer: function (oMarker) {
+                        markerRenderer: function(oMarker) {
                             if (oMarker.ctx.measureNames === 'Fact Hours') {
                                 var oData = this;
                                 var currentDay = oData.filter(day => {
@@ -1129,11 +1129,11 @@ sap.ui.define(
                 });
                 oVizFrame.setModel(oJson, "ChartMdl");
             },
-            onStartDateChange: function (oEvent) {
+            onStartDateChange: function(oEvent) {
                 this.updateCalendar(oEvent);
             },
 
-            onDayCalendayPress: function (oEvent) {
+            onDayCalendayPress: function(oEvent) {
 
                 this.setStateProperty("/datePressed", oEvent.getParameter("startDate"));
 
@@ -1143,7 +1143,7 @@ sap.ui.define(
                         sViewName: "intheme.zworker_schedule.view.fragments.dayViewCalendar",
                     })
                     .then(
-                        function (oDialog) {
+                        function(oDialog) {
 
                             this.bindDayDialog(
                                 this.getCurrentWorker(),
@@ -1157,7 +1157,7 @@ sap.ui.define(
             },
 
 
-            onMonthChange: function (oEvent) {
+            onMonthChange: function(oEvent) {
                 var sDate = oEvent.getParameter("newValue");
 
                 var sYear = sDate.split(".")[2];
@@ -1167,11 +1167,11 @@ sap.ui.define(
                 this.rebindMonthStatForm(this.getCurrentWorker(), sYear, sMonth + 1);
             },
 
-            onEditPlanningCalendarButtonPress: function () {
+            onEditPlanningCalendarButtonPress: function() {
                 this.setStateProperty("/planningEditMode", !this.getStateProperty("/planningEditMode"));
             },
 
-            rebindMonthStatForm: function (sWorkerID, sYear, sMonth) {
+            rebindMonthStatForm: function(sWorkerID, sYear, sMonth) {
                 var sPath =
                     "/MonthStatisticSet(Worker='" + sWorkerID + "',Year='" + sYear + "',Month='" + sMonth + "')";
                 var oSmartForm = this.getView().byId("monthStatForm");
@@ -1180,7 +1180,7 @@ sap.ui.define(
                 });
             },
 
-            checkDateInMonth: function (oDate) {
+            checkDateInMonth: function(oDate) {
                 var oStartDate = this.byId("planningScheduleCalendar").getStartDate();
                 var iYear = oStartDate.getFullYear();
                 var iMonth = oStartDate.getMonth();
@@ -1195,8 +1195,8 @@ sap.ui.define(
                 }
             },
 
-            checkOnDateAppointmentCreate: function (oEvent) {
-               
+            checkOnDateAppointmentCreate: function(oEvent) {
+
                 var oStartDate = new Date(
                     oEvent.mParameters.startDate.getFullYear(),
                     oEvent.mParameters.startDate.getMonth(),
@@ -1213,11 +1213,11 @@ sap.ui.define(
                     this.parseTimePicker(this.byId("DateTimeToSchedulePlan").getValue()).minutes,
                 );
 
-                
+
                 this._inputAppointmentEvent = {
-                    startDate : oStartDate,
-                    endDate : oEndDate,
-                    Type : this.byId("selectTypeDaySchedulePlan").getSelectedItem().getBindingContext().getObject().Type
+                    startDate: oStartDate,
+                    endDate: oEndDate,
+                    Type: this.byId("selectTypeDaySchedulePlan").getSelectedItem().getBindingContext().getObject().Type
                 }
 
                 this.byId("planningScheduleCalendar").setBusy(true);
@@ -1229,7 +1229,7 @@ sap.ui.define(
                         DateFrom: this._inputAppointmentEvent.startDate,
                         DateTo: this._inputAppointmentEvent.endDate
                     },
-                    success: function (oData) {
+                    success: function(oData) {
 
                         this.byId("planningScheduleCalendar").setBusy(false);
 
@@ -1252,7 +1252,7 @@ sap.ui.define(
                         }
                     }.bind(this),
 
-                    error: function (oError) {
+                    error: function(oError) {
                         this.byId("planningScheduleCalendar").setBusy(false);
                         this.showError();
                     }.bind(this)
@@ -1261,7 +1261,7 @@ sap.ui.define(
             },
 
 
-            onAppointmentPlanCreate: function (oEvent) {
+            onAppointmentPlanCreate: function(oEvent) {
 
                 if (!this.checkDateInMonth(oEvent.getParameter("startDate"))) {
                     return;
@@ -1274,7 +1274,7 @@ sap.ui.define(
                 }
             },
 
-            onAppoitmentPlanSelect: function (oEvent) {
+            onAppoitmentPlanSelect: function(oEvent) {
 
                 return;
 
@@ -1290,7 +1290,7 @@ sap.ui.define(
                         debugger
                         var oClickedAppointment = oEvent.mParameters.appointment.getBindingContext("scheduleData").getObject();
 
-                        oResultData.Appointments.forEach(function (oAppointment, sIndex, aAppointments) {
+                        oResultData.Appointments.forEach(function(oAppointment, sIndex, aAppointments) {
                             if (oAppointment === this) {
                                 debugger;
                                 aAppointments.splice(sIndex, 1);
@@ -1310,7 +1310,7 @@ sap.ui.define(
                 }
             },
 
-            onDeleteAppointpmentDrop: function (oEvent) {
+            onDeleteAppointpmentDrop: function(oEvent) {
                 oEvent.getParameter("draggedControl")
 
                 if (this.getStateProperty("/planningEditMode")) {
@@ -1319,7 +1319,7 @@ sap.ui.define(
 
                     var oClickedAppointment = oEvent.getParameter("draggedControl").getBindingContext("scheduleData").getObject();
 
-                    oResultData.Appointments.forEach(function (oAppointment, sIndex, aAppointments) {
+                    oResultData.Appointments.forEach(function(oAppointment, sIndex, aAppointments) {
                         if (oAppointment === this) {
                             debugger;
                             aAppointments.splice(sIndex, 1);
@@ -1331,14 +1331,14 @@ sap.ui.define(
                 }
             },
 
-            getFirstDayOfMonthByDate: function (oDate) {
+            getFirstDayOfMonthByDate: function(oDate) {
                 var sYear = oDate.getFullYear();
                 var sMonth = oDate.getMonth();
 
                 return new Date(sYear, sMonth, 1);
             },
 
-            onAppointmentPlanDrop: function (oEvent) {
+            onAppointmentPlanDrop: function(oEvent) {
 
                 if (this.getStateProperty("/planningEditMode")) {
 
@@ -1377,7 +1377,7 @@ sap.ui.define(
                 }
             },
 
-            onAppointmentPlanResize: function (oEvent) {
+            onAppointmentPlanResize: function(oEvent) {
 
                 debugger;
 
@@ -1418,7 +1418,7 @@ sap.ui.define(
                 }
             },
 
-            convertPrettyTime: function (oDateTimeFrom, oDateTimeto) {
+            convertPrettyTime: function(oDateTimeFrom, oDateTimeto) {
                 var iHourFrom = oDateTimeFrom.getHours();
                 var iMinutesFrom = oDateTimeFrom.getMinutes();
 
@@ -1426,7 +1426,7 @@ sap.ui.define(
             },
 
 
-            onSaveCalendarChanges: function () {
+            onSaveCalendarChanges: function() {
 
                 debugger;
 
@@ -1451,12 +1451,12 @@ sap.ui.define(
                     urlParameters: {
                         inputDataJSON: sScheduleData,
                     },
-                    success: function (oData) {
+                    success: function(oData) {
                         this.byId("planningScheduleCalendar").setBusy(false);
                         this.showMessageToast("Сохранено");
                     }.bind(this),
 
-                    error: function (oError) {
+                    error: function(oError) {
                         this.byId("planningScheduleCalendar").setBusy(false);
                         // this.showMessageToast("Косяк");
                         MessageDialog.checkAndShow("Ошибки")
@@ -1465,7 +1465,7 @@ sap.ui.define(
 
             },
 
-            onAppointmentDayDrop: function (oEvent) {
+            onAppointmentDayDrop: function(oEvent) {
 
             }
         });
