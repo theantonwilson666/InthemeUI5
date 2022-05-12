@@ -84,6 +84,9 @@
 
             <f:GridList showNoData="false"
               growingDirection="Upwards">
+              <f:customLayout>
+                <grid:GridBoxLayout boxMinWidth="100%"/>
+              </f:customLayout>
             </f:GridList>
           </VBox>
         </control:GridListStatus>

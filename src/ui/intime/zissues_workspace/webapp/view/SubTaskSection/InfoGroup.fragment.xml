@@ -23,7 +23,6 @@
             </smartForm:GroupElement>
             <smartForm:GroupElement label="Проект">
                 <Text text="{taskData>/ProjectName}"/>
-            <!-- <smartField:SmartField value="{taskData>/ProjectName}" id="SubTaskProjectName"/> -->
             </smartForm:GroupElement>
             <smartForm:GroupElement label="Этап проекта">
                 <Text text="{taskData>/ProjectStageName}"/>
@@ -66,9 +65,14 @@
             </smartForm:GroupElement>
         </smartForm:Group>
 
-      <!-- <smartForm:semanticObjectController>
+
+        <!-- <smartForm:semanticObjectController>
+        <navpopover:SemanticObjectController entitySet="ZSNN_INTIME_TASK" enableAvailableActionsPersonalization='\{"ProjectName":false\}'/>
+
+      <! <smartForm:semanticObjectController>
         <navpopover:SemanticObjectController entitySet="ZSNN_INTIME_TASK"
           enableAvailableActionsPersonalization='\{"taskData>/ProjectName":false\}'/>
+
       </smartForm:semanticObjectController> -->
 
     </smartForm:SmartForm>
@@ -96,24 +100,43 @@
                     press="onAddSubTaskExecutor" />
             </OverflowToolbar>
         </smartTable:customToolbar>
-      
+
         <Table growing="true"
             mode="SingleSelectMaster"
             selectionChange="onAddSubTaskExecutor">
-        <columns>
-            <column width="80px" id="deleteColumnForForwarder" demandPopin="true" vAlign="Middle">
-                <customData>
-                    <core:CustomData key="p13nData" value='\{"columnKey": "Delete", "columnIndex": 10}' />
-                </customData>
-            </column>
-        </columns>
-        <items>
-            <ColumnListItem>
-                <cells>
-                    <Button id="deleteButtonForForwarder" icon="sap-icon://delete" type="Transparent" press="onDeleteSelection"/>
-                </cells>
-            </ColumnListItem>
-        </items>
+            <columns>
+                <Column id="deleteColumnForForwarder"
+                    demandPopin="true"
+                    vAlign="Middle">
+                    <customData>
+                        <core:CustomData key="p13nData"
+                            value='\{"columnKey": "Operation", "leadingProperty": "Operation", "sortProperty": "Operation", "columnIndex": 10}' />
+                    </customData>
+                    <header>
+                        <Text text="Операции"/>
+                    </header>
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem>
+                    <cells>
+                        <HBox class="sapUiTinyMargin">
+
+                            <Button icon="sap-icon://present"
+                                type="Emphasized"
+                                text="Списать время"
+                                press="onTimeSheetCreateButtonPress"/>
+
+
+                            <Button id="deleteButtonForForwarder"
+                                icon="sap-icon://delete"
+                                type="Transparent"
+                                press="onDeleteSelection"/>
+
+                        </HBox>
+                    </cells>
+                </ColumnListItem>
+            </items>
         </Table>
     </smartTable:SmartTable>
 
