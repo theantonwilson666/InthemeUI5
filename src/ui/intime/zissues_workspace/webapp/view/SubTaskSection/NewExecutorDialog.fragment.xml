@@ -6,7 +6,8 @@
     xmlns:u="sap.ui.unified"
     xmlns:m="sap.m">
     <Dialog id="_newExecutor-Dialog"
-        title="Назначить исполнителя">
+        title="Назначить исполнителя"
+        afterClose=".afterCloseDialog">
         <content>
             <VBox class="sapUiTinyMargin">
 
