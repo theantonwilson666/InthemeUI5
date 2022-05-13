@@ -4,9 +4,13 @@
     xmlns:l="sap.ui.layout"
     xmlns:f="sap.ui.layout.form"
     xmlns:u="sap.ui.unified"
+    xmlns:nav="sap.ui.comp.navpopover"
     xmlns:smartTable="sap.ui.comp.smarttable"
     xmlns:m="sap.m">
-
+    			<!-- <smartTable:SmartTable tableType="ResponsiveTable"
+								   entitySet="ZSNN_PROJECT_ADMIN" useVariantManagement="false"
+								   useTablePersonalisation="false" showRowCount="false"
+								   useExportToExcel="false" enableAutoColumnWidth="true"> -->
     <Table id="_ProjectAdmins-Table"
         delete=".onDeleteAdminPress">
         <headerToolbar>
@@ -39,4 +43,8 @@
             </Column>
         </columns>
     </Table>
+			<!-- <smartTable:semanticObjectController>
+					<nav:SemanticObjectController enableAvailableActionsPersonalization='\{"FullName":false\}'/>
+				</smartTable:semanticObjectController>
+			</smartTable:SmartTable> -->
 </core:FragmentDefinition>

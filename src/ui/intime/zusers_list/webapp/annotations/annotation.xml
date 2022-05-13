@@ -127,6 +127,26 @@
 
 			<Annotations Target="ZINT_UI_USERS_SRV.ZSNN_INTIME_USERType">
 
+			<Annotation Term="UI.QuickViewFacets">
+					<Collection>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#dataQ" />
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.FieldGroup" Qualifier="dataQ">
+					<Record>
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="Полное имя" />
+									<PropertyValue Property="Value" Path="FullName" />
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+
 				<Annotation Term="UI.FieldGroup"
 					Qualifier="AltIDHeader">
 					<Record>

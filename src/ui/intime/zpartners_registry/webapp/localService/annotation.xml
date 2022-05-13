@@ -352,6 +352,11 @@
       </Annotations>
 
       <Annotations Target="ZINT_UI_PARTNERS_SRV.ZSNN_PARTNER_ADMINType">
+				<Annotation Term="com.sap.vocabularies.Common.v1.SemanticKey">
+					<Collection>
+						<PropertyPath>UserName</PropertyPath>
+					</Collection>
+				</Annotation>
         <Annotation Term="UI.LineItem">
           <Collection>
             <Record Type="UI.DataField">
