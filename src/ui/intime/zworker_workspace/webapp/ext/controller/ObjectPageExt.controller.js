@@ -19,7 +19,7 @@ var TimeSheetDialog = sap.ui.require(
 sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
     _UserObjectPageId: 'intime.zworker_workspace::sap.suite.ui.generic.template.ObjectPage.view.Details::ZSNN_WORKER_LIST',
 
-    onInit: function() {
+    onInit: function () {
 
         if (this.getView().getId() === this._UserObjectPageId) {
             this.uiExtension();
@@ -27,20 +27,20 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
 
     },
 
-    uiExtension: function() {
-        this.extensionAPI.attachPageDataLoaded(function() {
+    uiExtension: function () {
+        this.extensionAPI.attachPageDataLoaded(function () {
             this.initDateIntervalSelection();
             this.updateVizFrame();
         }.bind(this))
     },
 
-    initDateIntervalSelection: function() {
+    initDateIntervalSelection: function () {
         var oDay = this.getDayParam(new Date());
         this.byId("_TimeSheetIntervalSelection-DateRangeSelection").setDateValue(new Date(oDay.year, oDay.month, oDay.day - 7));
         this.byId("_TimeSheetIntervalSelection-DateRangeSelection").setSecondDateValue(new Date());
     },
 
-    getDayParam: function(oDate) {
+    getDayParam: function (oDate) {
         return {
             year: oDate.getFullYear(),
             month: oDate.getMonth(),
@@ -49,7 +49,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
     },
 
 
-    onCreateTimeSheetButtonPress: function(oEvent) {
+    onCreateTimeSheetButtonPress: function (oEvent) {
         var oUser = oEvent.getSource().getBindingContext().getObject();
         var oItem = this.byId("to_AssignedSubTask::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getSelectedContexts()[0].getObject();
 
@@ -64,7 +64,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
 
     },
 
-    onCreateTimeSheetHeaderButtonPress: function(oEvent) {
+    onCreateTimeSheetHeaderButtonPress: function (oEvent) {
         var oDialog = new TimeSheetDialog({
             title: `Списать время - ${oEvent.getSource().getBindingContext().getObject().Surname} ${oEvent.getSource().getBindingContext().getObject().Name}`,
             executorID: oEvent.getSource().getBindingContext().getObject().UserID,
@@ -74,7 +74,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
     },
 
 
-    updateVizFrame: function() {
+    updateVizFrame: function () {
         Format.numericFormatter(ChartFormatter.getInstance());
         var formatPattern = ChartFormatter.DefaultPattern;
 
@@ -83,11 +83,12 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
 
         this.byId("_TimeSheet-VizFrame").setVizProperties({
 
-            // interaction: {
-            //     selectability: {
-            //         mode: "SINGLE" //only one data point can be selected at a time
-            //     }
-            // },
+            interaction: {
+                selectability: {
+                    // plotLassoSelection : false
+                    mode: "EXCLUSIVE" //only one data point can be selected at a time
+                }
+            },
 
             title: {
                 text: "Диаграмма списания",
@@ -151,59 +152,85 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
 
         var oPopOver = this.getView().byId("_TimeSheet-Popover");
         oPopOver.connect(this.byId("_TimeSheet-VizFrame").getVizUid());
-        // oPopOver.setActionItems([{
-        //     type: 'action',
-        //     text: 'Списать время',
-        //     press: function(oEvent) {
-        //         debugger;
-        //     }
-        // }]);
 
-        oPopOver.setCustomDataControl(function(data) {
+        oPopOver.setCustomDataControl(function (data, test) {
             if (!data.data.val) {
-                var sSelectedDate = this.byId("_TimeSheet-VizFrame").vizSelection()[0].data.DateSheet;
 
-                return new sap.m.Text({ text: 'test' });
+                var sSelectedDate = data.target.__data__.DateSheet;
+                this.getView().byId("_TimeSheet-Popover").close()
+
+                var oUserData = this.getView().getBindingContext().getObject();
+
+                var oDialog = new TimeSheetDialog({
+                    title: `Списать время - ${oUserData.Surname} ${oUserData.Name}`,
+                    executorID: oUserData.UserID,
+                    dateSheet: this.parseDate(sSelectedDate),
+                    contentWidth: "50%"
+                });
+                oDialog.open();
+
+                oDialog.timeSheetSaveResult.then(function (oData) {
+                    this.updateVizFrame();
+                }.bind(this))
+
             } else {
-                return new sap.m.Text({ text: 'test_1' });
+
+                debugger;
+
+                var oList = new sap.m.List({
+                    includeItemInSelection : true
+                });
+
+                oList.setModel(this.getView().getModel());
+
+                oList.bindItems({
+                    path: this.getView().getBindingContext().getPath() + "/to_TimeSheet",
+                    template: new sap.m.StandardListItem({
+                        title: "{TaskName}",
+                        description: "{SubTaskName}",
+                        icon: "{PartnerImageURL}",
+                        // counter : {
+                        //      path : "TimeSpent",
+                        //      formatter : function (sTimeSpent){
+                                 
+                        //         debugger;
+
+                        //         if (sTimeSpent){
+                        //             return parseInt(sTimeSpent);
+                        //         }
+                        //      }
+                        //     },
+                        info : "{TimeSpent} {TimeSpentUText}"
+                    }),
+                    filters: [
+                        new sap.ui.model.Filter("DateSheet", "EQ", this.parseDate(data.data.val[0].value))
+                    ]
+                })
+
+                return oList;
             }
         }.bind(this));
 
-        debugger;
+    },
 
-        // this.byId("_TimeSheet-VizFrame").setInteraction(new sap.viz.ui5.types.controller.Interaction({
-        //     selectability: new sap.viz.ui5.types.controller.Interaction_selectability({
-        //         mode: sap.viz.ui5.types.controller.Interaction_selectability_mode.none
-        //     })
-        // }));
+    parseDate: function (sDateString) {
 
-        // this.byId("_TimeSheet-VizFrame").attachBrowserEvent("click", function() {
-        //     debugger;
-        //     if (!$(oEvent.srcElement).closest('.v-m-xAxis').length) return;
-        // }.bind(this))
+        var sDay = sDateString.split('.')[0];
+        var sMonth = parseInt(sDateString.split('.')[1]) - 1;
+        var sYear = sDateString.split('.')[2];
+
+        return new Date(sYear, sMonth, sDay, 4);
 
     },
 
-    formatDate: function(oDate) {
+
+    formatDate: function (oDate) {
         if (oDate) {
             return oDate.toLocaleDateString("ru-RU", { year: 'numeric', month: 'numeric', day: 'numeric' });
         };
     },
 
-    onChangeDateRangeSelection: function(oEvent) {
-
+    onChangeDateRangeSelection: function (oEvent) {
         this.updateVizFrame();
-        // var oStartDate = oEvent.getParameter("from");
-        // var oEndDate = oEvent.getParameter("to");
-
-        // debugger;
-
-
-        // this.getView().getModel().updateBindings(true)
-        // debugger;
-
-        // this.byId("_TimeSheet-VizFrame").bindAggregation("dataset", oEvent.getSource().getBindingContext().getPath() + "/to_SpendHours", oDataSet);
-
-
     }
 });

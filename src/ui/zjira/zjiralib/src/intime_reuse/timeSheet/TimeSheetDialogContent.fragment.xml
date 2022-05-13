@@ -51,7 +51,7 @@
         <smartForm:Group>
 
             <smartForm:GroupElement>
-                <smartField:SmartField value="{DateSheet}" />
+                <smartField:SmartField value="{DateSheet}" id="_DateSheet-SmartField"/>
             </smartForm:GroupElement>
 
             <smartForm:GroupElement>

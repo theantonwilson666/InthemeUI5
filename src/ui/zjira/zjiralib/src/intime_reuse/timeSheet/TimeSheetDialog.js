@@ -17,6 +17,10 @@ sap.ui.define([
 
                 "executorID": {
                     type: "string"
+                },
+
+                "dateSheet" : {
+                    type : "object"
                 }
             }
             // ,
@@ -30,10 +34,19 @@ sap.ui.define([
         ODataModel: null,
         ODataUrl: '/sap/opu/odata/sap/ZINT_UI_TIMESHEET_SRV/',
 
+
+        timeSheetSaveResult : null,
+
+
         constructor: function (oParam) {
             arguments[0].afterOpen = this._onAfterOpen;
             arguments[0].afterClose = this._afterClose;
             sap.m.Dialog.prototype.constructor.apply(this, arguments);
+
+            this.timeSheetSaveResult = new Promise(function (res, rej){
+                this._ODataSaveResolve = res;
+                this._ODataSaveReject = rej;
+            }.bind(this))
         },
 
         _loadTimeSheetDialogContent: function () {
@@ -52,14 +65,14 @@ sap.ui.define([
                     properties: {
                         Executor: this.getExecutorID(),
                         SubTaskID: this.getSubTaskID(),
-                        DateSheet: new Date()
+                        DateSheet: this.getDateSheet() ? this.getDateSheet() : new Date()
                     },
                     success: function (oData) {
-                        debugger;
+                        this._ODataSaveResolve('success');
                     }.bind(this),
 
                     error: function (oError) {
-                        debugger;
+                        this._ODataSaveReject('error');;
                     }.bind(this)
                 });
 
@@ -78,10 +91,16 @@ sap.ui.define([
                     this._readAssignedTask(this.getExecutorID(), this.getSubTaskID());
                 }
 
+                if (this.getDateSheet()){
+                    this.Lib.byId("_DateSheet-SmartField").setEditable(false);
+                }
+
                 if (this.getButtons().length === 0) {
                     this.addButton(new sap.m.Button({ text: 'OK', type: 'Emphasized', press: this._onOkButtonPress.bind(this) }));
                     this.addButton(new sap.m.Button({ text: 'Отмена', type: 'Reject', press: this._onCancelButtonPress.bind(this) }));
                 }
+
+
 
             }.bind(this));
         },
@@ -94,6 +113,7 @@ sap.ui.define([
                 success: function () {
                     this.setBusy(false);
                     this.close();
+                    
                 }.bind(this),
 
                 error: function () {
@@ -103,6 +123,8 @@ sap.ui.define([
             });
 
         },
+
+
 
         _onCancelButtonPress: function (oEvent) {
 
