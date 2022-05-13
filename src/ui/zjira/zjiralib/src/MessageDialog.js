@@ -2,6 +2,8 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel"
 ], function (JSONModel) {
 
+    debugger;
+
     var oResourceBundle = sap.ui.getCore().getLibraryResourceBundle("jira.lib");
 
     var oMessageView = new sap.m.MessageView({

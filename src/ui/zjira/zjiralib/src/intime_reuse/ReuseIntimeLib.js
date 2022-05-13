@@ -1,71 +1,79 @@
-sap.ui.define(["sap/ui/core/Fragment", "sap/ui/model/json/JSONModel", "sap/m/MessageToast"], function (Fragment, JSONModel, MessageToast) {
+sap.ui.define(["sap/ui/core/Fragment", "sap/ui/model/json/JSONModel", "sap/m/MessageToast", "jira/lib/MessageDialog"],
+    function (Fragment, JSONModel, MessageToast, MessageDialog) {
 
-    return {
-        loadDialog: function (oParams) {
+        return {
+            loadDialog: function (oParams) {
 
 
-            if (!this[oParams.sDialogName]) {
-                return Fragment.load({
-                    type: "XML",
-                    name: oParams.sViewName,
-                    controller: oParams.controller ? oParams.controller : this,
-                }).then(
-                    function (oDialog) {
-                        this[oParams.sDialogName] = oDialog;
-                        if (oParams.sPath) {
-                            this[oParams.sDialogName].bindElement(oParams.sPath);
-                        }
-                        if (!$.isArray(this[oParams.sDialogName])) {
-                            this[oParams.sDialogName].setBusyIndicatorDelay(0);
-                        }
-                        return this[oParams.sDialogName];
-                    }.bind(this)
-                );
-            } else {
-                return new Promise(
-                    function (res) {    
-                        res(this[oParams.sDialogName]);
-                    }.bind(this)
-                );
-            }
-        },
+                if (!this[oParams.sDialogName]) {
+                    return Fragment.load({
+                        type: "XML",
+                        name: oParams.sViewName,
+                        controller: oParams.controller ? oParams.controller : this,
+                    }).then(
+                        function (oDialog) {
+                            this[oParams.sDialogName] = oDialog;
+                            if (oParams.sPath) {
+                                this[oParams.sDialogName].bindElement(oParams.sPath);
+                            }
+                            if (!$.isArray(this[oParams.sDialogName])) {
+                                this[oParams.sDialogName].setBusyIndicatorDelay(0);
+                            }
+                            return this[oParams.sDialogName];
+                        }.bind(this)
+                    );
+                } else {
+                    return new Promise(
+                        function (res) {
+                            res(this[oParams.sDialogName]);
+                        }.bind(this)
+                    );
+                }
+            },
 
-        byId: function(sId){
-            return sap.ui.getCore().byId(sId);
-        },
-        
-        showMessage: function (sText) {
-            MessageToast.show(sText);
-        },
+            byId: function (sId) {
+                return sap.ui.getCore().byId(sId);
+            },
 
-        newJSONModel: function (oData) {
-            return new JSONModel(oData);
-        },
+            showMessage: function (sText) {
+                MessageToast.show(sText);
+            },
 
-        isExistError: function () {
-            return this.baseController.isExistError();
-            // var aMassages = sap.ui
-            //     .getCore()
-            //     .getMessageManager()
-            //     .getMessageModel()
-            //     .getProperty("/");
-            // if (aMassages.length > 0) {
-            //     MessageDialog.showCurrentState();
-            //     return true;
-            // }
-            // return false;
-        },
+            newJSONModel: function (oData) {
+                return new JSONModel(oData);
+            },
 
-        showError: function (oError) {
+            isExistError: function () {
+                return this.baseController.isExistError();
+                // var aMassages = sap.ui
+                //     .getCore()
+                //     .getMessageManager()
+                //     .getMessageModel()
+                //     .getProperty("/");
+                // if (aMassages.length > 0) {
+                //     MessageDialog.showCurrentState();
+                //     return true;
+                // }
+                // return false;
+            },
 
-            debugger;
+            showError: function (oError) {
+                
+                debugger;
 
-            return this.baseController.showError(oError);
-            // if (oError && JSON.parse(oError.statusCode) === 500) {
-            //     MessageDialog.showError.call(this, oError);
-            //     return;
-            // }
-            // MessageDialog.showCurrentState();
-        },
-    };
-});
+                if (oError && JSON.parse(oError.statusCode) === 500) {
+                    MessageDialog.showError.call(this, oError);
+                    return;
+                }
+                MessageDialog.showCurrentState();
+                // debugger;
+
+                // return this.baseController.showError(oError);
+                // if (oError && JSON.parse(oError.statusCode) === 500) {
+                //     MessageDialog.showError.call(this, oError);
+                //     return;
+                // }
+                // MessageDialog.showCurrentState();
+            },
+        };
+    });
