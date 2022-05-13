@@ -125,6 +125,12 @@ module.exports = function(grunt) {
                         bspContainer: "ZUSER_LIST",
                         bspDescription: "Intime : Сотрудники",
                         prefix: "intime/zusers_list",
+                    },
+
+                    zworker_workspace: {
+                        bspContainer: "ZWORK_SPACE",
+                        bspDescription: "Intime : Личный кабинет",
+                        prefix: "intime/zworker_workspace",
                     }
                 },
             }
