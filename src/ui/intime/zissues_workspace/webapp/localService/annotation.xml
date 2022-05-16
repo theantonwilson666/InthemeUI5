@@ -141,7 +141,7 @@
         </Annotation>
       </Annotations>
 
-      <!-- На главной странице/выподающий список -->
+      <!-- На главной странице/выпадающий список -->
       <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_TASKType/PartnerID">
         <Annotation Term="Common.ValueListWithFixedValues"
           Bool="true" />
@@ -227,7 +227,7 @@
       </Annotations>
 
 
-      <!-- В фильтре "Этап проекта"/Выподающий список -->
+      <!-- В фильтре "Этап проекта"/Выпадающий список -->
 
       <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INT_PROJECT_STAGE_SHType/PartnerId">
         <Annotation Term="Common.ValueListWithFixedValues"
@@ -258,7 +258,7 @@
         </Annotation>
       </Annotations>
 
-      <!-- В фильтре "Проект"/Выподающий список -->
+      <!-- В фильтре "Проект"/Выпадающий список -->
 
       <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INT_PROJECT_SHType/PartnerId">
         <Annotation Term="Common.ValueListWithFixedValues"
