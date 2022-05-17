@@ -405,7 +405,7 @@
                   <PropertyValue Property="ValueListProperty"
                     String="TaskName"/>
                 </Record>
-                <!-- <Record Type="Common.ValueListParameterDisplayOnly">
+                <Record Type="Common.ValueListParameterDisplayOnly">
                   <PropertyValue Property="ValueListProperty"
                     String="PartnerName"/>
                 </Record>
@@ -413,8 +413,8 @@
                   <PropertyValue Property="LocalDataProperty"
                     PropertyPath="PartnerID"/>
                   <PropertyValue Property="ValueListProperty"
-                    String="PartnerId"/>
-                </Record> -->
+                    String="PartnerID"/>
+                </Record>
                 <Record Type="Common.ValueListParameterOut">
                   <PropertyValue Property="LocalDataProperty"
                     PropertyPath="TaskID"/>
