@@ -80,6 +80,7 @@
     <smartTable:SmartTable id="_SubTaskExecutors-SmartTable"
         entitySet="ZSNN_SUBTASK_EXECUTORS"
         tableType="ResponsiveTable"
+        visible="{= ${state>/subTaskCreateMode} === true ? false : true}"
         header="Исполнители"
         useExportToExcel="false"
         useVariantManagement="false"

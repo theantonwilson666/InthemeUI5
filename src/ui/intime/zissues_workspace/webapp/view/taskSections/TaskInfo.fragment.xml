@@ -81,12 +81,6 @@
 
         <smartForm:Group label="Доп.инфо">
             <smartForm:GroupElement>
-                <smartField:SmartField value="{DocNum}"
-                    entitySet="ZSNN_INTIME_TASK"
-                    editable="true"/>
-            </smartForm:GroupElement>
-
-            <smartForm:GroupElement>
                 <smartField:SmartField value="{ManagedTask}"
                     editable="true"/>
             </smartForm:GroupElement>

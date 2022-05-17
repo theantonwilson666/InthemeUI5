@@ -34,6 +34,8 @@ sap.ui.define([
 
                     if (this._routeSubTaskParam.subTaskId === 'new') {
 
+                        this.setStateProperty("/subTaskCreateMode", true);
+
                         if (!oTaskContext) {
                             this.goToMainPage(true);
                             return;
@@ -61,6 +63,9 @@ sap.ui.define([
 
 
                     } else {
+
+                        this.setStateProperty("/subTaskCreateMode", false);
+
                         this.getView().bindObject({
                             path: `/ZSNN_INTIME_SUBTASK('${this._routeSubTaskParam.subTaskId}')`,
                             parameters: {

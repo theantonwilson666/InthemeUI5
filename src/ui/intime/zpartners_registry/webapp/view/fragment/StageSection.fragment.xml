@@ -40,6 +40,10 @@
             </smartField:configuration>
           </smartField:SmartField>
         </smartForm:GroupElement>
+        <smartForm:GroupElement>
+          <smartField:SmartField value="{DocNum}"
+                                 entitySet="ZSNN_INT_PROJECT" />
+        </smartForm:GroupElement>
       </smartForm:Group>
       <smartForm:Group label="Сроки">
         <smartForm:GroupElement>
@@ -48,6 +52,10 @@
         </smartForm:GroupElement>
         <smartForm:GroupElement>
           <smartField:SmartField value="{EndDate}"
+                                 entitySet="ZSNN_INT_PROJECT" />
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+          <smartField:SmartField value="{DocNumDate}"
                                  entitySet="ZSNN_INT_PROJECT" />
         </smartForm:GroupElement>
       </smartForm:Group>
