@@ -106,7 +106,7 @@
         <Annotation Term="UI.HiddenFilter"
           Bool="true"/>
       </Annotations>
-      
+
       <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_INT_PROJECT_SHType/ProjectName">
         <Annotation Term="UI.HiddenFilter"
           Bool="true"/>
@@ -122,12 +122,12 @@
           Bool="true"/>
       </Annotations>
 
-            <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/PartnerImageURL">
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/PartnerImageURL">
         <Annotation Term="UI.HiddenFilter"
           Bool="true"/>
       </Annotations>
 
-        <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/StartDate">
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/StartDate">
         <Annotation Term="UI.HiddenFilter"
           Bool="true"/>
       </Annotations>
@@ -237,7 +237,7 @@
       </Annotations>
 
 
-<Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/PartnerID">
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/PartnerID">
         <Annotation Term="Common.ValueListWithFixedValues"
           Bool="true" />
         <Annotation Term="Common.ValueList">
@@ -266,7 +266,7 @@
         </Annotation>
       </Annotations>
 
-<Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/ProjectID">
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/ProjectID">
         <Annotation Term="Common.ValueListWithFixedValues"
           Bool="false"/>
         <Annotation Term="Common.ValueList">
@@ -305,9 +305,10 @@
 
 
 
-<Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType">
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType">
         <Annotation Term="UI.FieldGroup"
-          Qualifier="task_search" Label = "Test_Label">
+          Qualifier="task_search"
+          Label = "Test_Label">
           <Record>
             <PropertyValue Property="Data">
               <Collection>
@@ -321,55 +322,45 @@
                 </Record>
                 <Record Type="UI.DataField">
                   <PropertyValue Property="Value"
-                    Path="PartnerId"/>
+                    Path="PartnerID"/>
                 </Record>
                 <!-- <Record Type="UI.DataField">
-                  <PropertyValue Property="Value"
-                    Path="PartnerImageURL"/>
+                  <PropertyValue Property="Value" Path="PartnerImageURL"/>
                 </Record>
                 <Record Type="UI.DataField">
-                  <PropertyValue Property="Value"
-                    Path="StartDate"/>
+                  <PropertyValue Property="Value" Path="StartDate"/>
                 </Record>
                 <Record Type="UI.DataField">
-                  <PropertyValue Property="Value"
-                    Path="EndDate"/>
+                  <PropertyValue Property="Value" Path="EndDate"/>
                 </Record>
                 <Record Type="UI.DataField">
-                  <PropertyValue Property="Value"
-                    Path="EstimateTime"/>
+                  <PropertyValue Property="Value" Path="EstimateTime"/>
                 </Record>
                 <Record Type="UI.DataField">
-                  <PropertyValue Property="Value"
-                    Path="EstimateTimeUnit"/>
+                  <PropertyValue Property="Value" Path="EstimateTimeUnit"/>
                 </Record>
                 <Record Type="UI.DataField">
-                  <PropertyValue Property="Value"
-                    Path="WorkDescr"/>
+                  <PropertyValue Property="Value" Path="WorkDescr"/>
                 </Record> -->
                 <Record Type="UI.DataField">
                   <PropertyValue Property="Value"
                     Path="SubTaskID"/>
                 </Record>
                 <!-- <Record Type="UI.DataField">
-                  <PropertyValue Property="Value"
-                    Path="SubTaskName"/>
+                  <PropertyValue Property="Value" Path="SubTaskName"/>
                 </Record>
                 <Record Type="UI.DataField">
-                  <PropertyValue Property="Value"
-                    Path="SubTaskStatus"/>
+                  <PropertyValue Property="Value" Path="SubTaskStatus"/>
                 </Record>
                 <Record Type="UI.DataField">
-                  <PropertyValue Property="Value"
-                    Path="SubTaskStatusText"/>
+                  <PropertyValue Property="Value" Path="SubTaskStatusText"/>
                 </Record> -->
                 <Record Type="UI.DataField">
                   <PropertyValue Property="Value"
                     Path="TaskID"/>
                 </Record>
                 <!-- <Record Type="UI.DataField">
-                  <PropertyValue Property="Value"
-                    Path="TaskName"/> -->
+                  <PropertyValue Property="Value" Path="TaskName"/> -->
                 <!-- </Record> -->
               </Collection>
             </PropertyValue>
@@ -390,7 +381,7 @@
       </Annotations>
 
 
-<Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/TaskID">
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/TaskID">
         <Annotation Term="Common.ValueListWithFixedValues"
           Bool="false"/>
         <Annotation Term="Common.ValueList">
@@ -409,12 +400,38 @@
                   <PropertyValue Property="ValueListProperty"
                     String="PartnerName"/>
                 </Record>
+
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="StageName"/>
+                </Record>
+
                 <Record Type="Common.ValueListParameterInOut">
                   <PropertyValue Property="LocalDataProperty"
                     PropertyPath="PartnerID"/>
                   <PropertyValue Property="ValueListProperty"
                     String="PartnerID"/>
                 </Record>
+
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="ProjectID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectID"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="StageID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="StageID"/>
+                </Record>
+
                 <Record Type="Common.ValueListParameterOut">
                   <PropertyValue Property="LocalDataProperty"
                     PropertyPath="TaskID"/>
@@ -562,6 +579,7 @@
                   <PropertyValue Property="Value"
                     Path="ProjectID"/>
                 </Record>
+
                 <Record Type="UI.DataField">
                   <PropertyValue Property="Value"
                     Path="PartnerId"/>
@@ -586,7 +604,7 @@
       </Annotations>
 
 
-<Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_INT_PROJECT_SHType">
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_INT_PROJECT_SHType">
         <Annotation Term="UI.FieldGroup"
           Qualifier="search">
           <Record>
@@ -774,7 +792,7 @@
         </Annotation>
       </Annotations>
 
-      
+
 
 
 
