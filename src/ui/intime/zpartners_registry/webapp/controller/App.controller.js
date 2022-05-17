@@ -14,7 +14,7 @@ sap.ui.define([
                 if (sPartnerId) {
                     this.navTo("project", { query: { PartnerId: sPartnerId } }, false);
                 }
-             },
+            },
 
             OnEdit: function () {
                 this.changeEditMode();
@@ -179,14 +179,33 @@ sap.ui.define([
                     .then(
                         function (oDialog) {
 
-                            var oPartnerContext = this.getModel().createEntry("/ZSNN_PARTNER_ROOT", {
-                                groupId: "changes"
+                            oDialog.setBusy(true);
+
+                            this.getModel().callFunction("/GetCreatedPartner", {
+
+                                method: "POST",
+                                success: function (oData) {
+                                    this["EditParnterDialog"].setBusy(false);
+                                    this.isExistError();
+                                    
+                                    var oPartnerContext = this.getModel().createEntry("/ZSNN_PARTNER_ROOT", {
+                                        groupId: "changes",
+                                        properties : oData
+                                    });
+
+                                    this.setStateProperty('/editablePartner', oPartnerContext);
+
+                                    this["EditParnterDialog"].setBindingContext(oPartnerContext);
+                                    this["EditParnterDialog"].open();
+
+                                }.bind(this),
+
+                                error: function (oError) {
+                                    debugger;
+                                    this.showError(oError);
+                                }.bind(this)
                             });
 
-                            this.setStateProperty('/editablePartner', oPartnerContext);
-
-                            oDialog.setBindingContext(oPartnerContext);
-                            oDialog.open();
                         }.bind(this)
                     );
 

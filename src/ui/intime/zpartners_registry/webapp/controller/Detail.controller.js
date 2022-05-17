@@ -240,17 +240,41 @@ sap.ui.define([
             onRejectButtonPress: function() {},
 
             onAddNewProjectButtonPress: function(oEvent) {
-                var oNewEntryContext = this.getView().getModel().createEntry(this.getBindingPath() + "/to_Project", {
-                    properties: {
-                        Name: 'Новый проект',
-                        PartnerID: this.getView().getBindingContext().getObject().PartnerId
-                    },
-                    groupId: "changes"
+                
+                this.getModel().callFunction("/GetCreatedProject", {
+                    method: "POST",
+                    success: function (oData) {
+                        this.isExistError();
+                        
+                        // var oProjectContext = this.getModel().createEntry("/ZSNN_PARTNER_ROOT", {
+                        //     groupId: "changes",
+                        //     properties : oData
+                        // });
+
+
+                        var oNewEntryContext = this.getView().getModel().createEntry(this.getBindingPath() + "/to_Project", {
+                            properties: {
+                                Name: 'Новый проект',
+                                PartnerID: this.getView().getBindingContext().getObject().PartnerId
+                            },
+                            groupId: "changes"
+                        });
+                        this.setProjectSelection();
+                        this.byId("projectTab").setBindingContext(oNewEntryContext);
+                        this.setStateProperty("/editProjectMode", true);
+                        this.byId("projectForm").focus();
+
+
+                    }.bind(this),
+
+                    error: function (oError) {
+                        debugger;
+                        this.showError(oError);
+                    }.bind(this)
                 });
-                this.setProjectSelection();
-                this.byId("projectTab").setBindingContext(oNewEntryContext);
-                this.setStateProperty("/editProjectMode", true);
-                this.byId("projectForm").focus();
+
+
+              
             },
 
 
