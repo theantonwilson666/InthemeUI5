@@ -10,6 +10,9 @@
       editTogglable="true"
       entityType="ZSNN_INT_PROJECTType"
       editable="{state>/editProjectMode}"
+      editToggled="onEditProject"
+
+
       visible="{state&gt;/projectSelection}">
       <smartForm:layout>
         <smartForm:ColumnLayout columnsM="2"

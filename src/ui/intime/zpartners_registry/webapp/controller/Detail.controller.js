@@ -79,6 +79,16 @@ sap.ui.define([
                   });
             },
 
+            onEditProject: function(oEvent){
+                var bEdit = oEvent.getParameter("editable");
+
+                if (bEdit){
+
+                } else {
+                    
+                }
+            },
+
             refreshAdminSection: function() {
                 var oTable = this.byId("_ProjectAdmins-Table");
                 var oTemplate = new sap.m.ColumnListItem({
