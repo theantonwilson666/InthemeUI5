@@ -29,6 +29,7 @@
         <smartForm:GroupElement>
           <smartField:SmartField value="{ProjectStatus}"
             entitySet="ZSNN_INT_PROJECT"
+            editable="false"
             textInEditModeSource="ValueList"
             id="status">
             <smartField:configuration>
