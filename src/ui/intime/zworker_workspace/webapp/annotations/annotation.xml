@@ -268,6 +268,36 @@
 				<Annotation Term="UI.IsImageUrl"/>
 			</Annotations>
 
+	    <Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_INTIME_TIMESHEETType/TimeSpentU">
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="true" />
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZBNN_TIME_UNIT" />
+            <PropertyValue Property="SearchSupported"
+              Bool="true" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="TimeSpentU" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="Unit" />
+                </Record>
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="TimeSpentUText" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="UnitText" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+
+
 
 
 		</Schema>
