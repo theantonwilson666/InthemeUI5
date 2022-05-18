@@ -19,6 +19,7 @@
         "type": "OData",
         "settings": {
           "annotations": [
+            "ZINT_UI_WORKER_WORKSPAC_ANNO_MDL",
             "annotation"
           ],
           "localUri": "localService/metadata.xml"
@@ -30,6 +31,13 @@
         "settings": {
           "localUri": "annotations/annotation.xml"
         }
+      },
+      "ZINT_UI_WORKER_WORKSPAC_ANNO_MDL": {
+          "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZINT_UI_WORKER_WORKSPAC_ANNO_MDL',Version='0001')/$value",
+          "type": "ODataAnnotation",
+          "settings": {
+              "localUri": ""
+          }
       }
     },
     "offline": false,
