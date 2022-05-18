@@ -36,8 +36,11 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
 
     initDateIntervalSelection: function () {
         var oDay = this.getDayParam(new Date());
-        this.byId("_TimeSheetIntervalSelection-DateRangeSelection").setDateValue(new Date(oDay.year, oDay.month, oDay.day - 7));
-        this.byId("_TimeSheetIntervalSelection-DateRangeSelection").setSecondDateValue(new Date());
+        var oId = this.byId("_TimeSheetIntervalSelection-DateRangeSelection");
+        if(oId) {
+            oId.setDateValue(new Date(oDay.year, oDay.month, oDay.day - 7));
+            oId.setSecondDateValue(new Date());
+        }
     },
 
     getDayParam: function (oDate) {

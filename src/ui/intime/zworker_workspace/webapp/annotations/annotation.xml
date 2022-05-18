@@ -100,7 +100,7 @@
 							</Collection>
 						</PropertyValue>
 						<PropertyValue Property="Label"
-							String="Текущиче активности"/>
+							String="Текущие активности"/>
 					</Record>
 				</Annotation>
 
@@ -150,11 +150,14 @@
 							<PropertyValue Property="Target"
 								AnnotationPath="to_AssignedSubTask/@UI.LineItem" />
 						</Record>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Label"
+								String="TimeSheet"/>
+							<PropertyValue Property="Target"
+								AnnotationPath="to_TimeSheet/@UI.LineItem" />
+						</Record>
 					</Collection>
 				</Annotation>
-
-
-
 
 				<Annotation Term="UI.HeaderFacets">
 					<Collection>
@@ -187,6 +190,7 @@
 					</Collection>
 				</Annotation>
 
+                
 				<Annotation Term="UI.HeaderInfo">
 
 					<Record>
