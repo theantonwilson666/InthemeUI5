@@ -15,12 +15,32 @@
     <f:title>
       <f:DynamicPageTitle>
         <f:heading>
+
+          <!-- <ObjectHeader title="Партнер">
+            <ObjectAttribute text="Проект"/>
+            <ObjectAttribute text="Этап"/>
+          </ObjectHeader> -->
+
+          <!-- <Label text="This is a subheading"/> -->
+          <!-- <sv:SmartVariantManagement id="__SVM01" persistencyKey="fiori.test.application2.view.S4" showShare="true" showExecuteOnSelection="true" entitySet="ZSNN_INTIME_TASK"/> -->
+        </f:heading>
+
+        <f:breadcrumbs>
+          <Breadcrumbs id="_MainPage-BreadCrumbs" links="{state>/EntityNavigation}">
+            <Link text="{state>Name}" press="onPressBreadCrumbNavigate"/>
+          </Breadcrumbs>
+        </f:breadcrumbs>
+
+        <f:expandedContent>
+          <!-- <Label text="This is a subheading"/> -->
+
           <sv:SmartVariantManagement id="__SVM01"
             persistencyKey="fiori.test.application2.view.S4"
             showShare="true"
             showExecuteOnSelection="true"
             entitySet="ZSNN_INTIME_TASK"/>
-        </f:heading>
+
+        </f:expandedContent>
 
         <f:content>
           <OverflowToolbar>
@@ -37,6 +57,7 @@
           considerSelectionVariants="true"
           search="onSmartFilterGoPress"
           entitySet="ZSNN_INTIME_TASK"
+          blocked="{state>/filterBlocked}"
           initialized="onTaskFilterinitialized"
           showClearButton="true">
 

@@ -34,27 +34,50 @@ sap.ui.define([
 
                         this.setStateProperty("/taskCreated", true);
 
-                        var oParam = this._routeParam.param;
+                        var oProjectData = this.getStateProperty("/ProjectData");
 
-                        //todo : stage project
-                        var oNewTaskContext = this.getView().getModel().createEntry("/ZSNN_INTIME_TASK", {
-                            properties: {
-                                Name: 'Новая задача',
-                                Status: oParam.status
+                        this.getView().setBusy(true);
+
+                        this.getModel().callFunction("/GetCreatedTask", {
+                            method: "POST",
+                            urlParameters: {
+                                PartnerID: oProjectData.PartnerID,
+                                ProjectID: oProjectData.ProjectID, //this._selectedRowContext.getObject().ID,
+                                ProjectStageID: oProjectData.ProjectStageID
                             },
-                            groupId: "changes",
 
                             success: function(oData) {
-                                this.navTo("task", {
-                                    taskId: btoa(oData.TaskId)
-                                }, true);
+                                this.getView().setBusy(false);
+                                this.isExistError();
+                                var oParam = this._routeParam.param;
+
+                                //todo : stage project
+                                var oNewTaskContext = this.getView().getModel().createEntry("/ZSNN_INTIME_TASK", {
+                                    properties: oData,
+                                    groupId: "changes",
+
+                                    success: function(oData) {
+                                        this.navTo("task", {
+                                            taskId: btoa(oData.TaskId)
+                                        }, true);
+                                    }.bind(this)
+                                });
+
+                                this.getView().unbindObject();
+                                this.getView().setBindingContext(oNewTaskContext);
+
+                                this.setStateProperty("/taskEditMode", true);
+                                this.setStateProperty("/taskContext", this.getView().getBindingContext());
+
+                            }.bind(this),
+
+                            error: function(oError) {
+                                this.getView().setBusy(false);
+                                this.showError(oError);
                             }.bind(this)
                         });
 
-                        this.getView().unbindObject();
-                        this.getView().setBindingContext(oNewTaskContext);
 
-                        this.setStateProperty("/taskContext", this.getView().getBindingContext());
 
                     } else {
                         this.setStateProperty("/taskCreated", false);
