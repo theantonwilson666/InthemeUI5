@@ -53,7 +53,7 @@
 
             <smartForm:GroupElement>
                 <smartField:SmartField value="{Status}"
-                    editable="true"
+                    editable="false"
                     textInEditModeSource="ValueList"/>
             </smartForm:GroupElement>
 
