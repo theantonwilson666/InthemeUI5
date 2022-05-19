@@ -41,25 +41,44 @@ sap.ui.define([
                             return;
                         }
 
-                        //todo : stage project
-                        var oNewSubTaskContext = this.getView().getModel().createEntry(`/ZSNN_INTIME_SUBTASK`, {
-                            properties: {
-                                Name: 'Новая подзадача',
-                                TaskId: this._routeSubTaskParam.taskId
+                        this.getView().setBusy(true);
+
+                        this.getModel().callFunction("/GetCreatedSubTask", {
+                            method: "POST",
+                            urlParameters: {
+                                TaskID: this._routeSubTaskParam.taskId
                             },
-                            groupId: "changes",
+
                             success: function (oData) {
-                                this.navTo("subtask", {
-                                    taskId: btoa(oData.TaskId),
-                                    subTaskId: btoa(oData.SubtaskId)
-                                }, true);
+                                this.getView().setBusy(false);
+                                this.isExistError();
+
+                                var oNewSubTaskContext = this.getView().getModel().createEntry(`/ZSNN_INTIME_SUBTASK`, {
+                                    properties: oData,
+                                    groupId: "changes",
+                                    success: function (oData) {
+                                        this.navTo("subtask", {
+                                            taskId: btoa(oData.TaskId),
+                                            subTaskId: btoa(oData.SubtaskId)
+                                        }, true);
+                                    }.bind(this)
+                                });
+
+                                this.getView().unbindObject();
+                                this.getView().setBindingContext(oNewSubTaskContext);
+                                this.setStateProperty("/subTaskEditMode", true);
+
+                            }.bind(this),
+
+                            error: function (oError) {
+                                this.getView().setBusy(false);
+                                this.showError(oError);
                             }.bind(this)
                         });
 
 
-                        this.getView().unbindObject();
-                        this.getView().setBindingContext(oNewSubTaskContext);
-                        this.setStateProperty("/subTaskEditMode", true);
+
+
 
 
                     } else {
@@ -73,7 +92,7 @@ sap.ui.define([
                             },
                             events: {
 
-                                dataReceived: function(oData) {
+                                dataReceived: function (oData) {
                                     var oTaskModel = new JSONModel(oData.getParameter("data").to_Task);
                                     this.getView().setModel(oTaskModel, "taskData");
                                     this.setFaviconIconByPartner(oData.getParameter("data").to_Task.PartnerID);
@@ -168,7 +187,7 @@ sap.ui.define([
 
             },
 
-            afterCloseDialog: function(oEvent) {
+            afterCloseDialog: function (oEvent) {
                 debugger;
             },
 
@@ -235,13 +254,13 @@ sap.ui.define([
             onTimeSheetCreateButtonPress: function (oEvent) {
 
                 debugger;
-                
+
                 this.loadDialog
                     .call(this, {
                         sDialogName: "_createTimeSheetDialog",
                         sViewName: "intime.zissues_workspace.view.SubTaskSection.CreateTimeSheet",
-                        sPath : oEvent.getSource().getBindingContext().getPath()
-                    
+                        sPath: oEvent.getSource().getBindingContext().getPath()
+
                     })
                     .then(
                         function (oDialog) {
