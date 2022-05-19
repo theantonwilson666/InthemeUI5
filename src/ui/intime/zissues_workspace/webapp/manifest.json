@@ -109,19 +109,20 @@
                     },
                     "currentProjectStage": null,
                     "taskEditMode": false,
-                    "subTaskCreateMode" : false,
-                    "subTaskEditMode" : false,
-                    "taskContext" : null,
-                    "taskCreated" : false
+                    "subTaskCreateMode": false,
+                    "subTaskEditMode": false,
+                    "taskContext": null,
+                    "taskCreated": false,
+                    "filterBlocked": false,
+                    "EntityNavigation": [],
+                    "ProjectData": null
                 }
             }
         },
         "resources": {
-            "css": [
-                {
-                    "uri": "css/style.css"
-                }
-            ]
+            "css": [{
+                "uri": "css/style.css"
+            }]
         },
         "routing": {
             "config": {
@@ -135,8 +136,7 @@
                 "controlAggregation": "pages",
                 "transition": "slide"
             },
-            "routes": [
-                {
+            "routes": [{
                     "pattern": "",
                     "name": "mainpage",
                     "target": "mainpage"

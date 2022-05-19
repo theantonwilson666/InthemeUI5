@@ -21,6 +21,7 @@
                 <!-- <Text text="{PartnerName}"/> -->
             <smartField:SmartField value="{PartnerName}"
             entitySet="ZSNN_INTIME_TASK"
+            editable="false"
             id="PartnerName">
             </smartField:SmartField>
             </smartForm:GroupElement>
@@ -29,6 +30,7 @@
                 <!-- <Text text="{ProjectName}"/> -->
             <smartField:SmartField value="{ProjectName}"
             entitySet="ZSNN_INTIME_TASK"
+            editable="false"
             id="ProjectName">
             </smartField:SmartField>
             </smartForm:GroupElement>

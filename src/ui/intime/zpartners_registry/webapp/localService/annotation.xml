@@ -404,6 +404,14 @@
                 <PropertyPath>ProjectTypeText</PropertyPath>
                 <PropertyPath>StageType</PropertyPath>
                 <PropertyPath>StageTypeText</PropertyPath>
+                <PropertyPath>ProjectName</PropertyPath>
+                <PropertyPath>ProjectStageName</PropertyPath>
+                <PropertyPath>PartnerName</PropertyPath>
+                <PropertyPath>PartnerImageURL</PropertyPath>
+                <PropertyPath>PartnerID</PropertyPath>
+                <PropertyPath>ProjectName</PropertyPath>
+                <PropertyPath>ProjectStageName</PropertyPath>
+
               </Collection>
             </PropertyValue>
           </Record>
