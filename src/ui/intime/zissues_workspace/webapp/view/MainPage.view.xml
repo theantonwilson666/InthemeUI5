@@ -11,7 +11,7 @@
   xmlns:dnd-grid="sap.f.dnd">
 
 
-  <f:DynamicPage id="dynamicPageId">
+  <f:DynamicPage id="dynamicPageId" headerExpanded="false">
     <f:title>
       <f:DynamicPageTitle>
         <f:heading>
