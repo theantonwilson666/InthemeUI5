@@ -127,20 +127,24 @@
 
 			<Annotations Target="ZINT_UI_USERS_SRV.ZSNN_INTIME_USERType">
 
-			<Annotation Term="UI.QuickViewFacets">
+				<Annotation Term="UI.QuickViewFacets">
 					<Collection>
 						<Record Type="UI.ReferenceFacet">
-							<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#dataQ" />
+							<PropertyValue Property="Target"
+								AnnotationPath="@UI.FieldGroup#dataQ" />
 						</Record>
 					</Collection>
 				</Annotation>
-				<Annotation Term="UI.FieldGroup" Qualifier="dataQ">
+				<Annotation Term="UI.FieldGroup"
+					Qualifier="dataQ">
 					<Record>
 						<PropertyValue Property="Data">
 							<Collection>
 								<Record Type="UI.DataField">
-									<PropertyValue Property="Label" String="Полное имя" />
-									<PropertyValue Property="Value" Path="FullName" />
+									<PropertyValue Property="Label"
+										String="Полное имя" />
+									<PropertyValue Property="Value"
+										Path="FullName" />
 								</Record>
 							</Collection>
 						</PropertyValue>
@@ -434,6 +438,36 @@
 					</Record>
 				</Annotation>
 			</Annotations>
+
+
+
+			<Annotations Target="ZINT_UI_USERS_SRV.ZSNN_INTIME_USERType/JiraID">
+				<Annotation Term="Common.ValueListWithFixedValues"
+					Bool="false" />
+				<Annotation Term="Common.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath"
+							String="ZBNN_JIRA_USER_SH" />
+						<PropertyValue Property="SearchSupported"
+							Bool="true" />
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty"
+										PropertyPath="JiraID" />
+									<PropertyValue Property="ValueListProperty"
+										String="JiraID" />
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty"
+										String="Name"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+
 
 
 			<Annotations Target="ZINT_UI_USERS_SRV.ZSNN_INTIME_USERType/PositionID">
