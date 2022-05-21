@@ -23,7 +23,10 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
 
         if (this.getView().getId() === this._UserObjectPageId) {
             this.uiExtension();
+            this.uiExtensionPhoto();
         }
+
+
 
     },
 
@@ -32,12 +35,13 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
             this.initDateIntervalSelection();
             this.updateVizFrame();
         }.bind(this))
+        // this.addPhotoLoader();
     },
 
     initDateIntervalSelection: function () {
         var oDay = this.getDayParam(new Date());
         var oId = this.byId("_TimeSheetIntervalSelection-DateRangeSelection");
-        if(oId) {
+        if (oId) {
             oId.setDateValue(new Date(oDay.year, oDay.month, oDay.day - 7));
             oId.setSecondDateValue(new Date());
         }
@@ -181,7 +185,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
                 debugger;
 
                 var oList = new sap.m.List({
-                    includeItemInSelection : true
+                    includeItemInSelection: true
                 });
 
                 oList.setModel(this.getView().getModel());
@@ -195,7 +199,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
                         // counter : {
                         //      path : "TimeSpent",
                         //      formatter : function (sTimeSpent){
-                                 
+
                         //         debugger;
 
                         //         if (sTimeSpent){
@@ -203,7 +207,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
                         //         }
                         //      }
                         //     },
-                        info : "{TimeSpent} {TimeSpentUText}"
+                        info: "{TimeSpent} {TimeSpentUText}"
                     }),
                     filters: [
                         new sap.ui.model.Filter("DateSheet", "EQ", this.parseDate(data.data.val[0].value))
@@ -235,5 +239,87 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
 
     onChangeDateRangeSelection: function (oEvent) {
         this.updateVizFrame();
+    },
+
+    uiExtensionPhoto: function () {
+        this.addPhotoLoader();
+    },
+    addPhotoLoader: function () {
+        var oObjectPageHeader = this.byId("objectPageHeader");
+        var oUpload = new sap.ui.unified.FileUploader({
+            buttonOnly: true,
+            id: "_UserPhoto-FileUploader",
+            style: "Emphasized",
+            name: "myFileUpload",
+            buttonText: 'Загрузить фотографию',
+            fileType: "jpg,png,jpeg,ico",
+            change: this.onUploadFile.bind(this)
+        });
+
+        oObjectPageHeader.insertAction(oUpload, 0);;
+    },
+
+    onUploadFile: function (oEvent) {
+        this.getFileContent(oEvent);
+    },
+
+    getFileContent: function (oEvent) {
+        return new Promise(
+            function (res, rej) {
+                var oFile = oEvent.getSource().getFocusDomRef().files[0];
+                if (oFile) {
+                    var oReader = new FileReader();
+                    oReader.onload = function (e) {
+                        var vContent = e.currentTarget.result.replace(
+                            "data:" + oFile.type + ";base64,",
+                            ""
+                        );
+
+                        debugger;
+
+                        this.getView().setBusy(true);
+
+                        var sSurl = "/sap/opu/odata/sap/ZINT_UI_USERS_SRV/";
+                        var oModal = new sap.ui.model.odata.v2.ODataModel(sSurl, {
+                            defaultBindingMode: "TwoWay"
+                        });
+                        oModal.attachMetadataLoaded(function () {
+
+                            oModal.createEntry("/UserPhotoSet", {
+                                properties: {
+                                    UserID: this.getView().getBindingContext().getObject().UserID,
+                                    Content: vContent,
+                                    FilePath: oFile.name
+                                },
+
+                                success: function (oData) {
+                                    this.getView().setBusy(false);
+                                    this.extensionAPI.refresh();
+                                    this.clearFileUploader();
+
+                                }.bind(this),
+
+                                error: function () {
+                                    this.getView().setBusy(false);
+                                    this.clearFileUploader();
+
+                                    debugger;
+
+                                }.bind(this)
+                            });
+                            oModal.submitChanges();
+                        }, this);
+                    }.bind(this);
+
+                    oReader.readAsDataURL(oFile);
+                }
+            }
+                .bind(this)
+        );
+    },
+
+    clearFileUploader: function () {
+        this.getView().getContent()[0].getHeaderTitle().getActions()[0].clear();
     }
+
 });

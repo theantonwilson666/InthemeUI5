@@ -202,6 +202,8 @@ sap.ui.define([
             onSaveProjectButtonPress: function(oEvent) {
 
                 debugger;
+                this.setStateProperty("/projectSelection", false);
+                this.setStateProperty("/stageSelection", false);
 
                 this.byId("projectPage").setBusy(true);
 
@@ -239,6 +241,7 @@ sap.ui.define([
 
             onAddNewProjectButtonPress: function(oEvent) {
 
+                debugger;
 
                 this.getModel().callFunction("/GetCreatedProject", {
                     method: "POST",
@@ -253,14 +256,13 @@ sap.ui.define([
                         var oNewEntryContext = this.getView().getModel().createEntry(this.getBindingPath() + "/to_Project", {
                             properties: oData,
                             groupId: "changes"
-                        });
+                        }
+                        );
 
                         this.setProjectSelection();
-                        this.byId("projectTab").setBindingContext(oNewEntryContext);
+                        this.byId("projectTab").getContent()[0].setBindingContext(oNewEntryContext);
                         this.setStateProperty("/editProjectMode", true);
                         this.byId("projectForm").focus();
-
-                        debugger;
 
 
                     }.bind(this),
