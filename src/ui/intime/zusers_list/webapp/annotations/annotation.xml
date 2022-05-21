@@ -160,6 +160,17 @@
 									<PropertyValue Property="Value"
 										Path="TelegramID"/>
 								</Record>
+
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value"
+										Path="DoorUserID"/>
+								</Record>
+
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value"
+										Path="User1C"/>
+								</Record>
+
 							</Collection>
 						</PropertyValue>
 						<PropertyValue Property="Label"
