@@ -41,6 +41,13 @@
             </smartField:configuration>
           </smartField:SmartField>
         </smartForm:GroupElement>
+
+         <smartForm:GroupElement>
+          <smartField:SmartField value="{StageNo}"
+                                 entitySet="ZSNN_INT_PROJECT">
+          </smartField:SmartField>
+        </smartForm:GroupElement>
+
         <!-- <smartForm:GroupElement>
           <smartField:SmartField value="{DocNum}"
                                  entitySet="ZSNN_INT_PROJECT" />

@@ -97,6 +97,12 @@
 									<PropertyValue Property="Value"
 										Path="OpenAssignedSubTask"/>
 								</Record>
+
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value"
+										Path="OverDueAssignedSubTask"/>
+								</Record>
+
 							</Collection>
 						</PropertyValue>
 						<PropertyValue Property="Label"
