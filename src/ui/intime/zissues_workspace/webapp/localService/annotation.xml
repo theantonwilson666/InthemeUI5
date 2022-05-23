@@ -83,6 +83,21 @@
         </Annotation>
       </Annotations>
 
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_TM_USERType/LastName">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_TM_USERType/FullName">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_TM_USERType/FirstName">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
       <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_SUBTASKType/EstimateTimeU">
         <Annotation Term="Common.ValueListWithFixedValues"
           Bool="true" />

@@ -64,7 +64,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
             title: `Списать время - ${oUser.Surname} ${oUser.Name}`,
             executorID: oUser.UserID,
             subTaskID: oItem.SubTaskID,
-            contentWidth: "50%"
+            contentWidth: "100%"
         });
 
         oDialog.open();
@@ -75,7 +75,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
         var oDialog = new TimeSheetDialog({
             title: `Списать время - ${oEvent.getSource().getBindingContext().getObject().Surname} ${oEvent.getSource().getBindingContext().getObject().Name}`,
             executorID: oEvent.getSource().getBindingContext().getObject().UserID,
-            contentWidth: "50%"
+            contentWidth: "100%"
         });
         oDialog.open();
     },
@@ -172,7 +172,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
                     title: `Списать время - ${oUserData.Surname} ${oUserData.Name}`,
                     executorID: oUserData.UserID,
                     dateSheet: this.parseDate(sSelectedDate),
-                    contentWidth: "50%"
+                    contentWidth: "100%"
                 });
                 oDialog.open();
 

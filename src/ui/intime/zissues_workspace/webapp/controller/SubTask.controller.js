@@ -219,11 +219,13 @@ sap.ui.define([
             onOkNewExecutorDialog: function (oEvent) {
                 this.onSaveSubTaskButtonPress();
                 oEvent.getSource().getParent().close();
+                this.onRemoveRowSelection();
 
             },
 
             onCancelNewExecutorDialog: function (oEvent) {
                 oEvent.getSource().getParent().close();
+                this.onRemoveRowSelection();
             },
 
             onDeleteSelection: function (oEvent) {
@@ -267,6 +269,11 @@ sap.ui.define([
                             oDialog.open();
                         }.bind(this)
                     );;
+            },
+
+            onRemoveRowSelection: function() {
+            var oFirstSelectedItem = this.byId("__xmlview0--_SubTaskExecutors-SmartTable").getTable().getSelectedItems()[0];
+            this.byId("__xmlview0--_SubTaskExecutors-SmartTable").getTable().setSelectedItem(oFirstSelectedItem, false);
             }
         });
     });
