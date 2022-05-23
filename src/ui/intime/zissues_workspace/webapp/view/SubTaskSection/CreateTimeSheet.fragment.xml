@@ -8,7 +8,7 @@
     xmlns:m="sap.m">
 
 
-    <timeSheet:TimeSheetDialog title="Списать время - {ExecutorName}" executorID="{Executor}" subTaskID="{SubTaskID}" contentWidth="50%"/>
+    <timeSheet:TimeSheetDialog title="Списать время - {ExecutorName}" executorID="{Executor}" subTaskID="{SubTaskID}" contentWidth="100%"/>
 
     <!-- <Dialog id="_CreateTimeSheet-Dialog" title="Списать время - {ExecutorName}">
         <content>
