@@ -119,6 +119,9 @@ sap.ui.define([
                     this.savePartnerChanges();
                 }
 
+            debugger;
+            oEvent.getSource().getParent().close();
+
             },
 
 
