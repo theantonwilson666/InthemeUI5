@@ -1,83 +1,100 @@
 <core:FragmentDefinition xmlns="sap.m"
-                         xmlns:core="sap.ui.core"
-                         xmlns:smartForm="sap.ui.comp.smartform"
-                         xmlns:smartField="sap.ui.comp.smartfield">
+  xmlns:core="sap.ui.core"
+  xmlns:smartForm="sap.ui.comp.smartform"
+  xmlns:smartField="sap.ui.comp.smartfield">
   <VBox>
     <smartForm:SmartForm id="stageForm"
-                         title="{Name}"
-                         checkButton="true"
-                         editTogglable="true"
-                         entityType="ZSNN_INT_PROJECTType"
-                         editable="{state>/editProjectMode}"
-                         visible="{state&gt;/stageSelection}">
+      title="{Name}"
+      checkButton="true"
+      editTogglable="true"
+      entityType="ZSNN_INT_PROJECTType"
+      editable="{state>/editProjectMode}"
+      visible="{state&gt;/stageSelection}">
       <smartForm:layout>
         <smartForm:ColumnLayout columnsM="2"
-                                columnsL="2"
-                                columnsXL="2" />
+          columnsL="2"
+          columnsXL="2" />
       </smartForm:layout>
       <smartForm:Group label="Основные данные">
         <smartForm:GroupElement>
           <smartField:SmartField value="{Name}"
-                                 entitySet="ZSNN_INT_PROJECT" />
+            entitySet="ZSNN_INT_PROJECT" />
         </smartForm:GroupElement>
         <smartForm:GroupElement>
           <smartField:SmartField value="{StageStatus}"
-                                 editable="false"
-                                 entitySet="ZSNN_INT_PROJECT"
-                                 textInEditModeSource="ValueList">
+            editable="false"
+            entitySet="ZSNN_INT_PROJECT"
+            textInEditModeSource="ValueList">
             <smartField:configuration>
               <smartField:Configuration preventInitialDataFetchInValueHelpDialog="false"
-                                        displayBehaviour="descriptionAndId" />
+                displayBehaviour="descriptionAndId" />
             </smartField:configuration>
           </smartField:SmartField>
         </smartForm:GroupElement>
         <smartForm:GroupElement>
           <smartField:SmartField value="{StageType}"
-                                 entitySet="ZSNN_INT_PROJECT"
-                                 textInEditModeSource="ValueList">
+            entitySet="ZSNN_INT_PROJECT"
+            textInEditModeSource="ValueList">
             <smartField:configuration>
               <smartField:Configuration preventInitialDataFetchInValueHelpDialog="false"
-                                        displayBehaviour="descriptionAndId" />
+                displayBehaviour="descriptionAndId" />
             </smartField:configuration>
           </smartField:SmartField>
         </smartForm:GroupElement>
 
-         <smartForm:GroupElement>
+        <smartForm:GroupElement>
           <smartField:SmartField value="{StageNo}"
-                                 entitySet="ZSNN_INT_PROJECT">
+            entitySet="ZSNN_INT_PROJECT">
           </smartField:SmartField>
         </smartForm:GroupElement>
 
         <!-- <smartForm:GroupElement>
-          <smartField:SmartField value="{DocNum}"
-                                 entitySet="ZSNN_INT_PROJECT" />
+          <smartField:SmartField value="{DocNum}" entitySet="ZSNN_INT_PROJECT" />
         </smartForm:GroupElement> -->
       </smartForm:Group>
       <smartForm:Group label="Сроки">
         <smartForm:GroupElement>
           <smartField:SmartField value="{StartDate}"
-                                 entitySet="ZSNN_INT_PROJECT" />
+            entitySet="ZSNN_INT_PROJECT" />
         </smartForm:GroupElement>
         <smartForm:GroupElement>
           <smartField:SmartField value="{EndDate}"
-                                 entitySet="ZSNN_INT_PROJECT" />
+            entitySet="ZSNN_INT_PROJECT" />
         </smartForm:GroupElement>
         <!-- <smartForm:GroupElement>
-          <smartField:SmartField value="{DocNumDate}"
-                                 entitySet="ZSNN_INT_PROJECT" />
+          <smartField:SmartField value="{DocNumDate}" entitySet="ZSNN_INT_PROJECT" />
         </smartForm:GroupElement> -->
 
       </smartForm:Group>
-            <smartForm:Group label="Заявка">
-      <smartForm:GroupElement>
+      <smartForm:Group label="Заявка">
+        <smartForm:GroupElement>
           <smartField:SmartField value="{DocNum}"
-                                 entitySet="ZSNN_INT_PROJECT" />
-      </smartForm:GroupElement>
-      <smartForm:GroupElement>
+            entitySet="ZSNN_INT_PROJECT" />
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
           <smartField:SmartField value="{DocNumDate}"
-                                 entitySet="ZSNN_INT_PROJECT" />
-      </smartForm:GroupElement>
+            entitySet="ZSNN_INT_PROJECT" />
+        </smartForm:GroupElement>
       </smartForm:Group>
+
+      <smartForm:Group label="Jira">
+        <smartForm:GroupElement>
+          <smartField:SmartField value="{JiraProjectID}"
+            textInEditModeSource="ValueList"
+            entitySet="ZSNN_INT_PROJECT">
+            <smartField:configuration>
+              <smartField:Configuration preventInitialDataFetchInValueHelpDialog="false"
+                displayBehaviour="descriptionAndId" />
+            </smartField:configuration>
+          </smartField:SmartField>
+
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+          <smartField:SmartField value="{JiraProjectStage}"
+            entitySet="ZSNN_INT_PROJECT" />
+        </smartForm:GroupElement>
+      </smartForm:Group>
+
     </smartForm:SmartForm>
     <Text text="" />
     <Text text="" />
