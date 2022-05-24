@@ -1,4 +1,8 @@
 
+$.sap.require("jira/lib/MessageDialog");
+var MessageDialog = sap.ui.require(
+  "jira/lib/MessageDialog"
+);
 
 sap.ui.controller("intime.zusers_list.ext.controller.ObjectPageExt", {
 
@@ -6,7 +10,7 @@ sap.ui.controller("intime.zusers_list.ext.controller.ObjectPageExt", {
 
   onInit: function () {
 
-    
+
     if (this.getView().getId() === this._UserObjectPageId) {
       this.uiExtension();
     }
@@ -15,6 +19,19 @@ sap.ui.controller("intime.zusers_list.ext.controller.ObjectPageExt", {
 
   uiExtension: function () {
     this.addPhotoLoader();
+
+    this.extensionAPI.attachPageDataLoaded(this.pageDataLoaded.bind(this))
+  },
+
+  pageDataLoaded: function () {
+    var oObject = this.getView().getBindingContext().getObject();
+
+
+    if (oObject.JiraID !== "") {
+      this.byId("action::createJiraUser").setVisible(false);
+    } else {
+      this.byId("action::createJiraUser").setVisible(true);
+    }
   },
 
   addPhotoLoader: function () {
@@ -88,6 +105,60 @@ sap.ui.controller("intime.zusers_list.ext.controller.ObjectPageExt", {
 
   clearFileUploader: function () {
     this.getView().getContent()[0].getHeaderTitle().getActions()[0].clear();
+  },
+
+  onCreateJiraUserButtonPress: function () {
+    this.getView().setBusy(true);
+
+    this.getView().getModel().callFunction("/CreateJiraUser", {
+      method: "POST",
+      urlParameters: {
+        UserID: this.getView().getBindingContext().getObject().UserID
+      },
+
+      success: function () {
+        this.getView().setBusy(false);
+        this.extensionAPI.refresh();
+        
+      }.bind(this),
+
+      error: function () {
+        this.getView().setBusy(false);
+      }.bind(this)
+
+    });
+
+    //   this.getModel().callFunction("/GetCreatedProject", {
+    //     method: "POST",
+    //     urlParameters: {
+    //         PartnerID: this.getView().getBindingContext().getObject().PartnerId
+    //     },
+
+    //     success: function(oData) {
+
+    //         this.isExistError();
+
+    //         var oNewEntryContext = this.getView().getModel().createEntry(this.getBindingPath() + "/to_Project", {
+    //             properties: oData,
+    //             groupId: "changes"
+    //         }
+    //         );
+
+    //         this.setProjectSelection();
+    //         this.byId("projectTab").getContent()[0].setBindingContext(oNewEntryContext);
+    //         this.setStateProperty("/editProjectMode", true);
+    //         this.byId("projectForm").focus();
+
+
+    //     }.bind(this),
+
+    //     error: function(oError) {
+    //         debugger;
+    //         this.showError(oError);
+    //     }.bind(this)
+    // });
+
+
   }
 
 });

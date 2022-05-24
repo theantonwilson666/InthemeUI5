@@ -136,7 +136,17 @@
             "controllerName": "intime.zusers_list.ext.controller.ObjectPageExt",
             "sap.ui.generic.app": {
               "ZSNN_INTIME_USER": {
-                "EntitySet": "ZSNN_INTIME_USER"
+                "EntitySet": "ZSNN_INTIME_USER",
+                "Header" : {
+                  "Actions": {
+                    "createJiraUser": {
+                      "id" : "createJiraUser",
+                      "text" : "Создать Jira пользователя",
+                      "press" : "onCreateJiraUserButtonPress",
+                      "determining" : false
+                    }
+                  }
+                }
               }
             }
           }
