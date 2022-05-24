@@ -80,6 +80,13 @@
 								Path="WorkDescr" />
 						</Record>
 
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="TaskOverDueFlag" />
+							<!-- <Annotation Term="UI.Criticality"
+							Path="TaskOverDueCriticality"/> -->
+						</Record>
+
 
 
 					</Collection>

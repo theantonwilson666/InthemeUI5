@@ -272,8 +272,8 @@ sap.ui.define([
             },
 
             onRemoveRowSelection: function() {
-            var oFirstSelectedItem = this.byId("__xmlview0--_SubTaskExecutors-SmartTable").getTable().getSelectedItems()[0];
-            this.byId("__xmlview0--_SubTaskExecutors-SmartTable").getTable().setSelectedItem(oFirstSelectedItem, false);
+            var oFirstSelectedItem = this.byId("_SubTaskExecutors-SmartTable").getTable().getSelectedItems()[0];
+            this.byId("_SubTaskExecutors-SmartTable").getTable().setSelectedItem(oFirstSelectedItem, false);
             }
         });
     });

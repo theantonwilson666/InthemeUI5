@@ -118,8 +118,6 @@ sap.ui.define([
                 } else {
                     this.savePartnerChanges();
                 }
-
-            debugger;
             oEvent.getSource().getParent().close();
 
             },
