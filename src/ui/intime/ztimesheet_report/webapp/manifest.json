@@ -1,0 +1,188 @@
+{
+  "_version": "1.32.0",
+  "sap.app": {
+    "id": "intime.ts_report",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "crossNavigation": {
+      "inbounds": {},
+      "outbounds": {}
+    },
+    "tags": {
+      "keywords": []
+    },
+    "resources": "resources.json",
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata/sap/ZSNQ_INTIME_TIMESHEET_CDS/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "annotation"
+          ],
+          "localUri": "localService/metadata.xml"
+        }
+      },
+      "annotation": {
+        "type": "ODataAnnotation",
+        "uri": "annotations/annotation.xml",
+        "settings": {
+          "localUri": "annotations/annotation.xml"
+        }
+      }
+    },
+    "offline": false,
+    "sourceTemplate": {
+      "id": "ui5template.smartTemplate",
+      "version": "1.40.12"
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    },
+    "supportedThemes": [
+      "sap_hcb",
+      "sap_belize",
+      "sap_fiori_3"
+    ]
+  },
+  "sap.ui5": {
+    "resources": {
+      "js": [],
+      "css": [
+        {
+          "uri": "/css/style.css"
+        }
+      ]
+    },
+    "dependencies": {
+      "minUI5Version": "1.65.0",
+      "libs": {
+        "sap.ui.core": {
+          "lazy": false
+        },
+        "sap.ui.generic.app": {
+          "lazy": false
+        },
+        "sap.suite.ui.generic.template": {
+          "lazy": false
+        }
+      },
+      "components": {}
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      },
+      "i18n|sap.suite.ui.generic.template.ListReport|ZSNQ_INTIME_TIMESHEET": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/ListReport/ZSNQ_INTIME_TIMESHEET/i18n.properties"
+      },
+      "i18n|sap.suite.ui.generic.template.ObjectPage|ZSNQ_INTIME_TIMESHEET": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/ObjectPage/ZSNQ_INTIME_TIMESHEET/i18n.properties"
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "useBatch": true,
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "refreshAfterChange": false
+        }
+      }
+    },
+    "extends": {
+      "extensions": {
+        "sap.ui.controllerExtensions": {
+          "sap.suite.ui.generic.template.AnalyticalListPage.view.AnalyticalListPage": {
+            "controllerName": "intime.ts_report.ext.controller.ListReportExt",
+            "sap.ui.generic.app": {
+              "ZSNQ_INTIME_TIMESHEET": {
+                "EntitySet": "ZSNQ_INTIME_TIMESHEET"
+              }
+            }
+          },
+          "sap.suite.ui.generic.template.ObjectPage.view.Details": {
+            "controllerName": "intime.ts_report.ext.controller.ObjectPageExt",
+            "sap.ui.generic.app": {
+              "ZSNQ_INTIME_TIMESHEET": {
+                "EntitySet": "ZSNQ_INTIME_TIMESHEET"
+              }
+            }
+          }
+        }
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    }
+  },
+  "sap.ui.generic.app": {
+    "_version": "1.3.0",
+    "settings": {
+      "forceGlobalRefresh": false,
+      "objectPageHeaderType": "Static",
+      "showDraftToggle": false
+    },
+    "pages": [
+      {
+        "entitySet": "ZSNQ_INTIME_TIMESHEET",
+        "component": {
+          "name": "sap.suite.ui.generic.template.AnalyticalListPage",
+          "list": true,
+          "settings": {
+            "tableSettings": {
+              "type": "AnalyticalTable",
+              "multiSelect": false,
+              "selectAll": false
+            },
+            "chartPresentationQualifier": "DefaultPresentationVariant",
+            "qualifier": "DefaultPresentationVariant",
+            "condensedTableLayout": true,
+            "smartVariantManagement": true,
+            "defaultContentView": "charttable",
+            "defaultFilterMode": "compact",
+            "showGoButtonOnFilterBar": true,
+            "contentTitle": "TimeSheet",
+            "filterDefaultsFromSelectionVariant" : false
+          }
+        }
+      }
+    ]
+  },
+  "sap.platform.abap": {
+    "uri": ""
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  },
+  "sap.platform.hcp": {
+    "uri": ""
+  }
+}
