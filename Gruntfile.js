@@ -106,7 +106,7 @@ module.exports = function(grunt) {
 
             {
                 package: "ZINTIME",
-                transportno: "TMDK922445",
+                transportno: "TMDK922768",
                 project: "intime",
                 apps: {
                     zissues_workspace: {
@@ -141,7 +141,7 @@ module.exports = function(grunt) {
             zjiralib: {
                 package: "ZJIRA",
                 bspContainer: "ZJIRALIB",
-                transportno: "TMDK922445",
+                transportno: "TMDK922768",
                 bspDescription: "JIRA LIB FOR UI5 APPLICATION",
             },
         },
