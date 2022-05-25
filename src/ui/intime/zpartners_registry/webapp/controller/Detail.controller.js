@@ -256,8 +256,7 @@ sap.ui.define([
                         var oNewEntryContext = this.getView().getModel().createEntry(this.getBindingPath() + "/to_Project", {
                             properties: oData,
                             groupId: "changes"
-                        }
-                        );
+                        });
 
                         this.setProjectSelection();
                         this.byId("projectTab").getContent()[0].setBindingContext(oNewEntryContext);
@@ -329,8 +328,35 @@ sap.ui.define([
                 window.open(sLinkForWinow, true);
             },
 
-            onCreateJiraProjectButtonPress: function(){
+            onCreateJiraProjectButtonPress: function(oEvent) {
+
+                this.byId("stageForm").setBusy(true);
+
                 debugger;
+
+                this.getModel().callFunction("/CreateJiraProject", {
+                    method: "POST",
+                    urlParameters: {
+                        JiraStage: oEvent.getSource().getBindingContext().getObject().JiraProjectStage,
+                        StageID: oEvent.getSource().getBindingContext().getObject().ProjectStageID
+                    },
+
+                    success: function(oData) {
+                        this.byId("stageForm").setBusy(false);
+                        this.isExistError();
+
+                        this.byId("stageForm").updateBindings(true);
+
+
+                    }.bind(this),
+
+                    error: function(oError) {
+                        this.byId("stageForm").setBusy(false);
+                        this.showError(oError);
+                        debugger;
+
+                    }.bind(this)
+                });;
             }
         });
     });

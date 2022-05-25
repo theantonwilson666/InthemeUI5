@@ -26,6 +26,7 @@
 
 			<Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType">
 				<Annotation Term="UI.LineItem">
+					<Annotation Term="UI.Criticality" Path="TaskOverDueCriticality" />
 					<Collection>
 
 						<Record Type="UI.DataField">
@@ -83,8 +84,6 @@
 						<Record Type="UI.DataField">
 							<PropertyValue Property="Value"
 								Path="TaskOverDueFlag" />
-							<!-- <Annotation Term="UI.Criticality"
-							Path="TaskOverDueCriticality"/> -->
 						</Record>
 
 
