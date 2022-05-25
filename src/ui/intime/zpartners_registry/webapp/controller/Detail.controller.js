@@ -327,6 +327,10 @@ sap.ui.define([
                     }
                 });
                 window.open(sLinkForWinow, true);
+            },
+
+            onCreateJiraProjectButtonPress: function(){
+                debugger;
             }
         });
     });

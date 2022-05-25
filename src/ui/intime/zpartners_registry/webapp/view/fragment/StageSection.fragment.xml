@@ -88,6 +88,7 @@
             </smartField:configuration>
           </smartField:SmartField>
 
+          <Button width="30%" icon="sap-icon://add" visible="{state>/editProjectMode}" press="onCreateJiraProjectButtonPress"/>
         </smartForm:GroupElement>
         <smartForm:GroupElement>
           <smartField:SmartField value="{JiraProjectStage}"
