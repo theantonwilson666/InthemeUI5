@@ -106,7 +106,7 @@ module.exports = function(grunt) {
 
             {
                 package: "ZINTIME",
-                transportno: "TMDK922768",
+                transportno: "TMDK922788",
                 project: "intime",
                 apps: {
                     zissues_workspace: {
@@ -131,7 +131,14 @@ module.exports = function(grunt) {
                         bspContainer: "ZWORK_SPACE",
                         bspDescription: "Intime : Личный кабинет",
                         prefix: "intime/zworker_workspace",
+                    },
+
+                    ztimesheet_report: {
+                        bspContainer: "ZTS_REPORT",
+                        bspDescription: "Intime : Отчет по списанию",
+                        prefix: "intime/ts_report",
                     }
+
                 },
             }
 
@@ -356,10 +363,12 @@ module.exports = function(grunt) {
 
     grunt.registerTask("deploy_plugin", ["nwabap_ui5uploader:upload_plugin"]);
 
+
     grunt.registerTask("build", [
         "clean",
         "initBuild",
         "openui5_preload",
         "copy",
     ]);
+
 };
