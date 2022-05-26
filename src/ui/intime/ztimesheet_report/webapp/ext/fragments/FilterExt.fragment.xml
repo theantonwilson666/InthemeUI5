@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
+    xmlns:core="sap.ui.core">
+    <!-- <smartfilterbar:ControlConfiguration id="_FilterDateSheet-ControlConfig" key="DateSheet" groupId="_BASIC" index="99" conditionType="{ module: 'sap.ui.comp.config.condition.DateRangeType'}">
+    </smartfilterbar:ControlConfiguration> -->
+
+    <smartfilterbar:ControlConfiguration key="DateSheet"
+        index="0"
+        visibleInAdvancedArea="true"
+        label="Дата"
+        mandatory="mandatory"
+        groupId="_BASIC">
+        <smartfilterbar:customControl>
+            <DateRangeSelection id="_DateSheet-Selection"
+                dateValue="{filter>/dateFirst}"
+                secondDateValue="{filter>/dateSecond}" />
+        </smartfilterbar:customControl>
+    </smartfilterbar:ControlConfiguration>
+
+</core:FragmentDefinition>

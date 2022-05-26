@@ -23,8 +23,971 @@
     <edmx:DataServices>
         <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm">
 
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/Executor">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
 
-            <Annotations Target="ZSNQ_INTIME_TIMESHEET_CDS.ZSNQ_INTIME_TIMESHEETType">
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType/Name">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType/DoorUserID">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType/User1C">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType/Surname">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType/BranchText">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType/PositionText">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType/ImageURL">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZBNN_INTIME_POSITIONType/PositionID">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZBNN_INTIME_POSITIONType/PositionText">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZBNN_INTIME_BRANCHType/BranchID">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZBNN_INTIME_BRANCHType/BranchText">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+
+
+
+
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType/TelephonNumber">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType/Email">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType/JiraID">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType/TelegramID">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/PartnerName">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/ProjectName">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INT_PROJECT_SHType/ProjectName">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INT_PROJECT_SHType/PartnerName">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/StageName">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/PartnerImageURL">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/StartDate">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/EndDate">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/EstimateTime">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/EstimateTimeUnit">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/WorkDescr">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/SubTaskName">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/SubTaskStatus">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/SubTaskStatusText">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/TaskName">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INT_PROJECT_STAGE_SHType/ProjectName">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INT_PROJECT_STAGE_SHType/PartnerName">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INT_PROJECT_STAGE_SHType/StageName">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZBNN_TASKNAME_SHType/TaskName">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZBNN_TASKNAME_SHType/PartnerName">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZBNN_TASKNAME_SHType/ProjectName">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZBNN_TASKNAME_SHType/StageName">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INT_PROJECT_SHType/PartnerId">
+                <Annotation Term="Common.ValueListWithFixedValues"
+                    Bool="true" />
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath"
+                            String="ZBNN_PARTNER_SH" />
+                        <PropertyValue Property="SearchSupported"
+                            Bool="true" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="PartnerId" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="PartnerId" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="PartnerName" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="PartnerName" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNQ_INTIME_TIMESHEETType/PartnerID">
+                <Annotation Term="Common.ValueListWithFixedValues"
+                    Bool="true" />
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath"
+                            String="ZBNN_PARTNER_SH" />
+                        <PropertyValue Property="SearchSupported"
+                            Bool="true" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="PartnerID" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="PartnerId" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="PartnerName" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="PartnerName" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNQ_INTIME_TIMESHEETType/ProjectID">
+                <Annotation Term="Common.ValueListWithFixedValues"
+                    Bool="false"/>
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath"
+                            String="ZSNN_INT_PROJECT_SH"/>
+                        <PropertyValue Property="SearchSupported"
+                            Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="ProjectName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="PartnerName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="PartnerID"/>
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="PartnerId"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="ProjectID"/>
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="ProjectID"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNQ_INTIME_TIMESHEETType/TaskID">
+                <Annotation Term="Common.ValueListWithFixedValues"
+                    Bool="false"/>
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath"
+                            String="ZBNN_TASKNAME_SH"/>
+                        <PropertyValue Property="SearchSupported"
+                            Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="TaskName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="PartnerName"/>
+                                </Record>
+
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="ProjectName"/>
+                                </Record>
+
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="StageName"/>
+                                </Record>
+
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="PartnerID"/>
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="PartnerID"/>
+                                </Record>
+
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="ProjectID"/>
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="ProjectID"/>
+                                </Record>
+
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="StageID"/>
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="StageID"/>
+                                </Record>
+
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="TaskID"/>
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="TaskID"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNQ_INTIME_TIMESHEETType/StageID">
+                <Annotation Term="Common.ValueListWithFixedValues"
+                    Bool="false"/>
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath"
+                            String="ZSNN_INT_PROJECT_STAGE_SH"/>
+                        <PropertyValue Property="SearchSupported"
+                            Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="StageName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="ProjectName"/>
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="ProjectName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="PartnerName"/>
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="PartnerName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="PartnerID"/>
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="PartnerId"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="ProjectID"/>
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="ProjectID"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="StageID"/>
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="StageID"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INT_PROJECT_STAGE_SHType/ProjectID">
+                <Annotation Term="Common.ValueListWithFixedValues"
+                    Bool="false"/>
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath"
+                            String="ZSNN_INT_PROJECT_SH"/>
+                        <PropertyValue Property="SearchSupported"
+                            Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="ProjectName"/>
+                                </Record>
+
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="PartnerName"/>
+                                </Record>
+
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="PartnerId"/>
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="PartnerId"/>
+                                </Record>
+
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="ProjectID"/>
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="ProjectID"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INT_PROJECT_STAGE_SHType/PartnerId">
+                <Annotation Term="Common.ValueListWithFixedValues"
+                    Bool="true" />
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath"
+                            String="ZBNN_PARTNER_SH" />
+                        <PropertyValue Property="SearchSupported"
+                            Bool="true" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="PartnerId" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="PartnerId" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="PartnerName" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="PartnerName" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNQ_INTIME_TIMESHEETType/Executor">
+
+
+
+                <Annotation Term="Common.ValueListWithFixedValues"
+                    Bool="false" />
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath"
+                            String="ZSNN_INTIME_USER" />
+                        <PropertyValue Property="SearchSupported"
+                            Bool="true" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="Executor" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="UserID" />
+                                </Record>
+
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="ExecutorName" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="FullName" />
+                                </Record>
+                                <!-- <Record Type="Common.ValueListParameterDisplayOnly">
+                    <PropertyValue Property="ValueListProperty" String="FullName"/>
+                  </Record> -->
+
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="BranchText"/>
+                                </Record>
+
+
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="PositionText"/>
+                                </Record>
+
+
+                            </Collection>
+                        </PropertyValue>
+
+                        <!-- <PropertyValue Property="SelectionVariantQualifier" String="test" /> -->
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INT_PROJECT_STAGE_SHType">
+                <Annotation Term="UI.FieldGroup"
+                    Qualifier="stage_search">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value"
+                                        Path="StageID"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value"
+                                        Path="ProjectID"/>
+                                </Record>
+
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value"
+                                        Path="PartnerId"/>
+                                </Record>
+
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Label"
+                            String="Поиск"/>
+                    </Record>
+                </Annotation>
+
+                <Annotation Term="UI.FilterFacets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target"
+                                AnnotationPath="@UI.FieldGroup#stage_search"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+
+            </Annotations>
+
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INT_PROJECT_SHType">
+                <Annotation Term="UI.FieldGroup"
+                    Qualifier="search">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value"
+                                        Path="ProjectID"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value"
+                                        Path="PartnerId"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Label"
+                            String="Поиск"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FilterFacets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target"
+                                AnnotationPath="@UI.FieldGroup#search"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZBNN_TASKNAME_SHType/PartnerID">
+                <Annotation Term="Common.ValueListWithFixedValues"
+                    Bool="true" />
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath"
+                            String="ZBNN_PARTNER_SH" />
+                        <PropertyValue Property="SearchSupported"
+                            Bool="true" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="PartnerID" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="PartnerId" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="PartnerName" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="PartnerName" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZBNN_TASKNAME_SHType/StageID">
+                <Annotation Term="Common.ValueListWithFixedValues"
+                    Bool="false"/>
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath"
+                            String="ZSNN_INT_PROJECT_STAGE_SH"/>
+                        <PropertyValue Property="SearchSupported"
+                            Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="StageName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="ProjectName"/>
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="ProjectName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="PartnerName"/>
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="PartnerName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="PartnerID"/>
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="PartnerId"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="ProjectID"/>
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="ProjectID"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="StageID"/>
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="StageID"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZBNN_TASKNAME_SHType/ProjectID">
+                <Annotation Term="Common.ValueListWithFixedValues"
+                    Bool="false"/>
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath"
+                            String="ZSNN_INT_PROJECT_SH"/>
+                        <PropertyValue Property="SearchSupported"
+                            Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="ProjectName"/>
+                                </Record>
+
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="PartnerName"/>
+                                </Record>
+
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="PartnerID"/>
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="PartnerId"/>
+                                </Record>
+
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="ProjectID"/>
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="ProjectID"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZBNN_TASKNAME_SHType">
+                <Annotation Term="UI.FieldGroup"
+                    Qualifier="task_search">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value"
+                                        Path="TaskID"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value"
+                                        Path="ProjectID"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value"
+                                        Path="PartnerId"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value"
+                                        Path="StageID"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Label"
+                            String="Поиск"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FilterFacets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target"
+                                AnnotationPath="@UI.FieldGroup#task_search"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+
+
+
+
+
+
+
+
+
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType/Branch">
+                <Annotation Term="Common.ValueListWithFixedValues"
+                    Bool="true" />
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath"
+                            String="ZBNN_INTIME_BRANCH" />
+                        <PropertyValue Property="SearchSupported"
+                            Bool="true" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="Branch" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="BranchID" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="BranchText" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="BranchText" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType/PositionID">
+
+                <Annotation Term="Common.ValueListWithFixedValues"
+                    Bool="true" />
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath"
+                            String="ZBNN_INTIME_POSITION" />
+                        <PropertyValue Property="SearchSupported"
+                            Bool="true" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="PositionID" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="PositionID" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="PositionText" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="PositionText" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType">
+
+                <Annotation Term="UI.FieldGroup"
+                    Qualifier="user">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value"
+                                        Path="UserID"/>
+                                </Record>
+
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value"
+                                        Path="FullName"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Label"
+                            String="Пользователь"/>
+                    </Record>
+                </Annotation>
+
+                <Annotation Term="UI.FieldGroup"
+                    Qualifier="position">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value"
+                                        Path="Branch"/>
+                                </Record>
+
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value"
+                                        Path="PositionID"/>
+                                </Record>
+
+
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Label"
+                            String="Должность"/>
+                    </Record>
+                </Annotation>
+
+
+                <Annotation Term="UI.FieldGroup"
+                    Qualifier="contact">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value"
+                                        Path="TelephonNumber"/>
+                                </Record>
+
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value"
+                                        Path="Email"/>
+                                </Record>
+
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Label"
+                            String="Контакты"/>
+                    </Record>
+                </Annotation>
+
+                <Annotation Term="UI.FieldGroup"
+                    Qualifier="extID">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value"
+                                        Path="JiraID"/>
+                                </Record>
+
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value"
+                                        Path="TelegramID"/>
+                                </Record>
+
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Label"
+                            String="Внешние ID"/>
+                    </Record>
+                </Annotation>
+
+
+
+
+                <Annotation Term="UI.FilterFacets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target"
+                                AnnotationPath="@UI.FieldGroup#user"/>
+                        </Record>
+
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target"
+                                AnnotationPath="@UI.FieldGroup#position"/>
+                        </Record>
+
+                        <!-- <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#contact"/>
+            </Record>
+
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#extID"/>
+            </Record> -->
+                    </Collection>
+                </Annotation>
+
+
+
+                <!-- <Annotation Term="UI.SelectionFields">
+          <Collection>
+            <PropertyPath>UserID</PropertyPath>
+            <PropertyPath>FullName</PropertyPath>
+          </Collection>
+        </Annotation> -->
+            </Annotations>
+
+
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNQ_INTIME_TIMESHEETType">
+
+                <Annotation Term="UI.SelectionPresentationVariant"
+                    Qualifier="DefaultVariant">
+                    <Record>
+                        <PropertyValue Property="Text"
+                            String="Test variant"/>
+                        <PropertyValue Property="SelectionVariant"
+                            Path="@UI.SelectionVariant#DefaultSelectionVariant"/>
+                        <PropertyValue Property="PresentationVariant"
+                            Path="@UI.PresentationVariant#DefaultPresentationVariant"/>
+                    </Record>
+                </Annotation>
 
                 <Annotation Term="UI.PresentationVariant"
                     Qualifier="DefaultPresentationVariant">
@@ -50,21 +1013,64 @@
                     </Record>
                 </Annotation>
 
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <!-- <PropertyPath>DateSheet</PropertyPath> -->
+
+                        <PropertyPath>PartnerID</PropertyPath>
+                        <PropertyPath>ProjectID</PropertyPath>
+                        <PropertyPath>StageID</PropertyPath>
+                        <PropertyPath>TaskID</PropertyPath>
+                        <PropertyPath>SubTaskID</PropertyPath>
+                        <PropertyPath>Executor</PropertyPath>
+
+                    </Collection>
+                </Annotation>
+
                 <Annotation Term="UI.LineItem"
                     Qualifier="Default">
                     <Collection>
+
+
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value"
-                                Path="PartnerID" />
+                                Path="Executor" />
                         </Record>
+
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value"
-                                Path="ProjectID" />
+                                Path="DateSheet" />
                         </Record>
+
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value"
                                 Path="TimeSpent" />
                         </Record>
+
+
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value"
+                                Path="SubTaskID" />
+                        </Record>
+
+
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value"
+                                Path="PartnerID" />
+                        </Record>
+                        
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value"
+                                Path="TaskID" />
+                        </Record>
+
+
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value"
+                                Path="ProjectID" />
+                        </Record>
+
+
                     </Collection>
                 </Annotation>
 
@@ -80,6 +1086,8 @@
                         <PropertyValue Property="Dimensions">
                             <Collection>
                                 <PropertyPath>PartnerID</PropertyPath>
+                                <PropertyPath>ProjectID</PropertyPath>
+                                <PropertyPath>StageID</PropertyPath>
                             </Collection>
                         </PropertyValue>
                         <PropertyValue Property="DimensionAttributes">
@@ -90,6 +1098,22 @@
                                     <PropertyValue Property="Role"
                                         EnumMember="UI.ChartDimensionRoleType/Category"/>
                                 </Record>
+
+                                <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension"
+                                        PropertyPath="ProjectID"/>
+                                    <PropertyValue Property="Role"
+                                        EnumMember="UI.ChartDimensionRoleType/Category"/>
+                                </Record>
+
+                                <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension"
+                                        PropertyPath="StageID"/>
+                                    <PropertyValue Property="Role"
+                                        EnumMember="UI.ChartDimensionRoleType/Category"/>
+                                </Record>
+
+
                             </Collection>
                         </PropertyValue>
                         <PropertyValue Property="Measures">

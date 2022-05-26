@@ -19,7 +19,7 @@
     "resources": "resources.json",
     "dataSources": {
       "mainService": {
-        "uri": "/sap/opu/odata/sap/ZSNQ_INTIME_TIMESHEET_CDS/",
+        "uri": "/sap/opu/odata/sap/ZINT_UI_TIMESHEET_REPORT_SRV/",
         "type": "OData",
         "settings": {
           "annotations": [
@@ -28,6 +28,7 @@
           "localUri": "localService/metadata.xml"
         }
       },
+
       "annotation": {
         "type": "ODataAnnotation",
         "uri": "annotations/annotation.xml",
@@ -134,6 +135,15 @@
               }
             }
           }
+        },
+        "sap.ui.viewExtensions": {
+          "sap.suite.ui.generic.template.AnalyticalListPage.view.AnalyticalListPage": {
+            "SmartFilterBarControlConfigurationExtension|ZSNQ_INTIME_TIMESHEET": {
+              "className": "sap.ui.core.Fragment",
+              "fragmentName": "intime.ts_report.ext.fragments.FilterExt",
+              "type": "XML"
+            }
+          }
         }
       }
     },
@@ -161,6 +171,7 @@
               "multiSelect": false,
               "selectAll": false
             },
+            
             "chartPresentationQualifier": "DefaultPresentationVariant",
             "qualifier": "DefaultPresentationVariant",
             "condensedTableLayout": true,
@@ -169,7 +180,7 @@
             "defaultFilterMode": "compact",
             "showGoButtonOnFilterBar": true,
             "contentTitle": "TimeSheet",
-            "filterDefaultsFromSelectionVariant" : false
+            "filterDefaultsFromSelectionVariant": false
           }
         }
       }
