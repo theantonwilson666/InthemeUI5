@@ -645,6 +645,11 @@
                 Path="WorkDescr" />
             </Record>
 
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="TimeSpent" />
+            </Record>
+
 
           </Collection>
         </Annotation>
