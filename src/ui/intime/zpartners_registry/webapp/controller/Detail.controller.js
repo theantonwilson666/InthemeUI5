@@ -16,6 +16,10 @@ sap.ui.define([
                 this.getRouter()
                     .getRoute("project")
                     .attachPatternMatched(this._onRouteMatched, this);
+                this.byId("projectSmartTable").attachBeforeRebindTable(function(oEvent) {debugger;
+                    var oSorter = new sap.ui.model.Sorter("StageNo", true);
+                    oEvent.getParameter("bindingParams").sorter.push(oSorter);
+                });
 
 
             },

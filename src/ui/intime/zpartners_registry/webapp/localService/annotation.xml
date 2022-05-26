@@ -460,22 +460,6 @@
         </Annotation>
         <Annotation Term="UI.PresentationVariant">
           <Record Type="UI.PresentationVariantType">
-            <PropertyValue Property="SortOrder">
-              <Collection>
-                <Record Type="Common.SortOrderType">
-                  <PropertyValue Property="Property"
-                    PropertyPath="Name" />
-                  <!-- <PropertyValue Property="Acsending"
-                    Bool="false" /> -->
-                </Record>
-                <Record Type="Common.SortOrderType">
-                  <PropertyValue Property="Property"
-                    PropertyPath="StageNo" />
-                  <PropertyValue Property="Descending"
-                    Bool="true" />
-                </Record>
-              </Collection>
-            </PropertyValue>
             <PropertyValue Property="Visualizations">
                 <Collection>
                     <AnnotationPath>@UI.LineItem</AnnotationPath>

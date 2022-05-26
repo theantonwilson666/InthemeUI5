@@ -81,10 +81,10 @@
 								Path="WorkDescr" />
 						</Record>
 
-						<!-- <Record Type="UI.DataField">
+						<Record Type="UI.DataField">
 							<PropertyValue Property="Value"
-								Path="TaskOverDueFlag" />
-						</Record> -->
+								Path="TimeSpent" />
+						</Record> 
 
 
 
