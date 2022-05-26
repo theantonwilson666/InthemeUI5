@@ -459,7 +459,28 @@
           </Collection>
         </Annotation>
         <Annotation Term="UI.PresentationVariant">
-          <Record>
+          <Record Type="UI.PresentationVariantType">
+            <PropertyValue Property="SortOrder">
+              <Collection>
+                <Record Type="Common.SortOrderType">
+                  <PropertyValue Property="Property"
+                    PropertyPath="Name" />
+                  <!-- <PropertyValue Property="Acsending"
+                    Bool="false" /> -->
+                </Record>
+                <Record Type="Common.SortOrderType">
+                  <PropertyValue Property="Property"
+                    PropertyPath="StageNo" />
+                  <PropertyValue Property="Descending"
+                    Bool="true" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="Visualizations">
+                <Collection>
+                    <AnnotationPath>@UI.LineItem</AnnotationPath>
+                </Collection>
+            </PropertyValue>
             <PropertyValue Property="RequestAtLeast">
               <Collection>
                 <PropertyPath>Name</PropertyPath>
@@ -480,7 +501,7 @@
                 <PropertyPath>PartnerID</PropertyPath>
                 <PropertyPath>ProjectName</PropertyPath>
                 <PropertyPath>ProjectStageName</PropertyPath>
-
+                <PropertyPath>StageNo</PropertyPath>
               </Collection>
             </PropertyValue>
           </Record>
