@@ -41,9 +41,9 @@ sap.ui.define([
                         this.getModel().callFunction("/GetCreatedTask", {
                             method: "POST",
                             urlParameters: {
-                                PartnerID: oProjectData.PartnerID,
-                                ProjectID: oProjectData.ProjectID, //this._selectedRowContext.getObject().ID,
-                                ProjectStageID: oProjectData.ProjectStageID
+                                PartnerID: oProjectData ? oProjectData.PartnerID : "",
+                                ProjectID: oProjectData ? oProjectData.ProjectID : "",  //this._selectedRowContext.getObject().ID,
+                                ProjectStageID: oProjectData ? oProjectData.ProjectStageID : ""
                             },
 
                             success: function(oData) {
