@@ -113,16 +113,31 @@ sap.ui.define([
                             this.savePartnerChanges(vContent);
 
                         } else {
-                            // Function Import
+                            debugger;
+                            this.getModel().callFunction("/GetChangedPartner", {
+                                method: "POST",
+                                urlParameters: {
+                                    PartnerID: this.getStateProperty('/editablePartner').getObject().PartnerId
+                                },
+                                success: function (oData) {
+                                    this.EditParnterDialog.setBusy(false).close();
+                                    debugger;
+                                }.bind(this),
+                                error: function (oError) {
+                                    this.EditParnterDialog.setBusy(false).close();
+                                    debugger;
+                                }.bind(this)
+                            })
+
                         }
 
-
-                    }.bind(this);
+                    }.bind(this)
 
                     oReader.readAsDataURL(oFile);
                 } else {
                     this.savePartnerChanges();
                 }
+
                 oEvent.getSource().getParent().close();
 
             },

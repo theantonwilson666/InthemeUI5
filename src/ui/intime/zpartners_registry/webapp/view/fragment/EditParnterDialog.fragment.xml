@@ -19,7 +19,7 @@
 
         </content>
         <beginButton>
-            <Button id="beginBtn" text="Сохранить" type="Emphasized" press=".onOkPartnerDialog"/>
+            <Button id="beginBtn" text="Сохранить" type="Emphasized" press="onOkPartnerDialog"/>
         </beginButton>
         <endButton>
             <Button id="endBtn" text="Отменить" press=".onCancelPartnerDialog"/>
