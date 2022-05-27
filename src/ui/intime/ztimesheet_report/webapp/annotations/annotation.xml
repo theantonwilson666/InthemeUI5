@@ -1085,19 +1085,19 @@
                             EnumMember="UI.ChartType/Column"/>
                         <PropertyValue Property="Dimensions">
                             <Collection>
-                                <PropertyPath>PartnerID</PropertyPath>
+                                <!-- <PropertyPath>PartnerID</PropertyPath> -->
                                 <PropertyPath>ProjectID</PropertyPath>
                                 <PropertyPath>StageID</PropertyPath>
                             </Collection>
                         </PropertyValue>
                         <PropertyValue Property="DimensionAttributes">
                             <Collection>
-                                <Record Type="UI.ChartDimensionAttributeType">
+                                <!-- <Record Type="UI.ChartDimensionAttributeType">
                                     <PropertyValue Property="Dimension"
                                         PropertyPath="PartnerID"/>
                                     <PropertyValue Property="Role"
                                         EnumMember="UI.ChartDimensionRoleType/Category"/>
-                                </Record>
+                                </Record> -->
 
                                 <Record Type="UI.ChartDimensionAttributeType">
                                     <PropertyValue Property="Dimension"

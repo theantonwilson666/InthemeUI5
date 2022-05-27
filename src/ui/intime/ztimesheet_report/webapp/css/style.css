@@ -6,3 +6,8 @@
     font-size: 0.975rem;
     line-height: 1.2rem;
 }
+
+/* .sapMHBox {
+    -webkit-box-orient: vertical;
+    flex-direction: column;
+} */

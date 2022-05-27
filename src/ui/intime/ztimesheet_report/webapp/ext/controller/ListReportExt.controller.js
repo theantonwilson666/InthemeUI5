@@ -1,9 +1,11 @@
 sap.ui.controller("intime.ts_report.ext.controller.ListReportExt", {
     onInit: function () {
-        // this.byId("template::SmartFilterBar").setUseDateRangeType(true)
-
-
         this.byId("_DateSheet-Selection").setModel(this._getFilterModel(), "filter");
+
+        this.byId("chart").removeStyleClass("sapMHBox");
+        this.byId("chart").addStyleClass("sapMVBox");
+        
+        this.byId("table").setUseExportToExcel(true);
 
     },
 
