@@ -131,6 +131,19 @@ sap.ui.define([
             return aMessages.length > 0;
         },
 
+        isExistError: function () {
+            var aMassages = sap.ui
+                .getCore()
+                .getMessageManager()
+                .getMessageModel()
+                .getProperty("/");
+            if (aMassages.length > 0) {
+                this.showCurrentState();
+                return true;
+            }
+            return false;
+        },
+
         _getTitle: function (sTitleArg) {
             var sTitle = oResourceBundle.getText("DEFAULT_MESSAGE_DIALOG_TITLE");
             if (sTitleArg) {

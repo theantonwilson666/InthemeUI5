@@ -266,14 +266,23 @@ sap.ui.define([
                     })
                     .then(
                         function (oDialog) {
+
                             oDialog.open();
+
+                            oDialog.timeSheetSaveResult.then(function (oSuccess) {
+                                this.isExistError();
+                            }.bind(this), function (oError) {
+                                this.showError(oError);;
+                            }.bind(this));
+
+
                         }.bind(this)
                     );;
             },
 
-            onRemoveRowSelection: function() {
-            var oFirstSelectedItem = this.byId("_SubTaskExecutors-SmartTable").getTable().getSelectedItems()[0];
-            this.byId("_SubTaskExecutors-SmartTable").getTable().setSelectedItem(oFirstSelectedItem, false);
+            onRemoveRowSelection: function () {
+                var oFirstSelectedItem = this.byId("_SubTaskExecutors-SmartTable").getTable().getSelectedItems()[0];
+                this.byId("_SubTaskExecutors-SmartTable").getTable().setSelectedItem(oFirstSelectedItem, false);
             }
         });
     });

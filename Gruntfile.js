@@ -148,7 +148,7 @@ module.exports = function(grunt) {
             zjiralib: {
                 package: "ZJIRA",
                 bspContainer: "ZJIRALIB",
-                transportno: "TMDK922768",
+                transportno: "TMDK922788",
                 bspDescription: "JIRA LIB FOR UI5 APPLICATION",
             },
         },
