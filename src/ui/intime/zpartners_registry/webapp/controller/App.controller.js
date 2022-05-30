@@ -114,10 +114,12 @@ sap.ui.define([
 
                         } else {
                             debugger;
+                            
                             this.getModel().callFunction("/GetChangedPartner", {
                                 method: "POST",
                                 urlParameters: {
-                                    PartnerID: this.getStateProperty('/editablePartner').getObject().PartnerId
+                                    PartnerID: this.getStateProperty('/editablePartner').getObject().PartnerId,
+                                    ImageContent: vContent 
                                 },
                                 success: function (oData) {
                                     this.EditParnterDialog.setBusy(false).close();
