@@ -217,6 +217,26 @@
           Bool="true"/>
       </Annotations>
 
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/TimeSpentUText">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/TimeSpent">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/TimeSpentU">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/EstimateTimeUnitText">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
       <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_INT_PROJECT_SHType/PartnerId">
         <Annotation Term="Common.ValueListWithFixedValues"
           Bool="true" />
@@ -1091,6 +1111,10 @@
           </Record>
         </Annotation>
       </Annotations>
+
+      <!-- <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_INTIME_TIMESHEETType/TimeSpentU">
+        <Annotation Term="Common.FilterDefaultValue" String="Час" />
+      </Annotations> -->
 
 
       <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/PartnerName">
