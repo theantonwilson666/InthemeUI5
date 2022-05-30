@@ -15,6 +15,11 @@ var TimeSheetDialog = sap.ui.require(
     "jira/lib/intime_reuse/timeSheet/TimeSheetDialog"
 );
 
+$.sap.require("jira/lib/MessageDialog");
+var MessageDialog = sap.ui.require(
+    "jira/lib/MessageDialog"
+);
+
 
 sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
     _UserObjectPageId: 'intime.zworker_workspace::sap.suite.ui.generic.template.ObjectPage.view.Details::ZSNN_WORKER_LIST',
@@ -67,6 +72,15 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
             contentWidth: "100%"
         });
 
+        oDialog.timeSheetSaveResult.then(function (oSuccess) {
+            this.extensionAPI.refresh();
+            this.updateVizFrame();
+        }.bind(this),
+            function (oError) {
+                MessageDialog.isExistError();
+            }.bind(this)
+        );
+
         oDialog.open();
 
     },
@@ -77,6 +91,16 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
             executorID: oEvent.getSource().getBindingContext().getObject().UserID,
             contentWidth: "100%"
         });
+
+        oDialog.timeSheetSaveResult.then(function (oSuccess) {
+            this.extensionAPI.refresh();
+            this.updateVizFrame();
+        }.bind(this),
+            function (oError) {
+                MessageDialog.isExistError();
+            }.bind(this)
+        );
+
         oDialog.open();
     },
 
@@ -174,10 +198,15 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
                     dateSheet: this.parseDate(sSelectedDate),
                     contentWidth: "100%"
                 });
+
+
                 oDialog.open();
 
                 oDialog.timeSheetSaveResult.then(function (oData) {
+                    this.extensionAPI.refresh();
                     this.updateVizFrame();
+                }.bind(this), function(oError){
+                    MessageDialog.isExistError();
                 }.bind(this))
 
             } else {
