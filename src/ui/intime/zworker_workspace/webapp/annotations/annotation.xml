@@ -114,6 +114,59 @@
 
 					</Record>
 				</Annotation>
+
+
+				<Annotation Term="UI.LineItem">
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="DateSheet"/>
+							<Annotation Term="UI.Importance"
+								EnumMember="UI.ImportanceType/High"/>
+						</Record>
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="TimeSpent" />
+						</Record>
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="SubTaskID" />
+						</Record>
+
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="TaskID" />
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="StageID" />
+						</Record>
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="ProjectID" />
+						</Record>
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="PartnerID" />
+						</Record>
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="CreatedBy" />
+						</Record>
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="CreatedOn" />
+						</Record>
+
+					</Collection>
+				</Annotation>
 			</Annotations>
 
 
