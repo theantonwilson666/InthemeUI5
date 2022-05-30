@@ -92,6 +92,7 @@ sap.ui.define([
                 this.byId("logoUploader").clear();
             },
 
+
             onOkPartnerDialog: function (oEvent) {
                 oEvent.getSource().getParent().setBusy(true);
 
@@ -119,7 +120,9 @@ sap.ui.define([
                                 method: "POST",
                                 urlParameters: {
                                     PartnerID: this.getStateProperty('/editablePartner').getObject().PartnerId,
-                                    ImageContent: vContent 
+                                    ImageContent: vContent,
+                                    FilePath: oFile.name,
+                                    LogoTechValue: oFile.name
                                 },
                                 success: function (oData) {
                                     this.EditParnterDialog.setBusy(false).close();
