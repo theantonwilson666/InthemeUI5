@@ -72,8 +72,8 @@ sap.ui.define([
                     }.bind(this),
 
                     error: function (oError) {
-                        this._ODataSaveReject('error');
-                        this.Lib.showError(oError);
+                        this._ODataSaveReject(oError);
+                        // this.Lib.showError(oError);
                     }.bind(this)
                 });
 
@@ -121,9 +121,9 @@ sap.ui.define([
                     
                     this.setBusy(false);
 
-                    
-                    debugger;
-                    this.Lib.showError(oError);
+                
+                    // debugger;
+                    // this.Lib.showError(oError);
 
                 }.bind(this)
             });
@@ -133,7 +133,7 @@ sap.ui.define([
 
 
         _onCancelButtonPress: function (oEvent) {
-
+            this._getModel().resetChanges();
             oEvent.getSource().getParent().close();
         },
 
