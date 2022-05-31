@@ -164,6 +164,13 @@
                         "text": "Списать время",
                         "determining": true,
                         "requiresSelection": true
+                      },
+                      "changeTaskStatus": {
+                        "id": "changeTaskStatus",
+                        "text": "Сменить статус",
+                        "press": "onChangeTaskStatusPress",
+                        "determining": true,
+                        "requiresSelection": true
                       }
                     }
                   }

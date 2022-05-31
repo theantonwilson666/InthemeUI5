@@ -60,6 +60,13 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
         }
     },
 
+    onChangeTaskStatusPress: function (oEvent) {
+
+        var oUser = oEvent.getSource().getBindingContext().getObject();
+        var oItem = this.byId("to_AssignedSubTask::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getSelectedContexts()[0].getObject();
+
+        },
+
 
     onCreateTimeSheetButtonPress: function (oEvent) {
         var oUser = oEvent.getSource().getBindingContext().getObject();
