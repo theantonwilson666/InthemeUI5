@@ -159,6 +159,28 @@ sap.ui.controller("intime.zusers_list.ext.controller.ObjectPageExt", {
     // });
 
 
+  },
+
+  onSyncJiraData: function(oEvent){
+    this.getView().setBusy(true);
+
+    this.getView().getModel().callFunction("/SyncJiraData", {
+      method: "POST",
+      urlParameters: {
+        UserID: this.getView().getBindingContext().getObject().UserID
+      },
+
+      success: function () {
+        this.getView().setBusy(false);
+        this.extensionAPI.refresh();
+        
+      }.bind(this),
+
+      error: function () {
+        this.getView().setBusy(false);
+      }.bind(this)
+
+    });
   }
 
 });

@@ -60,7 +60,7 @@
 
 
             <smartForm:GroupElement>
-                <smartField:SmartField value="{Comment}" />
+                <smartField:SmartField value="{Comment}" width="100%"/>
             </smartForm:GroupElement>
 
         </smartForm:Group>

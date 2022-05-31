@@ -21,6 +21,10 @@ sap.ui.define([
 
                 "dateSheet" : {
                     type : "object"
+                },
+
+                "noCheck" : {
+                    type : "boolean"
                 }
             }
             // ,
@@ -56,16 +60,18 @@ sap.ui.define([
                 controller: this
             }).then(function (oDialogContent) {
 
-                debugger;
 
                 oDialogContent.setModel(this._getModel());
                 this.addContent(oDialogContent);
+                
+                debugger;
 
                 var oCreatedTimeSheetContext = this._getModel().createEntry("/ZSNN_INTIME_TIMESHEET", {
                     properties: {
                         Executor: this.getExecutorID(),
                         SubTaskID: this.getSubTaskID(),
-                        DateSheet: this.getDateSheet() ? this.getDateSheet() : new Date()
+                        DateSheet: this.getDateSheet() ? this.getDateSheet() : new Date(),
+                        NoValidCheck : this.getNoCheck()
                     },
                     success: function (oData) {
                         this._ODataSaveResolve('success');

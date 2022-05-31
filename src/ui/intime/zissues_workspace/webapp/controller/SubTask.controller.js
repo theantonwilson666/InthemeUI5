@@ -205,7 +205,9 @@ sap.ui.define([
                             var oExecutorContext = this.getModel().createEntry(this.getPage().getBindingContext().getPath() + "/to_Executors", {
                                 groupId: "changes",
                                 properties: {
-                                    SubTaskID: this.getPage().getBindingContext().getObject().SubtaskId
+                                    SubTaskID: this.getPage().getBindingContext().getObject().SubtaskId,
+                                    StartDate: this.getPage().getBindingContext().getObject().StartDate,
+                                    EndDate: this.getPage().getBindingContext().getObject().EndDate,
                                 },
                             });
 
@@ -271,6 +273,7 @@ sap.ui.define([
 
                             oDialog.timeSheetSaveResult.then(function (oSuccess) {
                                 this.isExistError();
+                                this.refreshPage();
                             }.bind(this), function (oError) {
                                 this.showError(oError);;
                             }.bind(this));
