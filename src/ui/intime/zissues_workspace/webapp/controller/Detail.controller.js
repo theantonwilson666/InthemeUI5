@@ -161,6 +161,10 @@ sap.ui.define([
                     taskId: btoa(this.getView().getBindingContext().getObject().TaskId),
                     subTaskId: btoa("new")
                 }, false);
+            },
+
+            onMoveToAnotherStageButtonPress: function() {
+                
             }
 
 

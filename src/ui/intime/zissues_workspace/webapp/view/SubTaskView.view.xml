@@ -31,6 +31,16 @@
                         text="Удалить"
                         type="Reject"
                         press="onSubTaskDeleteButtonPress"/>
+
+                <MenuButton text="Раскрыть">
+                <menu>
+                    <Menu>
+                        <MenuItem text="Переместить в другую задачу" press="onMoveToAnotherTaskButtonPress" />
+                        <MenuItem text="Переместить в другую подзадачу" press="onMoveToAnotherSubTaskButtonPress" />
+                    </Menu>
+                </menu>
+		        </MenuButton>
+
                 </f:actions>
             </f:DynamicPageTitle>
         </f:title>

@@ -283,6 +283,14 @@ sap.ui.define([
             onRemoveRowSelection: function () {
                 var oFirstSelectedItem = this.byId("_SubTaskExecutors-SmartTable").getTable().getSelectedItems()[0];
                 this.byId("_SubTaskExecutors-SmartTable").getTable().setSelectedItem(oFirstSelectedItem, false);
+            },
+
+            onMoveToAnotherTaskButtonPress: function() {
+
+            },
+
+            onMoveToAnotherSubTaskButtonPress: function() {
+                
             }
         });
     });

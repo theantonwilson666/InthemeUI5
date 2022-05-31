@@ -28,6 +28,12 @@
                 </f:content>
 
                 <f:actions>
+                
+                    <Button
+                        text="Переместить в другой этап"
+                        type="Emphasized"
+                        press="onMoveToAnotherStageButtonPress"/>
+
                     <Button icon="{= ${state>/taskEditMode} === true ? 'sap-icon://display' : 'sap-icon://edit'}"
                         text="{= ${state>/taskEditMode} === true ? 'Просмотреть' : 'Изменить'}"
                         type="Emphasized"

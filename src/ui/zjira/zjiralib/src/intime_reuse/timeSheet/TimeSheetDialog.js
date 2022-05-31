@@ -65,7 +65,8 @@ sap.ui.define([
                     properties: {
                         Executor: this.getExecutorID(),
                         SubTaskID: this.getSubTaskID(),
-                        DateSheet: this.getDateSheet() ? this.getDateSheet() : new Date()
+                        DateSheet: this.getDateSheet() ? this.getDateSheet() : new Date(),
+                        TimeSpentU: "ЧАС"
                     },
                     success: function (oData) {
                         this._ODataSaveResolve('success');
