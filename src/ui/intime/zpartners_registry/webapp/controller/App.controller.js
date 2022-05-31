@@ -94,57 +94,57 @@ sap.ui.define([
 
 
             onOkPartnerDialog: function (oEvent) {
-                oEvent.getSource().getParent().setBusy(true);
 
                 var oFile = this.byId("logoUploader").getFocusDomRef().files[0];
-                if (oFile) {
-                    var oReader = new FileReader();
-                    oReader.onload = function (e) {
+                if (this.getModel().hasPendingChanges() || oFile) {
+                    oEvent.getSource().getParent().setBusy(true);
+                    if (this.getModel().hasPendingChanges()) {
+                        this.savePartnerChanges();
+                    }
 
-                        var vContent = e.currentTarget.result.replace(
-                            "data:" + oFile.type + ";base64,",
-                            ""
-                        );
+                    if (oFile) {
+                        var oReader = new FileReader();
+                        oReader.onload = function (e) {
 
-                        debugger;
+                            var vContent = e.currentTarget.result.replace(
+                                "data:" + oFile.type + ";base64,",
+                                ""
+                            );
 
-                        if (this.getStateProperty('/editablePartner').bCreated) {
-                            this.getModel().setProperty(this.getStateProperty('/editablePartner').getPath() + "/LogoTechValue", vContent);
-                            this.getModel().setProperty(this.getStateProperty('/editablePartner').getPath() + "/FilePath", oFile.name);
-                            this.savePartnerChanges(vContent);
-
-                        } else {
                             debugger;
-                            
-                            this.getModel().callFunction("/GetChangedPartner", {
-                                method: "POST",
-                                urlParameters: {
-                                    PartnerID: this.getStateProperty('/editablePartner').getObject().PartnerId,
-                                    ImageContent: vContent,
-                                    FilePath: oFile.name,
-                                    LogoTechValue: oFile.name
-                                },
-                                success: function (oData) {
-                                    this.EditParnterDialog.setBusy(false).close();
-                                    debugger;
-                                }.bind(this),
-                                error: function (oError) {
-                                    this.EditParnterDialog.setBusy(false).close();
-                                    debugger;
-                                }.bind(this)
-                            })
 
-                        }
+                            if (this.getStateProperty('/editablePartner').bCreated) {
+                                this.getModel().setProperty(this.getStateProperty('/editablePartner').getPath() + "/LogoTechValue", vContent);
+                                this.getModel().setProperty(this.getStateProperty('/editablePartner').getPath() + "/FilePath", oFile.name);
+                                this.savePartnerChanges(vContent);
+                            } else {
+                                debugger;
 
-                    }.bind(this)
+                                this.getModel().callFunction("/GetChangedPartner", {
+                                    method: "POST",
+                                    urlParameters: {
+                                        PartnerID: this.getStateProperty('/editablePartner').getObject().PartnerId,
+                                        LogoTechValue: vContent,
+                                        FilePath: oFile.name
+                                    },
+                                    success: function (oData) {
+                                        this.EditParnterDialog.setBusy(false).close();
+                                        debugger;
+                                    }.bind(this),
+                                    error: function (oError) {
+                                        this.EditParnterDialog.setBusy(false).close();
+                                        debugger;
+                                    }.bind(this)
+                                })
 
-                    oReader.readAsDataURL(oFile);
-                } else {
-                    this.savePartnerChanges();
+                            }
+
+                        }.bind(this)
+                        oReader.readAsDataURL(oFile);
+                    }
+
                 }
-
                 oEvent.getSource().getParent().close();
-
             },
 
 
