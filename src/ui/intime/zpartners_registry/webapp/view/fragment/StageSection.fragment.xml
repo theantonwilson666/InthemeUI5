@@ -77,7 +77,7 @@
         </smartForm:GroupElement>
       </smartForm:Group>
 
-      <smartForm:Group label="Jira">
+      <smartForm:Group label="Jira" id="_JiraGroup-SmartFormGroup">
         <smartForm:GroupElement>
           <smartField:SmartField value="{JiraProjectID}"
             textInEditModeSource="ValueList"
