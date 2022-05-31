@@ -58,6 +58,11 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
             width: "15%"
         });
 
+        this._oDateRangeSelection.attachChange(function () {
+            this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getParent().rebindTable();
+        }.bind(this))
+
+
         this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getHeaderToolbar().addContent(this._oDateRangeSelection);
         this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getParent().attachBeforeRebindTable(function (oEvent) {
             var oDateFrom = this._oDateRangeSelection.getDateValue();
