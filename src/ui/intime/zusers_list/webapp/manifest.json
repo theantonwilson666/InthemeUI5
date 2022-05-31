@@ -144,7 +144,15 @@
                       "text" : "Создать Jira пользователя",
                       "press" : "onCreateJiraUserButtonPress",
                       "determining" : false
+                    },
+
+                    "syncJiraData" : {
+                      "id" : "syncJiraData",
+                      "text" : "Синхр. Jira данные по задачам",
+                      "press" : "onSyncJiraData",
+                      "determining" : false
                     }
+
                   }
                 }
               }
