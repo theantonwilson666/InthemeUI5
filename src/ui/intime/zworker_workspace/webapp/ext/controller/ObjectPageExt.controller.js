@@ -65,7 +65,9 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
         var oUser = oEvent.getSource().getBindingContext().getObject();
         var oItem = this.byId("to_AssignedSubTask::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getSelectedContexts()[0].getObject();
 
-        },
+        sap.m.MessageToast.show("Функционал не реализован");
+
+    },
 
 
     onCreateTimeSheetButtonPress: function (oEvent) {
@@ -212,7 +214,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
                 oDialog.timeSheetSaveResult.then(function (oData) {
                     this.extensionAPI.refresh();
                     this.updateVizFrame();
-                }.bind(this), function(oError){
+                }.bind(this), function (oError) {
                     MessageDialog.isExistError();
                 }.bind(this))
 
