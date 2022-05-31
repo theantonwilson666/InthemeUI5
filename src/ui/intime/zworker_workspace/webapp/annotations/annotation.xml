@@ -162,7 +162,7 @@
 
 						<Record Type="UI.DataField">
 							<PropertyValue Property="Value"
-								Path="CreatedOn" />
+								Path="Comment" />
 						</Record>
 
 					</Collection>

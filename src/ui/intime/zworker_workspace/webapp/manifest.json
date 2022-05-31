@@ -33,11 +33,11 @@
         }
       },
       "ZINT_UI_WORKER_WORKSPAC_ANNO_MDL": {
-          "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZINT_UI_WORKER_WORKSPAC_ANNO_MDL',Version='0001')/$value",
-          "type": "ODataAnnotation",
-          "settings": {
-              "localUri": ""
-          }
+        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZINT_UI_WORKER_WORKSPAC_ANNO_MDL',Version='0001')/$value",
+        "type": "ODataAnnotation",
+        "settings": {
+          "localUri": ""
+        }
       }
     },
     "offline": false,

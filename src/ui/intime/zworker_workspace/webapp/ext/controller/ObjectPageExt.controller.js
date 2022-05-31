@@ -39,8 +39,33 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
         this.extensionAPI.attachPageDataLoaded(function () {
             this.initDateIntervalSelection();
             this.updateVizFrame();
+
+            debugger;
+
+            this.addTimeSheetDateInterval();
+
         }.bind(this))
         // this.addPhotoLoader();
+    },
+
+
+    addTimeSheetDateInterval: function () {
+        var oDay = this.getDayParam(new Date());
+
+        this._oDateRangeSelection = new sap.m.DateRangeSelection("timeSheetDateRange-DateRangeSelection", {
+            dateValue: new Date(oDay.year, oDay.month, oDay.day - 7),
+            secondDateValue: new Date(),
+            width: "15%"
+        });
+
+        this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getHeaderToolbar().addContent(this._oDateRangeSelection);
+        this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getParent().attachBeforeRebindTable(function (oEvent) {
+            var oDateFrom = this._oDateRangeSelection.getDateValue();
+            var oDateTo = this._oDateRangeSelection.getSecondDateValue();
+            oEvent.getParameter('bindingParams').filters.push(new sap.ui.model.Filter("DateSheet", 'BT', oDateFrom, oDateTo));
+        }.bind(this))
+
+        this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getParent().rebindTable();
     },
 
     initDateIntervalSelection: function () {

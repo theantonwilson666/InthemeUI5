@@ -280,9 +280,8 @@ sap.ui.define([
 
             },
 
-
+            
             onAddNewProjectStageButtonPress: function(oEvent) {
-
                 this.getModel().callFunction("/GetCreatedProjectStage", {
                     method: "POST",
                     urlParameters: {
@@ -300,6 +299,7 @@ sap.ui.define([
                         this.byId("stageTab").setBindingContext(oNewEntryContext);
                         this.setStateProperty("/editProjectMode", true);
                         this.byId("stageForm").focus();
+
 
 
                     }.bind(this),
@@ -336,7 +336,6 @@ sap.ui.define([
 
                 this.byId("stageForm").setBusy(true);
 
-                debugger;
 
                 this.getModel().callFunction("/CreateJiraProject", {
                     method: "POST",
@@ -348,7 +347,6 @@ sap.ui.define([
                     success: function(oData) {
                         this.byId("stageForm").setBusy(false);
                         this.isExistError();
-
                         this.byId("stageForm").updateBindings(true);
 
 
