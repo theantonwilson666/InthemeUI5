@@ -87,6 +87,11 @@
 								Path="TimeSpent" />
 						</Record>
 
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="TimeHave" />
+						</Record>
+
 
 
 					</Collection>
