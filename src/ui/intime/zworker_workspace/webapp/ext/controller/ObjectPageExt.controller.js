@@ -364,6 +364,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
                                     this.getView().setBusy(false);
                                     this.extensionAPI.refresh();
                                     this.clearFileUploader();
+                                    // this.byId("page").getBinding('content').refresh();
 
                                 }.bind(this),
 

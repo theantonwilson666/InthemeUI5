@@ -237,6 +237,21 @@
           Bool="true"/>
       </Annotations>
 
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/TimeRemain">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/TimeRemainU">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/TimeRemainUText">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
       <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_INT_PROJECT_SHType/PartnerId">
         <Annotation Term="Common.ValueListWithFixedValues"
           Bool="true" />

@@ -51,10 +51,10 @@
               <ToolbarSpacer />
               <!-- <VBox> -->
                 <control:DeleteButton id="deleteButtonId"
-                                      text=""
-                                      type="Reject"
+                                      text="Перенесите, чтобы удалить"
+                                      type="Emphasized"
                                       icon="sap-icon://delete"
-                                      width="99%">
+                                      width="30%">
                   <control:dragDropConfig>
                     <dnd:DropInfo drop="onDeletePartnerDrop" />
                   </control:dragDropConfig>
