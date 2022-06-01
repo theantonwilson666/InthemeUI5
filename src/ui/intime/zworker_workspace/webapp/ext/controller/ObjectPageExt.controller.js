@@ -66,7 +66,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
         this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getHeaderToolbar().addContent(this._oDateRangeSelection);
         this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getParent().attachBeforeRebindTable(function (oEvent) {
             var oDateFrom = this._oDateRangeSelection.getDateValue();
-            var oDateTo = this._oDateRangeSelection.getSecondDateValue();
+            var oDateTo = this._oDateRangeSelection.getSecondDateValue();   
             oEvent.getParameter('bindingParams').filters.push(new sap.ui.model.Filter("DateSheet", 'BT', oDateFrom, oDateTo));
         }.bind(this))
 

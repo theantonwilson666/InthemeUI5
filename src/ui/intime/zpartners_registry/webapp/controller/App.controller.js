@@ -128,12 +128,15 @@ sap.ui.define([
                                         FilePath: oFile.name
                                     },
                                     success: function (oData) {
-                                        this.EditParnterDialog.setBusy(false).close();
-                                        debugger;
+                                        if (!this.isExistError()) {
+                                            this.EditParnterDialog.setBusy(false).close();
+                                            this.byId("page").getBinding('content').refresh();
+                                        }
+
                                     }.bind(this),
                                     error: function (oError) {
                                         this.EditParnterDialog.setBusy(false).close();
-                                        debugger;
+                                        this.showError(oError);;
                                     }.bind(this)
                                 })
 
