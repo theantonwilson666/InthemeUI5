@@ -1,9 +1,19 @@
 <core:FragmentDefinition xmlns="sap.m"
     xmlns:core="sap.ui.core"
-    xmlns:smartField="sap.ui.comp.smartfield"
     xmlns:l="sap.ui.layout"
     xmlns:f="sap.ui.layout.form"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    xmlns:smartField="sap.ui.comp.smartfield"
     xmlns:u="sap.ui.unified"
     xmlns:m="sap.m">
-    <Text text="Функционал не реализован"/>
+        <smartTable:SmartTable id="taskChangeDocumentSmartTable1"
+        entitySet="ZSNN_INTIME_TIMESHEET"
+        tableType="ResponsiveTable"
+        useExportToExcel="false"
+        useVariantManagement="false"
+        useTablePersonalisation="true"
+        showRowCount="false"
+        enableAutoBinding="true"
+        tableBindingPath="to_TimeSheet"/>
 </core:FragmentDefinition>
