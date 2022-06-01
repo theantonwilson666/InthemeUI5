@@ -181,6 +181,10 @@ sap.ui.controller("intime.zusers_list.ext.controller.ObjectPageExt", {
       }.bind(this)
 
     });
+  },
+
+  onSync1CData: function(oEvent){
+    debugger;
   }
 
 });
