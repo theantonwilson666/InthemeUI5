@@ -141,7 +141,7 @@ sap.ui.define([
 
 
             onRejectButtonPress: function() {
-
+                this.getView().getModel().resetChanges();
                 this.setStateProperty("/taskEditMode", !this.getStateProperty("/taskEditMode"));
             },
 

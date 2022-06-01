@@ -184,6 +184,8 @@ sap.ui.define([
             },
 
             onRejectSubTaskButtonPress: function () {
+                this.getView().getModel().resetChanges();
+                this.setStateProperty("/subTaskEditMode", false);
 
             },
 

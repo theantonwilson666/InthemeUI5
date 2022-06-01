@@ -241,7 +241,10 @@ sap.ui.define([
 
             },
 
-            onRejectButtonPress: function() {},
+            onRejectButtonPress: function() {
+                this.getView().getModel().resetChanges();
+                this.setStateProperty("/editProjectMode", false);
+            },
 
             onAddNewProjectButtonPress: function(oEvent) {
 
