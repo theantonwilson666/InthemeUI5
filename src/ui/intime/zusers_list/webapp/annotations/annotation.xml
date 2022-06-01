@@ -441,6 +441,33 @@
 
 
 
+			<Annotations Target="ZINT_UI_USERS_SRV.ZSNN_INTIME_USERType/User1C">
+				<Annotation Term="Common.ValueListWithFixedValues"
+					Bool="false" />
+				<Annotation Term="Common.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath"
+							String="ZBNN_1C_WORKER_SH" />
+						<PropertyValue Property="SearchSupported"
+							Bool="true" />
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty"
+										PropertyPath="User1C" />
+									<PropertyValue Property="ValueListProperty"
+										String="Id" />
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty"
+										String="Name"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+
 			<Annotations Target="ZINT_UI_USERS_SRV.ZSNN_INTIME_USERType/JiraID">
 				<Annotation Term="Common.ValueListWithFixedValues"
 					Bool="false" />

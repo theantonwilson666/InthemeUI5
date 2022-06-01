@@ -151,7 +151,15 @@
                       "text" : "Синхр. Jira данные по задачам",
                       "press" : "onSyncJiraData",
                       "determining" : false
+                    },
+
+                    "sync1CData" : {
+                      "id" : "sync1CData",
+                      "text" : "Синхр. 1C данных",
+                      "press" : "onSync1CData",
+                      "determining" : false
                     }
+
 
                   }
                 }
