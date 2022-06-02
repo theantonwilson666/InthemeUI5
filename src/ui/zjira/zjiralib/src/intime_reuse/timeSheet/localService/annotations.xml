@@ -252,6 +252,88 @@
           Bool="true"/>
       </Annotations>
 
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_INTIME_TIMESHEETType/StageID">
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="false"/>
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZSNN_INT_PROJECT_STAGE_SH"/>
+            <PropertyValue Property="SearchSupported"
+              Bool="true"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="StageName"/>
+                </Record>
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="ProjectName"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectName"/>
+                </Record>
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="PartnerName"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerName"/>
+                </Record>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="PartnerID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerId"/>
+                </Record>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="ProjectID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectID"/>
+                </Record>
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="StageID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="StageID"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+
+       <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_INT_PROJECT_STAGE_SHType">
+				<Annotation Term="UI.LineItem">
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="StageID" />
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="StageName" />
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="ProjectID" />
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="ProjectName" />
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="PartnerId" />
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="PartnerName" />
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+
       <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_INT_PROJECT_SHType/PartnerId">
         <Annotation Term="Common.ValueListWithFixedValues"
           Bool="true" />
