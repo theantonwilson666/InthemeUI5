@@ -1,16 +1,19 @@
 sap.ui.define([
-        // "intime.zissues_workspace.controller.App",
-        "intime/zissues_workspace/controller/Main.controller",
-        'sap/ui/core/Fragment',
-        'sap/m/MessageBox',
-        'sap/m/Button',
-        "sap/ui/core/routing/History"
-    ],
-    function(MainController, Fragment, MessageBox, Button, History) {
+    // "intime.zissues_workspace.controller.App",
+    "intime/zissues_workspace/controller/Main.controller",
+    "jira/lib/BaseController",
+    'sap/ui/core/Fragment',
+    'sap/m/MessageBox',
+    'sap/m/Button',
+    "sap/ui/core/routing/History",
+    "jira/lib/intime_reuse/timeSheet/MoveTasktoAnotherStageDialog"
+],
+
+    function (BaseController, MainController, Fragment, MessageBox, Button, History, MoveTasktoAnotherStageDialog) {
         "use strict";
 
         return MainController.extend("intime.zissues_workspace.controller.Detail", {
-            onInit: function() {
+            onInit: function () {
                 this.getRouter()
                     .getRoute("task")
                     .attachPatternMatched(this._onRouteMatched, this);
@@ -21,14 +24,14 @@ sap.ui.define([
             //     sap.ui.getCore().byId('__xmlview0--subTaskSmartTable-btnEditToggle').setVisible(false);
             // },
 
-            _onRouteMatched: function(oEvent) {
+            _onRouteMatched: function (oEvent) {
 
                 this._routeParam = {
                     taskId: atob(oEvent.getParameter("arguments").taskId),
                     param: oEvent.getParameter("arguments")["?query"]
                 };
 
-                this.getView().getModel().metadataLoaded().then(function() {
+                this.getView().getModel().metadataLoaded().then(function () {
 
                     if (this._routeParam.taskId === 'new') {
 
@@ -46,7 +49,7 @@ sap.ui.define([
                                 ProjectStageID: oProjectData ? oProjectData.ProjectStageID : ""
                             },
 
-                            success: function(oData) {
+                            success: function (oData) {
                                 this.getView().setBusy(false);
                                 this.isExistError();
                                 var oParam = this._routeParam.param;
@@ -56,7 +59,7 @@ sap.ui.define([
                                     properties: oData,
                                     groupId: "changes",
 
-                                    success: function(oData) {
+                                    success: function (oData) {
                                         this.navTo("task", {
                                             taskId: btoa(oData.TaskId)
                                         }, true);
@@ -71,7 +74,7 @@ sap.ui.define([
 
                             }.bind(this),
 
-                            error: function(oError) {
+                            error: function (oError) {
                                 this.getView().setBusy(false);
                                 this.showError(oError);
                             }.bind(this)
@@ -84,7 +87,7 @@ sap.ui.define([
                         this.getView().bindObject({
                             path: `/ZSNN_INTIME_TASK('${this._routeParam.taskId}')`,
                             events: {
-                                dataReceived: function(oEvent) {
+                                dataReceived: function (oEvent) {
                                     this.setFaviconIconByPartner(this.getView().getBindingContext().getObject().PartnerID);
                                     this.setStateProperty("/taskContext", this.getView().getBindingContext());
                                 }.bind(this)
@@ -105,24 +108,24 @@ sap.ui.define([
                 }.bind(this))
             },
 
-            onTaskEditButtonPress: function(oEvent) {
+            onTaskEditButtonPress: function (oEvent) {
                 this.setStateProperty("/taskEditMode", !this.getStateProperty("/taskEditMode"));
             },
 
-            getPage: function() {
+            getPage: function () {
                 return this.byId("taskPage");
             },
 
-            refreshPage: function() {
+            refreshPage: function () {
                 this.getView().getElementBinding().refresh(true)
             },
 
-            onSaveTaskButtonPress: function() {
+            onSaveTaskButtonPress: function () {
                 this.getPage().setBusy(true);
 
                 this.submitChanges({
                     groupId: "changes",
-                    success: function() {
+                    success: function () {
                         this.getPage().setBusy(false);
 
                         if (!this.isExistError()) {
@@ -130,7 +133,7 @@ sap.ui.define([
                             this.refreshPage();
                         }
                     }.bind(this),
-                    error: function(oError) {
+                    error: function (oError) {
                         this.getPage().setBusy(false);
                         this.showError(oError);
                         this.refreshPage();
@@ -140,13 +143,13 @@ sap.ui.define([
             },
 
 
-            onRejectButtonPress: function() {
+            onRejectButtonPress: function () {
                 this.getView().getModel().resetChanges();
                 this.setStateProperty("/taskEditMode", !this.getStateProperty("/taskEditMode"));
             },
 
 
-            onSubTaskItemPress: function(oEvent) {
+            onSubTaskItemPress: function (oEvent) {
                 oEvent.getParameter("listItem").setSelected(false);
 
                 this.navTo("subtask", {
@@ -156,15 +159,52 @@ sap.ui.define([
 
             },
 
-            onAddNewSubTask: function() {
+            onAddNewSubTask: function () {
                 this.navTo("subtask", {
                     taskId: btoa(this.getView().getBindingContext().getObject().TaskId),
                     subTaskId: btoa("new")
                 }, false);
             },
+            loadDialog: function (oParams) {
+                if (!this[oParams.sDialogName]) {
+                    return Fragment.load({
+                        id: this.getView().sId,
+                        type: "XML",
+                        name: oParams.sViewName,
+                        controller: (oParams.controller) ? oParams.controller : this
+                    }).then(function (oDialog) {
+                        this[oParams.sDialogName] = oDialog;
+                        if (oParams.sPath) { this[oParams.sDialogName].bindElement(oParams.sPath); }
+                        if (oParams.bAddDependent === undefined || oParams.bAddDependent === true) {
+                            this.getView().addDependent(this[oParams.sDialogName]);
+                        }
+                        if (!$.isArray(this[oParams.sDialogName])) { this[oParams.sDialogName].setBusyIndicatorDelay(0); }
+                        return this[oParams.sDialogName];
+                    }.bind(this));
+                } else {
+                    return new Promise(function (res) {
+                        res(this[oParams.sDialogName]);
+                    }.bind(this));
+                }
+            },
 
-            onMoveToAnotherStageButtonPress: function() {
-                
+            onMoveToAnotherStageButtonPress: function (oEvent) {
+                debugger;
+                var oDialog = new MoveTasktoAnotherStageDialog({
+                    title: `Перенос задачи`,
+                    contentWidth: "100%"
+                });
+
+                oDialog.timeSheetSaveResult.then(function (oSuccess) {
+                    this.extensionAPI.refresh();
+                    this.updateVizFrame();
+                }.bind(this),
+                    function (oError) {
+                        MessageDialog.isExistError();
+                    }.bind(this)
+                );
+        
+                oDialog.open();
             }
 
 

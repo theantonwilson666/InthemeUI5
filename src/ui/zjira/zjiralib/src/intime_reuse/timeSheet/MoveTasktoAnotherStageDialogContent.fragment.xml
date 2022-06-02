@@ -1,0 +1,48 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:u="sap.ui.unified"
+    xmlns:smartForm="sap.ui.comp.smartform"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    xmlns:m="sap.m">
+
+<VBox fitContainer="true">
+
+  <smartFilterBar:SmartFilterBar 
+		id="smartFilterBar"
+		entitySet="ZSNN_INTIME_TIMESHEET">
+		<smartFilterBar:controlConfiguration>
+			<smartFilterBar:ControlConfiguration
+				key="StageID" visibleInAdvancedArea="true"
+				preventInitialDataFetchInValueHelpDialog="false">
+			</smartFilterBar:ControlConfiguration>
+		</smartFilterBar:controlConfiguration>
+			<smartFilterBar:layoutData>
+				<FlexItemData shrinkFactor="0"/>
+			</smartFilterBar:layoutData>
+	</smartFilterBar:SmartFilterBar>
+
+
+        <smartTable:SmartTable id="taskProjectStageSHSmartTable"
+        entitySet="ZSNN_INT_PROJECT_STAGE_SH"
+        tableType="Table"
+        smartFilterId="taskProjectStageSHsmartFilterBar"
+        useExportToExcel="false"
+        useVariantManagement="false"
+        useTablePersonalisation="true"
+        showRowCount="false"
+        fitContainer="true"
+        demandPopin="true"
+        enableAutoBinding="true">
+			<smartTable:layoutData>
+				<FlexItemData growFactor="1" baseSize="0%"/>
+			</smartTable:layoutData>
+        </smartTable:SmartTable>
+
+        </VBox>
+
+</core:FragmentDefinition>

@@ -15,6 +15,11 @@ var TimeSheetDialog = sap.ui.require(
     "jira/lib/intime_reuse/timeSheet/TimeSheetDialog"
 );
 
+// $.sap.require("jira/lib/intime_reuse/timeSheet/ChangeStatusDialog");
+// var ChangeTaskStatusDialog = sap.ui.require(
+//     "jira/lib/intime_reuse/timeSheet/ChangeStatusDialog"
+// );
+
 $.sap.require("jira/lib/MessageDialog");
 var MessageDialog = sap.ui.require(
     "jira/lib/MessageDialog"
@@ -389,6 +394,31 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
 
     clearFileUploader: function () {
         this.getView().getContent()[0].getHeaderTitle().getActions()[0].clear();
-    }
+    },
+
+    // onChangeTaskStatusPress: function (oEvent) {
+        
+    //     var oUser = oEvent.getSource().getBindingContext().getObject();
+    //     var oItem = this.byId("to_AssignedSubTask::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getSelectedContexts()[0].getObject();
+
+    //     var oDialog = new ChangeTaskStatusDialog({
+    //         title: `Сменить статус`,
+    //         executorID: oUser.UserID,
+    //         subTaskID: oItem.SubTaskID,
+    //         contentWidth: "100%"
+    //     });
+
+    //     oDialog.timeSheetSaveResult.then(function (oSuccess) {
+    //         this.extensionAPI.refresh();
+    //         this.updateVizFrame();
+    //     }.bind(this),
+    //         function (oError) {
+    //             MessageDialog.isExistError();
+    //         }.bind(this)
+    //     );
+
+    //     oDialog.open();
+
+    // },
 
 });
