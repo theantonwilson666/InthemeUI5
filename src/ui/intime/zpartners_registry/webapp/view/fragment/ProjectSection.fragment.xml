@@ -11,8 +11,6 @@
       entityType="ZSNN_INT_PROJECTType"
       editable="{state>/editProjectMode}"
       editToggled="onEditProject"
-
-
       visible="{state&gt;/projectSelection}">
       <smartForm:layout>
         <smartForm:ColumnLayout columnsM="2"
@@ -49,6 +47,14 @@
             </smartField:configuration>
           </smartField:SmartField>
         </smartForm:GroupElement>
+
+        <smartForm:GroupElement>
+          <smartField:SmartField value="{ProjectKey}"
+            entitySet="ZSNN_INT_PROJECT"
+            id="projectKey">
+          </smartField:SmartField>
+        </smartForm:GroupElement>
+
       </smartForm:Group>
       <smartForm:Group label="Сроки">
         <smartForm:GroupElement>
