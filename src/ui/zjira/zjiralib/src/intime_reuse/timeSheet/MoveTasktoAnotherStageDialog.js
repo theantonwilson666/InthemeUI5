@@ -7,7 +7,7 @@ sap.ui.define([
     "jira/lib/intime_reuse/ReuseIntimeLib"
 ], function (Dialog, ReuseLib) {
     "use strict";
-    return Dialog.extend("jira.lib.intime_reuse.timeSheet.ChangeStatusDialog", {
+    return Dialog.extend("jira.lib.intime_reuse.timeSheet.MoveTasktoAnotherStageDialog", {
         renderer: "sap.m.DialogRenderer",
         metadata: {
             properties: {
@@ -56,7 +56,7 @@ sap.ui.define([
         _loadTimeSheetDialogContent: function () {
             this.Lib.loadDialog({
                 sDialogName: "_timeSheetDialog",
-                sViewName: "jira.lib.intime_reuse.timeSheet.ChangeStatusDialogContent",
+                sViewName: "jira.lib.intime_reuse.timeSheet.MoveTasktoAnotherStageDialogContent",
                 controller: this
             }).then(function (oDialogContent) {
 
