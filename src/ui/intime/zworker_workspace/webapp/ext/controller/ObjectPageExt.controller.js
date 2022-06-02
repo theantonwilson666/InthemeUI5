@@ -29,7 +29,7 @@ var MessageDialog = sap.ui.require(
 sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
     _UserObjectPageId: 'intime.zworker_workspace::sap.suite.ui.generic.template.ObjectPage.view.Details::ZSNN_WORKER_LIST',
 
-    onInit: function () {
+    onInit: function() {
 
         if (this.getView().getId() === this._UserObjectPageId) {
             this.uiExtension();
@@ -40,21 +40,21 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
 
     },
 
-    uiExtension: function () {
-        this.extensionAPI.attachPageDataLoaded(function () {
-            this.initDateIntervalSelection();
-            this.updateVizFrame();
+    uiExtension: function() {
+        this.extensionAPI.attachPageDataLoaded(function() {
+                this.initDateIntervalSelection();
+                this.updateVizFrame();
 
-            debugger;
+                debugger;
 
-            this.addTimeSheetDateInterval();
+                this.addTimeSheetDateInterval();
 
-        }.bind(this))
-        // this.addPhotoLoader();
+            }.bind(this))
+            // this.addPhotoLoader();
     },
 
 
-    addTimeSheetDateInterval: function () {
+    addTimeSheetDateInterval: function() {
         var oDay = this.getDayParam(new Date());
 
         this._oDateRangeSelection = new sap.m.DateRangeSelection("timeSheetDateRange-DateRangeSelection", {
@@ -63,22 +63,22 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
             width: "15%"
         });
 
-        this._oDateRangeSelection.attachChange(function () {
+        this._oDateRangeSelection.attachChange(function() {
             this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getParent().rebindTable();
         }.bind(this))
 
 
         this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getHeaderToolbar().addContent(this._oDateRangeSelection);
-        this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getParent().attachBeforeRebindTable(function (oEvent) {
+        this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getParent().attachBeforeRebindTable(function(oEvent) {
             var oDateFrom = this._oDateRangeSelection.getDateValue();
-            var oDateTo = this._oDateRangeSelection.getSecondDateValue();   
+            var oDateTo = this._oDateRangeSelection.getSecondDateValue();
             oEvent.getParameter('bindingParams').filters.push(new sap.ui.model.Filter("DateSheet", 'BT', oDateFrom, oDateTo));
         }.bind(this))
 
         this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getParent().rebindTable();
     },
 
-    initDateIntervalSelection: function () {
+    initDateIntervalSelection: function() {
         var oDay = this.getDayParam(new Date());
         var oId = this.byId("_TimeSheetIntervalSelection-DateRangeSelection");
         if (oId) {
@@ -87,7 +87,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
         }
     },
 
-    getDayParam: function (oDate) {
+    getDayParam: function(oDate) {
         return {
             year: oDate.getFullYear(),
             month: oDate.getMonth(),
@@ -95,7 +95,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
         }
     },
 
-    onChangeTaskStatusPress: function (oEvent) {
+    onChangeTaskStatusPress: function(oEvent) {
 
         var oUser = oEvent.getSource().getBindingContext().getObject();
         var oItem = this.byId("to_AssignedSubTask::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getSelectedContexts()[0].getObject();
@@ -105,7 +105,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
     },
 
 
-    onCreateTimeSheetButtonPress: function (oEvent) {
+    onCreateTimeSheetButtonPress: function(oEvent) {
         var oUser = oEvent.getSource().getBindingContext().getObject();
         var oItem = this.byId("to_AssignedSubTask::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getSelectedContexts()[0].getObject();
 
@@ -116,11 +116,11 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
             contentWidth: "100%"
         });
 
-        oDialog.timeSheetSaveResult.then(function (oSuccess) {
-            this.extensionAPI.refresh();
-            this.updateVizFrame();
-        }.bind(this),
-            function (oError) {
+        oDialog.timeSheetSaveResult.then(function(oSuccess) {
+                this.extensionAPI.refresh();
+                this.updateVizFrame();
+            }.bind(this),
+            function(oError) {
                 MessageDialog.isExistError();
             }.bind(this)
         );
@@ -129,18 +129,18 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
 
     },
 
-    onCreateTimeSheetHeaderButtonPress: function (oEvent) {
+    onCreateTimeSheetHeaderButtonPress: function(oEvent) {
         var oDialog = new TimeSheetDialog({
             title: `Списать время - ${oEvent.getSource().getBindingContext().getObject().Surname} ${oEvent.getSource().getBindingContext().getObject().Name}`,
             executorID: oEvent.getSource().getBindingContext().getObject().UserID,
             contentWidth: "100%"
         });
 
-        oDialog.timeSheetSaveResult.then(function (oSuccess) {
-            this.extensionAPI.refresh();
-            this.updateVizFrame();
-        }.bind(this),
-            function (oError) {
+        oDialog.timeSheetSaveResult.then(function(oSuccess) {
+                this.extensionAPI.refresh();
+                this.updateVizFrame();
+            }.bind(this),
+            function(oError) {
                 MessageDialog.isExistError();
             }.bind(this)
         );
@@ -149,7 +149,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
     },
 
 
-    updateVizFrame: function () {
+    updateVizFrame: function() {
         Format.numericFormatter(ChartFormatter.getInstance());
         var formatPattern = ChartFormatter.DefaultPattern;
 
@@ -172,6 +172,43 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
                 dataLabel: {
                     formatString: formatPattern.SHORTFLOAT_MFD2,
                     visible: false,
+                },
+
+                dataPointStyle: {
+                    "rules": [{
+                            "dataContext": { "SpendHours": { "min": 0, "max": 7 } },
+                            "properties": {
+                                "color": "sapUiChartPaletteSemanticCriticalLight3"
+                            },
+                            "displayName": "Списано 0-7 часов"
+                        },
+
+                        {
+                            "dataContext": { "SpendHours": { "min": 8, "max": 8 } },
+                            "properties": {
+                                "color": "sapUiChartPaletteSemanticGood"
+                            },
+                            "displayName": "Списано 8 часов"
+                        },
+
+                        {
+                            "dataContext": { "SpendHours": { "min": 9, "max": 9 } },
+                            "properties": {
+                                "color": "sapUiChartPaletteSemanticCritical"
+                            },
+                            "displayName": "Списано 9 часов"
+                        },
+
+                        {
+                            "dataContext": { "SpendHours": { "min": 10 } },
+                            "properties": {
+                                "color": "sapUiChartPaletteSemanticBad"
+                            },
+                            "displayName": "Списано больше 10 часов"
+                        }
+
+
+                    ]
                 }
             },
             valueAxis: {
@@ -228,7 +265,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
         var oPopOver = this.getView().byId("_TimeSheet-Popover");
         oPopOver.connect(this.byId("_TimeSheet-VizFrame").getVizUid());
 
-        oPopOver.setCustomDataControl(function (data, test) {
+        oPopOver.setCustomDataControl(function(data, test) {
             if (!data.data.val) {
 
                 var sSelectedDate = data.target.__data__.DateSheet;
@@ -246,10 +283,10 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
 
                 oDialog.open();
 
-                oDialog.timeSheetSaveResult.then(function (oData) {
+                oDialog.timeSheetSaveResult.then(function(oData) {
                     this.extensionAPI.refresh();
                     this.updateVizFrame();
-                }.bind(this), function (oError) {
+                }.bind(this), function(oError) {
                     MessageDialog.isExistError();
                 }.bind(this))
 
@@ -293,7 +330,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
 
     },
 
-    parseDate: function (sDateString) {
+    parseDate: function(sDateString) {
 
         var sDay = sDateString.split('.')[0];
         var sMonth = parseInt(sDateString.split('.')[1]) - 1;
@@ -304,20 +341,20 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
     },
 
 
-    formatDate: function (oDate) {
+    formatDate: function(oDate) {
         if (oDate) {
             return oDate.toLocaleDateString("ru-RU", { year: 'numeric', month: 'numeric', day: 'numeric' });
         };
     },
 
-    onChangeDateRangeSelection: function (oEvent) {
+    onChangeDateRangeSelection: function(oEvent) {
         this.updateVizFrame();
     },
 
-    uiExtensionPhoto: function () {
+    uiExtensionPhoto: function() {
         this.addPhotoLoader();
     },
-    addPhotoLoader: function () {
+    addPhotoLoader: function() {
         var oObjectPageHeader = this.byId("objectPageHeader");
         var oUpload = new sap.ui.unified.FileUploader({
             buttonOnly: true,
@@ -332,17 +369,17 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
         oObjectPageHeader.insertAction(oUpload, 0);;
     },
 
-    onUploadFile: function (oEvent) {
+    onUploadFile: function(oEvent) {
         this.getFileContent(oEvent);
     },
 
-    getFileContent: function (oEvent) {
+    getFileContent: function(oEvent) {
         return new Promise(
-            function (res, rej) {
+            function(res, rej) {
                 var oFile = oEvent.getSource().getFocusDomRef().files[0];
                 if (oFile) {
                     var oReader = new FileReader();
-                    oReader.onload = function (e) {
+                    oReader.onload = function(e) {
                         var vContent = e.currentTarget.result.replace(
                             "data:" + oFile.type + ";base64,",
                             ""
@@ -356,7 +393,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
                         var oModal = new sap.ui.model.odata.v2.ODataModel(sSurl, {
                             defaultBindingMode: "TwoWay"
                         });
-                        oModal.attachMetadataLoaded(function () {
+                        oModal.attachMetadataLoaded(function() {
 
                             oModal.createEntry("/UserPhotoSet", {
                                 properties: {
@@ -365,7 +402,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
                                     FilePath: oFile.name
                                 },
 
-                                success: function (oData) {
+                                success: function(oData) {
                                     this.getView().setBusy(false);
                                     this.extensionAPI.refresh();
                                     this.clearFileUploader();
@@ -373,7 +410,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
 
                                 }.bind(this),
 
-                                error: function () {
+                                error: function() {
                                     this.getView().setBusy(false);
                                     this.clearFileUploader();
 
@@ -388,16 +425,16 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
                     oReader.readAsDataURL(oFile);
                 }
             }
-                .bind(this)
+            .bind(this)
         );
     },
 
-    clearFileUploader: function () {
+    clearFileUploader: function() {
         this.getView().getContent()[0].getHeaderTitle().getActions()[0].clear();
     },
 
     // onChangeTaskStatusPress: function (oEvent) {
-        
+
     //     var oUser = oEvent.getSource().getBindingContext().getObject();
     //     var oItem = this.byId("to_AssignedSubTask::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getSelectedContexts()[0].getObject();
 
