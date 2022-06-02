@@ -20,6 +20,45 @@
 		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm">
 
 
+			<Annotations Target="ZINT_UI_USERS_SRV.ZSNN_USER_ABSType">
+				<Annotation Term="UI.PresentationVariant">
+					<Record>
+						<PropertyValue Property="Text"
+							String="Default"/>
+						<PropertyValue Property="SortOrder">
+							<Collection>
+								<Record Type="Common.SortOrderType">
+									<PropertyValue Property="Property"
+										PropertyPath="EndDate"/>
+									<PropertyValue Property="Descending"
+										Bool="true"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+
+				<Annotation Term="UI.LineItem">
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="Type" />
+						</Record>
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="StartDate" />
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="EndDate" />
+						</Record>
+
+
+					</Collection>
+				</Annotation>
+			</Annotations>
+
 			<Annotations Target="ZINT_UI_USERS_SRV.ZSNN_INTIME_USER_POSITION_HISTType">
 
 				<Annotation Term="UI.HeaderInfo">
@@ -105,6 +144,12 @@
 							<PropertyValue Property="Value"
 								Path="PositionID" />
 						</Record>
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="DepartmentID" />
+						</Record>
+
 						<Record Type="UI.DataField">
 							<PropertyValue Property="Value"
 								Path="PositionFrom" />
@@ -264,6 +309,15 @@
 							<PropertyValue Property="Target"
 								AnnotationPath="to_PositionHistory/@UI.LineItem" />
 						</Record>
+
+
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Label"
+								String="Отсутствия"/>
+							<PropertyValue Property="Target"
+								AnnotationPath="to_Absense/@UI.LineItem" />
+						</Record>
+
 					</Collection>
 				</Annotation>
 

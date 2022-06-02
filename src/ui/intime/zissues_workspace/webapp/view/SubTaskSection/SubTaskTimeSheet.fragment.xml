@@ -5,15 +5,32 @@
     xmlns:smartTable="sap.ui.comp.smarttable"
     xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
     xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
     xmlns:u="sap.ui.unified"
     xmlns:m="sap.m">
-        <smartTable:SmartTable id="taskChangeDocumentSmartTable1"
+
+
+    <smartFilterBar:SmartFilterBar id="_SubTaskTimeSheet-SmartFilter"
+        entitySet="ZSNN_INTIME_TIMESHEET"
+        showClearButton="true"/>
+
+    <smartTable:SmartTable id="_SubTaskTimeSheet-SmartTable"
         entitySet="ZSNN_INTIME_TIMESHEET"
         tableType="ResponsiveTable"
         useExportToExcel="false"
         useVariantManagement="false"
         useTablePersonalisation="true"
+        editTogglable="false"
+        app:useSmartToggle="true"
         showRowCount="false"
+        smartFilterId="_SubTaskTimeSheet-SmartFilter"
         enableAutoBinding="true"
-        tableBindingPath="to_TimeSheet"/>
+        tableBindingPath="to_Timesheet">
+
+        <Table mode="Delete"
+            growing="true"
+            delete="onDeleteTimesheet"
+            growingScrollToLoad="true"/>
+
+    </smartTable:SmartTable>
 </core:FragmentDefinition>

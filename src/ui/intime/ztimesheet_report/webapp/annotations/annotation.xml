@@ -221,6 +221,95 @@
                     Bool="true"/>
             </Annotations>
 
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNQ_INTIME_TIMESHEETType/Department">
+                <Annotation Term="Common.ValueListWithFixedValues"
+                    Bool="true" />
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath"
+                            String="ZBNN_INTIME_DEPARTMENT" />
+                        <PropertyValue Property="SearchSupported"
+                            Bool="true" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="Department" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="DepartmentID" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="DepartmentText" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="DepartmentText" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNQ_INTIME_TIMESHEETType/Branch">
+                <Annotation Term="Common.ValueListWithFixedValues"
+                    Bool="true" />
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath"
+                            String="ZBNN_INTIME_BRANCH" />
+                        <PropertyValue Property="SearchSupported"
+                            Bool="true" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="Branch" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="BranchID" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="BranchText" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="BranchText" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNQ_INTIME_TIMESHEETType/PositionID">
+                <Annotation Term="Common.ValueListWithFixedValues"
+                    Bool="true" />
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath"
+                            String="ZBNN_INTIME_POSITION" />
+                        <PropertyValue Property="SearchSupported"
+                            Bool="true" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="PositionID" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="PositionID" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="PositionText" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="PositionText" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+
+
             <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INT_PROJECT_SHType/PartnerId">
                 <Annotation Term="Common.ValueListWithFixedValues"
                     Bool="true" />
@@ -1023,6 +1112,9 @@
                         <PropertyPath>TaskID</PropertyPath>
                         <PropertyPath>SubTaskID</PropertyPath>
                         <PropertyPath>Executor</PropertyPath>
+                        <PropertyPath>Branch</PropertyPath>
+                        <PropertyPath>PositionID</PropertyPath>
+                        <PropertyPath>Department</PropertyPath>
 
                     </Collection>
                 </Annotation>
@@ -1058,7 +1150,7 @@
                             <PropertyValue Property="Value"
                                 Path="PartnerID" />
                         </Record>
-                        
+
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value"
                                 Path="TaskID" />
@@ -1093,10 +1185,8 @@
                         <PropertyValue Property="DimensionAttributes">
                             <Collection>
                                 <!-- <Record Type="UI.ChartDimensionAttributeType">
-                                    <PropertyValue Property="Dimension"
-                                        PropertyPath="PartnerID"/>
-                                    <PropertyValue Property="Role"
-                                        EnumMember="UI.ChartDimensionRoleType/Category"/>
+                                    <PropertyValue Property="Dimension" PropertyPath="PartnerID"/>
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
                                 </Record> -->
 
                                 <Record Type="UI.ChartDimensionAttributeType">
