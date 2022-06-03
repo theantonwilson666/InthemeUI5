@@ -1,0 +1,9 @@
+<mvc:View
+  controllerName="intime.ztelegram_app.controller.Main"
+  xmlns="sap.m"
+  xmlns:mvc="sap.ui.core.mvc"
+  displayBlock="true">
+  <Shell appWidthLimited="false">
+    <App class="myFirstApp" id="app" width="100%"/>
+  </Shell>
+</mvc:View>

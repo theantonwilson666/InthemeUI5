@@ -1,0 +1,7 @@
+<mvc:View controllerName="intime.ztelegram_app.controller.Main"
+  xmlns="sap.m"
+  xmlns:mvc="sap.ui.core.mvc">
+
+  <Text text="123"/>
+
+</mvc:View>

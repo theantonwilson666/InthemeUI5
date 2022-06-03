@@ -140,7 +140,22 @@ module.exports = function(grunt) {
                     }
 
                 },
-            }
+            },
+
+            {
+                package: "ZTELEGRAM",
+                transportno: "TMDK922788",
+                project: "intime",
+                apps: {
+                    ztelegram_webapp: {
+                        bspContainer: "ZTELEGR_APP",
+                        bspDescription: "Intime : Telegram App",
+                        prefix: "intime/ztelegram_app",
+                    }
+
+                },
+            },
+
 
         ],
 
