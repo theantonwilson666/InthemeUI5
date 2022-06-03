@@ -176,7 +176,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
 
                 dataPointStyle: {
                     "rules": [{
-                            "dataContext": { "SpendHours": { "min": 0, "max": 7 } },
+                            "dataContext": { "SpendHours": { "min": 0, "max": 8 } },
                             "properties": {
                                 "color": "sapUiChartPaletteSemanticCriticalLight3"
                             },
@@ -184,7 +184,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
                         },
 
                         {
-                            "dataContext": { "SpendHours": { "min": 8, "max": 8 } },
+                            "dataContext": { "SpendHours": { "min": 8, "max": 9 } },
                             "properties": {
                                 "color": "sapUiChartPaletteSemanticGood"
                             },
@@ -192,7 +192,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
                         },
 
                         {
-                            "dataContext": { "SpendHours": { "min": 9, "max": 9 } },
+                            "dataContext": { "SpendHours": { "min": 9, "max": 10 } },
                             "properties": {
                                 "color": "sapUiChartPaletteSemanticCritical"
                             },

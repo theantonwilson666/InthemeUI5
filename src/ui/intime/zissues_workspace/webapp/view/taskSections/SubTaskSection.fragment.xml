@@ -1,7 +1,7 @@
 <core:FragmentDefinition xmlns="sap.m"
     xmlns:core="sap.ui.core"
     xmlns:l="sap.ui.layout"
-    xmlns:f="sap.ui.layout.form"
+    xmlns:f="sap.f"
     xmlns:smartTable="sap.ui.comp.smarttable"
     xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
     xmlns:smartField="sap.ui.comp.smartfield"
@@ -36,7 +36,34 @@
         <Table growing="true"
             rememberSelections="false"
             mode="SingleSelectMaster"
-            selectionChange="onSubTaskItemPress"/>
+            selectionChange="onSubTaskItemPress">
+            <columns>
+                <Column id="Kunnr"
+                    hAlign="Begin">
+                    <customData>
+                        <core:CustomData key="p13nData"
+                            value='\{"columnKey": "Executors", "columnIndex": 4, "leadingProperty": "Executors", "sortProperty": "Executors"}' />
+                    </customData>
+                    <Text text="Исполнители" />
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem>
+                    <cells>
+                        <HBox items="{to_Executors}">
+                            <VBox alignItems="Center" class="sapUiTinyMarginBegin sapUiTinyMarginEnd">
+                                <f:Avatar src="{ImageURL}"
+                                    displaySize="S"
+                                    showBorder="true"/>
+
+                                <Text text="{ExecutorName}"/>
+                            </VBox>
+                        </HBox>
+                    </cells>
+                </ColumnListItem>
+            </items>
+
+        </Table>
 
     </smartTable:SmartTable>
 
