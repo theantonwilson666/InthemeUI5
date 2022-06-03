@@ -100,6 +100,12 @@
                     Bool="true"/>
             </Annotations>
 
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType/DepartmentText">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+
             <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType/JiraID">
                 <Annotation Term="UI.HiddenFilter"
                     Bool="true"/>
@@ -873,7 +879,34 @@
 
 
 
-
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType/Department">
+                <Annotation Term="Common.ValueListWithFixedValues"
+                    Bool="true" />
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath"
+                            String="ZBNN_INTIME_DEPARTMENT" />
+                        <PropertyValue Property="SearchSupported"
+                            Bool="true" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="Department" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="DepartmentID" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="DepartmentText" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="DepartmentText" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
 
 
             <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType/Branch">
@@ -967,6 +1000,11 @@
                                 <Record Type="UI.DataField">
                                     <PropertyValue Property="Value"
                                         Path="Branch"/>
+                                </Record>
+
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value"
+                                        Path="Department"/>
                                 </Record>
 
                                 <Record Type="UI.DataField">
