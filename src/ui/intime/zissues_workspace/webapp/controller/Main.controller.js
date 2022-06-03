@@ -23,6 +23,10 @@ sap.ui.define([
 
             _onRouteMatched: function() {
                 this.getView().getModel().metadataLoaded().then(function() {
+
+                    var startupParams = this.getOwnerComponent().getComponentData().startupParameters;
+                    debugger;
+
                     if (this.byId("statusGridList")) {
 
                         // var oUrlParam = jQuery.sap.getUriParameters().mParams;

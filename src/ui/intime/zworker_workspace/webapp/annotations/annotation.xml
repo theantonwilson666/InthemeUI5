@@ -20,11 +20,81 @@
 		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm">
 
 
+			<!-- <Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/SubTaskID">
+				<Annotation Term="Common.SemanticObject"
+					String="zissues_workspace"/>
+			</Annotations>
+
+			<Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/TaskID">
+				<Annotation Term="Common.SemanticObject"
+					String="zissues_workspace"/>
+			</Annotations>
+
+			<Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/ProjectID">
+				<Annotation Term="Common.SemanticObject"
+					String="zpartners_registry"/>
+			</Annotations>
+
+			<Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/PartnerID">
+				<Annotation Term="Common.SemanticObject"
+					String="zpartners_registry"/>
+			</Annotations>
+
+			<Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/StageID">
+				<Annotation Term="Common.SemanticObject"
+					String="zpartners_registry"/>
+			</Annotations>
+
+
+
+
+			<Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_INTIME_TIMESHEETType/SubTaskID">
+				<Annotation Term="Common.SemanticObject"
+					String="zissues_workspace"/>
+			</Annotations>
+
+			<Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_INTIME_TIMESHEETType/TaskID">
+				<Annotation Term="Common.SemanticObject"
+					String="zissues_workspace"/>
+			</Annotations>
+
+			<Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_INTIME_TIMESHEETType/ProjectID">
+				<Annotation Term="Common.SemanticObject"
+					String="zpartners_registry"/>
+			</Annotations>
+
+			<Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_INTIME_TIMESHEETType/PartnerID">
+				<Annotation Term="Common.SemanticObject"
+					String="zpartners_registry"/>
+			</Annotations>
+
+			<Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_INTIME_TIMESHEETType/StageID">
+				<Annotation Term="Common.SemanticObject"
+					String="zpartners_registry"/>
+			</Annotations> -->
+
+
 			<Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/PartnerImageURL">
 				<Annotation Term="UI.IsImageUrl"/>
 			</Annotations>
 
 			<Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType">
+
+				<Annotation Term="UI.PresentationVariant">
+					<Record>
+						<PropertyValue Property="RequestAtLeast">
+							<Collection>
+								<PropertyPath>SubTaskID</PropertyPath>
+								<PropertyPath>TaskID</PropertyPath>
+								<PropertyPath>StageID</PropertyPath>
+								<PropertyPath>ProjectID</PropertyPath>
+								<PropertyPath>PartnerID</PropertyPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+
+
 				<Annotation Term="UI.LineItem">
 					<Annotation Term="UI.Criticality"
 						Path="TaskOverDueCriticality" />

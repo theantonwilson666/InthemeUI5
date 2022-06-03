@@ -9,8 +9,16 @@ sap.ui.define([
 
         return BaseController.extend("intime.zpartners_registry.controller.App", {
             onInit: function () {
+
+                debugger;
+
                 var startupParams = this.getOwnerComponent().getComponentData().startupParameters;
                 var sPartnerId = startupParams && startupParams.PartnerID && startupParams.PartnerID[0];
+
+                // if ((startupParams.zpartners_registry) && (startupParams.zpartners_registry[0])){
+                //     sPartnerId = startupParams.zpartners_registry[0];
+                // }
+
                 if (sPartnerId) {
                     this.navTo("project", { query: { PartnerId: sPartnerId } }, false);
                 }
