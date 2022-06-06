@@ -221,7 +221,6 @@ sap.ui.define([
 
 
             onAddSubTaskExecutor: function(oEvent) {
-                debugger;
                 this.loadDialog
                     .call(this, {
                         sDialogName: "_newSubTaskExecutorDialog",
@@ -229,6 +228,8 @@ sap.ui.define([
                     })
                     .then(
                         function(oDialog) {
+
+                            debugger;
 
                             var oExecutorContext = this.getModel().createEntry(this.getPage().getBindingContext().getPath() + "/to_Executors", {
                                 groupId: "changes",

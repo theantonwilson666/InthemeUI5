@@ -127,9 +127,9 @@ sap.ui.define([
                 var oFile = this.byId("logoUploader").getFocusDomRef().files[0];
                 if (this.getModel().hasPendingChanges() || oFile) {
                     oEvent.getSource().getParent().setBusy(true);
-                    if (this.getModel().hasPendingChanges()) {
-                        this.savePartnerChanges();
-                    }
+                    // if (this.getModel().hasPendingChanges()) {
+                    //     this.savePartnerChanges();
+                    // }
 
                     if (oFile) {
                         var oReader = new FileReader();
@@ -243,6 +243,9 @@ sap.ui.define([
 
                                 method: "POST",
                                 success: function (oData) {
+                                    
+                                    debugger;
+
                                     this["EditParnterDialog"].setBusy(false);
                                     this.isExistError();
 
