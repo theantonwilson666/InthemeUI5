@@ -20,7 +20,7 @@
 		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm">
 
 
-			<!-- <Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/SubTaskID">
+			<Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/SubTaskID">
 				<Annotation Term="Common.SemanticObject"
 					String="zissues_workspace"/>
 			</Annotations>
@@ -71,7 +71,7 @@
 			<Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_INTIME_TIMESHEETType/StageID">
 				<Annotation Term="Common.SemanticObject"
 					String="zpartners_registry"/>
-			</Annotations> -->
+			</Annotations>
 
 
 			<Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/PartnerImageURL">
