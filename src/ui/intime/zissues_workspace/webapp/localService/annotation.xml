@@ -491,7 +491,7 @@
         </Annotation>
       </Annotations>
 
-      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_SUBTASK_ExecutorType/EstimateTimeU">
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_SUBTASK_EXECUTORSType/EstimateTimeU">
         <Annotation Term="Common.ValueListWithFixedValues"
           Bool="true" />
         <Annotation Term="Common.ValueList">
@@ -790,7 +790,7 @@
 
       </Annotations>
 
-      <Annotations Target="ZINT_UI_USERS_SRV.ZSNN_SUBTASK_ExecutorType/Executor">
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_SUBTASK_EXECUTORSType/Executor">
         <Annotation Term="Common.SemanticObject"
           String="zusers_list"/>
       </Annotations>
@@ -905,7 +905,7 @@
         </Annotation>
       </Annotations>
 
-      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_SUBTASK_ExecutorType/Executor">
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_SUBTASK_EXECUTORSType/Executor">
         <Annotation Term="Common.ValueListWithFixedValues"
           Bool="false" />
         <Annotation Term="Common.ValueList">
@@ -986,7 +986,7 @@
           </Collection>
         </Annotation>
       </Annotations>
-      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_SUBTASK_ExecutorType">
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_SUBTASK_EXECUTORSType">
         <Annotation Term="UI.LineItem">
           <Collection>
             <Record Type="UI.DataField">

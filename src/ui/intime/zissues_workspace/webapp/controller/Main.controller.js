@@ -19,6 +19,28 @@ sap.ui.define([
                     .getRoute("mainpage")
                     .attachPatternMatched(this._onRouteMatched, this);
                 // this.getRouter().getRoute("mainpage").attachPatternMatched(this._onMasterMatched, this);
+
+                this.NavToTask();
+            },
+
+            NavToTask: function () {
+                debugger
+
+                var items = this.getOwnerComponent().getComponentData().startupParameters;
+                this.getModel().callFunction("/NavToTasks", {
+                    method: "GET",
+                    urlParameters: {
+                        AllParameters: items
+                    },
+                    success: function (oData) {
+                        debugger
+
+                    }.bind(this),
+                    error: function (oError) {
+                        debugger
+                    }.bind(this)
+                })
+                
             },
 
             _onRouteMatched: function() {

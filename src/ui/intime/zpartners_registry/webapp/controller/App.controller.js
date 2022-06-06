@@ -22,6 +22,27 @@ sap.ui.define([
                 if (sPartnerId) {
                     this.navTo("project", { query: { PartnerId: sPartnerId } }, false);
                 }
+                this.NavToPartner();
+            },
+
+            NavToPartner: function () {
+                debugger
+
+                var items = this.getOwnerComponent().getComponentData().startupParameters;
+                this.getModel().callFunction("/NavToPartner", {
+                    method: "GET",
+                    urlParameters: {
+                        AllParameters: items
+                    },
+                    success: function (oData) {
+                        debugger
+
+                    }.bind(this),
+                    error: function (oError) {
+                        debugger
+                    }.bind(this)
+                })
+                
             },
 
             OnEdit: function () {
