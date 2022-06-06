@@ -4,6 +4,6 @@
   xmlns:mvc="sap.ui.core.mvc"
   displayBlock="true">
   <Shell appWidthLimited="false">
-    <App class="myFirstApp" id="app" width="100%"/>
+    <App class="backColor" id="app" width="100%"/>
   </Shell>
 </mvc:View>
