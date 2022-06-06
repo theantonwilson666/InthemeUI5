@@ -905,6 +905,38 @@
         </Annotation>
       </Annotations>
 
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INT_PROJECT_STAGE_SHType">
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="StageID" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="StageName" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="ProjectID" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="ProjectName" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="PartnerId" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="PartnerName" />
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+
       <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_SUBTASK_EXECUTORSType/Executor">
         <Annotation Term="Common.ValueListWithFixedValues"
           Bool="false" />

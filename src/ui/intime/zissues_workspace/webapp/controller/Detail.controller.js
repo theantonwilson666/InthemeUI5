@@ -165,46 +165,77 @@ sap.ui.define([
                     subTaskId: btoa("new")
                 }, false);
             },
-            loadDialog: function (oParams) {
-                if (!this[oParams.sDialogName]) {
-                    return Fragment.load({
-                        id: this.getView().sId,
-                        type: "XML",
-                        name: oParams.sViewName,
-                        controller: (oParams.controller) ? oParams.controller : this
-                    }).then(function (oDialog) {
-                        this[oParams.sDialogName] = oDialog;
-                        if (oParams.sPath) { this[oParams.sDialogName].bindElement(oParams.sPath); }
-                        if (oParams.bAddDependent === undefined || oParams.bAddDependent === true) {
-                            this.getView().addDependent(this[oParams.sDialogName]);
-                        }
-                        if (!$.isArray(this[oParams.sDialogName])) { this[oParams.sDialogName].setBusyIndicatorDelay(0); }
-                        return this[oParams.sDialogName];
-                    }.bind(this));
-                } else {
-                    return new Promise(function (res) {
-                        res(this[oParams.sDialogName]);
-                    }.bind(this));
-                }
+
+            onCancelMoveDialog: function (oEvent) {
+                oEvent.getSource().getParent().close();
             },
 
-            onMoveToAnotherStageButtonPress: function (oEvent) {
-                debugger;
-                var oDialog = new MoveTasktoAnotherStageDialog({
-                    title: `Перенос задачи`,
-                    contentWidth: "100%"
+            onOkMoveDialog: function (oEvent) {
+
+                var oSelectedItem = this.byId("_TaskProjectStage-SmartTable").getTable().getSelectedItem();
+
+                if (!oSelectedItem) {
+                    MessageBox.show("Выберите этап проекта");
+                    return;
+                }
+
+
+                this.byId("_moveTaskToProjectStage-Dialog").setBusy(true);
+
+                this.getModel().callFunction("/MoveTaskToProjectStage", {
+                    method: "POST",
+                    urlParameters: {
+                        TaskID: oEvent.getSource().getParent().getBindingContext().getObject().TaskId,
+                        ProjectStageID: oSelectedItem.getBindingContext().getObject().StageID
+                    },
+
+                    success: function (oData) {
+                        this.byId("_moveTaskToProjectStage-Dialog").setBusy(false);
+                        this.isExistError();
+                        this.byId("_moveTaskToProjectStage-Dialog").close();
+
+                    }.bind(this),
+
+                    error: function (oError) {
+                        this.byId("_moveTaskToProjectStage-Dialog").setBusy(false);
+                        this.showError(oError);
+                    }.bind(this)
                 });
 
-                oDialog.timeSheetSaveResult.then(function (oSuccess) {
-                    this.extensionAPI.refresh();
-                    this.updateVizFrame();
-                }.bind(this),
-                    function (oError) {
-                        MessageDialog.isExistError();
-                    }.bind(this)
-                );
-        
-                oDialog.open();
+            },
+
+
+            onMoveToAnotherStageButtonPress: function (oEvent) {
+
+                this.loadDialog
+                    .call(this, {
+                        sDialogName: "_moveToProjectStageDialog",
+                        sViewName: "intime.zissues_workspace.view.taskSections.MoveToProjectStage"
+                    })
+                    .then(
+                        function (oDialog) {
+
+                            debugger;
+
+                            oDialog.open();
+                        }.bind(this)
+                    );
+
+                // var oDialog = new MoveTasktoAnotherStageDialog({
+                //     title: `Перенос задачи`,
+                //     contentWidth: "100%"
+                // });
+
+                // oDialog.timeSheetSaveResult.then(function (oSuccess) {
+                //     this.extensionAPI.refresh();
+                //     this.updateVizFrame();
+                // }.bind(this),
+                //     function (oError) {
+                //         MessageDialog.isExistError();
+                //     }.bind(this)
+                // );
+
+                // oDialog.open();
             }
 
 
