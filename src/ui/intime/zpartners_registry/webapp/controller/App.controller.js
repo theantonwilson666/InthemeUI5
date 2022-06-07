@@ -20,7 +20,7 @@ sap.ui.define([
                 if (sPartnerId) {
                     this.navTo("project", { query: { PartnerId: sPartnerId } }, false);
                 }
-                this.NavToPartner();
+                // this.NavToPartner();
             },
 
             NavToPartner: function() {
@@ -44,6 +44,11 @@ sap.ui.define([
                     }.bind(this)
                 })
 
+            },
+
+            onAfterRendering: function() {
+                debugger;
+                this.NavToPartner();
             },
 
             OnEdit: function() {

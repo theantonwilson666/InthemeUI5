@@ -1,7 +1,46 @@
 <mvc:View controllerName="intime.ztelegram_app.controller.Main"
   xmlns="sap.m"
-  xmlns:mvc="sap.ui.core.mvc">
-  <Vbox>
-    <Text text="66689"/>
-  </Vbox>
+  xmlns:f="sap.f"
+  xmlns:sv="sap.ui.comp.smartvariants"
+  xmlns:layout="sap.ui.layout"
+  xmlns:smartTable="sap.ui.comp.smarttable"
+  xmlns:table="sap.ui.table"
+  xmlns:core="sap.ui.core"
+  xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+  xmlns:adminDialog="jira.lib.intime_reuse.adminDialog"
+  xmlns:navpopover="sap.ui.comp.navpopover"
+  xmlns:mvc="sap.ui.core.mvc"
+		height="100%">
+	<f:DynamicPage id="dynamicPageId" showFooter="true">
+			<!-- DynamicPage Header -->
+			<f:header>
+				<f:DynamicPageHeader pinnable="true">
+					<layout:HorizontalLayout allowWrapping="true">
+						<layout:VerticalLayout class="sapUiMediumMarginEnd">
+							<ObjectAttribute title="Location" text="Warehouse A"/>
+							<ObjectAttribute title="Halway" text="23L"/>
+							<ObjectAttribute title="Rack" text="34"/>
+						</layout:VerticalLayout>
+
+						<layout:VerticalLayout>
+							<ObjectAttribute title="Availability"/>
+							<ObjectStatus text="In Stock" state="Success" />
+						</layout:VerticalLayout>
+					</layout:HorizontalLayout>
+				</f:DynamicPageHeader>
+			</f:header>
+      
+		  <f:footer>
+      <OverflowToolbar>
+        <ToolbarSpacer />
+        <Button type="Accept"
+          text="Сохранить"
+          press="onSaveProjectButtonPress" />
+        <Button type="Reject"
+          text="Отменить"
+          press="onRejectButtonPress" />
+      </OverflowToolbar>
+    </f:footer>
+    </f:DynamicPage>
+  
 </mvc:View>

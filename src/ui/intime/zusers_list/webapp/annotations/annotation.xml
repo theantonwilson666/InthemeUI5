@@ -420,6 +420,8 @@
 				</Annotation>
 
 				<Annotation Term="UI.LineItem">
+				    <Annotation Term="UI.Criticality"
+						Path="DismissedCriticality" />
 					<Collection>
 
 						<Record Type="UI.DataField">

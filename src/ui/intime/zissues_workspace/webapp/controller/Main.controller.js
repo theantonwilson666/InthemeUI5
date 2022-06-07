@@ -20,7 +20,7 @@ sap.ui.define([
                     .attachPatternMatched(this._onRouteMatched, this);
                 // this.getRouter().getRoute("mainpage").attachPatternMatched(this._onMasterMatched, this);
 
-                this.NavToTask();
+                // this.NavToTask();
             },
 
             NavToTask: function () {
@@ -42,6 +42,11 @@ sap.ui.define([
                     }.bind(this)
                 })
                 
+            },
+
+            onAfterRendering: function() {
+                debugger;
+                this.NavToTask();
             },
 
             _onRouteMatched: function() {

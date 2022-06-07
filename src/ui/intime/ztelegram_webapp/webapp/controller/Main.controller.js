@@ -6,7 +6,9 @@ sap.ui.define([
 
         return Controller.extend("intime.ztelegram_app.controller.Main", {
             onInit: function () {
-
+            //     debugger;
+            //     this.byId('dynamicPageId').addStyleClass('backColor')
+            // return;
             }
         });
     });
