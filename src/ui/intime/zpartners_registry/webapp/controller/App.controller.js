@@ -25,12 +25,8 @@ sap.ui.define([
 
             NavToPartner: function() {
 
-                // s - string
-                // i - integer 
-                // a - array 
-                // o - object 
-
-                var items = this.getOwnerComponent().getComponentData().startupParameters;
+                var oItems = this.getOwnerComponent().getComponentData().startupParameters;
+                var sItems = JSON.stringify(oItems);
 
                 debugger;
 
