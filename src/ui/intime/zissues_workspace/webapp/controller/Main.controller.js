@@ -24,13 +24,14 @@ sap.ui.define([
             },
 
             NavToTask: function () {
-                debugger
+                debugger;
 
-                var items = this.getOwnerComponent().getComponentData().startupParameters;
+                var oItems = this.getOwnerComponent().getComponentData().startupParameters;
+                var sItems = JSON.stringify(oItems);
                 this.getModel().callFunction("/NavToTasks", {
-                    method: "GET",
+                    method: "POST",
                     urlParameters: {
-                        AllParameters: items
+                        AllParameters: sItems
                     },
                     success: function (oData) {
                         debugger

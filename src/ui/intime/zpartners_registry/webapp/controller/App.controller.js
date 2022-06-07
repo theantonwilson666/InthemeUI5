@@ -10,8 +10,6 @@ sap.ui.define([
         return BaseController.extend("intime.zpartners_registry.controller.App", {
             onInit: function () {
 
-                debugger;
-
                 var startupParams = this.getOwnerComponent().getComponentData().startupParameters;
                 var sPartnerId = startupParams && startupParams.PartnerID && startupParams.PartnerID[0];
 
@@ -25,21 +23,23 @@ sap.ui.define([
                 this.NavToPartner();
             },
 
-            NavToPartner: function () {
-                debugger
 
-                var items = this.getOwnerComponent().getComponentData().startupParameters;
+            NavToPartner: function () {
+
+                var oItems = this.getOwnerComponent().getComponentData().startupParameters;
+                var sItems = JSON.stringify(oItems);
+                debugger;
                 this.getModel().callFunction("/NavToPartner", {
-                    method: "GET",
+                    method: "POST",
                     urlParameters: {
-                        AllParameters: items
+                        AllParameters: sItems
                     },
                     success: function (oData) {
-                        debugger
+                       
 
                     }.bind(this),
                     error: function (oError) {
-                        debugger
+                       
                     }.bind(this)
                 })
                 
