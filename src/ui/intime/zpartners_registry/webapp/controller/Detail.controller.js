@@ -343,7 +343,8 @@ sap.ui.define([
                     method: "POST",
                     urlParameters: {
                         JiraStage: oEvent.getSource().getBindingContext().getObject().JiraProjectStage,
-                        StageID: oEvent.getSource().getBindingContext().getObject().ProjectStageID
+                        StageID: oEvent.getSource().getBindingContext().getObject().ProjectStageID,
+                        JiraProjectID : oEvent.getSource().getBindingContext().getObject().JiraProjectID
                     },
 
                     success: function (oData) {
