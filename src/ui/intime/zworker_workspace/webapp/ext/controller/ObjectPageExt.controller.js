@@ -85,8 +85,8 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
     onChartDateClick: function (day, month, year) {
         debugger;
 
-        sap.ui.getCore().byId('timeSheetDateRange-DateRangeSelection').setDateValue(new Date(year,month, day));
-        sap.ui.getCore().byId('timeSheetDateRange-DateRangeSelection').setSecondDateValue(new Date(year,month, day));
+        sap.ui.getCore().byId('timeSheetDateRange-DateRangeSelection').setDateValue(new Date(year, month, day, 23,59,59));
+        sap.ui.getCore().byId('timeSheetDateRange-DateRangeSelection').setSecondDateValue(new Date(year, month, day, 23,59,59));
 
         this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getParent().rebindTable();
     },
