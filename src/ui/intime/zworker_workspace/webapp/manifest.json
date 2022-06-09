@@ -238,23 +238,19 @@
               "name": "sap.suite.ui.generic.template.ObjectPage",
               "settings": {
                 "editableHeaderContent": true
-              },
-              "pages": [
-                {
-                  "navigationProperty": "to_AssignedSubTask",
-                  "entitySet": "ZSNN_WORKER_ASSIGNED_SUBTASK",
-                  "component": {
-                    "name": "sap.suite.ui.generic.template.ObjectPage",
-                    "settings": {
-                      "tableSettings": {
-                        "type": "GridTable"
-                      }
-                    }
-                  }
+              }
+            },
+            "pages": [
+              {
+                "navigationProperty": "to_AssignedSubTask",
+                "entitySet": "ZSNN_WORKER_ASSIGNED_SUBTASK",
+                "component": {
+                  "name": "sap.suite.ui.generic.template.ObjectPage"
                 }
-              ]
-            }
+              }
+            ]
           }
+
         }
       }
     }

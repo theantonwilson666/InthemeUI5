@@ -21,28 +21,23 @@
 
 
 			<!-- <Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/SubTaskID">
-				<Annotation Term="Common.SemanticObject"
-					String="zissues_workspace"/>
+				<Annotation Term="Common.SemanticObject" String="zissues_workspace"/>
 			</Annotations> -->
 
 			<!-- <Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/TaskID">
-				<Annotation Term="Common.SemanticObject"
-					String="zissues_workspace"/>
+				<Annotation Term="Common.SemanticObject" String="zissues_workspace"/>
 			</Annotations> -->
 
 			<!-- <Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/ProjectID">
-				<Annotation Term="Common.SemanticObject"
-					String="zpartners_registry"/>
+				<Annotation Term="Common.SemanticObject" String="zpartners_registry"/>
 			</Annotations> -->
 
 			<!-- <Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/PartnerID">
-				<Annotation Term="Common.SemanticObject"
-					String="zpartners_registry"/>
+				<Annotation Term="Common.SemanticObject" String="zpartners_registry"/>
 			</Annotations> -->
 
 			<!-- <Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/StageID">
-				<Annotation Term="Common.SemanticObject"
-					String="zpartners_registry"/>
+				<Annotation Term="Common.SemanticObject" String="zpartners_registry"/>
 			</Annotations> -->
 
 
@@ -78,6 +73,8 @@
 				<Annotation Term="UI.IsImageUrl"/>
 			</Annotations>
 
+
+
 			<Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType">
 
 				<Annotation Term="UI.PresentationVariant">
@@ -94,6 +91,36 @@
 					</Record>
 				</Annotation>
 
+
+				<Annotation Term="UI.FieldGroup"
+					Qualifier="TaskData">
+					<Record>
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value"
+										Path="SubTaskID"/>
+									<Annotation Term="UI.Importance"
+										EnumMember="UI.ImportanceType/Low"/>
+								</Record>
+
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Label"
+							String="Общая инофрмация"/>
+					</Record>
+				</Annotation>
+
+				<Annotation Term="UI.Facets">
+					<Collection>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Label"
+								String="Задача"/>
+							<PropertyValue Property="Target"
+								AnnotationPath="@UI.FieldGroup#TaskData" />
+						</Record>
+					</Collection>
+				</Annotation>
 
 				<Annotation Term="UI.LineItem">
 					<Annotation Term="UI.Criticality"
