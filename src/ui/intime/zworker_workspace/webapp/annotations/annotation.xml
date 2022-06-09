@@ -20,30 +20,30 @@
 		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm">
 
 
-			<Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/SubTaskID">
+			<!-- <Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/SubTaskID">
 				<Annotation Term="Common.SemanticObject"
 					String="zissues_workspace"/>
-			</Annotations>
+			</Annotations> -->
 
-			<Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/TaskID">
+			<!-- <Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/TaskID">
 				<Annotation Term="Common.SemanticObject"
 					String="zissues_workspace"/>
-			</Annotations>
+			</Annotations> -->
 
-			<Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/ProjectID">
+			<!-- <Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/ProjectID">
 				<Annotation Term="Common.SemanticObject"
 					String="zpartners_registry"/>
-			</Annotations>
+			</Annotations> -->
 
-			<Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/PartnerID">
+			<!-- <Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/PartnerID">
 				<Annotation Term="Common.SemanticObject"
 					String="zpartners_registry"/>
-			</Annotations>
+			</Annotations> -->
 
-			<Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/StageID">
+			<!-- <Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/StageID">
 				<Annotation Term="Common.SemanticObject"
 					String="zpartners_registry"/>
-			</Annotations>
+			</Annotations> -->
 
 
 
