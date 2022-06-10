@@ -172,6 +172,16 @@
 
 			<Annotations Target="ZINT_UI_USERS_SRV.ZSNN_INTIME_USERType">
 
+			<Annotation Term="UI.PresentationVariant">
+					<Record>
+						<PropertyValue Property="RequestAtLeast">
+							<Collection>
+								<PropertyPath>DismissedCriticality</PropertyPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+
 				<Annotation Term="UI.QuickViewFacets">
 					<Collection>
 						<Record Type="UI.ReferenceFacet">

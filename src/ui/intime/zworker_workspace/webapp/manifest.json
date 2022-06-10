@@ -175,6 +175,24 @@
                     }
                   }
                 }
+              },
+              "ZSNN_WORKER_ASSIGNED_SUBTASK": {
+                "EntitySet": "ZSNN_WORKER_ASSIGNED_SUBTASK",
+                "Header": {
+                  "Actions": {
+                    "createTimeSheetHeader": {
+                      "id": "createTimeSheetHeader",
+                      "text": "Списать время",
+                      "press": "onCreateTimeSheetHeaderButtonPress"
+                    },
+                    "changeTaskStatus": {
+                      "id": "changeTaskStatus",
+                      "text": "Сменить статус",
+                      "press": "onChangeTaskStatusPress",
+                      "requiresSelection": true
+                    }
+                  }
+                }
               }
             }
           }
