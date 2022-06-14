@@ -161,6 +161,28 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
         oDialog.open();
     },
 
+    onCreateTimeSheetSubTaskPageButtonPress: function (oEvent) {
+        debugger;
+        var oItem = this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::SubSection").getBindingContext().getObject();
+        var oDialog = new TimeSheetDialog({
+            title: `Списать время - ${oEvent.getSource().getBindingContext().getObject().Executor}`,
+            executorID: oEvent.getSource().getBindingContext().getObject().Executor,
+            SubTaskID: oItem.SubTaskID,
+            contentWidth: "100%"
+        });
+
+        oDialog.timeSheetSaveResult.then(function (oSuccess) {
+            this.extensionAPI.refresh();
+            this.updateVizFrame();
+        }.bind(this),
+            function (oError) {
+                MessageDialog.isExistError();
+            }.bind(this)
+        );
+
+        oDialog.open();
+    },
+
 
     updateVizFrame: function () {
         Format.numericFormatter(ChartFormatter.getInstance());

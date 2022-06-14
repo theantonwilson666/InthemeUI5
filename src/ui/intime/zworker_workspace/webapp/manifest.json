@@ -183,7 +183,7 @@
                     "createTimeSheetHeader": {
                       "id": "createTimeSheetHeader",
                       "text": "Списать время",
-                      "press": "onCreateTimeSheetHeaderButtonPress"
+                      "press": "onCreateTimeSheetSubTaskPageButtonPress"
                     },
                     "changeTaskStatus": {
                       "id": "changeTaskStatus",
