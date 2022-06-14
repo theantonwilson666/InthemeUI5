@@ -151,6 +151,11 @@
                       "id": "createTimeSheetHeader",
                       "text": "Списать время",
                       "press": "onCreateTimeSheetHeaderButtonPress"
+                    },
+                    "SeeAllUsers": {
+                      "id": "seeAllUsers",
+                      "text": "Просмотр всех сотрудников",
+                      "press": "onSeeAllUsers"
                     }
                   }
                 },
