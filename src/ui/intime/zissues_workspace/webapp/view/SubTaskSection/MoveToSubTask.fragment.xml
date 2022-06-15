@@ -9,22 +9,22 @@
     xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
     xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
     xmlns:m="sap.m">
-    <Dialog id="_moveTaskToProjectStage-Dialog"
-        title="Переместить задачу - {Name}">
+    <Dialog id="_moveSubTaskToSubTask-Dialog"
+        title="Переместить подзадачу - {Name}">
         <content>
 
-            <smartFilterBar:SmartFilterBar id="_TaskProjectStage-SmartFilter"
-                entitySet="ZSNN_INT_PROJECT_STAGE_SH">
+            <smartFilterBar:SmartFilterBar id="_MoveSubTaskToSubTask-SmartFilter"
+                entitySet="ZBNN_SUBTASK_SH">
                 <smartFilterBar:layoutData>
                     <FlexItemData shrinkFactor="0"/>
                 </smartFilterBar:layoutData>
             </smartFilterBar:SmartFilterBar>
 
 
-            <smartTable:SmartTable id="_TaskProjectStage-SmartTable"
-                entitySet="ZSNN_INT_PROJECT_STAGE_SH"
+            <smartTable:SmartTable id="_MoveSubTaskToSubTask-SmartTable"
+                entitySet="ZBNN_SUBTASK_SH"
                 tableType="ResponsiveTable"
-                smartFilterId="_TaskProjectStage-SmartFilter"
+                smartFilterId="_MoveSubTaskToSubTask-SmartFilter"
                 useExportToExcel="false"
                 useVariantManagement="false"
                 useTablePersonalisation="true"
