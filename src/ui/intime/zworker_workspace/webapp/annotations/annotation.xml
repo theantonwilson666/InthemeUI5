@@ -402,6 +402,16 @@
 
 			<Annotations Target="ZINT_UI_WORKER_WORKSPACE_SRV.ZSNN_WORKER_LISTType">
 
+				<!-- <Annotation Term="UI.PresentationVariant">
+					<Record>
+						<PropertyValue Property="RequestAtLeast">
+							<Collection>
+								<PropertyPath>CurrentUser</PropertyPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation> -->
+
 				<Annotation Term="UI.FieldGroup"
 					Qualifier="Activities">
 					<Record>
@@ -515,6 +525,7 @@
 						<PropertyPath>UserID</PropertyPath>
 						<PropertyPath>Branch</PropertyPath>
 						<PropertyPath>PositionID</PropertyPath>
+						<PropertyPath>CurrentUser</PropertyPath>
 					</Collection>
 				</Annotation>
 
@@ -587,6 +598,11 @@
 							<PropertyValue Property="Value"
 								Path="OpenAssignedSubTask" />
 						</Record>
+
+						<!-- <Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="CurrentUser" />
+						</Record> -->
 
 					</Collection>
 				</Annotation>

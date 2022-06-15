@@ -154,7 +154,7 @@
                     },
                     "SeeAllUsers": {
                       "id": "seeAllUsers",
-                      "text": "Просмотр всех сотрудников",
+                      "text": "Список сотрудников",
                       "press": "onSeeAllUsers"
                     }
                   }
