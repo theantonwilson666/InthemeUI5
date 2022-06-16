@@ -167,7 +167,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
         var oDialog = new TimeSheetDialog({
             title: `Списать время - ${oEvent.getSource().getBindingContext().getObject().Executor}`,
             executorID: oEvent.getSource().getBindingContext().getObject().Executor,
-            SubTaskID: oItem.SubTaskID,
+            subTaskID: oItem.SubTaskID,
             contentWidth: "100%"
         });
 

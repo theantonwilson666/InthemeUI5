@@ -5,6 +5,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ListReportExt", {
   },
 
   onInitSmartFilterBarExtension: function (oEvent) {
+    this.byId('intime.zworker_workspace::sap.suite.ui.generic.template.ListReport.view.ListReport::ZSNN_WORKER_LIST--listReportFilter-filterItemControl_BASIC-CurrentUser').setValue('X')
     this.getSmartTable().attachBeforeRebindTable(this.onBeforeRebindSmartTable.bind(this));
     this.getSmartTable().rebindTable();
   },

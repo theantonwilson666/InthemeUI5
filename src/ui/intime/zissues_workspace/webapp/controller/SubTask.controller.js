@@ -317,12 +317,77 @@ sap.ui.define([
                 this.byId("_SubTaskExecutors-SmartTable").getTable().setSelectedItem(oFirstSelectedItem, false);
             },
 
-            onMoveToAnotherTaskButtonPress: function() {
+            onMoveToAnotherTaskButtonPress: function (oEvent) {
+
+                this.loadDialog
+                .call(this, {
+                    sDialogName: "_moveSubTaskToTask-Dialog",
+                    sViewName: "intime.zissues_workspace.view.SubTaskSection.MoveToTask"
+                })
+                .then(
+                    function (oDialog) {
+
+                        debugger;
+
+                        oDialog.open();
+                    }.bind(this)
+                );
 
             },
 
-            onMoveToAnotherSubTaskButtonPress: function() {
+            onMoveToAnotherSubTaskButtonPress: function(oEvent) {
 
+                this.loadDialog
+                .call(this, {
+                    sDialogName: "_moveSubTaskToSubTask-Dialog",
+                    sViewName: "intime.zissues_workspace.view.SubTaskSection.MoveToSubTask"
+                })
+                .then(
+                    function (oDialog) {
+
+                        debugger;
+
+                        oDialog.open();
+                    }.bind(this)
+                );
+            },
+
+            onCancelMoveDialog: function (oEvent) {
+                oEvent.getSource().getParent().close();
             }
+
+            // onOkMoveDialog: function (oEvent) {
+
+            //     var oSelectedItem = this.byId("_MoveSubTaskToTask-SmartTable").getTable().getSelectedItem();
+
+            //     if (!oSelectedItem) {
+            //         MessageBox.show("Выберите задачу");
+            //         return;
+            //     }
+
+
+            //     this.byId("_moveTaskToProjectStage-Dialog").setBusy(true);
+
+            //     this.getModel().callFunction("/MoveTaskToProjectStage", {
+            //         method: "POST",
+            //         urlParameters: {
+            //             TaskID: oEvent.getSource().getParent().getBindingContext().getObject().TaskId,
+            //             ProjectStageID: oSelectedItem.getBindingContext().getObject().StageID
+            //         },
+
+            //         success: function (oData) {
+            //             this.byId("_moveTaskToProjectStage-Dialog").setBusy(false);
+            //             this.isExistError();
+            //             this.byId("_moveTaskToProjectStage-Dialog").close();
+
+            //         }.bind(this),
+
+            //         error: function (oError) {
+            //             this.byId("_moveTaskToProjectStage-Dialog").setBusy(false);
+            //             this.showError(oError);
+            //         }.bind(this)
+            //     });
+
+            // },
         });
     });
