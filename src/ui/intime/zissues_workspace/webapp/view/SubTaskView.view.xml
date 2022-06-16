@@ -42,11 +42,13 @@
 		        </MenuButton> -->
 
                 <Button
+                        id="MoveToTask"
                         text="Переместить в другую задачу"
                         type="Emphasized"
                         press="onMoveToAnotherTaskButtonPress"/>
 
                 <Button
+                        id="MoveToSubTask"
                         text="Переместить в другую подзадачу"
                         type="Emphasized"
                         press="onMoveToAnotherSubTaskButtonPress"/>
