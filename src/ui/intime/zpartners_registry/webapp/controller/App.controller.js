@@ -28,7 +28,6 @@ sap.ui.define([
                 var oItems = this.getOwnerComponent().getComponentData().startupParameters;
                 var sItems = JSON.stringify(oItems);
 
-                debugger;
 
                 this.getModel().callFunction("/NavToPartner", {
                     method: "POST",
@@ -36,18 +35,15 @@ sap.ui.define([
                         AllParameters: sItems
                     },
                     success: function(oData) {
-                        debugger
 
                     }.bind(this),
                     error: function(oError) {
-                        debugger
                     }.bind(this)
                 })
 
             },
 
             onAfterRendering: function() {
-                debugger;
                 this.NavToPartner();
             },
 
@@ -146,14 +142,11 @@ sap.ui.define([
                                 ""
                             );
 
-                            debugger;
-
                             if (this.getStateProperty('/editablePartner').bCreated) {
                                 this.getModel().setProperty(this.getStateProperty('/editablePartner').getPath() + "/LogoTechValue", vContent);
                                 this.getModel().setProperty(this.getStateProperty('/editablePartner').getPath() + "/FilePath", oFile.name);
                                 this.savePartnerChanges(vContent);
                             } else {
-                                debugger;
 
                                 this.getModel().callFunction("/GetChangedPartner", {
                                     method: "POST",
@@ -250,7 +243,6 @@ sap.ui.define([
                                 method: "POST",
                                 success: function(oData) {
 
-                                    debugger;
 
                                     this["EditParnterDialog"].setBusy(false);
                                     this.isExistError();
@@ -268,7 +260,6 @@ sap.ui.define([
                                 }.bind(this),
 
                                 error: function(oError) {
-                                    debugger;
                                     this.showError(oError);
                                 }.bind(this)
                             });

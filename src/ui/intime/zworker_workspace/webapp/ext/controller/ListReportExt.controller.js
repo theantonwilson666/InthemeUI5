@@ -21,7 +21,6 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ListReportExt", {
 
   onDataRecieved: function(oData){
     var oUser = oData.getParameter('data').results[0];
-
     this.getOwnerComponent().getRouter().navTo("ZSNN_WORKER_LIST", {
       keys1 : `'${oUser.UserID}'`
     }, true);
