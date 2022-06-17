@@ -47,15 +47,15 @@
 
         </content>
         <beginButton>
-            <Button id="beginBtn"
+            <Button id="MoveToTaskSave"
                 text="Сохранить"
                 type="Emphasized"
-                press="onOkMoveDialog"/>
+                press="onOkMoveToTaskDialog"/>
         </beginButton>
         <endButton>
-            <Button id="endBtn"
+            <Button id="MoveToTaskCancel"
                 text="Отменить"
-                press=".onCancelMoveDialog"/>
+                press=".onCancelMoveToTaskDialog"/>
         </endButton>
     </Dialog>
 
