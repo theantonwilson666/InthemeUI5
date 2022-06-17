@@ -746,6 +746,12 @@
                   <PropertyValue Property="ValueListProperty"
                     String="ProjectID"/>
                 </Record>
+                <!-- <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="ProjectName"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectName"/>
+                </Record> -->
               </Collection>
             </PropertyValue>
           </Record>
