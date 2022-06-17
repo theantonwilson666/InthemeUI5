@@ -1101,7 +1101,7 @@
             };
 
             loginController.getTelegramCode = function () {
-                return document.getElementById("TELEGRAM_BLOCK").value
+                return document.getElementById("TELEGRAM_FIELD-inner").value
             };
 
             loginController.getPassword = function () {
@@ -1121,6 +1121,10 @@
                     if (oParam) {
                         for (var i = 0; i < Object.keys(oParam).length; i++) {
                             oHttp.setRequestHeader(Object.keys(oParam)[i], oParam[Object.keys(oParam)[i]]);
+                        }
+                    } else {
+                        oParam = {
+                            'X-CSRF-TOKEN': ''
                         }
                     }
 
@@ -1232,10 +1236,9 @@
                         "accept": "application/json"
                     }).then(function (oResponse) {
                         document.getElementById("TELEGRAM_BLOCK").hidden = false;
-                        this.telegramState = {
-                            codeNotSend: false,
-                            codeSend: true
-                        }
+                        this.telegramState.codeNotSend = false;
+                        this.telegramState.codeSend = true;
+
                     }.bind(this))
                         .catch(function (oError) {
                             this.handleError(oError);
@@ -1246,12 +1249,14 @@
             };
 
             loginController.validateToken = function () {
-                var sUrl = window.location.origin + "/sap/opu/odata/sap/ZTELEGRAM_AUTH_SRV/ValidateToken";
+                var sUrl = window.location.origin + "/sap/opu/odata/sap/ZTELEGRAM_AUTH_SRV/ValidateToken?Token='" + this.getTelegramCode() + "'";
                 this.makeRequest('POST', sUrl, {
                     "X-CSRF-TOKEN": this.telegramState.xsrf_token,
                     "accept": "application/json"
                 }).then(function (oResponse) {
-                    
+                    if (JSON.parse(oResponse.response).d.ValidateToken.Ok) {
+                        this.form.submit();
+                    }
                 }.bind(this))
                     .catch(function (oError) {
                         this.handleError(oError);
