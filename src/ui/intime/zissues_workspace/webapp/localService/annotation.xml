@@ -746,6 +746,12 @@
                   <PropertyValue Property="ValueListProperty"
                     String="ProjectID"/>
                 </Record>
+                <!-- <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="ProjectName"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectName"/>
+                </Record> -->
               </Collection>
             </PropertyValue>
           </Record>
@@ -813,6 +819,57 @@
       <!-- <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_SUBTASKType/ProjectName">
         <Annotation Term="Common.SemanticObject" String="zpartners_registry"/>
       </Annotations> -->
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INT_PROJECT_STAGE_SHType/StageID">
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="false"/>
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZSNN_INT_PROJECT_STAGE_SH"/>
+            <PropertyValue Property="SearchSupported"
+              Bool="true"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="StageName"/>
+                </Record>
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="ProjectName"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectName"/>
+                </Record>
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="PartnerName"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerName"/>
+                </Record>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="PartnerId"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerId"/>
+                </Record>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="ProjectID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectID"/>
+                </Record>
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="StageID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="StageID"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
 
       <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INT_PROJECT_STAGE_SHType/ProjectID">
         <Annotation Term="Common.ValueListWithFixedValues"
@@ -907,13 +964,14 @@
 
 
       <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INT_PROJECT_STAGE_SHType">
-        <Annotation Term="UI.SelectionFields">
-          <Collection>
-            <PropertyPath>PartnerId</PropertyPath>
+
+      	<Annotation Term="UI.SelectionFields">
+					<Collection>
+						<PropertyPath>StageID</PropertyPath>
             <PropertyPath>ProjectID</PropertyPath>
-            <PropertyPath>ProjeStageID</PropertyPath>
-          </Collection>
-        </Annotation>
+            <PropertyPath>PartnerId</PropertyPath>
+					</Collection>
+				</Annotation>
 
         <Annotation Term="UI.LineItem">
           <Collection>
@@ -921,9 +979,339 @@
               <PropertyValue Property="Value"
                 Path="StageID" />
             </Record>
-            <Record Type="UI.DataField">
+            <!-- <Record Type="UI.DataField">
               <PropertyValue Property="Value"
                 Path="StageName" />
+            </Record> -->
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="ProjectID" />
+            </Record>
+            <!-- <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="ProjectName" />
+            </Record> -->
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="PartnerId" />
+            </Record>
+            <!-- <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="PartnerName" />
+            </Record> -->
+          </Collection>
+        </Annotation>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZBNN_SUBTASK_SHType/PartnerID">
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="true" />
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZBNN_PARTNER_SH" />
+            <PropertyValue Property="SearchSupported"
+              Bool="true" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="PartnerID" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerId" />
+                </Record>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="PartnerName" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerName" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZBNN_SUBTASK_SHType/ProjectID">
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="false"/>
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZSNN_INT_PROJECT_SH"/>
+            <PropertyValue Property="SearchSupported"
+              Bool="true"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="PartnerID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerId"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="ProjectID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectID"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZBNN_SUBTASK_SHType/StageID">
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="false"/>
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZSNN_INT_PROJECT_STAGE_SH"/>
+            <PropertyValue Property="SearchSupported"
+              Bool="true"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="StageName"/>
+                </Record>
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="ProjectName"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectName"/>
+                </Record>
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="PartnerName"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerName"/>
+                </Record>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="PartnerID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerId"/>
+                </Record>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="ProjectID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectID"/>
+                </Record>
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="StageID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="StageID"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZBNN_SUBTASK_SHType/TaskID">
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="false"/>
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZBNN_TASKNAME_SH"/>
+            <PropertyValue Property="SearchSupported"
+              Bool="true"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="TaskName"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="StageName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="PartnerID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerID"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="ProjectID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectID"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="StageID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="StageID"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="TaskID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="TaskID"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZBNN_SUBTASK_SHType/SubTaskID">
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="false"/>
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZBNN_SUBTASK_SH"/>
+            <PropertyValue Property="SearchSupported"
+              Bool="true"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="TaskName"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="StageName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="SubTaskName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="PartnerID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerID"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="ProjectID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectID"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="StageID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="StageID"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="TaskID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="TaskID"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="SubTaskID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="SubTaskID"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZBNN_SUBTASK_SHType/StageName">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZBNN_SUBTASK_SHType/SubTaskName">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZBNN_SUBTASK_SHType/ProjectName">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZBNN_SUBTASK_SHType/PartnerName">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZBNN_SUBTASK_SHType/TaskName">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+      
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZBNN_SUBTASK_SHType">
+
+      	<Annotation Term="UI.SelectionFields">
+					<Collection>
+						<PropertyPath>TaskID</PropertyPath>
+            <PropertyPath>SubTaskID</PropertyPath>
+            <PropertyPath>StageID</PropertyPath>
+            <PropertyPath>ProjectID</PropertyPath>
+            <PropertyPath>PartnerID</PropertyPath>
+					</Collection>
+				</Annotation>
+
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="TaskID" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="SubTaskID" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="StageID" />
             </Record>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value"
@@ -931,17 +1319,285 @@
             </Record>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value"
-                Path="ProjectName" />
-            </Record>
-            <Record Type="UI.DataField">
-              <PropertyValue Property="Value"
-                Path="PartnerId" />
-            </Record>
-            <Record Type="UI.DataField">
-              <PropertyValue Property="Value"
-                Path="PartnerName" />
+                Path="PartnerID" />
             </Record>
           </Collection>
+        </Annotation>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INT_PROJECT_STAGE_SHType/ProjectID">
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="false"/>
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZSNN_INT_PROJECT_SH"/>
+            <PropertyValue Property="SearchSupported"
+              Bool="true"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="PartnerId"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerId"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="ProjectID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectID"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+
+    <Annotations Target="ZINT_UI_TASK_SRV.ZBNN_TASKNAME_SHType">
+
+      	<Annotation Term="UI.SelectionFields">
+					<Collection>
+						<PropertyPath>TaskID</PropertyPath>
+            <PropertyPath>StageID</PropertyPath>
+            <PropertyPath>ProjectID</PropertyPath>
+            <PropertyPath>PartnerID</PropertyPath>
+					</Collection>
+				</Annotation>
+
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="TaskID" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="StageID" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="ProjectID" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="PartnerID" />
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZBNN_TASKNAME_SHType/StageID">
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="false"/>
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZSNN_INT_PROJECT_STAGE_SH"/>
+            <PropertyValue Property="SearchSupported"
+              Bool="true"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="StageName"/>
+                </Record>
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="ProjectName"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectName"/>
+                </Record>
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="PartnerName"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerName"/>
+                </Record>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="PartnerID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerId"/>
+                </Record>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="ProjectID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectID"/>
+                </Record>
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="StageID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="StageID"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZBNN_TASKNAME_SHType/TaskID">
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="false"/>
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZBNN_TASKNAME_SH"/>
+            <PropertyValue Property="SearchSupported"
+              Bool="true"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="TaskName"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="StageName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="PartnerID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerID"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="ProjectID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectID"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="StageID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="StageID"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="TaskID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="TaskID"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZBNN_TASKNAME_SHType/TaskName">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZBNN_TASKNAME_SHType/StageName">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZBNN_TASKNAME_SHType/ProjectName">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZBNN_TASKNAME_SHType/PartnerName">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZBNN_TASKNAME_SHType/PartnerID">
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="true" />
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZBNN_PARTNER_SH" />
+            <PropertyValue Property="SearchSupported"
+              Bool="true" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="PartnerID" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerId" />
+                </Record>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="PartnerName" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerName" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZBNN_TASKNAME_SHType/ProjectID">
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="false"/>
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZSNN_INT_PROJECT_SH"/>
+            <PropertyValue Property="SearchSupported"
+              Bool="true"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="PartnerID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerId"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="ProjectID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectID"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
         </Annotation>
       </Annotations>
 

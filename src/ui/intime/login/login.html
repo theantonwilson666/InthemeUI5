@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <title>@label_title_login</title>
+    <link rel="shortcut icon" href="@img_favicon" />
+    @Html.Raw(sys_include_css)
+    @Html.Raw(sys_include_js)
+</head>
+
+
+
+<body lang="@sys_lang" class="sapUiBody @sys_login_height_class" data-sap-login="@Html.Raw(sys_login_data)">
+    <div class="hspan"></div>
+    <header>
+        <div class="loginLogo"><img src="@img_logo" width="@img_logo_width" /></div>
+    </header>
+    <main id="LOGIN_MAIN">
+        <form id="LOGIN_FORM" class="loginForm" name="loginForm" action="@sys_form_action" method="post"
+            autocomplete="@sys_autocomplete"></form>
+        <div id="LOGIN_SHADOW_FORM" hidden="hidden" class="loginDisplayNone">
+            @Html.Raw(sys_form_hidden_fields)
+            <div id="USERNAME_BLOCK" class="loginInput sapUiLightestBG"><label id="USERNAME_LABEL"
+                    for="USERNAME_FIELD-inner" class="loginHiddenAccessible">@label_user</label><input
+                    id="USERNAME_FIELD-inner" tabindex="0" type="text" class="loginInputField"
+                    name="@sys_form_param_user" maxlength="@sys_form_user_maxlen" inputmode="verbatim" autocorrect="off"
+                    autocapitalize="none" placeholder="@label_user" title="@label_user"></div>
+            <div id="PASSWORD_BLOCK" class="loginInput sapUiLightestBG"><label id="PASSWORD_LABEL"
+                    for="PASSWORD_FIELD-inner" class="loginHiddenAccessible">@label_password</label><input
+                    id="PASSWORD_FIELD-inner" tabindex="0" type="password" class="loginInputField"
+                    name="@sys_form_param_password" inputmode="verbatim" placeholder="@label_password"
+                    title="@label_password"></div>
+            <div id="LANGUAGE_BLOCK">
+                <div id="LANGUAGE_LABEL_BLOCK" class="loginDisplayInput"><label id="LANGUAGE_LABEL"
+                        for="LANGUAGE_SELECT" class="sapUiContentForegroundTextColor">@label_language</label></div>
+                <div id="LANGUAGE_SELECT_BLOCK"><select id="LANGUAGE_SELECT" tabindex="0" class="loginSelect"
+                        title="@label_language"></select></div>
+            </div>
+
+            <div id="TELEGRAM_BLOCK" class="loginInput sapUiLightestBG" hidden="@telegram_block_hidden"><label id="TELEGRAM_LABEL"
+                    for="TELEGRAM_FIELD-inner" class="loginHiddenAccessible">@telegram_label</label>
+                <input id="TELEGRAM_FIELD-inner" tabindex="0" class="loginInputField" name="TELEGRAM_INPUT"
+                    placeholder="@telegram_label" title="@telegram_label" type="password" inputmode="verbatim" autocorrect="off">
+            </div>
+
+            <div id="CLIENT_BLOCK" class="loginInput sapUiLightestBG" ><label id="CLIENT_LABEL" for="CLIENT_FIELD-inner"
+                    class="loginHiddenAccessible">@label_client</label><input id="CLIENT_FIELD-inner" tabindex="0"
+                    type="text" class="loginInputField" name="@sys_form_param_client" maxlength="3"
+                    value="@sys_form_default_client" placeholder="@label_client" title="@label_client"></div>
+            <div id="LOGIN_SUBMIT_BLOCK" class="loginButtonRow"><button id="LOGIN_LINK" type="submit"
+                    class="loginButton sapUiButtonEmphasized" tabindex="0"
+                    title="@label_button_login">@label_button_login</button></div>
+            <div id="LOGIN_CHANGE_PASSWORDD_BLOCK" class="loginButtonRow"><button id="CHANGE_PASSWORD_LINK"
+                    type="button" class="loginButton sapUiButtonLite" tabindex="0"
+                    title="@label_change_password">@label_change_password</button></div>
+            <div id="LOGIN_FORGOT_PASSWORD_BLOCK" class="loginButtonRow">
+                <div class="loginLink"><a id="LOGIN_FORGOT_PASSWORD_LINK"
+                        href="@sys_url_forgot_pw">@label_forgot_password</a></div>
+            </div>
+            <div id="LOGIN_REGISTER_BLOCK" class="loginButtonRow">
+                <div class="loginLink"><a id="LOGIN_REGISTER_LINK" href="@sys_url_register">@label_register</a></div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="loginCopyright"><label class="sapMLabel">@Html.Raw(label_copyright)</label></div>
+    </footer>
+    <div class="busyAnimation">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</body>
+
+</html>

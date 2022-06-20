@@ -168,10 +168,12 @@ sap.ui.define([
 
             onCancelMoveDialog: function (oEvent) {
                 oEvent.getSource().getParent().close();
+                this.onRemoveRowSelectionForMoveToProjectStage();
             },
 
             onOkMoveDialog: function (oEvent) {
 
+                debugger;
                 var oSelectedItem = this.byId("_TaskProjectStage-SmartTable").getTable().getSelectedItem();
 
                 if (!oSelectedItem) {
@@ -190,15 +192,18 @@ sap.ui.define([
                     },
 
                     success: function (oData) {
+                        debugger;
                         this.byId("_moveTaskToProjectStage-Dialog").setBusy(false);
                         this.isExistError();
                         this.byId("_moveTaskToProjectStage-Dialog").close();
+                        this.onRemoveRowSelectionForMoveToProjectStage();
 
                     }.bind(this),
 
                     error: function (oError) {
                         this.byId("_moveTaskToProjectStage-Dialog").setBusy(false);
                         this.showError(oError);
+                        this.onRemoveRowSelectionForMoveToProjectStage();
                     }.bind(this)
                 });
 
@@ -220,22 +225,11 @@ sap.ui.define([
                             oDialog.open();
                         }.bind(this)
                     );
+            },
 
-                // var oDialog = new MoveTasktoAnotherStageDialog({
-                //     title: `Перенос задачи`,
-                //     contentWidth: "100%"
-                // });
-
-                // oDialog.timeSheetSaveResult.then(function (oSuccess) {
-                //     this.extensionAPI.refresh();
-                //     this.updateVizFrame();
-                // }.bind(this),
-                //     function (oError) {
-                //         MessageDialog.isExistError();
-                //     }.bind(this)
-                // );
-
-                // oDialog.open();
+            onRemoveRowSelectionForMoveToProjectStage: function() {
+                var oFirstSelectedItem = this.byId("_TaskProjectStage-SmartTable").getTable().getSelectedItems()[0];
+                this.byId("_TaskProjectStage-SmartTable").getTable().setSelectedItem(oFirstSelectedItem, false);
             }
 
 

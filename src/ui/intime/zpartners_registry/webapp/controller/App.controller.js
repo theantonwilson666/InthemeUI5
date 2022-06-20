@@ -10,8 +10,6 @@ sap.ui.define([
         return BaseController.extend("intime.zpartners_registry.controller.App", {
             onInit: function() {
 
-                debugger;
-
                 var startupParams = this.getOwnerComponent().getComponentData().startupParameters;
                 var sPartnerId = startupParams && startupParams.PartnerID && startupParams.PartnerID[0];
 
@@ -22,34 +20,31 @@ sap.ui.define([
                 if (sPartnerId) {
                     this.navTo("project", { query: { PartnerId: sPartnerId } }, false);
                 }
-                this.NavToPartner();
+                // this.NavToPartner();
             },
 
             NavToPartner: function() {
 
-                // s - string
-                // i - integer 
-                // a - array 
-                // o - object 
+                var oItems = this.getOwnerComponent().getComponentData().startupParameters;
+                var sItems = JSON.stringify(oItems);
 
-                var items = this.getOwnerComponent().getComponentData().startupParameters;
-
-                debugger;
 
                 this.getModel().callFunction("/NavToPartner", {
-                    method: "GET",
+                    method: "POST",
                     urlParameters: {
-                        AllParameters: items
+                        AllParameters: sItems
                     },
                     success: function(oData) {
-                        debugger
 
                     }.bind(this),
                     error: function(oError) {
-                        debugger
                     }.bind(this)
                 })
 
+            },
+
+            onAfterRendering: function() {
+                this.NavToPartner();
             },
 
             OnEdit: function() {
@@ -147,14 +142,11 @@ sap.ui.define([
                                 ""
                             );
 
-                            debugger;
-
                             if (this.getStateProperty('/editablePartner').bCreated) {
                                 this.getModel().setProperty(this.getStateProperty('/editablePartner').getPath() + "/LogoTechValue", vContent);
                                 this.getModel().setProperty(this.getStateProperty('/editablePartner').getPath() + "/FilePath", oFile.name);
                                 this.savePartnerChanges(vContent);
                             } else {
-                                debugger;
 
                                 this.getModel().callFunction("/GetChangedPartner", {
                                     method: "POST",
@@ -251,7 +243,6 @@ sap.ui.define([
                                 method: "POST",
                                 success: function(oData) {
 
-                                    debugger;
 
                                     this["EditParnterDialog"].setBusy(false);
                                     this.isExistError();
@@ -269,7 +260,6 @@ sap.ui.define([
                                 }.bind(this),
 
                                 error: function(oError) {
-                                    debugger;
                                     this.showError(oError);
                                 }.bind(this)
                             });

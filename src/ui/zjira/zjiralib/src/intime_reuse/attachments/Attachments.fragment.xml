@@ -1,0 +1,36 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+
+    <smartTable:SmartTable entitySet="ZSNN_INTIME_ATTACHMENT"
+        header="Вложения"
+        tableType="ResponsiveTable"
+        showRowCount="true"
+        enableAutoBinding="true"
+        class="sapUiResponsiveContentPadding"
+        enableAutoColumnWidth="true">
+        <!-- layout data used to make the table growing but the filter bar fixed -->
+        <smartTable:layoutData>
+            <FlexItemData growFactor="1"
+                baseSize="0%"/>
+        </smartTable:layoutData>
+
+         <smartTable:customToolbar>
+            <OverflowToolbar design="Transparent">
+              <ToolbarSpacer />
+              <Button 
+                icon="sap-icon://add"
+                press="_onAddNewAttachment" />
+
+                <!-- <Button 
+                icon="sap-icon://delete"
+                press="_onDeleteAttachment" /> -->
+
+            </OverflowToolbar>
+          </smartTable:customToolbar>
+
+    </smartTable:SmartTable>
+
+</core:FragmentDefinition>
+

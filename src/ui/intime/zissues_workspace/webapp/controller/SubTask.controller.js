@@ -317,12 +317,138 @@ sap.ui.define([
                 this.byId("_SubTaskExecutors-SmartTable").getTable().setSelectedItem(oFirstSelectedItem, false);
             },
 
-            onMoveToAnotherTaskButtonPress: function() {
+            onMoveToAnotherTaskButtonPress: function (oEvent) {
+
+                this.loadDialog
+                .call(this, {
+                    sDialogName: "_moveSubTaskToTask-Dialog",
+                    sViewName: "intime.zissues_workspace.view.SubTaskSection.MoveToTask"
+                })
+                .then(
+                    function (oDialog) {
+
+                        debugger;
+
+                        oDialog.open();
+                    }.bind(this)
+                );
 
             },
 
-            onMoveToAnotherSubTaskButtonPress: function() {
+            onMoveToAnotherSubTaskButtonPress: function(oEvent) {
 
+                debugger;
+
+                this.loadDialog
+                .call(this, {
+                    sDialogName: "_moveSubTaskToSubTask-Dialog",
+                    sViewName: "intime.zissues_workspace.view.SubTaskSection.MoveToSubTask"
+                })
+                .then(
+                    function (oDialog) {
+
+                        debugger;
+
+                        oDialog.open();
+                    }.bind(this)
+                );
+            },
+
+            onCancelMoveToTaskDialog: function (oEvent) {
+                oEvent.getSource().getParent().close();
+                this.onRemoveRowSelectionForMoveToTask();
+            },
+
+            onCancelMoveToSubTaskDialog: function (oEvent) {
+                oEvent.getSource().getParent().close();
+                this.onRemoveRowSelectionForMoveToSubTask();
+            },
+
+            onOkMoveToTaskDialog: function (oEvent) {
+
+                debugger;
+
+                var oSelectedItem = this.byId("_MoveSubTaskToTask-SmartTable").getTable().getSelectedItem();
+
+                if (!oSelectedItem) {
+                    MessageBox.show("Выберите подзадачу");
+                    return;
+                }
+
+
+                this.byId("_moveSubTaskToTask-Dialog").setBusy(true);
+
+                this.getModel().callFunction("/MoveSubTaskToTask", {
+                    method: "POST",
+                    urlParameters: {
+                        SubTaskID: oEvent.getSource().getParent().getBindingContext().getObject().SubtaskId,
+                        TaskID: oSelectedItem.getBindingContext().getObject().TaskID
+                    },
+
+                    success: function (oData) {
+                        this.byId("_moveSubTaskToTask-Dialog").setBusy(false);
+                        this.isExistError();
+                        this.byId("_moveSubTaskToTask-Dialog").close();
+                        this.onRemoveRowSelectionForMoveToTask();
+
+                    }.bind(this),
+
+                    error: function (oError) {
+                        this.byId("_moveSubTaskToTask-Dialog").setBusy(false);
+                        this.showError(oError);
+                        this.onRemoveRowSelectionForMoveToTask();
+                    }.bind(this)
+                });
+
+            },
+
+            onOkMoveToSubTaskDialog: function (oEvent) {
+
+                debugger;
+
+                var oSelectedItem = this.byId("_MoveSubTaskToSubTask-SmartTable").getTable().getSelectedItem();
+
+                if (!oSelectedItem) {
+                    MessageBox.show("Выберите подзадачу");
+                    return;
+                }
+
+
+                this.byId("_moveSubTaskToSubTask-Dialog").setBusy(true);
+
+                this.getModel().callFunction("/MoveTimeSheetSubTaskToSubTask", {
+                    method: "POST",
+                    urlParameters: {
+                        SourceSubTaskID: oEvent.getSource().getParent().getBindingContext().getObject().SubtaskId,
+                        TargetSubTaskID: oSelectedItem.getBindingContext().getObject().SubTaskID
+                    },
+
+                    success: function (oData) {
+                        this.byId("_moveSubTaskToSubTask-Dialog").setBusy(false);
+                        this.isExistError();
+                        this.byId("_moveSubTaskToSubTask-Dialog").close();
+                        this.onRemoveRowSelectionForMoveToSubTask();
+
+                    }.bind(this),
+
+                    error: function (oError) {
+                        this.byId("_moveSubTaskToSubTask-Dialog").setBusy(false);
+                        this.showError(oError);
+                        this.onRemoveRowSelectionForMoveToSubTask();
+                    }.bind(this)
+                });
+
+            },
+
+            onRemoveRowSelectionForMoveToTask: function() {
+                var oFirstSelectedItem = this.byId("_MoveSubTaskToTask-SmartTable").getTable().getSelectedItems()[0];
+                this.byId("_MoveSubTaskToTask-SmartTable").getTable().setSelectedItem(oFirstSelectedItem, false);
+            },
+
+            onRemoveRowSelectionForMoveToSubTask: function() {
+                var oFirstSelectedItem = this.byId("_MoveSubTaskToSubTask-SmartTable").getTable().getSelectedItems()[0];
+                this.byId("_MoveSubTaskToSubTask-SmartTable").getTable().setSelectedItem(oFirstSelectedItem, false);
             }
+
         });
     });

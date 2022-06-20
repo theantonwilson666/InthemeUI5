@@ -151,6 +151,11 @@
                       "id": "createTimeSheetHeader",
                       "text": "Списать время",
                       "press": "onCreateTimeSheetHeaderButtonPress"
+                    },
+                    "SeeAllUsers": {
+                      "id": "seeAllUsers",
+                      "text": "Список сотрудников",
+                      "press": "onSeeAllUsers"
                     }
                   }
                 },
@@ -172,6 +177,24 @@
                         "determining": true,
                         "requiresSelection": true
                       }
+                    }
+                  }
+                }
+              },
+              "ZSNN_WORKER_ASSIGNED_SUBTASK": {
+                "EntitySet": "ZSNN_WORKER_ASSIGNED_SUBTASK",
+                "Header": {
+                  "Actions": {
+                    "createTimeSheetHeader": {
+                      "id": "createTimeSheetHeader",
+                      "text": "Списать время",
+                      "press": "onCreateTimeSheetSubTaskPageButtonPress"
+                    },
+                    "changeTaskStatus": {
+                      "id": "changeTaskStatus",
+                      "text": "Сменить статус",
+                      "press": "onChangeTaskStatusPress",
+                      "requiresSelection": true
                     }
                   }
                 }
@@ -239,8 +262,18 @@
               "settings": {
                 "editableHeaderContent": true
               }
-            }
+            },
+            "pages": [
+              {
+                "navigationProperty": "to_AssignedSubTask",
+                "entitySet": "ZSNN_WORKER_ASSIGNED_SUBTASK",
+                "component": {
+                  "name": "sap.suite.ui.generic.template.ObjectPage"
+                }
+              }
+            ]
           }
+
         }
       }
     }

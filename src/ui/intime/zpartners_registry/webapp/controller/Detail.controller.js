@@ -17,7 +17,7 @@ sap.ui.define([
                     .getRoute("project")
                     .attachPatternMatched(this._onRouteMatched, this);
                 this.byId("projectSmartTable").attachBeforeRebindTable(function (oEvent) {
-                    debugger;
+                   
                     var oSorter = new sap.ui.model.Sorter("StageNo", true);
                     oEvent.getParameter("bindingParams").sorter.push(oSorter);
                 });
@@ -59,11 +59,9 @@ sap.ui.define([
                 this.refreshAdminSection();
                 this.setStateProperty("/editProjectMode", false);
 
-                debugger;
             },
 
             onDeleteSelection: function (oEvent) {
-                debugger
                 sap.m.MessageBox.warning(`Вы уверены, что хотите удалить ${this._selectedRowContext.getObject().Name}`, {
                     actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
                     emphasizedAction: MessageBox.Action.OK,
@@ -71,7 +69,7 @@ sap.ui.define([
                         switch (sAction) {
                             case MessageBox.Action.OK:
                                 this.getModel().remove(this._selectedRowContext.getPath());
-                                debugger;
+                              
                                 break;
                             case MessageBox.Action.CANCEL:
                                 sap.m.MessageToast.show("Операция отменена");
@@ -196,7 +194,6 @@ sap.ui.define([
             },
 
             isSelected: function (ID) {
-                debugger;
                 this.buttonId = `${ID}`;
             },
 
@@ -206,7 +203,6 @@ sap.ui.define([
 
             onSaveProjectButtonPress: function (oEvent) {
 
-                debugger;
                 this.setStateProperty("/projectSelection", false);
                 this.setStateProperty("/stageSelection", false);
 
@@ -215,7 +211,6 @@ sap.ui.define([
                 this.submitChanges({
                     groupId: "changes",
                     success: function () {
-                        debugger;
 
                         this.byId("projectPage").setBusy(false);
 
@@ -249,7 +244,6 @@ sap.ui.define([
 
             onAddNewProjectButtonPress: function (oEvent) {
 
-                debugger;
 
                 this.getModel().callFunction("/GetCreatedProject", {
                     method: "POST",
@@ -275,7 +269,7 @@ sap.ui.define([
                     }.bind(this),
 
                     error: function (oError) {
-                        debugger;
+                        
                         this.showError(oError);
                     }.bind(this)
                 });
@@ -321,7 +315,6 @@ sap.ui.define([
             },
 
             onDocumentNavigate: function (oEvent) {
-                debugger;
                 var oLinkData = oEvent.getSource().getBindingContext().getObject();
 
                 var oCrossAppNav = sap.ushell.Container.getService("CrossApplicationNavigation");
@@ -343,7 +336,8 @@ sap.ui.define([
                     method: "POST",
                     urlParameters: {
                         JiraStage: oEvent.getSource().getBindingContext().getObject().JiraProjectStage,
-                        StageID: oEvent.getSource().getBindingContext().getObject().ProjectStageID
+                        StageID: oEvent.getSource().getBindingContext().getObject().ProjectStageID,
+                        JiraProjectID : oEvent.getSource().getBindingContext().getObject().JiraProjectID
                     },
 
                     success: function (oData) {
@@ -364,6 +358,10 @@ sap.ui.define([
 
                     }.bind(this)
                 });;
+            },
+
+            onErrorAttachment: function(oEvent){
+                this.showError(oEvent.mParameters);
             }
         });
     });

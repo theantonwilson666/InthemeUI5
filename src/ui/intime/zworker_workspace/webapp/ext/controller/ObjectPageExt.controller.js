@@ -82,6 +82,15 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
         this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getParent().rebindTable();
     },
 
+    onChartDateClick: function (day, month, year) {
+        debugger;
+
+        sap.ui.getCore().byId('timeSheetDateRange-DateRangeSelection').setDateValue(new Date(year, month, day, 23,59,59));
+        sap.ui.getCore().byId('timeSheetDateRange-DateRangeSelection').setSecondDateValue(new Date(year, month, day, 23,59,59));
+
+        this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getParent().rebindTable();
+    },
+
     initDateIntervalSelection: function () {
         var oDay = this.getDayParam(new Date());
         var oId = this.byId("_TimeSheetIntervalSelection-DateRangeSelection");
@@ -152,6 +161,28 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
         oDialog.open();
     },
 
+    onCreateTimeSheetSubTaskPageButtonPress: function (oEvent) {
+        debugger;
+        var oItem = this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::SubSection").getBindingContext().getObject();
+        var oDialog = new TimeSheetDialog({
+            title: `Списать время - ${oEvent.getSource().getBindingContext().getObject().Executor}`,
+            executorID: oEvent.getSource().getBindingContext().getObject().Executor,
+            subTaskID: oItem.SubTaskID,
+            contentWidth: "100%"
+        });
+
+        oDialog.timeSheetSaveResult.then(function (oSuccess) {
+            this.extensionAPI.refresh();
+            this.updateVizFrame();
+        }.bind(this),
+            function (oError) {
+                MessageDialog.isExistError();
+            }.bind(this)
+        );
+
+        oDialog.open();
+    },
+
 
     updateVizFrame: function () {
         Format.numericFormatter(ChartFormatter.getInstance());
@@ -184,7 +215,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
                         "properties": {
                             "color": "sapUiChartPaletteSemanticCriticalLight3"
                         },
-                        "displayName": "Списано 0-7 часов"
+                        "displayName": "0-8"
                     },
 
                     {
@@ -192,7 +223,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
                         "properties": {
                             "color": "sapUiChartPaletteSemanticGood"
                         },
-                        "displayName": "Списано 8 часов"
+                        "displayName": "8-9"
                     },
 
                     {
@@ -200,7 +231,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
                         "properties": {
                             "color": "sapUiChartPaletteSemanticCritical"
                         },
-                        "displayName": "Списано 9 часов"
+                        "displayName": "9-10"
                     },
 
                     {
@@ -208,7 +239,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
                         "properties": {
                             "color": "sapUiChartPaletteSemanticBad"
                         },
-                        "displayName": "Списано больше 10 часов"
+                        "displayName": "10+"
                     }
 
 
@@ -271,9 +302,11 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
 
         oPopOver.setCustomDataControl(function (data, test) {
             if (!data.data.val) {
+                debugger;
+                var sSelectedDate = data.target.__data__.DateSheet;                
 
-                var sSelectedDate = data.target.__data__.DateSheet;
-                this.getView().byId("_TimeSheet-Popover").close()
+                this.getView().byId("_TimeSheet-Popover").close();
+
 
                 var oUserData = this.getView().getBindingContext().getObject();
 
@@ -297,6 +330,9 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
             } else {
 
                 debugger;
+
+                var sDate = data.target.__data__.DateSheet;
+                this.onChartDateClick(sDate.split('.')[0], sDate.split('.')[1] - 1, sDate.split('.')[2]);
 
                 var oList = new sap.m.List({
                     includeItemInSelection: true

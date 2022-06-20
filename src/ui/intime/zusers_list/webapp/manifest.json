@@ -137,33 +137,38 @@
             "sap.ui.generic.app": {
               "ZSNN_INTIME_USER": {
                 "EntitySet": "ZSNN_INTIME_USER",
-                "Header" : {
+                "Header": {
                   "Actions": {
                     "createJiraUser": {
-                      "id" : "createJiraUser",
-                      "text" : "Создать Jira пользователя",
-                      "press" : "onCreateJiraUserButtonPress",
-                      "determining" : false
+                      "id": "createJiraUser",
+                      "text": "Создать Jira пользователя",
+                      "press": "onCreateJiraUserButtonPress",
+                      "determining": false
                     },
-
-                    "syncJiraData" : {
-                      "id" : "syncJiraData",
-                      "text" : "Синхр. Jira данные по задачам",
-                      "press" : "onSyncJiraData",
-                      "determining" : false
+                    "syncJiraData": {
+                      "id": "syncJiraData",
+                      "text": "Синхр. Jira данные по задачам",
+                      "press": "onSyncJiraData",
+                      "determining": false
                     },
-
-                    "sync1CData" : {
-                      "id" : "sync1CData",
-                      "text" : "Синхр. 1C данных",
-                      "press" : "onSync1CData",
-                      "determining" : false
+                    "sync1CData": {
+                      "id": "sync1CData",
+                      "text": "Синхр. 1C данных",
+                      "press": "onSync1CData",
+                      "determining": false
                     }
-
-
                   }
                 }
               }
+            }
+          }
+        },
+        "sap.ui.viewExtensions": {
+          "sap.suite.ui.generic.template.ListReport.view.ListReport": {
+            "GridTableColumnsExtension|ZSNN_INTIME_USER": {
+              "className": "sap.ui.core.Fragment",
+              "fragmentName": "intime.zusers_list.view.fragment.CustomColumn",
+              "type": "XML"
             }
           }
         }

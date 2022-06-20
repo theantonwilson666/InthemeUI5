@@ -1,0 +1,66 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:u="sap.ui.unified"
+    xmlns:m="sap.m">
+
+    <Dialog title="Прикрепить вложение">
+
+        <VBox class="sapUiSmallMargin">
+
+            <Label text="Описание"
+                labelFor="_AttachemntDescr-Input"
+                design="Bold" />
+            <Input id="_AttachemntDescr-Input"
+                type="Text"
+                value="{control>/description}"
+                width="15em"/>
+
+
+            <Label text="Вид вложения"
+                labelFor="_AttachmentType-Select"
+                design="Bold" />
+
+            <Select id="_AttachmentType-Select"
+                forceSelection="false"
+                selectedKey="{control>/selectedType}"
+                items="{/ZBNN_ATTACHMENT_TYPE}">
+                <core:Item key="{Type}"
+                    text="{TypeText}" />
+
+            </Select>
+
+            <Label visible="{= ${control>/selectedType} === '01' ? true : false}"
+                text="Файл"
+                labelFor="_Attachment-FilteUploader"
+                design="Bold" />
+
+            <u:FileUploader id="_Attachment-FilteUploader"
+                visible="{= ${control>/selectedType} === '01' ? true : false}"
+                width="15em"/>
+
+            <Label visible="{= ${control>/selectedType} === '02' ? true : false}"
+                text="Ссылка"
+                labelFor="_AttachemntURL-Input"
+                design="Bold" />
+                
+            <Input id="_AttachemntURL-Input"
+                value="{control>/URL}"
+                visible="{= ${control>/selectedType} === '02' ? true : false}"
+                type="Text"
+                width="15em"/>
+
+
+        </VBox>
+
+        <beginButton>
+            <Button text="Сохранить"
+                type="Emphasized"
+                press="_onOkNewAttachmentButtonPress"/>
+        </beginButton>
+        <endButton>
+            <Button text="Отменить"
+                press="_onCancelNewAttachmentButtonPress"/>
+        </endButton>
+
+    </Dialog>
+</core:FragmentDefinition>

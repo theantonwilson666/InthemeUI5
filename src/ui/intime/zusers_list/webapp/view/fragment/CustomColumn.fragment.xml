@@ -1,0 +1,23 @@
+<!-- <core:FragmentDefinition xmlns:core="sap.ui.core"
+       xmlns="sap.m">
+       <Column>
+              <Text text="ляляля" />
+              <customData>
+                     <core:CustomData key="p13nData"
+                            value='\{"columnKey": "Test", "columnIndex" : "101"}' />
+              </customData>
+       </Column>
+</core:FragmentDefinition> -->
+
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+       xmlns:table="sap.ui.table" xmlns="sap.m">
+       <table:Column>
+              <Label text="MessageIcon" />
+              <table:customData>
+                     <core:CustomData key="p13nData" value='\{"columnKey": "MessageIcon", "columnIndex" : "101"}' />
+              </table:customData>
+              <table:template>
+                     <Text text="MessageIcon}">MessageIcon</Text>
+              </table:template>
+       </table:Column>
+</core:FragmentDefinition>

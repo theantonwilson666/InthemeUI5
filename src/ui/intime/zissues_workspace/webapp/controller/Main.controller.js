@@ -20,17 +20,18 @@ sap.ui.define([
                     .attachPatternMatched(this._onRouteMatched, this);
                 // this.getRouter().getRoute("mainpage").attachPatternMatched(this._onMasterMatched, this);
 
-                this.NavToTask();
+                // this.NavToTask();
             },
 
             NavToTask: function () {
-                debugger
+                debugger;
 
-                var items = this.getOwnerComponent().getComponentData().startupParameters;
+                var oItems = this.getOwnerComponent().getComponentData().startupParameters;
+                var sItems = JSON.stringify(oItems);
                 this.getModel().callFunction("/NavToTasks", {
-                    method: "GET",
+                    method: "POST",
                     urlParameters: {
-                        AllParameters: items
+                        AllParameters: sItems
                     },
                     success: function (oData) {
                         debugger
@@ -41,6 +42,11 @@ sap.ui.define([
                     }.bind(this)
                 })
                 
+            },
+
+            onAfterRendering: function() {
+                debugger;
+                this.NavToTask();
             },
 
             _onRouteMatched: function() {

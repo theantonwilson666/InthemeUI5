@@ -32,14 +32,26 @@
                         type="Reject"
                         press="onSubTaskDeleteButtonPress"/>
 
-                <MenuButton text="Раскрыть">
+                <!-- <MenuButton text="Раскрыть">
                 <menu>
                     <Menu>
                         <MenuItem text="Переместить в другую задачу" press="onMoveToAnotherTaskButtonPress" />
                         <MenuItem text="Переместить в другую подзадачу" press="onMoveToAnotherSubTaskButtonPress" />
                     </Menu>
                 </menu>
-		        </MenuButton>
+		        </MenuButton> -->
+
+                <Button
+                        id="MoveToTask"
+                        text="Переместить в другую задачу"
+                        type="Emphasized"
+                        press="onMoveToAnotherTaskButtonPress"/>
+
+                <Button
+                        id="MoveToSubTask"
+                        text="Переместить в другую подзадачу"
+                        type="Emphasized"
+                        press="onMoveToAnotherSubTaskButtonPress"/>
 
                 </f:actions>
             </f:DynamicPageTitle>
