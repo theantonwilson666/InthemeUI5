@@ -907,6 +907,14 @@
 
 
       <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INT_PROJECT_STAGE_SHType">
+        <Annotation Term="UI.SelectionFields">
+          <Collection>
+            <PropertyPath>PartnerId</PropertyPath>
+            <PropertyPath>ProjectID</PropertyPath>
+            <PropertyPath>ProjeStageID</PropertyPath>
+          </Collection>
+        </Annotation>
+
         <Annotation Term="UI.LineItem">
           <Collection>
             <Record Type="UI.DataField">
