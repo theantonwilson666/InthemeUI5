@@ -386,6 +386,7 @@
 						<PropertyPath>PositionID</PropertyPath>
 						<PropertyPath>HasTelegramID</PropertyPath>
 						<PropertyPath>HasJiraID</PropertyPath>
+						<PropertyPath>HasUser1CID</PropertyPath>
 					</Collection>
 				</Annotation>
 

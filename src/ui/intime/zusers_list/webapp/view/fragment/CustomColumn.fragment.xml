@@ -15,7 +15,7 @@
                             value='\{"columnKey": "MessageIcon", "leadingProperty": "MessageIcon", "sortProperty": "MessageIcon", "columnIndex": 10}' />
                     </customData>
                     <header>
-                        <Text text="Иконка"/>
+                        <Text text="Предупреждение"/>
                     </header>
                 </Column>
                 
