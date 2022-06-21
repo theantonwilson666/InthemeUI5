@@ -165,11 +165,16 @@
         },
         "sap.ui.viewExtensions": {
           "sap.suite.ui.generic.template.ListReport.view.ListReport": {
-            "GridTableColumnsExtension|ZSNN_INTIME_USER": {
+            "ResponsiveTableColumnsExtension|ZSNN_INTIME_USER": {
               "className": "sap.ui.core.Fragment",
               "fragmentName": "intime.zusers_list.view.fragment.CustomColumn",
               "type": "XML"
-            }
+            },
+            "ResponsiveTableCellsExtension|ZSNN_INTIME_USER": {
+              "className": "sap.ui.core.Fragment",
+              "fragmentName": "intime.zusers_list.view.fragment.CustomCell",
+              "type": "XML"
+        }
           }
         }
       }

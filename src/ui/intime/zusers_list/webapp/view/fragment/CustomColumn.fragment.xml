@@ -1,23 +1,22 @@
-<!-- <core:FragmentDefinition xmlns:core="sap.ui.core"
-       xmlns="sap.m">
-       <Column>
-              <Text text="ляляля" />
-              <customData>
-                     <core:CustomData key="p13nData"
-                            value='\{"columnKey": "Test", "columnIndex" : "101"}' />
-              </customData>
-       </Column>
-</core:FragmentDefinition> -->
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:u="sap.ui.unified"
+    xmlns:m="sap.m">
 
-<core:FragmentDefinition xmlns:core="sap.ui.core"
-       xmlns:table="sap.ui.table" xmlns="sap.m">
-       <table:Column>
-              <Label text="MessageIcon" />
-              <table:customData>
-                     <core:CustomData key="p13nData" value='\{"columnKey": "MessageIcon", "columnIndex" : "101"}' />
-              </table:customData>
-              <table:template>
-                     <Text text="MessageIcon}">MessageIcon</Text>
-              </table:template>
-       </table:Column>
+                <Column>
+                    <customData>
+                        <core:CustomData key="p13nData"
+                            value='\{"columnKey": "MessageIcon", "leadingProperty": "MessageIcon", "sortProperty": "MessageIcon", "columnIndex": 10}' />
+                    </customData>
+                    <header>
+                        <Text text="Иконка"/>
+                    </header>
+                </Column>
+                
 </core:FragmentDefinition>
