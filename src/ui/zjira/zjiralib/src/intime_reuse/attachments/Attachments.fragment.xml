@@ -1,36 +1,68 @@
 <core:FragmentDefinition xmlns="sap.m"
-    xmlns:core="sap.ui.core"
-    xmlns:smartTable="sap.ui.comp.smarttable"
-    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+  xmlns:core="sap.ui.core"
+  xmlns:smartTable="sap.ui.comp.smarttable"
+  xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 
-    <smartTable:SmartTable entitySet="ZSNN_INTIME_ATTACHMENT"
-        header="Вложения"
-        tableType="ResponsiveTable"
-        showRowCount="true"
-        enableAutoBinding="true"
-        class="sapUiResponsiveContentPadding"
-        enableAutoColumnWidth="true">
-        <!-- layout data used to make the table growing but the filter bar fixed -->
-        <smartTable:layoutData>
-            <FlexItemData growFactor="1"
-                baseSize="0%"/>
-        </smartTable:layoutData>
+  <smartTable:SmartTable entitySet="ZSNN_INTIME_ATTACHMENT"
+    header="Вложения"
+    tableType="ResponsiveTable"
+    showRowCount="true"
+    enableAutoBinding="true"
+    class="sapUiResponsiveContentPadding"
+    enableAutoColumnWidth="true">
+    <!-- layout data used to make the table growing but the filter bar fixed -->
+    <smartTable:layoutData>
+      <FlexItemData growFactor="1"
+        baseSize="0%"/>
+    </smartTable:layoutData>
 
-         <smartTable:customToolbar>
-            <OverflowToolbar design="Transparent">
-              <ToolbarSpacer />
-              <Button 
-                icon="sap-icon://add"
-                press="_onAddNewAttachment" />
+    <smartTable:customToolbar>
+      <OverflowToolbar design="Transparent">
+        <ToolbarSpacer />
+        <Button icon="sap-icon://add"
+          press="_onAddNewAttachment" />
+      </OverflowToolbar>
+    </smartTable:customToolbar>
+    <Table growing="true" growingScrollToLoad="true" mode="Delete" delete="_onDeleteAttachmentPress">
+      <columns>
+        <Column id="_AttachmentDescription-Column">
+          <customData>
+            <core:CustomData key="p13nData"
+              value='\{"columnKey": "Description", "columnIndex": 0, "leadingProperty": "Description", "sortProperty": "Description"}' />
+          </customData>
+          <Text text="Вложение" />
+        </Column>
 
-                <!-- <Button 
-                icon="sap-icon://delete"
-                press="_onDeleteAttachment" /> -->
 
-            </OverflowToolbar>
-          </smartTable:customToolbar>
+        <!-- <Column id="_AttachmentOperation-Column">
+          <customData>
+            <core:CustomData key="p13nData"
+              value='\{"columnKey": "Operations", "columnIndex": 1, "leadingProperty": "Operations", "sortProperty": "Operations"}' />
+          </customData>
+          <Text text="Операции" />
+        </Column> -->
 
-    </smartTable:SmartTable>
+      </columns>
+      <items>
+        <ColumnListItem>
+          <cells>
+            <VBox>
+              <ObjectIdentifier title="{Description}"
+                text="{= ${isUrl} === true ? ${Url} : ${FileName}}"
+                titleActive="true"
+                titlePress="_onAttachemntPress"/>
+            </VBox>
+
+            <!-- <HBox>
+              <Button icon="sap-icon://delete"/>
+            </HBox> -->
+          </cells>
+        </ColumnListItem>
+      </items>
+
+    </Table>
+
+  </smartTable:SmartTable>
 
 </core:FragmentDefinition>
 

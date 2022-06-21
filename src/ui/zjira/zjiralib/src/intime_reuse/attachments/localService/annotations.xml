@@ -50,14 +50,23 @@
               <PropertyValue Property="Value"
                 Path="Description" />
             </Record>
-
-            <Record Type="UI.DataField">
-              <PropertyValue Property="Value"
-                Path="DocumentType" />
-            </Record>
-
           </Collection>
         </Annotation>
+
+
+        <Annotation Term="UI.PresentationVariant">
+          <Record>
+            <PropertyValue Property="RequestAtLeast">
+              <Collection>
+                <PropertyPath>isUrl</PropertyPath>
+                <PropertyPath>isFile</PropertyPath>
+                <PropertyPath>Url</PropertyPath>
+                <PropertyPath>FileName</PropertyPath>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+
       </Annotations>
 
 
