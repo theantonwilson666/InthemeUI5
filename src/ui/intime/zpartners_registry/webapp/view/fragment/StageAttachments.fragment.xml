@@ -4,8 +4,13 @@
     xmlns:l="sap.ui.layout"
     xmlns:f="sap.ui.layout.form"
     xmlns:u="sap.ui.unified"
+    xmlns:attachments="jira.lib.intime_reuse.attachments"
     xmlns:m="sap.m">
-   
 
-   <Text text="Функционал не реализован"/>
+
+    <attachments:Attachments width="100%"
+        DocumentType="stage"
+        DocumentID="{ProjectStageID}"
+        error="onErrorAttachment"/>
+
 </core:FragmentDefinition>

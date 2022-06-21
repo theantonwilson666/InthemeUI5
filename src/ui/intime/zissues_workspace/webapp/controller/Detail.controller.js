@@ -90,6 +90,8 @@ sap.ui.define([
                                 dataReceived: function (oEvent) {
                                     this.setFaviconIconByPartner(this.getView().getBindingContext().getObject().PartnerID);
                                     this.setStateProperty("/taskContext", this.getView().getBindingContext());
+                                    this.byId("taskAttachments").getContent()[0].setDocumentID(oData.getParameter("data").TaskId);
+                                    this.byId("taskAttachments").getContent()[0].setDocumentType('task')
                                 }.bind(this)
                             }
                         });
@@ -171,6 +173,10 @@ sap.ui.define([
                 this.onRemoveRowSelectionForMoveToProjectStage();
             },
 
+            onErrorAttachment: function (oEvent) {
+                this.showError(oEvent.mParameters);
+            },
+
             onOkMoveDialog: function (oEvent) {
 
                 debugger;
@@ -227,7 +233,7 @@ sap.ui.define([
                     );
             },
 
-            onRemoveRowSelectionForMoveToProjectStage: function() {
+            onRemoveRowSelectionForMoveToProjectStage: function () {
                 var oFirstSelectedItem = this.byId("_TaskProjectStage-SmartTable").getTable().getSelectedItems()[0];
                 this.byId("_TaskProjectStage-SmartTable").getTable().setSelectedItem(oFirstSelectedItem, false);
             }

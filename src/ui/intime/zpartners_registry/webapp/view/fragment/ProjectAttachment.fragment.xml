@@ -7,6 +7,9 @@
     xmlns:attachments="jira.lib.intime_reuse.attachments"
     xmlns:m="sap.m">
 
-    <attachments:Attachments width="100%" DocumentType="project" DocumentID="{ProjectID}" error="onErrorAttachment"/>
+    <attachments:Attachments width="100%"
+        DocumentType="project"
+        DocumentID="{ProjectID}"
+        error="onErrorAttachment"/>
 
 </core:FragmentDefinition>

@@ -4,8 +4,12 @@
     xmlns:l="sap.ui.layout"
     xmlns:f="sap.ui.layout.form"
     xmlns:u="sap.ui.unified"
+    xmlns:attachments="jira.lib.intime_reuse.attachments"
     xmlns:m="sap.m">
-   
 
-   <Text text="test"/>
+    <attachments:Attachments width="100%"
+        DocumentType="task"
+        DocumentID="{TaskId}"
+        error="onErrorAttachment"/>
+
 </core:FragmentDefinition>

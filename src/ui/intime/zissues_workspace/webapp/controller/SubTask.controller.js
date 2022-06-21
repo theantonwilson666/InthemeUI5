@@ -96,6 +96,9 @@ sap.ui.define([
                                     var oTaskModel = new JSONModel(oData.getParameter("data").to_Task);
                                     this.getView().setModel(oTaskModel, "taskData");
                                     this.setFaviconIconByPartner(oData.getParameter("data").to_Task.PartnerID);
+
+                                    this.byId("SubTaskAttachment").getContent()[0].setDocumentID(oData.getParameter("data").SubtaskId);
+                                    this.byId("SubTaskAttachment").getContent()[0].setDocumentType('subtask')
                                 }.bind(this)
                             }
                         });

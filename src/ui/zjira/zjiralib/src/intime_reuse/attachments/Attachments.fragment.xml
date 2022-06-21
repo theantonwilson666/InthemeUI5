@@ -23,9 +23,12 @@
           press="_onAddNewAttachment" />
       </OverflowToolbar>
     </smartTable:customToolbar>
-    <Table growing="true" growingScrollToLoad="true" mode="Delete" delete="_onDeleteAttachmentPress">
+    <Table growing="true"
+      growingScrollToLoad="true"
+      mode="Delete"
+      delete="_onDeleteAttachmentPress">
       <columns>
-        <Column id="_AttachmentDescription-Column">
+        <Column>
           <customData>
             <core:CustomData key="p13nData"
               value='\{"columnKey": "Description", "columnIndex": 0, "leadingProperty": "Description", "sortProperty": "Description"}' />
@@ -36,8 +39,7 @@
 
         <!-- <Column id="_AttachmentOperation-Column">
           <customData>
-            <core:CustomData key="p13nData"
-              value='\{"columnKey": "Operations", "columnIndex": 1, "leadingProperty": "Operations", "sortProperty": "Operations"}' />
+            <core:CustomData key="p13nData" value='\{"columnKey": "Operations", "columnIndex": 1, "leadingProperty": "Operations", "sortProperty": "Operations"}' />
           </customData>
           <Text text="Операции" />
         </Column> -->
