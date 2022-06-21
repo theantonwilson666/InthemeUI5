@@ -1743,10 +1743,6 @@
           <Collection>
             <Record Type="UI.DataField">
 
-              <!-- <Record Type="UI.DataField">
-                <PropertyValue Property="Value" Path="Executor" />
-              </Record> -->
-
               <PropertyValue Property="Value"
                 Path="DateSheet"/>
               <Annotation Term="UI.Importance"

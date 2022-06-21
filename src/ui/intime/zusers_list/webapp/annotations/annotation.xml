@@ -386,6 +386,7 @@
 						<PropertyPath>PositionID</PropertyPath>
 						<PropertyPath>HasTelegramID</PropertyPath>
 						<PropertyPath>HasJiraID</PropertyPath>
+						<PropertyPath>HasUser1CID</PropertyPath>
 					</Collection>
 				</Annotation>
 
@@ -415,18 +416,11 @@
 							</Record>
 						</PropertyValue>
 
-
-
-
-
 						<!-- <PropertyValue Property="ImageUrl">
 							<Record Type="UI.DataField">
 								<PropertyValue Property="Value" Path="ImageURL"/>
 							</Record>
 						</PropertyValue> -->
-
-
-
 
 					</Record>
 				</Annotation>
@@ -462,7 +456,6 @@
 								Path="TelephonNumber" />
 						</Record>
 
-
 						<Record Type="UI.DataField">
 							<PropertyValue Property="Value"
 								Path="Email" />
@@ -476,13 +469,7 @@
 							<PropertyValue Property="Value"
 								Path="PositionID" />
 						</Record>
-
-						<!-- <Record Type="UI.DataField">
-							<PropertyValue Property="Value"
-								Path="MessageIcon" />
-						</Record> -->
 						
-
 					</Collection>
 				</Annotation>
 			</Annotations>
