@@ -24,6 +24,7 @@ sap.ui.define([
             },
 
             NavToPartner: function() {
+                return;
 
                 var oItems = this.getOwnerComponent().getComponentData().startupParameters;
                 var sItems = JSON.stringify(oItems);
@@ -37,8 +38,7 @@ sap.ui.define([
                     success: function(oData) {
 
                     }.bind(this),
-                    error: function(oError) {
-                    }.bind(this)
+                    error: function(oError) {}.bind(this)
                 })
 
             },

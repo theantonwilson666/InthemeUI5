@@ -4,7 +4,7 @@ sap.ui.loader.config({ paths: { "jira/lib": "/sap/bc/ui5_ui5/sap/zjiralib" } });
 sap.ui.define([
     "sap/m/VBox",
     "jira/lib/intime_reuse/ReuseIntimeLib"
-], function (VBox, ReuseLib) {
+], function(VBox, ReuseLib) {
     "use strict";
     return VBox.extend("jira.lib.intime_reuse.timeSheet.Attachments", {
         renderer: "sap.m.VBoxRenderer",
@@ -35,41 +35,41 @@ sap.ui.define([
         ODataUrl: '/sap/opu/odata/sap/ZINT_UI_ATTACHMENT_SRV/',
 
 
-        constructor: function (oParam) {
+        constructor: function(oParam) {
             arguments[0].modelContextChange = this._modelContextChange;
             sap.m.VBox.prototype.constructor.apply(this, arguments);
 
-            this._getModel().metadataLoaded().then(function () {
+            this._getModel().metadataLoaded().then(function() {
                 // this.setBindingContext(this.getParent().getBindingContext());
                 this._loadAttacmhentFragment();
             }.bind(this));
         },
 
 
-        _modelContextChange: function (oEvent) {
+        _modelContextChange: function(oEvent) {
 
             if ((this._getSmartTable()) && this.getDocumentID()) {
                 this._getSmartTable().rebindTable();
             }
         },
 
-        _getSmartTable: function () {
+        _getSmartTable: function() {
             return this.getItems()[0];
         },
 
-        _loadAttacmhentFragment: function () {
+        _loadAttacmhentFragment: function() {
             this.Lib.loadDialog.call(this, {
                 sDialogName: "_AttachmentFragment",
                 sViewName: "jira.lib.intime_reuse.attachments.Attachments",
                 controller: this
-            }).then(function (oSmartTable) {
+            }).then(function(oSmartTable) {
                 oSmartTable.setModel(this._getModel());
                 oSmartTable.attachBeforeRebindTable(this._beforeRebindTable.bind(this));
                 this.addItem(oSmartTable);
             }.bind(this));
         },
 
-        _onAttachemntPress: function (oEvent) {
+        _onAttachemntPress: function(oEvent) {
             var oAttach = oEvent.getSource().getBindingContext().getObject();
 
             if (oAttach.isUrl) {
@@ -84,13 +84,13 @@ sap.ui.define([
             }
         },
 
-        _onDeleteAttachmentPress: function (oEvent) {
+        _onDeleteAttachmentPress: function(oEvent) {
             this._deletedAttach = oEvent.getParameter('listItem').getBindingContext();
 
             sap.m.MessageBox.warning("Удалить вложение?", {
                 actions: [sap.m.MessageBox.Action.OK, sap.m.MessageBox.Action.CANCEL],
                 emphasizedAction: sap.m.MessageBox.Action.OK,
-                onClose: function (sAction) {
+                onClose: function(sAction) {
                     if (sAction === 'OK') {
 
                         this._getSmartTable().setBusy(true);
@@ -104,18 +104,18 @@ sap.ui.define([
             });
         },
 
-        _beforeRebindTable: function (oEvent) {
+        _beforeRebindTable: function(oEvent) {
             oEvent.getParameter('bindingParams').filters.push(
                 new sap.ui.model.Filter("DocumentID", 'EQ', this.getDocumentID())
             );
         },
 
-        _onAddNewAttachment: function (oEvent) {
-            this.Lib.loadDialog({
+        _onAddNewAttachment: function(oEvent) {
+            this.Lib.loadDialog.call(this, {
                 sDialogName: "_NewAttachmentDialog",
                 sViewName: "jira.lib.intime_reuse.attachments.NewAttachDialog",
                 controller: this
-            }).then(function (oDialog) {
+            }).then(function(oDialog) {
 
                 oDialog.setModel(this._getModel());
 
@@ -131,34 +131,34 @@ sap.ui.define([
         },
 
 
-        _getFileUploader: function () {
-            return this.Lib["_NewAttachmentDialog"].getContent()[0].getItems()[5]; // ???
+        _getFileUploader: function() {
+            return this["_NewAttachmentDialog"].getContent()[0].getItems()[5]; // ???
         },
 
-        _onSuccessNewAttachment: function () {
-            this.Lib["_NewAttachmentDialog"].setBusy(false);
+        _onSuccessNewAttachment: function() {
+            this["_NewAttachmentDialog"].setBusy(false);
             this.fireSuccess();
             this._getFileUploader().clear();
-            this.Lib["_NewAttachmentDialog"].close();
+            this["_NewAttachmentDialog"].close();
             this._getSmartTable().rebindTable();
         },
 
-        _onSuccessDeleteAttachment: function () {
+        _onSuccessDeleteAttachment: function() {
             this._getSmartTable().setBusy(false);
         },
 
-        _onErrorDeleteAttachment: function (oError) {
+        _onErrorDeleteAttachment: function(oError) {
             this._getSmartTable().setBusy(false);
             this.fireError(oError);
         },
 
-        _onErrorNewAttachment: function (oError) {
-            this.Lib["_NewAttachmentDialog"].setBusy(false);
+        _onErrorNewAttachment: function(oError) {
+            this["_NewAttachmentDialog"].setBusy(false);
             this.fireError(oError);
             this._getFileUploader().clear();
         },
 
-        _onOkNewAttachmentButtonPress: function (oEvent) {
+        _onOkNewAttachmentButtonPress: function(oEvent) {
 
             var oControlData = this._getFileUploader().getModel("control").getData();
             if (oControlData.selectedType === '01') {
@@ -169,7 +169,7 @@ sap.ui.define([
 
 
                     oEvent.getSource().getParent().setBusy(true);
-                    oReader.onload = function (e) {
+                    oReader.onload = function(e) {
 
                         var vContent = e.currentTarget.result.replace(
                             "data:" + oFile.type + ";base64,",
@@ -215,11 +215,11 @@ sap.ui.define([
 
         },
 
-        _onCancelNewAttachmentButtonPress: function (oEvent) {
+        _onCancelNewAttachmentButtonPress: function(oEvent) {
             oEvent.getSource().getParent().close();
         },
 
-        _getModel: function () {
+        _getModel: function() {
             if (!this.ODataModel) {
                 this.ODataModel = new sap.ui.model.odata.v2.ODataModel(this.ODataUrl, {
                     defaultBindingMode: "TwoWay",

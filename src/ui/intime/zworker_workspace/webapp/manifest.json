@@ -1,291 +1,282 @@
 {
-  "_version": "1.32.0",
-  "sap.app": {
-    "id": "intime.zworker_workspace",
-    "type": "application",
-    "i18n": "i18n/i18n.properties",
-    "applicationVersion": {
-      "version": "1.0.0"
-    },
-    "title": "{{appTitle}}",
-    "description": "{{appDescription}}",
-    "tags": {
-      "keywords": []
-    },
-    "resources": "resources.json",
-    "dataSources": {
-      "mainService": {
-        "uri": "/sap/opu/odata/sap/ZINT_UI_WORKER_WORKSPACE_SRV/",
-        "type": "OData",
-        "settings": {
-          "annotations": [
-            "ZINT_UI_WORKER_WORKSPAC_ANNO_MDL",
-            "annotation"
-          ],
-          "localUri": "localService/metadata.xml"
-        }
-      },
-      "annotation": {
-        "type": "ODataAnnotation",
-        "uri": "annotations/annotation.xml",
-        "settings": {
-          "localUri": "annotations/annotation.xml"
-        }
-      },
-      "ZINT_UI_WORKER_WORKSPAC_ANNO_MDL": {
-        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZINT_UI_WORKER_WORKSPAC_ANNO_MDL',Version='0001')/$value",
-        "type": "ODataAnnotation",
-        "settings": {
-          "localUri": ""
-        }
-      }
-    },
-    "offline": false,
-    "sourceTemplate": {
-      "id": "ui5template.smartTemplate",
-      "version": "1.40.12"
-    }
-  },
-  "sap.ui": {
-    "technology": "UI5",
-    "icons": {
-      "icon": "",
-      "favIcon": "",
-      "phone": "",
-      "phone@2": "",
-      "tablet": "",
-      "tablet@2": ""
-    },
-    "deviceTypes": {
-      "desktop": true,
-      "tablet": true,
-      "phone": true
-    },
-    "supportedThemes": [
-      "sap_hcb",
-      "sap_belize",
-      "sap_fiori_3"
-    ]
-  },
-  "sap.ui5": {
-    "resources": {
-      "js": [],
-      "css": [
-        {
-          "uri": "/css/style.css"
-        }
-      ]
-    },
-    "dependencies": {
-      "minUI5Version": "1.65.0",
-      "libs": {
-        "sap.ui.core": {
-          "lazy": false
+    "_version": "1.32.0",
+    "sap.app": {
+        "id": "intime.zworker_workspace",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "1.0.0"
         },
-        "sap.ui.generic.app": {
-          "lazy": false
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "tags": {
+            "keywords": []
         },
-        "sap.suite.ui.generic.template": {
-          "lazy": false
-        }
-      },
-      "components": {}
-    },
-    "models": {
-      "i18n": {
-        "type": "sap.ui.model.resource.ResourceModel",
-        "uri": "i18n/i18n.properties"
-      },
-      "@i18n": {
-        "type": "sap.ui.model.resource.ResourceModel",
-        "uri": "i18n/i18n.properties"
-      },
-      "i18n|sap.suite.ui.generic.template.ListReport|ZSNN_WORKER_LIST": {
-        "type": "sap.ui.model.resource.ResourceModel",
-        "uri": "i18n/ListReport/ZSNN_WORKER_LIST/i18n.properties"
-      },
-      "i18n|sap.suite.ui.generic.template.ObjectPage|ZSNN_WORKER_LIST": {
-        "type": "sap.ui.model.resource.ResourceModel",
-        "uri": "i18n/ObjectPage/ZSNN_WORKER_LIST/i18n.properties"
-      },
-      "": {
-        "dataSource": "mainService",
-        "preload": true,
-        "settings": {
-          "useBatch": true,
-          "defaultBindingMode": "TwoWay",
-          "defaultCountMode": "Inline",
-          "refreshAfterChange": false
-        }
-      },
-      "state": {
-        "type": "sap.ui.model.json.JSONModel",
-        "settings": {
-          "isDraft": false,
-          "icons": {
-            "goHome": "sap-icon://home"
-          },
-          "access": false
-        }
-      }
-    },
-    "extends": {
-      "extensions": {
-        "sap.ui.controllerExtensions": {
-          "sap.suite.ui.generic.template.ListReport.view.ListReport": {
-            "controllerName": "intime.zworker_workspace.ext.controller.ListReportExt",
-            "sap.ui.generic.app": {
-              "ZSNN_WORKER_LIST": {
-                "EntitySet": "ZSNN_WORKER_LIST"
-              }
+        "resources": "resources.json",
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/sap/ZINT_UI_WORKER_WORKSPACE_SRV/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "ZINT_UI_WORKER_WORKSPAC_ANNO_MDL",
+                        "annotation"
+                    ],
+                    "localUri": "localService/metadata.xml"
+                }
+            },
+            "annotation": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotation.xml",
+                "settings": {
+                    "localUri": "annotations/annotation.xml"
+                }
+            },
+            "ZINT_UI_WORKER_WORKSPAC_ANNO_MDL": {
+                "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZINT_UI_WORKER_WORKSPAC_ANNO_MDL',Version='0001')/$value",
+                "type": "ODataAnnotation",
+                "settings": {
+                    "localUri": ""
+                }
             }
-          },
-          "sap.suite.ui.generic.template.ObjectPage.view.Details": {
-            "controllerName": "intime.zworker_workspace.ext.controller.ObjectPageExt",
-            "sap.ui.generic.app": {
-              "ZSNN_WORKER_LIST": {
-                "EntitySet": "ZSNN_WORKER_LIST",
-                "Header": {
-                  "Actions": {
-                    "createTimeSheetHeader": {
-                      "id": "createTimeSheetHeader",
-                      "text": "Списать время",
-                      "press": "onCreateTimeSheetHeaderButtonPress"
-                    },
-                    "SeeAllUsers": {
-                      "id": "seeAllUsers",
-                      "text": "Список сотрудников",
-                      "press": "onSeeAllUsers"
-                    }
-                  }
+        },
+        "offline": false,
+        "sourceTemplate": {
+            "id": "ui5template.smartTemplate",
+            "version": "1.40.12"
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        },
+        "supportedThemes": [
+            "sap_hcb",
+            "sap_belize",
+            "sap_fiori_3"
+        ]
+    },
+    "sap.ui5": {
+        "resources": {
+            "js": [],
+            "css": [{
+                "uri": "/css/style.css"
+            }]
+        },
+        "dependencies": {
+            "minUI5Version": "1.65.0",
+            "libs": {
+                "sap.ui.core": {
+                    "lazy": false
                 },
-                "Sections": {
-                  "to_AssignedSubTask::com.sap.vocabularies.UI.v1.LineItem": {
-                    "id": "to_AssignedSubTask::com.sap.vocabularies.UI.v1.LineItem",
-                    "Actions": {
-                      "createTimeSheet": {
-                        "id": "createTimeSheet",
-                        "press": "onCreateTimeSheetButtonPress",
-                        "text": "Списать время",
-                        "determining": true,
-                        "requiresSelection": true
-                      },
-                      "changeTaskStatus": {
-                        "id": "changeTaskStatus",
-                        "text": "Сменить статус",
-                        "press": "onChangeTaskStatusPress",
-                        "determining": true,
-                        "requiresSelection": true
-                      }
-                    }
-                  }
+                "sap.ui.generic.app": {
+                    "lazy": false
+                },
+                "sap.suite.ui.generic.template": {
+                    "lazy": false
                 }
-              },
-              "ZSNN_WORKER_ASSIGNED_SUBTASK": {
-                "EntitySet": "ZSNN_WORKER_ASSIGNED_SUBTASK",
-                "Header": {
-                  "Actions": {
-                    "createTimeSheetHeader": {
-                      "id": "createTimeSheetHeader",
-                      "text": "Списать время",
-                      "press": "onCreateTimeSheetSubTaskPageButtonPress"
-                    },
-                    "changeTaskStatus": {
-                      "id": "changeTaskStatus",
-                      "text": "Сменить статус",
-                      "press": "onChangeTaskStatusPress",
-                      "requiresSelection": true
-                    }
-                  }
-                }
-              }
-            }
-          }
+            },
+            "components": {}
         },
-        "sap.ui.viewExtensions": {
-          "sap.suite.ui.generic.template.ObjectPage.view.Details": {
-            "AfterFacet|ZSNN_WORKER_LIST|to_AssignedSubTask::com.sap.vocabularies.UI.v1.LineItem": {
-              "className": "sap.ui.core.Fragment",
-              "fragmentName": "intime.zworker_workspace.ext.fragments.TimeSheetChart",
-              "type": "XML",
-              "sap.ui.generic.app": {
-                "id": "timesheetSection",
-                "title": "Списание времени",
-                "enableLazyLoading": true
-              }
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            },
+            "i18n|sap.suite.ui.generic.template.ListReport|ZSNN_WORKER_LIST": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/ListReport/ZSNN_WORKER_LIST/i18n.properties"
+            },
+            "i18n|sap.suite.ui.generic.template.ObjectPage|ZSNN_WORKER_LIST": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/ObjectPage/ZSNN_WORKER_LIST/i18n.properties"
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "useBatch": true,
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "refreshAfterChange": false
+                }
+            },
+            "state": {
+                "type": "sap.ui.model.json.JSONModel",
+                "settings": {
+                    "isDraft": false,
+                    "icons": {
+                        "goHome": "sap-icon://home"
+                    },
+                    "access": false
+                }
             }
-          }
+        },
+        "extends": {
+            "extensions": {
+                "sap.ui.controllerExtensions": {
+                    "sap.suite.ui.generic.template.ListReport.view.ListReport": {
+                        "controllerName": "intime.zworker_workspace.ext.controller.ListReportExt",
+                        "sap.ui.generic.app": {
+                            "ZSNN_WORKER_LIST": {
+                                "EntitySet": "ZSNN_WORKER_LIST"
+                            }
+                        }
+                    },
+                    "sap.suite.ui.generic.template.ObjectPage.view.Details": {
+                        "controllerName": "intime.zworker_workspace.ext.controller.ObjectPageExt",
+                        "sap.ui.generic.app": {
+                            "ZSNN_WORKER_LIST": {
+                                "EntitySet": "ZSNN_WORKER_LIST",
+                                "Header": {
+                                    "Actions": {
+                                        "createTimeSheetHeader": {
+                                            "id": "createTimeSheetHeader",
+                                            "text": "Списать время",
+                                            "press": "onCreateTimeSheetHeaderButtonPress"
+                                        }
+                                    }
+                                },
+                                "Sections": {
+                                    "to_AssignedSubTask::com.sap.vocabularies.UI.v1.LineItem": {
+                                        "id": "to_AssignedSubTask::com.sap.vocabularies.UI.v1.LineItem",
+                                        "Actions": {
+                                            "createTimeSheet": {
+                                                "id": "createTimeSheet",
+                                                "press": "onCreateTimeSheetButtonPress",
+                                                "text": "Списать время",
+                                                "determining": true,
+                                                "requiresSelection": true
+                                            },
+                                            "changeTaskStatus": {
+                                                "id": "changeTaskStatus",
+                                                "text": "Сменить статус",
+                                                "press": "onChangeTaskStatusPress",
+                                                "determining": true,
+                                                "requiresSelection": true
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "ZSNN_WORKER_ASSIGNED_SUBTASK": {
+                                "EntitySet": "ZSNN_WORKER_ASSIGNED_SUBTASK",
+                                "Header": {
+                                    "Actions": {
+                                        "createTimeSheetHeader": {
+                                            "id": "createTimeSheetHeader",
+                                            "text": "Списать время",
+                                            "press": "onCreateTimeSheetSubTaskPageButtonPress"
+                                        },
+                                        "changeTaskStatus": {
+                                            "id": "changeTaskStatus",
+                                            "text": "Сменить статус",
+                                            "press": "onChangeTaskStatusPress",
+                                            "requiresSelection": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "sap.ui.viewExtensions": {
+                    "sap.suite.ui.generic.template.ObjectPage.view.Details": {
+                        "AfterFacet|ZSNN_WORKER_LIST|to_AssignedSubTask::com.sap.vocabularies.UI.v1.LineItem": {
+                            "className": "sap.ui.core.Fragment",
+                            "fragmentName": "intime.zworker_workspace.ext.fragments.TimeSheetChart",
+                            "type": "XML",
+                            "sap.ui.generic.app": {
+                                "id": "timesheetSection",
+                                "title": "Списание времени",
+                                "enableLazyLoading": true
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
         }
-      }
     },
-    "contentDensities": {
-      "compact": true,
-      "cozy": true
-    }
-  },
-  "sap.ui.generic.app": {
-    "_version": "1.3.0",
-    "settings": {
-      "forceGlobalRefresh": false,
-      "objectPageHeaderType": "Static",
-      "showDraftToggle": false
-    },
-    "pages": {
-      "ListReport|ZSNN_WORKER_LIST": {
-        "entitySet": "ZSNN_WORKER_LIST",
-        "component": {
-          "name": "sap.suite.ui.generic.template.ListReport",
-          "list": true,
-          "settings": {
-            "smartVariantManagement": false,
-            "enableTableFilterInPageVariant": true,
-            "multiSelect": true,
-            "dataLoadSettings": {
-              "loadDataOnAppLaunch": "always"
-            },
-            "tableSettings": {
-              "type": "ResponsiveTable"
-            },
-            "filterSettings": {
-              "dateSettings": {
-                "useDateRange": true
-              }
-            }
-          }
+    "sap.ui.generic.app": {
+        "_version": "1.3.0",
+        "settings": {
+            "forceGlobalRefresh": false,
+            "objectPageHeaderType": "Static",
+            "showDraftToggle": false
         },
         "pages": {
-          "ObjectPage|ZSNN_WORKER_LIST": {
-            "entitySet": "ZSNN_WORKER_LIST",
-            "defaultLayoutTypeIfExternalNavigation": "MidColumnFullScreen",
-            "component": {
-              "name": "sap.suite.ui.generic.template.ObjectPage",
-              "settings": {
-                "editableHeaderContent": true
-              }
-            },
-            "pages": [
-              {
-                "navigationProperty": "to_AssignedSubTask",
-                "entitySet": "ZSNN_WORKER_ASSIGNED_SUBTASK",
+            "ListReport|ZSNN_WORKER_LIST": {
+                "entitySet": "ZSNN_WORKER_LIST",
                 "component": {
-                  "name": "sap.suite.ui.generic.template.ObjectPage"
-                }
-              }
-            ]
-          }
+                    "name": "sap.suite.ui.generic.template.ListReport",
+                    "list": true,
+                    "settings": {
+                        "smartVariantManagement": false,
+                        "enableTableFilterInPageVariant": true,
+                        "multiSelect": true,
+                        "dataLoadSettings": {
+                            "loadDataOnAppLaunch": "always"
+                        },
+                        "tableSettings": {
+                            "type": "ResponsiveTable"
+                        },
+                        "filterSettings": {
+                            "dateSettings": {
+                                "useDateRange": true
+                            }
+                        }
+                    }
+                },
+                "pages": {
+                    "ObjectPage|ZSNN_WORKER_LIST": {
+                        "entitySet": "ZSNN_WORKER_LIST",
+                        "defaultLayoutTypeIfExternalNavigation": "MidColumnFullScreen",
+                        "component": {
+                            "name": "sap.suite.ui.generic.template.ObjectPage",
+                            "settings": {
+                                "editableHeaderContent": true
+                            }
+                        },
+                        "pages": [{
+                            "navigationProperty": "to_AssignedSubTask",
+                            "entitySet": "ZSNN_WORKER_ASSIGNED_SUBTASK",
+                            "component": {
+                                "name": "sap.suite.ui.generic.template.ObjectPage"
+                            }
+                        }]
+                    }
 
+                }
+            }
         }
-      }
+    },
+    "sap.platform.abap": {
+        "uri": ""
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "transactional"
+    },
+    "sap.platform.hcp": {
+        "uri": ""
     }
-  },
-  "sap.platform.abap": {
-    "uri": ""
-  },
-  "sap.fiori": {
-    "registrationIds": [],
-    "archeType": "transactional"
-  },
-  "sap.platform.hcp": {
-    "uri": ""
-  }
 }

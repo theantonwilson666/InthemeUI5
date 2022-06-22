@@ -8,6 +8,7 @@
     xmlns:m="sap.m">
 
     <attachments:Attachments width="100%"
+        id="_TaskAttachment"
         DocumentType="task"
         DocumentID="{TaskId}"
         error="onErrorAttachment"/>

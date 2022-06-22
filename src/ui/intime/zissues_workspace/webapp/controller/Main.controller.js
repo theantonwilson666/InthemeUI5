@@ -23,7 +23,10 @@ sap.ui.define([
                 // this.NavToTask();
             },
 
-            NavToTask: function () {
+            NavToTask: function() {
+
+                return;
+
                 debugger;
 
                 var oItems = this.getOwnerComponent().getComponentData().startupParameters;
@@ -33,15 +36,15 @@ sap.ui.define([
                     urlParameters: {
                         AllParameters: sItems
                     },
-                    success: function (oData) {
+                    success: function(oData) {
                         debugger
 
                     }.bind(this),
-                    error: function (oError) {
+                    error: function(oError) {
                         debugger
                     }.bind(this)
                 })
-                
+
             },
 
             onAfterRendering: function() {
@@ -190,9 +193,13 @@ sap.ui.define([
 
 
             onTaskTitlePress: function(oEvent) {
-                this.navTo("task", {
-                    taskId: btoa(oEvent.getSource().getBindingContext().getObject().TaskId)
-                }, false);
+                sap.m.URLHelper.redirect(
+                    '#zissues_workspace-display&/' + this.getRouter().getRoute('task').getURL({ taskId: btoa(oEvent.getSource().getBindingContext().getObject().TaskId) }),
+                    true);
+
+                // this.navTo("task", {
+                //     taskId: btoa(oEvent.getSource().getBindingContext().getObject().TaskId)
+                // }, false);
             },
 
             onNewTaskButtonPress: function(oEvent) {
