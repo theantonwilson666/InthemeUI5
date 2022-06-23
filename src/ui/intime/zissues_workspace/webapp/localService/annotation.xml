@@ -49,6 +49,7 @@
             <PropertyPath>ProjectStageId</PropertyPath>
             <PropertyPath>Status</PropertyPath>
             <PropertyPath>Executor</PropertyPath>
+             <PropertyPath>TaskId</PropertyPath>
           </Collection>
         </Annotation>
       </Annotations>
