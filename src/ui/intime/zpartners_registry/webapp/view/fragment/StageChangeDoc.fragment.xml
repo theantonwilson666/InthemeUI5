@@ -16,5 +16,5 @@
         useTablePersonalisation="true"
         showRowCount="false"
         enableAutoBinding="false"
-        tableBindingPath="to_ChangeDocument"/> -->
+        tableBindingPath="to_ChangeStageDocument"/>
 </core:FragmentDefinition>
