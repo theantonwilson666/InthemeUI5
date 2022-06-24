@@ -8,19 +8,17 @@
         <VBox class="sapUiSmallMargin">
 
             <Label text="Описание"
-                labelFor="_AttachemntDescr-Input"
                 design="Bold" />
-            <Input id="_AttachemntDescr-Input"
+            <Input 
                 type="Text"
                 value="{control>/description}"
                 width="15em"/>
 
 
             <Label text="Вид вложения"
-                labelFor="_AttachmentType-Select"
                 design="Bold" />
 
-            <Select id="_AttachmentType-Select"
+            <Select 
                 forceSelection="false"
                 selectedKey="{control>/selectedType}"
                 items="{/ZBNN_ATTACHMENT_TYPE}">
@@ -31,19 +29,17 @@
 
             <Label visible="{= ${control>/selectedType} === '01' ? true : false}"
                 text="Файл"
-                labelFor="_Attachment-FilteUploader"
                 design="Bold" />
 
-            <u:FileUploader id="_Attachment-FilteUploader"
+            <u:FileUploader 
                 visible="{= ${control>/selectedType} === '01' ? true : false}"
                 width="15em"/>
 
             <Label visible="{= ${control>/selectedType} === '02' ? true : false}"
                 text="Ссылка"
-                labelFor="_AttachemntURL-Input"
                 design="Bold" />
                 
-            <Input id="_AttachemntURL-Input"
+            <Input 
                 value="{control>/URL}"
                 visible="{= ${control>/selectedType} === '02' ? true : false}"
                 type="Text"

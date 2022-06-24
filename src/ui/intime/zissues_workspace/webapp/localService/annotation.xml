@@ -49,7 +49,71 @@
             <PropertyPath>ProjectStageId</PropertyPath>
             <PropertyPath>Status</PropertyPath>
             <PropertyPath>Executor</PropertyPath>
+             <PropertyPath>TaskId</PropertyPath>
           </Collection>
+        </Annotation>
+      </Annotations>
+
+       <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_TASKType/TaskId">
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="false"/>
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZBNN_TASKNAME_SH"/>
+            <PropertyValue Property="SearchSupported"
+              Bool="true"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="TaskName"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="StageName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="PartnerID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerID"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="ProjectId"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectID"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="ProjectStageId"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="StageID"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="TaskId"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="TaskID"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
         </Annotation>
       </Annotations>
 
@@ -149,6 +213,36 @@
           Bool="true"/>
       </Annotations>
 
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_USERType/MessageIcon">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_USERType/Dismissed">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_USERType/DismissedCriticality">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_USERType/HasUser1CID">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_USERType/HasJiraID">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
+      <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_USERType/HasTelegramID">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
 
       <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_TASKType/Executor">
         <Annotation Term="Common.ValueListWithFixedValues"
@@ -172,9 +266,6 @@
                   <PropertyValue Property="ValueListProperty"
                     String="FullName" />
                 </Record>
-                <!-- <Record Type="Common.ValueListParameterDisplayOnly">
-                    <PropertyValue Property="ValueListProperty" String="FullName"/>
-                  </Record> -->
 
                 <Record Type="Common.ValueListParameterDisplayOnly">
                   <PropertyValue Property="ValueListProperty"
@@ -190,8 +281,6 @@
 
               </Collection>
             </PropertyValue>
-
-            <!-- <PropertyValue Property="SelectionVariantQualifier" String="test" /> -->
           </Record>
         </Annotation>
       </Annotations>

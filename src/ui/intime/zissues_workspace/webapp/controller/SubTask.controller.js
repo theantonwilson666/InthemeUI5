@@ -232,8 +232,6 @@ sap.ui.define([
                     .then(
                         function(oDialog) {
 
-                            debugger;
-
                             var oExecutorContext = this.getModel().createEntry(this.getPage().getBindingContext().getPath() + "/to_Executors", {
                                 groupId: "changes",
                                 properties: {
@@ -259,6 +257,7 @@ sap.ui.define([
 
             onCancelNewExecutorDialog: function(oEvent) {
                 oEvent.getSource().getParent().close();
+                this.getModel().resetChanges();
                 this.onRemoveRowSelection();
             },
 
@@ -320,21 +319,21 @@ sap.ui.define([
                 this.byId("_SubTaskExecutors-SmartTable").getTable().setSelectedItem(oFirstSelectedItem, false);
             },
 
-            onMoveToAnotherTaskButtonPress: function (oEvent) {
+            onMoveToAnotherTaskButtonPress: function(oEvent) {
 
                 this.loadDialog
-                .call(this, {
-                    sDialogName: "_moveSubTaskToTask-Dialog",
-                    sViewName: "intime.zissues_workspace.view.SubTaskSection.MoveToTask"
-                })
-                .then(
-                    function (oDialog) {
+                    .call(this, {
+                        sDialogName: "_moveSubTaskToTask-Dialog",
+                        sViewName: "intime.zissues_workspace.view.SubTaskSection.MoveToTask"
+                    })
+                    .then(
+                        function(oDialog) {
 
-                        debugger;
+                            debugger;
 
-                        oDialog.open();
-                    }.bind(this)
-                );
+                            oDialog.open();
+                        }.bind(this)
+                    );
 
             },
 
@@ -343,31 +342,31 @@ sap.ui.define([
                 debugger;
 
                 this.loadDialog
-                .call(this, {
-                    sDialogName: "_moveSubTaskToSubTask-Dialog",
-                    sViewName: "intime.zissues_workspace.view.SubTaskSection.MoveToSubTask"
-                })
-                .then(
-                    function (oDialog) {
+                    .call(this, {
+                        sDialogName: "_moveSubTaskToSubTask-Dialog",
+                        sViewName: "intime.zissues_workspace.view.SubTaskSection.MoveToSubTask"
+                    })
+                    .then(
+                        function(oDialog) {
 
-                        debugger;
+                            debugger;
 
-                        oDialog.open();
-                    }.bind(this)
-                );
+                            oDialog.open();
+                        }.bind(this)
+                    );
             },
 
-            onCancelMoveToTaskDialog: function (oEvent) {
+            onCancelMoveToTaskDialog: function(oEvent) {
                 oEvent.getSource().getParent().close();
                 this.onRemoveRowSelectionForMoveToTask();
             },
 
-            onCancelMoveToSubTaskDialog: function (oEvent) {
+            onCancelMoveToSubTaskDialog: function(oEvent) {
                 oEvent.getSource().getParent().close();
                 this.onRemoveRowSelectionForMoveToSubTask();
             },
 
-            onOkMoveToTaskDialog: function (oEvent) {
+            onOkMoveToTaskDialog: function(oEvent) {
 
                 debugger;
 
@@ -388,7 +387,7 @@ sap.ui.define([
                         TaskID: oSelectedItem.getBindingContext().getObject().TaskID
                     },
 
-                    success: function (oData) {
+                    success: function(oData) {
                         this.byId("_moveSubTaskToTask-Dialog").setBusy(false);
                         this.isExistError();
                         this.byId("_moveSubTaskToTask-Dialog").close();
@@ -396,7 +395,7 @@ sap.ui.define([
 
                     }.bind(this),
 
-                    error: function (oError) {
+                    error: function(oError) {
                         this.byId("_moveSubTaskToTask-Dialog").setBusy(false);
                         this.showError(oError);
                         this.onRemoveRowSelectionForMoveToTask();
@@ -405,7 +404,7 @@ sap.ui.define([
 
             },
 
-            onOkMoveToSubTaskDialog: function (oEvent) {
+            onOkMoveToSubTaskDialog: function(oEvent) {
 
                 debugger;
 
@@ -426,7 +425,7 @@ sap.ui.define([
                         TargetSubTaskID: oSelectedItem.getBindingContext().getObject().SubTaskID
                     },
 
-                    success: function (oData) {
+                    success: function(oData) {
                         this.byId("_moveSubTaskToSubTask-Dialog").setBusy(false);
                         this.isExistError();
                         this.byId("_moveSubTaskToSubTask-Dialog").close();
@@ -434,7 +433,7 @@ sap.ui.define([
 
                     }.bind(this),
 
-                    error: function (oError) {
+                    error: function(oError) {
                         this.byId("_moveSubTaskToSubTask-Dialog").setBusy(false);
                         this.showError(oError);
                         this.onRemoveRowSelectionForMoveToSubTask();

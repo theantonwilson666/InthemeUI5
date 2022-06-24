@@ -65,6 +65,36 @@
                     Bool="true"/>
             </Annotations>
 
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType/MessageIcon">
+                <Annotation Term="UI.HiddenFilter"
+                Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType/Dismissed">
+                <Annotation Term="UI.HiddenFilter"
+                Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType/DismissedCriticality">
+                <Annotation Term="UI.HiddenFilter"
+                Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType/HasUser1CID">
+                <Annotation Term="UI.HiddenFilter"
+                Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType/HasJiraID">
+                <Annotation Term="UI.HiddenFilter"
+                Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType/HasTelegramID">
+                <Annotation Term="UI.HiddenFilter"
+                Bool="true"/>
+            </Annotations>
+
             <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZBNN_INTIME_POSITIONType/PositionID">
                 <Annotation Term="UI.HiddenFilter"
                     Bool="true"/>

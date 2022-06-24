@@ -8,6 +8,7 @@
     xmlns:m="sap.m">
 
     <attachments:Attachments width="100%"
+    id="_SubTaskAttachment"
         DocumentType="subtask"
         DocumentID="{SubtaskId}"
         error="onErrorAttachment"/>
