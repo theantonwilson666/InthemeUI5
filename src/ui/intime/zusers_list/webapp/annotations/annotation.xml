@@ -110,6 +110,11 @@
 										Path="PositionActual"/>
 								</Record>
 
+							    <Record Type="UI.DataField">
+									<PropertyValue Property="Value"
+										Path="Dismissed"/>
+								</Record>
+
 
 							</Collection>
 						</PropertyValue>
@@ -163,6 +168,11 @@
 							<PropertyValue Property="Value"
 								Path="PositionActual" />
 						</Record>
+
+						<!-- <Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="Dismissed" />
+						</Record> -->
 
 					</Collection>
 				</Annotation>
@@ -284,6 +294,13 @@
 										Path="Department"/>
 									<Annotation Term="UI.Importance"
 										EnumMember="UI.ImportanceType/High"/>
+								</Record>
+
+						        <Record Type="UI.DataField">
+									<PropertyValue Property="Value"
+										Path="Dismissed"/>
+									<Annotation Term="UI.Importance"
+										EnumMember="UI.ImportanceType/Low"/>
 								</Record>
 
 							</Collection>

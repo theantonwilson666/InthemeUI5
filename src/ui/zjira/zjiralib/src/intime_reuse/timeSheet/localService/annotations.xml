@@ -571,6 +571,81 @@
         </Annotation>
       </Annotations>
 
+       <!-- <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/SubTaskID">
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="false"/>
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZBNN_SUBTASK_SH"/>
+            <PropertyValue Property="SearchSupported"
+              Bool="true"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="TaskName"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="StageName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="SubTaskName"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="PartnerID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="PartnerID"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="ProjectID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="ProjectID"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="StageID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="StageID"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="TaskID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="TaskID"/>
+                </Record>
+
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="SubTaskID"/>
+                  <PropertyValue Property="ValueListProperty"
+                    String="SubTaskID"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations> -->
+
       <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/StageID">
         <Annotation Term="Common.ValueListWithFixedValues"
           Bool="false"/>
