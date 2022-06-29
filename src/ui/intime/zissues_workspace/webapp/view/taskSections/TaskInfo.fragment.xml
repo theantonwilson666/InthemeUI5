@@ -95,6 +95,8 @@
             <smartForm:GroupElement>
                 <smartField:SmartField value="{EstimateTime}"
                     editable="true"/>
+                <smartField:SmartField value="{AllTaskTime}"
+                    editable="true"/>
             </smartForm:GroupElement>
         </smartForm:Group>
 

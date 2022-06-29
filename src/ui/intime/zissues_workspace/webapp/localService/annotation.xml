@@ -1889,6 +1889,12 @@
               <PropertyValue Property="Value"
                 Path="EstimateTime" />
             </Record>
+
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value"
+                Path="AllSubTaskTime" />
+            </Record>
+            
           </Collection>
         </Annotation>
 
