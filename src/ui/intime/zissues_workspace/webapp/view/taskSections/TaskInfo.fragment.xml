@@ -96,14 +96,18 @@
                 <smartField:SmartField value="{EstimateTime}"
                     editable="true"/>
             </smartForm:GroupElement>
-        </smartForm:Group>
-
-        <smartForm:Group label="Списанное на задачу время">
             <smartForm:GroupElement>
                 <smartField:SmartField value="{AllTaskTime}"
                     editable="true"/>
             </smartForm:GroupElement>
         </smartForm:Group>
+
+        <!-- <smartForm:Group label="Списанное на задачу время">
+            <smartForm:GroupElement>
+                <smartField:SmartField value="{AllTaskTime}"
+                    editable="true"/>
+            </smartForm:GroupElement>
+        </smartForm:Group> -->
 
       <smartForm:semanticObjectController>
         <navpopover:SemanticObjectController entitySet="ZSNN_INTIME_TASK"
