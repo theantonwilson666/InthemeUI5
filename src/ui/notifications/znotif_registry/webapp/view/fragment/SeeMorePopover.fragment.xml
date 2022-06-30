@@ -1,0 +1,15 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Popover
+		title="Сообщение"
+		class="sapUiContentPadding"
+		contentWidth="20rem" contentHeight="auto" placement="Auto">
+            <VBox>
+				<Text text="Не указан TelegramID" class="sapUiTinyMarginTop" visible="{=(${HasTelegramID} === false ) ? true : false }" />
+                <Text text="Не указан JiraID" class="sapUiTinyMarginTop" visible="{=(${HasJiraID} === false ) ? true : false }" />
+                <Text text="Не указан 1CID" class="sapUiTinyMarginTop" visible="{=(${HasUser1CID} === false ) ? true : false }" />
+			</VBox>
+
+	</Popover>
+</core:FragmentDefinition>

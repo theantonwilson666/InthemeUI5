@@ -1,0 +1,300 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+	Version="4.0">
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470968/UI.xml?api=v2">
+		<edmx:Include Alias="UI"
+			Namespace="com.sap.vocabularies.UI.v1" />
+	</edmx:Reference>
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470971/Communication.xml?api=v2">
+		<edmx:Include Alias="Communication"
+			Namespace="com.sap.vocabularies.Communication.v1" />
+	</edmx:Reference>
+	<edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Measures.V1.xml">
+		<edmx:Include Alias="Measures"
+			Namespace="Org.OData.Measures.V1" />
+	</edmx:Reference>
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470974/Common.xml?api=v2">
+		<edmx:Include Alias="Common"
+			Namespace="com.sap.vocabularies.Common.v1" />
+	</edmx:Reference>
+	<edmx:DataServices>
+		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm">
+
+
+			<Annotations Target="ZNOTIFY_REGISTRY_SRV.ZSNN_NOTIF_SEND_TYPESType/SendType">
+				<Annotation Term="Common.ValueListWithFixedValues"
+					Bool="true" />
+				<Annotation Term="Common.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath"
+							String="ZBNN_SEND_TYPES" />
+						<PropertyValue Property="SearchSupported"
+							Bool="true" />
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty"
+										PropertyPath="SendType" />
+									<PropertyValue Property="ValueListProperty"
+										String="SendType" />
+								</Record>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty"
+										PropertyPath="SendTypeDescr" />
+									<PropertyValue Property="ValueListProperty"
+										String="SendTypeDescr" />
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+
+			<Annotations Target="ZNOTIFY_REGISTRY_SRV.ZSNN_NOTIF_SEND_TYPESType">
+
+				<Annotation Term="UI.LineItem">
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="SendType"/>
+							<Annotation Term="UI.Importance"
+								EnumMember="UI.ImportanceType/High"/>
+						</Record>
+					</Collection>
+				</Annotation>
+
+				<Annotation Term="UI.HeaderInfo">
+					<Record>
+						<PropertyValue Property="Title">
+							<Record Type="UI.DataField">
+								<PropertyValue Property="Value"
+									Path="SendType"/>
+							</Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+
+				<Annotation Term="UI.FieldGroup"
+					Qualifier="sendTypeData">
+					<Record>
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value"
+										Path="SendType"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+
+				<Annotation Term="UI.Facets">
+					<Collection>
+
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Label"
+								String="Отпрвка"/>
+							<PropertyValue Property="Target"
+								AnnotationPath="@UI.FieldGroup#sendTypeData" />
+						</Record>
+
+					</Collection>
+				</Annotation>
+
+
+			</Annotations>
+
+			<Annotations Target="ZNOTIFY_REGISTRY_SRV.ZSNN_NOTIF_HTML_TEMPLATEType">
+
+				<Annotation Term="UI.LineItem">
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="NotifID"/>
+							<Annotation Term="UI.Importance"
+								EnumMember="UI.ImportanceType/High"/>
+						</Record>
+					</Collection>
+				</Annotation>
+
+				<Annotation Term="UI.FieldGroup">
+					<Record>
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value"
+										Path="NotifID"/>
+								</Record>
+
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+
+				<Annotation Term="UI.LineItem">
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="NotifID"/>
+							<Annotation Term="UI.Importance"
+								EnumMember="UI.ImportanceType/High"/>
+						</Record>
+					</Collection>
+				</Annotation>
+
+			</Annotations>
+
+			<Annotations Target="ZNOTIFY_REGISTRY_SRV.ZSNN_NOTIF_HEADERType">
+
+
+				<Annotation Term="UI.FieldGroup"
+					Qualifier="mainInfo">
+					<Record>
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value"
+										Path="Params"/>
+								</Record>
+
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+
+				<Annotation Term="UI.FieldGroup"
+					Qualifier="admin">
+					<Record>
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value"
+										Path="CreatedBy"/>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value"
+										Path="CreatedOn"/>
+								</Record>
+
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value"
+										Path="ChangedBy"/>
+								</Record>
+
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value"
+										Path="ChangedOn"/>
+								</Record>
+
+
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+
+
+				<Annotation Term="UI.HeaderInfo">
+
+					<Record>
+						<PropertyValue Property="ImageUrl"
+							Path="ImageURL"/>
+
+						<PropertyValue Property="Title">
+							<Record Type="UI.DataField">
+								<PropertyValue Property="Value"
+									Path="NotifID"/>
+							</Record>
+						</PropertyValue>
+						<PropertyValue Property="Description">
+							<Record Type="UI.DataField">
+								<PropertyValue Property="Value"
+									Path="Description"/>
+							</Record>
+						</PropertyValue>
+
+					</Record>
+				</Annotation>
+
+				<Annotation Term="UI.Facets">
+					<Collection>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Label"
+								String="Информация по изменению"/>
+							<PropertyValue Property="Target"
+								AnnotationPath="@UI.FieldGroup#admin" />
+						</Record>
+
+
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Label"
+								String="Отправка через"/>
+							<PropertyValue Property="Target"
+								AnnotationPath="to_SendTypes/@UI.LineItem" />
+						</Record>
+
+
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Label"
+								String="Уведомление"/>
+							<PropertyValue Property="Target"
+								AnnotationPath="@UI.FieldGroup#mainInfo" />
+						</Record>
+
+
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Label"
+								String="Шаблон сообщения"/>
+							<PropertyValue Property="Target"
+								AnnotationPath="to_HtmlTemplate/@UI.FieldGroup" />
+						</Record>
+
+
+					</Collection>
+				</Annotation>
+
+
+				<Annotation Term="UI.LineItem">
+					<Collection>
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="NotifID"/>
+							<Annotation Term="UI.Importance"
+								EnumMember="UI.ImportanceType/High"/>
+						</Record>
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="Description" />
+						</Record>
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="Params" />
+						</Record>
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="CreatedBy" />
+						</Record>
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="CreatedOn" />
+						</Record>
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="ChangedBy" />
+						</Record>
+
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="ChangedOn" />
+						</Record>
+
+					</Collection>
+				</Annotation>
+			</Annotations>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

@@ -1,0 +1,5 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+       <!-- <Text text="{MessageIcon}"></Text> -->
+       <Button id="idSeeMoreBtn" icon="sap-icon://warning" 
+       visible="{=(${MessageIcon} === false) ? true : false }" press="onSeeMorePress"/>
+</core:FragmentDefinition>
