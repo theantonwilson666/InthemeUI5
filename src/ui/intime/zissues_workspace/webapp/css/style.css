@@ -15,3 +15,7 @@
 .backColor {
     background-color: #DEDDD8 !important;
 }
+
+#CommentSmartField-textArea {
+    height: 10rem !important;
+}

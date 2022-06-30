@@ -144,6 +144,16 @@ sap.ui.define([
                                             }
 
                                         }).addStyleClass("sapUiTinyMarginBegin"),
+
+                                        new sap.m.Text({
+                                            text: "Cписано на задачу: {AllTaskTime} {AllTaskTimeU}"
+
+                                        }).addStyleClass("sapUiTinyMarginBegin"),
+
+                                        new sap.m.Text({
+                                            text: "Оценка времени: {EstimateTime} {EstimateTimeU}"
+
+                                        }).addStyleClass("sapUiTinyMarginBegin"),
                                     ]
                                 }),
 
