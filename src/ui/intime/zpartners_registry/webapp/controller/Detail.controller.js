@@ -215,22 +215,12 @@ sap.ui.define([
                         this.byId("projectPage").setBusy(false);
 
                         if (!this.isExistError()) {
-                            // this.clearFileUploader();
                         }
-
-                        // if (!this.isExistError()) {
-                        //     this.byId("profitWorkerSmartTable").rebindTable();
-                        //     this.closeBusyDialog();
-                        // } else {
-                        //     this.closeBusyDialog();
-                        // }
                     }.bind(this),
                     error: function (oError) {
 
                         this.byId("projectPage").setBusy(false);
                         this.showError(oError);
-                        // this.closeBusyDialog();
-                        // this.showError(oError);
                     }.bind(this),
 
                 });
