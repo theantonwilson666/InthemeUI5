@@ -248,6 +248,22 @@
 					</Collection>
 				</Annotation>
 
+				<Annotation Term="UI.PresentationVariant">
+					<Record>
+						<PropertyValue Property="SortOrder">
+							<Collection>
+								<Record>
+									<PropertyValue Property="Property"
+										PropertyPath="ChangedOn"/>
+									<PropertyValue Property="Descending"
+										Bool="true"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+
+					</Record>
+				</Annotation>
+
 				<Annotation Term="UI.LineItem">
 					<Annotation Term="UI.Criticality"
 						Path="TaskOverDueCriticality" />
@@ -314,6 +330,11 @@
 							<PropertyValue Property="Value"
 								Path="TimeRemain" />
 						</Record>
+
+						<!-- <Record Type="UI.DataField">
+							<PropertyValue Property="Value"
+								Path="ChangedOn" />
+						</Record> -->
 
 
 
