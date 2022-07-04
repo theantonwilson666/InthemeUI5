@@ -15,7 +15,7 @@
     "resources": "resources.json",
     "dataSources": {
       "mainService": {
-        "uri": "/sap/opu/odata/sap/ZINT_UI_USERS_SRV/",
+        "uri": "/sap/opu/odata/sap/ZINT_UI_EMPLOYEE_CARD_SRV/",
         "type": "OData",
         "settings": {
           "annotations": [
