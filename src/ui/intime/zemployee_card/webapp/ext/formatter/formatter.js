@@ -1,7 +1,7 @@
-sap.ui.define([], function () {
+sap.ui.define([], function() {
     "use strict";
     return {
-        timestampDDMMYYHHDDFormatter: function (sValue) {
+        timestampDDMMYYHHDDFormatter: function(sValue) {
             var yyyy = sValue.getFullYear();
             var mm = sValue.getMonth() + 1;
             var dd = sValue.getDate();
@@ -20,7 +20,8 @@ sap.ui.define([], function () {
             return dd + '.' + mm + '.' + yyyy + " " + hh + ':' + min;
         },
 
-        timestampDDMM_DDMMFormatter: function (sValue1, sValue2) {
+        timestampDDMM_DDMMFormatter: function(sValue1, sValue2) {
+            debugger;
             if (sValue1 && sValue2 != null) {
                 return sValue1.toLocaleDateString() + " " + "-" + " " + sValue2.toLocaleDateString();
             } else {
@@ -28,7 +29,7 @@ sap.ui.define([], function () {
             }
         },
 
-        percentagesTwoNbFormatter: function (sValue1, sValue2) {
+        percentagesTwoNbFormatter: function(sValue1, sValue2) {
             var fValue1 = parseFloat(sValue1),
                 fValue2 = parseFloat(sValue2);
             if (fValue1 && fValue1 >= 0 &&
@@ -40,9 +41,8 @@ sap.ui.define([], function () {
             }
         },
 
-        TimeSpentFormatter: function (sValue) {
+        TimeSpentFormatter: function(sValue) {
             debugger;
-            // Math.round(sValue)
             if (sValue != null) {
                 return Math.round(sValue) + " " + "Месяц";
             } else {

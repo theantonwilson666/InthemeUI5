@@ -12,7 +12,7 @@
             change="onChangeDateRangeSelection" />
 
         <VBox alignContent="Stretch">
-            <viz:Popover id="_TimeSheet-Popover"></viz:Popover>
+            <!-- <viz:Popover id="_TimeSheet-Popover"></viz:Popover> -->
 
             <viz:VizFrame id="_TimeSheet-VizFrame"
                 uiConfig="{applicationSet:'fiori'}"
