@@ -44,7 +44,7 @@ sap.ui.define([], function () {
             debugger;
             // Math.round(sValue)
             if (sValue != null) {
-                return Math.round(sValue) + " " + "Месяц";
+                return Math.round(sValue) + " " + "Месяцев";
             } else {
                 return " ";
             }

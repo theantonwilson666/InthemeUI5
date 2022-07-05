@@ -132,7 +132,11 @@
                     },
                     "sap.suite.ui.generic.template.ObjectPage.view.Details": {
                         "controllerName": "intime.zemployee_card.ext.controller.ObjectPageExt",
-                        "sap.ui.generic.app": {}
+                        "sap.ui.generic.app": {
+                            "ZSNN_EMPLOYEE_CARD": {
+                              "EntitySet": "ZSNN_EMPLOYEE_CARD"
+                            }
+                          }
                     }
                 },
                 "sap.ui.viewExtensions": {
@@ -195,19 +199,7 @@
                             "settings": {
                                 "editableHeaderContent": true
                             }
-                        },
-                        "pages": [{
-                            "navigationProperty": "to_PositionHistory",
-                            "entitySet": "ZSNN_EMPLOYEE_CARD_POSITION_HIST",
-                            "component": {
-                                "name": "sap.suite.ui.generic.template.ObjectPage",
-                                "settings": {
-                                    "tableSettings": {
-                                        "type": "GridTable"
-                                    }
-                                }
-                            }
-                        }]
+                        }
                     }
                 }
             }
