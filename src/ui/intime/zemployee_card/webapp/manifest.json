@@ -139,12 +139,12 @@
                     "sap.suite.ui.generic.template.ListReport.view.ListReport": {
                         "ResponsiveTableColumnsExtension|ZSNN_EMPLOYEE_CARD": {
                             "className": "sap.ui.core.Fragment",
-                            "fragmentName": "intime.zemployee_card.ext.fragment.ListReportCustomColumns",
+                            "fragmentName": "intime.zemployee_card.view.fragment.ListReportColumn",
                             "type": "XML"
                         },
                         "ResponsiveTableCellsExtension|ZSNN_EMPLOYEE_CARD": {
                             "className": "sap.ui.core.Fragment",
-                            "fragmentName": "intime.zemployee_card.ext.fragment.ListReportCustomCells",
+                            "fragmentName": "intime.zemployee_card.view.fragment.ListReportCell",
                             "type": "XML"
                         }
                     }
