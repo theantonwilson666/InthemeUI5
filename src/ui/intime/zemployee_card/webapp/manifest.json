@@ -92,13 +92,13 @@
         "type": "sap.ui.model.resource.ResourceModel",
         "uri": "i18n/i18n.properties"
       },
-      "i18n|sap.suite.ui.generic.template.ListReport|ZSNN_INTIME_USER": {
+      "i18n|sap.suite.ui.generic.template.ListReport|ZSNN_EMPLOYEE_CARD": {
         "type": "sap.ui.model.resource.ResourceModel",
-        "uri": "i18n/ListReport/ZSNN_INTIME_USER/i18n.properties"
+        "uri": "i18n/ListReport/ZSNN_EMPLOYEE_CARD/i18n.properties"
       },
-      "i18n|sap.suite.ui.generic.template.ObjectPage|ZSNN_INTIME_USER": {
+      "i18n|sap.suite.ui.generic.template.ObjectPage|ZSNN_EMPLOYEE_CARD": {
         "type": "sap.ui.model.resource.ResourceModel",
-        "uri": "i18n/ObjectPage/ZSNN_INTIME_USER/i18n.properties"
+        "uri": "i18n/ObjectPage/ZSNN_EMPLOYEE_CARD/i18n.properties"
       },
       "": {
         "dataSource": "mainService",
@@ -127,55 +127,18 @@
           "sap.suite.ui.generic.template.ListReport.view.ListReport": {
             "controllerName": "intime.zemployee_card.ext.controller.ListReportExt",
             "sap.ui.generic.app": {
-              "ZSNN_INTIME_USER": {
-                "EntitySet": "ZSNN_INTIME_USER"
+              "ZSNN_EMPLOYEE_CARD": {
+                "EntitySet": "ZSNN_EMPLOYEE_CARD"
               }
             }
           },
           "sap.suite.ui.generic.template.ObjectPage.view.Details": {
             "controllerName": "intime.zemployee_card.ext.controller.ObjectPageExt",
             "sap.ui.generic.app": {
-              "ZSNN_INTIME_USER": {
-                "EntitySet": "ZSNN_INTIME_USER",
-                "Header": {
-                  "Actions": {
-                    "createJiraUser": {
-                      "id": "createJiraUser",
-                      "text": "Создать Jira пользователя",
-                      "press": "onCreateJiraUserButtonPress",
-                      "determining": false
-                    },
-                    "syncJiraData": {
-                      "id": "syncJiraData",
-                      "text": "Синхр. Jira данные по задачам",
-                      "press": "onSyncJiraData",
-                      "determining": false
-                    },
-                    "sync1CData": {
-                      "id": "sync1CData",
-                      "text": "Синхр. 1C данных",
-                      "press": "onSync1CData",
-                      "determining": false
-                    }
-                  }
-                }
-              }
             }
           }
         },
         "sap.ui.viewExtensions": {
-          "sap.suite.ui.generic.template.ListReport.view.ListReport": {
-            "ResponsiveTableColumnsExtension|ZSNN_INTIME_USER": {
-              "className": "sap.ui.core.Fragment",
-              "fragmentName": "intime.zemployee_card.view.fragment.CustomColumn",
-              "type": "XML"
-            },
-            "ResponsiveTableCellsExtension|ZSNN_INTIME_USER": {
-              "className": "sap.ui.core.Fragment",
-              "fragmentName": "intime.zemployee_card.view.fragment.CustomCell",
-              "type": "XML"
-        }
-          }
         }
       }
     },
@@ -192,8 +155,8 @@
       "showDraftToggle": false
     },
     "pages": {
-      "ListReport|ZSNN_INTIME_USER": {
-        "entitySet": "ZSNN_INTIME_USER",
+      "ListReport|ZSNN_EMPLOYEE_CARD": {
+        "entitySet": "ZSNN_EMPLOYEE_CARD",
         "component": {
           "name": "sap.suite.ui.generic.template.ListReport",
           "list": true,
@@ -215,8 +178,8 @@
           }
         },
         "pages": {
-          "ObjectPage|ZSNN_INTIME_USER": {
-            "entitySet": "ZSNN_INTIME_USER",
+          "ObjectPage|ZSNN_EMPLOYEE_CARD": {
+            "entitySet": "ZSNN_EMPLOYEE_CARD",
             "defaultLayoutTypeIfExternalNavigation": "MidColumnFullScreen",
             "component": {
               "name": "sap.suite.ui.generic.template.ObjectPage",
@@ -227,7 +190,7 @@
             "pages": [
               {
                 "navigationProperty": "to_PositionHistory",
-                "entitySet": "ZSNN_INTIME_USER_POSITION_HIST",
+                "entitySet": "ZSNN_EMPLOYEE_CARD_POSITION_HIST",
                 "component": {
                   "name": "sap.suite.ui.generic.template.ObjectPage",
                   "settings": {
