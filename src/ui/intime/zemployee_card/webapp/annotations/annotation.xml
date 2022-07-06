@@ -45,10 +45,15 @@
 									<Annotation Term="UI.Importance"
 										EnumMember="UI.ImportanceType/High"/>
 								</Record>
-								
 								<Record Type="UI.DataField">
 									<PropertyValue Property="Value"
 										Path="TelephonNumber"/>
+									<Annotation Term="UI.Importance"
+										EnumMember="UI.ImportanceType/High"/>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value"
+										Path="UserAge"/>
 									<Annotation Term="UI.Importance"
 										EnumMember="UI.ImportanceType/High"/>
 								</Record>
@@ -120,13 +125,13 @@
 						<PropertyValue Property="ImageUrl"
 							Path="ImageURL"/>
 
-						<!-- <PropertyValue Property="Title">
+						<PropertyValue Property="Title">
 							<Record Type="UI.DataField">
 								<PropertyValue Property="Value"
-									Path="SubTaskName"/>
+									Path="UserStatus"/>
 							</Record>
 						</PropertyValue>
-						<PropertyValue Property="Description">
+						<!-- <PropertyValue Property="Description">
 							<Record Type="UI.DataField">
                        		<PropertyValue Property="Value"
 									Path="ProjectName"/>
@@ -165,6 +170,93 @@
 					</Collection>
 				</Annotation>
 			</Annotations>
+
+			<Annotations Target="ZINT_UI_EMPLOYEE_CARD_SRV.ZSNN_EMPLOYEE_CARDType/Branch">
+				<Annotation Term="Common.ValueListWithFixedValues"
+					Bool="true" />
+				<Annotation Term="Common.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath"
+							String="ZBNN_INTIME_BRANCH" />
+						<PropertyValue Property="SearchSupported"
+							Bool="true" />
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty"
+										PropertyPath="Branch" />
+									<PropertyValue Property="ValueListProperty"
+										String="BranchID" />
+								</Record>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty"
+										PropertyPath="BranchText" />
+									<PropertyValue Property="ValueListProperty"
+										String="BranchText" />
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+
+			<Annotations Target="ZINT_UI_EMPLOYEE_CARD_SRV.ZSNN_EMPLOYEE_CARDType/PositionID">
+				<Annotation Term="Common.ValueListWithFixedValues"
+					Bool="true" />
+				<Annotation Term="Common.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath"
+							String="ZBNN_INTIME_POSITION" />
+						<PropertyValue Property="SearchSupported"
+							Bool="true" />
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty"
+										PropertyPath="PositionID" />
+									<PropertyValue Property="ValueListProperty"
+										String="PositionID" />
+								</Record>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty"
+										PropertyPath="PositionText" />
+									<PropertyValue Property="ValueListProperty"
+										String="PositionText" />
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+
+			 <Annotations Target="ZINT_UI_EMPLOYEE_CARD_SRV.ZSNN_EMPLOYEE_CARDType/Department">
+                <Annotation Term="Common.ValueListWithFixedValues"
+                    Bool="true" />
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath"
+                            String="ZBNN_INTIME_DEPARTMENT" />
+                        <PropertyValue Property="SearchSupported"
+                            Bool="true" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="Department" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="DepartmentID" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="DepartmentText" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="DepartmentText" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
 
 		</Schema>
 	</edmx:DataServices>

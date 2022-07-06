@@ -44,7 +44,7 @@ sap.ui.define([], function() {
         TimeSpentFormatter: function(sValue) {
             debugger;
             if (sValue != null) {
-                return Math.round(sValue) + " " + "Месяцев";
+                return Math.trunc(sValue) + " " + "Месяцев";
             } else {
                 return " ";
             }
