@@ -21,9 +21,9 @@ sap.ui.define([], function() {
         },
 
         timestampDDMM_DDMMFormatter: function(sValue1, sValue2) {
-            debugger;
             if (sValue1 && sValue2 != null) {
-                return sValue1.toLocaleDateString() + " " + "-" + " " + sValue2.toLocaleDateString();
+                debugger;
+                return sValue1 + " " + "-" + " " + sValue2;
             } else {
                 return " ";
             }

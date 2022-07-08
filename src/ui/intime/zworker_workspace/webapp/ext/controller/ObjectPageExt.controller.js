@@ -296,75 +296,75 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
         this.byId("_TimeSheet-VizFrame").addFeed(oFeedCategoryAxis);
 
         var oPopOver = this.getView().byId("_TimeSheet-Popover");
-        // oPopOver.connect(this.byId("_TimeSheet-VizFrame").getVizUid());
+        oPopOver.connect(this.byId("_TimeSheet-VizFrame").getVizUid());
 
-        // oPopOver.setCustomDataControl(function(data, test) {
-        //     if (!data.data.val) {
-        //         debugger;
-        //         var sSelectedDate = data.target.__data__.DateSheet;
+        oPopOver.setCustomDataControl(function(data, test) {
+            if (!data.data.val) {
+                debugger;
+                var sSelectedDate = data.target.__data__.DateSheet;
 
-        //         this.getView().byId("_TimeSheet-Popover").close();
-
-
-        //         var oUserData = this.getView().getBindingContext().getObject();
-
-        //         var oDialog = new TimeSheetDialog({
-        //             title: `Списать время - ${oUserData.Surname} ${oUserData.Name}`,
-        //             executorID: oUserData.UserID,
-        //             dateSheet: this.parseDate(sSelectedDate),
-        //             contentWidth: "100%"
-        //         });
+                this.getView().byId("_TimeSheet-Popover").close();
 
 
-        //         oDialog.open();
+                var oUserData = this.getView().getBindingContext().getObject();
 
-        //         oDialog.timeSheetSaveResult.then(function(oData) {
-        //             this.extensionAPI.refresh();
-        //             this.updateVizFrame();
-        //         }.bind(this), function(oError) {
-        //             MessageDialog.isExistError();
-        //         }.bind(this))
+                var oDialog = new TimeSheetDialog({
+                    title: `Списать время - ${oUserData.Surname} ${oUserData.Name}`,
+                    executorID: oUserData.UserID,
+                    dateSheet: this.parseDate(sSelectedDate),
+                    contentWidth: "100%"
+                });
 
-        //     } else {
 
-        //         debugger;
+                oDialog.open();
 
-        //         var sDate = data.target.__data__.DateSheet;
-        //         this.onChartDateClick(sDate.split('.')[0], sDate.split('.')[1] - 1, sDate.split('.')[2]);
+                oDialog.timeSheetSaveResult.then(function(oData) {
+                    this.extensionAPI.refresh();
+                    this.updateVizFrame();
+                }.bind(this), function(oError) {
+                    MessageDialog.isExistError();
+                }.bind(this))
 
-        //         var oList = new sap.m.List({
-        //             includeItemInSelection: true
-        //         });
+            } else {
 
-        //         oList.setModel(this.getView().getModel());
+                debugger;
 
-        //         oList.bindItems({
-        //             path: this.getView().getBindingContext().getPath() + "/to_TimeSheet",
-        //             template: new sap.m.StandardListItem({
-        //                 title: "{TaskName}",
-        //                 description: "{SubTaskName}",
-        //                 icon: "{PartnerImageURL}",
-        //                 // counter : {
-        //                 //      path : "TimeSpent",
-        //                 //      formatter : function (sTimeSpent){
+                var sDate = data.target.__data__.DateSheet;
+                this.onChartDateClick(sDate.split('.')[0], sDate.split('.')[1] - 1, sDate.split('.')[2]);
 
-        //                 //         debugger;
+                var oList = new sap.m.List({
+                    includeItemInSelection: true
+                });
 
-        //                 //         if (sTimeSpent){
-        //                 //             return parseInt(sTimeSpent);
-        //                 //         }
-        //                 //      }
-        //                 //     },
-        //                 info: "{TimeSpent} {TimeSpentUText}"
-        //             }),
-        //             filters: [
-        //                 new sap.ui.model.Filter("DateSheet", "EQ", this.parseDate(data.data.val[0].value))
-        //             ]
-        //         })
+                oList.setModel(this.getView().getModel());
 
-        //         return oList;
-        //     }
-        // }.bind(this));
+                oList.bindItems({
+                    path: this.getView().getBindingContext().getPath() + "/to_TimeSheet",
+                    template: new sap.m.StandardListItem({
+                        title: "{TaskName}",
+                        description: "{SubTaskName}",
+                        icon: "{PartnerImageURL}",
+                        // counter : {
+                        //      path : "TimeSpent",
+                        //      formatter : function (sTimeSpent){
+
+                        //         debugger;
+
+                        //         if (sTimeSpent){
+                        //             return parseInt(sTimeSpent);
+                        //         }
+                        //      }
+                        //     },
+                        info: "{TimeSpent} {TimeSpentUText}"
+                    }),
+                    filters: [
+                        new sap.ui.model.Filter("DateSheet", "EQ", this.parseDate(data.data.val[0].value))
+                    ]
+                })
+
+                return oList;
+            }
+        }.bind(this));
 
     },
 
@@ -473,29 +473,29 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
         this.getView().getContent()[0].getHeaderTitle().getActions()[0].clear();
     },
 
-    // onChangeTaskStatusPress: function (oEvent) {
+    onChangeTaskStatusPress: function (oEvent) {
 
-    //     var oUser = oEvent.getSource().getBindingContext().getObject();
-    //     var oItem = this.byId("to_AssignedSubTask::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getSelectedContexts()[0].getObject();
+        var oUser = oEvent.getSource().getBindingContext().getObject();
+        var oItem = this.byId("to_AssignedSubTask::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getSelectedContexts()[0].getObject();
 
-    //     var oDialog = new ChangeTaskStatusDialog({
-    //         title: `Сменить статус`,
-    //         executorID: oUser.UserID,
-    //         subTaskID: oItem.SubTaskID,
-    //         contentWidth: "100%"
-    //     });
+        var oDialog = new ChangeTaskStatusDialog({
+            title: `Сменить статус`,
+            executorID: oUser.UserID,
+            subTaskID: oItem.SubTaskID,
+            contentWidth: "100%"
+        });
 
-    //     oDialog.timeSheetSaveResult.then(function (oSuccess) {
-    //         this.extensionAPI.refresh();
-    //         this.updateVizFrame();
-    //     }.bind(this),
-    //         function (oError) {
-    //             MessageDialog.isExistError();
-    //         }.bind(this)
-    //     );
+        oDialog.timeSheetSaveResult.then(function (oSuccess) {
+            this.extensionAPI.refresh();
+            this.updateVizFrame();
+        }.bind(this),
+            function (oError) {
+                MessageDialog.isExistError();
+            }.bind(this)
+        );
 
-    //     oDialog.open();
+        oDialog.open();
 
-    // },
+    },
 
 });

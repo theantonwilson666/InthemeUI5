@@ -1,0 +1,39 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:l="sap.ui.layout"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:smartField="sap.ui.comp.smartfield"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar">
+	<Popover
+		title="Списанное время"
+		class="sapUiContentPadding"
+		contentWidth="20rem" contentHeight="auto" placement="Auto">
+
+		<content>
+		<FlexBox items="{to_WEEK_TIMESHEET}">
+		<items>
+		<Text text="{ProjectName}"/>
+            <!-- <smartTable:SmartTable  id="diffSmartTable"
+                                    entitySet="ZSNN_WEEK_TIMESHEET" 
+                                    smartFilterId="smartFilterBar" 
+                                    tableType="ResponsiveTable" 
+                                    placeToolbarInTable="true" 
+                                    useExportToExcel="true" 
+                                    beforeExport="onBeforeExport" 
+                                    useVariantManagement="false" 
+                                    useTablePersonalisation="true" 
+                                    persistencyKey="SmartTableAnalytical_Explored" 
+                                    enableAutoBinding="true" 
+                                    demandPopin="true" 
+                                    class="sapUiResponsiveContentPadding" 
+                                    enableAutoColumnWidth="true"
+                                    tableBindingPath="to_WEEK_TIMESHEET">
+                <Table sticky="ColumnHeaders,HeaderToolbar" />
+            </smartTable:SmartTable> -->
+			</items>
+			</FlexBox>
+        </content>
+
+	</Popover>
+</core:FragmentDefinition>

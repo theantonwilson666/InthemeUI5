@@ -3,22 +3,30 @@
                          xmlns:smartForm="sap.ui.comp.smartform"
                          xmlns:f="sap.ui.layout.form"
                          xmlns="sap.m">
+                                                   
+                            <HBox>
+                                   <VBox>
+                                          <ObjectStatus text="{LastTimeSpendHours} {SpendHoursUText}" active="true" press="onSpendHoursPress" state="Information"/>
+                                   </VBox>
+                            </HBox>
 
                             <HBox>
                                    <VBox>
                                           <Text text="{ path:'PositionTime', 
                                                   formatter: '.formatter.TimeSpentFormatter' }"/>
+                                          <Button id="idSeeMoreBtn" icon="sap-icon://warning" 
+                                                          visible="{=(${PositionTime} === &apos; &apos; ) ? false : true }" press="onSeeMorePress"/>
                                    </VBox>
                             </HBox>
                             <HBox>
                                    <VBox>
-                                          <Text text="{ parts: [{path:'VacationStartDate'},{path:'VacationEndDate'}], 
+                                          <Text text="{ parts: [{path:'VacationStartDate', type:'sap.ui.model.type.Date', formatOptions: { style: 'long'}},{path:'VacationEndDate', type:'sap.ui.model.type.Date', formatOptions: { style: 'long'}}], 
                                                   formatter: '.formatter.timestampDDMM_DDMMFormatter' }"/>
                                    </VBox>
                             </HBox>
                             <HBox>
                                    <VBox>
-                                          <Text text="{ parts: [{path:'SickLeaveStartDate'},{path:'SickLeaveEndDate'}], 
+                                          <Text text="{ parts: [{path:'SickLeaveStartDate', type:'sap.ui.model.type.Date', formatOptions: { style: 'long'}},{path:'SickLeaveEndDate', type:'sap.ui.model.type.Date', formatOptions: { style: 'long'}}], 
                                                   formatter: '.formatter.timestampDDMM_DDMMFormatter' }"/>
                                    </VBox>
                             </HBox>

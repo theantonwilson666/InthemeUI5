@@ -1,0 +1,13 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Popover
+		title="Сообщение"
+		class="sapUiContentPadding"
+		contentWidth="20rem" contentHeight="auto" placement="Auto">
+            <VBox>
+				<Text text="Ориентировочная продолжительность на этом грейде { path:'PositionTime', formatter: '.formatter.TimeSpentFormatter' }" class="sapUiTinyMarginTop" />
+			</VBox>
+
+	</Popover>
+</core:FragmentDefinition>

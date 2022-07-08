@@ -4,6 +4,14 @@
                          xmlns="sap.m">
 
        <Column>
+              <Text text="Трудозатрат" />
+              <customData>
+                     <core:CustomData key="p13nData"
+                            value='\{"columnKey": "LastTimeSpendHours", "leadingProperty":"LastTimeSpendHours,SpendHoursUText", "columnIndex" : "4"}' />
+              </customData>
+       </Column>
+
+       <Column>
               <Text text="Продолжительность на текущей должности" />
               <customData>
                      <core:CustomData key="p13nData"
