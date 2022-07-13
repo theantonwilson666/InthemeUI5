@@ -32,5 +32,12 @@
                             value='\{"columnKey": "SickLeaveStartDate", "leadingProperty":"SickLeaveStartDate,SickLeaveEndDate", "columnIndex" : "7"}' />
               </customData>
        </Column>
+              <Column>
+              <Text text="Отчет" />
+              <customData>
+                     <core:CustomData key="p13nData"
+                            value='\{"columnIndex" : "8"}' />
+              </customData>
+       </Column>
        
 </core:FragmentDefinition>

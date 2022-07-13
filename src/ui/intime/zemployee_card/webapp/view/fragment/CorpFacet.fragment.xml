@@ -1,0 +1,40 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:smartForm="sap.ui.comp.smartform">
+       <HBox width="100%" alignContent="Center">
+            <VBox width="100%">
+              <!-- <smartForm:SmartForm id="TechCorpFacet" editable="false">
+                     <smartForm:Group label="Корпоративное">
+                        <smartForm:GroupElement>
+                            <smartField:SmartField value="{Department}" />
+                        </smartForm:GroupElement>
+                        <smartForm:GroupElement>
+                            <smartField:SmartField value="{Branch}" />
+                        </smartForm:GroupElement>
+                        <smartForm:GroupElement>
+                            <smartField:SmartField value="{PositionID}"/>
+                        </smartForm:GroupElement>
+                        <smartForm:GroupElement>
+                            <smartField:SmartField value="{path:'PositionTime', formatter: '.formatter.TimeSpentObjPageFormatter'}"/>
+                        </smartForm:GroupElement>
+                    </smartForm:Group>
+              </smartForm:SmartForm> -->
+            <Text class="TechFacet" text="Корпоративное"/>
+            <VBox>
+                <Text class="ValueText" text="Отдел: {DepartmentText}"/>
+            </VBox>
+            <VBox>
+                <Text class="ValueText" text="Филиал: {BranchText}"/>
+            </VBox>
+            <VBox>
+                <Text class="ValueText" text="Должность: {PositionText}"/>
+            </VBox>
+            <VBox>
+                <Text class="ValueText" text="Продолжительность на текущей должности: {path:'PositionTime', formatter: '.formatter.TimeSpentObjPageFormatter'}"/>
+            </VBox>
+            </VBox>
+       </HBox>
+</core:FragmentDefinition>

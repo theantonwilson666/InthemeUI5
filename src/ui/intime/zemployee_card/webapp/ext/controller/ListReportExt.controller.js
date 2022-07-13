@@ -8,7 +8,7 @@ sap.ui.controller("intime.zemployee_card.ext.controller.ListReportExt", {
     formatter: Formatter,
 
     onInit: function() {
-        // this.uiExtensions();
+        
     },
 
     onSeeMorePress: function (oEvent) {
@@ -78,7 +78,15 @@ sap.ui.controller("intime.zemployee_card.ext.controller.ListReportExt", {
               oPopover.openBy(this.oObject);
             }.bind(this)
           );
+      },
+
+      onBeforeRebindTable: function (oEvent) {
+        var oBindingParams = oEvent.getParameter( "bindingParams" );
+        if (!oBindingParams.sorter.length){
+          oBindingParams.sorter.push(new sap.ui.model.Sorter("DateSheet", true))
+        }
       }
+
 
 
 

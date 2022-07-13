@@ -3,38 +3,47 @@ var MessageDialog = sap.ui.require(
     "jira/lib/MessageDialog"
 );
 
+$.sap.require("sap/ui/core/format/NumberFormat");
+var NumberFormat = sap.ui.require(
+    "sap/ui/core/format/NumberFormat"
+);
+
+$.sap.require("intime/zemployee_card/ext/formatter/formatter");
+var Formatter = sap.ui.require("intime/zemployee_card/ext/formatter/formatter");
+
+
 sap.ui.controller("intime.zemployee_card.ext.controller.ObjectPageExt", {
+
+    formatter: Formatter,
 
     _UserObjectPageId: 'intime.zemployee_card::sap.suite.ui.generic.template.ObjectPage.view.Details::ZSNN_EMPLOYEE_CARD',
 
     onInit: function() {
 
-        // if (this.getView().getId() === this._UserObjectPageId) {
-
-        // }
+        this.getStatus();
 
     },
 
-    onAfterRendering: function() {
-        debugger;
-        this.roundFlout();
-    },
+    getStatus: function() {
 
-    roundFlout: function() {
-        // var oitem = this.byId("intime.zemployee_card::sap.suite.ui.generic.template.ObjectPage.view.Details::ZSNN_EMPLOYEE_CARD--objectPage-OPHeaderContent").getBindingContext().getObject();
+        this.extensionAPI.attachPageDataLoaded(function(){
+            debugger;
+            var oDismissedDate = sap.ui.getCore().byId('intime.zemployee_card::sap.suite.ui.generic.template.ObjectPage.view.Details::ZSNN_EMPLOYEE_CARD--objectPageHeader').getBindingContext().getObject().DismisseStartDate;
+            var oVacationDate = sap.ui.getCore().byId('intime.zemployee_card::sap.suite.ui.generic.template.ObjectPage.view.Details::ZSNN_EMPLOYEE_CARD--objectPageHeader').getBindingContext().getObject().VacationEndDate;
+            var oSickLeaveDate = sap.ui.getCore().byId('intime.zemployee_card::sap.suite.ui.generic.template.ObjectPage.view.Details::ZSNN_EMPLOYEE_CARD--objectPageHeader').getBindingContext().getObject().SickLeaveEndDate;
+            var oItem = sap.ui.getCore().byId('intime.zemployee_card::sap.suite.ui.generic.template.ObjectPage.view.Details::ZSNN_EMPLOYEE_CARD--objectPageHeader').getBindingContext().getObject().UserStatus;
+            var oType = sap.ui.getCore().byId('intime.zemployee_card::sap.suite.ui.generic.template.ObjectPage.view.Details::ZSNN_EMPLOYEE_CARD--objectPageHeader').getBindingContext().getObject().UserStatusType;
+            if (oType === '000') {
+             sap.ui.getCore().byId('intime.zemployee_card::sap.suite.ui.generic.template.ObjectPage.view.Details::ZSNN_EMPLOYEE_CARD--objectPageHeader').setObjectTitle(oItem);
+            } else if (oType === '006') {
+             sap.ui.getCore().byId('intime.zemployee_card::sap.suite.ui.generic.template.ObjectPage.view.Details::ZSNN_EMPLOYEE_CARD--objectPageHeader').setObjectTitle(oItem + " " + oDismissedDate.toLocaleDateString());
+            } else if (oType === '001') {
+             sap.ui.getCore().byId('intime.zemployee_card::sap.suite.ui.generic.template.ObjectPage.view.Details::ZSNN_EMPLOYEE_CARD--objectPageHeader').setObjectTitle(oItem + " " + "до" + " " + oVacationDate.toLocaleDateString());
+            } else if (oType === '002') {
+             sap.ui.getCore().byId('intime.zemployee_card::sap.suite.ui.generic.template.ObjectPage.view.Details::ZSNN_EMPLOYEE_CARD--objectPageHeader').setObjectTitle(oItem + " " + "до" + " " + oSickLeaveDate.toLocaleDateString());
+            }
+         });
 
-        // if (typeof oitem === "undefined" ) return
-
-        // var Birthday = oitem.Birthday;
-        // var PositionTime = oitem.PositionTime;
-
-        // if (typeof Birthday === "undefined" && PositionTime === "undefined"){
-        // var FinallyBirthday = Math.trunc(Birthday / 365);
-        // var FinallyPositionTime = Math.floor((PositionTime * 100) / 100 );
-        // } else return
-
-        // this.byId('intime.zemployee_card::sap.suite.ui.generic.template.ObjectPage.view.Details::ZSNN_EMPLOYEE_CARD--header::headerEditable::com.sap.vocabularies.UI.v1.FieldGroup::InfoHeader::Birthday::Field').setValue(FinallyBirthday);
-        // this.byId('intime.zemployee_card::sap.suite.ui.generic.template.ObjectPage.view.Details::ZSNN_EMPLOYEE_CARD--header::headerEditable::com.sap.vocabularies.UI.v1.FieldGroup::CorpInfo::PositionTime::Field').setValue(FinallyPositionTime)
     }
 
 });

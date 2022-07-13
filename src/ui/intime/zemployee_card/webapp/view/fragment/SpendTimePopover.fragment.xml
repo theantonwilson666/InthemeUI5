@@ -8,19 +8,19 @@
 	<Popover
 		title="Списанное время"
 		class="sapUiContentPadding"
-		contentWidth="20rem" contentHeight="auto" placement="Auto">
+		contentWidth="35Rem" contentHeight="auto" placement="Auto">
 
 		<content>
-		<FlexBox items="{to_WEEK_TIMESHEET}">
+		<!-- <FlexBox items="{to_WEEK_TIMESHEET}">
 		<items>
-		<Text text="{ProjectName}"/>
-            <!-- <smartTable:SmartTable  id="diffSmartTable"
+		<Text text="{ProjectName}"/> -->
+            <smartTable:SmartTable  id="diffSmartTable"
                                     entitySet="ZSNN_WEEK_TIMESHEET" 
-                                    smartFilterId="smartFilterBar" 
                                     tableType="ResponsiveTable" 
                                     placeToolbarInTable="true" 
                                     useExportToExcel="true" 
                                     beforeExport="onBeforeExport" 
+                                    beforeRebindTable="onBeforeRebindTable"
                                     useVariantManagement="false" 
                                     useTablePersonalisation="true" 
                                     persistencyKey="SmartTableAnalytical_Explored" 
@@ -30,9 +30,9 @@
                                     enableAutoColumnWidth="true"
                                     tableBindingPath="to_WEEK_TIMESHEET">
                 <Table sticky="ColumnHeaders,HeaderToolbar" />
-            </smartTable:SmartTable> -->
-			</items>
-			</FlexBox>
+            </smartTable:SmartTable>
+			<!-- </items>
+			</FlexBox> -->
         </content>
 
 	</Popover>

@@ -63,7 +63,7 @@
         "resources": {
             "js": [],
             "css": [{
-                "uri": "/css/style.css"
+                "uri": "css/style.css"
             }]
         },
         "dependencies": {
@@ -151,6 +151,19 @@
                             "fragmentName": "intime.zemployee_card.view.fragment.ListReportCell",
                             "type": "XML"
                         }
+                    },
+                    "sap.suite.ui.generic.template.ObjectPage.view.Details": {
+                        "ReplaceHeaderFacet|ZSNN_EMPLOYEE_CARD|headerEditable::TechnicalFacetPesonal": {
+                            "className": "sap.ui.core.Fragment",
+                            "type": "XML",
+                            "fragmentName": "intime.zemployee_card.view.fragment.PersonalFacet"
+                        },
+                        "ReplaceHeaderFacet|ZSNN_EMPLOYEE_CARD|headerEditable::TechnicalFacetCorp": {
+                            "className": "sap.ui.core.Fragment",
+                            "type": "XML",
+                            "fragmentName": "intime.zemployee_card.view.fragment.CorpFacet"
+                        }
+
                     }
                 }
             }
@@ -175,8 +188,8 @@
                     "list": true,
                     "settings": {
                         "smartVariantManagement": false,
-                        "enableTableFilterInPageVariant": true,
                         "multiSelect": true,
+                        "enableTableFilterInPageVariant": true,
                         "dataLoadSettings": {
                             "loadDataOnAppLaunch": "always"
                         },

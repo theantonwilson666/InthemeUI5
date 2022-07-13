@@ -30,4 +30,10 @@
                                                   formatter: '.formatter.timestampDDMM_DDMMFormatter' }"/>
                                    </VBox>
                             </HBox>
+                            <HBox>
+                                   <VBox>
+                                          <Button id="ExportBtn" text="Export" press="onExportBtnPress"/>
+                                          <Button id="ImportBtn" text="Import" press="onImportBtnPress"/>
+                                   </VBox>
+                            </HBox>
 </core:FragmentDefinition>

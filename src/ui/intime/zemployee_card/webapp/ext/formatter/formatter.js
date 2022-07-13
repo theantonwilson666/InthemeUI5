@@ -49,5 +49,37 @@ sap.ui.define([], function() {
                 return " ";
             }
         },
+
+        UserAgeFormatter: function(sValue) {
+
+            if (sValue != null) {
+                return Math.trunc(sValue);
+            } else {
+                return " ";
+            }
+            // var oFormatOptions = {
+            //     minIntegerDigits: 2,
+            //     maxIntegerDigits: 3,
+            //     minFractionDigits: 0,
+            //     maxFractionDigits: 0
+            // };
+            // var oFloatFormat = NumberFormat.getFloatInstance(oFormatOptions);
+            // debugger;
+            // if (sValue != null) {
+            //  var x = oFloatFormat.format(sValue);
+            // return x;
+            // } else {
+            //     return " ";
+            // }
+        },
+
+        TimeSpentObjPageFormatter: function(sValue) {
+            debugger;
+            if (sValue != null) {
+                return Math.trunc(sValue) + " " + "Месяцев";
+            } else {
+                return " ";
+            }
+        }
     };
 });
