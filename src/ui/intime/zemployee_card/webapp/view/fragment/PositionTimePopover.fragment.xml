@@ -6,7 +6,7 @@
 		class="sapUiContentPadding"
 		contentWidth="20rem" contentHeight="auto" placement="Auto">
             <VBox>
-				<Text text="Ориентировочная продолжительность на этом грейде { path:'PositionTime', formatter: '.formatter.TimeSpentFormatter' }" class="sapUiTinyMarginTop" />
+				<Text text="{ path:'PositionTime', formatter: '.formatter.TimeSpentFormatter' } - ориентировочная продолжительность на текущем грейде" class="sapUiTinyMarginTop" />
 			</VBox>
 
 	</Popover>

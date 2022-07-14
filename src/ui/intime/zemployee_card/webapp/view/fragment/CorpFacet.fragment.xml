@@ -33,7 +33,11 @@
                 <Text class="ValueText" text="Должность: {PositionText}"/>
             </VBox>
             <VBox>
-                <Text class="ValueText" text="Продолжительность на текущей должности: {path:'PositionTime', formatter: '.formatter.TimeSpentObjPageFormatter'}"/>
+                <Text class="ValueText" text="Продолжительность на текущей должности: {path:'PositionTime', formatter: '.formatter.PositionTimeFormatter'}"/>
+            </VBox>
+            <VBox>
+                <Text class="ValueText" text="Стаж работы: { parts: [{path:'WorkExperienceMonths'},{path:'WorkExperienceMonthsFlag'}], 
+                                                  formatter: '.formatter.WorkExperienceFormatter' }"/>
             </VBox>
             </VBox>
        </HBox>

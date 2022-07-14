@@ -41,12 +41,15 @@ sap.ui.define([], function() {
             }
         },
 
-        TimeSpentFormatter: function(sValue) {
+        PositionTimeFormatter: function(sValue) {
             debugger;
             if (sValue != null) {
-                return Math.trunc(sValue) + " " + "Месяцев";
+                if (Math.trunc(sValue) === 0) {
+                    return "меньше месяца"
+                } else 
+                return Math.trunc(sValue) + " " + "месяцев";
             } else {
-                return " ";
+                return " "; 
             }
         },
 
@@ -73,13 +76,22 @@ sap.ui.define([], function() {
             // }
         },
 
-        TimeSpentObjPageFormatter: function(sValue) {
+        WorkExperienceFormatter: function(sValue, bFlag) {
             debugger;
-            if (sValue != null) {
-                return Math.trunc(sValue) + " " + "Месяцев";
-            } else {
-                return " ";
+            if (bFlag) {
+                if (sValue != null) {
+                    if (Math.trunc(sValue) === 0) {
+                        return "меньше месяца"
+                    } else 
+                    return Math.trunc(sValue) + " " + "месяцев";
+                } else {
+                    return " "; 
+                }
             }
+            else{
+                return " "; 
+            }
+            
         }
     };
 });

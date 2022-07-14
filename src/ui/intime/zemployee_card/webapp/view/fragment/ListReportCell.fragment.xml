@@ -13,7 +13,7 @@
                             <HBox>
                                    <VBox>
                                           <Text text="{ path:'PositionTime', 
-                                                  formatter: '.formatter.TimeSpentFormatter' }"/>
+                                                  formatter: '.formatter.PositionTimeFormatter' }"/>
                                           <Button id="idSeeMoreBtn" icon="sap-icon://warning" 
                                                           visible="{=(${PositionTime} === &apos; &apos; ) ? false : true }" press="onSeeMorePress"/>
                                    </VBox>
