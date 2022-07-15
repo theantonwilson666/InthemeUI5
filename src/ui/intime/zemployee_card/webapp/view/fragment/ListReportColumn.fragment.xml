@@ -1,0 +1,43 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+                         xmlns:smartField="sap.ui.comp.smartfield" 
+                         xmlns:table="sap.ui.table"
+                         xmlns="sap.m">
+
+       <Column>
+              <Text text="Трудозатрат" />
+              <customData>
+                     <core:CustomData key="p13nData"
+                            value='\{"columnKey": "LastTimeSpendHours", "leadingProperty":"LastTimeSpendHours,SpendHoursUText", "columnIndex" : "4"}' />
+              </customData>
+       </Column>
+
+       <Column>
+              <Text text="Продолжительность на текущей должности" />
+              <customData>
+                     <core:CustomData key="p13nData"
+                            value='\{"columnKey": "PositionTime", "leadingProperty":"PositionTime", "columnIndex" : "5"}' />
+              </customData>
+       </Column>
+        <Column>
+              <Text text="Отпуск" />
+              <customData>
+                     <core:CustomData key="p13nData"
+                            value='\{"columnKey": "VacationStartDate", "leadingProperty":"VacationStartDate,VacationEndDate", "columnIndex" : "6"}' />
+              </customData>
+       </Column>
+       <Column>
+              <Text text="Больничный" />
+              <customData>
+                     <core:CustomData key="p13nData"
+                            value='\{"columnKey": "SickLeaveStartDate", "leadingProperty":"SickLeaveStartDate,SickLeaveEndDate", "columnIndex" : "7"}' />
+              </customData>
+       </Column>
+              <Column>
+              <Text text="Отчет" />
+              <customData>
+                     <core:CustomData key="p13nData"
+                            value='\{"columnIndex" : "8"}' />
+              </customData>
+       </Column>
+       
+</core:FragmentDefinition>

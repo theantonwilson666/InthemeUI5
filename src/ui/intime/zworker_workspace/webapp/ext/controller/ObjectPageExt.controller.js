@@ -8,8 +8,6 @@ var Format = sap.ui.require(
     "sap/viz/ui5/api/env/Format"
 );
 
-
-
 $.sap.require("jira/lib/intime_reuse/timeSheet/TimeSheetDialog");
 var TimeSheetDialog = sap.ui.require(
     "jira/lib/intime_reuse/timeSheet/TimeSheetDialog"
@@ -25,11 +23,10 @@ var MessageDialog = sap.ui.require(
     "jira/lib/MessageDialog"
 );
 
-
 sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
     _UserObjectPageId: 'intime.zworker_workspace::sap.suite.ui.generic.template.ObjectPage.view.Details::ZSNN_WORKER_LIST',
 
-    onInit: function () {
+    onInit: function() {
 
         if (this.getView().getId() === this._UserObjectPageId) {
             this.uiExtension();
@@ -40,21 +37,21 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
 
     },
 
-    uiExtension: function () {
-        this.extensionAPI.attachPageDataLoaded(function () {
-            this.initDateIntervalSelection();
-            this.updateVizFrame();
+    uiExtension: function() {
+        this.extensionAPI.attachPageDataLoaded(function() {
+                this.initDateIntervalSelection();
+                this.updateVizFrame();
 
-            debugger;
+                debugger;
 
-            this.addTimeSheetDateInterval();
+                this.addTimeSheetDateInterval();
 
-        }.bind(this))
-        // this.addPhotoLoader();
+            }.bind(this))
+            // this.addPhotoLoader();
     },
 
 
-    addTimeSheetDateInterval: function () {
+    addTimeSheetDateInterval: function() {
         var oDay = this.getDayParam(new Date());
 
         this._oDateRangeSelection = new sap.m.DateRangeSelection("timeSheetDateRange-DateRangeSelection", {
@@ -63,35 +60,35 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
             width: "15%"
         });
 
-        this._oDateRangeSelection.attachChange(function () {
+        this._oDateRangeSelection.attachChange(function() {
             this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getParent().rebindTable();
         }.bind(this))
 
 
         this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getHeaderToolbar().addContent(this._oDateRangeSelection);
-        this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getParent().attachBeforeRebindTable(function (oEvent) {
+        this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getParent().attachBeforeRebindTable(function(oEvent) {
             var oDateFrom = this._oDateRangeSelection.getDateValue();
             var oDateTo = this._oDateRangeSelection.getSecondDateValue();
 
             if ((oDateFrom) && (oDateTo)) {
                 oEvent.getParameter('bindingParams').filters.push(new sap.ui.model.Filter("DateSheet", 'BT', oDateFrom, oDateTo));
             }
-            
+
         }.bind(this))
 
         this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getParent().rebindTable();
     },
 
-    onChartDateClick: function (day, month, year) {
+    onChartDateClick: function(day, month, year) {
         debugger;
 
-        sap.ui.getCore().byId('timeSheetDateRange-DateRangeSelection').setDateValue(new Date(year, month, day, 23,59,59));
-        sap.ui.getCore().byId('timeSheetDateRange-DateRangeSelection').setSecondDateValue(new Date(year, month, day, 23,59,59));
+        sap.ui.getCore().byId('timeSheetDateRange-DateRangeSelection').setDateValue(new Date(year, month, day, 23, 59, 59));
+        sap.ui.getCore().byId('timeSheetDateRange-DateRangeSelection').setSecondDateValue(new Date(year, month, day, 23, 59, 59));
 
         this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getParent().rebindTable();
     },
 
-    initDateIntervalSelection: function () {
+    initDateIntervalSelection: function() {
         var oDay = this.getDayParam(new Date());
         var oId = this.byId("_TimeSheetIntervalSelection-DateRangeSelection");
         if (oId) {
@@ -100,7 +97,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
         }
     },
 
-    getDayParam: function (oDate) {
+    getDayParam: function(oDate) {
         return {
             year: oDate.getFullYear(),
             month: oDate.getMonth(),
@@ -108,7 +105,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
         }
     },
 
-    onChangeTaskStatusPress: function (oEvent) {
+    onChangeTaskStatusPress: function(oEvent) {
 
         var oUser = oEvent.getSource().getBindingContext().getObject();
         var oItem = this.byId("to_AssignedSubTask::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getSelectedContexts()[0].getObject();
@@ -118,7 +115,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
     },
 
 
-    onCreateTimeSheetButtonPress: function (oEvent) {
+    onCreateTimeSheetButtonPress: function(oEvent) {
         var oUser = oEvent.getSource().getBindingContext().getObject();
         var oItem = this.byId("to_AssignedSubTask::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getSelectedContexts()[0].getObject();
 
@@ -129,11 +126,11 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
             contentWidth: "100%"
         });
 
-        oDialog.timeSheetSaveResult.then(function (oSuccess) {
-            this.extensionAPI.refresh();
-            this.updateVizFrame();
-        }.bind(this),
-            function (oError) {
+        oDialog.timeSheetSaveResult.then(function(oSuccess) {
+                this.extensionAPI.refresh();
+                this.updateVizFrame();
+            }.bind(this),
+            function(oError) {
                 MessageDialog.isExistError();
             }.bind(this)
         );
@@ -142,18 +139,18 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
 
     },
 
-    onCreateTimeSheetHeaderButtonPress: function (oEvent) {
+    onCreateTimeSheetHeaderButtonPress: function(oEvent) {
         var oDialog = new TimeSheetDialog({
             title: `Списать время - ${oEvent.getSource().getBindingContext().getObject().Surname} ${oEvent.getSource().getBindingContext().getObject().Name}`,
             executorID: oEvent.getSource().getBindingContext().getObject().UserID,
             contentWidth: "100%"
         });
 
-        oDialog.timeSheetSaveResult.then(function (oSuccess) {
-            this.extensionAPI.refresh();
-            this.updateVizFrame();
-        }.bind(this),
-            function (oError) {
+        oDialog.timeSheetSaveResult.then(function(oSuccess) {
+                this.extensionAPI.refresh();
+                this.updateVizFrame();
+            }.bind(this),
+            function(oError) {
                 MessageDialog.isExistError();
             }.bind(this)
         );
@@ -161,7 +158,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
         oDialog.open();
     },
 
-    onCreateTimeSheetSubTaskPageButtonPress: function (oEvent) {
+    onCreateTimeSheetSubTaskPageButtonPress: function(oEvent) {
         debugger;
         var oItem = this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::SubSection").getBindingContext().getObject();
         var oDialog = new TimeSheetDialog({
@@ -171,11 +168,11 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
             contentWidth: "100%"
         });
 
-        oDialog.timeSheetSaveResult.then(function (oSuccess) {
-            this.extensionAPI.refresh();
-            this.updateVizFrame();
-        }.bind(this),
-            function (oError) {
+        oDialog.timeSheetSaveResult.then(function(oSuccess) {
+                this.extensionAPI.refresh();
+                this.updateVizFrame();
+            }.bind(this),
+            function(oError) {
                 MessageDialog.isExistError();
             }.bind(this)
         );
@@ -184,7 +181,8 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
     },
 
 
-    updateVizFrame: function () {
+    updateVizFrame: function() {
+        debugger;
         Format.numericFormatter(ChartFormatter.getInstance());
         var formatPattern = ChartFormatter.DefaultPattern;
 
@@ -211,36 +209,36 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
 
                 dataPointStyle: {
                     "rules": [{
-                        "dataContext": { "SpendHours": { "min": 0, "max": 8 } },
-                        "properties": {
-                            "color": "sapUiChartPaletteSemanticCriticalLight3"
+                            "dataContext": { "SpendHours": { "min": 0, "max": 8 } },
+                            "properties": {
+                                "color": "sapUiChartPaletteSemanticCriticalLight3"
+                            },
+                            "displayName": "0-8"
                         },
-                        "displayName": "0-8"
-                    },
 
-                    {
-                        "dataContext": { "SpendHours": { "min": 8, "max": 9 } },
-                        "properties": {
-                            "color": "sapUiChartPaletteSemanticGood"
+                        {
+                            "dataContext": { "SpendHours": { "min": 8, "max": 9 } },
+                            "properties": {
+                                "color": "sapUiChartPaletteSemanticGood"
+                            },
+                            "displayName": "8-9"
                         },
-                        "displayName": "8-9"
-                    },
 
-                    {
-                        "dataContext": { "SpendHours": { "min": 9, "max": 10 } },
-                        "properties": {
-                            "color": "sapUiChartPaletteSemanticCritical"
+                        {
+                            "dataContext": { "SpendHours": { "min": 9, "max": 10 } },
+                            "properties": {
+                                "color": "sapUiChartPaletteSemanticCritical"
+                            },
+                            "displayName": "9-10"
                         },
-                        "displayName": "9-10"
-                    },
 
-                    {
-                        "dataContext": { "SpendHours": { "min": 10 } },
-                        "properties": {
-                            "color": "sapUiChartPaletteSemanticBad"
-                        },
-                        "displayName": "10+"
-                    }
+                        {
+                            "dataContext": { "SpendHours": { "min": 10 } },
+                            "properties": {
+                                "color": "sapUiChartPaletteSemanticBad"
+                            },
+                            "displayName": "10+"
+                        }
 
 
                     ]
@@ -300,10 +298,10 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
         var oPopOver = this.getView().byId("_TimeSheet-Popover");
         oPopOver.connect(this.byId("_TimeSheet-VizFrame").getVizUid());
 
-        oPopOver.setCustomDataControl(function (data, test) {
+        oPopOver.setCustomDataControl(function(data, test) {
             if (!data.data.val) {
                 debugger;
-                var sSelectedDate = data.target.__data__.DateSheet;                
+                var sSelectedDate = data.target.__data__.DateSheet;
 
                 this.getView().byId("_TimeSheet-Popover").close();
 
@@ -320,10 +318,10 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
 
                 oDialog.open();
 
-                oDialog.timeSheetSaveResult.then(function (oData) {
+                oDialog.timeSheetSaveResult.then(function(oData) {
                     this.extensionAPI.refresh();
                     this.updateVizFrame();
-                }.bind(this), function (oError) {
+                }.bind(this), function(oError) {
                     MessageDialog.isExistError();
                 }.bind(this))
 
@@ -370,7 +368,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
 
     },
 
-    parseDate: function (sDateString) {
+    parseDate: function(sDateString) {
 
         var sDay = sDateString.split('.')[0];
         var sMonth = parseInt(sDateString.split('.')[1]) - 1;
@@ -381,20 +379,20 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
     },
 
 
-    formatDate: function (oDate) {
+    formatDate: function(oDate) {
         if (oDate) {
             return oDate.toLocaleDateString("ru-RU", { year: 'numeric', month: 'numeric', day: 'numeric' });
         };
     },
 
-    onChangeDateRangeSelection: function (oEvent) {
+    onChangeDateRangeSelection: function(oEvent) {
         this.updateVizFrame();
     },
 
-    uiExtensionPhoto: function () {
+    uiExtensionPhoto: function() {
         this.addPhotoLoader();
     },
-    addPhotoLoader: function () {
+    addPhotoLoader: function() {
         var oObjectPageHeader = this.byId("objectPageHeader");
         var oUpload = new sap.ui.unified.FileUploader({
             buttonOnly: true,
@@ -409,17 +407,17 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
         oObjectPageHeader.insertAction(oUpload, 0);;
     },
 
-    onUploadFile: function (oEvent) {
+    onUploadFile: function(oEvent) {
         this.getFileContent(oEvent);
     },
 
-    getFileContent: function (oEvent) {
+    getFileContent: function(oEvent) {
         return new Promise(
-            function (res, rej) {
+            function(res, rej) {
                 var oFile = oEvent.getSource().getFocusDomRef().files[0];
                 if (oFile) {
                     var oReader = new FileReader();
-                    oReader.onload = function (e) {
+                    oReader.onload = function(e) {
                         var vContent = e.currentTarget.result.replace(
                             "data:" + oFile.type + ";base64,",
                             ""
@@ -433,7 +431,7 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
                         var oModal = new sap.ui.model.odata.v2.ODataModel(sSurl, {
                             defaultBindingMode: "TwoWay"
                         });
-                        oModal.attachMetadataLoaded(function () {
+                        oModal.attachMetadataLoaded(function() {
 
                             oModal.createEntry("/UserPhotoSet", {
                                 properties: {
@@ -442,15 +440,16 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
                                     FilePath: oFile.name
                                 },
 
-                                success: function (oData) {
+                                success: function(oData) {
                                     this.getView().setBusy(false);
+                                    debugger;
                                     this.extensionAPI.refresh();
                                     this.clearFileUploader();
                                     // this.byId("page").getBinding('content').refresh();
 
                                 }.bind(this),
 
-                                error: function () {
+                                error: function() {
                                     this.getView().setBusy(false);
                                     this.clearFileUploader();
 
@@ -465,37 +464,38 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
                     oReader.readAsDataURL(oFile);
                 }
             }
-                .bind(this)
+            .bind(this)
         );
     },
 
-    clearFileUploader: function () {
+    clearFileUploader: function() {
+        debugger;
         this.getView().getContent()[0].getHeaderTitle().getActions()[0].clear();
     },
 
-    // onChangeTaskStatusPress: function (oEvent) {
+    onChangeTaskStatusPress: function (oEvent) {
 
-    //     var oUser = oEvent.getSource().getBindingContext().getObject();
-    //     var oItem = this.byId("to_AssignedSubTask::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getSelectedContexts()[0].getObject();
+        var oUser = oEvent.getSource().getBindingContext().getObject();
+        var oItem = this.byId("to_AssignedSubTask::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getSelectedContexts()[0].getObject();
 
-    //     var oDialog = new ChangeTaskStatusDialog({
-    //         title: `Сменить статус`,
-    //         executorID: oUser.UserID,
-    //         subTaskID: oItem.SubTaskID,
-    //         contentWidth: "100%"
-    //     });
+        var oDialog = new ChangeTaskStatusDialog({
+            title: `Сменить статус`,
+            executorID: oUser.UserID,
+            subTaskID: oItem.SubTaskID,
+            contentWidth: "100%"
+        });
 
-    //     oDialog.timeSheetSaveResult.then(function (oSuccess) {
-    //         this.extensionAPI.refresh();
-    //         this.updateVizFrame();
-    //     }.bind(this),
-    //         function (oError) {
-    //             MessageDialog.isExistError();
-    //         }.bind(this)
-    //     );
+        oDialog.timeSheetSaveResult.then(function (oSuccess) {
+            this.extensionAPI.refresh();
+            this.updateVizFrame();
+        }.bind(this),
+            function (oError) {
+                MessageDialog.isExistError();
+            }.bind(this)
+        );
 
-    //     oDialog.open();
+        oDialog.open();
 
-    // },
+    },
 
 });
