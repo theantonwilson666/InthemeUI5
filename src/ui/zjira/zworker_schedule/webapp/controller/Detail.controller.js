@@ -694,7 +694,15 @@ sap.ui.define(
                 debugger
                 var oData = oModel.getData();
 
-                debugger;
+
+                oData.SpecialDate = [];
+
+                oData.SpecialDate.push({
+                    StartDate: new Date("2022", "6", "18"),
+                    EndDate: new Date("2022", "6", "18", "23", "59"),
+                    Type: "Type01"
+                });
+
 
                 oData.Appointments = [];
 

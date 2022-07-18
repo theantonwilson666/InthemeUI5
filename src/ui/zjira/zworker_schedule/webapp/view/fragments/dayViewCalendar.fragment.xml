@@ -125,7 +125,7 @@
         </HBox>
         <beginButton>
             <Button text="Сохранить"
-                    press="onUploadScheduleButtonPersonalPress" />
+                    press="onSaveChanges"/>
         </beginButton>
         <endButton>
             <Button text="Отмена"

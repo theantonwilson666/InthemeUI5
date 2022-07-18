@@ -32,8 +32,8 @@ module.exports = function(grunt) {
     // Structure of MOL
     var oAuth = {
         server: "http://sap-tm.inthemelab.com:8000",
-        login: "AEFIMOVA",
-        pass: "Z486153852z",
+        login: "VilsonAYU",
+        pass: "EDCrfv123!",
         packages: [{
                 package: "ZJIRA",
                 transportno: "TMDK910450",
@@ -138,7 +138,7 @@ module.exports = function(grunt) {
                         bspDescription: "Intime : Отчет по списанию",
                         prefix: "intime/ts_report",
                     },
-                    
+
                     zemployee_card: {
                         bspContainer: "ZEMPLOYEE_CARD",
                         bspDescription: "Intime : Карточка сотрудника",
