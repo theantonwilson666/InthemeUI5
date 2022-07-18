@@ -1890,10 +1890,10 @@
                 Path="EstimateTime" />
             </Record>
 
-            <Record Type="UI.DataField">
+            <!-- <Record Type="UI.DataField">
               <PropertyValue Property="Value"
                 Path="AllSubTaskTime" />
-            </Record>
+            </Record> -->
             
           </Collection>
         </Annotation>

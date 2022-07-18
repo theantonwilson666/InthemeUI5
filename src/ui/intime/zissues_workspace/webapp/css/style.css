@@ -19,3 +19,7 @@
 #CommentSmartField-textArea {
     height: 10rem !important;
 }
+
+.executor {
+    border-radius: 20rem !important;
+}
