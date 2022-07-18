@@ -5,9 +5,7 @@
     xmlns:layout="sap.ui.layout"
     xmlns:f="sap.f"
     xmlns:tnt="sap.tnt">
-<!-- <Shell> -->
-<tnt:ToolPage>
-	<tnt:mainContents>
+<Page>
 	<Toolbar class="sapUiSmallMargin"
     height="auto">
 				<DatePicker
@@ -134,7 +132,5 @@
             </f:GridListItem>
         </f:GridList>
     </Panel>
-    	</tnt:mainContents>
-<!-- </Shell> -->
-</tnt:ToolPage>
+    	</Page>
 </mvc:View>
