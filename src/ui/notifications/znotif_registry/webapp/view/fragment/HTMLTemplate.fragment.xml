@@ -1,0 +1,52 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:rte="sap.ui.richtexteditor">
+
+    <Panel width="auto" id="RtePanel">
+        <headerToolbar>
+            <OverflowToolbar>
+                <Button text='Параметры' enabled="{ui>/editable}" press="onParamButtonPress"/>
+            </OverflowToolbar>
+        </headerToolbar>
+        <content>
+            <HBox>
+
+                <VBox id="RteContainer" width="70%">
+                    <rte:RichTextEditor editorType="TinyMCE4"
+                        height="40em"
+                        width="100%"
+                        editable="{ui>/editable}"
+                        customToolbar="false"
+                        showGroupFont="true"
+                        sanitizeValue="false"
+                        required="true"
+                        showGroupLink="true"
+                        showGroupInsert="true"
+                        showGroupUndo="true"
+                        value="{HtmlTemplate}">
+
+                        <rte:customButtons>
+                            <Button text="Параметры"
+                                press="onParamButtonPress"/>
+                        </rte:customButtons>
+                    </rte:RichTextEditor>
+                </VBox>
+
+                <VBox width="30%">
+                    <TextArea value="{HtmlTemplate}"
+                        width="100%"
+                        height="100%"
+                        rows="31"
+                        editable="{ui>/editable}"/>
+                </VBox>
+
+
+                <!-- <Text text="{HtmlTemplate}"/> -->
+
+            </HBox>
+        </content>
+    </Panel>
+
+
+
+</core:FragmentDefinition>

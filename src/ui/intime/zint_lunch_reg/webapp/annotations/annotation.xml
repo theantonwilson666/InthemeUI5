@@ -1,0 +1,49 @@
+<!-- <edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0"> -->
+    <!-- <edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470968/UI.xml?api=v2">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1" />
+    </edmx:Reference>
+    <edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470971/Communication.xml?api=v2">
+        <edmx:Include Alias="Communication" Namespace="com.sap.vocabularies.Communication.v1" />
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Measures.V1.xml">
+        <edmx:Include Alias="Measures" Namespace="Org.OData.Measures.V1" />
+    </edmx:Reference>
+    <edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470974/Common.xml?api=v2">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1" />
+    </edmx:Reference> -->
+    <!-- <edmx:Reference Uri="/sap/opu/odata/SAP/Z_SCHEDULE_SHIPSORDER_SRV/$metadata">
+        <edmx:Include Alias="Metadata" Namespace="Z_SCHEDULE_SHIPSORDER_SRV"/>
+    </edmx:Reference> -->
+    <!-- <edmx:DataServices>
+        <Schema Namespace="Z_SCHEDULE_SHIPSORDER_SRV" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="Z_SCHEDULE_SHIPSORDER_SRV.ZSNN_TM_SCHEDULE_TRQ_LISTType">
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value">
+                                    <Apply Function="odata.concat">
+                                        <String>Продукт: </String>
+                                        <Path>ProductText</Path>
+                                    </Apply>
+                                </PropertyValue>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value">
+                                    <Apply Function="odata.concat">
+                                        <String>Заказ: </String>
+                                        <Path>OeBSNr</Path>
+                                    </Apply>
+                                </PropertyValue>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="TypeName" String="Менюсотрудника" />
+                        <PropertyValue Property="TypeNamePlural" String="Заказы" />
+                    </Record>
+                </Annotation>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx> -->

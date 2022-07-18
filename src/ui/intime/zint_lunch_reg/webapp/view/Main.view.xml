@@ -1,0 +1,34 @@
+<mvc:View controllerName="intime.zint_lunch_reg.controller.Main"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:grid="sap.ui.layout.cssgrid"
+    xmlns:layout="sap.ui.layout"
+    xmlns:f="sap.f">
+
+    <Panel id="panelForGridList"
+        backgroundDesign="Transparent">
+        <headerToolbar>
+            <Toolbar height="3rem">
+                <Title text="Первые блюда" />
+            </Toolbar>
+        </headerToolbar>
+
+        <f:GridList id="_Soup-GridList"
+            items="{/zbnn_EMP_MENU}">
+            <f:GridListItem>
+                <VBox class="sapUiSmallMargin">
+                    <layoutData>
+                        <FlexItemData growFactor="1"
+                            shrinkFactor="0" />
+                    </layoutData>
+
+                    <Title text="{DishDescr}"
+                        wrapping="true" />
+                    <Label text="{DishComposition}"
+                        wrapping="true" />
+                </VBox>
+            </f:GridListItem>
+        </f:GridList>
+    </Panel>
+
+</mvc:View>

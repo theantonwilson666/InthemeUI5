@@ -90,7 +90,7 @@ sap.ui.define([
                                 dataReceived: function (oEvent) {
                                     this.setFaviconIconByPartner(this.getView().getBindingContext().getObject().PartnerID);
                                     this.setStateProperty("/taskContext", this.getView().getBindingContext());
-                                    this.byId("taskAttachments").getContent()[0].setDocumentID(oData.getParameter("data").TaskId);
+                                    this.byId("taskAttachments").getContent()[0].setDocumentID(oEvent.getParameter("data").TaskId);
                                     this.byId("taskAttachments").getContent()[0].setDocumentType('task')
                                 }.bind(this)
                             }
