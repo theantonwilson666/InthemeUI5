@@ -14,8 +14,7 @@
                                    <VBox>
                                           <Text text="{ path:'PositionTime', 
                                                   formatter: '.formatter.PositionTimeFormatter' }"/>
-                                          <Button id="idSeeMoreBtn" icon="sap-icon://warning" 
-                                                          visible="{=(${PositionTime} === &apos; &apos; ) ? false : true }" press="onSeeMorePress"/>
+                                          <Button id="idSeeMoreBtn" icon="sap-icon://warning" press="onSeeMorePress"/>
                                    </VBox>
                             </HBox>
                             <HBox>
@@ -30,10 +29,10 @@
                                                   formatter: '.formatter.timestampDDMM_DDMMFormatter' }"/>
                                    </VBox>
                             </HBox>
-                            <HBox>
+                            <!-- <HBox>
                                    <VBox>
                                           <Button id="ExportBtn" text="Export" press="onExportBtnPress"/>
                                           <Button id="ImportBtn" text="Import" press="onImportBtnPress"/>
                                    </VBox>
-                            </HBox>
+                            </HBox> -->
 </core:FragmentDefinition>

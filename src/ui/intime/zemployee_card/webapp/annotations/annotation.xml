@@ -33,6 +33,18 @@
 							</Collection>
 						</PropertyValue>
 					</Record>
+					<!-- <Record>
+						<PropertyValue Property="SortOrder">
+							<Collection>
+								<Record>
+									<PropertyValue Property="Property"
+										PropertyPath="PositionID"/>
+									<PropertyValue Property="Descending"
+										Bool="true"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record> -->
 				</Annotation>
 
 				<Annotation Term="UI.SelectionFields">

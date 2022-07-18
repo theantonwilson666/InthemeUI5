@@ -83,11 +83,17 @@ sap.ui.controller("intime.zemployee_card.ext.controller.ListReportExt", {
       onBeforeRebindTable: function (oEvent) {
         var oBindingParams = oEvent.getParameter( "bindingParams" );
         if (!oBindingParams.sorter.length){
-          oBindingParams.sorter.push(new sap.ui.model.Sorter("DateSheet", true))
+          oBindingParams.sorter.push(new sap.ui.model.Sorter("DateSheet", true));
+        }
+      },
+
+      onBeforeRebindTableExtension: function (oEvent) {
+        var oBindingParams = oEvent.getParameter( "bindingParams" );
+        if (!this._FirstLoadingComplete){
+          oBindingParams.sorter.push(new sap.ui.model.Sorter("PositionTime", false));
+          debugger;
+          this._FirstLoadingComplete = true;
         }
       }
-
-
-
 
 });

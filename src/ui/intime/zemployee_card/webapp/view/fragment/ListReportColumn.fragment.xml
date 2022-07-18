@@ -15,7 +15,7 @@
               <Text text="Продолжительность на текущей должности" />
               <customData>
                      <core:CustomData key="p13nData"
-                            value='\{"columnKey": "PositionTime", "leadingProperty":"PositionTime", "columnIndex" : "5"}' />
+                            value='\{"columnKey": "PositionTime", "leadingProperty":"PositionTime", "columnIndex" : "5", "sortProperty": "PositionTime"}' />
               </customData>
        </Column>
         <Column>
@@ -32,12 +32,12 @@
                             value='\{"columnKey": "SickLeaveStartDate", "leadingProperty":"SickLeaveStartDate,SickLeaveEndDate", "columnIndex" : "7"}' />
               </customData>
        </Column>
-              <Column>
+       <!-- <Column>
               <Text text="Отчет" />
               <customData>
                      <core:CustomData key="p13nData"
-                            value='\{"columnIndex" : "8"}' />
+                            value='\{"columnKey": "WorkExperienceMonthsFlag","columnIndex" : "8"}' />
               </customData>
-       </Column>
+       </Column> -->
        
 </core:FragmentDefinition>

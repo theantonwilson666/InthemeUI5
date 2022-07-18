@@ -6,7 +6,9 @@
     xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
     xmlns:smartField="sap.ui.comp.smartfield"
     xmlns:u="sap.ui.unified"
-    xmlns:m="sap.m">
+    xmlns:m="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+	xmlns:grid="sap.ui.layout.cssgrid">
 
 
     <smartTable:SmartTable id="subTaskSmartTable"
@@ -46,17 +48,50 @@
                     </customData>
                     <Text text="Исполнители" />
                 </Column>
+                <Column id="AllSubTaskTimeSpent"
+                    hAlign="Begin">
+                    <customData>
+                        <core:CustomData key="p13nData"
+                            value='\{"columnKey": "AllSubTaskTime", "columnIndex": 7, "leadingProperty": "AllSubTaskTime"}' />
+                    </customData>
+                    <Text text="Списано всего на подзадачу" />
+                </Column>
             </columns>
             <items>
                 <ColumnListItem>
                     <cells>
-                        <HBox items="{to_Executors}">
+                        <!-- <HBox items="{to_Executors}">
                             <VBox alignItems="Center" class="sapUiTinyMarginBegin sapUiTinyMarginEnd">
                                 <f:Avatar src="{ImageURL}"
                                     displaySize="S"
                                     showBorder="true"/>
 
                                 <Text text="{ExecutorName}"/>
+                            </VBox>
+                        </HBox> -->
+                    <!-- <HBox> -->
+                    <f:GridList
+			            id="gridList"
+			            items="{to_Executors}"
+                        width="25%">
+                        <f:GridListItem class="executor">
+                            <VBox class="sapUiSmallMargin" alignItems="Center">
+                                <!-- <layoutData>
+                                    <FlexItemData/> 
+                                </layoutData> -->
+                                    <f:Avatar src="{ImageURL}"
+                                        displaySize="S"
+                                        showBorder="true"/>
+                                    <Text text="{ExecutorName}"/>
+                            </VBox>
+                        </f:GridListItem>
+		            </f:GridList>
+                    <!-- </HBox> -->
+                    </cells>
+                    <cells>
+                        <HBox>
+                            <VBox alignItems="Center" class="sapUiTinyMarginBegin sapUiTinyMarginEnd">
+                                <Text text="{AllSubTaskTime} {AllSubTaskTimeUText}"/>
                             </VBox>
                         </HBox>
                     </cells>
