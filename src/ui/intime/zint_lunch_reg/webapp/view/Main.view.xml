@@ -3,32 +3,135 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:grid="sap.ui.layout.cssgrid"
     xmlns:layout="sap.ui.layout"
-    xmlns:f="sap.f">
+    xmlns:f="sap.f"
+    xmlns:tnt="sap.tnt">
+    <Page>
+        <Toolbar class="sapUiSmallMargin"
+            height="auto">
+            <DatePicker width="20%"
+                class="sapUiSmallMargin"
+                id="DP1"
+                placeholder="Enter Date"
+                change="handleChange"/>
+            <ToolbarSpacer/>
 
-    <Panel id="panelForGridList"
-        backgroundDesign="Transparent">
-        <headerToolbar>
-            <Toolbar height="3rem">
-                <Title text="Первые блюда" />
-            </Toolbar>
-        </headerToolbar>
+            <Button text="Администратор"
+                press="onPress"
+                type="Transparent"
+                class="sapUiSmallMargin"
+                ariaLabelledBy="editButtonLabel"/>
+        </Toolbar>
 
-        <f:GridList id="_Soup-GridList"
-            items="{/zbnn_EMP_MENU}">
-            <f:GridListItem>
-                <VBox class="sapUiSmallMargin">
-                    <layoutData>
-                        <FlexItemData growFactor="1"
-                            shrinkFactor="0" />
-                    </layoutData>
+        <Panel id="panelForGridList"
+            backgroundDesign="Transparent">
 
-                    <Title text="{DishDescr}"
-                        wrapping="true" />
-                    <Label text="{DishComposition}"
-                        wrapping="true" />
-                </VBox>
-            </f:GridListItem>
-        </f:GridList>
-    </Panel>
+            <headerToolbar>
+                <Toolbar height="3rem">
+                    <Title text="Первые блюда" />
+                </Toolbar>
+            </headerToolbar>
 
+            <f:GridList id="_Soup-GridList"
+                items="{/ZSNN_EMP_MENU}"
+                
+                mode="MultiSelect">
+                <f:GridListItem selected="{DishChoosen}">
+                    <VBox class="sapUiSmallMargin">
+                        <layoutData>
+                            <FlexItemData growFactor="1"
+                                shrinkFactor="0" />
+                        </layoutData>
+
+                        <Title text="{DISH_DESCR}"
+                            wrapping="true" />
+                        <Label text="{DISH_COMPOSITION}"
+                            wrapping="true" />
+                    </VBox>
+                </f:GridListItem>
+            </f:GridList>
+        </Panel>
+
+
+        <Panel id="panelForGridList2"
+            backgroundDesign="Transparent">
+            <headerToolbar>
+                <Toolbar height="3rem">
+                    <Title text="Горячее" />
+                </Toolbar>
+            </headerToolbar>
+
+            <f:GridList id="_Hot-GridList"
+                items="{/ZSNN_EMP_MENU}"
+                mode="MultiSelect">
+                <f:GridListItem selected="{DishChoosen}"
+            >
+                    <VBox class="sapUiSmallMargin">
+                        <layoutData>
+                            <FlexItemData growFactor="1"
+                                shrinkFactor="0" />
+                        </layoutData>
+
+                        <Title text="{DISH_DESCR}"
+                            wrapping="true" />
+                        <Label text="{DISH_COMPOSITION}"
+                            wrapping="true" />
+                    </VBox>
+                </f:GridListItem>
+            </f:GridList>
+        </Panel>
+
+        <Panel id="panelForGridList3"
+            backgroundDesign="Transparent">
+            <headerToolbar>
+                <Toolbar height="3rem">
+                    <Title text="Гарнир" />
+                </Toolbar>
+            </headerToolbar>
+
+            <f:GridList id="_Garnish-GridList"
+                items="{/ZSNN_EMP_MENU}"
+                mode="MultiSelect">
+                <f:GridListItem selected="{DishChoosen}"> 
+                    <VBox class="sapUiSmallMargin">
+                        <layoutData>
+                            <FlexItemData growFactor="1"
+                                shrinkFactor="0" />
+                        </layoutData>
+
+                        <Title text="{DISH_DESCR}"
+                            wrapping="true" />
+                        <Label text="{DISH_COMPOSITION}"
+                            wrapping="true" />
+                    </VBox>
+                </f:GridListItem>
+            </f:GridList>
+        </Panel>
+
+        <Panel id="panelForGridList4"
+            backgroundDesign="Transparent">
+            <headerToolbar>
+                <Toolbar height="3rem">
+                    <Title text="Закуски" />
+                </Toolbar>
+            </headerToolbar>
+
+            <f:GridList id="_Snacks-GridList"
+                items="{/ZSNN_EMP_MENU}"
+                mode="MultiSelect">
+                <f:GridListItem selected="{DishChoosen}">
+                    <VBox class="sapUiSmallMargin">
+                        <layoutData>
+                            <FlexItemData growFactor="1"
+                                shrinkFactor="0" />
+                        </layoutData>
+
+                        <Title text="{DISH_DESCR}"
+                            wrapping="true" />
+                        <Label text="{DISH_COMPOSITION}"
+                            wrapping="true" />
+                    </VBox>
+                </f:GridListItem>
+            </f:GridList>
+        </Panel>
+    </Page>
 </mvc:View>

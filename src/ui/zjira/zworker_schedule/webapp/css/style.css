@@ -1,12 +1,14 @@
 /* Enter your custom styles here */
+
 .sapUiPaddingTitle {
     height: 1rem !important;
     padding-top: 0.09rem;
 }
 
-
-
-
+.specialDateIndicator {
+    width: 100%;
+    height: 0.188rem;
+}
 
 .sapUiCalItemType01>.sapUiCalItemText {
     background-color: #FF0000;
@@ -16,7 +18,6 @@
     background-color: #FFC000;
 }
 
-
 .sapUiCalItemType03>.sapUiCalItemText {
     background-color: #FFFF00;
 }
@@ -25,11 +26,9 @@
     background-color: #92D050;
 }
 
-
 .sapUiCalItemType05>.sapUiCalItemText {
     background-color: #00B0F0;
 }
-
 
 .sapUiCalItemType06>.sapUiCalItemText {
     background-color: #0070C0;
@@ -39,4 +38,50 @@
     background-color: #CC99FF;
 }
 
+.sapMSPCMonthGrid .sapUiCalendarSpecialDayType01 .specialDateIndicator {
+    background-color: #FF0000;
+}
 
+.sapMSPCMonthGrid .sapUiCalendarSpecialDayType02 .specialDateIndicator {
+    background-color: #FFC000;
+}
+
+.sapMSPCMonthGrid .sapUiCalendarSpecialDayType03 .specialDateIndicator {
+    background-color: #FFFF00;
+}
+
+.sapMSPCMonthGrid .sapUiCalendarSpecialDayType04 .specialDateIndicator {
+    background-color: #92D050;
+}
+
+.sapMSPCMonthGrid .sapUiCalendarSpecialDayType05 .specialDateIndicator {
+    background-color: #00B0F0;
+}
+
+.sapMSPCMonthGrid .sapUiCalendarSpecialDayType06 .specialDateIndicator {
+    background-color: #0070C0;
+}
+
+.sapMSPCMonthGrid .sapUiCalendarSpecialDayType07 .specialDateIndicator {
+    background-color: #CC99FF;
+}
+
+.sapMSPCMonthGrid .sapUiCalendarSpecialDayType08 .specialDateIndicator {
+    background-color: #808080;
+}
+
+.sapMSPCMonthGrid .sapUiCalendarSpecialDayType09 .specialDateIndicator {
+    background-color: #35D59D;
+}
+
+.sapMSPCMonthGrid .sapUiCalendarSpecialDayType10 .specialDateIndicator {
+    background-color: #80196A;
+}
+
+.sapMSPCMonthGrid .sapUiCalendarSpecialDayType11 .specialDateIndicator {
+    background-color: #6F5925;
+}
+
+.sapMSPCMonthGrid .sapUiCalendarSpecialDayType12 .specialDateIndicator {
+    background-color: #B64600;
+}

@@ -1,23 +1,23 @@
 sap.ui.define([
-    "intime/zpartners_registry/controller/App.controller",
-    'sap/ui/core/Fragment',
-    'sap/m/MessageBox',
-    'sap/m/Button',
-    "sap/ui/table/Row",
-    "jira/lib/fiorielementslib/fioriBaseController"
-],
-    function (AppController, Fragment, MessageBox, Button, TableRow, fioriBaseController) {
+        "intime/zpartners_registry/controller/App.controller",
+        'sap/ui/core/Fragment',
+        'sap/m/MessageBox',
+        'sap/m/Button',
+        "sap/ui/table/Row",
+        "jira/lib/fiorielementslib/fioriBaseController"
+    ],
+    function(AppController, Fragment, MessageBox, Button, TableRow, fioriBaseController) {
         "use strict";
 
         return AppController.extend("intime.zpartners_registry.controller.Detail", {
 
             buttonId: null,
-            onInit: function () {
+            onInit: function() {
                 this.getRouter()
                     .getRoute("project")
                     .attachPatternMatched(this._onRouteMatched, this);
-                this.byId("projectSmartTable").attachBeforeRebindTable(function (oEvent) {
-                   
+                this.byId("projectSmartTable").attachBeforeRebindTable(function(oEvent) {
+
                     var oSorter = new sap.ui.model.Sorter("StageNo", true);
                     oEvent.getParameter("bindingParams").sorter.push(oSorter);
                 });
@@ -26,7 +26,7 @@ sap.ui.define([
             },
 
 
-            _onRouteMatched: function (oEvent) {
+            _onRouteMatched: function(oEvent) {
                 var oArr = oEvent.getParameter("arguments")["?query"];
                 this.getView().bindObject(`/ZSNN_PARTNER_ROOT('${oArr.PartnerId}')`);
                 this.setFaviconIconByPartner(oArr.PartnerId);
@@ -37,7 +37,7 @@ sap.ui.define([
 
             },
 
-            onSelectRow: function (oEvent) {
+            onSelectRow: function(oEvent) {
                 var oRowData = oEvent.getParameter("rowContext").getObject();
 
                 this._selectedRowContext = oEvent.getParameter("rowContext");
@@ -61,15 +61,15 @@ sap.ui.define([
 
             },
 
-            onDeleteSelection: function (oEvent) {
+            onDeleteSelection: function(oEvent) {
                 sap.m.MessageBox.warning(`Вы уверены, что хотите удалить ${this._selectedRowContext.getObject().Name}`, {
                     actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
                     emphasizedAction: MessageBox.Action.OK,
-                    onClose: function (sAction) {
+                    onClose: function(sAction) {
                         switch (sAction) {
                             case MessageBox.Action.OK:
                                 this.getModel().remove(this._selectedRowContext.getPath());
-                              
+
                                 break;
                             case MessageBox.Action.CANCEL:
                                 sap.m.MessageToast.show("Операция отменена");
@@ -80,7 +80,7 @@ sap.ui.define([
                 });
             },
 
-            onEditProject: function (oEvent) {
+            onEditProject: function(oEvent) {
                 var bEdit = oEvent.getParameter("editable");
 
                 if (bEdit) {
@@ -90,31 +90,30 @@ sap.ui.define([
                 }
             },
 
-            refreshAdminSection: function () {
+            refreshAdminSection: function() {
                 var oTable = this.byId("_ProjectAdmins-Table");
+
+                debugger;
+
                 var oTemplate = new sap.m.ColumnListItem({
                     vAlign: "Middle",
                     cells: [
                         new sap.ui.comp.smartfield.SmartField({
                             value: "{UserName}",
-                            editable: "{state>/editProjectMode}"
-                        }),
-                        new sap.m.Switch({
-                            state: "{CreateEnabled}",
-                            type: "AcceptReject",
-                            enabled: "{state>/editProjectMode}"
+                            editable: "{state>/editProjectMode}",
+                            configuration: new sap.ui.comp.smartfield.Configuration({
+                                displayBehaviour: "descriptionAndId"
+                            })
                         }),
 
-                        new sap.m.Switch({
-                            state: "{UpdateEnabled}",
-                            type: "AcceptReject",
-                            enabled: "{state>/editProjectMode}"
-                        }),
-
-                        new sap.m.Switch({
-                            state: "{DeleteEnabled}",
-                            type: "AcceptReject",
-                            enabled: "{state>/editProjectMode}"
+                        new sap.ui.comp.smartfield.SmartField({
+                            value: "{Role}",
+                            editable: "{state>/editProjectMode}",
+                            configuration: new sap.ui.comp.smartfield.Configuration({
+                                controlType: "dropDownList"
+                            })
+                        }).bindProperty('editable', {
+                            path: 'state>/editProjectMode'
                         })
 
                     ]
@@ -124,14 +123,14 @@ sap.ui.define([
 
             },
 
-            onDeleteAdminPress: function (oEvent) {
+            onDeleteAdminPress: function(oEvent) {
                 var oDeletedContext = oEvent.getParameter("listItem").getBindingContext();
                 this.byId("_ProjectAdmins-Table").setBusy(true);
                 this.getModel().remove(oDeletedContext.getPath(), {
-                    success: function (oData) {
+                    success: function(oData) {
                         this.byId("_ProjectAdmins-Table").setBusy(false);
                     }.bind(this),
-                    error: function (oError) {
+                    error: function(oError) {
                         this.byId("_ProjectAdmins-Table").setBusy(false);
                         this.showError(oError);
 
@@ -139,7 +138,7 @@ sap.ui.define([
                 });
             },
 
-            onAddAdminPress: function (oEvent) {
+            onAddAdminPress: function(oEvent) {
 
                 var oProjectData = oEvent.getSource().getBindingContext().getObject();
 
@@ -156,7 +155,7 @@ sap.ui.define([
                 oEvent.getSource().getParent().getParent().insertItem(oItem, 0);
             },
 
-            onEditAdminPress: function (oEvent) {
+            onEditAdminPress: function(oEvent) {
 
                 this.setStateProperty("/editProjectMode", !this.getStateProperty("/editProjectMode"));
                 oEvent.getSource().getParent().getParent().setMode(this.getStateProperty("/editProjectMode") === true ? "Delete" : "None");
@@ -171,7 +170,7 @@ sap.ui.define([
             },
 
 
-            bindSections: function (oKey) {
+            bindSections: function(oKey) {
                 var aItems = this.byId("iconTabBar").getItems();
                 for (var i = 0; i < aItems.length; i++) {
                     var oItem = aItems[i];
@@ -179,29 +178,29 @@ sap.ui.define([
                 };
             },
 
-            setProjectSelection: function () {
+            setProjectSelection: function() {
                 this.setStateProperty("/projectSelection", true);
                 this.setStateProperty("/stageSelection", false);
 
                 this.byId("ProjectChangeDocumentSmartTable").rebindTable();
             },
 
-            setStageSelection: function () {
+            setStageSelection: function() {
                 this.setStateProperty("/projectSelection", false);
                 this.setStateProperty("/stageSelection", true);
 
                 this.byId("stageChangeDocumentSmartTable").rebindTable();
             },
 
-            isSelected: function (ID) {
+            isSelected: function(ID) {
                 this.buttonId = `${ID}`;
             },
 
-            onDeletePartnerButtonPress: function (oEvent) {
+            onDeletePartnerButtonPress: function(oEvent) {
                 this.deletePartner(oEvent.getSource().getBindingContext());
             },
 
-            onSaveProjectButtonPress: function (oEvent) {
+            onSaveProjectButtonPress: function(oEvent) {
 
                 this.setStateProperty("/projectSelection", false);
                 this.setStateProperty("/stageSelection", false);
@@ -210,14 +209,13 @@ sap.ui.define([
 
                 this.submitChanges({
                     groupId: "changes",
-                    success: function () {
+                    success: function() {
 
                         this.byId("projectPage").setBusy(false);
 
-                        if (!this.isExistError()) {
-                        }
+                        if (!this.isExistError()) {}
                     }.bind(this),
-                    error: function (oError) {
+                    error: function(oError) {
 
                         this.byId("projectPage").setBusy(false);
                         this.showError(oError);
@@ -227,12 +225,12 @@ sap.ui.define([
 
             },
 
-            onRejectButtonPress: function () {
+            onRejectButtonPress: function() {
                 this.getView().getModel().resetChanges();
                 this.setStateProperty("/editProjectMode", false);
             },
 
-            onAddNewProjectButtonPress: function (oEvent) {
+            onAddNewProjectButtonPress: function(oEvent) {
 
 
                 this.getModel().callFunction("/GetCreatedProject", {
@@ -241,7 +239,7 @@ sap.ui.define([
                         PartnerID: this.getView().getBindingContext().getObject().PartnerId
                     },
 
-                    success: function (oData) {
+                    success: function(oData) {
 
                         this.isExistError();
 
@@ -258,8 +256,8 @@ sap.ui.define([
 
                     }.bind(this),
 
-                    error: function (oError) {
-                        
+                    error: function(oError) {
+
                         this.showError(oError);
                     }.bind(this)
                 });
@@ -269,14 +267,14 @@ sap.ui.define([
             },
 
 
-            onAddNewProjectStageButtonPress: function (oEvent) {
+            onAddNewProjectStageButtonPress: function(oEvent) {
                 this.getModel().callFunction("/GetCreatedProjectStage", {
                     method: "POST",
                     urlParameters: {
                         ProjectID: this._selectedRowContext.getObject().ID
                     },
 
-                    success: function (oData) {
+                    success: function(oData) {
                         this.isExistError();
                         var oNewEntryContext = this.getView().getModel().createEntry(this.getBindingPath() + "/to_Project", {
                             properties: oData,
@@ -292,7 +290,7 @@ sap.ui.define([
 
                     }.bind(this),
 
-                    error: function (oError) {
+                    error: function(oError) {
                         this.showError(oError);
                     }.bind(this)
                 });
@@ -300,11 +298,11 @@ sap.ui.define([
 
             },
 
-            getSmartTable: function () {
+            getSmartTable: function() {
                 return this.byId("projectSmartTable");
             },
 
-            onDocumentNavigate: function (oEvent) {
+            onDocumentNavigate: function(oEvent) {
                 var oLinkData = oEvent.getSource().getBindingContext().getObject();
 
                 var oCrossAppNav = sap.ushell.Container.getService("CrossApplicationNavigation");
@@ -319,7 +317,7 @@ sap.ui.define([
                 window.open(sLinkForWinow, true);
             },
 
-            onCreateJiraProjectButtonPress: function (oEvent) {
+            onCreateJiraProjectButtonPress: function(oEvent) {
                 this.getView().setBusy(true);
 
                 this.getModel().callFunction("/CreateJiraProject", {
@@ -327,10 +325,10 @@ sap.ui.define([
                     urlParameters: {
                         JiraStage: oEvent.getSource().getBindingContext().getObject().JiraProjectStage,
                         StageID: oEvent.getSource().getBindingContext().getObject().ProjectStageID,
-                        JiraProjectID : oEvent.getSource().getBindingContext().getObject().JiraProjectID
+                        JiraProjectID: oEvent.getSource().getBindingContext().getObject().JiraProjectID
                     },
 
-                    success: function (oData) {
+                    success: function(oData) {
                         this.getView().setBusy(false);
                         this.isExistError();
 
@@ -341,7 +339,7 @@ sap.ui.define([
 
                     }.bind(this),
 
-                    error: function (oError) {
+                    error: function(oError) {
                         this.getView().setBusy(false);
                         this.showError(oError);
                         this.byId("stageForm").updateBindings(true);
@@ -350,7 +348,7 @@ sap.ui.define([
                 });;
             },
 
-            onErrorAttachment: function(oEvent){
+            onErrorAttachment: function(oEvent) {
                 this.showError(oEvent.mParameters);
             }
         });

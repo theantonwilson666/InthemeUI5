@@ -7,10 +7,7 @@
     xmlns:nav="sap.ui.comp.navpopover"
     xmlns:smartTable="sap.ui.comp.smarttable"
     xmlns:m="sap.m">
-    			<!-- <smartTable:SmartTable tableType="ResponsiveTable"
-								   entitySet="ZSNN_PROJECT_ADMIN" useVariantManagement="false"
-								   useTablePersonalisation="false" showRowCount="false"
-								   useExportToExcel="false" enableAutoColumnWidth="true"> -->
+
     <Table id="_ProjectAdmins-Table"
         delete=".onDeleteAdminPress">
         <headerToolbar>
@@ -30,21 +27,11 @@
                 <Text text="Пользователь" />
             </Column>
 
-            <Column width="7em">
-                <Text text="Создание" />
+
+            <Column width="12em">
+                <Text text="Роль" />
             </Column>
 
-            <Column width="7em">
-                <Text text="Изменение" />
-            </Column>
-
-            <Column width="7em">
-                <Text text="Удаление" />
-            </Column>
         </columns>
     </Table>
-			<!-- <smartTable:semanticObjectController>
-					<nav:SemanticObjectController enableAvailableActionsPersonalization='\{"FullName":false\}'/>
-				</smartTable:semanticObjectController>
-			</smartTable:SmartTable> -->
 </core:FragmentDefinition>

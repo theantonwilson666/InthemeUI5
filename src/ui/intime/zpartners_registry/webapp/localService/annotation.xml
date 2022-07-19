@@ -260,6 +260,36 @@
         </Annotation>
       </Annotations>
 
+      <Annotations Target="ZINT_UI_PARTNERS_SRV.ZSNN_PARTNER_ADMINType/Role">
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="true" />
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZBNN_ADMIN_ROLE_TYPE" />
+            <PropertyValue Property="SearchSupported"
+              Bool="true" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="Role" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="Role" />
+                </Record>
+
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="RoleText" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="RoleText" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+
       <Annotations Target="ZINT_UI_PARTNERS_SRV.ZSNN_PARTNER_ADMINType/UserName">
         <Annotation Term="Common.ValueListWithFixedValues"
           Bool="false" />
@@ -299,6 +329,35 @@
         </Annotation>
       </Annotations>
 
+      <Annotations Target="ZINT_UI_PARTNERS_SRV.ZSNN_PROJECT_ADMINType/Role">
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="true" />
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZBNN_ADMIN_ROLE_TYPE" />
+            <PropertyValue Property="SearchSupported"
+              Bool="true" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="Role" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="Role" />
+                </Record>
+
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="RoleText" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="RoleText" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
 
       <Annotations Target="ZINT_UI_PARTNERS_SRV.ZSNN_PROJECT_ADMINType/UserName">
         <Annotation Term="Common.SemanticObject"
@@ -641,9 +700,9 @@
         <Annotation Term="UI.PresentationVariant">
           <Record Type="UI.PresentationVariantType">
             <PropertyValue Property="Visualizations">
-                <Collection>
-                    <AnnotationPath>@UI.LineItem</AnnotationPath>
-                </Collection>
+              <Collection>
+                <AnnotationPath>@UI.LineItem</AnnotationPath>
+              </Collection>
             </PropertyValue>
             <PropertyValue Property="RequestAtLeast">
               <Collection>
