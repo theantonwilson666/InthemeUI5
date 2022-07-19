@@ -42,7 +42,6 @@ sap.ui.define([], function() {
         },
 
         PositionTimeFormatter: function(sValue) {
-            debugger;
             if (sValue != null) {
                 if (Math.trunc(sValue) === 0) {
                     return "меньше месяца"
@@ -60,24 +59,9 @@ sap.ui.define([], function() {
             } else {
                 return " ";
             }
-            // var oFormatOptions = {
-            //     minIntegerDigits: 2,
-            //     maxIntegerDigits: 3,
-            //     minFractionDigits: 0,
-            //     maxFractionDigits: 0
-            // };
-            // var oFloatFormat = NumberFormat.getFloatInstance(oFormatOptions);
-            // debugger;
-            // if (sValue != null) {
-            //  var x = oFloatFormat.format(sValue);
-            // return x;
-            // } else {
-            //     return " ";
-            // }
         },
 
         WorkExperienceFormatter: function(sValue, bFlag) {
-            debugger;
             if (bFlag) {
                 if (sValue != null) {
                     if (Math.trunc(sValue) === 0) {

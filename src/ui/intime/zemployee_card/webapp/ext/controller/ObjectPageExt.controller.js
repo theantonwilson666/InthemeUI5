@@ -27,7 +27,6 @@ sap.ui.controller("intime.zemployee_card.ext.controller.ObjectPageExt", {
     getStatus: function() {
 
         this.extensionAPI.attachPageDataLoaded(function(){
-            debugger;
             var oDismissedDate = sap.ui.getCore().byId('intime.zemployee_card::sap.suite.ui.generic.template.ObjectPage.view.Details::ZSNN_EMPLOYEE_CARD--objectPageHeader').getBindingContext().getObject().DismisseStartDate;
             var oVacationDate = sap.ui.getCore().byId('intime.zemployee_card::sap.suite.ui.generic.template.ObjectPage.view.Details::ZSNN_EMPLOYEE_CARD--objectPageHeader').getBindingContext().getObject().VacationEndDate;
             var oSickLeaveDate = sap.ui.getCore().byId('intime.zemployee_card::sap.suite.ui.generic.template.ObjectPage.view.Details::ZSNN_EMPLOYEE_CARD--objectPageHeader').getBindingContext().getObject().SickLeaveEndDate;
