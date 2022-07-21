@@ -15,6 +15,7 @@
                 <!-- value="{path:'/dateValue', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true}}" -->
                
             <ToolbarSpacer/>
+    
 
             <Button text="Администратор"
                 press="onPress"

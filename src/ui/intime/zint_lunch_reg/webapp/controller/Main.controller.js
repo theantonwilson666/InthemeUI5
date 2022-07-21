@@ -1,12 +1,15 @@
 sap.ui.define([
         "jira/lib/BaseController",
-        'sap/ui/model/json/JSONModel'
+        'sap/ui/model/json/JSONModel',
+        
 
     ],
     function(BaseController, JSONModel) {
         "use strict";
+        
 
         return BaseController.extend("intime.zint_lunch_reg.controller.Main", {
+          
             onInit: function() {
                 // create model
 			
@@ -35,13 +38,13 @@ sap.ui.define([
             },
 
             _setValue: function() {
-                debugger;
-                const oModel = new JSONModel();
-                    oModel.setData({
-                        dateValue: new Date()
-                    });
-                    this.getView().setModel(oModel);
-                    this.byId("DP1").setDateValue(new Date());
+                // debugger;
+                // const oModel = new JSONModel();
+                //     oModel.setData({
+                //         dateValue: new Date()
+                //     });
+                //     this.getView().setModel(oModel);
+                //     this.byId("DP1").setDateValue(new Date());
                
             },
 
