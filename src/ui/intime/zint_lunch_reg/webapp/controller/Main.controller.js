@@ -36,6 +36,7 @@ sap.ui.define([
                             value1: "HD"
                         })
                     ]),
+                    
                     //Гарнир
                     this.byId('_Garnish-GridList').getBinding('items').filter([
                         new sap.ui.model.Filter({
