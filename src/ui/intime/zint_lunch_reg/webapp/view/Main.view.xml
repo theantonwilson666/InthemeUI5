@@ -9,11 +9,13 @@
         <Toolbar class="sapUiSmallMargin"
             height="auto">
             <DatePicker width="20%"
+            change="onDateChange"
                 class="sapUiSmallMargin"
-                id="DP1"
-                placeholder="Enter Date"
-                change="handleChange"/>
+                id="DP1" />
+                <!-- value="{path:'/dateValue', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true}}" -->
+               
             <ToolbarSpacer/>
+    
 
             <Button text="Администратор"
                 press="onPress"
@@ -63,8 +65,7 @@
             <f:GridList id="_Hot-GridList"
                 items="{/ZSNN_EMP_MENU}"
                 mode="MultiSelect">
-                <f:GridListItem selected="{DishChoosen}"
-            >
+                <f:GridListItem selected="{DishChoosen}">
                     <VBox class="sapUiSmallMargin">
                         <layoutData>
                             <FlexItemData growFactor="1"
