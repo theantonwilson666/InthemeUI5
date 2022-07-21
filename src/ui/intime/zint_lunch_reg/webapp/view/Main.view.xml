@@ -11,8 +11,9 @@
             <DatePicker width="20%"
             change="onDateChange"
                 class="sapUiSmallMargin"
+                
+                value="{path:'date>/dateValue', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true}}"
                 id="DP1" />
-                <!-- value="{path:'/dateValue', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true}}" -->
                
             <ToolbarSpacer/>
     
@@ -35,7 +36,7 @@
 
             <f:GridList id="_Soup-GridList"
                 items="{/ZSNN_EMP_MENU}"
-                
+                select="onSelectDish"
                 mode="MultiSelect">
                 <f:GridListItem selected="{DishChoosen}">
                     <VBox class="sapUiSmallMargin">
@@ -64,6 +65,7 @@
 
             <f:GridList id="_Hot-GridList"
                 items="{/ZSNN_EMP_MENU}"
+                select="onSelectDish"
                 mode="MultiSelect">
                 <f:GridListItem selected="{DishChoosen}">
                     <VBox class="sapUiSmallMargin">
@@ -91,6 +93,7 @@
 
             <f:GridList id="_Garnish-GridList"
                 items="{/ZSNN_EMP_MENU}"
+                select="onSelectDish"
                 mode="MultiSelect">
                 <f:GridListItem selected="{DishChoosen}"> 
                     <VBox class="sapUiSmallMargin">
@@ -118,6 +121,7 @@
 
             <f:GridList id="_Snacks-GridList"
                 items="{/ZSNN_EMP_MENU}"
+                select="onSelectDish"
                 mode="MultiSelect">
                 <f:GridListItem selected="{DishChoosen}">
                     <VBox class="sapUiSmallMargin">
