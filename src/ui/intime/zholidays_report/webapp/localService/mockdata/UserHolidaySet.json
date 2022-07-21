@@ -1,0 +1,38 @@
+[
+    {
+        "UserID": "MIGOSHIN",
+        "HolidayID": "1",
+        "TypeID": "01",
+        "TypeText": "Отпуск",
+        "StartDate": "/Date(1658406567000)/",
+        "EndDate": "/Date(1663752567000)/",
+        "HasCrossing": false
+    },
+    {
+        "UserID": "MIGOSHIN",
+        "HolidayID": "2",
+        "TypeID": "01",
+        "TypeText": "Больничный",
+        "StartDate": "/Date(1647854967000)/",
+        "EndDate": "/Date(1650533367000)/",
+        "HasCrossing": false
+    },
+    {
+        "UserID": "VILSONAYU",
+        "HolidayID": "3",
+        "TypeID": "01",
+        "TypeText": "Отпуск",
+        "StartDate": "/Date(1653125367000)/",
+        "EndDate": "/Date(1655803767000)/",
+        "HasCrossing": false
+    },
+    {
+        "UserID": "VILSONAYU",
+        "HolidayID": "4",
+        "TypeID": "01",
+        "TypeText": "Больничный",
+        "StartDate": "/Date(1655112567000)/",
+        "EndDate": "/Date(1655544567000)/",
+        "HasCrossing": false
+    }
+]

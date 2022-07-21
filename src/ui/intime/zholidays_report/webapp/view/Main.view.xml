@@ -1,0 +1,56 @@
+<mvc:View controllerName="intime.zholiday_report.controller.App"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+		xmlns:smartTable="sap.ui.comp.smarttable"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:unified="sap.ui.unified"
+	xmlns="sap.m">
+
+	<VBox class="sapUiSmallMargin">
+
+
+		<smartFilterBar:SmartFilterBar id="smartFilterBar"
+			entitySet="UserSet"
+			enableBasicSearch="true"/>
+
+		<smartTable:SmartTable id="smartTable"
+			entitySet="UserSet"
+			smartFilterId="smartFilterBar"
+			tableType="Table"
+			enableAutoColumnWidth="true"
+			useExportToExcel="true"
+			useVariantManagement="false"
+			useTablePersonalisation="true"
+			header="Line Items"
+			showRowCount="true">
+		</smartTable:SmartTable>
+
+
+		<PlanningCalendar id="PC1"
+			rows="{/UserSet}"
+			appointmentsVisualization="Filled"
+			appointmentSelect="handleAppointmentSelect"
+			showEmptyIntervalHeaders="false"
+			stickyHeader="true"
+			showWeekNumbers="true">
+			<toolbarContent>
+				<Title text="Отчет о отпусках"
+					titleStyle="H4"/>
+			</toolbarContent>
+			<rows>
+				<PlanningCalendarRow title="{UserName}"
+					text="{PositionText}"
+					appointments="{toHolidays}">
+					<appointments>
+						<unified:CalendarAppointment startDate="{StartDate}"
+							endDate="{EndDate}"
+							title="{TypeText}"
+							text="тест"
+							type="Type01">
+						</unified:CalendarAppointment>
+					</appointments>
+				</PlanningCalendarRow>
+			</rows>
+		</PlanningCalendar>
+	</VBox>
+</mvc:View>

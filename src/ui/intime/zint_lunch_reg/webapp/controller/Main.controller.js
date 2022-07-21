@@ -103,6 +103,5 @@ sap.ui.define([
                 //Закуски
                 this.byId('_Snacks-GridList').getBinding('items').filter(this._getFilters('ST'));
             },
-
         });
     });
