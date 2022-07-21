@@ -32,18 +32,31 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
             this.uiExtension();
             this.uiExtensionPhoto();
         }
-
-
-
+        
+        // debugger;
+        var oModel = this.getOwnerComponent().getModel();
+        if(oModel) {
+            oModel.attachRequestCompleted(function(oEvent) { 
+                switch (oEvent.getParameter('method')) {
+                    case 'DELETE':
+                        oModel.refresh();
+                        break;
+                    case 'MERGE':
+                        oModel.refresh();
+                        break;
+                    // case 'GET':
+                    //     this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getParent().rebindTable();
+                    default:
+                        break;
+                }
+             }, this);
+        }
     },
 
     uiExtension: function() {
         this.extensionAPI.attachPageDataLoaded(function() {
                 this.initDateIntervalSelection();
                 this.updateVizFrame();
-
-                debugger;
-
                 this.addTimeSheetDateInterval();
 
             }.bind(this))
@@ -61,7 +74,9 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
         });
 
         this._oDateRangeSelection.attachChange(function() {
+            debugger;
             this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getParent().rebindTable();
+            // this.byId("intime.zworker_workspace::sap.suite.ui.generic.template.ObjectPage.view.Details::ZSNN_WORKER_ASSIGNED_SUBTASK--to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::Table").getParent().rebindTable();
         }.bind(this))
 
 
@@ -75,8 +90,9 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
             }
 
         }.bind(this))
-
+        debugger;
         this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getParent().rebindTable();
+        // this.byId("intime.zworker_workspace::sap.suite.ui.generic.template.ObjectPage.view.Details::ZSNN_WORKER_ASSIGNED_SUBTASK--to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::Table").getParent().rebindTable();
     },
 
     onChartDateClick: function(day, month, year) {
@@ -84,8 +100,10 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
 
         sap.ui.getCore().byId('timeSheetDateRange-DateRangeSelection').setDateValue(new Date(year, month, day, 23, 59, 59));
         sap.ui.getCore().byId('timeSheetDateRange-DateRangeSelection').setSecondDateValue(new Date(year, month, day, 23, 59, 59));
-
+        
+        debugger;
         this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getParent().rebindTable();
+        // this.byId("intime.zworker_workspace::sap.suite.ui.generic.template.ObjectPage.view.Details::ZSNN_WORKER_ASSIGNED_SUBTASK--to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::Table").getParent().rebindTable();
     },
 
     initDateIntervalSelection: function() {
@@ -169,7 +187,11 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
         });
 
         oDialog.timeSheetSaveResult.then(function(oSuccess) {
-                this.extensionAPI.refresh();
+                // this.extensionAPI.refresh();
+                var oModel = this.getOwnerComponent().getModel();
+                if(oModel) {
+                    oModel.refresh();
+                }
                 this.updateVizFrame();
             }.bind(this),
             function(oError) {
@@ -182,190 +204,189 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
 
 
     updateVizFrame: function() {
-        debugger;
         Format.numericFormatter(ChartFormatter.getInstance());
         var formatPattern = ChartFormatter.DefaultPattern;
 
-        this.byId("_TimeSheet-VizFrame").destroyDataset()
-        this.byId("_TimeSheet-VizFrame").destroyFeeds()
+        var oVizFrame = this.byId("_TimeSheet-VizFrame");
 
-        this.byId("_TimeSheet-VizFrame").setVizProperties({
-
-            interaction: {
-                selectability: {
-                    // plotLassoSelection : false
-                    mode: "EXCLUSIVE" //only one data point can be selected at a time
-                }
-            },
-
-            title: {
-                text: "Диаграмма списания",
-            },
-            plotArea: {
-                dataLabel: {
-                    formatString: formatPattern.SHORTFLOAT_MFD2,
-                    visible: false,
+        if(oVizFrame) {
+            oVizFrame.destroyDataset()
+            oVizFrame.destroyFeeds()
+    
+            oVizFrame.setVizProperties({
+    
+                interaction: {
+                    selectability: {
+                        // plotLassoSelection : false
+                        mode: "EXCLUSIVE" //only one data point can be selected at a time
+                    }
                 },
-
-                dataPointStyle: {
-                    "rules": [{
-                            "dataContext": { "SpendHours": { "min": 0, "max": 8 } },
-                            "properties": {
-                                "color": "sapUiChartPaletteSemanticCriticalLight3"
-                            },
-                            "displayName": "0-8"
-                        },
-
-                        {
-                            "dataContext": { "SpendHours": { "min": 8, "max": 9 } },
-                            "properties": {
-                                "color": "sapUiChartPaletteSemanticGood"
-                            },
-                            "displayName": "8-9"
-                        },
-
-                        {
-                            "dataContext": { "SpendHours": { "min": 9, "max": 10 } },
-                            "properties": {
-                                "color": "sapUiChartPaletteSemanticCritical"
-                            },
-                            "displayName": "9-10"
-                        },
-
-                        {
-                            "dataContext": { "SpendHours": { "min": 10 } },
-                            "properties": {
-                                "color": "sapUiChartPaletteSemanticBad"
-                            },
-                            "displayName": "10+"
-                        }
-
-
-                    ]
-                }
-            },
-            valueAxis: {
+    
                 title: {
-                    text: "Списанные часы",
-                    visible: true,
+                    text: "Диаграмма списания",
                 },
-            },
-            categoryAxis: {
-                title: {
-                    text: "Дата",
-                    visible: true,
+                plotArea: {
+                    dataLabel: {
+                        formatString: formatPattern.SHORTFLOAT_MFD2,
+                        visible: false,
+                    },
+    
+                    dataPointStyle: {
+                        "rules": [{
+                                "dataContext": { "SpendHours": { "min": 0, "max": 8 } },
+                                "properties": {
+                                    "color": "sapUiChartPaletteSemanticCriticalLight3"
+                                },
+                                "displayName": "0-8"
+                            },
+    
+                            {
+                                "dataContext": { "SpendHours": { "min": 8, "max": 9 } },
+                                "properties": {
+                                    "color": "sapUiChartPaletteSemanticGood"
+                                },
+                                "displayName": "8-9"
+                            },
+    
+                            {
+                                "dataContext": { "SpendHours": { "min": 9, "max": 10 } },
+                                "properties": {
+                                    "color": "sapUiChartPaletteSemanticCritical"
+                                },
+                                "displayName": "9-10"
+                            },
+    
+                            {
+                                "dataContext": { "SpendHours": { "min": 10 } },
+                                "properties": {
+                                    "color": "sapUiChartPaletteSemanticBad"
+                                },
+                                "displayName": "10+"
+                            }
+    
+    
+                        ]
+                    }
                 },
-            },
-        });
-
-        var oDataSet = new sap.viz.ui5.data.FlattenedDataset({
-            dimensions: [{
-                name: "DateSheet",
-                value: { path: "DateSheet", formatter: this.formatDate }
-            }],
-            measures: [{
-                name: "SpendHours",
-                value: "{SpendHours}"
-            }],
-            data: {
-                path: this.getView().getBindingContext().getPath() + "/to_SpendHours"
-            },
-        });
-
-
-        this.byId("_TimeSheet-VizFrame").setDataset(oDataSet);
-
-        this.byId("_TimeSheet-VizFrame").getDataset().getBinding('data').filter([
-            new sap.ui.model.Filter("DateSheet", 'BT', this.byId("_TimeSheetIntervalSelection-DateRangeSelection").getDateValue(), this.byId("_TimeSheetIntervalSelection-DateRangeSelection").getSecondDateValue())
-        ]);
-
-        var oFeedValueAxis = new sap.viz.ui5.controls.common.feeds.FeedItem({
-            "uid": "valueAxis",
-            "type": "Measure",
-            "values": ["SpendHours"]
-        });
-
-        oFeedCategoryAxis = new sap.viz.ui5.controls.common.feeds.FeedItem({
-            "uid": "categoryAxis",
-            "type": "Dimension",
-            "values": ["DateSheet"]
-        });
-
-
-        this.byId("_TimeSheet-VizFrame").addFeed(oFeedValueAxis);
-        this.byId("_TimeSheet-VizFrame").addFeed(oFeedCategoryAxis);
-
-        var oPopOver = this.getView().byId("_TimeSheet-Popover");
-        oPopOver.connect(this.byId("_TimeSheet-VizFrame").getVizUid());
-
-        oPopOver.setCustomDataControl(function(data, test) {
-            if (!data.data.val) {
-                debugger;
-                var sSelectedDate = data.target.__data__.DateSheet;
-
-                this.getView().byId("_TimeSheet-Popover").close();
-
-
-                var oUserData = this.getView().getBindingContext().getObject();
-
-                var oDialog = new TimeSheetDialog({
-                    title: `Списать время - ${oUserData.Surname} ${oUserData.Name}`,
-                    executorID: oUserData.UserID,
-                    dateSheet: this.parseDate(sSelectedDate),
-                    contentWidth: "100%"
-                });
-
-
-                oDialog.open();
-
-                oDialog.timeSheetSaveResult.then(function(oData) {
-                    this.extensionAPI.refresh();
-                    this.updateVizFrame();
-                }.bind(this), function(oError) {
-                    MessageDialog.isExistError();
-                }.bind(this))
-
-            } else {
-
-                debugger;
-
-                var sDate = data.target.__data__.DateSheet;
-                this.onChartDateClick(sDate.split('.')[0], sDate.split('.')[1] - 1, sDate.split('.')[2]);
-
-                var oList = new sap.m.List({
-                    includeItemInSelection: true
-                });
-
-                oList.setModel(this.getView().getModel());
-
-                oList.bindItems({
-                    path: this.getView().getBindingContext().getPath() + "/to_TimeSheet",
-                    template: new sap.m.StandardListItem({
-                        title: "{TaskName}",
-                        description: "{SubTaskName}",
-                        icon: "{PartnerImageURL}",
-                        // counter : {
-                        //      path : "TimeSpent",
-                        //      formatter : function (sTimeSpent){
-
-                        //         debugger;
-
-                        //         if (sTimeSpent){
-                        //             return parseInt(sTimeSpent);
-                        //         }
-                        //      }
-                        //     },
-                        info: "{TimeSpent} {TimeSpentUText}"
-                    }),
-                    filters: [
-                        new sap.ui.model.Filter("DateSheet", "EQ", this.parseDate(data.data.val[0].value))
-                    ]
-                })
-
-                return oList;
-            }
-        }.bind(this));
-
+                valueAxis: {
+                    title: {
+                        text: "Списанные часы",
+                        visible: true,
+                    },
+                },
+                categoryAxis: {
+                    title: {
+                        text: "Дата",
+                        visible: true,
+                    },
+                },
+            });
+    
+            var oDataSet = new sap.viz.ui5.data.FlattenedDataset({
+                dimensions: [{
+                    name: "DateSheet",
+                    value: { path: "DateSheet", formatter: this.formatDate }
+                }],
+                measures: [{
+                    name: "SpendHours",
+                    value: "{SpendHours}"
+                }],
+                data: {
+                    path: this.getView().getBindingContext().getPath() + "/to_SpendHours"
+                },
+            });
+    
+    
+            oVizFrame.setDataset(oDataSet);
+    
+            oVizFrame.getDataset().getBinding('data').filter([
+                new sap.ui.model.Filter("DateSheet", 'BT', this.byId("_TimeSheetIntervalSelection-DateRangeSelection").getDateValue(), this.byId("_TimeSheetIntervalSelection-DateRangeSelection").getSecondDateValue())
+            ]);
+    
+            var oFeedValueAxis = new sap.viz.ui5.controls.common.feeds.FeedItem({
+                "uid": "valueAxis",
+                "type": "Measure",
+                "values": ["SpendHours"]
+            });
+    
+            oFeedCategoryAxis = new sap.viz.ui5.controls.common.feeds.FeedItem({
+                "uid": "categoryAxis",
+                "type": "Dimension",
+                "values": ["DateSheet"]
+            });
+    
+    
+            oVizFrame.addFeed(oFeedValueAxis);
+            oVizFrame.addFeed(oFeedCategoryAxis);
+    
+            var oPopOver = this.getView().byId("_TimeSheet-Popover");
+            oPopOver.connect(oVizFrame.getVizUid());
+    
+            oPopOver.setCustomDataControl(function(data, test) {
+                if (!data.data.val) {
+                    var sSelectedDate = data.target.__data__.DateSheet;
+    
+                    this.getView().byId("_TimeSheet-Popover").close();
+    
+    
+                    var oUserData = this.getView().getBindingContext().getObject();
+    
+                    var oDialog = new TimeSheetDialog({
+                        title: `Списать время - ${oUserData.Surname} ${oUserData.Name}`,
+                        executorID: oUserData.UserID,
+                        dateSheet: this.parseDate(sSelectedDate),
+                        contentWidth: "100%"
+                    });
+    
+    
+                    oDialog.open();
+    
+                    oDialog.timeSheetSaveResult.then(function(oData) {
+                        this.extensionAPI.refresh();
+                        this.updateVizFrame();
+                    }.bind(this), function(oError) {
+                        MessageDialog.isExistError();
+                    }.bind(this))
+    
+                } else {
+    
+                    var sDate = data.target.__data__.DateSheet;
+                    this.onChartDateClick(sDate.split('.')[0], sDate.split('.')[1] - 1, sDate.split('.')[2]);
+    
+                    var oList = new sap.m.List({
+                        includeItemInSelection: true
+                    });
+    
+                    oList.setModel(this.getView().getModel());
+    
+                    oList.bindItems({
+                        path: this.getView().getBindingContext().getPath() + "/to_TimeSheet",
+                        template: new sap.m.StandardListItem({
+                            title: "{TaskName}",
+                            description: "{SubTaskName}",
+                            icon: "{PartnerImageURL}",
+                            // counter : {
+                            //      path : "TimeSpent",
+                            //      formatter : function (sTimeSpent){
+    
+                            //         debugger;
+    
+                            //         if (sTimeSpent){
+                            //             return parseInt(sTimeSpent);
+                            //         }
+                            //      }
+                            //     },
+                            info: "{TimeSpent} {TimeSpentUText}"
+                        }),
+                        filters: [
+                            new sap.ui.model.Filter("DateSheet", "EQ", this.parseDate(data.data.val[0].value))
+                        ]
+                    })
+    
+                    return oList;
+                }
+            }.bind(this));
+        }
     },
 
     parseDate: function(sDateString) {
@@ -423,8 +444,6 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
                             ""
                         );
 
-                        debugger;
-
                         this.getView().setBusy(true);
 
                         var sSurl = "/sap/opu/odata/sap/ZINT_UI_USERS_SRV/";
@@ -442,7 +461,6 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
 
                                 success: function(oData) {
                                     this.getView().setBusy(false);
-                                    debugger;
                                     this.extensionAPI.refresh();
                                     this.clearFileUploader();
                                     // this.byId("page").getBinding('content').refresh();
@@ -452,8 +470,6 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
                                 error: function() {
                                     this.getView().setBusy(false);
                                     this.clearFileUploader();
-
-                                    debugger;
 
                                 }.bind(this)
                             });
@@ -469,7 +485,6 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
     },
 
     clearFileUploader: function() {
-        debugger;
         this.getView().getContent()[0].getHeaderTitle().getActions()[0].clear();
     },
 
