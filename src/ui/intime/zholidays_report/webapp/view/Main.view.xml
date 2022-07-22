@@ -11,7 +11,9 @@
 
 		<smartFilterBar:SmartFilterBar id="smartFilterBar"
 			entitySet="UserSet"
-			enableBasicSearch="true"/>
+			enableBasicSearch="false"
+			search="onSearch"
+/>
 
 		<smartTable:SmartTable id="smartTable"
 			entitySet="UserSet"
@@ -22,7 +24,8 @@
 			useVariantManagement="false"
 			useTablePersonalisation="true"
 			header="Line Items"
-			showRowCount="true">
+			showRowCount="true"
+			>
 		</smartTable:SmartTable>
 
 
