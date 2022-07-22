@@ -52,6 +52,25 @@ function (Controller, JSONModel, MessageBox) {
         handleSelectionFinish: function(oEvent) {
             var aSelectedKeys = oEvent.getSource().getSelectedKeys();
             this.byId("PC1").setBuiltInViews(aSelectedKeys);
+        },
+        onSearch:function(oEvent){
+           return;
+            const oData = oEvent.getSource().getFilterData();
+            
+            const oUserId = oData.UserID.ranges.map((item)=>item.value1);
+            const oDepartmentID = oData.DepartmentID.ranges.map((item)=>item.value1);
+            const oBranchID = oData.BranchID.ranges.map((item)=>item.value1);
+            const oPositionID = oData.PositionID.ranges.map((item)=>item.value1);
+
+            console.log(oUserId);
+            console.log(oDepartmentID);
+            console.log(oBranchID);
+            console.log(oPositionID);
+            this.byId('PC1').getBinding('rows').filter(oEvent.getSource().getFilters());
+            debugger;
+        },
+        bindingNewPlanningCalendar:function(){
+
         }
 
     });
