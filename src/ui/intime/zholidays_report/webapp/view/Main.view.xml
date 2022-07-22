@@ -11,10 +11,13 @@
 
 		<smartFilterBar:SmartFilterBar id="smartFilterBar"
 			entitySet="UserSet"
-			enableBasicSearch="true"/>
+			enableBasicSearch="false"
+			search="onSearch"
+/>
 
 		<smartTable:SmartTable id="smartTable"
 			entitySet="UserSet"
+			visible="false"
 			smartFilterId="smartFilterBar"
 			tableType="Table"
 			enableAutoColumnWidth="true"
@@ -22,7 +25,8 @@
 			useVariantManagement="false"
 			useTablePersonalisation="true"
 			header="Line Items"
-			showRowCount="true">
+			showRowCount="true"
+			>
 		</smartTable:SmartTable>
 
 
@@ -40,7 +44,7 @@
 			<rows>
 				<PlanningCalendarRow title="{UserName}"
 					text="{PositionText}"
-					appointments="{toHolidays}">
+					appointments="{path: 'toHolidays', templateShareable: false}">
 					<appointments>
 						<unified:CalendarAppointment startDate="{StartDate}"
 							endDate="{EndDate}"

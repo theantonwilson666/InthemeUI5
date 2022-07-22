@@ -1,52 +1,59 @@
 <mvc:View controllerName="intime.zint_duty.controller.Main"
-          xmlns="sap.m"
-          xmlns:mvc="sap.ui.core.mvc"
-          xmlns:core="sap.ui.core"
-          xmlns:layout="sap.ui.layout"
-          xmlns:f="sap.f"
-          xmlns:sv="sap.ui.comp.smartvariants"
-          xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
-          xmlns:unified="sap.ui.unified">
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:layout="sap.ui.layout"
+    xmlns:f="sap.f"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:unified="sap.ui.unified">
     <f:DynamicPage id="dynamicPageId"
-                   headerExpanded="false">
+        headerExpanded="false">
         <f:header>
             <f:DynamicPageHeader>
                 <smartFilterBar:SmartFilterBar id="SmartFilter"
-                                               considerSelectionVariants="true"
-                                               search="onSmartFilterGoPress"
-                                               entitySet="ZSNN_INTIME_TASK"
-                                               blocked="{state&gt;/filterBlocked}"
-                                               initialized="onTaskFilterinitialized"
-                                               showClearButton="true"/>
+                    considerSelectionVariants="true"
+                    search="onSmartFilterGoPress"
+                    entitySet="ZSNN_INTIME_TASK"
+                    blocked="{state&gt;/filterBlocked}"
+                    initialized="onTaskFilterinitialized"
+                    showClearButton="true"/>
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
             <VBox class="sapUiSmallMargin">
                 <SinglePlanningCalendar id="SPC1"
-                                        class="sapUiSmallMarginTop"
-                                        viewChange="handleViewChange"
-                                        appointmentSelect="handleAppointmentSelect"
-                                        headerDateSelect="handleHeaderDateSelect"
-                                        startDateChange="handleStartDateChange"
-                                        appointmentResize="handleAppointmentResize"
-                                        appointmentCreate="handleAppointmentCreateDnD"
-                                        moreLinkPress="handleMoreLinkPress">
+                    class="sapUiSmallMarginTop"
+                    viewChange="handleViewChange"
+                    appointments="{test>/appointments}"
+                    appointmentSelect="handleAppointmentSelect"
+                    startDate="{test>/startDate}"
+                    headerDateSelect="handleHeaderDateSelect"
+                    startDateChange="handleStartDateChange"
+                    appointmentResize="handleAppointmentResize"
+                    appointmentCreate="handleAppointmentCreateDnD"
+                    moreLinkPress="handleMoreLinkPress">
                     <actions>
                         <Button text="Редактировать"
-                                type="Transparent"
-                                press="onPress"/>
+                            type="Transparent"
+                            press="onPress"/>
                     </actions>
                     <views>
                         <SinglePlanningCalendarMonthView key="MonthView"
-                                                         title="Month"/>
+                            title="Month"/>
                     </views>
                     <appointments>
-                        <unified:CalendarAppointment title="{title}"
-                                                     color="#1c4e9e"
-                                                     type="{type}"
-                                                     icon="{icon}"
-                                                     startDate="{startDate}"
-                                                     endDate="{endDate}"/>
+
+                        <unified:CalendarAppointment title="{test>title}"
+                            text= "{test>text}"
+                            type= "{test>type}"
+                            icon= "{test>icon}"
+                            startDate= "{test>startDate}"
+                            endDate= "{test>endDate}">
+
+                        </unified:CalendarAppointment>
+
+
                     </appointments>
                 </SinglePlanningCalendar>
             </VBox>
