@@ -17,6 +17,7 @@
 
 		<smartTable:SmartTable id="smartTable"
 			entitySet="UserSet"
+			visible="false"
 			smartFilterId="smartFilterBar"
 			tableType="Table"
 			enableAutoColumnWidth="true"
