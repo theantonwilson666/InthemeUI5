@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "main": "Gruntfile.js",
   "dependencies": {
+    "grunt-connect": "^0.2.0",
     "grunt-connect-proxy": "^0.1.11",
     "grunt-contrib-clean": "^2.0.0",
     "grunt-contrib-connect": "^3.0.0",
     "grunt-contrib-watch": "^1.1.0",
     "grunt-nwabap-ui5uploader": "^1.0.7",
-    "grunt-openui5": "^0.18.2",
+    "grunt-openui5": "^0.18.3",
     "grunt-zip": "^0.14.0"
   },
   "scripts": {
