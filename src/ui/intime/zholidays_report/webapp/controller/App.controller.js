@@ -7,33 +7,6 @@ function (Controller, JSONModel, MessageBox) {
     "use strict";
 
     return Controller.extend("intime.zholiday_report.controller.App", {
-
-        onInit: function () {
-            // create model
-            var oModel = new JSONModel();
-            oModel.setData({
-                startDate: new Date("2017", "0", "15", "8", "0"),
-                
-                people: [{
-                    pic: "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/8d/8d19edb05990defafc555a2011a94dde8c90698e_medium.jpg",
-                    name: "Artem Pavlov",
-                    role: "Чебоксары",
-                    appointments: [
-                        {
-                            start: new Date("2017", "0", "8", "08", "30"),
-                            end: new Date("2017", "0", "8", "09", "30"),
-                            title: "Meet Max Mustermann",
-                            type: "Type02",
-                            tentative: false
-                    }
-                ]
-            }]
-            });
-
-            // this.getView().setModel(oModel);
-
-        },
-
         handleAppointmentSelect: function (oEvent) {
             var oAppointment = oEvent.getParameter("appointment"),
                 sSelected,
@@ -54,20 +27,19 @@ function (Controller, JSONModel, MessageBox) {
             this.byId("PC1").setBuiltInViews(aSelectedKeys);
         },
         onSearch:function(oEvent){
-           return;
-            const oData = oEvent.getSource().getFilterData();
+        //    return;
+            // const oData = oEvent.getSource().getFilterData();
             
-            const oUserId = oData.UserID.ranges.map((item)=>item.value1);
-            const oDepartmentID = oData.DepartmentID.ranges.map((item)=>item.value1);
-            const oBranchID = oData.BranchID.ranges.map((item)=>item.value1);
-            const oPositionID = oData.PositionID.ranges.map((item)=>item.value1);
+            // const oUserId = oData.UserID.ranges.map((item)=>item.value1);
+            // const oDepartmentID = oData.DepartmentID.ranges.map((item)=>item.value1);
+            // const oBranchID = oData.BranchID.ranges.map((item)=>item.value1);
+            // const oPositionID = oData.PositionID.ranges.map((item)=>item.value1);
 
-            console.log(oUserId);
-            console.log(oDepartmentID);
-            console.log(oBranchID);
-            console.log(oPositionID);
+            // console.log(oUserId);
+            // console.log(oDepartmentID);
+            // console.log(oBranchID);
+            // console.log(oPositionID);
             this.byId('PC1').getBinding('rows').filter(oEvent.getSource().getFilters());
-            debugger;
         },
         bindingNewPlanningCalendar:function(){
 
