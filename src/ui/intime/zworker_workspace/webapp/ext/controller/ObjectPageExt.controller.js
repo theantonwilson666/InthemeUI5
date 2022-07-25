@@ -44,8 +44,6 @@ sap.ui.controller("intime.zworker_workspace.ext.controller.ObjectPageExt", {
                     case 'MERGE':
                         oModel.refresh();
                         break;
-                    // case 'GET':
-                    //     this.byId("to_TimeSheet::com.sap.vocabularies.UI.v1.LineItem::responsiveTable").getParent().rebindTable();
                     default:
                         break;
                 }
