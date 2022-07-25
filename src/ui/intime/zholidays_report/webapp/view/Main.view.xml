@@ -1,7 +1,7 @@
 <mvc:View controllerName="intime.zholiday_report.controller.App"
 	xmlns:core="sap.ui.core"
 	xmlns:mvc="sap.ui.core.mvc"
-		xmlns:smartTable="sap.ui.comp.smarttable"
+	xmlns:smartTable="sap.ui.comp.smarttable"
 	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
 	xmlns:unified="sap.ui.unified"
 	xmlns="sap.m">
@@ -20,33 +20,62 @@
 			visible="false"
 			smartFilterId="smartFilterBar"
 			tableType="Table"
-			enableAutoColumnWidth="true"
 			useExportToExcel="true"
 			useVariantManagement="false"
 			useTablePersonalisation="true"
 			header="Line Items"
-			showRowCount="true"
-			>
+			showRowCount="true">
 		</smartTable:SmartTable>
 
 
+		<!-- startDate="path: .getFirstDateOnCurrentQuarter" -->
 		<PlanningCalendar id="PC1"
+			viewKey="nonWorking"
 			rows="{/UserSet}"
 			appointmentsVisualization="Filled"
 			appointmentSelect="handleAppointmentSelect"
 			showEmptyIntervalHeaders="false"
 			stickyHeader="true"
 			showWeekNumbers="true">
-			<toolbarContent>
-				<Title text="Отчет о отпусках"
-					titleStyle="H4"/>
-			</toolbarContent>
+			<!-- <toolbarContent>
+				<Title text="Title" titleStyle="H4"/>
+			</toolbarContent> -->
+			<views>
+				<!-- <PlanningCalendarView
+					key="D"
+					intervalType="Day"
+					description="days view"
+					intervalsS="1"
+					intervalsM="3"
+					intervalsL="7"
+					showSubIntervals="true">
+				</PlanningCalendarView>
+				<PlanningCalendarView
+					key="M"
+					intervalType="Month"
+					description="months view"
+					intervalsS="1"
+					intervalsM="2"
+					intervalsL="3"
+					showSubIntervals="true">
+				</PlanningCalendarView> -->
+				<PlanningCalendarView
+				id="quarter"
+					key="nonWorking"
+					intervalType="Month"
+					description="quarter view"
+					intervalsS="1"
+					intervalsM="3"
+					intervalsL="3">
+				</PlanningCalendarView>
+			</views>
 			<rows>
 				<PlanningCalendarRow title="{UserName}"
 					text="{PositionText}"
-					appointments="{path: 'toHolidays', templateShareable: false}">
+					appointments="{path: 'toHolidays', templateShareable:true}">
+
 					<appointments>
-						<unified:CalendarAppointment startDate="{StartDate}"
+						<unified:CalendarAppointment  startDate="{StartDate}"
 							endDate="{EndDate}"
 							title="{TypeText}"
 							text="тест"
