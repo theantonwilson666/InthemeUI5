@@ -1,15 +1,18 @@
 sap.ui.define([
     'sap/ui/core/mvc/Controller',
-    'sap/ui/model/json/JSONModel',
     'sap/m/MessageBox'
 ],
-function (Controller, JSONModel, MessageBox) {
+function (Controller, MessageBox) {
     "use strict";
 
     return Controller.extend("intime.zholiday_report.controller.App", {
+
+        onInit:function(){
+            this.byId('PC1').setStartDate(this.getFirstDateOnCurrentQuarter())
+        },
         handleAppointmentSelect: function (oEvent) {
-            var oAppointment = oEvent.getParameter("appointment"),
-                sSelected,
+            const oAppointment = oEvent.getParameter("appointment");
+            let sSelected,
                 aAppointments,
                 sValue;
             if (oAppointment) {
@@ -23,15 +26,34 @@ function (Controller, JSONModel, MessageBox) {
         },
 
         handleSelectionFinish: function(oEvent) {
-            var aSelectedKeys = oEvent.getSource().getSelectedKeys();
+            const aSelectedKeys = oEvent.getSource().getSelectedKeys();
             this.byId("PC1").setBuiltInViews(aSelectedKeys);
         },
         onSearch:function(oEvent){
             const oData = oEvent.getSource().getFilterData();
             this.byId('PC1').getBinding('rows').filter(oEvent.getSource().getFilters());
         },
-        bindingNewPlanningCalendar:function(){
-
+        getFirstDateOnCurrentQuarter: function(oDate){
+            // For the US Government fiscal year
+            // Oct-Dec = 1
+            // Jan-Mar = 2
+            // Apr-Jun = 3
+            // Jul-Sep = 4
+            oDate = oDate || new Date();
+            let sMonth = Math.floor(oDate.getMonth() + 1);
+            if(sMonth >= 0 && sMonth < 4){
+                sMonth = 0;
+            }
+            else if(sMonth >= 4 && sMonth < 7){
+                sMonth = 3;
+            }
+            else if(sMonth >= 7 && sMonth < 10){
+                sMonth = 6;
+            }
+            else if(sMonth >= 10 && sMonth < 13){
+                sMonth = 9;
+            }
+            return new Date(oDate.getFullYear(), sMonth, oDate.getDay(), 0);
         }
 
     });
