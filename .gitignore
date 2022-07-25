@@ -5,3 +5,4 @@ Gruntfile.js
 workspace.code-workspace
 testProject
 sapui5-dist-static
+test

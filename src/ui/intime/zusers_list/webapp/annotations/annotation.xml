@@ -110,7 +110,7 @@
 										Path="PositionActual"/>
 								</Record>
 
-							    <Record Type="UI.DataField">
+								<Record Type="UI.DataField">
 									<PropertyValue Property="Value"
 										Path="Dismissed"/>
 								</Record>
@@ -170,13 +170,14 @@
 						</Record>
 
 						<!-- <Record Type="UI.DataField">
-							<PropertyValue Property="Value"
-								Path="Dismissed" />
+							<PropertyValue Property="Value" Path="Dismissed" />
 						</Record> -->
 
 					</Collection>
 				</Annotation>
 			</Annotations>
+
+
 
 			<Annotations Target="ZINT_UI_USERS_SRV.ZSNN_INTIME_USERType">
 
@@ -211,6 +212,34 @@
 								</Record>
 							</Collection>
 						</PropertyValue>
+					</Record>
+				</Annotation>
+
+
+				<Annotation Term="UI.FieldGroup"
+					Qualifier="AltIDContract">
+					<Record>
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value"
+										Path="ContractType"/>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value"
+										Path="ContractDateBegin"/>
+								</Record>
+
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value"
+										Path="ContractDateEnd"/>
+								</Record>
+
+
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Label"
+							String="Контракт"/>
 					</Record>
 				</Annotation>
 
@@ -296,7 +325,7 @@
 										EnumMember="UI.ImportanceType/High"/>
 								</Record>
 
-						        <Record Type="UI.DataField">
+								<Record Type="UI.DataField">
 									<PropertyValue Property="Value"
 										Path="Dismissed"/>
 									<Annotation Term="UI.Importance"
@@ -389,6 +418,14 @@
 							<PropertyValue Property="Target"
 								AnnotationPath="@UI.FieldGroup#AltIDHeader" />
 						</Record>
+
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Label"
+								String="Договор"/>
+							<PropertyValue Property="Target"
+								AnnotationPath="@UI.FieldGroup#AltIDContract" />
+						</Record>
+
 
 
 					</Collection>
@@ -493,6 +530,35 @@
 				<Annotation Term="UI.IsImageUrl"/>
 			</Annotations>
 
+
+			<Annotations Target="ZINT_UI_USERS_SRV.ZSNN_INTIME_USERType/ContractType">
+				<Annotation Term="Common.ValueListWithFixedValues"
+					Bool="true" />
+				<Annotation Term="Common.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath"
+							String="ZBNN_CONTRACT_TYPE" />
+						<PropertyValue Property="SearchSupported"
+							Bool="true" />
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty"
+										PropertyPath="ContractType" />
+									<PropertyValue Property="ValueListProperty"
+										String="ContractType" />
+								</Record>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty"
+										PropertyPath="ContractTypeText" />
+									<PropertyValue Property="ValueListProperty"
+										String="ContractTypeText" />
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
 
 			<Annotations Target="ZINT_UI_USERS_SRV.ZSNN_INTIME_USERType/Branch">
 				<Annotation Term="Common.ValueListWithFixedValues"
