@@ -1,90 +1,108 @@
 sap.ui.define([
-        "jira/lib/BaseController",
-        'sap/ui/model/json/JSONModel',
-        
+    "jira/lib/BaseController",
+    'sap/ui/model/json/JSONModel',
 
-    ],
-    function(BaseController, JSONModel) {
+
+],
+    function (BaseController, JSONModel) {
         "use strict";
-        
+
 
         return BaseController.extend("intime.zint_lunch_reg.controller.Main", {
-          
-            onInit: function() {
-                // create model
-			
+
+            onInit: function () {
                 this.getRouter()
                     .getRoute("mainpage")
                     .attachPatternMatched(this._onRouteMatched, this)
-                    
-                    // const oModel = new JSONModel();
-                    // oModel.setData({
-                    //     dateValue: new Date()
-                    // });
-                    // this.getView().setModel(oModel);
-                    // this.byId("DP1").setDateValue(new Date());
-
             },
-            // onDateChange: function(){
-            //     debugger;
-            // },
 
-            _onRouteMatched: function() {
+
+            _onRouteMatched: function () {
+
                 debugger;
+
+                // this.getView().getModel().setDeferredBatchGroups([])
+
+                this._initDatePicker();
+
                 this._setFilters();
-                debugger;
-                this._setValue();
-                
+
             },
 
-            _setValue: function() {
-                // debugger;
-                // const oModel = new JSONModel();
-                //     oModel.setData({
-                //         dateValue: new Date()
-                //     });
-                //     this.getView().setModel(oModel);
-                //     this.byId("DP1").setDateValue(new Date());
-               
+            onSelectDish: function (oEvent) {
+
+                this._changedTile = oEvent.getSource();
+                this._changedTile.setBusy(true);
+
+                this.submitChanges({
+                    groupId: "changes",
+                    success: function () {
+                        
+                        this._changedTile.setBusy(false);
+                        this.isExistError()
+
+                    }.bind(this),
+                    error: function (oError) {
+
+                        this._changedTile.setBusy(false);
+                        this.showError(oError);
+                    }.bind(this),
+
+                });
+
             },
 
-            _setFilters: function() {
-                debugger;
+            onDateChange: function () {
+                this._setFilters();
+                // const oDate = oEvent.getSource().getModel('date').getData().dateValue;
+
+
+            },
+
+            _initDatePicker: function () {
+                const oModel = new JSONModel();
+                oModel.setData({
+                    dateValue: new Date()
+                });
+
+                this.getView().setModel(oModel, 'date');
+            },
+
+
+            _getFilters: function (sDishType) {
+                const aFilter = [];
+
+                this.getView().byId('DP1').getDateValue().setHours(3);
+
+                aFilter.push(new sap.ui.model.Filter({
+                    path: "DISH_TYPE",
+                    operator: "EQ",
+                    value1: sDishType
+                }));
+
+                aFilter.push(new sap.ui.model.Filter({
+                    path: "REQ_DATE",
+                    operator: "EQ",
+                    value1: this.getView().byId('DP1').getDateValue()
+                }));
+
+                return aFilter;
+            },
+
+
+            _setFilters: function () {
                 //Первые блюда
-                this.byId('_Soup-GridList').getBinding('items').filter([
-                        new sap.ui.model.Filter({
-                            path: "DISH_TYPE",
-                            operator: "EQ",
-                            value1: "FC"
-                        })
-                    ]),
-                    //Горячее
-                    this.byId('_Hot-GridList').getBinding('items').filter([
-                        new sap.ui.model.Filter({
-                            path: "DISH_TYPE",
-                            operator: "EQ",
-                            value1: "HD"
-                        })
-                    ]),
-                    //Гарнир
-                    this.byId('_Garnish-GridList').getBinding('items').filter([
-                        new sap.ui.model.Filter({
-                            path: "DISH_TYPE",
-                            operator: "EQ",
-                            value1: "G"
-                        })
-                    ]),
-                    //Закуски
-                    this.byId('_Snacks-GridList').getBinding('items').filter([
-                        new sap.ui.model.Filter({
-                            path: "DISH_TYPE",
-                            operator: "EQ",
-                            value1: "ST"
-                        })
-                    ]);
+                this.byId('_Soup-GridList').getBinding('items').filter(this._getFilters('FC'));
 
-                debugger;
+                //Горячее
+                this.byId('_Hot-GridList').getBinding('items').filter(this._getFilters('HD'));
+
+                //Гарнир
+                this.byId('_Garnish-GridList').getBinding('items').filter(this._getFilters('G'));
+
+                //Закуски
+                this.byId('_Snacks-GridList').getBinding('items').filter(this._getFilters('ST'));
             },
-    
+
         });
     });
