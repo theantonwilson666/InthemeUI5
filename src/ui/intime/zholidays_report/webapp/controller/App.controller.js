@@ -6,6 +6,7 @@ function (Controller, MessageBox) {
     "use strict";
 
     return Controller.extend("intime.zholiday_report.controller.App", {
+
         onInit:function(){
             this.byId('PC1').setStartDate(this.getFirstDateOnCurrentQuarter())
         },
