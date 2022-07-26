@@ -75,11 +75,6 @@
 							intervalsL="3">
 						</PlanningCalendarView>
 					</views>
-
-					<toolbarContent>
-						<Title text="Отчет о отпусках"
-							titleStyle="H4"/>
-					</toolbarContent>
 					<rows>
 						<PlanningCalendarRow title="{UserName}"
 							text="{PositionText}"
@@ -87,8 +82,9 @@
 							<appointments>
 								<unified:CalendarAppointment startDate="{StartDate}"
 									endDate="{EndDate}"
-									title="{TypeText}"
-									text="тест"
+									icon="{ImgUrl}"
+									title="{UserName}"
+									text="{PositionText}"
 									type="Type01">
 								</unified:CalendarAppointment>
 							</appointments>
