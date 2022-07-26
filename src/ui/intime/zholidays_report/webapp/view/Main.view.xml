@@ -34,28 +34,7 @@
 			showEmptyIntervalHeaders="false"
 			stickyHeader="true"
 			showWeekNumbers="true">
-			<!-- <toolbarContent>
-				<Title text="Title" titleStyle="H4"/>
-			</toolbarContent> -->
 			<views>
-				<!-- <PlanningCalendarView
-					key="D"
-					intervalType="Day"
-					description="days view"
-					intervalsS="1"
-					intervalsM="3"
-					intervalsL="7"
-					showSubIntervals="true">
-				</PlanningCalendarView>
-				<PlanningCalendarView
-					key="M"
-					intervalType="Month"
-					description="months view"
-					intervalsS="1"
-					intervalsM="2"
-					intervalsL="3"
-					showSubIntervals="true">
-				</PlanningCalendarView> -->
 				<PlanningCalendarView
 				id="quarter"
 					key="nonWorking"
@@ -67,8 +46,10 @@
 				</PlanningCalendarView>
 			</views>
 			<rows>
-				<PlanningCalendarRow title="{UserName}"
-					text="{PositionText}"
+				<PlanningCalendarRow 
+					icon="{ImgUrl}"
+					title="{UserName}"
+					text="{Label}"
 					appointments="{path: 'toHolidays', templateShareable:true}">
 
 					<appointments>
