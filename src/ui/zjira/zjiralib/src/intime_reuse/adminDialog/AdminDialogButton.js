@@ -70,26 +70,36 @@ sap.ui.define([
                         vAlign: "Middle",
                         cells: [
                             new sap.ui.comp.smartfield.SmartField({
-                                value: "{Username}",
-                                editable: "{control>/edit}"
+                                value: "{UserName}",
+                                editable: "{control>/edit}",
+                                configuration: new sap.ui.comp.smartfield.Configuration({
+                                    displayBehaviour: "descriptionAndId"
+                                })
                             }),
-                            new sap.m.Switch({
-                                state: "{CreateEnabled}",
-                                type: "AcceptReject",
-                                enabled: "{control>/edit}"
-                            }),
-
-                            new sap.m.Switch({
-                                state: "{UpdateEnabled}",
-                                type: "AcceptReject",
-                                enabled: "{control>/edit}"
-                            }),
-
-                            new sap.m.Switch({
-                                state: "{DeleteEnabled}",
-                                type: "AcceptReject",
-                                enabled: "{control>/edit}"
+                            new sap.ui.comp.smartfield.SmartField({
+                                value: "{Role}",
+                                editable: "{control>/edit}",
+                                configuration: new sap.ui.comp.smartfield.Configuration({
+                                    controlType: "dropDownList"
+                                })
                             })
+                            // new sap.m.Switch({
+                            //     state: "{CreateEnabled}",
+                            //     type: "AcceptReject",
+                            //     enabled: "{control>/edit}"
+                            // }),
+
+                            // new sap.m.Switch({
+                            //     state: "{UpdateEnabled}",
+                            //     type: "AcceptReject",
+                            //     enabled: "{control>/edit}"
+                            // }),
+
+                            // new sap.m.Switch({
+                            //     state: "{DeleteEnabled}",
+                            //     type: "AcceptReject",
+                            //     enabled: "{control>/edit}"
+                            // })
 
                         ]
                     });

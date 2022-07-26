@@ -28,7 +28,7 @@
                         <Text text="Пользователь" />
                     </Column>
 
-                    <Column width="7em">
+                    <!-- <Column width="7em">
                         <Text text="Создание" />
                     </Column>
 
@@ -38,6 +38,10 @@
 
                     <Column width="7em">
                         <Text text="Удаление" />
+                    </Column> -->
+                    
+                    <Column width="12em">
+                        <Text text="Роль" />
                     </Column>
                 </columns>
             </Table>

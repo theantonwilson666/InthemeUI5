@@ -15,7 +15,6 @@
 
 		<smartTable:SmartTable id="smartTable"
 			entitySet="UserSet"
-			
 			visible="false"
 			smartFilterId="smartFilterBar"
 			tableType="Table"
@@ -71,6 +70,7 @@
 				<PlanningCalendarRow title="{UserName}"
 					text="{PositionText}"
 					appointments="{path: 'toHolidays', templateShareable:true}">
+
 					<appointments>
 						<unified:CalendarAppointment  startDate="{StartDate}"
 							endDate="{EndDate}"
