@@ -626,9 +626,6 @@
             </Annotations>
 
             <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNQ_INTIME_TIMESHEETType/Executor">
-
-
-
                 <Annotation Term="Common.ValueListWithFixedValues"
                     Bool="false" />
                 <Annotation Term="Common.ValueList">
@@ -652,26 +649,19 @@
                                     <PropertyValue Property="ValueListProperty"
                                         String="FullName" />
                                 </Record>
-                                <!-- <Record Type="Common.ValueListParameterDisplayOnly">
-                    <PropertyValue Property="ValueListProperty" String="FullName"/>
-                  </Record> -->
 
                                 <Record Type="Common.ValueListParameterDisplayOnly">
                                     <PropertyValue Property="ValueListProperty"
                                         String="BranchText"/>
                                 </Record>
 
-
                                 <Record Type="Common.ValueListParameterDisplayOnly">
                                     <PropertyValue Property="ValueListProperty"
                                         String="PositionText"/>
                                 </Record>
 
-
                             </Collection>
                         </PropertyValue>
-
-                        <!-- <PropertyValue Property="SelectionVariantQualifier" String="test" /> -->
                     </Record>
                 </Annotation>
             </Annotations>
@@ -1183,6 +1173,7 @@
                         <PropertyPath>Branch</PropertyPath>
                         <PropertyPath>PositionID</PropertyPath>
                         <PropertyPath>Department</PropertyPath>
+                        <PropertyPath>NotProjectActivity</PropertyPath>
 
                     </Collection>
                 </Annotation>

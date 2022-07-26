@@ -12,7 +12,6 @@ sap.ui.controller("intime.zemployee_card.ext.controller.ListReportExt", {
     },
 
     onSeeMorePress: function (oEvent) {
-        debugger;
         this.oObject = oEvent.getSource();
     
         var oSelectedItemObject = oEvent.getSource().getParent().getBindingContext().getPath();
@@ -90,7 +89,7 @@ sap.ui.controller("intime.zemployee_card.ext.controller.ListReportExt", {
       onBeforeRebindTableExtension: function (oEvent) {
         var oBindingParams = oEvent.getParameter( "bindingParams" );
         if (!this._FirstLoadingComplete){
-          oBindingParams.sorter.push(new sap.ui.model.Sorter("PositionTime", false));
+          oBindingParams.sorter.push(new sap.ui.model.Sorter("PositionTime", true));
           debugger;
           this._FirstLoadingComplete = true;
         }

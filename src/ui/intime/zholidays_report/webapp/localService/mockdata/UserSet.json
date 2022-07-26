@@ -1,0 +1,37 @@
+[{
+	"UserID": "VILSONAYU",
+	"ImgUrl": "test",
+	"BranchText": "Москва",
+	"BranchID": "01",
+	"DepartmentText" : "Разработка",
+	"DepartmentID" : "01",
+	"PositionText" : "Разработчик",
+	"PositionID" : "01",
+	"UserName" : "Вильсон Антон Юрьевич"
+},
+
+{
+	"UserID": "MKOROVIN",
+	"ImgUrl": "test",
+	"BranchText": "Москва",
+	"BranchID": "01",
+	"DepartmentText" : "Разработка",
+	"DepartmentID" : "01",
+	"PositionText" : "Главный разработчик",
+	"PositionID" : "01",
+	"UserName" : "Коровин Максим Викторович"
+},
+
+{
+	"UserID": "MIGOSHIN",
+	"ImgUrl": "test",
+	"BranchText": "Москва",
+	"BranchID": "01",
+	"DepartmentText" : "Начальство",
+	"DepartmentID" : "01",
+	"PositionText" : "Начальник",
+	"PositionID" : "01",
+	"UserName" : "Игошин Михаил"
+}
+
+]

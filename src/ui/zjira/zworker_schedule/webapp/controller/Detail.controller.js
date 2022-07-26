@@ -196,6 +196,9 @@ sap.ui.define(
                     success: function(oData) {
                         debugger;
                         if (oData.GetSchedulePlanningCalendar.dataJSON) {
+                            
+                            debugger;
+
                             var oRecalcData = JSON.parse(oData.GetSchedulePlanningCalendar.dataJSON);
                             this.updateResultCalendar(this.byId("planningScheduleCalendar").getModel("scheduleData"), oRecalcData);
                         }
@@ -697,17 +700,24 @@ sap.ui.define(
 
                 oData.SpecialDate = [];
 
-                oData.SpecialDate.push({
-                    StartDate: new Date("2022", "6", "18"),
-                    EndDate: new Date("2022", "6", "18", "23", "59"),
-                    Type: "Type01"
-                });
+                // oData.SpecialDate.push({
+                //     StartDate: new Date("2022", "6", "18"),
+                //     EndDate: new Date("2022", "6", "18", "23", "59"),
+                //     Type: "Type01"
+                // });
 
 
                 oData.Appointments = [];
 
                 for (var i = 0; i < oResultData.SCHEDULE.length; i++) {
                     var oSchedule = oResultData.SCHEDULE[i];
+
+
+                    oData.SpecialDate.push({
+                        StartDate: this.convertSAPDateTimeToJS(oSchedule.DATE, "000000"),
+                        EndDate: this.convertSAPDateTimeToJS(oSchedule.DATE, "235959"),
+                        Type : "Type" + oSchedule.DATE_TYPE
+                    });
 
                     for (var j = 0; j < oSchedule.INTERVALS.length; j++) {
                         var oInterval = oSchedule.INTERVALS[j];

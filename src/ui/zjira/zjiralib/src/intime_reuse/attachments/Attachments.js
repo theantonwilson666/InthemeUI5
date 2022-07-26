@@ -85,6 +85,7 @@ sap.ui.define([
         },
 
         _onDeleteAttachmentPress: function(oEvent) {
+            debugger;
             this._deletedAttach = oEvent.getParameter('listItem').getBindingContext();
 
             sap.m.MessageBox.warning("Удалить вложение?", {
@@ -94,6 +95,8 @@ sap.ui.define([
                     if (sAction === 'OK') {
 
                         this._getSmartTable().setBusy(true);
+
+                        debugger;
 
                         this._getModel().remove(this._deletedAttach.getPath(), {
                             success: this._onSuccessNewAttachment.bind(this),

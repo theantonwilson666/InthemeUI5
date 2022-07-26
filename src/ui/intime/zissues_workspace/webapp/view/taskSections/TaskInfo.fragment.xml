@@ -86,6 +86,10 @@
                 <smartField:SmartField value="{ManagedTask}"
                     editable="true"/>
             </smartForm:GroupElement>
+            <smartForm:GroupElement>
+                <smartField:SmartField value="{NotProjectActivity}"
+                    editable="true"/>
+            </smartForm:GroupElement>
 
 
         </smartForm:Group>
