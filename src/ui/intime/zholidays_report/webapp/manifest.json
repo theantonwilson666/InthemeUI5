@@ -78,12 +78,8 @@
         "type": "View",
         "viewType": "XML",
         "path": "intime.zholiday_report.view",
-        "controlId": "Main",
+        "controlId": "app",
         "controlAggregation": "pages",
-        "transition": "slide",
-        "bypassed": {
-          "target": "notFound"
-        },
         "async": true
       },
       "routes": [
