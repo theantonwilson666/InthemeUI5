@@ -13,7 +13,7 @@
 	xmlns:smartField="sap.ui.comp.smartfield">
 	<f:DynamicPage toggleHeaderOnTitleClick="true"
 		showFooter="false"
-		headerExpanded="false"
+		headerExpanded="true"
 		preserveHeaderStateOnScroll="true"
 		class="sapUiNoContentPadding">
 		<!-- <f:title>
@@ -48,7 +48,6 @@
 					visible="false"
 					smartFilterId="smartFilterBar"
 					tableType="Table"
-					enableAutoColumnWidth="true"
 					useExportToExcel="true"
 					useVariantManagement="false"
 					useTablePersonalisation="true"
@@ -59,11 +58,24 @@
 
 				<PlanningCalendar id="PC1"
 					rows="{/UserSet}"
+					viewKey="nonWorking"
 					appointmentsVisualization="Filled"
 					appointmentSelect="handleAppointmentSelect"
 					showEmptyIntervalHeaders="false"
 					stickyHeader="true"
 					showWeekNumbers="true">
+
+					<views>
+						<PlanningCalendarView id="quarter"
+							key="nonWorking"
+							intervalType="Month"
+							description="quarter view"
+							intervalsS="1"
+							intervalsM="3"
+							intervalsL="3">
+						</PlanningCalendarView>
+					</views>
+
 					<toolbarContent>
 						<Title text="Отчет о отпусках"
 							titleStyle="H4"/>
@@ -87,4 +99,3 @@
 		</f:content>
 	</f:DynamicPage>
 </mvc:View>
-

@@ -1173,6 +1173,7 @@
                         <PropertyPath>Branch</PropertyPath>
                         <PropertyPath>PositionID</PropertyPath>
                         <PropertyPath>Department</PropertyPath>
+                        <PropertyPath>NotProjectActivity</PropertyPath>
 
                     </Collection>
                 </Annotation>
