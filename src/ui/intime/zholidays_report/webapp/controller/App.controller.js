@@ -32,6 +32,7 @@ function (Controller, MessageBox) {
         onSearch:function(oEvent){
             const oData = oEvent.getSource().getFilterData();
             this.byId('PC1').getBinding('rows').filter(oEvent.getSource().getFilters());
+            // this.byId('PC1').getBinding('rows').filter(oData);
         },
         getFirstDateOnCurrentQuarter: function(oDate){
             // For the US Government fiscal year
