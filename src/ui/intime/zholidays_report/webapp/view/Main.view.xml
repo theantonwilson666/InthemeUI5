@@ -5,15 +5,13 @@
 	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
 	xmlns:unified="sap.ui.unified"
 	xmlns="sap.m">
-
 	<VBox class="sapUiSmallMargin">
 
 
 		<smartFilterBar:SmartFilterBar id="smartFilterBar"
 			entitySet="UserSet"
 			enableBasicSearch="false"
-			search="onSearch"
-/>
+			search="onSearch"/>
 
 		<smartTable:SmartTable id="smartTable"
 			entitySet="UserSet"
@@ -23,16 +21,15 @@
 			tableType="Table"
 			useExportToExcel="true"
 			useVariantManagement="false"
+			enableAutoBinding='true'
 			useTablePersonalisation="true"
 			header="Line Items"
 			showRowCount="true">
 		</smartTable:SmartTable>
-
-
 		<!-- startDate="path: .getFirstDateOnCurrentQuarter" -->
 		<PlanningCalendar id="PC1"
 			viewKey="nonWorking"
-			rows="{/UserSet}"
+			rows="{ path: '/UserSet'}"
 			appointmentsVisualization="Filled"
 			appointmentSelect="handleAppointmentSelect"
 			showEmptyIntervalHeaders="false"
@@ -86,4 +83,5 @@
 			</rows>
 		</PlanningCalendar>
 	</VBox>
+	
 </mvc:View>
