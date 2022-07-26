@@ -18,7 +18,16 @@
             <ToolbarSpacer/>
     
 
-            <Button text="Администратор"
+            <Button 
+                icon = "sap-icon://edit"
+                press="onPress"
+                
+                type="Transparent"
+                class="sapUiSmallMargin"
+                ariaLabelledBy="editButtonLabel"/> 
+<!-- type="DetailAndActive" -->
+            <Button 
+                icon="sap-icon://action"
                 press="onPress"
                 type="Transparent"
                 class="sapUiSmallMargin"
