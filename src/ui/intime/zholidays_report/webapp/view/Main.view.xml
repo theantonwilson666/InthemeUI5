@@ -11,67 +11,82 @@
 	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
 	xmlns:smartTable="sap.ui.comp.smarttable"
 	xmlns:smartField="sap.ui.comp.smartfield">
-	
-	<VBox height="100%">
-					<ScrollContainer
-						height="100%"
-						width="100%"
-						vertical="true"
-						focusable="false">
-			<smartFilterBar:SmartFilterBar id="smartFilterBar"
-						entitySet="UserSet"
-						enableBasicSearch="false"
-						search="onSearch" />
-            
-				<smartTable:SmartTable id="smartTable"
-					entitySet="UserSet"
-					visible="false"
-					smartFilterId="smartFilterBar"
-					tableType="Table"
-					useExportToExcel="true"
-					useVariantManagement="false"
-					useTablePersonalisation="true"
-					header="Line Items"
-					showRowCount="true">
-				</smartTable:SmartTable>
 
-				<content>
-				<PlanningCalendar id="PC1"
-					rows="{/UserSet}"
-					viewKey="nonWorking"
-					appointmentsVisualization="Filled"
-					appointmentSelect="handleAppointmentSelect"
-					showEmptyIntervalHeaders="false"
-					stickyHeader="true"
-					showWeekNumbers="true">
-				
-					<views>
-						<PlanningCalendarView id="quarter"
-							key="nonWorking"
-							intervalType="Month"
-							description="quarter view"
-							intervalsS="1"
-							intervalsM="3"
-							intervalsL="3">
-						</PlanningCalendarView>
-					</views>
-					<rows>
-						<PlanningCalendarRow title="{UserName}"
-							text="{PositionText}"
-							appointments="{path: 'toHolidays', templateShareable: false}">
-							<appointments>
-								<unified:CalendarAppointment startDate="{StartDate}"
-									endDate="{EndDate}"
-									icon="{ImgUrl}"
-									title="{UserName}"
-									text="{PositionText}"
-									type="Type01">
-								</unified:CalendarAppointment>
-							</appointments>
-						</PlanningCalendarRow>
-					</rows>
-				</PlanningCalendar>
-				</content>
-		</ScrollContainer>
-	</VBox>
+
+	<Page title="Отпуска"
+		class="sapUiContentPadding"
+		id="_Holiday-Page">
+
+		<!-- <VBox height="100%" alignItems="Start" class="sapUiSmallMargin"> -->
+
+
+
+		<!-- <ScrollContainer vertical="true" horizontal="false" focusable="false"> -->
+
+		<!-- <content> -->
+
+		<content>
+
+			<smartFilterBar:SmartFilterBar id="smartFilterBar"
+				entitySet="UserSet"
+				enableBasicSearch="false"
+				search="onSearch" />
+
+			<smartTable:SmartTable id="smartTable"
+				entitySet="UserSet"
+				visible="false"
+				smartFilterId="smartFilterBar"
+				tableType="Table"
+				useExportToExcel="true"
+				useVariantManagement="false"
+				useTablePersonalisation="true"
+				header="Line Items"
+				showRowCount="true">
+			</smartTable:SmartTable>
+
+
+			<PlanningCalendar id="PC1"
+				rows="{/UserSet}"
+				viewKey="nonWorking"
+				appointmentsVisualization="Filled"
+				appointmentSelect="handleAppointmentSelect"
+				showEmptyIntervalHeaders="false"
+				stickyHeader="true"
+				showWeekNumbers="true">
+
+				<views>
+					<PlanningCalendarView id="quarter"
+						key="nonWorking"
+						intervalType="Month"
+						description="quarter view"
+						intervalsS="1"
+						intervalsM="3"
+						intervalsL="3">
+					</PlanningCalendarView>
+				</views>
+				<rows>
+					<PlanningCalendarRow title="{UserName}"
+						text="{PositionText}"
+						icon="{ImgUrl}"
+						appointments="{path: 'toHolidays', templateShareable: false}">
+						<appointments>
+							<unified:CalendarAppointment startDate="{StartDate}"
+								endDate="{EndDate}"
+								title="{TypeText}"
+								text="{StartDate} - {EndDate}"
+								type="Type01">
+							</unified:CalendarAppointment>
+						</appointments>
+					</PlanningCalendarRow>
+				</rows>
+			</PlanningCalendar>
+
+		</content>
+
+		<!-- </content> -->
+		<!-- </ScrollContainer> -->
+		<!-- </VBox> -->
+
+	</Page>
+
 </mvc:View>
