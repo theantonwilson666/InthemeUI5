@@ -11,40 +11,13 @@
 	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
 	xmlns:smartTable="sap.ui.comp.smarttable"
 	xmlns:smartField="sap.ui.comp.smartfield">
-	<f:DynamicPage toggleHeaderOnTitleClick="true"
 	
-		showFooter="false"
-		headerExpanded="true"
-		preserveHeaderStateOnScroll="true"
-		class="sapUiNoContentPadding">
-		
-		<!-- <f:title>
-			<f:DynamicPageTitle>
-				<f:heading>
-					<sv:SmartVariantManagement id="workerPageVariant" persistencyKey="workerPage.PKey" showShare="true" showExecuteOnSelection="true"/>
-				</f:heading>
-				<f:actions>
-					<Button icon="sap-icon://monitor-payments" text="{i18n>BonusConfigButtonTitle}" visible="false" press="onOpenBonusSettingDialog" type="Emphasized"/>
-				</f:actions>
-			</f:DynamicPageTitle>
-		</f:title> -->
-		<!-- <f:header>
-			<f:DynamicPageHeader pinnable="false"
-				class="sapUiNoContentPadding">
-				<f:content>
-
-					<smartFilterBar:SmartFilterBar id="smartFilterBar"
-						entitySet="UserSet"
-						enableBasicSearch="false"
-						search="onSearch" />
-
-				</f:content>
-			</f:DynamicPageHeader>
-		</f:header>-->
-		<f:content> 
-
-			<VBox height="100%">
-
+	<VBox height="100%">
+					<ScrollContainer
+						height="100%"
+						width="100%"
+						vertical="true"
+						focusable="false">
 			<smartFilterBar:SmartFilterBar id="smartFilterBar"
 						entitySet="UserSet"
 						enableBasicSearch="false"
@@ -62,7 +35,7 @@
 					showRowCount="true">
 				</smartTable:SmartTable>
 
-
+				<content>
 				<PlanningCalendar id="PC1"
 					rows="{/UserSet}"
 					viewKey="nonWorking"
@@ -71,7 +44,7 @@
 					showEmptyIntervalHeaders="false"
 					stickyHeader="true"
 					showWeekNumbers="true">
-
+				
 					<views>
 						<PlanningCalendarView id="quarter"
 							key="nonWorking"
@@ -98,7 +71,7 @@
 						</PlanningCalendarRow>
 					</rows>
 				</PlanningCalendar>
-			</VBox>
-		</f:content>
-	</f:DynamicPage>
+				</content>
+		</ScrollContainer>
+	</VBox>
 </mvc:View>
