@@ -5,21 +5,20 @@
     xmlns:layout="sap.ui.layout"
     xmlns:f="sap.f"
     xmlns:tnt="sap.tnt">
-    <Page>
+    <Page showFooter="{state>/adminMode}">
         <Toolbar class="sapUiSmallMargin"
             height="auto">
             <DatePicker width="20%"
-            change="onDateChange"
+                change="onDateChange"
                 class="sapUiSmallMargin"
-                
                 value="{path:'date>/dateValue', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true}}"
                 id="DP1" />
-               
+
             <ToolbarSpacer/>
-    
+
 
             <Button text="Администратор"
-                press="onPress"
+                press="onGoToAdminModeButtonPress"
                 type="Transparent"
                 class="sapUiSmallMargin"
                 ariaLabelledBy="editButtonLabel"/>
@@ -31,6 +30,9 @@
             <headerToolbar>
                 <Toolbar height="3rem">
                     <Title text="Первые блюда" />
+                    <ToolbarSpacer />
+                    <Button icon="sap-icon://add"
+                        visible="{state>/adminMode}"/>
                 </Toolbar>
             </headerToolbar>
 
@@ -60,6 +62,9 @@
             <headerToolbar>
                 <Toolbar height="3rem">
                     <Title text="Горячее" />
+                    <ToolbarSpacer />
+                    <Button icon="sap-icon://add"
+                        visible="{state>/adminMode}"/>
                 </Toolbar>
             </headerToolbar>
 
@@ -88,6 +93,9 @@
             <headerToolbar>
                 <Toolbar height="3rem">
                     <Title text="Гарнир" />
+                    <ToolbarSpacer />
+                    <Button icon="sap-icon://add"
+                        visible="{state>/adminMode}"/>
                 </Toolbar>
             </headerToolbar>
 
@@ -95,7 +103,7 @@
                 items="{/ZSNN_EMP_MENU}"
                 select="onSelectDish"
                 mode="MultiSelect">
-                <f:GridListItem selected="{DishChoosen}"> 
+                <f:GridListItem selected="{DishChoosen}">
                     <VBox class="sapUiSmallMargin">
                         <layoutData>
                             <FlexItemData growFactor="1"
@@ -116,6 +124,9 @@
             <headerToolbar>
                 <Toolbar height="3rem">
                     <Title text="Закуски" />
+                    <ToolbarSpacer />
+                    <Button icon="sap-icon://add"
+                        visible="{state>/adminMode}"/>
                 </Toolbar>
             </headerToolbar>
 
@@ -138,5 +149,16 @@
                 </f:GridListItem>
             </f:GridList>
         </Panel>
+
+        <footer>
+            <OverflowToolbar>
+                <ToolbarSpacer/>
+                <Button text="Сохранить"
+                    type="Accept" />
+                <Button text="Отменить"
+                    type="Reject" />
+            </OverflowToolbar>
+        </footer>
+
     </Page>
 </mvc:View>

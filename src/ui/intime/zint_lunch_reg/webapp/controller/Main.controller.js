@@ -17,6 +17,11 @@ sap.ui.define([
             },
 
 
+            onGoToAdminModeButtonPress: function(){
+                this.setStateProperty('/adminMode', !this.getStateProperty('/adminMode'));
+            },
+
+
             _onRouteMatched: function () {
 
                 debugger;
