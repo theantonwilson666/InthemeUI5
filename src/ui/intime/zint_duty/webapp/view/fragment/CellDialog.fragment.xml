@@ -1,0 +1,58 @@
+<core:FragmentDefinition controllerName="intime.zint_duty.controller.Main"
+                         xmlns:smartField="sap.ui.comp.smartfield"
+                         xmlns:mvc="sap.ui.core.mvc"
+                         xmlns:core="sap.ui.core"
+                         xmlns:l="sap.ui.layout"
+                         xmlns="sap.m">
+    <Dialog id="Dialog"
+            title="Подробнее">
+        <content>
+            <VBox>
+                <OverflowToolbar id="otb1">
+                    <Button id="EditButtonTollBar"
+                            icon="sap-icon://edit"
+                            text="Редактировать"
+                            type="Transparent"
+                            press="onEditButtonTollBar"/>
+                </OverflowToolbar>
+            </VBox>
+            <VBox>
+                <HBox class="HBOX">
+                    <VBox>
+                        <ImageContent
+                            class="sapUiLargeMarginTop sapUiLargeMarginBottom"
+                            src="https://imgur.com/t/space/ibyZ32U"
+                            description="Profile image"
+                            press="press">
+                        </ImageContent>
+                        <!-- <Image src="/sap/opu/odata/sap/ZINT_UI_USERS_SRV/UserPhotoSet('VILSONAYU')/$value"/> -->
+                        <Text text="ФИО"/>
+                        <smartField:SmartField id="idCategory" value="test" placeholder="test"/>
+                    </VBox>
+                    <VBox>
+                        <ImageContent
+                            class="sapUiLargeMarginTop sapUiLargeMarginBottom"
+                            src="https://imgur.com/t/space/ibyZ32U"
+                            description="Profile image"
+                            press="press">
+                        </ImageContent>
+                        <!-- <Image src="/sap/opu/odata/sap/ZINT_UI_USERS_SRV/UserPhotoSet('VILSONAYU')/$value"/> -->
+                        <Text text="ФИО"/>
+                        <smartField:SmartField id="idCategory1" value="test" placeholder="test"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+        </content>
+        <beginButton>
+            <Button id="beginBtn"
+                    text="Сохранить"
+                    type="Emphasized"
+                    press=".onOkDialog"/>
+        </beginButton>
+        <endButton>
+            <Button id="endBtn"
+                    text="Отменить"
+                    press=".onCancelDialog"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>
