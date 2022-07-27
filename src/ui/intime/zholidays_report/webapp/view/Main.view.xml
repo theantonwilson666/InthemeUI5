@@ -41,7 +41,7 @@
 		</f:header>
 		<f:content>
 
-			<VBox height="100%">
+			<!-- <VBox height="100%"> -->
 
 				<smartTable:SmartTable id="smartTable"
 					entitySet="UserSet"
@@ -95,7 +95,7 @@
 						</PlanningCalendarRow>
 					</rows>
 				</PlanningCalendar>
-			</VBox>
+			<!-- </VBox> -->
 		</f:content>
 	</f:DynamicPage>
 </mvc:View>
