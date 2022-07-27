@@ -39,6 +39,7 @@
     "fullWidth": true
   },
   "sap.ui5": {
+    "flexEnabled": false,
     "rootView": {
       "viewName": "intime.zholiday_report.view.Main",
       "type": "XML",

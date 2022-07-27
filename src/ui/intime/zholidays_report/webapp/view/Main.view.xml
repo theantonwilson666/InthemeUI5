@@ -12,10 +12,12 @@
 	xmlns:smartTable="sap.ui.comp.smarttable"
 	xmlns:smartField="sap.ui.comp.smartfield">
 	<f:DynamicPage toggleHeaderOnTitleClick="true"
+	
 		showFooter="false"
 		headerExpanded="true"
 		preserveHeaderStateOnScroll="true"
 		class="sapUiNoContentPadding">
+		
 		<!-- <f:title>
 			<f:DynamicPageTitle>
 				<f:heading>
@@ -26,7 +28,7 @@
 				</f:actions>
 			</f:DynamicPageTitle>
 		</f:title> -->
-		<f:header>
+		<!-- <f:header>
 			<f:DynamicPageHeader pinnable="false"
 				class="sapUiNoContentPadding">
 				<f:content>
@@ -38,10 +40,15 @@
 
 				</f:content>
 			</f:DynamicPageHeader>
-		</f:header>
-		<f:content>
+		</f:header>-->
+		<f:content> 
 
 			<VBox height="100%">
+
+			<smartFilterBar:SmartFilterBar id="smartFilterBar"
+						entitySet="UserSet"
+						enableBasicSearch="false"
+						search="onSearch" />
 
 				<smartTable:SmartTable id="smartTable"
 					entitySet="UserSet"
