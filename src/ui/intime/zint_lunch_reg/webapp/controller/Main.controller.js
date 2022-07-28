@@ -1,11 +1,11 @@
 sap.ui.define([
     "jira/lib/BaseController",
     'sap/ui/model/json/JSONModel',
-    "sap/m/Dialog"
-
+    "sap/ui/core/Fragment"
+    
 
 ],
-    function (BaseController, JSONModel, Dialog) {
+    function (BaseController, JSONModel, Fragment) {
         "use strict";
 
 
@@ -19,62 +19,51 @@ sap.ui.define([
 
 
             onGoToAdminModeButtonPress: function(){
-                debugger;
+              
                 this.setStateProperty('/adminMode', !this.getStateProperty('/adminMode'));
-                if(this.byId("GL1").getType() == 'Detail')
-                {
-                    this.byId("GL1").setType("Inactive");
-                }else{
-                    this.byId("GL1").setVisible(true);
-                    this.byId("GL1").setType("Detail");
+                // if(this.byId("GL1").getType() == 'Detail')
+                // {
+                //     this.byId("GL1").setType("Inactive");
+                // }else{
+                //     this.byId("GL1").setVisible(true);
+                //     this.byId("GL1").setType("Detail");
                     
-                }
+                // }
             },
 
-
-            
-            onPressB:function(){
+            onDetailPress: function (oEvent) {
                 debugger;
-                if (!this.oPressB) {
-                    this.oPressB = new Dialog({
-                        type: DialogType.Message,
-                        title: "Default Message",
-                        content: new Text({ text: "Build enterprise-ready web applications, responsive to all devices and running on the browser of your choice. That's OpenUI5." }),
-                        beginButton: new Button({
-                            type: ButtonType.Emphasized,
-                            text: "OK",
-                            press: function () {
-                                this.oPressB.close();
-                            }.bind(this)
-                        })
+                let oDishDescr = oEvent.getSource();
+                if (!this.pDialog) {
+                    this.pDialog = Fragment.load({
+                        name: "intime.zint_lunch_reg.view.Dialog",
+                        controller: this,
+                        content: new Text({ text: "Do you want to submit this order?" })
                     });
-                }
-    
-                this.oPressB.open();
+                } 
+                this.pDialog.then(function(oDialog) {
+                    oDialog.open();
+                    oDialog.bindElement(oDishDescr.getBindingContext().getPath());
+                });
             },
-
-            // onDefaultMessageDialogPress: function(){
+            // onDetailPress: function (oEvent) {
             //     debugger;
-            //     if (!this.oDefaultMessageDialog) {
-            //         this.oDefaultMessageDialog = new Dialog({
-            //             type: DialogType.Message,
-            //             title: "Default Message",
-            //             content: [ new smartForm()],
-            //             beginButton: new Button({
-            //                 type: ButtonType.Emphasized,
-            //                 text: "OK",
-            //                 press: function () {
-            //                     this.oDefaultMessageDialog.close();
-            //                 }.bind(this)
-            //             })
+            //     let oDishDescr = oEvent.getSource();
+            //     if (!this.pDialog) {
+            //         this.pDialog = Fragment.load({
+            //             name: "intime.zint_lunch_reg.view.Dialog",
+            //             controller: this,
+            //             content: new Text({ text: "Do you want to submit this order?" })
             //         });
-            //     }
-    
-            //     this.oDefaultMessageDialog.open();
+            //     } 
+            //     this.pDialog.then(function(oDialog) {
+            //         oDialog.open();
+            //         oDialog.bindElement(oDishDescr.getBindingContext().getPath());
+            //     });
             // },
-
-
-            _onRouteMatched: function () {
+            
+            
+                _onRouteMatched: function () {
 
                 
 
@@ -107,6 +96,10 @@ sap.ui.define([
 
                 });
 
+            },
+            onCloseDialog : function (oEvent) {
+                debugger;
+                oEvent.getSource().getParent().close();
             },
 
             onDateChange: function () {

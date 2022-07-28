@@ -24,6 +24,17 @@
                 ariaLabelledBy="editButtonLabel"/>
         </Toolbar>
 
+        <Dialog
+            id="helloDialog"
+            title="Заголовок">
+        <content>
+            <Text text="Тут контент"/>
+        </content>
+        <endButton>
+            <Button text="Закрыть" press="onCloseDialog"/>
+        </endButton>
+    </Dialog>
+
         <Panel id="panelForGridList"
             backgroundDesign="Transparent">
 
@@ -39,20 +50,29 @@
             <f:GridList id="_Soup-GridList"
                 items="{/ZSNN_EMP_MENU}"
                 select="onSelectDish"
-                mode="MultiSelect">
-                <f:GridListItem selected="{DishChoosen}" type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }">
+                mode="MultiSelect"
+                >
+                <f:GridListItem selected="{DishChoosen}" type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }"
+                detailPress="onDetailPress">
                 
-                    <VBox class="sapUiSmallMargin">
+                    <HBox class="sapUiSmallMargin">
+                        <Avatar
+							src="{/Speakers}"
+							displaySize="S"
+							displayShape="Square"
+							showBorder="true"/>
                         <layoutData>
                             <FlexItemData growFactor="1"
                                 shrinkFactor="0" />
                         </layoutData>
 
+                        <VBox class="sapUiSmallMargin">
                         <Title text="{DISH_DESCR}"
                             wrapping="true" />
                         <Label text="{DISH_COMPOSITION}"
                             wrapping="true" />
-                    </VBox>
+                            </VBox>
+                    </HBox>
                 </f:GridListItem>
             </f:GridList>
         </Panel>
@@ -73,7 +93,8 @@
                 items="{/ZSNN_EMP_MENU}"
                 select="onSelectDish"
                 mode="MultiSelect">
-                <f:GridListItem selected="{DishChoosen}">
+                <f:GridListItem selected="{DishChoosen}"
+                type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }">
                     <VBox class="sapUiSmallMargin">
                         <layoutData>
                             <FlexItemData growFactor="1"
@@ -104,7 +125,8 @@
                 items="{/ZSNN_EMP_MENU}"
                 select="onSelectDish"
                 mode="MultiSelect">
-                <f:GridListItem selected="{DishChoosen}">
+                <f:GridListItem selected="{DishChoosen}"
+                type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }">
                     <VBox class="sapUiSmallMargin">
                         <layoutData>
                             <FlexItemData growFactor="1"
@@ -135,7 +157,8 @@
                 items="{/ZSNN_EMP_MENU}"
                 select="onSelectDish"
                 mode="MultiSelect">
-                <f:GridListItem selected="{DishChoosen}">
+                <f:GridListItem selected="{DishChoosen}"
+                type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }">
                     <VBox class="sapUiSmallMargin">
                         <layoutData>
                             <FlexItemData growFactor="1"
