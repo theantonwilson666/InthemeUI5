@@ -173,6 +173,18 @@ module.exports = function(grunt) {
                         prefix: "intime/zholidays_report",
                     }
                 },
+            },
+            {
+                package: "ZINTIME_LUNCH",
+                transportno: "TMDK923156",
+                project: "intime",
+                apps: {
+                    zint_lunch_reg: {
+                        bspContainer: "ZINT_LUNCH",
+                        bspDescription: "Intime : LUNCH App",
+                        prefix: "intime/zint_lunch_reg",
+                    }
+                },
             }
 
 
