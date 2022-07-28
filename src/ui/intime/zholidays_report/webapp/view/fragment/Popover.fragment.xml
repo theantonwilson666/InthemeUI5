@@ -3,10 +3,12 @@
 	xmlns:core="sap.ui.core">
 	<Popover
 		id="myPopover"
-		title="{Name}"
+		title="{TypeText}"
 		class="sapUiResponsivePadding--header sapUiResponsivePadding--footer"
 		placement="Bottom"
 		initialFocus="email">
+
+		<Text text="Test"/>
 		<footer>
 			<OverflowToolbar>
 				<ToolbarSpacer/>
