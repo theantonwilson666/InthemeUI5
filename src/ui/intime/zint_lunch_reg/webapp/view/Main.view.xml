@@ -127,6 +127,7 @@
                 mode="MultiSelect">
                 <f:GridListItem selected="{DishChoosen}"
                 type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }">
+
                     <VBox class="sapUiSmallMargin">
                         <layoutData>
                             <FlexItemData growFactor="1"

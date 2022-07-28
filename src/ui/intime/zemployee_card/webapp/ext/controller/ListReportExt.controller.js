@@ -89,6 +89,9 @@ sap.ui.controller("intime.zemployee_card.ext.controller.ListReportExt", {
       onBeforeRebindTableExtension: function (oEvent) {
         var oBindingParams = oEvent.getParameter( "bindingParams" );
         if (!this._FirstLoadingComplete){
+          
+          debugger;
+
           oBindingParams.sorter.push(new sap.ui.model.Sorter("PositionTime", true));
           debugger;
           this._FirstLoadingComplete = true;

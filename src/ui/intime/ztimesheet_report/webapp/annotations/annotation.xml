@@ -666,6 +666,37 @@
                 </Annotation>
             </Annotations>
 
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNQ_INTIME_TIMESHEETType/NotProjectActivity">
+                <Annotation Term="Common.ValueListWithFixedValues"
+                    Bool="true" />
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath"
+                            String="ZBNN_XFELD_TEXT" />
+                        <PropertyValue Property="SearchSupported"
+                            Bool="true" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="NotProjectActivity" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="FieldValue" />
+                                </Record>
+
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="NotProjectActivityText" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="FieldText" />
+                                </Record>
+
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
             <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INT_PROJECT_STAGE_SHType">
                 <Annotation Term="UI.FieldGroup"
                     Qualifier="stage_search">

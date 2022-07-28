@@ -561,6 +561,14 @@
 			</Annotations>
 
 			<Annotations Target="ZINT_UI_USERS_SRV.ZSNN_INTIME_USERType/Branch">
+
+
+				<Annotation Term="Common.Text"
+					Path="BranchText">
+					<Annotation Term="UI.TextArrangement"
+						EnumMember="UI.TextArrangementType/TextOnly" />
+				</Annotation>
+
 				<Annotation Term="Common.ValueListWithFixedValues"
 					Bool="true" />
 				<Annotation Term="Common.ValueList">

@@ -19,17 +19,10 @@ sap.ui.define([
 
 
             onGoToAdminModeButtonPress: function(){
-              
                 this.setStateProperty('/adminMode', !this.getStateProperty('/adminMode'));
-                // if(this.byId("GL1").getType() == 'Detail')
-                // {
-                //     this.byId("GL1").setType("Inactive");
-                // }else{
-                //     this.byId("GL1").setVisible(true);
-                //     this.byId("GL1").setType("Detail");
-                    
-                // }
             },
+
+
 
             onDetailPress: function (oEvent) {
                 debugger;
