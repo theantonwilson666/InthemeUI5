@@ -35,8 +35,13 @@ sap.ui.define([
                     });
                 } 
                 this.pDialog.then(function(oDialog) {
+
+                    oDialog.setModel(oDishDescr.getModel());
+                    oDialog.setBindingContext(oDishDescr.getBindingContext());
+
+                    // oDialog.bindContext(oDishDescr.getBindingContext().getPath());
+                    // oDialog.bindElement(oDishDescr.getBindingContext().getPath());
                     oDialog.open();
-                    oDialog.bindElement(oDishDescr.getBindingContext().getPath());
                 });
             },
             // onDetailPress: function (oEvent) {

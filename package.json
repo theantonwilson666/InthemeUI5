@@ -4,7 +4,6 @@
   "main": "Gruntfile.js",
   "dependencies": {
     "grunt-connect": "^0.2.0",
-    "grunt-connect-proxy": "^0.1.5",
     "grunt-contrib-clean": "^2.0.0",
     "grunt-contrib-connect": "^3.0.0",
     "grunt-contrib-watch": "^1.1.0",
@@ -47,6 +46,7 @@
   },
   "homepage": "https://github.com/theantonwilson666/InthemeUI5#readme",
   "devDependencies": {
-    "grunt": "^1.5.3"
+    "grunt": "^1.5.3",
+    "grunt-connect-proxy": "^0.2.0"
   }
 }

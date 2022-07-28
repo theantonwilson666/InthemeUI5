@@ -56,11 +56,11 @@
                 detailPress="onDetailPress">
                 
                     <HBox class="sapUiSmallMargin">
-                        <Avatar
+                        <!-- <Avatar
 							src="{/Speakers}"
 							displaySize="S"
 							displayShape="Square"
-							showBorder="true"/>
+							showBorder="true"/> -->
                         <layoutData>
                             <FlexItemData growFactor="1"
                                 shrinkFactor="0" />
