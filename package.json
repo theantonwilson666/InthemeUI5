@@ -31,6 +31,7 @@
     "deploy_ztimesheet_rep": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=4 --app=ztimesheet_report",
     "deploy_ztelegram_app": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=5 --app=ztelegram_webapp",
     "deploy_zholiday_app": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=6 --app=zholidays_report",
+    "deploy_zlunch_reg_app": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=7 --app=zint_lunch_reg",
     "deploy_intime": "grunt deploy --level=4 --app=zpartners_registry && grunt deploy --level=4 --app=zissues_workspace && grunt deploy --level=4 --app=zusers_list && grunt deploy --level=4 --app=zworker_workspace && grunt deploy --level=4 --app=ztimesheet_report && grunt deploy_lib --lib=zjiralib"
   },
   "keywords": [],

@@ -1,10 +1,11 @@
 sap.ui.define([
     "jira/lib/BaseController",
     'sap/ui/model/json/JSONModel',
-
+    "sap/ui/core/Fragment"
+    
 
 ],
-    function (BaseController, JSONModel) {
+    function (BaseController, JSONModel, Fragment) {
         "use strict";
 
 
@@ -22,9 +23,42 @@ sap.ui.define([
             },
 
 
-            _onRouteMatched: function () {
 
+            onDetailPress: function (oEvent) {
                 debugger;
+                let oDishDescr = oEvent.getSource();
+                if (!this.pDialog) {
+                    this.pDialog = Fragment.load({
+                        name: "intime.zint_lunch_reg.view.Dialog",
+                        controller: this,
+                        content: new Text({ text: "Do you want to submit this order?" })
+                    });
+                } 
+                this.pDialog.then(function(oDialog) {
+                    oDialog.open();
+                    oDialog.bindElement(oDishDescr.getBindingContext().getPath());
+                });
+            },
+            // onDetailPress: function (oEvent) {
+            //     debugger;
+            //     let oDishDescr = oEvent.getSource();
+            //     if (!this.pDialog) {
+            //         this.pDialog = Fragment.load({
+            //             name: "intime.zint_lunch_reg.view.Dialog",
+            //             controller: this,
+            //             content: new Text({ text: "Do you want to submit this order?" })
+            //         });
+            //     } 
+            //     this.pDialog.then(function(oDialog) {
+            //         oDialog.open();
+            //         oDialog.bindElement(oDishDescr.getBindingContext().getPath());
+            //     });
+            // },
+            
+            
+                _onRouteMatched: function () {
+
+                
 
                 // this.getView().getModel().setDeferredBatchGroups([])
 
@@ -55,6 +89,10 @@ sap.ui.define([
 
                 });
 
+            },
+            onCloseDialog : function (oEvent) {
+                debugger;
+                oEvent.getSource().getParent().close();
             },
 
             onDateChange: function () {
