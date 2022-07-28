@@ -117,8 +117,12 @@
                 select="onSelectDish"
                 mode="MultiSelect">
                 <f:GridListItem selected="{DishChoosen}"
+<<<<<<< HEAD
                 type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }"
                 detailPress="onDetailPress">
+=======
+                type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }">
+>>>>>>> a27ca3d98b1e8b83fd9e446f30de56488b2e742b
 
                     <VBox class="sapUiSmallMargin">
                         <layoutData>

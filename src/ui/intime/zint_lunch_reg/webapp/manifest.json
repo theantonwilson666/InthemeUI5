@@ -107,15 +107,7 @@
                   "icons": {
                       "goHome": "sap-icon://home"
                   },
-                  "currentProjectStage": null,
-                  "taskEditMode": false,
-                  "subTaskCreateMode": false,
-                  "subTaskEditMode": false,
-                  "taskContext": null,
-                  "taskCreated": false,
-                  "filterBlocked": false,
-                  "EntityNavigation": [],
-                  "ProjectData": null
+                  "adminMode" : false
               }
           }
       },
