@@ -2,5 +2,9 @@
     xmlns:mvc="sap.ui.core.mvc"
     displayBlock="true"
     xmlns="sap.m">
-    <App id="app"/>
-</mvc:View>
+    <Shell appWidthLimited="false">
+        <App id="app"
+            width="100%"/>
+    </Shell>
+
+</mvc:View> 
