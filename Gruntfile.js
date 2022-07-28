@@ -239,7 +239,7 @@ module.exports = function(grunt) {
                         port: 8000,
                         secure: false,
                         https: false,
-                        header: "Basic " + new Buffer.from("VILSONAYU:QAZwsx123!"),
+                        header: "Basic " + new Buffer.from("NAFANASIEV:Zero0300"),
                     },
                 ],
             },

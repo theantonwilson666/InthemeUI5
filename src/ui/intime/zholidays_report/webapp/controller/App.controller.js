@@ -1,8 +1,9 @@
 sap.ui.define([
     'sap/ui/core/mvc/Controller',
-    'sap/m/MessageBox'
+	'sap/ui/core/Fragment',
+    "sap/ui/core/Popup"
 ],
-function (Controller, MessageBox) {
+function (Controller, Fragment, Popup) {
     "use strict";
 
     return Controller.extend("intime.zholiday_report.controller.App", {
@@ -11,18 +12,29 @@ function (Controller, MessageBox) {
             this.byId('PC1').setStartDate(this.getFirstDateOnCurrentQuarter())
         },
         handleAppointmentSelect: function (oEvent) {
-            const oAppointment = oEvent.getParameter("appointment");
-            let sSelected,
-                aAppointments,
-                sValue;
-            if (oAppointment) {
-                sSelected = oAppointment.getSelected() ? "selected" : "deselected";
-                MessageBox.show("'" + oAppointment.getTitle() + "' " + sSelected + ". \n Selected appointments: " + this.byId("PC1").getSelectedAppointments().length);
-            } else {
-                aAppointments = oEvent.getParameter("appointments");
-                sValue = aAppointments.length + " Appointments selected";
-                MessageBox.show(sValue);
-            }
+            debugger;
+        // Set the element that will serve as 'within area' for all popups
+			const oButton = oEvent.getSource(),
+				oView = this.getView(),
+                oAppointment = oEvent.mParameters.appointment.getBindingContext().getPath();
+
+			// Create popover
+			if (!this._pPopover) {
+				this._pPopover = Fragment.load({
+					id: oView.getId(),
+                    name: "intime.zholiday_report.view.fragment.Popover",
+					controller: this
+				}).then(function(oPopover) {
+					oView.addDependent(oPopover);
+                    debugger;
+					oPopover.bindElement(oAppointment);
+					return oPopover;
+				});
+			}
+			this._pPopover.then(function(oPopover) {
+                // debugger;
+				oPopover.openBy(oButton);
+			});
         },
 
         handleSelectionFinish: function(oEvent) {
