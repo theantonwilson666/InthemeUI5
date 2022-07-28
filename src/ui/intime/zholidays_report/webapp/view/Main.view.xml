@@ -65,15 +65,18 @@
 					</PlanningCalendarView>
 				</views>
 				<rows>
-					<PlanningCalendarRow title="{UserName}"
+					<PlanningCalendarRow
+						id="PCRow"
+						title="{UserName}"
 						text="{PositionText}"
-						icon="{ImgUrl}"
+						icon="{=${HasImage==true} ? 'ImgUrl' : 'sap-icon://SAP-icons-TNT/user'}"
 						appointments="{path: 'toHolidays', templateShareable: false}">
 						<appointments>
-							<unified:CalendarAppointment startDate="{StartDate}"
+							<unified:CalendarAppointment id="CA"
+							startDate="{StartDate}"
 								endDate="{EndDate}"
 								title="{TypeText}"
-								text="{StartDate} - {EndDate}"
+								text="{path: 'StartDate', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true} } - {path: 'EndDate', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true} }"
 								type="Type01">
 							</unified:CalendarAppointment>
 						</appointments>
