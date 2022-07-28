@@ -24,17 +24,6 @@
                 ariaLabelledBy="editButtonLabel"/>
         </Toolbar>
 
-        <Dialog
-            id="helloDialog"
-            title="Заголовок">
-        <content>
-            <Text text="Тут контент"/>
-        </content>
-        <endButton>
-            <Button text="Закрыть" press="onCloseDialog"/>
-        </endButton>
-    </Dialog>
-
         <Panel id="panelForGridList"
             backgroundDesign="Transparent">
 
@@ -43,7 +32,8 @@
                     <Title text="Первые блюда" />
                     <ToolbarSpacer />
                     <Button icon="sap-icon://add"
-                        visible="{state>/adminMode}"/>
+                        visible="{state>/adminMode}"
+                        press="onDetailPress"/>
                 </Toolbar>
             </headerToolbar>
 
@@ -56,11 +46,11 @@
                 detailPress="onDetailPress">
                 
                     <HBox class="sapUiSmallMargin">
-                        <Avatar
+                        <!-- <Avatar
 							src="{/Speakers}"
 							displaySize="S"
 							displayShape="Square"
-							showBorder="true"/>
+							showBorder="true"/> -->
                         <layoutData>
                             <FlexItemData growFactor="1"
                                 shrinkFactor="0" />
@@ -94,7 +84,8 @@
                 select="onSelectDish"
                 mode="MultiSelect">
                 <f:GridListItem selected="{DishChoosen}"
-                type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }">
+                type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }"
+                detailPress="onDetailPress">
                     <VBox class="sapUiSmallMargin">
                         <layoutData>
                             <FlexItemData growFactor="1"
@@ -126,7 +117,9 @@
                 select="onSelectDish"
                 mode="MultiSelect">
                 <f:GridListItem selected="{DishChoosen}"
-                type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }">
+                type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }"
+                detailPress="onDetailPress">
+
                     <VBox class="sapUiSmallMargin">
                         <layoutData>
                             <FlexItemData growFactor="1"
@@ -158,7 +151,8 @@
                 select="onSelectDish"
                 mode="MultiSelect">
                 <f:GridListItem selected="{DishChoosen}"
-                type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }">
+                type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }"
+                detailPress="onDetailPress">
                     <VBox class="sapUiSmallMargin">
                         <layoutData>
                             <FlexItemData growFactor="1"
