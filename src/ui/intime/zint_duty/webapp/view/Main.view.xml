@@ -1,59 +1,72 @@
 <mvc:View controllerName="intime.zint_duty.controller.Main"
-    xmlns="sap.m"
-    xmlns:mvc="sap.ui.core.mvc"
-    xmlns:core="sap.ui.core"
-    xmlns:layout="sap.ui.layout"
-    xmlns:f="sap.f"
-    xmlns:sv="sap.ui.comp.smartvariants"
-    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
-    xmlns:unified="sap.ui.unified">
+          xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+          xmlns:smartField="sap.ui.comp.smartfield"
+          xmlns:sv="sap.ui.comp.smartvariants"
+          xmlns:unified="sap.ui.unified"
+          xmlns:layout="sap.ui.layout"
+          xmlns:mvc="sap.ui.core.mvc"
+          xmlns:core="sap.ui.core"
+          xmlns:f="sap.f"
+          xmlns="sap.m">
     <f:DynamicPage id="dynamicPageId"
-        headerExpanded="false">
+                   headerExpanded="false">
         <f:header>
             <f:DynamicPageHeader>
                 <smartFilterBar:SmartFilterBar id="SmartFilter"
-                    considerSelectionVariants="true"
-                    search="onSmartFilterGoPress"
-                    entitySet="ZSNN_INTIME_TASK"
-                    blocked="{state&gt;/filterBlocked}"
-                    initialized="onTaskFilterinitialized"
-                    showClearButton="true"/>
+                                               considerSelectionVariants="true"
+                                               search="onSmartFilterGoPress"
+                                               entitySet="ZSNN_INTIME_TASK"
+                                               blocked="{state>/filterBlocked}"
+                                               initialized="onTaskFilterinitialized"
+                                               showClearButton="true"/>
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
             <VBox class="sapUiSmallMargin">
                 <SinglePlanningCalendar id="SPC1"
-                    class="sapUiSmallMarginTop"
-                    viewChange="handleViewChange"
-                    appointments="{test>/appointments}"
-                    appointmentSelect="handleAppointmentSelect"
-                    startDate="{test>/startDate}"
-                    headerDateSelect="handleHeaderDateSelect"
-                    startDateChange="handleStartDateChange"
-                    appointmentResize="handleAppointmentResize"
-                    appointmentCreate="handleAppointmentCreateDnD"
-                    moreLinkPress="handleMoreLinkPress">
+                                        class="sapUiSmallMarginTop"
+                                        viewChange="handleViewChange"
+                                        appointments="{test>/appointments}"
+                                        startDate="{test>/startDate}"
+                                        headerDateSelect="handleHeaderDateSelect"
+                                        startDateChange="handleStartDateChange"
+                                        appointmentResize="handleAppointmentResize"
+                                        appointmentCreate="handleAppointmentCreateDnD"
+                                        moreLinkPress="handleMoreLinkPress"
+                                        cellPress="onCellPress">
                     <actions>
-                        <Button text="Редактировать"
-                            type="Transparent"
-                            press="onPress"/>
+                        <FlexBox id="FlexBoxActions"
+                                 class="sapUiContentPadding"
+                                 visible="false">
+                            <Label class="sapUiTinyMargin"
+                                   text="Сотрудник"
+                                   labelFor="selectTypeDaySchedule"/>
+                            <!--<Select class="sapUiTinyMargin"
+                                    id="selectTypeDaySchedulePlan"
+                                    items="{path: &apos;/IntervalTypesLegendSet&apos;}">
+                                <core:Item key="{Type}"
+                                           text="{Text}"/>
+                            </Select>-->
+                            <smartField:SmartField id="Employzse"
+                                                   value="test"
+                                                   placeholder="test"/>
+                        </FlexBox>
+                        <Button id="editButton"
+                                text="Редактировать"
+                                type="Transparent"
+                                press="onEditButtonOverFullButton"/>
                     </actions>
                     <views>
                         <SinglePlanningCalendarMonthView key="MonthView"
-                            title="Month"/>
+                                                         title="Month"/>
                     </views>
                     <appointments>
-
                         <unified:CalendarAppointment title="{test>title}"
-                            text= "{test>text}"
-                            type= "{test>type}"
-                            icon= "{test>icon}"
-                            startDate= "{test>startDate}"
-                            endDate= "{test>endDate}">
-
-                        </unified:CalendarAppointment>
-
-
+                                                     text="{test>text}"
+                                                     type="{test>type}"
+                                                     icon="{test>icon}"
+                                                     startDate="{test>startDate}"
+                                                     endDate="{test>endDate}"/>
                     </appointments>
                 </SinglePlanningCalendar>
             </VBox>

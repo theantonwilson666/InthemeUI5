@@ -22,7 +22,7 @@
 						entitySet="UserSet"
 						enableBasicSearch="false"
 						search="onSearch" />
-
+            
 				<smartTable:SmartTable id="smartTable"
 					entitySet="UserSet"
 					visible="false"
