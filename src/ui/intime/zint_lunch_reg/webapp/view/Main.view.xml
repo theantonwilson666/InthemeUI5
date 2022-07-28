@@ -40,7 +40,8 @@
                 items="{/ZSNN_EMP_MENU}"
                 select="onSelectDish"
                 mode="MultiSelect">
-                <f:GridListItem selected="{DishChoosen}">
+                <f:GridListItem selected="{DishChoosen}" type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }">
+                
                     <VBox class="sapUiSmallMargin">
                         <layoutData>
                             <FlexItemData growFactor="1"
