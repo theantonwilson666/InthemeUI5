@@ -98,8 +98,8 @@
           "transition": "show"
         },
         "mainPages": {
-          "viewId": "mainPage",
-          "viewName": "Main"
+          "viewId": "app",
+          "viewName": "App"
         }
       }
     }
