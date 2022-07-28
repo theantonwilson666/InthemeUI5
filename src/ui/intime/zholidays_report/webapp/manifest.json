@@ -98,8 +98,8 @@
           "transition": "show"
         },
         "mainPages": {
-          "viewId": "_Holiday-Page",
-          "viewName": "Main"
+          "viewId": "app",
+          "viewName": "App"
         }
       }
     }
