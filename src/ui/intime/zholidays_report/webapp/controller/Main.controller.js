@@ -6,9 +6,12 @@ sap.ui.define([
 function (Controller, Fragment, Popup) {
     "use strict";
 
-    return Controller.extend("intime.zholiday_report.controller.App", {
+    return Controller.extend("intime.zholiday_report.controller.Main", {
 
         onInit:function(){
+            
+            debugger;
+
             this.byId('PC1').setStartDate(this.getFirstDateOnCurrentQuarter())
         },
         handleAppointmentSelect: function (oEvent) {

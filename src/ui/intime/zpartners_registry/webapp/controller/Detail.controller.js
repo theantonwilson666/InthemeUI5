@@ -112,8 +112,6 @@ sap.ui.define([
                             configuration: new sap.ui.comp.smartfield.Configuration({
                                 controlType: "dropDownList"
                             })
-                        }).bindProperty('editable', {
-                            path: 'state>/editProjectMode'
                         })
 
                     ]
@@ -156,6 +154,8 @@ sap.ui.define([
             },
 
             onEditAdminPress: function(oEvent) {
+
+                debugger;
 
                 this.setStateProperty("/editProjectMode", !this.getStateProperty("/editProjectMode"));
                 oEvent.getSource().getParent().getParent().setMode(this.getStateProperty("/editProjectMode") === true ? "Delete" : "None");

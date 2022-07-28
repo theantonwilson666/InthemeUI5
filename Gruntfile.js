@@ -173,6 +173,18 @@ module.exports = function(grunt) {
                         prefix: "intime/zholidays_report",
                     }
                 },
+            },
+            {
+                package: "ZINTIME_LUNCH",
+                transportno: "TMDK923156",
+                project: "intime",
+                apps: {
+                    zint_lunch_reg: {
+                        bspContainer: "ZINT_LUNCH",
+                        bspDescription: "Intime : LUNCH App",
+                        prefix: "intime/zint_lunch_reg",
+                    }
+                },
             }
 
 
@@ -249,8 +261,8 @@ module.exports = function(grunt) {
             server: {
                 options: {
                     appresources: "src",
-                    resources: "C:/ui5/resources",
-                    testresources: "C:/ui5/test-resources",
+                    resources: "C:/sapSDK/sapui5-sdk-1.84.25/resources",
+                    testresources: "C:/sapSDK/sapui5-sdk-1.84.25/test-resources",
 
                     proxypath: "proxy",
                 },
