@@ -10,6 +10,40 @@ sap.ui.define([
 			var oModel = new JSONModel(Device);
 			oModel.setDefaultBindingMode("OneWay");
 			return oModel;
+		},
+
+
+		createDishModel: function () {
+			let oModel = new JSONModel({
+				dishType: [
+					{
+						typeId: "FC",
+						typeText: "Первые блюда"
+					},
+
+					{
+						typeId: "HD",
+						typeText: "Горячее"
+					},
+
+					{
+						typeId: "G",
+						typeText: "Гарнир"
+					},
+
+					{
+						typeId: "ST",
+						typeText: "Закуски"
+					}
+
+			
+				]
+			});
+
+			oModel.setDefaultBindingMode("OneWay");
+			return oModel;
+
+
 		}
 
 	};
