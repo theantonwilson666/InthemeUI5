@@ -9,7 +9,6 @@
     xmlns:u="sap.ui.unified"
     xmlns:m="sap.m">
 
-
     <smartFilterBar:SmartFilterBar id="_SubTaskTimeSheet-SmartFilter"
         entitySet="ZSNN_INTIME_TIMESHEET"
         showClearButton="true"/>
@@ -27,10 +26,47 @@
         enableAutoBinding="true"
         tableBindingPath="to_Timesheet">
 
-        <Table mode="Delete"
+        <Table mode="MultiSelect"
             growing="true"
-            delete="onDeleteTimesheet"
-            growingScrollToLoad="true"/>
+            growingScrollToLoad="true">
+        <headerToolbar>
+			<OverflowToolbar>
+				<content>
+                <ToolbarSpacer/>
+                  <Button id="ChangeTimeSheet"
+                          type="Emphasized"
+                          text="Перенести списание"
+                          press="OnChangeTimeSheet"/>
+				</content>
+		   </OverflowToolbar>
+		</headerToolbar>
+            <columns>
+                <Column id="deleteColumnTimeSheet"
+                    demandPopin="true"
+                    vAlign="Middle">
+                    <customData>
+                        <core:CustomData key="p13nData"
+                            value='\{"columnKey": "Operation", "leadingProperty": "Operation", "sortProperty": "Operation", "columnIndex": 6}' />
+                    </customData>
+                    <header>
+                        <Text text="Операции"/>
+                    </header>
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem>
+                    <cells>
+                        <HBox class="sapUiTinyMargin">
+                            <Button id="deleteButtonTimeSheet"
+                                icon="sap-icon://delete"
+                                type="Transparent"
+                                press="onDeleteTimeSheet"/>
+
+                        </HBox>
+                    </cells>
+                </ColumnListItem>
+            </items>
+            </Table>
 
     </smartTable:SmartTable>
 </core:FragmentDefinition>
