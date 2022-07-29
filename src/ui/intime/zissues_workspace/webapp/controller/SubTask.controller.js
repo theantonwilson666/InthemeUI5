@@ -114,28 +114,50 @@ sap.ui.define([
             },
 
 
-            onDeleteTimesheet: function(oEvent) {
+            onDeleteTimeSheet: function(oEvent) {
 
-                this._deletedTimeSheet = oEvent.getParameter('listItem').getBindingContext();
+                debugger;
 
-                sap.m.MessageBox.warning("Удалить списание?", {
-                    actions: [sap.m.MessageBox.Action.OK, sap.m.MessageBox.Action.CANCEL],
-                    emphasizedAction: sap.m.MessageBox.Action.OK,
+                // this._deletedTimeSheet = oEvent.getParameter('listItem').getBindingContext();
+                var oItem = oEvent.getSource().getParent();
+                var oEntry = oItem.getBindingContext().getObject();
+
+                
+                sap.m.MessageBox.warning(`Удалить списание?`, {
+                    actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
+                    emphasizedAction: MessageBox.Action.OK,
                     onClose: function(sAction) {
-                        if (sAction === 'OK') {
-                            this.getModel().remove(this._deletedTimeSheet.getPath(), {
-                                success: function(oData) {
-                                    this.isExistError();
-                                    this.refreshPage();
-                                }.bind(this),
-
-                                error: function(oError) {
-                                    this.showError(oError);
-                                }.bind(this)
-                            });;
+                        switch (sAction) {
+                            case MessageBox.Action.OK:
+                                this.getModel().remove(oItem.getBindingContext().sPath);
+                                debugger;
+                                break;
+                            case MessageBox.Action.CANCEL:
+                                sap.m.MessageToast.show("Операция отменена");
+                            default:
+                                break;
                         }
                     }.bind(this)
-                });;
+                });
+
+                // sap.m.MessageBox.warning("Удалить списание?", {
+                //     actions: [sap.m.MessageBox.Action.OK, sap.m.MessageBox.Action.CANCEL],
+                //     emphasizedAction: sap.m.MessageBox.Action.OK,
+                //     onClose: function(sAction) {
+                //         if (sAction === 'OK') {
+                //             this.getModel().remove(this._deletedTimeSheet.getPath(), {
+                //                 success: function(oData) {
+                //                     this.isExistError();
+                //                     this.refreshPage();
+                //                 }.bind(this),
+
+                //                 error: function(oError) {
+                //                     this.showError(oError);
+                //                 }.bind(this)
+                //             });;
+                //         }
+                //     }.bind(this)
+                // });;
             },
 
             getTaskData: function() {
@@ -450,6 +472,10 @@ sap.ui.define([
             onRemoveRowSelectionForMoveToSubTask: function() {
                 var oFirstSelectedItem = this.byId("_MoveSubTaskToSubTask-SmartTable").getTable().getSelectedItems()[0];
                 this.byId("_MoveSubTaskToSubTask-SmartTable").getTable().setSelectedItem(oFirstSelectedItem, false);
+            },
+
+            OnChangeTimeSheet: function() {
+                
             }
 
         });
