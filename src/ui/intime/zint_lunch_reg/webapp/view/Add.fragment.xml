@@ -8,79 +8,78 @@
    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 
    <Dialog id="fragment"
-      title="{DISH_DESCR}"
-      >
+      title="{DISH_DESCR}">
 
       <content>
-	<f:Form id="FormToolbar"
-   editable="true"
-			ariaLabelledBy="Title1">
-         <f:layout>
-				<f:ResponsiveGridLayout
-					labelSpanXL="4"
-					labelSpanL="3"
-					labelSpanM="4"
-					labelSpanS="12"
-					adjustLabelSpan="false"
-					emptySpanXL="0"
-					emptySpanL="4"
-					emptySpanM="0"
-					emptySpanS="0"
-					columnsXL="2"
-					columnsL="1"
-					columnsM="1"
-					singleContainerFullSize="false" />
-			</f:layout>
-              <f:formContainers>
-				<f:FormContainer ariaLabelledBy="Title2">
-						<f:toolbar>
-				<Toolbar id="TB1">
-					<Title id="Title1" text="Address"/>
-					<ToolbarSpacer />
-					<Button icon="sap-icon://settings" press="onFormPress"/>
-					<Button icon="sap-icon://drop-down-list" />
-				</Toolbar>
-			</f:toolbar>
-					<f:formElements>
-						<f:FormElement>
-							<f:fields>
+         <f:Form id="FormToolbar"
+                 editable="true"
+                 ariaLabelledBy="Title1">
+            <f:layout>
+               <f:ResponsiveGridLayout
+                  labelSpanXL="4"
+                  labelSpanL="3"
+                  labelSpanM="4"
+                  labelSpanS="12"
+                  adjustLabelSpan="false"
+                  emptySpanXL="0"
+                  emptySpanL="4"
+                  emptySpanM="0"
+                  emptySpanS="0"
+                  columnsXL="2"
+                  columnsL="1"
+                  columnsM="1"
+                  singleContainerFullSize="false" />
+            </f:layout>
+               <f:formContainers>
+                     <f:FormContainer ariaLabelledBy="Title2">
+                           <f:toolbar>
+                     <Toolbar id="TB1">
+                        <Title id="Title1" text="Address"/>
+                        <ToolbarSpacer />
+                        <Button icon="sap-icon://settings" press="onFormPress"/>
+                        <Button icon="sap-icon://drop-down-list" />
+                     </Toolbar>
+                  </f:toolbar>
+                        <f:formElements>
+                           <f:FormElement>
+                              <f:fields>
+                              
+                                 <Input placeholder="Тип блюда" id="typedish"/>
+                                 <Input placeholder="Название блюда"/>
+                                 <Input placeholder="Описание блюда"/>
+                                 
+                              </f:fields>
+                           </f:FormElement>
+                           
+                           
+                        </f:formElements>
+                     </f:FormContainer>
                      
-                        <Input placeholder="Тип блюда" id="typedish"/>
-								<Input placeholder="Название блюда"/>
-                        <Input placeholder="Описание блюда"/>
+                  </f:formContainers>
+         </f:Form>
+
+
+
+
+                  <!-- <smartForm:SmartForm id="smartForm"
+                     app:defaultCheckBoxDisplayBehaviour="OnOff"
+                     app:defaultDropDownDisplayBehaviour="idAndDescription"
+                     editable="true">
+                     <smartForm:Group>
+                        <smartForm:GroupElement label="Название блюда">
+                           <smartField:SmartField id="DISH_DESCR"
+                              editable="true"
+                              />
+                        </smartForm:GroupElement>
+                        <smartForm:GroupElement label="Описание блюда">
+                           <smartField:SmartField id="DISH_COMPOSITION"
+                              editable="true"
+                              contextEditableChanged="onChange"
+                           />
+                        </smartForm:GroupElement>
                         
-							</f:fields>
-						</f:FormElement>
-						
-						
-					</f:formElements>
-				</f:FormContainer>
-				
-			</f:formContainers>
-</f:Form>
-
-
-
-
-         <!-- <smartForm:SmartForm id="smartForm"
-            app:defaultCheckBoxDisplayBehaviour="OnOff"
-            app:defaultDropDownDisplayBehaviour="idAndDescription"
-            editable="true">
-            <smartForm:Group>
-               <smartForm:GroupElement label="Название блюда">
-                  <smartField:SmartField id="DISH_DESCR"
-                     editable="true"
-                     />
-               </smartForm:GroupElement>
-               <smartForm:GroupElement label="Описание блюда">
-                  <smartField:SmartField id="DISH_COMPOSITION"
-                     editable="true"
-                     contextEditableChanged="onChange"
-                    />
-               </smartForm:GroupElement>
-               
-            </smartForm:Group>
-         </smartForm:SmartForm> -->
+                     </smartForm:Group>
+                  </smartForm:SmartForm> -->
       </content>
 
       <beginButton>
