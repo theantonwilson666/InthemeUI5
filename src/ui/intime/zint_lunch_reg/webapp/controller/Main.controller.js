@@ -2,8 +2,6 @@ sap.ui.define([
     "jira/lib/BaseController",
     'sap/ui/model/json/JSONModel',
     "sap/ui/core/Fragment"
-    
-
 ],
     function (BaseController, JSONModel, Fragment) {
         "use strict";
@@ -22,8 +20,6 @@ sap.ui.define([
                 this.setStateProperty('/adminMode', !this.getStateProperty('/adminMode'));
             },
 
-
-
             onDetailPress: function (oEvent) {
                 debugger;
                 let oDishDescr = oEvent.getSource();
@@ -31,9 +27,9 @@ sap.ui.define([
                     this.pDialog = Fragment.load({
                         name: "intime.zint_lunch_reg.view.Dialog",
                         controller: this,
-                        content: new Text({ text: "Do you want to submit this order?" })
                     });
                 } 
+
                 this.pDialog.then(function(oDialog) {
 
                     oDialog.setModel(oDishDescr.getModel());
@@ -44,40 +40,57 @@ sap.ui.define([
                     oDialog.open();
                 });
             },
-            // onDetailPress: function (oEvent) {
-            //     debugger;
-            //     let oDishDescr = oEvent.getSource();
-            //     if (!this.pDialog) {
-            //         this.pDialog = Fragment.load({
-            //             name: "intime.zint_lunch_reg.view.Dialog",
-            //             controller: this,
-            //             content: new Text({ text: "Do you want to submit this order?" })
-            //         });
-            //     } 
-            //     this.pDialog.then(function(oDialog) {
-            //         oDialog.open();
-            //         oDialog.bindElement(oDishDescr.getBindingContext().getPath());
-            //     });
-            // },
-            
-            
-                _onRouteMatched: function () {
+
+
+            onAddPress: function(oEvent, oModel){
+                debugger;
+                let oDishDescr = oEvent.getSource();
+                if (!this.pDialog) {
+                    this.pDialog = Fragment.load({
+                        name: "intime.zint_lunch_reg.view.Add",
+                        controller: this,
+                        // stretch: true,
+                        
+                    });
+                } 
+                
+                this.pDialog.then(function(oDialog) {
+
+                    oDialog.setModel(oDishDescr.getModel());
+                    oDialog.setBindingContext(oDishDescr.getBindingContext());
+                    oDialog.open();
+                });
+                // var oContext = oModel.createEntry("/Z_MENU_MAIN_SET", {
+                //     properties : {DISH_TYPE: "", DISH_DESCR: "", DISH_COMPOSITION: ""}
+                // });
+                // onformdata.setBindingContext(oContext);
+
+                // oModel.submitChanges({success: mySuccessHandler, error: myErrorHandler});
+
+                // oContext.created().then(
+                //     function () {},
+                //     function () {}
+                // );
+                // oModel.resetChanges([oContext.getPath()], undefined, true);
 
                 
-
-                // this.getView().getModel().setDeferredBatchGroups([])
-
-                this._initDatePicker();
-
-                this._setFilters();
-
             },
+            onFormPress:function(oEvent){
+                debugger;
+                
+            },
+
+            _onRouteMatched: function () {
+                // this.getView().getModel().setDeferredBatchGroups([])
+                this._initDatePicker();
+                this._setFilters();
+            },
+
 
             onSelectDish: function (oEvent) {
 
                 this._changedTile = oEvent.getSource();
                 this._changedTile.setBusy(true);
-
                 this.submitChanges({
                     groupId: "changes",
                     success: function () {
@@ -91,35 +104,34 @@ sap.ui.define([
                         this._changedTile.setBusy(false);
                         this.showError(oError);
                     }.bind(this),
-
                 });
 
             },
+
+
             onCloseDialog : function (oEvent) {
                 debugger;
                 oEvent.getSource().getParent().close();
             },
 
+
             onDateChange: function () {
                 this._setFilters();
                 // const oDate = oEvent.getSource().getModel('date').getData().dateValue;
-
-
             },
+
 
             _initDatePicker: function () {
                 const oModel = new JSONModel();
                 oModel.setData({
                     dateValue: new Date()
                 });
-
                 this.getView().setModel(oModel, 'date');
             },
 
 
             _getFilters: function (sDishType) {
                 const aFilter = [];
-
                 this.getView().byId('DP1').getDateValue().setHours(3);
 
                 aFilter.push(new sap.ui.model.Filter({

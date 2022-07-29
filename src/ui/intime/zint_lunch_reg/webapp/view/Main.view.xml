@@ -24,17 +24,6 @@
                 ariaLabelledBy="editButtonLabel"/>
         </Toolbar>
 
-        <Dialog
-            id="helloDialog"
-            title="Заголовок">
-        <content>
-            <Text text="Тут контент"/>
-        </content>
-        <endButton>
-            <Button text="Закрыть" press="onCloseDialog"/>
-        </endButton>
-    </Dialog>
-
         <Panel id="panelForGridList"
             backgroundDesign="Transparent">
 
@@ -43,7 +32,8 @@
                     <Title text="Первые блюда" />
                     <ToolbarSpacer />
                     <Button icon="sap-icon://add"
-                        visible="{state>/adminMode}"/>
+                        visible="{state>/adminMode}"
+                        press="onAddPress"/>
                 </Toolbar>
             </headerToolbar>
 
@@ -56,6 +46,12 @@
                 detailPress="onDetailPress">
                 
                     <HBox class="sapUiSmallMargin">
+                    <f:Avatar
+						src="{/Speakers}"
+						displaySize="S"
+						displayShape="Square"
+						showBorder="true">
+					</f:Avatar>
                         <!-- <Avatar
 							src="{/Speakers}"
 							displaySize="S"
@@ -94,18 +90,28 @@
                 select="onSelectDish"
                 mode="MultiSelect">
                 <f:GridListItem selected="{DishChoosen}"
-                type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }">
-                    <VBox class="sapUiSmallMargin">
+                type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }"
+                detailPress="onDetailPress">
+                <HBox class="sapUiSmallMargin">
+                    <f:Avatar
+						src="{/Speakers}"
+						displaySize="S"
+						displayShape="Square"
+						showBorder="true">
+					</f:Avatar>
+                   
                         <layoutData>
                             <FlexItemData growFactor="1"
                                 shrinkFactor="0" />
                         </layoutData>
 
+                         <VBox class="sapUiSmallMargin">
                         <Title text="{DISH_DESCR}"
                             wrapping="true" />
                         <Label text="{DISH_COMPOSITION}"
                             wrapping="true" />
                     </VBox>
+                </HBox>
                 </f:GridListItem>
             </f:GridList>
         </Panel>
@@ -126,19 +132,30 @@
                 select="onSelectDish"
                 mode="MultiSelect">
                 <f:GridListItem selected="{DishChoosen}"
-                type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }">
 
-                    <VBox class="sapUiSmallMargin">
+                type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }"
+                detailPress="onDetailPress">
+
+               <HBox class="sapUiSmallMargin">
+                    <f:Avatar
+						src="{/Speakers}"
+						displaySize="S"
+						displayShape="Square"
+						showBorder="true">
+					</f:Avatar>
+
+                    
                         <layoutData>
                             <FlexItemData growFactor="1"
                                 shrinkFactor="0" />
                         </layoutData>
-
+                    <VBox class="sapUiSmallMargin">
                         <Title text="{DISH_DESCR}"
                             wrapping="true" />
                         <Label text="{DISH_COMPOSITION}"
                             wrapping="true" />
                     </VBox>
+                </HBox>
                 </f:GridListItem>
             </f:GridList>
         </Panel>
@@ -159,18 +176,28 @@
                 select="onSelectDish"
                 mode="MultiSelect">
                 <f:GridListItem selected="{DishChoosen}"
-                type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }">
-                    <VBox class="sapUiSmallMargin">
+                type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }"
+                detailPress="onDetailPress">
+                <HBox class="sapUiSmallMargin">
+                    <f:Avatar
+						src="{/Speakers}"
+						displaySize="S"
+						displayShape="Square"
+						showBorder="true">
+					</f:Avatar>
+                    
                         <layoutData>
                             <FlexItemData growFactor="1"
                                 shrinkFactor="0" />
                         </layoutData>
 
+                    <VBox class="sapUiSmallMargin">
                         <Title text="{DISH_DESCR}"
                             wrapping="true" />
                         <Label text="{DISH_COMPOSITION}"
                             wrapping="true" />
                     </VBox>
+                </HBox>
                 </f:GridListItem>
             </f:GridList>
         </Panel>
