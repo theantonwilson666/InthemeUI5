@@ -1,4 +1,4 @@
-<mvc:View controllerName="intime.zholiday_report.controller.App"
+<mvc:View controllerName="intime.zholiday_report.controller.Main"
 	xmlns:core="sap.ui.core"
 	xmlns:mvc="sap.ui.core.mvc"
 	displayBlock="true"
@@ -11,91 +11,85 @@
 	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
 	xmlns:smartTable="sap.ui.comp.smarttable"
 	xmlns:smartField="sap.ui.comp.smartfield">
-	<f:DynamicPage toggleHeaderOnTitleClick="true"
-		showFooter="false"
-		headerExpanded="true"
-		preserveHeaderStateOnScroll="true"
-		class="sapUiNoContentPadding">
-		<!-- <f:title>
-			<f:DynamicPageTitle>
-				<f:heading>
-					<sv:SmartVariantManagement id="workerPageVariant" persistencyKey="workerPage.PKey" showShare="true" showExecuteOnSelection="true"/>
-				</f:heading>
-				<f:actions>
-					<Button icon="sap-icon://monitor-payments" text="{i18n>BonusConfigButtonTitle}" visible="false" press="onOpenBonusSettingDialog" type="Emphasized"/>
-				</f:actions>
-			</f:DynamicPageTitle>
-		</f:title> -->
-		<f:header>
-			<f:DynamicPageHeader pinnable="false"
-				class="sapUiNoContentPadding">
-				<f:content>
-
-					<smartFilterBar:SmartFilterBar id="smartFilterBar"
-						entitySet="UserSet"
-						enableBasicSearch="false"
-						search="onSearch" />
-
-				</f:content>
-			</f:DynamicPageHeader>
-		</f:header>
-		<f:content>
-
-			<VBox height="100%">
-
-				<smartTable:SmartTable id="smartTable"
-					entitySet="UserSet"
-					visible="false"
-					smartFilterId="smartFilterBar"
-					tableType="Table"
-					useExportToExcel="true"
-					useVariantManagement="false"
-					useTablePersonalisation="true"
-					header="Line Items"
-					showRowCount="true">
-				</smartTable:SmartTable>
 
 
-				<PlanningCalendar id="PC1"
-					rows="{/UserSet}"
-					viewKey="nonWorking"
-					appointmentsVisualization="Filled"
-					appointmentSelect="handleAppointmentSelect"
-					showEmptyIntervalHeaders="false"
-					stickyHeader="true"
-					showWeekNumbers="true">
+	<Page title="Отпуска"
+		class="sapUiContentPadding"
+		id="_Holiday-Page">
 
-					<views>
-						<PlanningCalendarView id="quarter"
-							key="nonWorking"
-							intervalType="Month"
-							description="quarter view"
-							intervalsS="1"
-							intervalsM="3"
-							intervalsL="3">
-						</PlanningCalendarView>
-					</views>
+		<!-- <VBox height="100%" alignItems="Start" class="sapUiSmallMargin"> -->
 
-					<toolbarContent>
-						<Title text="Отчет о отпусках"
-							titleStyle="H4"/>
-					</toolbarContent>
-					<rows>
-						<PlanningCalendarRow title="{UserName}"
-							text="{PositionText}"
-							appointments="{path: 'toHolidays', templateShareable: false}">
-							<appointments>
-								<unified:CalendarAppointment startDate="{StartDate}"
-									endDate="{EndDate}"
-									title="{TypeText}"
-									text="тест"
-									type="Type01">
-								</unified:CalendarAppointment>
-							</appointments>
-						</PlanningCalendarRow>
-					</rows>
-				</PlanningCalendar>
-			</VBox>
-		</f:content>
-	</f:DynamicPage>
+
+
+		<!-- <ScrollContainer vertical="true" horizontal="false" focusable="false"> -->
+
+		<!-- <content> -->
+
+		<content>
+
+			<smartFilterBar:SmartFilterBar id="smartFilterBar"
+				entitySet="UserSet"
+				enableBasicSearch="false"
+				search="onSearch" />
+
+			<smartTable:SmartTable id="smartTable"
+				entitySet="UserSet"
+				visible="false"
+				smartFilterId="smartFilterBar"
+				tableType="Table"
+				useExportToExcel="true"
+				useVariantManagement="false"
+				useTablePersonalisation="true"
+				header="Line Items"
+				showRowCount="true">
+			</smartTable:SmartTable>
+
+
+			<PlanningCalendar id="PC1"
+				rows="{/UserSet}"
+				viewKey="nonWorking"
+				appointmentsVisualization="Filled"
+				appointmentSelect="handleAppointmentSelect"
+				showEmptyIntervalHeaders="false"
+				stickyHeader="true"
+				showWeekNumbers="true">
+
+				<views>
+					<PlanningCalendarView id="quarter"
+						key="nonWorking"
+						intervalType="Month"
+						description="quarter view"
+						intervalsS="1"
+						intervalsM="3"
+						intervalsL="3">
+					</PlanningCalendarView>
+				</views>
+				<rows>
+					<PlanningCalendarRow
+						id="PCRow"
+						title="{UserName}"
+						text="{PositionText}"
+						icon="{=${HasImage==true} ? 'ImgUrl' : 'sap-icon://SAP-icons-TNT/user'}"
+						appointments="{path: 'toHolidays', templateShareable: false}">
+						<appointments>
+							<unified:CalendarAppointment id="CA"
+							startDate="{StartDate}"
+								endDate="{EndDate}"
+								title="{TypeText}"
+								text="{path: 'StartDate', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true} } - {path: 'EndDate', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true} }"
+								type="Type01">
+							</unified:CalendarAppointment>
+						</appointments>
+					</PlanningCalendarRow>
+				</rows>
+			</PlanningCalendar>
+
+		</content>
+
+		<!-- </content> -->
+		<!-- </ScrollContainer> -->
+		<!-- </VBox> -->
+
+	</Page>
+
 </mvc:View>

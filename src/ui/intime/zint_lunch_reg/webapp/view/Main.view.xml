@@ -33,7 +33,7 @@
                     <ToolbarSpacer />
                     <Button icon="sap-icon://add"
                         visible="{state>/adminMode}"
-                        press="onDetailPress"/>
+                        press="onAddPress"/>
                 </Toolbar>
             </headerToolbar>
 
@@ -46,6 +46,12 @@
                 detailPress="onDetailPress">
                 
                     <HBox class="sapUiSmallMargin">
+                    <f:Avatar
+						src="{/Speakers}"
+						displaySize="S"
+						displayShape="Square"
+						showBorder="true">
+					</f:Avatar>
                         <!-- <Avatar
 							src="{/Speakers}"
 							displaySize="S"
@@ -86,17 +92,26 @@
                 <f:GridListItem selected="{DishChoosen}"
                 type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }"
                 detailPress="onDetailPress">
-                    <VBox class="sapUiSmallMargin">
+                <HBox class="sapUiSmallMargin">
+                    <f:Avatar
+						src="{/Speakers}"
+						displaySize="S"
+						displayShape="Square"
+						showBorder="true">
+					</f:Avatar>
+                   
                         <layoutData>
                             <FlexItemData growFactor="1"
                                 shrinkFactor="0" />
                         </layoutData>
 
+                         <VBox class="sapUiSmallMargin">
                         <Title text="{DISH_DESCR}"
                             wrapping="true" />
                         <Label text="{DISH_COMPOSITION}"
                             wrapping="true" />
                     </VBox>
+                </HBox>
                 </f:GridListItem>
             </f:GridList>
         </Panel>
@@ -117,24 +132,30 @@
                 select="onSelectDish"
                 mode="MultiSelect">
                 <f:GridListItem selected="{DishChoosen}"
-<<<<<<< HEAD
+
                 type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }"
                 detailPress="onDetailPress">
-=======
-                type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }">
->>>>>>> a27ca3d98b1e8b83fd9e446f30de56488b2e742b
 
-                    <VBox class="sapUiSmallMargin">
+               <HBox class="sapUiSmallMargin">
+                    <f:Avatar
+						src="{/Speakers}"
+						displaySize="S"
+						displayShape="Square"
+						showBorder="true">
+					</f:Avatar>
+
+                    
                         <layoutData>
                             <FlexItemData growFactor="1"
                                 shrinkFactor="0" />
                         </layoutData>
-
+                    <VBox class="sapUiSmallMargin">
                         <Title text="{DISH_DESCR}"
                             wrapping="true" />
                         <Label text="{DISH_COMPOSITION}"
                             wrapping="true" />
                     </VBox>
+                </HBox>
                 </f:GridListItem>
             </f:GridList>
         </Panel>
@@ -157,17 +178,26 @@
                 <f:GridListItem selected="{DishChoosen}"
                 type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }"
                 detailPress="onDetailPress">
-                    <VBox class="sapUiSmallMargin">
+                <HBox class="sapUiSmallMargin">
+                    <f:Avatar
+						src="{/Speakers}"
+						displaySize="S"
+						displayShape="Square"
+						showBorder="true">
+					</f:Avatar>
+                    
                         <layoutData>
                             <FlexItemData growFactor="1"
                                 shrinkFactor="0" />
                         </layoutData>
 
+                    <VBox class="sapUiSmallMargin">
                         <Title text="{DISH_DESCR}"
                             wrapping="true" />
                         <Label text="{DISH_COMPOSITION}"
                             wrapping="true" />
                     </VBox>
+                </HBox>
                 </f:GridListItem>
             </f:GridList>
         </Panel>

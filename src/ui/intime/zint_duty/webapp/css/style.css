@@ -1,3 +1,17 @@
-.Error{
+.Error {
     color: rgb(236, 0, 0);
+}
+
+
+/* .sapUiSizeCompact .sapMSPCMonthGrid .sapMSinglePCAppointmentWrap.sapUiCalendarRowApps .sapUiCalendarApp {
+    height: 2rem;
+} */
+
+.sapMSPCMonthGrid .sapUiCalendarAppIcon+.sapUiCalendarAppTitle,
+.sapMSPCMonthGrid .sapUiCalendarAppIcon+.sapUiCalendarAppTitle+.sapUiCalendarAppText {
+    padding-left: 3rem;
+}
+
+.HBOX {
+    padding-left: 95px;
 }
