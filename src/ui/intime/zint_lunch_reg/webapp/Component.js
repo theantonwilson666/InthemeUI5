@@ -25,6 +25,9 @@ sap.ui.define([
             this.getRouter().initialize();
 
             this.setModel(models.createDeviceModel(), "device");
+
+            this.setModel(models.createDishModel(), 'dish');
+
         }
     });
 });

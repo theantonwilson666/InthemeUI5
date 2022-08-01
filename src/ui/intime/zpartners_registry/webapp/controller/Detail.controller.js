@@ -113,6 +113,9 @@ sap.ui.define([
                                 controlType: "dropDownList"
                             })
                         })
+                        // .bindProperty('editable', {
+                        //     path: 'state>/editProjectMode'
+                        // })
 
                     ]
                 });
@@ -155,18 +158,8 @@ sap.ui.define([
 
             onEditAdminPress: function(oEvent) {
 
-                debugger;
-
                 this.setStateProperty("/editProjectMode", !this.getStateProperty("/editProjectMode"));
                 oEvent.getSource().getParent().getParent().setMode(this.getStateProperty("/editProjectMode") === true ? "Delete" : "None");
-
-                // {state>/editProjectMode}
-
-                // var oControlModel = oEvent.getSource().getModel("control");
-                // var oData = oControlModel.getData();
-                // oData.edit = !oData.edit;
-                // oControlModel.updateBindings(true);
-                // oEvent.getSource().setIcon(oData.edit === true ? "sap-icon://display" : "sap-icon://edit")
             },
 
 
@@ -232,6 +225,9 @@ sap.ui.define([
 
             onAddNewProjectButtonPress: function(oEvent) {
 
+                debugger;
+
+                this.getView().getModel().resetChanges();
 
                 this.getModel().callFunction("/GetCreatedProject", {
                     method: "POST",

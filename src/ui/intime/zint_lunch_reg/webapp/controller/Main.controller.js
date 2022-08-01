@@ -16,7 +16,7 @@ sap.ui.define([
             },
 
 
-            onGoToAdminModeButtonPress: function(){
+            onGoToAdminModeButtonPress: function () {
                 this.setStateProperty('/adminMode', !this.getStateProperty('/adminMode'));
             },
 
@@ -28,9 +28,9 @@ sap.ui.define([
                         name: "intime.zint_lunch_reg.view.Dialog",
                         controller: this,
                     });
-                } 
+                }
 
-                this.pDialog.then(function(oDialog) {
+                this.pDialog.then(function (oDialog) {
 
                     oDialog.setModel(oDishDescr.getModel());
                     oDialog.setBindingContext(oDishDescr.getBindingContext());
@@ -42,24 +42,33 @@ sap.ui.define([
             },
 
 
-            onAddPress: function(oEvent, oModel){
+            onAddPress: function (oEvent, oModel) {
                 debugger;
-                let oDishDescr = oEvent.getSource();
+                let oGridList = oEvent.getSource().getParent();
+
+                let sDishType = oGridList.getBindingContext('dish').getObject().typeId;
+
                 if (!this.pDialog) {
                     this.pDialog = Fragment.load({
-                        name: "intime.zint_lunch_reg.view.Add",
+                        name: "intime.zint_lunch_reg.view.Dialog",
                         controller: this,
                         // stretch: true,
-                        
-                    });
-                } 
-                
-                this.pDialog.then(function(oDialog) {
 
-                    oDialog.setModel(oDishDescr.getModel());
-                    oDialog.setBindingContext(oDishDescr.getBindingContext());
+                    });
+                }
+
+                this.pDialog.then(function (oDialog) {
+
+                    let oModel = this.getView().getModel();
+
+                    var oContext = oModel.createEntry("/ZSNN_EMP_MENU", {
+                        properties: { DISH_TYPE: sDishType, DISH_DESCR: "Новое блюдо", DISH_COMPOSITION: "" }
+                    });
+
+                    oDialog.setModel(oModel);
+                    oDialog.setBindingContext(oContext);
                     oDialog.open();
-                });
+                }.bind(this));
                 // var oContext = oModel.createEntry("/Z_MENU_MAIN_SET", {
                 //     properties : {DISH_TYPE: "", DISH_DESCR: "", DISH_COMPOSITION: ""}
                 // });
@@ -73,11 +82,11 @@ sap.ui.define([
                 // );
                 // oModel.resetChanges([oContext.getPath()], undefined, true);
 
-                
+
             },
-            onFormPress:function(oEvent){
+            onFormPress: function (oEvent) {
                 debugger;
-                
+
             },
 
             _onRouteMatched: function () {
@@ -94,7 +103,7 @@ sap.ui.define([
                 this.submitChanges({
                     groupId: "changes",
                     success: function () {
-                        
+
                         this._changedTile.setBusy(false);
                         this.isExistError()
 
@@ -109,7 +118,7 @@ sap.ui.define([
             },
 
 
-            onCloseDialog : function (oEvent) {
+            onCloseDialog: function (oEvent) {
                 debugger;
                 oEvent.getSource().getParent().close();
             },
@@ -151,17 +160,36 @@ sap.ui.define([
 
 
             _setFilters: function () {
-                //Первые блюда
-                this.byId('_Soup-GridList').getBinding('items').filter(this._getFilters('FC'));
 
-                //Горячее
-                this.byId('_Hot-GridList').getBinding('items').filter(this._getFilters('HD'));
+                let aPanels = this.byId('dishContainer').getItems();
 
-                //Гарнир
-                this.byId('_Garnish-GridList').getBinding('items').filter(this._getFilters('G'));
+                for (let i = 0; i < aPanels.length; i++) {
+                    let oGridList = aPanels[i].getContent()[0];
+                    oGridList.getBinding('items').filter(this._getFilters(oGridList.getBindingContext('dish').getObject().typeId));
+                }
 
-                //Закуски
-                this.byId('_Snacks-GridList').getBinding('items').filter(this._getFilters('ST'));
             },
+
+
+            onSaveButtonPress: function (oEvent) {
+                this.getView().setBusy(true);
+
+                this.submitChanges({
+                    groupId: "changes",
+                    success: function () {
+                        this.getView().setBusy(false);
+                        this.isExistError()
+
+                    }.bind(this),
+                    error: function (oError) {
+                        this.getView().setBusy(false);
+                        this.showError(oError);
+                    }.bind(this),
+                });
+            },
+
+            onRejectButtonPress: function (oEvent) {
+                this.getView().getModel().resetChanges();
+            }
         });
     });
