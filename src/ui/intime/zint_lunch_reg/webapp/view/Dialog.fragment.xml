@@ -33,7 +33,7 @@
       </content>
 
       <beginButton>
-         <Button text="Закрыть"
+         <Button text="Ок"
             press="onCloseDialog"/>
       </beginButton>
 

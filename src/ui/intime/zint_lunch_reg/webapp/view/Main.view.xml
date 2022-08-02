@@ -74,7 +74,10 @@
         <footer>
             <OverflowToolbar>
                 <ToolbarSpacer/>
-                <Button text="Сохранить"
+                <Button text="Применить"
+                    press="onApplyButtonPress"
+                    type="Accept" />
+                    <Button text="Сохранить"
                     press="onSaveButtonPress"
                     type="Accept" />
                 <Button text="Отменить"

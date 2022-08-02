@@ -188,6 +188,25 @@ sap.ui.define([
                 });
             },
 
+            onApplyButtonPress: function(){
+                this._changedTile = oEvent.getSource();
+                this._changedTile.setBusy(true);
+                this.submitChanges({
+                    groupId: "changes",
+                    success: function () {
+
+                        this._changedTile.setBusy(false);
+                        this.isExistError()
+
+                    }.bind(this),
+                    error: function (oError) {
+
+                        this._changedTile.setBusy(false);
+                        this.showError(oError);
+                    }.bind(this),
+                });
+            },
+
             onRejectButtonPress: function (oEvent) {
                 this.getView().getModel().resetChanges();
             }
