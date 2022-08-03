@@ -7,12 +7,12 @@
 		class="sapUiResponsivePadding--header sapUiResponsivePadding--footer"
 		placement="Bottom"
 		initialFocus="email">
-
+<content>
 		<Table id="idProductsTable"
 			inset="false"
-			items="{
-				path: './UserCrossing'
-			}">
+			width="100%"
+			items="{./UserCrossing}">
+			
 		<columns>
 			<Column
 				width="12em">
@@ -34,15 +34,19 @@
 				<cells>
 					<Text
 						text="{CrossingUserName}"/>
+						
 					<Text
 						text="{path: 'StartDate', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true} } - {path: 'EndDate', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true} }"/>
+				
 					<ObjectIdentifier
 						title="{BranchText}"
-						text="{PositionText}"/>
+						text="{PosiitionText}"/>
+		
 				</cells>
 			</ColumnListItem>
 		</items>
 		</Table>
+		</content>
 		<footer>
 			<OverflowToolbar>
 				<ToolbarSpacer/>
