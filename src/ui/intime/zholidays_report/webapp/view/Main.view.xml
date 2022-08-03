@@ -76,7 +76,9 @@
 							startDate="{StartDate}"
 								endDate="{EndDate}"
 								title="{TypeText}"
+
 								text="{path: 'StartDate', type:'sap.ui.model.type.Date', formatOptions: { format: 'Md',style: 'medium', strictParsing: true} } - {path: 'EndDate', type:'sap.ui.model.type.Date', formatOptions: { format: 'Md', style: 'medium', strictParsing: true} }"
+
 								type="Type01">
 							</unified:CalendarAppointment>
 						</appointments>
