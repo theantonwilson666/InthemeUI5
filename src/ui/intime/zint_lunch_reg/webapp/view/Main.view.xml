@@ -65,6 +65,16 @@
                                     wrapping="true" />
                             </VBox>
                         </HBox>
+
+
+                        <OverflowToolbar visible="{state>/adminMode}">
+                            <ToolbarSpacer />
+                            <Button 
+                                icon="sap-icon://delete"
+                                press="onDeleteDishButtonPress"
+                                type="Reject" />
+                        </OverflowToolbar>
+
                     </f:GridListItem>
                 </f:GridList>
             </Panel>

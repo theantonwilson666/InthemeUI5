@@ -1,26 +1,27 @@
 sap.ui.define([
-    "jira/lib/BaseController",
-    'sap/ui/model/json/JSONModel',
-    "sap/ui/core/Fragment"
-],
-    function (BaseController, JSONModel, Fragment) {
+        "jira/lib/BaseController",
+        'sap/ui/model/json/JSONModel',
+        "sap/ui/core/Fragment",
+        "sap/m/MessageBox"
+    ],
+    function(BaseController, JSONModel, Fragment, MessageBox) {
         "use strict";
 
 
         return BaseController.extend("intime.zint_lunch_reg.controller.Main", {
 
-            onInit: function () {
+            onInit: function() {
                 this.getRouter()
                     .getRoute("mainpage")
                     .attachPatternMatched(this._onRouteMatched, this)
             },
 
 
-            onGoToAdminModeButtonPress: function () {
+            onGoToAdminModeButtonPress: function() {
                 this.setStateProperty('/adminMode', !this.getStateProperty('/adminMode'));
             },
 
-            onDetailPress: function (oEvent) {
+            onDetailPress: function(oEvent) {
                 debugger;
                 let oDishDescr = oEvent.getSource();
                 if (!this.pDialog) {
@@ -30,7 +31,7 @@ sap.ui.define([
                     });
                 }
 
-                this.pDialog.then(function (oDialog) {
+                this.pDialog.then(function(oDialog) {
 
                     oDialog.setModel(oDishDescr.getModel());
                     oDialog.setBindingContext(oDishDescr.getBindingContext());
@@ -42,7 +43,7 @@ sap.ui.define([
             },
 
 
-            onAddPress: function (oEvent, oModel) {
+            onAddPress: function(oEvent, oModel) {
                 debugger;
                 let oGridList = oEvent.getSource().getParent();
 
@@ -57,7 +58,7 @@ sap.ui.define([
                     });
                 }
 
-                this.pDialog.then(function (oDialog) {
+                this.pDialog.then(function(oDialog) {
 
                     let oModel = this.getView().getModel();
 
@@ -84,31 +85,31 @@ sap.ui.define([
 
 
             },
-            onFormPress: function (oEvent) {
+            onFormPress: function(oEvent) {
                 debugger;
 
             },
 
-            _onRouteMatched: function () {
+            _onRouteMatched: function() {
                 // this.getView().getModel().setDeferredBatchGroups([])
                 this._initDatePicker();
                 this._setFilters();
             },
 
 
-            onSelectDish: function (oEvent) {
+            onSelectDish: function(oEvent) {
 
                 this._changedTile = oEvent.getSource();
                 this._changedTile.setBusy(true);
                 this.submitChanges({
                     groupId: "changes",
-                    success: function () {
+                    success: function() {
 
                         this._changedTile.setBusy(false);
                         this.isExistError()
 
                     }.bind(this),
-                    error: function (oError) {
+                    error: function(oError) {
 
                         this._changedTile.setBusy(false);
                         this.showError(oError);
@@ -118,19 +119,19 @@ sap.ui.define([
             },
 
 
-            onCloseDialog: function (oEvent) {
+            onCloseDialog: function(oEvent) {
                 debugger;
                 oEvent.getSource().getParent().close();
             },
 
 
-            onDateChange: function () {
+            onDateChange: function() {
                 this._setFilters();
                 // const oDate = oEvent.getSource().getModel('date').getData().dateValue;
             },
 
 
-            _initDatePicker: function () {
+            _initDatePicker: function() {
                 const oModel = new JSONModel();
                 oModel.setData({
                     dateValue: new Date()
@@ -139,7 +140,7 @@ sap.ui.define([
             },
 
 
-            _getFilters: function (sDishType) {
+            _getFilters: function(sDishType) {
                 const aFilter = [];
                 this.getView().byId('DP1').getDateValue().setHours(3);
 
@@ -159,7 +160,7 @@ sap.ui.define([
             },
 
 
-            _setFilters: function () {
+            _setFilters: function() {
 
                 let aPanels = this.byId('dishContainer').getItems();
 
@@ -171,25 +172,50 @@ sap.ui.define([
             },
 
 
-            onSaveButtonPress: function (oEvent) {
+            onSaveButtonPress: function(oEvent) {
                 this.getView().setBusy(true);
 
                 this.submitChanges({
                     groupId: "changes",
-                    success: function () {
+                    success: function() {
                         this.getView().setBusy(false);
                         this.isExistError()
 
                     }.bind(this),
-                    error: function (oError) {
+                    error: function(oError) {
                         this.getView().setBusy(false);
                         this.showError(oError);
                     }.bind(this),
                 });
             },
 
-            onRejectButtonPress: function (oEvent) {
+            onRejectButtonPress: function(oEvent) {
                 this.getView().getModel().resetChanges();
+            },
+
+
+            onDeleteDishButtonPress: function(oEvent) {
+                const sDish = oEvent.getSource().getBindingContext().getObject().DISH_DESCR;
+                const sPath = oEvent.getSource().getBindingContext().getPath();
+
+                this.getView().getModel().remove(sPath, {
+                    groupId: "changes"
+                })
+
+                debugger;
+
+                // MessageBox.warning(`Вы действительно хотите удалить блюдо - ${sDish}? `, {
+                //     actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
+                //     emphasizedAction: MessageBox.Action.OK,
+                //     onClose: sAction => {
+                //         if (sAction === 'OK') {
+                //             this.getView().getModel().remove(sPath, {
+                //                 groupId: "changes"
+                //             })
+                //         }
+                //     }
+                // });
+
             }
         });
     });
