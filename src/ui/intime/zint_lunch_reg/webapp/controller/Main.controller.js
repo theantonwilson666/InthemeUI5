@@ -45,9 +45,9 @@ sap.ui.define([
 
             onAddPress: function(oEvent, oModel) {
                 debugger;
-                let oGridList = oEvent.getSource().getParent();
+                this._oToolbar = oEvent.getSource().getParent();
 
-                let sDishType = oGridList.getBindingContext('dish').getObject().typeId;
+                let sDishType = this._oToolbar.getBindingContext('dish').getObject().typeId;
 
                 if (!this.pDialog) {
                     this.pDialog = Fragment.load({
@@ -63,7 +63,7 @@ sap.ui.define([
                     let oModel = this.getView().getModel();
 
                     var oContext = oModel.createEntry("/ZSNN_EMP_MENU", {
-                        properties: { DISH_TYPE: sDishType, DISH_DESCR: "Новое блюдо", DISH_COMPOSITION: "" }
+                        properties: { DISH_TYPE: sDishType, DISH_DESCR: "Новое блюдо", DISH_COMPOSITION: "", BranchId: "02", BranchText: "Чебоксары" }
                     });
 
                     oDialog.setModel(oModel);
@@ -119,8 +119,62 @@ sap.ui.define([
             },
 
 
+            onOKButtonPress: function(oEvent) {
+
+                const oGridList = this._oToolbar.getParent().getContent()[0];
+
+                // oGridList.addItem(new sap.f.GridListItem({
+                //     type: "Inactive",
+                //     content: [
+                //         new sap.m.HBox({
+                //             items : [
+
+                //             ]
+                //         }).addStyleClass('sapUiSmallMargin')
+                //     ]
+                // }));
+
+
+                // <f:GridListItem selected="{DishChoosen}"
+                //         type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }"
+                //         detailPress="onDetailPress">
+
+                //         <HBox class="sapUiSmallMargin">
+                //             <f:Avatar src="{/Speakers}"
+                //                 displaySize="S"
+                //                 displayShape="Square"
+                //                 showBorder="true">
+                //             </f:Avatar>
+                //             <layoutData>
+                //                 <FlexItemData growFactor="1"
+                //                     shrinkFactor="0" />
+                //             </layoutData>
+
+                //             <VBox class="sapUiSmallMargin">
+                //                 <Title text="{DISH_DESCR}"
+                //                     wrapping="true" />
+                //                 <Label text="{DISH_COMPOSITION}"
+                //                     wrapping="true" />
+                //             </VBox>
+                //         </HBox>
+
+
+                //         <OverflowToolbar visible="{state>/adminMode}">
+                //             <ToolbarSpacer />
+                //             <Button 
+                //                 icon="sap-icon://delete"
+                //                 press="onDeleteDishButtonPress"
+                //                 type="Reject" />
+                //         </OverflowToolbar>
+
+                //     </f:GridListItem>
+
+                oEvent.getSource().getParent().close();
+
+            },
+
             onCloseDialog: function(oEvent) {
-                debugger;
+                oEvent.getSource().getModel().resetChanges([oEvent.getSource().getBindingContext().getPath()], undefined, true);
                 oEvent.getSource().getParent().close();
             },
 
@@ -191,6 +245,7 @@ sap.ui.define([
 
             onRejectButtonPress: function(oEvent) {
                 this.getView().getModel().resetChanges();
+                this.onGoToAdminModeButtonPress();
             },
 
 
@@ -198,23 +253,21 @@ sap.ui.define([
                 const sDish = oEvent.getSource().getBindingContext().getObject().DISH_DESCR;
                 const sPath = oEvent.getSource().getBindingContext().getPath();
 
-                this.getView().getModel().remove(sPath, {
-                    groupId: "changes"
-                })
+                const oGridListItem = oEvent.getSource().getParent().getParent();
 
-                debugger;
+                MessageBox.warning(`Вы действительно хотите удалить блюдо - ${sDish}? `, {
+                    actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
+                    emphasizedAction: MessageBox.Action.OK,
+                    onClose: sAction => {
+                        if (sAction === 'OK') {
+                            this.getView().getModel().remove(sPath, {
+                                groupId: "changes"
+                            })
+                            oGridListItem.addStyleClass('DeletedDish');
 
-                // MessageBox.warning(`Вы действительно хотите удалить блюдо - ${sDish}? `, {
-                //     actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
-                //     emphasizedAction: MessageBox.Action.OK,
-                //     onClose: sAction => {
-                //         if (sAction === 'OK') {
-                //             this.getView().getModel().remove(sPath, {
-                //                 groupId: "changes"
-                //             })
-                //         }
-                //     }
-                // });
+                        }
+                    }
+                });
 
             }
         });

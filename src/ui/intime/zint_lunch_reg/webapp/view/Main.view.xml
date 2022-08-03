@@ -28,7 +28,7 @@
         <VBox id="dishContainer"
             items="{dish>/dishType}">
 
-            <Panel backgroundDesign="Transparent">
+            <Panel backgroundDesign="Transparent" width="100%">
 
                 <headerToolbar>
                     <Toolbar height="3rem">
