@@ -69,14 +69,14 @@
 						id="PCRow"
 						title="{UserName}"
 						text="{PositionText}"
-						icon="{=${HasImage==true} ? 'ImgUrl' : 'sap-icon://SAP-icons-TNT/user'}"
+						icon="{=${HasImage=='true'} ? 'ImgUrl' : 'sap-icon://SAP-icons-TNT/user'}"
 						appointments="{path: 'toHolidays', templateShareable: false}">
 						<appointments>
 							<unified:CalendarAppointment id="CA"
 							startDate="{StartDate}"
 								endDate="{EndDate}"
 								title="{TypeText}"
-								text="{path: 'StartDate', type:'sap.ui.model.type.Date', formatOptions: { style: 'short', strictParsing: true} }-{path: 'EndDate', type:'sap.ui.model.type.Date', formatOptions: { style: 'short', strictParsing: true} }"
+								text="{path: 'StartDate', type:'sap.ui.model.type.Date', formatOptions: { format: 'Md',style: 'medium', strictParsing: true} } - {path: 'EndDate', type:'sap.ui.model.type.Date', formatOptions: { format: 'Md', style: 'medium', strictParsing: true} }"
 								type="Type01">
 							</unified:CalendarAppointment>
 						</appointments>

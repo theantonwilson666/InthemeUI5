@@ -263,7 +263,6 @@ module.exports = function(grunt) {
                     appresources: "src",
                     resources: "C:/work/ui5_resources/sap-ui5-1.71.44/resources",
                     testresources: "C:/work/ui5_resources/sap-ui5-1.71.44/test-resources",
-
                     proxypath: "proxy",
                 },
             },
