@@ -16,11 +16,10 @@
 			<OverflowToolbar>
 				<ToolbarSpacer/>
 				<Button
-					id="email"
-					text="Email"
-					press="handleEmailPress" />
+					id="close"
+					text="Close"
+					press="handleClosePress" />
 			</OverflowToolbar>
 		</footer>
-		<Image src="{ProductPicUrl}" width="15em" densityAware="false" />
 	</Popover>
 </core:FragmentDefinition>
