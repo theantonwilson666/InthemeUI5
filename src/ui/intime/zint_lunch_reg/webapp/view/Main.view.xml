@@ -43,7 +43,9 @@
                 <f:GridList items="{/ZSNN_EMP_MENU}"
                     select="onSelectDish"
                     mode="MultiSelect">
-                    <f:GridListItem selected="{DishChoosen}"
+                    <f:GridListItem 
+                        id = "GridListItem"
+                        selected="{DishChoosen}"
                         type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }"
                         detailPress="onDetailPress">
 
@@ -65,6 +67,13 @@
                                     wrapping="true" />
                             </VBox>
                         </HBox>
+                          <OverflowToolbar visible="{state>/adminMode}">
+                            <ToolbarSpacer />
+                            <Button 
+                                icon="sap-icon://delete"
+                                press="onDeleteDishButtonPress"
+                                type="Reject" />
+                        </OverflowToolbar>
                     </f:GridListItem>
                 </f:GridList>
             </Panel>

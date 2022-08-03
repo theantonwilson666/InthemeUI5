@@ -1,10 +1,11 @@
 sap.ui.define([
     "jira/lib/BaseController",
     'sap/ui/model/json/JSONModel',
-    "sap/ui/core/Fragment"
+    "sap/ui/core/Fragment",
+    "sap/m/MessageBox"
 ],
-    function (BaseController, JSONModel, Fragment) {
-        "use strict";
+function(BaseController, JSONModel, Fragment, MessageBox) {
+    "use strict";
 
 
         return BaseController.extend("intime.zint_lunch_reg.controller.Main", {
@@ -209,6 +210,38 @@ sap.ui.define([
 
             onRejectButtonPress: function (oEvent) {
                 this.getView().getModel().resetChanges();
+            },
+        
+    onDeleteDishButtonPress: function(oEvent) {
+       
+        const sPath = oEvent.getSource().getBindingContext().getPath();
+        const sDish = oEvent.getSource().getBindingContext().getObject().DISH_DESCR;
+
+        this.getView().getModel().remove(sPath, {
+            groupId: "changes"
+        })
+
+        debugger;
+
+        MessageBox.warning(`Вы действительно хотите удалить блюдо - ${sDish}? `, {
+            actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
+            emphasizedAction: MessageBox.Action.OK,
+
+            onClose: sAction => {
+                debugger;
+                if (sAction === 'OK') {
+                    this.getView().getModel().remove(sPath, {
+                        groupId: "changes",
+                       
+                    });
+                    debugger;
+                    // this.byId("GridListItem").setHighlight("Indication07");
+                    debugger;
+                }
             }
         });
-    });
+       
+
+    }
+});
+});
