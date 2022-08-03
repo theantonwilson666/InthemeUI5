@@ -8,7 +8,10 @@
 		placement="Bottom"
 		initialFocus="email">
 
-		<Text text="Test"/>
+		<VBox items="{./UserCrossing}">
+			<Text text="{CrossingUserID}"/>
+		</VBox>
+
 		<footer>
 			<OverflowToolbar>
 				<ToolbarSpacer/>
