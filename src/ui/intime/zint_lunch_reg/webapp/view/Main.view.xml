@@ -24,163 +24,61 @@
                 ariaLabelledBy="editButtonLabel"/>
         </Toolbar>
 
-        <Dialog
-            id="helloDialog"
-            title="Заголовок">
-        <content>
-            <Text text="Тут контент"/>
-        </content>
-        <endButton>
-            <Button text="Закрыть" press="onCloseDialog"/>
-        </endButton>
-    </Dialog>
 
-        <Panel id="panelForGridList"
-            backgroundDesign="Transparent">
+        <VBox id="dishContainer"
+            items="{dish>/dishType}">
 
-            <headerToolbar>
-                <Toolbar height="3rem">
-                    <Title text="Первые блюда" />
-                    <ToolbarSpacer />
-                    <Button icon="sap-icon://add"
-                        visible="{state>/adminMode}"/>
-                </Toolbar>
-            </headerToolbar>
+            <Panel backgroundDesign="Transparent">
 
-            <f:GridList id="_Soup-GridList"
-                items="{/ZSNN_EMP_MENU}"
-                select="onSelectDish"
-                mode="MultiSelect"
-                >
-                <f:GridListItem selected="{DishChoosen}" type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }"
-                detailPress="onDetailPress">
-                
-                    <HBox class="sapUiSmallMargin">
-                        <!-- <Avatar
-							src="{/Speakers}"
-							displaySize="S"
-							displayShape="Square"
-							showBorder="true"/> -->
-                        <layoutData>
-                            <FlexItemData growFactor="1"
-                                shrinkFactor="0" />
-                        </layoutData>
+                <headerToolbar>
+                    <Toolbar height="3rem">
+                        <Title text="{dish>typeText}" />
+                        <ToolbarSpacer />
+                        <Button icon="sap-icon://add"
+                            visible="{state>/adminMode}"
+                            press="onAddPress"/>
+                    </Toolbar>
+                </headerToolbar>
 
-                        <VBox class="sapUiSmallMargin">
-                        <Title text="{DISH_DESCR}"
-                            wrapping="true" />
-                        <Label text="{DISH_COMPOSITION}"
-                            wrapping="true" />
+                <f:GridList items="{/ZSNN_EMP_MENU}"
+                    select="onSelectDish"
+                    mode="MultiSelect">
+                    <f:GridListItem selected="{DishChoosen}"
+                        type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }"
+                        detailPress="onDetailPress">
+
+                        <HBox class="sapUiSmallMargin">
+                            <f:Avatar src="{/Speakers}"
+                                displaySize="S"
+                                displayShape="Square"
+                                showBorder="true">
+                            </f:Avatar>
+                            <layoutData>
+                                <FlexItemData growFactor="1"
+                                    shrinkFactor="0" />
+                            </layoutData>
+
+                            <VBox class="sapUiSmallMargin">
+                                <Title text="{DISH_DESCR}"
+                                    wrapping="true" />
+                                <Label text="{DISH_COMPOSITION}"
+                                    wrapping="true" />
                             </VBox>
-                    </HBox>
-                </f:GridListItem>
-            </f:GridList>
-        </Panel>
+                        </HBox>
+                    </f:GridListItem>
+                </f:GridList>
+            </Panel>
 
-
-        <Panel id="panelForGridList2"
-            backgroundDesign="Transparent">
-            <headerToolbar>
-                <Toolbar height="3rem">
-                    <Title text="Горячее" />
-                    <ToolbarSpacer />
-                    <Button icon="sap-icon://add"
-                        visible="{state>/adminMode}"/>
-                </Toolbar>
-            </headerToolbar>
-
-            <f:GridList id="_Hot-GridList"
-                items="{/ZSNN_EMP_MENU}"
-                select="onSelectDish"
-                mode="MultiSelect">
-                <f:GridListItem selected="{DishChoosen}"
-                type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }">
-                    <VBox class="sapUiSmallMargin">
-                        <layoutData>
-                            <FlexItemData growFactor="1"
-                                shrinkFactor="0" />
-                        </layoutData>
-
-                        <Title text="{DISH_DESCR}"
-                            wrapping="true" />
-                        <Label text="{DISH_COMPOSITION}"
-                            wrapping="true" />
-                    </VBox>
-                </f:GridListItem>
-            </f:GridList>
-        </Panel>
-
-        <Panel id="panelForGridList3"
-            backgroundDesign="Transparent">
-            <headerToolbar>
-                <Toolbar height="3rem">
-                    <Title text="Гарнир" />
-                    <ToolbarSpacer />
-                    <Button icon="sap-icon://add"
-                        visible="{state>/adminMode}"/>
-                </Toolbar>
-            </headerToolbar>
-
-            <f:GridList id="_Garnish-GridList"
-                items="{/ZSNN_EMP_MENU}"
-                select="onSelectDish"
-                mode="MultiSelect">
-                <f:GridListItem selected="{DishChoosen}"
-                type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }">
-
-                    <VBox class="sapUiSmallMargin">
-                        <layoutData>
-                            <FlexItemData growFactor="1"
-                                shrinkFactor="0" />
-                        </layoutData>
-
-                        <Title text="{DISH_DESCR}"
-                            wrapping="true" />
-                        <Label text="{DISH_COMPOSITION}"
-                            wrapping="true" />
-                    </VBox>
-                </f:GridListItem>
-            </f:GridList>
-        </Panel>
-
-        <Panel id="panelForGridList4"
-            backgroundDesign="Transparent">
-            <headerToolbar>
-                <Toolbar height="3rem">
-                    <Title text="Закуски" />
-                    <ToolbarSpacer />
-                    <Button icon="sap-icon://add"
-                        visible="{state>/adminMode}"/>
-                </Toolbar>
-            </headerToolbar>
-
-            <f:GridList id="_Snacks-GridList"
-                items="{/ZSNN_EMP_MENU}"
-                select="onSelectDish"
-                mode="MultiSelect">
-                <f:GridListItem selected="{DishChoosen}"
-                type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }">
-                    <VBox class="sapUiSmallMargin">
-                        <layoutData>
-                            <FlexItemData growFactor="1"
-                                shrinkFactor="0" />
-                        </layoutData>
-
-                        <Title text="{DISH_DESCR}"
-                            wrapping="true" />
-                        <Label text="{DISH_COMPOSITION}"
-                            wrapping="true" />
-                    </VBox>
-                </f:GridListItem>
-            </f:GridList>
-        </Panel>
+        </VBox>
 
         <footer>
             <OverflowToolbar>
                 <ToolbarSpacer/>
                 <Button text="Сохранить"
+                    press="onSaveButtonPress"
                     type="Accept" />
                 <Button text="Отменить"
+                    press="onRejectButtonPress"
                     type="Reject" />
             </OverflowToolbar>
         </footer>
