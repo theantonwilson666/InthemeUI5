@@ -249,9 +249,6 @@ sap.ui.define([
             onSaveButtonPress: function (oEvent) {
                 this.getView().setBusy(true);
 
-
-                debugger;
-
                 this.fileSaveProcessHandling().then(() => {
                     this.submitChanges({
                         groupId: "changes",
