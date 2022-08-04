@@ -1,29 +1,29 @@
 sap.ui.define([
 
-        "jira/lib/BaseController",
-        'sap/ui/model/json/JSONModel',
-        "sap/ui/core/Fragment",
-        "sap/m/MessageBox"
-    ],
-    function(BaseController, JSONModel, Fragment, MessageBox) {
+    "jira/lib/BaseController",
+    'sap/ui/model/json/JSONModel',
+    "sap/ui/core/Fragment",
+    "sap/m/MessageBox"
+],
+    function (BaseController, JSONModel, Fragment, MessageBox) {
         "use strict";
 
 
 
         return BaseController.extend("intime.zint_lunch_reg.controller.Main", {
 
-            onInit: function() {
+            onInit: function () {
                 this.getRouter()
                     .getRoute("mainpage")
                     .attachPatternMatched(this._onRouteMatched, this)
             },
 
 
-            onGoToAdminModeButtonPress: function() {
+            onGoToAdminModeButtonPress: function () {
                 this.setStateProperty('/adminMode', !this.getStateProperty('/adminMode'));
             },
 
-            onDetailPress: function(oEvent) {
+            onDetailPress: function (oEvent) {
                 debugger;
                 let oDishDescr = oEvent.getSource();
                 if (!this.pDialog) {
@@ -33,7 +33,7 @@ sap.ui.define([
                     });
                 }
 
-                this.pDialog.then(function(oDialog) {
+                this.pDialog.then(function (oDialog) {
 
                     oDialog.setModel(oDishDescr.getModel());
                     oDialog.setBindingContext(oDishDescr.getBindingContext());
@@ -46,7 +46,7 @@ sap.ui.define([
 
 
 
-            onAddPress: function(oEvent, oModel) {
+            onAddPress: function (oEvent, oModel) {
                 debugger;
                 this._oToolbar = oEvent.getSource().getParent();
 
@@ -62,7 +62,7 @@ sap.ui.define([
                     });
                 }
 
-                this.pDialog.then(function(oDialog) {
+                this.pDialog.then(function (oDialog) {
 
                     let oModel = this.getView().getModel();
 
@@ -89,31 +89,40 @@ sap.ui.define([
 
 
             },
-            onFormPress: function(oEvent) {
+            onFormPress: function (oEvent) {
                 debugger;
 
             },
 
-            _onRouteMatched: function() {
+            onFileUploadChange: function (oEvent) {
+                debugger;
+
+                const aFileOnSave = this.getStateProperty('/_createImg');
+                aFileOnSave.push(oEvent.getSource());
+
+                this.setStateProperty('/_createImg', aFileOnSave);
+            },
+
+            _onRouteMatched: function () {
                 // this.getView().getModel().setDeferredBatchGroups([])
                 this._initDatePicker();
                 this._setFilters();
             },
 
 
-            onSelectDish: function(oEvent) {
+            onSelectDish: function (oEvent) {
 
                 this._changedTile = oEvent.getSource();
                 this._changedTile.setBusy(true);
                 this.submitChanges({
                     groupId: "changes",
-                    success: function() {
+                    success: function () {
 
                         this._changedTile.setBusy(false);
                         this.isExistError()
 
                     }.bind(this),
-                    error: function(oError) {
+                    error: function (oError) {
 
                         this._changedTile.setBusy(false);
                         this.showError(oError);
@@ -123,73 +132,24 @@ sap.ui.define([
             },
 
 
-            onOKButtonPress: function(oEvent) {
-
-                //const oGridList = this._oToolbar.getParent().getContent()[0];
-
-                // oGridList.addItem(new sap.f.GridListItem({
-                //     type: "Inactive",
-                //     content: [
-                //         new sap.m.HBox({
-                //             items : [
-
-                //             ]
-                //         }).addStyleClass('sapUiSmallMargin')
-                //     ]
-                // }));
-
-
-                // <f:GridListItem selected="{DishChoosen}"
-                //         type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }"
-                //         detailPress="onDetailPress">
-
-                //         <HBox class="sapUiSmallMargin">
-                //             <f:Avatar src="{/Speakers}"
-                //                 displaySize="S"
-                //                 displayShape="Square"
-                //                 showBorder="true">
-                //             </f:Avatar>
-                //             <layoutData>
-                //                 <FlexItemData growFactor="1"
-                //                     shrinkFactor="0" />
-                //             </layoutData>
-
-                //             <VBox class="sapUiSmallMargin">
-                //                 <Title text="{DISH_DESCR}"
-                //                     wrapping="true" />
-                //                 <Label text="{DISH_COMPOSITION}"
-                //                     wrapping="true" />
-                //             </VBox>
-                //         </HBox>
-
-
-                //         <OverflowToolbar visible="{state>/adminMode}">
-                //             <ToolbarSpacer />
-                //             <Button 
-                //                 icon="sap-icon://delete"
-                //                 press="onDeleteDishButtonPress"
-                //                 type="Reject" />
-                //         </OverflowToolbar>
-
-                //     </f:GridListItem>
-
+            onOKButtonPress: function (oEvent) {
                 oEvent.getSource().getParent().close();
 
             },
 
-            onCloseDialog: function(oEvent) {
+            onCloseDialog: function (oEvent) {
                 oEvent.getSource().getModel().resetChanges([oEvent.getSource().getBindingContext().getPath()], undefined, true);
                 oEvent.getSource().getParent().close();
             },
 
 
-            onDateChange: function() {
+            onDateChange: function () {
                 this._setFilters();
                 // const oDate = oEvent.getSource().getModel('date').getData().dateValue;
             },
 
 
-            _initDatePicker: function() {
+            _initDatePicker: function () {
                 const oModel = new JSONModel();
                 oModel.setData({
                     dateValue: new Date()
@@ -198,7 +158,7 @@ sap.ui.define([
             },
 
 
-            _getFilters: function(sDishType) {
+            _getFilters: function (sDishType) {
                 const aFilter = [];
                 this.getView().byId('DP1').getDateValue().setHours(3);
 
@@ -218,7 +178,7 @@ sap.ui.define([
             },
 
 
-            _setFilters: function() {
+            _setFilters: function () {
 
                 let aPanels = this.byId('dishContainer').getItems();
 
@@ -230,31 +190,95 @@ sap.ui.define([
             },
 
 
-            onSaveButtonPress: function(oEvent) {
-                this.getView().setBusy(true);
+            fileSaveProcessHandling: function () {
+                return new Promise((res, rej) => {
+                    const aFileOnSave = this.getStateProperty('/_createImg');
 
-                this.submitChanges({
-                    groupId: "changes",
-                    success: function() {
-                        this.getView().setBusy(false);
-                        this.isExistError()
+                    if (aFileOnSave) {
 
-                    }.bind(this),
-                    error: function(oError) {
-                        this.getView().setBusy(false);
-                        this.showError(oError);
-                    }.bind(this),
+                        const aPromises = [];
+
+                        for (let i = 0; i < aFileOnSave.length; i++) {
+                            const oFile = aFileOnSave[i].getFocusDomRef().files[0];
+                            const oDishData = aFileOnSave[i].getBindingContext().getObject();
+
+                            if (oFile) {
+                                aPromises.push(this.saveImg(oFile, oDishData));
+                            }
+                        }
+
+                        Promise.all(aPromises).then(() => {
+                            res(true);
+                        });
+
+
+                    } else {
+                        res(true)
+                    }
                 });
             },
 
+            saveImg: function (oFile, oDishData) {
+                return new Promise((res, rej) => {
+                    var oReader = new FileReader();
+                    oReader.onload = e => {
 
-            onRejectButtonPress: function(oEvent) {
+                        var vContent = e.currentTarget.result.replace(
+                            "data:" + oFile.type + ";base64,",
+                            ""
+                        );
+
+                        this.getView().getModel().createEntry("/DishImgSet", {
+                            groupId: "changes",
+                            properties: {
+                                DishID: oDishData.DISH_ID,
+                                BranchID: oDishData.BranchId,
+                                ImgContent: vContent,
+                                MimeCode: oFile.type
+                            }
+                        });
+
+                        res(true);
+                    }
+
+                    oReader.readAsDataURL(oFile);
+                });
+
+            },
+
+            onSaveButtonPress: function (oEvent) {
+                this.getView().setBusy(true);
+
+
+                debugger;
+
+                this.fileSaveProcessHandling().then(() => {
+                    this.submitChanges({
+                        groupId: "changes",
+                        success: function () {
+                            this.getView().setBusy(false);
+                            this.isExistError();
+
+                            this._postDeleteHandling();
+
+                        }.bind(this),
+                        error: function (oError) {
+                            this.getView().setBusy(false);
+                            this.showError(oError);
+                        }.bind(this),
+                    });
+                });
+
+            },
+
+
+            onRejectButtonPress: function (oEvent) {
                 this.getView().getModel().resetChanges();
                 this.onGoToAdminModeButtonPress();
             },
 
 
-            onDeleteDishButtonPress: function(oEvent) {
+            onDeleteDishButtonPress: function (oEvent) {
                 const sDish = oEvent.getSource().getBindingContext().getObject().DISH_DESCR;
                 const sPath = oEvent.getSource().getBindingContext().getPath();
 
@@ -270,13 +294,30 @@ sap.ui.define([
                             })
                             oGridListItem.addStyleClass('DeletedDish');
 
+                            this._addDeletedDishes(oGridListItem);
+
                         }
                     }
                 });
 
+            },
 
+            _addDeletedDishes: function (oDelDish) {
+                const aDelDishes = this.getStateProperty('/_preDeletedDishes');
+                aDelDishes.push(oDelDish);
+                this.setStateProperty('/_preDeletedDishes', aDelDishes);
+            },
+
+            _postDeleteHandling: function () {
+                const aDelDishes = this.getStateProperty('/_preDeletedDishes');
+
+                aDelDishes.forEach(oDish => {
+                    oDish.removeStyleClass('DeletedDish');
+                });
+
+                this.setStateProperty('/_preDeletedDishes', []);
             }
         });
-       
+
 
     })
