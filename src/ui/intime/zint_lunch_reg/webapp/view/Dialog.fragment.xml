@@ -40,12 +40,14 @@
       </content>
 
       <beginButton>
+
          <Button text="OK"
             press="onOKButtonPress"/>
       </beginButton>
 
       <endButton>
          <Button text="Закрыть"
+
             press="onCloseDialog"/>
       </endButton>
 

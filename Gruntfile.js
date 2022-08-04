@@ -261,8 +261,10 @@ module.exports = function(grunt) {
             server: {
                 options: {
                     appresources: "src",
+
                     resources: "C:/ui5/resources",
                     testresources: "C:/ui5/test-resources",
+
                     proxypath: "proxy",
                 },
             },

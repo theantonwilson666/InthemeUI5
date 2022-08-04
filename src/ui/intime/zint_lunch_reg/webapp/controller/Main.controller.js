@@ -1,4 +1,5 @@
 sap.ui.define([
+
         "jira/lib/BaseController",
         'sap/ui/model/json/JSONModel',
         "sap/ui/core/Fragment",
@@ -6,6 +7,7 @@ sap.ui.define([
     ],
     function(BaseController, JSONModel, Fragment, MessageBox) {
         "use strict";
+
 
 
         return BaseController.extend("intime.zint_lunch_reg.controller.Main", {
@@ -43,9 +45,11 @@ sap.ui.define([
             },
 
 
+
             onAddPress: function(oEvent, oModel) {
                 debugger;
                 this._oToolbar = oEvent.getSource().getParent();
+
 
                 let sDishType = this._oToolbar.getBindingContext('dish').getObject().typeId;
 
@@ -243,6 +247,7 @@ sap.ui.define([
                 });
             },
 
+
             onRejectButtonPress: function(oEvent) {
                 this.getView().getModel().resetChanges();
                 this.onGoToAdminModeButtonPress();
@@ -269,6 +274,11 @@ sap.ui.define([
                     }
                 });
 
+
             }
         });
-    });
+       
+
+    }
+});
+});
