@@ -1,27 +1,29 @@
 sap.ui.define([
-    "jira/lib/BaseController",
-    'sap/ui/model/json/JSONModel',
-    "sap/ui/core/Fragment",
-    "sap/m/MessageBox"
-],
-function(BaseController, JSONModel, Fragment, MessageBox) {
-    "use strict";
+
+        "jira/lib/BaseController",
+        'sap/ui/model/json/JSONModel',
+        "sap/ui/core/Fragment",
+        "sap/m/MessageBox"
+    ],
+    function(BaseController, JSONModel, Fragment, MessageBox) {
+        "use strict";
+
 
 
         return BaseController.extend("intime.zint_lunch_reg.controller.Main", {
 
-            onInit: function () {
+            onInit: function() {
                 this.getRouter()
                     .getRoute("mainpage")
                     .attachPatternMatched(this._onRouteMatched, this)
             },
 
 
-            onGoToAdminModeButtonPress: function () {
+            onGoToAdminModeButtonPress: function() {
                 this.setStateProperty('/adminMode', !this.getStateProperty('/adminMode'));
             },
 
-            onDetailPress: function (oEvent) {
+            onDetailPress: function(oEvent) {
                 debugger;
                 let oDishDescr = oEvent.getSource();
                 if (!this.pDialog) {
@@ -31,7 +33,7 @@ function(BaseController, JSONModel, Fragment, MessageBox) {
                     });
                 }
 
-                this.pDialog.then(function (oDialog) {
+                this.pDialog.then(function(oDialog) {
 
                     oDialog.setModel(oDishDescr.getModel());
                     oDialog.setBindingContext(oDishDescr.getBindingContext());
@@ -43,11 +45,13 @@ function(BaseController, JSONModel, Fragment, MessageBox) {
             },
 
 
-            onAddPress: function (oEvent, oModel) {
-                // debugger;
-                let oGridList = oEvent.getSource().getParent();
 
-                let sDishType = oGridList.getBindingContext('dish').getObject().typeId;
+            onAddPress: function(oEvent, oModel) {
+                debugger;
+                this._oToolbar = oEvent.getSource().getParent();
+
+
+                let sDishType = this._oToolbar.getBindingContext('dish').getObject().typeId;
 
                 if (!this.pDialog) {
                     this.pDialog = Fragment.load({
@@ -58,12 +62,12 @@ function(BaseController, JSONModel, Fragment, MessageBox) {
                     });
                 }
 
-                this.pDialog.then(function (oDialog) {
+                this.pDialog.then(function(oDialog) {
 
                     let oModel = this.getView().getModel();
 
                     var oContext = oModel.createEntry("/ZSNN_EMP_MENU", {
-                        properties: { DISH_TYPE: sDishType, DISH_DESCR: "Новое блюдо", DISH_COMPOSITION: "" }
+                        properties: { DISH_TYPE: sDishType, DISH_DESCR: "Новое блюдо", DISH_COMPOSITION: "", BranchId: "02", BranchText: "Чебоксары" }
                     });
 
                     oDialog.setModel(oModel);
@@ -85,31 +89,31 @@ function(BaseController, JSONModel, Fragment, MessageBox) {
 
 
             },
-            onFormPress: function (oEvent) {
+            onFormPress: function(oEvent) {
                 debugger;
 
             },
 
-            _onRouteMatched: function () {
+            _onRouteMatched: function() {
                 // this.getView().getModel().setDeferredBatchGroups([])
                 this._initDatePicker();
                 this._setFilters();
             },
 
 
-            onSelectDish: function (oEvent) {
+            onSelectDish: function(oEvent) {
 
                 this._changedTile = oEvent.getSource();
                 this._changedTile.setBusy(true);
                 this.submitChanges({
                     groupId: "changes",
-                    success: function () {
+                    success: function() {
 
                         this._changedTile.setBusy(false);
                         this.isExistError()
 
                     }.bind(this),
-                    error: function (oError) {
+                    error: function(oError) {
 
                         this._changedTile.setBusy(false);
                         this.showError(oError);
@@ -119,19 +123,73 @@ function(BaseController, JSONModel, Fragment, MessageBox) {
             },
 
 
-            onCloseDialog: function (oEvent) {
-                debugger;
+            onOKButtonPress: function(oEvent) {
+
+                const oGridList = this._oToolbar.getParent().getContent()[0];
+
+                // oGridList.addItem(new sap.f.GridListItem({
+                //     type: "Inactive",
+                //     content: [
+                //         new sap.m.HBox({
+                //             items : [
+
+                //             ]
+                //         }).addStyleClass('sapUiSmallMargin')
+                //     ]
+                // }));
+
+
+                // <f:GridListItem selected="{DishChoosen}"
+                //         type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }"
+                //         detailPress="onDetailPress">
+
+                //         <HBox class="sapUiSmallMargin">
+                //             <f:Avatar src="{/Speakers}"
+                //                 displaySize="S"
+                //                 displayShape="Square"
+                //                 showBorder="true">
+                //             </f:Avatar>
+                //             <layoutData>
+                //                 <FlexItemData growFactor="1"
+                //                     shrinkFactor="0" />
+                //             </layoutData>
+
+                //             <VBox class="sapUiSmallMargin">
+                //                 <Title text="{DISH_DESCR}"
+                //                     wrapping="true" />
+                //                 <Label text="{DISH_COMPOSITION}"
+                //                     wrapping="true" />
+                //             </VBox>
+                //         </HBox>
+
+
+                //         <OverflowToolbar visible="{state>/adminMode}">
+                //             <ToolbarSpacer />
+                //             <Button 
+                //                 icon="sap-icon://delete"
+                //                 press="onDeleteDishButtonPress"
+                //                 type="Reject" />
+                //         </OverflowToolbar>
+
+                //     </f:GridListItem>
+
+                oEvent.getSource().getParent().close();
+
+            },
+
+            onCloseDialog: function(oEvent) {
+                oEvent.getSource().getModel().resetChanges([oEvent.getSource().getBindingContext().getPath()], undefined, true);
                 oEvent.getSource().getParent().close();
             },
 
 
-            onDateChange: function () {
+            onDateChange: function() {
                 this._setFilters();
                 // const oDate = oEvent.getSource().getModel('date').getData().dateValue;
             },
 
 
-            _initDatePicker: function () {
+            _initDatePicker: function() {
                 const oModel = new JSONModel();
                 oModel.setData({
                     dateValue: new Date()
@@ -140,7 +198,7 @@ function(BaseController, JSONModel, Fragment, MessageBox) {
             },
 
 
-            _getFilters: function (sDishType) {
+            _getFilters: function(sDishType) {
                 const aFilter = [];
                 this.getView().byId('DP1').getDateValue().setHours(3);
 
@@ -160,7 +218,7 @@ function(BaseController, JSONModel, Fragment, MessageBox) {
             },
 
 
-            _setFilters: function () {
+            _setFilters: function() {
 
                 let aPanels = this.byId('dishContainer').getItems();
 
@@ -172,72 +230,51 @@ function(BaseController, JSONModel, Fragment, MessageBox) {
             },
 
 
-            onSaveButtonPress: function (oEvent) {
+            onSaveButtonPress: function(oEvent) {
                 this.getView().setBusy(true);
 
                 this.submitChanges({
                     groupId: "changes",
-                    success: function () {
+                    success: function() {
                         this.getView().setBusy(false);
                         this.isExistError()
 
                     }.bind(this),
-                    error: function (oError) {
+                    error: function(oError) {
                         this.getView().setBusy(false);
                         this.showError(oError);
                     }.bind(this),
                 });
             },
 
-            // onApplyButtonPress: function(){
-            //     this._changedTile = oEvent.getSource();
-            //     this._changedTile.setBusy(true);
-            //     this.submitChanges({
-            //         groupId: "changes",
-            //         success: function () {
 
-            //             this._changedTile.setBusy(false);
-            //             this.isExistError()
-
-            //         }.bind(this),
-            //         error: function (oError) {
-
-            //             this._changedTile.setBusy(false);
-            //             this.showError(oError);
-            //         }.bind(this),
-            //     });
-            // },
-
-            onRejectButtonPress: function (oEvent) {
+            onRejectButtonPress: function(oEvent) {
                 this.getView().getModel().resetChanges();
+                this.onGoToAdminModeButtonPress();
             },
-        
-    onDeleteDishButtonPress: function(oEvent) {
-       
-        const sPath = oEvent.getSource().getBindingContext().getPath();
-        const sDish = oEvent.getSource().getBindingContext().getObject().DISH_DESCR;
 
-        this.getView().getModel().remove(sPath, {
-            groupId: "changes"
-        })
 
-        debugger;
+            onDeleteDishButtonPress: function(oEvent) {
+                const sDish = oEvent.getSource().getBindingContext().getObject().DISH_DESCR;
+                const sPath = oEvent.getSource().getBindingContext().getPath();
 
-        MessageBox.warning(`Вы действительно хотите удалить блюдо - ${sDish}? `, {
-            actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
-            emphasizedAction: MessageBox.Action.OK,
+                const oGridListItem = oEvent.getSource().getParent().getParent();
 
-            onClose: sAction => {
-                debugger;
-                if (sAction === 'OK') {
-                    this.getView().getModel().remove(sPath, {
-                        groupId: "changes",
-                       
-                    });
-                    debugger;
-                    // this.byId("GridListItem").setHighlight("Indication07");
-                    debugger;
-                }
+                MessageBox.warning(`Вы действительно хотите удалить блюдо - ${sDish}? `, {
+                    actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
+                    emphasizedAction: MessageBox.Action.OK,
+                    onClose: sAction => {
+                        if (sAction === 'OK') {
+                            this.getView().getModel().remove(sPath, {
+                                groupId: "changes"
+                            })
+                            oGridListItem.addStyleClass('DeletedDish');
+
+                        }
+                    }
+                });
+
+
             }
         });
        

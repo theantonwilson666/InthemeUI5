@@ -9,17 +9,12 @@ function (Controller, Fragment, Popup) {
     return Controller.extend("intime.zholiday_report.controller.Main", {
 
         onInit:function(){
-            
-            debugger;
-
             this.byId('PC1').setStartDate(this.getFirstDateOnCurrentQuarter())
         },
         handleAppointmentSelect: function (oEvent) {
-            debugger;
         // Set the element that will serve as 'within area' for all popups
-			const oButton = oEvent.getParameter('appointment'),
-				oView = this.getView(),
-                oAppointment = oEvent.getParameter('appointment').getBindingContext().getPath();
+			const   oButton = oEvent.getParameter('appointment'),
+                    oView = this.getView();
 
 			// Create popover
 			if (!this._pPopover) {
@@ -28,19 +23,25 @@ function (Controller, Fragment, Popup) {
                     name: "intime.zholiday_report.view.fragment.Popover",
 					controller: this
 				}).then(function(oPopover) {
-
-                    debugger;
-
 					oView.addDependent(oPopover);
                     oPopover.setModel(oButton.getModel());
 					oPopover.setBindingContext(oButton.getBindingContext());
 					return oPopover;
 				});
-			}
+			}else{
+                this._pPopover.then(function(oPopover) {
+					oView.addDependent(oPopover);
+                    oPopover.setModel(oButton.getModel());
+					oPopover.setBindingContext(oButton.getBindingContext());
+					return oPopover;
+                });
+            }
 			this._pPopover.then(function(oPopover) {
-                debugger;
 				oPopover.openBy(oButton);
 			});
+        },
+        handleClosePress:function(oEvent){
+            this.byId("myPopover").close();
         },
 
         handleSelectionFinish: function(oEvent) {

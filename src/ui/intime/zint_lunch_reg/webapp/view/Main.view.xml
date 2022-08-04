@@ -28,7 +28,7 @@
         <VBox id="dishContainer"
             items="{dish>/dishType}">
 
-            <Panel backgroundDesign="Transparent">
+            <Panel backgroundDesign="Transparent" width="100%">
 
                 <headerToolbar>
                     <Toolbar height="3rem">
@@ -67,13 +67,16 @@
                                     wrapping="true" />
                             </VBox>
                         </HBox>
+
                           <OverflowToolbar visible="{state>/adminMode}">
+
                             <ToolbarSpacer />
                             <Button 
                                 icon="sap-icon://delete"
                                 press="onDeleteDishButtonPress"
                                 type="Reject" />
                         </OverflowToolbar>
+
                     </f:GridListItem>
                 </f:GridList>
             </Panel>

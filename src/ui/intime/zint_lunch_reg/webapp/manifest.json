@@ -1,146 +1,145 @@
 {
-  "_version": "1.32.0",
-  "sap.app": {
-      "id": "intime.zint_lunch_reg",
-      "type": "application",
-      "i18n": "i18n/i18n.properties",
-      "applicationVersion": {
-          "version": "1.0.0"
-      },
-      "title": "{{appTitle}}",
-      "description": "{{appDescription}}",
-      "resources": "resources.json",
-      "ach": "ach",
-      "dataSources": {
-          "mainService": {
-              "uri": "/sap/opu/odata/sap/ZINT_UI_MAIN_REQ_SRV/",
-              "type": "OData",
-              "settings": {
-                  "odataVersion": "2.0",
-                  "localUri": "localService/metadata.xml",
-                  "annotations": [
-                      "annotation"
-                  ]
-              }
-          },
-          "annotation": {
-              "type": "ODataAnnotation",
-              "uri": "localService/annotation.xml",
-              "settings": {
-                  "localUri": "localService/annotation.xml"
-              }
-          }
-      },
-      "crossNavigation": {
-          "inbounds": {
-              "intime.zint_lunch_reg-inbound": {
-                  "signature": {
-                      "parameters": {},
-                      "additionalParameters": "allowed"
-                  },
-                  "semanticObject": "zinfo_moni",
-                  "action": "display",
-                  "title": "{{flpTitle}}",
-                  "subTitle": "{{flpSubtitle}}",
-                  "icon": ""
-              }
-          }
-      }
-  },
-  "sap.ui": {
-      "fullWidth": true,
-      "technology": "UI5",
-      "icons": {
-          "icon": "sap-icon://task",
-          "favIcon": "",
-          "phone": "",
-          "phone@2": "",
-          "tablet": "",
-          "tablet@2": ""
-      },
-      "deviceTypes": {
-          "desktop": true,
-          "tablet": true,
-          "phone": true
-      }
-  },
-  "sap.ui5": {
-      "flexEnabled": false,
-      "rootView": {
-          "viewName": "intime.zint_lunch_reg.view.App",
-          "type": "XML",
-          "async": true,
-          "id": "app"
-      },
-      "dependencies": {
-          "minUI5Version": "1.93.0",
-          "libs": {
-              "sap.ui.core": {},
-              "sap.m": {},
-              "sap.f": {},
-              "sap.ui.layout": {}
-          }
-      },
-      "contentDensities": {
-          "compact": true,
-          "cozy": true
-      },
-      "models": {
-          "i18n": {
-              "type": "sap.ui.model.resource.ResourceModel",
-              "settings": {
-                  "bundleName": "intime.zint_lunch_reg.i18n.i18n"
-              }
-          },
-          "": {
-              "dataSource": "mainService",
-              "settings": {
-                  "defaultBindingMode": "TwoWay",
-                  "useBatch": true,
-                  "defaultCountMode": "Inline"
-              }
-          },
-          "state": {
-              "type": "sap.ui.model.json.JSONModel",
-              "settings": {
-                  "isDraft": false,
-                  "icons": {
-                      "goHome": "sap-icon://home"
-                  },
-                  "adminMode" : false
-              }
-          }
-      },
-      "resources": {
-          "css": [{
-              "uri": "css/style.css"
-          }]
-      },
-      "routing": {
-          "config": {
-              "fullWidth": true,
-              "routerClass": "sap.m.routing.Router",
-              "type": "View",
-              "viewType": "XML",
-              "async": true,
-              "viewPath": "intime.zint_lunch_reg.view",
-              "controlId": "app",
-              "controlAggregation": "pages",
-              "transition": "slide"
-          },
-          "routes": [{
-                  "pattern": "",
-                  "name": "mainpage",
-                  "target": "mainpage"
-              }
-          ],
-          "targets": {
-              "mainpage": {
-                  "viewid": "mainpage",
-                  "viewName": "Main",
-                  "viewLevel": 1
-              }
-          }
-      }
-  }
+    "_version": "1.32.0",
+    "sap.app": {
+        "id": "intime.zint_lunch_reg",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "ach": "ach",
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/sap/ZINT_UI_MAIN_REQ_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml",
+                    "annotations": [
+                        "annotation"
+                    ]
+                }
+            },
+            "annotation": {
+                "type": "ODataAnnotation",
+                "uri": "localService/annotation.xml",
+                "settings": {
+                    "localUri": "localService/annotation.xml"
+                }
+            }
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "intime.zint_lunch_reg-inbound": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "zinfo_moni",
+                    "action": "display",
+                    "title": "{{flpTitle}}",
+                    "subTitle": "{{flpSubtitle}}",
+                    "icon": ""
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "fullWidth": true,
+        "technology": "UI5",
+        "icons": {
+            "icon": "sap-icon://task",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": false,
+        "rootView": {
+            "viewName": "intime.zint_lunch_reg.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "app"
+        },
+        "dependencies": {
+            "minUI5Version": "1.93.0",
+            "libs": {
+                "sap.ui.core": {},
+                "sap.m": {},
+                "sap.f": {},
+                "sap.ui.layout": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "intime.zint_lunch_reg.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+                    "useBatch": true,
+                    "defaultCountMode": "Inline"
+                }
+            },
+            "state": {
+                "type": "sap.ui.model.json.JSONModel",
+                "settings": {
+                    "isDraft": false,
+                    "icons": {
+                        "goHome": "sap-icon://home"
+                    },
+                    "adminMode": false
+                }
+            }
+        },
+        "resources": {
+            "css": [{
+                "uri": "css/style.css"
+            }]
+        },
+        "routing": {
+            "config": {
+                "fullWidth": true,
+                "routerClass": "sap.m.routing.Router",
+                "type": "View",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "intime.zint_lunch_reg.view",
+                "controlId": "app",
+                "controlAggregation": "pages",
+                "transition": "slide"
+            },
+            "routes": [{
+                "pattern": "",
+                "name": "mainpage",
+                "target": "mainpage"
+            }],
+            "targets": {
+                "mainpage": {
+                    "viewid": "mainpage",
+                    "viewName": "Main",
+                    "viewLevel": 1
+                }
+            }
+        }
+    }
 }

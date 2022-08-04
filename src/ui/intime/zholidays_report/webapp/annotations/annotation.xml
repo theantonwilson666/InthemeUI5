@@ -19,6 +19,99 @@
     <edmx:DataServices>
         <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm">
 
+
+
+            <Annotations Target="ZINT_UI_HOLIDAYS_SRV.User/BranchID">
+                <Annotation Term="Common.ValueListWithFixedValues"
+                    Bool="true" />
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath"
+                            String="BranchShSet" />
+                        <PropertyValue Property="SearchSupported"
+                            Bool="true" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="BranchID" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="BranchID" />
+                                </Record>
+
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="BranchText" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="BranchText" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_HOLIDAYS_SRV.User/PositionID">
+                <Annotation Term="Common.ValueListWithFixedValues"
+                    Bool="true" />
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath"
+                            String="PositionShSet" />
+                        <PropertyValue Property="SearchSupported"
+                            Bool="true" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="PositionID" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="PositionID" />
+                                </Record>
+
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="PositionText" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="PositionText" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+
+            <Annotations Target="ZINT_UI_HOLIDAYS_SRV.User/DepartmentID">
+                <Annotation Term="Common.ValueListWithFixedValues"
+                    Bool="true" />
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="CollectionPath"
+                            String="DepartmentShSet" />
+                        <PropertyValue Property="SearchSupported"
+                            Bool="true" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="DepartmentID" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="DepartmentID" />
+                                </Record>
+
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty"
+                                        PropertyPath="DepartmentText" />
+                                    <PropertyValue Property="ValueListProperty"
+                                        String="DepartmentText" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
             <Annotations Target="ZINT_UI_HOLIDAYS_SRV.User">
 
                 <Annotation Term="UI.SelectionFields">
