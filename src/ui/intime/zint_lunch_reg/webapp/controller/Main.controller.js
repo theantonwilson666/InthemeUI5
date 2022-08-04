@@ -125,7 +125,7 @@ sap.ui.define([
 
             onOKButtonPress: function(oEvent) {
 
-                const oGridList = this._oToolbar.getParent().getContent()[0];
+                //const oGridList = this._oToolbar.getParent().getContent()[0];
 
                 // oGridList.addItem(new sap.f.GridListItem({
                 //     type: "Inactive",
@@ -279,6 +279,4 @@ sap.ui.define([
         });
        
 
-    }
-});
-});
+    })
