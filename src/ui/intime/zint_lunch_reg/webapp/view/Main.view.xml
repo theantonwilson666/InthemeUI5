@@ -55,14 +55,13 @@
 
                             <HBox>
 
-                                <f:Avatar src="{/Speakers}"
+                                <f:Avatar src="{ImgURL}"
                                     displaySize="S"
                                     displayShape="Square"
                                     showBorder="true">
                                 </f:Avatar>
 
-                                <u:FileUploader
-                                    class="sapUiSmallMarginBegin"
+                                <u:FileUploader class="sapUiSmallMarginBegin"
                                     visible="{state>/adminMode}"
                                     name="myFileUpload"
                                     fileType="jpg,png,jpeg,ico"
