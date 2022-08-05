@@ -262,8 +262,8 @@ module.exports = function(grunt) {
                 options: {
                     appresources: "src",
 
-                    resources: "C:/ui5/resources",
-                    testresources: "C:/ui5/test-resources",
+                    resources: "C:/sapSDK/sapui5-sdk-1.84.25/resources",
+                    testresources: "C:/sapSDK/sapui5-sdk-1.84.25/test-resources",
 
                     proxypath: "proxy",
                 },

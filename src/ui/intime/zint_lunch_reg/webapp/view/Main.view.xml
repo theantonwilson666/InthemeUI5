@@ -4,6 +4,7 @@
     xmlns:grid="sap.ui.layout.cssgrid"
     xmlns:layout="sap.ui.layout"
     xmlns:f="sap.f"
+    xmlns:u="sap.ui.unified"
     xmlns:tnt="sap.tnt">
     <Page showFooter="{state>/adminMode}">
         <Toolbar class="sapUiSmallMargin"
@@ -28,7 +29,8 @@
         <VBox id="dishContainer"
             items="{dish>/dishType}">
 
-            <Panel backgroundDesign="Transparent" width="100%">
+            <Panel backgroundDesign="Transparent"
+                width="100%">
 
                 <headerToolbar>
                     <Toolbar height="3rem">
@@ -49,30 +51,35 @@
                         type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }"
                         detailPress="onDetailPress">
 
-                        <HBox class="sapUiSmallMargin">
-                            <f:Avatar src="{/Speakers}"
-                                displaySize="S"
-                                displayShape="Square"
-                                showBorder="true">
-                            </f:Avatar>
-                            <layoutData>
-                                <FlexItemData growFactor="1"
-                                    shrinkFactor="0" />
-                            </layoutData>
+                        <VBox class="sapUiSmallMargin">
 
+                            <VBox>
+
+                                <f:Avatar src="{ImgURL}"
+                                    displaySize="XL"
+                                    displayShape="Square"
+                                    showBorder="true">
+                                </f:Avatar>
+
+                                <u:FileUploader class="sapUiSmallMarginBegin"
+                                    visible="{state>/adminMode}"
+                                    name="myFileUpload"
+                                    fileType="jpg,png,jpeg,ico"
+                                    change="onFileUploadChange"/>
+
+                            </VBox>
                             <VBox class="sapUiSmallMargin">
                                 <Title text="{DISH_DESCR}"
                                     wrapping="true" />
                                 <Label text="{DISH_COMPOSITION}"
                                     wrapping="true" />
                             </VBox>
-                        </HBox>
+                        </VBox>
 
-                          <OverflowToolbar visible="{state>/adminMode}">
+                        <OverflowToolbar visible="{state>/adminMode}">
 
                             <ToolbarSpacer />
-                            <Button 
-                                icon="sap-icon://delete"
+                            <Button icon="sap-icon://delete"
                                 press="onDeleteDishButtonPress"
                                 type="Reject" />
                         </OverflowToolbar>
@@ -86,10 +93,7 @@
         <footer>
             <OverflowToolbar>
                 <ToolbarSpacer/>
-                <!-- <Button text="Применить"
-                    press="onApplyButtonPress"
-                    type="Accept" /> -->
-                    <Button text="Сохранить"
+                <Button text="Сохранить"
                     press="onSaveButtonPress"
                     type="Accept" />
                 <Button text="Отменить"

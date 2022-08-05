@@ -33,7 +33,11 @@ sap.ui.define([
 
 					{
 						typeId: "ST",
-						typeText: "Закуски"
+						typeText: "Салаты"
+					},
+					{
+						typeId: "M",
+						typeText: "Мучное"
 					}
 
 			
