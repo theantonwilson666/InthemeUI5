@@ -85,6 +85,16 @@ sap.ui.define([
             },
 
             onFileUploadChange: function (oEvent) {
+
+                debugger;
+
+                const aFileOnSave = this.getStateProperty('/_createImg');
+                aFileOnSave.push(oEvent.getSource());
+
+                this.setStateProperty('/_createImg', aFileOnSave);
+            },
+
+            onFileUploadChange: function (oEvent) {
                 debugger;
 
                 const aFileOnSave = this.getStateProperty('/_createImg');
@@ -94,6 +104,7 @@ sap.ui.define([
             },
 
             _onRouteMatched: function () {
+                // this.getView().getModel().setDeferredBatchGroups([])
                 this._initDatePicker();
                 this._setFilters();
             },
@@ -232,6 +243,7 @@ sap.ui.define([
 
                     oReader.readAsDataURL(oFile);
                 });
+
             },
 
             onSaveButtonPress: function (oEvent) {
@@ -252,6 +264,7 @@ sap.ui.define([
                         }.bind(this),
                     });
                 });
+
             },
 
 
@@ -278,10 +291,18 @@ sap.ui.define([
                             oGridListItem.addStyleClass('DeletedDish');
 
                             this._addDeletedDishes(oGridListItem);
+
                         }
                     }
                 });
             },
+
+            _addDeletedDishes: function (oDelDish) {
+                const aDelDishes = this.getStateProperty('/_preDeletedDishes');
+                aDelDishes.push(oDelDish);
+                this.setStateProperty('/_preDeletedDishes', aDelDishes);
+            },
+
 
             _addDeletedDishes: function (oDelDish) {
                 const aDelDishes = this.getStateProperty('/_preDeletedDishes');
@@ -299,4 +320,6 @@ sap.ui.define([
                 this.setStateProperty('/_preDeletedDishes', []);
             }
         });
+
+
     })

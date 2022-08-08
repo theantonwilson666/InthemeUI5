@@ -68,6 +68,7 @@
                                     change="onFileUploadChange"/>
 
                             </VBox>
+
                             <VBox class="sapUiSmallMargin">
                                 <Title text="{DISH_DESCR}"
                                     wrapping="true" />
