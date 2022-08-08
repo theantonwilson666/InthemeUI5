@@ -9,7 +9,6 @@ sap.ui.define([
         "use strict";
 
 
-
         return BaseController.extend("intime.zint_lunch_reg.controller.Main", {
 
             onInit: function () {
@@ -37,19 +36,14 @@ sap.ui.define([
 
                     oDialog.setModel(oDishDescr.getModel());
                     oDialog.setBindingContext(oDishDescr.getBindingContext());
-
-                    // oDialog.bindContext(oDishDescr.getBindingContext().getPath());
-                    // oDialog.bindElement(oDishDescr.getBindingContext().getPath());
                     oDialog.open();
                 });
             },
 
 
-
             onAddPress: function (oEvent, oModel) {
                 debugger;
                 this._oToolbar = oEvent.getSource().getParent();
-
 
                 let sDishType = this._oToolbar.getBindingContext('dish').getObject().typeId;
 
@@ -57,8 +51,6 @@ sap.ui.define([
                     this.pDialog = Fragment.load({
                         name: "intime.zint_lunch_reg.view.Dialog",
                         controller: this,
-                        // stretch: true,
-
                     });
                 }
 
@@ -86,12 +78,20 @@ sap.ui.define([
                 //     function () {}
                 // );
                 // oModel.resetChanges([oContext.getPath()], undefined, true);
-
-
             },
             onFormPress: function (oEvent) {
                 debugger;
 
+            },
+
+            onFileUploadChange: function (oEvent) {
+
+                debugger;
+
+                const aFileOnSave = this.getStateProperty('/_createImg');
+                aFileOnSave.push(oEvent.getSource());
+
+                this.setStateProperty('/_createImg', aFileOnSave);
             },
 
             onFileUploadChange: function (oEvent) {
@@ -255,7 +255,6 @@ sap.ui.define([
                         success: function () {
                             this.getView().setBusy(false);
                             this.isExistError();
-
                             this._postDeleteHandling();
 
                         }.bind(this),
@@ -296,8 +295,14 @@ sap.ui.define([
                         }
                     }
                 });
-
             },
+
+            _addDeletedDishes: function (oDelDish) {
+                const aDelDishes = this.getStateProperty('/_preDeletedDishes');
+                aDelDishes.push(oDelDish);
+                this.setStateProperty('/_preDeletedDishes', aDelDishes);
+            },
+
 
             _addDeletedDishes: function (oDelDish) {
                 const aDelDishes = this.getStateProperty('/_preDeletedDishes');

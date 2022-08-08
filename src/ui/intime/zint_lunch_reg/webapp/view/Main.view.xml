@@ -53,10 +53,10 @@
 
                         <VBox class="sapUiSmallMargin">
 
-                            <HBox>
+                            <VBox>
 
                                 <f:Avatar src="{ImgURL}"
-                                    displaySize="S"
+                                    displaySize="XL"
                                     displayShape="Square"
                                     showBorder="true">
                                 </f:Avatar>
@@ -67,7 +67,8 @@
                                     fileType="jpg,png,jpeg,ico"
                                     change="onFileUploadChange"/>
 
-                            </HBox>
+                            </VBox>
+
                             <VBox class="sapUiSmallMargin">
                                 <Title text="{DISH_DESCR}"
                                     wrapping="true" />
@@ -93,7 +94,6 @@
         <footer>
             <OverflowToolbar>
                 <ToolbarSpacer/>
-                <!-- <Button text="Применить" press="onApplyButtonPress" type="Accept" /> -->
                 <Button text="Сохранить"
                     press="onSaveButtonPress"
                     type="Accept" />
