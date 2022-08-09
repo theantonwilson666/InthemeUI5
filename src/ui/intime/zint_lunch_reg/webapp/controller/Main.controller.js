@@ -1,9 +1,11 @@
 sap.ui.define([
+
     "jira/lib/BaseController",
     'sap/ui/model/json/JSONModel',
-    "sap/ui/core/Fragment"
+    "sap/ui/core/Fragment",
+    "sap/m/MessageBox"
 ],
-    function (BaseController, JSONModel, Fragment) {
+    function (BaseController, JSONModel, Fragment, MessageBox) {
         "use strict";
 
 
@@ -34,9 +36,6 @@ sap.ui.define([
 
                     oDialog.setModel(oDishDescr.getModel());
                     oDialog.setBindingContext(oDishDescr.getBindingContext());
-
-                    // oDialog.bindContext(oDishDescr.getBindingContext().getPath());
-                    // oDialog.bindElement(oDishDescr.getBindingContext().getPath());
                     oDialog.open();
                 });
             },
@@ -44,16 +43,14 @@ sap.ui.define([
 
             onAddPress: function (oEvent, oModel) {
                 debugger;
-                let oGridList = oEvent.getSource().getParent();
+                this._oToolbar = oEvent.getSource().getParent();
 
-                let sDishType = oGridList.getBindingContext('dish').getObject().typeId;
+                let sDishType = this._oToolbar.getBindingContext('dish').getObject().typeId;
 
                 if (!this.pDialog) {
                     this.pDialog = Fragment.load({
                         name: "intime.zint_lunch_reg.view.Dialog",
                         controller: this,
-                        // stretch: true,
-
                     });
                 }
 
@@ -62,7 +59,7 @@ sap.ui.define([
                     let oModel = this.getView().getModel();
 
                     var oContext = oModel.createEntry("/ZSNN_EMP_MENU", {
-                        properties: { DISH_TYPE: sDishType, DISH_DESCR: "Новое блюдо", DISH_COMPOSITION: "" }
+                        properties: { DISH_TYPE: sDishType, DISH_DESCR: "Новое блюдо", DISH_COMPOSITION: "", BranchId: "02", BranchText: "Чебоксары" }
                     });
 
                     oDialog.setModel(oModel);
@@ -81,12 +78,29 @@ sap.ui.define([
                 //     function () {}
                 // );
                 // oModel.resetChanges([oContext.getPath()], undefined, true);
-
-
             },
             onFormPress: function (oEvent) {
                 debugger;
 
+            },
+
+            onFileUploadChange: function (oEvent) {
+
+                debugger;
+
+                const aFileOnSave = this.getStateProperty('/_createImg');
+                aFileOnSave.push(oEvent.getSource());
+
+                this.setStateProperty('/_createImg', aFileOnSave);
+            },
+
+            onFileUploadChange: function (oEvent) {
+                debugger;
+
+                const aFileOnSave = this.getStateProperty('/_createImg');
+                aFileOnSave.push(oEvent.getSource());
+
+                this.setStateProperty('/_createImg', aFileOnSave);
             },
 
             _onRouteMatched: function () {
@@ -118,8 +132,13 @@ sap.ui.define([
             },
 
 
+            onOKButtonPress: function (oEvent) {
+                oEvent.getSource().getParent().close();
+
+            },
+
             onCloseDialog: function (oEvent) {
-                debugger;
+                oEvent.getSource().getModel().resetChanges([oEvent.getSource().getBindingContext().getPath()], undefined, true);
                 oEvent.getSource().getParent().close();
             },
 
@@ -171,25 +190,177 @@ sap.ui.define([
             },
 
 
-            onSaveButtonPress: function (oEvent) {
-                this.getView().setBusy(true);
+            fileSaveProcessHandling: function () {
+                return new Promise((res, rej) => {
+                    const aFileOnSave = this.getStateProperty('/_createImg');
 
-                this.submitChanges({
-                    groupId: "changes",
-                    success: function () {
-                        this.getView().setBusy(false);
-                        this.isExistError()
+                    if (aFileOnSave) {
 
-                    }.bind(this),
-                    error: function (oError) {
-                        this.getView().setBusy(false);
-                        this.showError(oError);
-                    }.bind(this),
+                        const aPromises = [];
+
+                        for (let i = 0; i < aFileOnSave.length; i++) {
+                            const oFile = aFileOnSave[i].getFocusDomRef().files[0];
+                            const oDishData = aFileOnSave[i].getBindingContext().getObject();
+
+                            if (oFile) {
+                                aPromises.push(this.saveImg(oFile, oDishData));
+                            }
+                        }
+
+                        Promise.all(aPromises).then(() => {
+                            res(true);
+                        });
+
+
+                    } else {
+                        res(true)
+                    }
                 });
             },
 
+            saveImg: function (oFile, oDishData) {
+                return new Promise((res, rej) => {
+                    var oReader = new FileReader();
+                    oReader.onload = e => {
+
+                        var vContent = e.currentTarget.result.replace(
+                            "data:" + oFile.type + ";base64,",
+                            ""
+                        );
+
+                        this.getView().getModel().createEntry("/DishImgSet", {
+                            groupId: "changes",
+                            properties: {
+                                DishID: oDishData.DISH_ID,
+                                BranchID: oDishData.BranchId,
+                                ImgContent: vContent,
+                                MimeCode: oFile.type
+                            }
+                        });
+
+                        res(true);
+                    }
+
+                    oReader.readAsDataURL(oFile);
+                });
+
+            },
+
+            onGetExcelReportButtonPress: function (oEvent) {
+                this.loadDialog
+                    .call(this, {
+                        sDialogName: "downloadExcelDialog",
+                        sViewName: "intime.zint_lunch_reg.view.ExcelDownload"
+                    })
+                    .then(
+                        function (oDialog) {
+                            oDialog.open();
+                        }.bind(this)
+                    );
+            },
+
+            onOKDownloadExcelButtonPress: function (oEvent) {
+
+                debugger;
+
+                const sBranch =  this.byId('_ExcelBranch-Select').getSelectedItem().getKey();
+                const oDate = this.byId('DP1').getDateValue();
+
+                const oModel = this.getModel();
+                const sServiceUrl = oModel.sServiceUrl;
+
+                const sPath = oModel.createKey('/ExcelReportSet', {
+                    Branch: sBranch,
+                    Date: oDate
+                });
+
+                const sUrl = sServiceUrl + sPath + "/$value";
+
+                sap.m.URLHelper.redirect(sUrl, true);
+
+                oEvent.getSource().getParent().close();
+                
+            },
+
+            onCloseExcelDialog: function (oEvent) {
+                oEvent.getSource().getParent().close();
+            },
+
+
+            onSaveButtonPress: function (oEvent) {
+                this.getView().setBusy(true);
+
+                this.fileSaveProcessHandling().then(() => {
+                    this.submitChanges({
+                        groupId: "changes",
+                        success: function () {
+                            this.getView().setBusy(false);
+                            this.isExistError();
+                            this._postDeleteHandling();
+
+                        }.bind(this),
+                        error: function (oError) {
+                            this.getView().setBusy(false);
+                            this.showError(oError);
+                        }.bind(this),
+                    });
+                });
+
+            },
+
+
             onRejectButtonPress: function (oEvent) {
                 this.getView().getModel().resetChanges();
+                this.onGoToAdminModeButtonPress();
+            },
+
+
+            onDeleteDishButtonPress: function (oEvent) {
+                const sDish = oEvent.getSource().getBindingContext().getObject().DISH_DESCR;
+                const sPath = oEvent.getSource().getBindingContext().getPath();
+
+                const oGridListItem = oEvent.getSource().getParent().getParent();
+
+                MessageBox.warning(`Вы действительно хотите удалить блюдо - ${sDish}? `, {
+                    actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
+                    emphasizedAction: MessageBox.Action.OK,
+                    onClose: sAction => {
+                        if (sAction === 'OK') {
+                            this.getView().getModel().remove(sPath, {
+                                groupId: "changes"
+                            })
+                            oGridListItem.addStyleClass('DeletedDish');
+
+                            this._addDeletedDishes(oGridListItem);
+
+                        }
+                    }
+                });
+            },
+
+            _addDeletedDishes: function (oDelDish) {
+                const aDelDishes = this.getStateProperty('/_preDeletedDishes');
+                aDelDishes.push(oDelDish);
+                this.setStateProperty('/_preDeletedDishes', aDelDishes);
+            },
+
+
+            _addDeletedDishes: function (oDelDish) {
+                const aDelDishes = this.getStateProperty('/_preDeletedDishes');
+                aDelDishes.push(oDelDish);
+                this.setStateProperty('/_preDeletedDishes', aDelDishes);
+            },
+
+            _postDeleteHandling: function () {
+                const aDelDishes = this.getStateProperty('/_preDeletedDishes');
+
+                aDelDishes.forEach(oDish => {
+                    oDish.removeStyleClass('DeletedDish');
+                });
+
+                this.setStateProperty('/_preDeletedDishes', []);
             }
         });
-    });
+
+
+    })
