@@ -24,6 +24,7 @@
 
 
             <Button text="Администратор"
+            id="admin"
                 press="onGoToAdminModeButtonPress"
                 type="Transparent"
                 class="sapUiSmallMargin"

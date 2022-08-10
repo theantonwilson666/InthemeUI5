@@ -12,11 +12,34 @@ sap.ui.define([
         return BaseController.extend("intime.zint_lunch_reg.controller.Main", {
 
             onInit: function () {
+                debugger;
                 this.getRouter()
                     .getRoute("mainpage")
                     .attachPatternMatched(this._onRouteMatched, this)
+
+                this.getView().setBusy(true);
+
+                this.getModel().callFunction('/getAdminButtonVisible', {
+                    method: 'POST',
+                    success: function (oData) {
+                        debugger;
+                        const bAdmin = oData['getAdminButtonVisible'].AdminVis;
+                        this.getView().setBusy(false);
+                        if(bAdmin === false){
+                            this.byId("admin").setVisible(false)
+                        }
+                        
+                    }.bind(this),
+                    error: function (oError) {
+                        debugger;
+                        this.getView().setBusy(false);
+                        this.showError(oError);
+                    }.bind(this),
+                });
+                
             },
 
+            
 
             onGoToAdminModeButtonPress: function () {
                 this.setStateProperty('/adminMode', !this.getStateProperty('/adminMode'));
@@ -361,6 +384,4 @@ sap.ui.define([
                 this.setStateProperty('/_preDeletedDishes', []);
             }
         });
-
-
     })
