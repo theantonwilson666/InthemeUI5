@@ -15,11 +15,33 @@ sap.ui.define([
                 this.getRouter()
                     .getRoute("mainpage")
                     .attachPatternMatched(this._onRouteMatched, this)
+
+                this.getView().setBusy(true);
+
+                this.getModel().callFunction('/getAdminButtonVisible', {
+                    method: 'POST',
+                    urlParameters:{
+                        buttonVisible: JSON.stringify()
+                    },
+            
+                        success: function (oData) {
+                            debugger;
+
+                            this.getView().setBusy(false);
+                        }.bind(this),
+                        error: function (oError) {
+                            this.getView().setBusy(false);
+                            this.showError(oError);
+                        }.bind(this),
+                    });
             },
 
 
             onGoToAdminModeButtonPress: function () {
                 this.setStateProperty('/adminMode', !this.getStateProperty('/adminMode'));
+            
+
+                
             },
 
             onDetailPress: function (oEvent) {
@@ -361,6 +383,4 @@ sap.ui.define([
                 this.setStateProperty('/_preDeletedDishes', []);
             }
         });
-
-
     })
