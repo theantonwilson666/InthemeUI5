@@ -12,6 +12,7 @@ sap.ui.define([
         return BaseController.extend("intime.zint_lunch_reg.controller.Main", {
 
             onInit: function () {
+                debugger;
                 this.getRouter()
                     .getRoute("mainpage")
                     .attachPatternMatched(this._onRouteMatched, this)
@@ -20,28 +21,28 @@ sap.ui.define([
 
                 this.getModel().callFunction('/getAdminButtonVisible', {
                     method: 'POST',
-                    urlParameters:{
-                        buttonVisible: JSON.stringify()
-                    },
-            
-                        success: function (oData) {
-                            debugger;
-
-                            this.getView().setBusy(false);
-                        }.bind(this),
-                        error: function (oError) {
-                            this.getView().setBusy(false);
-                            this.showError(oError);
-                        }.bind(this),
-                    });
+                    success: function (oData) {
+                        debugger;
+                        const bAdmin = oData['getAdminButtonVisible'].AdminVis;
+                        this.getView().setBusy(false);
+                        if(bAdmin === false){
+                            this.byId("admin").setVisible(false)
+                        }
+                        
+                    }.bind(this),
+                    error: function (oError) {
+                        debugger;
+                        this.getView().setBusy(false);
+                        this.showError(oError);
+                    }.bind(this),
+                });
+                
             },
 
+            
 
             onGoToAdminModeButtonPress: function () {
                 this.setStateProperty('/adminMode', !this.getStateProperty('/adminMode'));
-            
-
-                
             },
 
             onDetailPress: function (oEvent) {
