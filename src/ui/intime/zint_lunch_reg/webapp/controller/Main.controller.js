@@ -270,30 +270,16 @@ sap.ui.define([
             },
 
             onGetExcelReportButtonPress: function (oEvent) {
-                this.loadDialog
-                    .call(this, {
-                        sDialogName: "downloadExcelDialog",
-                        sViewName: "intime.zint_lunch_reg.view.ExcelDownload"
-                    })
-                    .then(
-                        function (oDialog) {
-                            oDialog.open();
-                        }.bind(this)
-                    );
-            },
-
-            onOKDownloadExcelButtonPress: function (oEvent) {
-
                 debugger;
 
-                const sBranch =  this.byId('_ExcelBranch-Select').getSelectedItem().getKey();
+                // const sBranch =  this.byId('_ExcelBranch-Select').getSelectedItem().getKey();
                 const oDate = this.byId('DP1').getDateValue();
 
                 const oModel = this.getModel();
                 const sServiceUrl = oModel.sServiceUrl;
 
                 const sPath = oModel.createKey('/ExcelReportSet', {
-                    Branch: sBranch,
+                    Branch: "02",
                     Date: oDate
                 });
 
@@ -302,6 +288,40 @@ sap.ui.define([
                 sap.m.URLHelper.redirect(sUrl, true);
 
                 oEvent.getSource().getParent().close();
+
+
+                // this.loadDialog
+                //     .call(this, {
+                //         sDialogName: "downloadExcelDialog",
+                //         sViewName: "intime.zint_lunch_reg.view.ExcelDownload"
+                //     })
+                //     .then(
+                //         function (oDialog) {
+                //             oDialog.open();
+                //         }.bind(this)
+                //     );
+            },
+
+            onOKDownloadExcelButtonPress: function (oEvent) {
+
+                // debugger;
+
+                // const sBranch =  this.byId('_ExcelBranch-Select').getSelectedItem().getKey();
+                // const oDate = this.byId('DP1').getDateValue();
+
+                // const oModel = this.getModel();
+                // const sServiceUrl = oModel.sServiceUrl;
+
+                // const sPath = oModel.createKey('/ExcelReportSet', {
+                //     Branch: sBranch,
+                //     Date: oDate
+                // });
+
+                // const sUrl = sServiceUrl + sPath + "/$value";
+
+                // sap.m.URLHelper.redirect(sUrl, true);
+
+                // oEvent.getSource().getParent().close();
                 
             },
 
