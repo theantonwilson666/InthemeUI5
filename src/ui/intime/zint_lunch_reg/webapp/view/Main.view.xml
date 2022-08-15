@@ -22,6 +22,11 @@
 
             <ToolbarSpacer/>
 
+            <Label class="sapUiSmallMargin"
+            text="Выбрано блюд: {3}."/>
+
+
+
 
             <Button text="Администратор"
             id="admin"
