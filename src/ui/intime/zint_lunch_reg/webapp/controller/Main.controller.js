@@ -18,7 +18,10 @@ sap.ui.define([
                     .attachPatternMatched(this._onRouteMatched, this)
 
                 this.getView().setBusy(true);
-
+                        
+                //TODO : get number of selected dish
+                this.getNumberOfSelectedDish();
+                
                 this.getModel().callFunction('/getAdminButtonVisible', {
                     method: 'POST',
                     success: function (oData) {
@@ -26,7 +29,18 @@ sap.ui.define([
                         const bAdmin = oData['getAdminButtonVisible'].AdminVis;
                         this.getView().setBusy(false);
                         if(bAdmin === false){
-                            this.byId("admin").setVisible(false)
+                            this.byId("admin").setVisible(false);
+
+                            this.byId('_MenuType-IconTabBar').getBinding('items').filter(
+                                new sap.ui.model.Filter({
+                                    path : "MenuActual",
+                                    operator : sap.ui.model.FilterOperator.EQ,
+                                    value1 : true
+                                }
+                            ));
+
+                            //todo : Скрыть IconTabBar если не админ    
+
                         }
                         
                     }.bind(this),
@@ -39,7 +53,16 @@ sap.ui.define([
                 
             },
 
+            onFilterSelect: function(oEvent){
+                //TODO : Обновлять биндинг у страницы
+                debugger;
+            },
+
             
+            getNumberOfSelectedDish: function(){
+
+            },
+
 
             onGoToAdminModeButtonPress: function () {
                 this.setStateProperty('/adminMode', !this.getStateProperty('/adminMode'));
@@ -142,7 +165,11 @@ sap.ui.define([
                     success: function () {
 
                         this._changedTile.setBusy(false);
-                        this.isExistError()
+                        this.isExistError();
+
+                        // TODO : get number of selected dish
+                        this.getNumberOfSelectedDish();
+
 
                     }.bind(this),
                     error: function (oError) {
@@ -196,6 +223,8 @@ sap.ui.define([
                     operator: "EQ",
                     value1: this.getView().byId('DP1').getDateValue()
                 }));
+
+                //TODO : filter by menu type
 
                 return aFilter;
             },
