@@ -38,7 +38,7 @@ sap.ui.define([
                                     value1 : true
                                 }
                             ));
-                            
+                            this.byId("IconTabFilter").setVisible(false);
                             //todo : Скрыть IconTabBar если не админ    
 
                         }
@@ -59,8 +59,33 @@ sap.ui.define([
             },
 
             
-            getNumberOfSelectedDish: function(){
-
+            getNumberOfSelectedDish: function(oEvent) {
+                debugger;
+                var oModel = new sap.ui.model.odata.v2.ODataModel("/sap/opu/odata/sap/ZINT_UI_MAIN_REQ_SRV");
+                const oFilter = []
+                oFilter.push(new sap.ui.model.Filter({
+                    path: "REQ_DATE",
+                    operator: "EQ",
+                    value1: this.getView().byId('DP1').getDateValue()
+                }));
+                oFilter.push(new sap.ui.model.Filter({
+                    path: "DishChoosen",
+                    operator: "EQ",
+                    value1: true
+                }));
+                    oModel.read("/ZSNN_EMP_MENU", {
+                        filters: oFilter,
+                        urlParameters: {
+                            "$inlinecount": "allpages"
+                        },
+                        success: function(oData, oResponse) { 
+                            debugger;
+                            var sCount = oData.results.length
+                          },
+                          error: function(oError) {
+                            MessageBox(oError)
+                          }
+                    })
             },
 
 
@@ -112,18 +137,6 @@ sap.ui.define([
                     oDialog.setBindingContext(oContext);
                     oDialog.open();
                 }.bind(this));
-                // var oContext = oModel.createEntry("/Z_MENU_MAIN_SET", {
-                //     properties : {DISH_TYPE: "", DISH_DESCR: "", DISH_COMPOSITION: ""}
-                // });
-                // onformdata.setBindingContext(oContext);
-
-                // oModel.submitChanges({success: mySuccessHandler, error: myErrorHandler});
-
-                // oContext.created().then(
-                //     function () {},
-                //     function () {}
-                // );
-                // oModel.resetChanges([oContext.getPath()], undefined, true);
             },
             onFormPress: function (oEvent) {
                 debugger;
@@ -150,7 +163,6 @@ sap.ui.define([
             },
 
             _onRouteMatched: function () {
-                // this.getView().getModel().setDeferredBatchGroups([])
                 this._initDatePicker();
                 this._setFilters();
             },
@@ -169,6 +181,7 @@ sap.ui.define([
 
                         // TODO : get number of selected dish
                         this.getNumberOfSelectedDish();
+                        debugger;
 
 
                     }.bind(this),
@@ -208,11 +221,13 @@ sap.ui.define([
             },
 
 
-            _getFilters: function (sDishType) {
+            _getFilters: function (sDishType, sMenuType) {
+                debugger;
                 const aFilter = [];
                 this.getView().byId('DP1').getDateValue().setHours(3);
 
                 aFilter.push(new sap.ui.model.Filter({
+
                     path: "DISH_TYPE",
                     operator: "EQ",
                     value1: sDishType
@@ -223,8 +238,14 @@ sap.ui.define([
                     operator: "EQ",
                     value1: this.getView().byId('DP1').getDateValue()
                 }));
-
+                
                 //TODO : filter by menu type
+                // aFilter.push(new sap.ui.model.Filter({
+                //     path: "MENU_TYPE",
+                //     operator: "EQ",
+                //     value1: sMenuType
+                // }));
+               
 
                 return aFilter;
             },
@@ -317,43 +338,10 @@ sap.ui.define([
                 sap.m.URLHelper.redirect(sUrl, true);
 
                 oEvent.getSource().getParent().close();
-
-
-                // this.loadDialog
-                //     .call(this, {
-                //         sDialogName: "downloadExcelDialog",
-                //         sViewName: "intime.zint_lunch_reg.view.ExcelDownload"
-                //     })
-                //     .then(
-                //         function (oDialog) {
-                //             oDialog.open();
-                //         }.bind(this)
-                //     );
+          
             },
 
-            onOKDownloadExcelButtonPress: function (oEvent) {
-
-                // debugger;
-
-                // const sBranch =  this.byId('_ExcelBranch-Select').getSelectedItem().getKey();
-                // const oDate = this.byId('DP1').getDateValue();
-
-                // const oModel = this.getModel();
-                // const sServiceUrl = oModel.sServiceUrl;
-
-                // const sPath = oModel.createKey('/ExcelReportSet', {
-                //     Branch: sBranch,
-                //     Date: oDate
-                // });
-
-                // const sUrl = sServiceUrl + sPath + "/$value";
-
-                // sap.m.URLHelper.redirect(sUrl, true);
-
-                // oEvent.getSource().getParent().close();
-                
-            },
-
+        
             onCloseExcelDialog: function (oEvent) {
                 oEvent.getSource().getParent().close();
             },
