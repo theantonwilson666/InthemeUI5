@@ -475,8 +475,76 @@ sap.ui.define([
             },
 
             OnChangeTimeSheet: function() {
+
+                this.loadDialog
+                .call(this, {
+                    sDialogName: "_ChangeTimeSheet-Dialog",
+                    sViewName: "intime.zissues_workspace.view.SubTaskSection.ChangeTimeSheet"
+                })
+                .then(
+                    function(oDialog) {
+
+                        oDialog.open();
+                    }.bind(this)
+                );
                 
-            }
+            },
+
+            onOkChangeTimeSheetDialog: function(oEvent) {
+
+                debugger;
+
+                var oSelectedItem = this.byId("_ChangeTimeSheet-SmartTable").getTable().getSelectedItem();
+
+                var oSelectedTimeSheet = this.byId("_SubTaskTimeSheet-SmartTable").getTable().getSelectedItem();
+
+                if (!oSelectedItem) {
+                    MessageBox.show("Выберите подзадачу");
+                    return;
+                }
+
+
+                // this.byId("_ChangeTimeSheet-Dialog").setBusy(true);
+
+                this.getModel().callFunction("/MoveTimesheetToSubtask", {
+                    method: "POST",
+                    urlParameters: {
+                        InputDataJSON: {
+                            TimesheetId: oSelectedTimeSheet.getBindingContext().getPath().getObject(),
+                            TargetSubTaskID: oSelectedItem.getBindingContext().getObject().SubTaskID
+                        }
+                    },
+
+                    success: function(oData) {
+                        // this.byId("_moveSubTaskToSubTask-Dialog").setBusy(false);
+                        // this.isExistError();
+                        // this.byId("_moveSubTaskToSubTask-Dialog").close();
+                        // this.onRemoveRowSelectionForMoveToSubTask();
+
+                    }.bind(this),
+
+                    error: function(oError) {
+                        // this.byId("_moveSubTaskToSubTask-Dialog").setBusy(false);
+                        // this.showError(oError);
+                        // this.onRemoveRowSelectionForMoveToSubTask();
+                    }.bind(this)
+                });
+
+            },
+
+            onCancelChangeTimeSheetDialog: function(oEvent) {
+                oEvent.getSource().getParent().close();
+                // this.onRemoveRowSelectionForMoveToSubTask();
+            },
+
+            // onRemoveRowSelectionForChangeTimeSheet: function() {
+
+            //     var oFirstSelectedItem = this.byId("_ChangeTimeSheet-SmartTable").getTable().getSelectedItems()[0];
+            //     this.byId("_ChangeTimeSheet-SmartTable").getTable().setSelectedItem(oFirstSelectedItem, false);
+
+            // }
+
+
 
         });
     });
