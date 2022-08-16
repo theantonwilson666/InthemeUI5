@@ -38,7 +38,7 @@ sap.ui.define([
                                     value1 : true
                                 }
                             ));
-
+                            
                             //todo : Скрыть IconTabBar если не админ    
 
                         }
