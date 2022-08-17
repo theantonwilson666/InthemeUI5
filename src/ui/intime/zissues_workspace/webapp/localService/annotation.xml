@@ -1861,6 +1861,17 @@
             </Record>
           </Collection>
         </Annotation>
+
+        <Annotation Term="UI.PresentationVariant">
+          <Record>
+            <PropertyValue Property="RequestAtLeast">
+              <Collection>
+                <PropertyPath>TimesheetId</PropertyPath>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+
       </Annotations>
 
       <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_SUBTASKType">
