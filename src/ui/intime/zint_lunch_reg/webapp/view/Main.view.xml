@@ -26,8 +26,8 @@
             <ToolbarSpacer/>
 
             <Label class="sapUiSmallMargin"
-            id="CountDishchoosen"
-                text="Выбрано блюд: {3}."/>
+                id="CountDishchoosen"
+                text="Выбрано блюд: {state>/numberOfDishChoosen}"/>
 
 
 
@@ -48,7 +48,7 @@
 
             <items>
                 <IconTabFilter id="IconTabFilter"
-                showAll="false"
+                    showAll="false"
                     text="{MenuTypeText}"
                     key="{MenuType}"/>
             </items>

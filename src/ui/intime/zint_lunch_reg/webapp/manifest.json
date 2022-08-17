@@ -109,7 +109,8 @@
                     },
                     "adminMode": false,
                     "_preDeletedDishes" : [],
-                    "_createImg" : []
+                    "_createImg" : [],
+                    "numberOfDishChoosen" : 0
                 }
             }
         },
