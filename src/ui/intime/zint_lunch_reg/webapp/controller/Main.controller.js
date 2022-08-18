@@ -172,7 +172,7 @@ sap.ui.define(
           .attachDataReceived((oData) => {
 
             debugger;
-this.onFilterSelect();
+          // this.onFilterSelect();
             // const aData = oData.getParametr('data').results[0].MenuType;
 
             this._setFilters(oData);
