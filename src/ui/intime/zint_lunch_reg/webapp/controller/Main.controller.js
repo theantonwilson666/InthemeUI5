@@ -4,13 +4,14 @@ sap.ui.define(
     "sap/ui/model/json/JSONModel",
     "sap/ui/core/Fragment",
     "sap/m/MessageBox",
+    'sap/ui/model/Filter',
   ],
-  function (BaseController, JSONModel, Fragment, MessageBox) {
+  function (BaseController, JSONModel, Fragment, MessageBox, Filter) {
     "use strict";
 
     return BaseController.extend("intime.zint_lunch_reg.controller.Main", {
       onInit: function () {
-        debugger;
+       
         this.getRouter()
           .getRoute("mainpage")
           .attachPatternMatched(this._onRouteMatched, this);
@@ -19,12 +20,29 @@ sap.ui.define(
       },
 
       onFilterSelect: function (oEvent) {
+        debugger;
+
+        // var oBinding = this._oTable.getBinding("items"),
+			let	sKey = oEvent.getParameter('key'),
+				// Array to combine filters
+				aFilters = [],
+				oCombinedFilter
+
+			if (sKey === "01") {
+				oCombinedFilter = new Filter(("MenuType", "EQ", sKey), true);
+				aFilters.push(new Filter(oCombinedFilter, false));
+			} else if (sKey === "02") {
+				oCombinedFilter = new Filter(("MenuType", "EQ", sKey), true);
+				aFilters.push(new Filter(oCombinedFilter, false));
+			} 
+			// oBinding.filter(aFilters);
         //TODO : Обновлять биндинг у страницы
+
         debugger;
       },
 
       getNumberOfSelectedDish: function (oEvent) {
-        debugger;
+       
 
         const oModel = this.getView().getModel();
         // var oModel = new sap.ui.model.odata.v2.ODataModel(
@@ -68,7 +86,7 @@ sap.ui.define(
       },
 
       onDetailPress: function (oEvent) {
-        debugger;
+        
         let oDishDescr = oEvent.getSource();
         if (!this.pDialog) {
           this.pDialog = Fragment.load({
@@ -85,7 +103,7 @@ sap.ui.define(
       },
 
       onAddPress: function (oEvent, oModel) {
-        debugger;
+        
         this._oToolbar = oEvent.getSource().getParent();
 
         let sDishType = this._oToolbar
@@ -120,11 +138,11 @@ sap.ui.define(
         );
       },
       onFormPress: function (oEvent) {
-        debugger;
+        
       },
 
       onFileUploadChange: function (oEvent) {
-        debugger;
+       
 
         const aFileOnSave = this.getStateProperty("/_createImg");
         aFileOnSave.push(oEvent.getSource());
@@ -133,7 +151,7 @@ sap.ui.define(
       },
 
       onFileUploadChange: function (oEvent) {
-        debugger;
+        
 
         const aFileOnSave = this.getStateProperty("/_createImg");
         aFileOnSave.push(oEvent.getSource());
@@ -145,6 +163,7 @@ sap.ui.define(
         this._initDatePicker();
 
         this.getNumberOfSelectedDish();
+        
 
         this._adminVisibleButton();
 
@@ -153,10 +172,10 @@ sap.ui.define(
           .attachDataReceived((oData) => {
 
             debugger;
+this.onFilterSelect();
+            // const aData = oData.getParametr('data').results[0].MenuType;
 
-            // const aData = oData.getParametr('data').results[0].....MenuType;
-
-            this._setFilters();
+            this._setFilters(oData);
           });
       },
 
@@ -202,7 +221,7 @@ sap.ui.define(
 
             // TODO : get number of selected dish
             this.getNumberOfSelectedDish();
-            debugger;
+           
           }.bind(this),
           error: function (oError) {
             this._changedTile.setBusy(false);
@@ -230,6 +249,7 @@ sap.ui.define(
       onDateChange: function () {
         this._setFilters();
         this.getNumberOfSelectedDish();
+        
         // const oDate = oEvent.getSource().getModel('date').getData().dateValue;
       },
 
@@ -273,7 +293,8 @@ sap.ui.define(
         return aFilter;
       },
 
-      _setFilters: function () {
+      _setFilters: function (oData) {
+        // debugger;
         let aPanels = this.byId("dishContainer").getItems();
 
         for (let i = 0; i < aPanels.length; i++) {
@@ -286,6 +307,12 @@ sap.ui.define(
               )
             );
         }
+        
+        // const oModel = this.getView().getModel();
+        let aMenuType = oData.getParameter('data').results[0].MenuType
+        
+       
+
       },
 
       fileSaveProcessHandling: function () {
@@ -342,7 +369,7 @@ sap.ui.define(
       },
 
       onGetExcelReportButtonPress: function (oEvent) {
-        debugger;
+       
 
         // const sBranch =  this.byId('_ExcelBranch-Select').getSelectedItem().getKey();
         const oDate = this.byId("DP1").getDateValue();
