@@ -257,6 +257,36 @@
                     Bool="true"/>
             </Annotations>
 
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType/Enabled">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType/HasImage">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType/ContractType">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType/ContractTypeText">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType/ContractDateEnd">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
+            <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNN_INTIME_USERType/ContractDateBegin">
+                <Annotation Term="UI.HiddenFilter"
+                    Bool="true"/>
+            </Annotations>
+
             <Annotations Target="ZINT_UI_TIMESHEET_REPORT_SRV.ZSNQ_INTIME_TIMESHEETType/Department">
                 <Annotation Term="Common.ValueListWithFixedValues"
                     Bool="true" />

@@ -252,6 +252,11 @@
           Bool="true"/>
       </Annotations>
 
+      <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_WORKER_ASSIGNED_SUBTASKType/ChangedOn">
+        <Annotation Term="UI.HiddenFilter"
+          Bool="true"/>
+      </Annotations>
+
       <Annotations Target="ZINT_UI_TIMESHEET_SRV.ZSNN_INTIME_TIMESHEETType/StageID">
         <Annotation Term="Common.ValueListWithFixedValues"
           Bool="false"/>
