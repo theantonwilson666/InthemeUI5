@@ -492,57 +492,82 @@ sap.ui.define([
 
             onOkChangeTimeSheetDialog: function(oEvent) {
 
-                debugger;
-
                 var oSelectedItem = this.byId("_ChangeTimeSheet-SmartTable").getTable().getSelectedItem();
 
-                var oSelectedTimeSheet = this.byId("_SubTaskTimeSheet-SmartTable").getTable().getSelectedItem();
+                var oSelectedTimeSheets = this.byId("_SubTaskTimeSheet-SmartTable").getTable().getSelectedItems();
 
                 if (!oSelectedItem) {
                     MessageBox.show("Выберите подзадачу");
                     return;
                 }
 
+                let TimeSheetsArray = [];
 
-                // this.byId("_ChangeTimeSheet-Dialog").setBusy(true);
+                for( let i = 0; i < oSelectedTimeSheets.length; i++){
 
-                this.getModel().callFunction("/MoveTimesheetToSubtask", {
-                    method: "POST",
-                    urlParameters: {
-                        InputDataJSON: {
-                            TimesheetId: oSelectedTimeSheet.getBindingContext().getPath().getObject(),
-                            TargetSubTaskID: oSelectedItem.getBindingContext().getObject().SubTaskID
-                        }
-                    },
+                    TimeSheetsArray.push( { "timesheetid": oSelectedTimeSheets[i].getBindingContext().getObject().TimesheetId });
 
-                    success: function(oData) {
-                        // this.byId("_moveSubTaskToSubTask-Dialog").setBusy(false);
-                        // this.isExistError();
-                        // this.byId("_moveSubTaskToSubTask-Dialog").close();
-                        // this.onRemoveRowSelectionForMoveToSubTask();
+                }
 
-                    }.bind(this),
+                var oInputDataJSON = new sap.ui.model.json.JSONModel( {
+                    timesheetid_tab: TimeSheetsArray,
+                    targetsubtaskid: oSelectedItem.getBindingContext().getObject().SubTaskID,
+                    sourcesubtaskid: oEvent.getSource().getParent().getBindingContext().getObject().SubtaskId
+                } );
 
-                    error: function(oError) {
-                        // this.byId("_moveSubTaskToSubTask-Dialog").setBusy(false);
-                        // this.showError(oError);
-                        // this.onRemoveRowSelectionForMoveToSubTask();
-                    }.bind(this)
-                });
+                debugger;
+
+                this.byId("_ChangeTimeSheet-Dialog").setBusy(true);
+
+                    this.getModel().callFunction("/MoveTimesheetToSubtask", {
+                        method: "POST",
+                        urlParameters: {
+                            InputDataJSON: oInputDataJSON.getJSON()
+                        },
+    
+                        success: function(oData) {
+                            debugger;
+                            this.byId("_ChangeTimeSheet-Dialog").setBusy(false);
+                            this.isExistError();
+                            this.byId("_ChangeTimeSheet-Dialog").close();
+                            this.RemoveRowSelectionForTimeSheet();
+                            this.RemoveRowSelectionForSubTask();
+    
+                        }.bind(this),
+    
+                        error: function(oError) {
+                            this.byId("_ChangeTimeSheet-Dialog").setBusy(false);
+                            this.showError(oError);
+                            this.RemoveRowSelectionForTimeSheet();
+                            this.RemoveRowSelectionForSubTask();
+                        }.bind(this)
+                    });
+
 
             },
 
             onCancelChangeTimeSheetDialog: function(oEvent) {
                 oEvent.getSource().getParent().close();
-                // this.onRemoveRowSelectionForMoveToSubTask();
+                this.RemoveRowSelectionForTimeSheet();
+                this.RemoveRowSelectionForSubTask();
             },
 
-            // onRemoveRowSelectionForChangeTimeSheet: function() {
+            RemoveRowSelectionForTimeSheet: function() {
 
-            //     var oFirstSelectedItem = this.byId("_ChangeTimeSheet-SmartTable").getTable().getSelectedItems()[0];
-            //     this.byId("_ChangeTimeSheet-SmartTable").getTable().setSelectedItem(oFirstSelectedItem, false);
+                debugger;
 
-            // }
+                var oSelectedItems = this.byId("_SubTaskTimeSheet-SmartTable").getTable().getSelectedItems();
+                var arrlen = oSelectedItems.length;
+                for (let i = 0; i < arrlen; i++) {
+                this.byId("_SubTaskTimeSheet-SmartTable").getTable().setSelectedItem(oSelectedItems[i], false);
+                }
+
+            },
+
+            RemoveRowSelectionForSubTask: function() {
+                var oFirstSelectedItem = this.byId("_ChangeTimeSheet-SmartTable").getTable().getSelectedItems()[0];
+                this.byId("_ChangeTimeSheet-SmartTable").getTable().setSelectedItem(oFirstSelectedItem, false);
+            },
 
 
 
