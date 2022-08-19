@@ -4,14 +4,13 @@ sap.ui.define(
     "sap/ui/model/json/JSONModel",
     "sap/ui/core/Fragment",
     "sap/m/MessageBox",
-    'sap/ui/model/Filter',
+    "sap/ui/model/Filter",
   ],
   function (BaseController, JSONModel, Fragment, MessageBox, Filter) {
     "use strict";
 
     return BaseController.extend("intime.zint_lunch_reg.controller.Main", {
       onInit: function () {
-       
         this.getRouter()
           .getRoute("mainpage")
           .attachPatternMatched(this._onRouteMatched, this);
@@ -22,27 +21,24 @@ sap.ui.define(
       onFilterSelect: function (oEvent) {
         debugger;
 
-			let	sKey = oEvent.getParameter('key'),
-				
-				aFilters = [],
-				oCombinedFilter
+        let sKey = oEvent.getParameter("key"),
+          aFilters = [],
+          oCombinedFilter;
 
-			if (sKey === "01") {
-				oCombinedFilter = new Filter(("MenuType", "EQ", sKey), true);
-				aFilters.push(new Filter(oCombinedFilter, false));
-			} else if (sKey === "02") {
-				oCombinedFilter = new Filter(("MenuType", "EQ", sKey), true);
-				aFilters.push(new Filter(oCombinedFilter, false));
-			} 
-			
+        if (sKey === "01") {
+          oCombinedFilter = new Filter(("MenuType", "EQ", sKey), true);
+          aFilters.push(new Filter(oCombinedFilter, false));
+        } else if (sKey === "02") {
+          oCombinedFilter = new Filter(("MenuType", "EQ", sKey), true);
+          aFilters.push(new Filter(oCombinedFilter, false));
+        }
+
         //TODO : Обновлять биндинг у страницы
-        this.byId('_MenuType-IconTabBar').getBinding('items').filter(aFilters)
+        this.byId("_MenuType-IconTabBar").getBinding("items").filter(aFilters);
         debugger;
       },
 
       getNumberOfSelectedDish: function (oEvent) {
-       
-
         const oModel = this.getView().getModel();
         // var oModel = new sap.ui.model.odata.v2.ODataModel(
         //   "/sap/opu/odata/sap/ZINT_UI_MAIN_REQ_SRV"
@@ -85,7 +81,6 @@ sap.ui.define(
       },
 
       onDetailPress: function (oEvent) {
-        
         let oDishDescr = oEvent.getSource();
         if (!this.pDialog) {
           this.pDialog = Fragment.load({
@@ -102,7 +97,6 @@ sap.ui.define(
       },
 
       onAddPress: function (oEvent, oModel) {
-        
         this._oToolbar = oEvent.getSource().getParent();
 
         let sDishType = this._oToolbar
@@ -136,13 +130,9 @@ sap.ui.define(
           }.bind(this)
         );
       },
-      onFormPress: function (oEvent) {
-        
-      },
+      onFormPress: function (oEvent) {},
 
       onFileUploadChange: function (oEvent) {
-       
-
         const aFileOnSave = this.getStateProperty("/_createImg");
         aFileOnSave.push(oEvent.getSource());
 
@@ -150,8 +140,6 @@ sap.ui.define(
       },
 
       onFileUploadChange: function (oEvent) {
-        
-
         const aFileOnSave = this.getStateProperty("/_createImg");
         aFileOnSave.push(oEvent.getSource());
 
@@ -162,19 +150,14 @@ sap.ui.define(
         this._initDatePicker();
 
         this.getNumberOfSelectedDish();
-        
 
         this._adminVisibleButton();
 
         this.byId("_MenuType-IconTabBar")
           .getBinding("items")
           .attachDataReceived((oData) => {
-
             debugger;
-          // this.onFilterSelect();
-            // const aData = oData.getParametr('data').results[0].MenuType;
-
-            this._setFilters(oData);
+            this._setFilters(oData.getParameter('data').results[0].MenuType);
           });
       },
 
@@ -220,7 +203,6 @@ sap.ui.define(
 
             // TODO : get number of selected dish
             this.getNumberOfSelectedDish();
-           
           }.bind(this),
           error: function (oError) {
             this._changedTile.setBusy(false);
@@ -248,7 +230,7 @@ sap.ui.define(
       onDateChange: function () {
         this._setFilters();
         this.getNumberOfSelectedDish();
-        
+
         // const oDate = oEvent.getSource().getModel('date').getData().dateValue;
       },
 
@@ -260,7 +242,8 @@ sap.ui.define(
         this.getView().setModel(oModel, "date");
       },
 
-      _getFilters: function (sDishType, sMenuType) {
+      _getFilters: function (oParam) {
+        // sDishType, sMenuType
         const aFilter = [];
         this.getView().byId("DP1").getDateValue().setHours(3);
 
@@ -268,7 +251,7 @@ sap.ui.define(
           new sap.ui.model.Filter({
             path: "DISH_TYPE",
             operator: "EQ",
-            value1: sDishType,
+            value1: oParam.dishType,
           })
         );
 
@@ -285,33 +268,32 @@ sap.ui.define(
           new sap.ui.model.Filter({
             path: "MenuType",
             operator: "EQ",
-            value1: sMenuType,
+            value1: oParam.menuType,
           })
         );
 
         return aFilter;
       },
 
-      _setFilters: function (oData) {
+      _setFilters: function (sMenuType) {
         // debugger;
         let aPanels = this.byId("dishContainer").getItems();
 
         for (let i = 0; i < aPanels.length; i++) {
           let oGridList = aPanels[i].getContent()[0];
-          oGridList
-            .getBinding("items")
-            .filter(
-              this._getFilters(
-                oGridList.getBindingContext("dish").getObject().typeId
-              )
-            );
-        }
-        
-        // const oModel = this.getView().getModel();
-        let aMenuType = oData.getParameter('data').results[0].MenuType
-        
-       
 
+          debugger;
+
+          oGridList.getBinding("items").filter(
+            this._getFilters({
+              dishType: oGridList.getBindingContext("dish").getObject().typeId,
+              menuType: sMenuType,
+            })
+          );
+        }
+
+        // const oModel = this.getView().getModel();
+        // let aMenuType = oData.getParameter('data').results[0].MenuType
       },
 
       fileSaveProcessHandling: function () {
@@ -368,8 +350,6 @@ sap.ui.define(
       },
 
       onGetExcelReportButtonPress: function (oEvent) {
-       
-
         // const sBranch =  this.byId('_ExcelBranch-Select').getSelectedItem().getKey();
         const oDate = this.byId("DP1").getDateValue();
 
