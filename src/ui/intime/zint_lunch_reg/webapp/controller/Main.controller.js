@@ -22,9 +22,8 @@ sap.ui.define(
       onFilterSelect: function (oEvent) {
         debugger;
 
-        // var oBinding = this._oTable.getBinding("items"),
 			let	sKey = oEvent.getParameter('key'),
-				// Array to combine filters
+				
 				aFilters = [],
 				oCombinedFilter
 
@@ -35,9 +34,9 @@ sap.ui.define(
 				oCombinedFilter = new Filter(("MenuType", "EQ", sKey), true);
 				aFilters.push(new Filter(oCombinedFilter, false));
 			} 
-			// oBinding.filter(aFilters);
+			
         //TODO : Обновлять биндинг у страницы
-
+        this.byId('_MenuType-IconTabBar').getBinding('items').filter(aFilters)
         debugger;
       },
 
