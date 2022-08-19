@@ -70,7 +70,9 @@
                             </Toolbar>
                         </headerToolbar>
 
-                        <f:GridList items="{/ZSNN_EMP_MENU}"
+                        <f:GridList 
+                            id='GL1'
+                            items="{/ZSNN_EMP_MENU}"
                             select="onSelectDish"
                             mode="MultiSelect">
                             <f:GridListItem 
