@@ -25,17 +25,20 @@ sap.ui.define(
           aFilters = [],
           oCombinedFilter;
 
-        if (sKey === "01") {
-          oCombinedFilter = new Filter(("MenuType", "EQ", sKey), true);
-          aFilters.push(new Filter(oCombinedFilter, false));
-        } else if (sKey === "02") {
-          oCombinedFilter = new Filter(("MenuType", "EQ", sKey), true);
-          aFilters.push(new Filter(oCombinedFilter, false));
-        }
+        this._setFilters(sKey);
 
-        //TODO : Обновлять биндинг у страницы
-        this.byId("_MenuType-IconTabBar").getBinding("items").filter(aFilters);
-        debugger;
+
+        // if (sKey === "01") {
+        //   oCombinedFilter = new Filter(("MenuType", "EQ", sKey), true);
+        //   aFilters.push(new Filter(oCombinedFilter, false));
+        // } else if (sKey === "02") {
+        //   oCombinedFilter = new Filter(("MenuType", "EQ", sKey), true);
+        //   aFilters.push(new Filter(oCombinedFilter, false));
+        // }
+
+        // //TODO : Обновлять биндинг у страницы
+        // this.byId("_MenuType-IconTabBar").getBinding("items").filter(aFilters);
+        // debugger;
       },
 
       getNumberOfSelectedDish: function (oEvent) {
@@ -157,7 +160,9 @@ sap.ui.define(
           .getBinding("items")
           .attachDataReceived((oData) => {
             debugger;
-            this._setFilters(oData.getParameter('data').results[0].MenuType);
+            if (oData.getParameter("data")) {
+              this._setFilters(oData.getParameter("data").results[0].MenuType);
+            }
           });
       },
 
@@ -228,6 +233,8 @@ sap.ui.define(
       },
 
       onDateChange: function () {
+
+        //
         this._setFilters();
         this.getNumberOfSelectedDish();
 
@@ -277,6 +284,11 @@ sap.ui.define(
 
       _setFilters: function (sMenuType) {
         // debugger;
+
+        // if (!sMenuType){
+        //   sMenuType = ''
+        // }
+
         let aPanels = this.byId("dishContainer").getItems();
 
         for (let i = 0; i < aPanels.length; i++) {
