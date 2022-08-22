@@ -81,6 +81,7 @@ sap.ui.define(
       },
 
       onDetailPress: function (oEvent) {
+        debugger;
         let oDishDescr = oEvent.getSource();
         if (!this.pDialog) {
           this.pDialog = Fragment.load({
