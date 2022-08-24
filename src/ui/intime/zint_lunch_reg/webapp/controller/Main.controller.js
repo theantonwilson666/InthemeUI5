@@ -10,6 +10,7 @@ sap.ui.define(
     "use strict";
 
     return BaseController.extend("intime.zint_lunch_reg.controller.Main", {
+    
       onInit: function () {
         this.getRouter()
           .getRoute("mainpage")
@@ -21,9 +22,9 @@ sap.ui.define(
       onFilterSelect: function (oEvent) {
         debugger;
 
-        let sKey = oEvent.getParameter("key"),
-          aFilters = [],
-          oCombinedFilter;
+        let sKey = oEvent.getParameter("key")
+          // aFilters = [],
+          // oCombinedFilter;
 
         this._setFilters(sKey);
 
@@ -101,11 +102,13 @@ sap.ui.define(
       },
 
       onAddPress: function (oEvent, oModel) {
+        debugger;
         this._oToolbar = oEvent.getSource().getParent();
 
-        let sDishType = this._oToolbar
-          .getBindingContext("dish")
-          .getObject().typeId;
+        let sDishType = this._oToolbar.getBindingContext("dish").getObject().typeId;
+        let sMenuType = this.byId("_MenuType-IconTabBar").getSelectedKey();
+
+
 
         if (!this.pDialog) {
           this.pDialog = Fragment.load({
@@ -125,6 +128,7 @@ sap.ui.define(
                 DISH_COMPOSITION: "",
                 BranchId: "02",
                 BranchText: "Чебоксары",
+                MenuType: sMenuType
               },
             });
 
@@ -233,12 +237,12 @@ sap.ui.define(
         oEvent.getSource().getParent().close();
       },
 
-      onDateChange: function () {
+      onDateChange: function (oEvent) {
+debugger;
 
         //
-        this._setFilters();
+        this._setFilters(this.byId("_MenuType-IconTabBar").getSelectedKey());
         this.getNumberOfSelectedDish();
-
         // const oDate = oEvent.getSource().getModel('date').getData().dateValue;
       },
 
