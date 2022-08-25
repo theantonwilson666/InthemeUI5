@@ -41,7 +41,7 @@ sap.ui.define(
         //   aFilters.push(new Filter(oCombinedFilter, false));
         // }
 
-        // //TODO : Обновлять биндинг у страницы
+        //TODO : Обновлять биндинг у страницы
         // this.byId("_MenuType-IconTabBar").getBinding("items").filter(aFilters);
         // debugger;
       },
