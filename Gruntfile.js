@@ -176,7 +176,7 @@ module.exports = function(grunt) {
             },
             {
                 package: "ZINTIME_LUNCH",
-                transportno: "TMDK923156",
+                transportno: "TMDK923334",
                 project: "intime",
                 apps: {
                     zint_lunch_reg: {
