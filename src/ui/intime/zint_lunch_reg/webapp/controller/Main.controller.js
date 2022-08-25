@@ -12,6 +12,7 @@ sap.ui.define(
     return BaseController.extend("intime.zint_lunch_reg.controller.Main", {
     
       onInit: function () {
+        debugger;
         this.getRouter()
           .getRoute("mainpage")
           .attachPatternMatched(this._onRouteMatched, this);
@@ -21,6 +22,9 @@ sap.ui.define(
 
       onFilterSelect: function (oEvent) {
         debugger;
+
+
+        this.getNumberOfSelectedDish();
 
         let sKey = oEvent.getParameter("key")
           // aFilters = [],
@@ -44,9 +48,6 @@ sap.ui.define(
 
       getNumberOfSelectedDish: function (oEvent) {
         const oModel = this.getView().getModel();
-        // var oModel = new sap.ui.model.odata.v2.ODataModel(
-        //   "/sap/opu/odata/sap/ZINT_UI_MAIN_REQ_SRV"
-        // );
 
         const oFilter = [];
         oFilter.push(
@@ -61,6 +62,13 @@ sap.ui.define(
             path: "DishChoosen",
             operator: "EQ",
             value1: true,
+          })
+        );
+        oFilter.push(
+          new sap.ui.model.Filter({
+            path: "MenuType",
+            operator: "EQ",
+            value1: this.byId("_MenuType-IconTabBar").getSelectedKey(),
           })
         );
         oModel.read("/ZSNN_EMP_MENU", {
@@ -155,9 +163,10 @@ sap.ui.define(
       },
 
       _onRouteMatched: function () {
+        this.getNumberOfSelectedDish();
         this._initDatePicker();
 
-        this.getNumberOfSelectedDish();
+        
 
         this._adminVisibleButton();
 
@@ -182,9 +191,7 @@ sap.ui.define(
             if (bAdmin === false) {
               this.byId("admin").setVisible(false);
 
-              this.byId("_MenuType-IconTabBar")
-                .getBinding("items")
-                .filter(
+              this.byId("_MenuType-IconTabBar").getBinding("items").filter(
                   new sap.ui.model.Filter({
                     path: "MenuActual",
                     operator: sap.ui.model.FilterOperator.EQ,
@@ -192,7 +199,6 @@ sap.ui.define(
                   })
                 );
               this.byId("IconTabFilter").setVisible(false);
-              //todo : Скрыть IconTabBar если не админ
             }
           },
           error: (oError) => {
@@ -288,7 +294,7 @@ debugger;
       },
 
       _setFilters: function (sMenuType) {
-        // debugger;
+        debugger;
 
         // if (!sMenuType){
         //   sMenuType = ''
