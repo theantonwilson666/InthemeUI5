@@ -173,6 +173,18 @@ module.exports = function(grunt) {
                         prefix: "intime/zholidays_report",
                     }
                 },
+            },
+            {
+                package: "ZINTIME_LUNCH",
+                transportno: "TMDK923156",
+                project: "intime",
+                apps: {
+                    zint_lunch_reg: {
+                        bspContainer: "ZINT_LUNCH",
+                        bspDescription: "Intime : LUNCH App",
+                        prefix: "intime/zint_lunch_reg",
+                    }
+                },
             }
 
 
@@ -239,7 +251,7 @@ module.exports = function(grunt) {
                         port: 8000,
                         secure: false,
                         https: false,
-                        header: "Basic " + new Buffer.from("VILSONAYU:QAZwsx123!"),
+                        header: "Basic " + new Buffer.from("NAFANASIEV:Zero0300"),
                     },
                 ],
             },
@@ -249,9 +261,11 @@ module.exports = function(grunt) {
             server: {
                 options: {
                     appresources: "src",
-                    resources: "C:/Users/1/Desktop/PR/UI5/resources",
-                    testresources: "C:/Users/1/Desktop/PR/UI5/test-resources",
-
+                    // resources: "C:/sapSDK/sapui5-sdk-1.84.25/resources",
+                    resources: "C:/sap/sapui5-sdk-1.84.27/resources",
+                    // testresources: "C:/sapSDK/sapui5-sdk-1.84.25/test-resources",
+                    testresources: "C:/sap/sapui5-sdk-1.84.27/test-resources",
+                    
                     proxypath: "proxy",
                 },
             },
