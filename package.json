@@ -1,28 +1,52 @@
 {
-  "name": "inthemeui5",
+  "name": "jira",
   "version": "1.0.0",
-  "description": "npm install <pkg> - установка пакетов",
   "main": "Gruntfile.js",
-  "scripts": {
-    "serve": "grunt serve"
+  "dependencies": {
+    "grunt-connect": "^0.2.0",
+    "grunt-contrib-clean": "^2.0.0",
+    "grunt-contrib-connect": "^3.0.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-nwabap-ui5uploader": "^1.0.7",
+    "grunt-openui5": "^0.18.3",
+    "grunt-zip": "^0.14.0"
   },
+  "scripts": {
+    "serve": "grunt serve",
+    "deploy_zjira_project_register": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=0 --app=zjira_project_register",
+    "deploy_zjira_worker_register": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=0 --app=zjira_worker_register",
+    "deploy_zworker_schedule": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=1 --app=zworker_schedule",
+    "deploy_zjiralib": "node node_modules\\grunt-cli\\bin\\grunt deploy_lib --lib=zjiralib",
+    "deploy_testApp": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=2 --app=ui5_example",
+    "deploy_zjira_workers_grade": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=0 --app=zjira_workers_grade",
+    "build": "grunt build",
+    "deploy_zjiraplugin": "node node_modules\\grunt-cli\\bin\\grunt deploy_plugin --plugin=zjiraplugin",
+    "deploy_zorg_hierarchy": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=3 --app=zorg_hierarchy",
+    "deploy_zperson_card": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=3 --app=zperson_card",
+    "deploy_zpartners_registry": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=4 --app=zpartners_registry",
+    "deploy_zissues_workspace": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=4 --app=zissues_workspace",
+    "deploy_zusers_list": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=4 --app=zusers_list",
+    "deploy_zworker_workspace": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=4 --app=zworker_workspace",
+    "deploy_ztimesheet_rep": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=4 --app=ztimesheet_report",
+    "deploy_ztelegram_app": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=5 --app=ztelegram_webapp",
+    "deploy_zholiday_app": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=6 --app=zholidays_report",
+    "deploy_zlunch_reg_app": "node node_modules\\grunt-cli\\bin\\grunt deploy --level=7 --app=zint_lunch_reg",
+    "deploy_intime": "grunt deploy --level=4 --app=zpartners_registry && grunt deploy --level=4 --app=zissues_workspace && grunt deploy --level=4 --app=zusers_list && grunt deploy --level=4 --app=zworker_workspace && grunt deploy --level=4 --app=ztimesheet_report && grunt deploy_lib --lib=zjiralib"
+  },
+  "keywords": [],
+  "author": "Vilson A.Y.",
+  "license": "UNLICENSED",
+  "description": "DEFAULT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/theantonwilson666/InthemeUI5.git"
   },
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/theantonwilson666/InthemeUI5/issues"
   },
   "homepage": "https://github.com/theantonwilson666/InthemeUI5#readme",
-  "dependencies": {
-    "grunt-connect-proxy": "^0.2.0",
-    "grunt-contrib-clean": "^2.0.1",
-    "grunt-contrib-connect": "^3.0.0",
-    "grunt-contrib-watch": "^1.1.0",
-    "grunt-nwabap-ui5uploader": "^2.1.0",
-    "grunt-openui5": "^0.18.3",
-    "grunt-zip": "^0.18.2"
+  "devDependencies": {
+    "grunt": "^1.5.3",
+    "grunt-connect-proxy": "^0.2.0"
   }
 }
