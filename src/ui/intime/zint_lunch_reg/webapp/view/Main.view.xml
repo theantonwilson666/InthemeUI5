@@ -4,6 +4,7 @@
     xmlns:grid="sap.ui.layout.cssgrid"
     xmlns:layout="sap.ui.layout"
     xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
     xmlns:u="sap.ui.unified"
     xmlns:tnt="sap.tnt">
 
@@ -24,6 +25,23 @@
                 visible="{state>/adminMode}"/>
 
             <ToolbarSpacer/>
+
+
+            <Label id="_MenuDefault-Label"
+                text="Меню по умолчанию:"
+                visible="{state>/adminMode}"/>
+
+            <Select id="_MenuDefault-Select"
+                visible="{state>/adminMode}"
+                change="onChangeMenuTypeDefault"
+                forceSelection="true"
+                items="{
+						path: '/ZBNN_MENU_TYPES',
+						sorter: { path: 'MenuActual', descending: true }
+					}">
+                <core:Item key="{MenuType}"
+                    text="{MenuTypeText}" />
+            </Select>
 
             <Label class="sapUiSmallMargin"
                 id="CountDishchoosen"
@@ -70,8 +88,7 @@
                             </Toolbar>
                         </headerToolbar>
 
-                        <f:GridList 
-                            id='GL1'
+                        <f:GridList id='GL1'
                             items="{/ZSNN_EMP_MENU}"
                             select="onSelectDish"
                             mode="MultiSelect">

@@ -10,7 +10,6 @@ sap.ui.define(
     "use strict";
 
     return BaseController.extend("intime.zint_lunch_reg.controller.Main", {
-    
       onInit: function () {
         debugger;
         this.getRouter()
@@ -23,15 +22,13 @@ sap.ui.define(
       onFilterSelect: function (oEvent) {
         debugger;
 
-
         this.getNumberOfSelectedDish();
 
-        let sKey = oEvent.getParameter("key")
-          // aFilters = [],
-          // oCombinedFilter;
+        let sKey = oEvent.getParameter("key");
+        // aFilters = [],
+        // oCombinedFilter;
 
         this._setFilters(sKey);
-
 
         // if (sKey === "01") {
         //   oCombinedFilter = new Filter(("MenuType", "EQ", sKey), true);
@@ -46,10 +43,12 @@ sap.ui.define(
         // debugger;
       },
 
-      getNumberOfSelectedDish: function (oEvent) {
+      getNumberOfSelectedDish: function (sMenuType) {
         const oModel = this.getView().getModel();
 
         const oFilter = [];
+
+
         oFilter.push(
           new sap.ui.model.Filter({
             path: "REQ_DATE",
@@ -64,13 +63,20 @@ sap.ui.define(
             value1: true,
           })
         );
+
+        if (!sMenuType){
+          sMenuType = this.byId("_MenuType-IconTabBar").getSelectedKey();
+        }
+
         oFilter.push(
           new sap.ui.model.Filter({
             path: "MenuType",
             operator: "EQ",
-            value1: this.byId("_MenuType-IconTabBar").getSelectedKey(),
+            value1: sMenuType,
           })
         );
+
+
         oModel.read("/ZSNN_EMP_MENU", {
           filters: oFilter,
           urlParameters: {
@@ -78,6 +84,7 @@ sap.ui.define(
           },
           success: function (oData, oResponse) {
             this.setStateProperty("/numberOfDishChoosen", oData.__count);
+            this.getModel("state").updateBindings(true);
           }.bind(this),
           error: function (oError) {
             MessageBox(oError);
@@ -113,10 +120,10 @@ sap.ui.define(
         debugger;
         this._oToolbar = oEvent.getSource().getParent();
 
-        let sDishType = this._oToolbar.getBindingContext("dish").getObject().typeId;
+        let sDishType = this._oToolbar
+          .getBindingContext("dish")
+          .getObject().typeId;
         let sMenuType = this.byId("_MenuType-IconTabBar").getSelectedKey();
-
-
 
         if (!this.pDialog) {
           this.pDialog = Fragment.load({
@@ -136,7 +143,7 @@ sap.ui.define(
                 DISH_COMPOSITION: "",
                 BranchId: "02",
                 BranchText: "Чебоксары",
-                MenuType: sMenuType
+                MenuType: sMenuType,
               },
             });
 
@@ -155,6 +162,13 @@ sap.ui.define(
         this.setStateProperty("/_createImg", aFileOnSave);
       },
 
+      onChangeMenuTypeDefault: function (oEvent) {
+        const oSelItem = oEvent
+          .getParameter("selectedItem")
+          .getBindingContext();
+        this.getModel().setProperty(oSelItem.getPath() + "/MenuActual", true);
+      },
+
       onFileUploadChange: function (oEvent) {
         const aFileOnSave = this.getStateProperty("/_createImg");
         aFileOnSave.push(oEvent.getSource());
@@ -163,10 +177,7 @@ sap.ui.define(
       },
 
       _onRouteMatched: function () {
-        this.getNumberOfSelectedDish();
         this._initDatePicker();
-
-        
 
         this._adminVisibleButton();
 
@@ -176,6 +187,9 @@ sap.ui.define(
             debugger;
             if (oData.getParameter("data")) {
               this._setFilters(oData.getParameter("data").results[0].MenuType);
+              this.getNumberOfSelectedDish(
+                oData.getParameter("data").results[0].MenuType
+              );
             }
           });
       },
@@ -191,14 +205,17 @@ sap.ui.define(
             if (bAdmin === false) {
               this.byId("admin").setVisible(false);
 
-              this.byId("_MenuType-IconTabBar").getBinding("items").filter(
+              this.byId("_MenuType-IconTabBar")
+                .getBinding("items")
+                .filter(
                   new sap.ui.model.Filter({
                     path: "MenuActual",
                     operator: sap.ui.model.FilterOperator.EQ,
                     value1: true,
                   })
                 );
-              this.byId("IconTabFilter").setVisible(false);
+
+              // this.byId("IconTabFilter").setVisible(false);
             }
           },
           error: (oError) => {
@@ -244,7 +261,7 @@ sap.ui.define(
       },
 
       onDateChange: function (oEvent) {
-debugger;
+        debugger;
 
         //
         this._setFilters(this.byId("_MenuType-IconTabBar").getSelectedKey());

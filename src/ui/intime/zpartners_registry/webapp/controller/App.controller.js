@@ -126,6 +126,8 @@ sap.ui.define([
 
             onOkPartnerDialog: function(oEvent) {
 
+                debugger;
+
                 var oFile = this.byId("logoUploader").getFocusDomRef().files[0];
                 if (this.getModel().hasPendingChanges() || oFile) {
                     oEvent.getSource().getParent().setBusy(true);
@@ -145,7 +147,7 @@ sap.ui.define([
                             if (this.getStateProperty('/editablePartner').bCreated) {
                                 this.getModel().setProperty(this.getStateProperty('/editablePartner').getPath() + "/LogoTechValue", vContent);
                                 this.getModel().setProperty(this.getStateProperty('/editablePartner').getPath() + "/FilePath", oFile.name);
-                                this.savePartnerChanges(vContent);
+                                this.savePartnerChanges();
                             } else {
 
                                 this.getModel().callFunction("/GetChangedPartner", {
@@ -156,6 +158,8 @@ sap.ui.define([
                                         FilePath: oFile.name
                                     },
                                     success: function(oData) {
+                                        debugger;
+                                        this.savePartnerChanges();
                                         if (!this.isExistError()) {
                                             this.EditParnterDialog.setBusy(false).close();
                                             this.byId("page").getBinding('content').refresh();
@@ -163,6 +167,7 @@ sap.ui.define([
 
                                     }.bind(this),
                                     error: function(oError) {
+                                        debugger;
                                         this.EditParnterDialog.setBusy(false).close();
                                         this.showError(oError);;
                                     }.bind(this)
@@ -172,6 +177,34 @@ sap.ui.define([
 
                         }.bind(this)
                         oReader.readAsDataURL(oFile);
+                    } else {
+                        if (this.getStateProperty('/editablePartner').bCreated) {
+                            this.savePartnerChanges();
+                        } else {
+
+                            this.getModel().callFunction("/GetChangedPartner", {
+                                method: "POST",
+                                urlParameters: {
+                                    PartnerID: this.getStateProperty('/editablePartner').getObject().PartnerId,
+                                    LogoTechValue: "",
+                                    FilePath: ""
+                                },
+                                success: function(oData) {
+                                    debugger;
+                                    this.savePartnerChanges();
+                                    if (!this.isExistError()) {
+                                        this.EditParnterDialog.setBusy(false).close();
+                                        this.byId("page").getBinding('content').refresh();
+                                    }
+
+                                }.bind(this),
+                                error: function(oError) {
+                                    debugger;
+                                    this.EditParnterDialog.setBusy(false).close();
+                                    this.showError(oError);;
+                                }.bind(this)
+                            })
+                        }
                     }
 
                 }
@@ -179,20 +212,20 @@ sap.ui.define([
             },
 
 
-            savePartnerChanges: function(sUpdateLogoBase64) {
+            savePartnerChanges: function() {
+                debugger;
                 this.submitChanges({
                     success: function(oData) {
                         this.byId("partnerDialog").setBusy(false);
-
                         if (!this.isExistError()) {
-                            this.clearFileUploader();
+                            // this.clearFileUploader();
                         }
                     }.bind(this),
 
                     error: function(oError) {
                         this.byId("partnerDialog").setBusy(false);
                         this.showError(oError);
-                        this.clearFileUploader();
+                        // this.clearFileUploader();
                     }.bind(this)
                 })
             },
@@ -225,9 +258,12 @@ sap.ui.define([
 
             onCancelPartnerDialog: function(oEvent) {
                 oEvent.getSource().getParent().close();
+                this.getView().getModel().resetChanges();
             },
 
             onCreatePartnerButtonPress: function() {
+                debugger;
+
                 this.loadDialog
                     .call(this, {
                         sDialogName: "EditParnterDialog",
@@ -256,6 +292,7 @@ sap.ui.define([
 
                                     this["EditParnterDialog"].setBindingContext(oPartnerContext);
                                     this["EditParnterDialog"].open();
+                                    this.clearFileUploader();
 
                                 }.bind(this),
 

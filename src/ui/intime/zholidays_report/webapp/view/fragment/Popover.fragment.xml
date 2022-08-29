@@ -3,7 +3,7 @@
 	xmlns:core="sap.ui.core">
 	<Popover
 		id="myPopover"
-		title="{TypeText}"
+		title="{TypeText} ( {path: 'StartDate', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true} } - {path: 'EndDate', type:'sap.ui.model.type.Date', formatOptions: { style: 'medium', strictParsing: true} } ) "
 		class="sapUiResponsivePadding--header sapUiResponsivePadding--footer"
 		placement="Bottom"
 		initialFocus="email">
@@ -57,4 +57,4 @@
 			</OverflowToolbar>
 		</footer>
 	</Popover>
-</core:FragmentDefinition>
+</core:FragmentDefinition> 
