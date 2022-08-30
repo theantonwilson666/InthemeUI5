@@ -10,6 +10,16 @@
       entityType="ZSNN_INT_PROJECTType"
       editable="{state>/editProjectMode}"
       visible="{state&gt;/stageSelection}">
+
+
+      <smartForm:customToolbar>
+        <Toolbar>
+          <ToolbarSpacer/>
+          <Button text="Синхр.Jira этап проекта" icon="sap-icon://synchronize" press="onPressSyncJiraStageButtonPress"/>
+        </Toolbar>
+      </smartForm:customToolbar>
+
+
       <smartForm:layout>
         <smartForm:ColumnLayout columnsM="2"
           columnsL="2"
@@ -77,7 +87,8 @@
         </smartForm:GroupElement>
       </smartForm:Group>
 
-      <smartForm:Group label="Jira" id="_JiraGroup-SmartFormGroup">
+      <smartForm:Group label="Jira"
+        id="_JiraGroup-SmartFormGroup">
         <smartForm:GroupElement>
           <smartField:SmartField value="{JiraProjectID}"
             textInEditModeSource="ValueList"
@@ -93,9 +104,12 @@
           <smartField:SmartField value="{JiraProjectStage}"
             entitySet="ZSNN_INT_PROJECT" />
 
-            
-          <Button width="30%" icon="sap-icon://add" visible="{state>/editProjectMode}" press="onCreateJiraProjectButtonPress"/>
-          
+
+          <Button width="30%"
+            icon="sap-icon://add"
+            visible="{state>/editProjectMode}"
+            press="onCreateJiraProjectButtonPress"/>
+
         </smartForm:GroupElement>
       </smartForm:Group>
 
