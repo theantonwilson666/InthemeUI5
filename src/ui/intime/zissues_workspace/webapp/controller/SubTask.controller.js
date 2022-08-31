@@ -475,8 +475,101 @@ sap.ui.define([
             },
 
             OnChangeTimeSheet: function() {
+
+                this.loadDialog
+                .call(this, {
+                    sDialogName: "_ChangeTimeSheet-Dialog",
+                    sViewName: "intime.zissues_workspace.view.SubTaskSection.ChangeTimeSheet"
+                })
+                .then(
+                    function(oDialog) {
+
+                        oDialog.open();
+                    }.bind(this)
+                );
                 
-            }
+            },
+
+            onOkChangeTimeSheetDialog: function(oEvent) {
+
+                var oSelectedItem = this.byId("_ChangeTimeSheet-SmartTable").getTable().getSelectedItem();
+
+                var oSelectedTimeSheets = this.byId("_SubTaskTimeSheet-SmartTable").getTable().getSelectedItems();
+
+                if (!oSelectedItem) {
+                    MessageBox.show("Выберите подзадачу");
+                    return;
+                }
+
+                let TimeSheetsArray = [];
+
+                for( let i = 0; i < oSelectedTimeSheets.length; i++){
+
+                    TimeSheetsArray.push( { "timesheetid": oSelectedTimeSheets[i].getBindingContext().getObject().TimesheetId });
+
+                }
+
+                var oInputDataJSON = new sap.ui.model.json.JSONModel( {
+                    timesheetid_tab: TimeSheetsArray,
+                    targetsubtaskid: oSelectedItem.getBindingContext().getObject().SubTaskID,
+                    sourcesubtaskid: oEvent.getSource().getParent().getBindingContext().getObject().SubtaskId
+                } );
+
+                debugger;
+
+                this.byId("_ChangeTimeSheet-Dialog").setBusy(true);
+
+                    this.getModel().callFunction("/MoveTimesheetToSubtask", {
+                        method: "POST",
+                        urlParameters: {
+                            InputDataJSON: oInputDataJSON.getJSON()
+                        },
+    
+                        success: function(oData) {
+                            debugger;
+                            this.byId("_ChangeTimeSheet-Dialog").setBusy(false);
+                            this.isExistError();
+                            this.byId("_ChangeTimeSheet-Dialog").close();
+                            this.RemoveRowSelectionForTimeSheet();
+                            this.RemoveRowSelectionForSubTask();
+    
+                        }.bind(this),
+    
+                        error: function(oError) {
+                            this.byId("_ChangeTimeSheet-Dialog").setBusy(false);
+                            this.showError(oError);
+                            this.RemoveRowSelectionForTimeSheet();
+                            this.RemoveRowSelectionForSubTask();
+                        }.bind(this)
+                    });
+
+
+            },
+
+            onCancelChangeTimeSheetDialog: function(oEvent) {
+                oEvent.getSource().getParent().close();
+                this.RemoveRowSelectionForTimeSheet();
+                this.RemoveRowSelectionForSubTask();
+            },
+
+            RemoveRowSelectionForTimeSheet: function() {
+
+                debugger;
+
+                var oSelectedItems = this.byId("_SubTaskTimeSheet-SmartTable").getTable().getSelectedItems();
+                var arrlen = oSelectedItems.length;
+                for (let i = 0; i < arrlen; i++) {
+                this.byId("_SubTaskTimeSheet-SmartTable").getTable().setSelectedItem(oSelectedItems[i], false);
+                }
+
+            },
+
+            RemoveRowSelectionForSubTask: function() {
+                var oFirstSelectedItem = this.byId("_ChangeTimeSheet-SmartTable").getTable().getSelectedItems()[0];
+                this.byId("_ChangeTimeSheet-SmartTable").getTable().setSelectedItem(oFirstSelectedItem, false);
+            },
+
+
 
         });
     });

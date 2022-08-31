@@ -4,8 +4,12 @@
     xmlns:grid="sap.ui.layout.cssgrid"
     xmlns:layout="sap.ui.layout"
     xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
     xmlns:u="sap.ui.unified"
     xmlns:tnt="sap.tnt">
+
+
+
     <Page showFooter="{state>/adminMode}">
         <Toolbar class="sapUiSmallMargin"
             height="auto">
@@ -23,7 +27,31 @@
             <ToolbarSpacer/>
 
 
+            <Label id="_MenuDefault-Label"
+                text="Меню по умолчанию:"
+                visible="{state>/adminMode}"/>
+
+            <Select id="_MenuDefault-Select"
+                visible="{state>/adminMode}"
+                change="onChangeMenuTypeDefault"
+                forceSelection="true"
+                items="{
+						path: '/ZBNN_MENU_TYPES',
+						sorter: { path: 'MenuActual', descending: true }
+					}">
+                <core:Item key="{MenuType}"
+                    text="{MenuTypeText}" />
+            </Select>
+
+            <Label class="sapUiSmallMargin"
+                id="CountDishchoosen"
+                text="Выбрано блюд: {state>/numberOfDishChoosen}"/>
+
+
+
+
             <Button text="Администратор"
+                id="admin"
                 press="onGoToAdminModeButtonPress"
                 type="Transparent"
                 class="sapUiSmallMargin"
@@ -31,70 +59,89 @@
         </Toolbar>
 
 
-        <VBox id="dishContainer"
-            items="{dish>/dishType}">
+        <IconTabBar id="_MenuType-IconTabBar"
+            select=".onFilterSelect"
+            class="sapUiResponsiveContentPadding"
+            items="{/ZBNN_MENU_TYPES}">
 
-            <Panel backgroundDesign="Transparent"
-                width="100%">
+            <items>
+                <IconTabFilter id="IconTabFilter"
+                    showAll="false"
+                    text="{MenuTypeText}"
+                    key="{MenuType}"/>
+            </items>
 
-                <headerToolbar>
-                    <Toolbar height="3rem">
-                        <Title text="{dish>typeText}" />
-                        <ToolbarSpacer />
-                        <Button icon="sap-icon://add"
-                            visible="{state>/adminMode}"
-                            press="onAddPress"/>
-                    </Toolbar>
-                </headerToolbar>
+            <content>
+                <VBox id="dishContainer"
+                    items="{dish>/dishType}">
 
-                <f:GridList items="{/ZSNN_EMP_MENU}"
-                    select="onSelectDish"
-                    mode="MultiSelect">
-                    <f:GridListItem 
-                        id = "GridListItem"
-                        selected="{DishChoosen}"
-                        type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }"
-                        detailPress="onDetailPress">
+                    <Panel backgroundDesign="Transparent"
+                        width="100%">
 
-                        <VBox class="sapUiSmallMargin">
-
-                            <VBox>
-
-                                <f:Avatar src="{ImgURL}"
-                                    displaySize="XL"
-                                    displayShape="Square"
-                                    showBorder="true">
-                                </f:Avatar>
-
-                                <u:FileUploader class="sapUiSmallMarginBegin"
+                        <headerToolbar>
+                            <Toolbar height="3rem">
+                                <Title text="{dish>typeText}" />
+                                <ToolbarSpacer />
+                                <Button icon="sap-icon://add"
                                     visible="{state>/adminMode}"
-                                    name="myFileUpload"
-                                    fileType="jpg,png,jpeg,ico"
-                                    change="onFileUploadChange"/>
+                                    press="onAddPress"/>
+                            </Toolbar>
+                        </headerToolbar>
 
-                            </VBox>
+                        <f:GridList id='GL1'
+                            items="{/ZSNN_EMP_MENU}"
+                            select="onSelectDish"
+                            mode="MultiSelect">
+                            <f:GridListItem 
+                        id = "GridListItem"
+                                selected="{DishChoosen}"
+                                type="{= ${state>/adminMode} ? 'Detail' : 'Inactive' }"
+                                detailPress="onDetailPress">
 
-                            <VBox class="sapUiSmallMargin">
-                                <Title text="{DISH_DESCR}"
-                                    wrapping="true" />
-                                <Label text="{DISH_COMPOSITION}"
-                                    wrapping="true" />
-                            </VBox>
-                        </VBox>
+                                <VBox class="sapUiSmallMargin">
 
-                        <OverflowToolbar visible="{state>/adminMode}">
+                                    <VBox>
 
-                            <ToolbarSpacer />
-                            <Button icon="sap-icon://delete"
-                                press="onDeleteDishButtonPress"
-                                type="Reject" />
-                        </OverflowToolbar>
+                                        <f:Avatar src="{ImgURL}"
+                                            displaySize="XL"
+                                            displayShape="Square"
+                                            showBorder="true">
+                                        </f:Avatar>
 
-                    </f:GridListItem>
-                </f:GridList>
-            </Panel>
+                                        <u:FileUploader class="sapUiSmallMarginBegin"
+                                            visible="{state>/adminMode}"
+                                            name="myFileUpload"
+                                            fileType="jpg,png,jpeg,ico"
+                                            change="onFileUploadChange"/>
 
-        </VBox>
+                                    </VBox>
+
+                                    <VBox class="sapUiSmallMargin">
+                                        <Title text="{DISH_DESCR}"
+                                            wrapping="true" />
+                                        <Label text="{DISH_COMPOSITION}"
+                                            wrapping="true" />
+                                    </VBox>
+                                </VBox>
+
+                                <OverflowToolbar visible="{state>/adminMode}">
+
+                                    <ToolbarSpacer />
+                                    <Button icon="sap-icon://delete"
+                                        press="onDeleteDishButtonPress"
+                                        type="Reject" />
+                                </OverflowToolbar>
+
+                            </f:GridListItem>
+                        </f:GridList>
+                    </Panel>
+                </VBox>
+            </content>
+
+        </IconTabBar>
+
+
+
 
         <footer>
             <OverflowToolbar>

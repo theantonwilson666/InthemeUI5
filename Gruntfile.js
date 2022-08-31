@@ -176,7 +176,7 @@ module.exports = function(grunt) {
             },
             {
                 package: "ZINTIME_LUNCH",
-                transportno: "TMDK923156",
+                transportno: "TMDK923334",
                 project: "intime",
                 apps: {
                     zint_lunch_reg: {
@@ -261,10 +261,8 @@ module.exports = function(grunt) {
             server: {
                 options: {
                     appresources: "src",
-
                     resources: "C:/work/ui5_resources/sap-ui5-1.71.44/resources",
                     testresources: "C:/work/ui5_resources/sap-ui5-1.71.44/test-resources",
-
                     proxypath: "proxy",
                 },
             },

@@ -1,0 +1,63 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:u="sap.ui.unified"
+    xmlns:smartForm="sap.ui.comp.smartform"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    xmlns:m="sap.m">
+    <Dialog id="_ChangeTimeSheet-Dialog"
+        title="Переместить списание">
+        <content>
+
+            <!-- <smartFilterBar:SmartFilterBar id="_MoveSubTaskToSubTask-SmartFilter"
+                entitySet="ZBNN_SUBTASK_SH">
+                <smartFilterBar:layoutData>
+                    <FlexItemData shrinkFactor="0"/>
+                </smartFilterBar:layoutData>
+            </smartFilterBar:SmartFilterBar> -->
+
+
+            <smartTable:SmartTable id="_ChangeTimeSheet-SmartTable"
+                entitySet="ZBNN_SUBTASK_SH"
+                tableType="ResponsiveTable"
+                smartFilterId="_ChangeTimeSheet-SmartFilter"
+                useExportToExcel="false"
+                useVariantManagement="false"
+                useTablePersonalisation="true"
+                showRowCount="false"
+                fitContainer="true"
+                demandPopin="true"
+                enableAutoBinding="true">
+                <smartTable:layoutData>
+                    <FlexItemData growFactor="1"
+                        baseSize="0%"/>
+                </smartTable:layoutData>
+
+                <Table growing="true"
+                    growingThreshold="20"
+                    growingScrollToLoad="true"
+                    mode="SingleSelectLeft">
+
+                </Table>
+            </smartTable:SmartTable>
+
+        </content>
+        <beginButton>
+            <Button id="ChangeTimeSheetSave"
+                text="Сохранить"
+                type="Emphasized"
+                press="onOkChangeTimeSheetDialog"/>
+        </beginButton>
+        <endButton>
+            <Button id="ChangeTimeSheetCansel"
+                text="Отменить"
+                press=".onCancelChangeTimeSheetDialog"/>
+        </endButton>
+    </Dialog>
+
+
+</core:FragmentDefinition>
