@@ -47,11 +47,11 @@
                         type="Emphasized"
                         press="onMoveToAnotherTaskButtonPress"/>
 
-                <Button
+                <!-- <Button
                         id="MoveToSubTask"
                         text="Переместить в другую подзадачу"
                         type="Emphasized"
-                        press="onMoveToAnotherSubTaskButtonPress"/>
+                        press="onMoveToAnotherSubTaskButtonPress"/> -->
 
                 </f:actions>
             </f:DynamicPageTitle>
