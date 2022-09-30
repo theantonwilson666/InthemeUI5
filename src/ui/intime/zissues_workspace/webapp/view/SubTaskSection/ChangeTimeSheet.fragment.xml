@@ -13,12 +13,12 @@
         title="Переместить списание">
         <content>
 
-            <!-- <smartFilterBar:SmartFilterBar id="_MoveSubTaskToSubTask-SmartFilter"
+            <smartFilterBar:SmartFilterBar id="_ChangeTimeSheet-SmartFilter"
                 entitySet="ZBNN_SUBTASK_SH">
                 <smartFilterBar:layoutData>
                     <FlexItemData shrinkFactor="0"/>
                 </smartFilterBar:layoutData>
-            </smartFilterBar:SmartFilterBar> -->
+            </smartFilterBar:SmartFilterBar>
 
 
             <smartTable:SmartTable id="_ChangeTimeSheet-SmartTable"

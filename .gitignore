@@ -6,3 +6,5 @@ workspace.code-workspace
 testProject
 sapui5-dist-static
 test
+zport_register
+fiorielements_example
