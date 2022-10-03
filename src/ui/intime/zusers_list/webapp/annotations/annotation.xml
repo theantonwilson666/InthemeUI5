@@ -419,12 +419,12 @@
 								AnnotationPath="@UI.FieldGroup#AltIDHeader" />
 						</Record>
 
-						<Record Type="UI.ReferenceFacet">
+						<!-- <Record Type="UI.ReferenceFacet">
 							<PropertyValue Property="Label"
 								String="Договор"/>
 							<PropertyValue Property="Target"
 								AnnotationPath="@UI.FieldGroup#AltIDContract" />
-						</Record>
+						</Record> -->
 
 
 
