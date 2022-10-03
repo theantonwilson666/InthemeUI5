@@ -62,6 +62,13 @@
                 <smartField:SmartField value="{EstimateTime}"
                     editable="true"/>
             </smartForm:GroupElement>
+
+
+             <smartForm:GroupElement>
+                <smartField:SmartField value="{LimitTime}"
+                    editable="true"/>
+            </smartForm:GroupElement>
+
         </smartForm:Group>
 
         <smartForm:Group label="Доп.инфо">

@@ -15,7 +15,9 @@
       <smartForm:customToolbar>
         <Toolbar>
           <ToolbarSpacer/>
-          <Button text="Синхр.Jira этап проекта" icon="sap-icon://synchronize" press="onPressSyncJiraStageButtonPress"/>
+          <Button text="Синхр.Jira этап проекта"
+            icon="sap-icon://synchronize"
+            press="onPressSyncJiraStageButtonPress"/>
         </Toolbar>
       </smartForm:customToolbar>
 
@@ -53,8 +55,7 @@
         </smartForm:GroupElement>
 
         <!-- <smartForm:GroupElement>
-          <smartField:SmartField value="{StageNo}"
-            entitySet="ZSNN_INT_PROJECT">
+          <smartField:SmartField value="{StageNo}" entitySet="ZSNN_INT_PROJECT">
           </smartField:SmartField>
         </smartForm:GroupElement> -->
 
@@ -100,23 +101,41 @@
           </smartField:SmartField>
 
         </smartForm:GroupElement>
-        <smartForm:GroupElement>
-          <smartField:SmartField value="{JiraProjectStage}"
-            entitySet="ZSNN_INT_PROJECT" />
+        <smartForm:GroupElement label="Jira этап проекта">
+
+      <StepInput
+						value="{JiraProjectStage}"
+						min="0"
+            editable="{state>/editProjectMode}"
+						step="1"/>
+
+          <!-- <Input type="Number"
+            placeholder="Enter a number"
+            editable="{state>/editProjectMode}"
+            value="{JiraProjectStage}"
+            class="sapUiSmallMarginBottom" /> -->
+
+          <!-- <smartField:SmartField value="{JiraProjectStage}" entitySet="ZSNN_INT_PROJECT">
+
+            <smartField:configuration>
+              <smartField:Configuration preventInitialDataFetchInValueHelpDialog="true"/>
+            </smartField:configuration> -->
+
+        <!-- </smartField:SmartField> -->
 
 
-          <Button width="30%"
-            icon="sap-icon://add"
-            visible="{state>/editProjectMode}"
-            press="onCreateJiraProjectButtonPress"/>
+        <Button width="30%"
+          icon="sap-icon://add"
+          visible="{state>/editProjectMode}"
+          press="onCreateJiraProjectButtonPress"/>
 
-        </smartForm:GroupElement>
-      </smartForm:Group>
+      </smartForm:GroupElement>
+    </smartForm:Group>
 
-    </smartForm:SmartForm>
-    <Text text="" />
-    <Text text="" />
-    <Text text="" />
-    <Text text="" />
-  </VBox>
+  </smartForm:SmartForm>
+  <Text text="" />
+  <Text text="" />
+  <Text text="" />
+  <Text text="" />
+</VBox>
 </core:FragmentDefinition>

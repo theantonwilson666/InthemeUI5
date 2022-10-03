@@ -191,7 +191,7 @@
         </Annotation>
       </Annotations>
 
-      <Annotations Target="ZINT_UI_PARTNERS_SRV.ZSNN_INT_PROJECTType/JiraProjectStage">
+      <!-- <Annotations Target="ZINT_UI_PARTNERS_SRV.ZSNN_INT_PROJECTType/JiraProjectStage">
         <Annotation Term="Common.ValueListWithFixedValues"
           Bool="false" />
         <Annotation Term="Common.ValueList">
@@ -226,7 +226,7 @@
             </PropertyValue>
           </Record>
         </Annotation>
-      </Annotations>
+      </Annotations> -->
 
 
       <Annotations Target="ZINT_UI_PARTNERS_SRV.ZSNN_INT_PROJECTType/StageType">

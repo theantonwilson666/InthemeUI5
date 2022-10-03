@@ -42,9 +42,15 @@ sap.ui.define(
       },
 
       onSelectRow: function (oEvent) {
-        var oRowData = oEvent.getParameter("rowContext").getObject();
-
+        
         this._selectedRowContext = oEvent.getParameter("rowContext");
+        var oRowData = this._selectedRowContext.getObject();
+
+        console.log('Created:');
+        console.log(this._selectedRowContext.bCreated);
+        console.log(this._selectedRowContext.getObject());
+
+        debugger;
 
         this.bindSections({
           ID: oRowData.ID,
@@ -97,8 +103,6 @@ sap.ui.define(
 
       refreshAdminSection: function () {
         var oTable = this.byId("_ProjectAdmins-Table");
-
-        debugger;
 
         var oTemplate = new sap.m.ColumnListItem({
           vAlign: "Middle",
@@ -187,6 +191,7 @@ sap.ui.define(
         var aItems = this.byId("iconTabBar").getItems();
         for (var i = 0; i < aItems.length; i++) {
           var oItem = aItems[i];
+          oItem.unbindObject();
           oItem.bindObject(`/ZSNN_INT_PROJECT('${oKey.ID}')`);
         }
       },
@@ -194,15 +199,27 @@ sap.ui.define(
       setProjectSelection: function () {
         this.setStateProperty("/projectSelection", true);
         this.setStateProperty("/stageSelection", false);
-
-        this.byId("ProjectChangeDocumentSmartTable").rebindTable();
+        
+        if (
+          !this.byId("projectTab").getContent()[0].getBindingContext().bCreated
+        ) {
+          this.byId("ProjectChangeDocumentSmartTable").rebindTable();
+        }
       },
 
       setStageSelection: function () {
         this.setStateProperty("/projectSelection", false);
         this.setStateProperty("/stageSelection", true);
 
-        this.byId("stageChangeDocumentSmartTable").rebindTable();
+        if (
+          !this.byId("stageTab").getBindingContext().bCreated
+        ) {
+          this.byId("stageChangeDocumentSmartTable").rebindTable();
+          this.byId("_JiraGroup-SmartFormGroup").setVisible(true);
+        } else {
+          this.byId("_JiraGroup-SmartFormGroup").setVisible(false);
+        }
+
       },
 
       isSelected: function (ID) {
@@ -262,11 +279,14 @@ sap.ui.define(
                 groupId: "changes",
               });
 
-            this.setProjectSelection();
             this.byId("projectTab")
               .getContent()[0]
               .setBindingContext(oNewEntryContext);
+
+            this.setProjectSelection();
+
             this.setStateProperty("/editProjectMode", true);
+
             this.byId("projectForm").focus();
           }.bind(this),
 
@@ -277,20 +297,18 @@ sap.ui.define(
       },
 
       onPressSyncJiraStageButtonPress: function (oEvent) {
-
-
         this.getView().setBusy(true);
 
         this.getModel().callFunction("/SyncJiraStage", {
           method: "POST",
           urlParameters: {
-            StageID: oEvent.getSource().getBindingContext().getObject().ProjectStageID
+            StageID: oEvent.getSource().getBindingContext().getObject()
+              .ProjectStageID,
           },
 
           success: function (oData) {
             this.getView().setBusy(false);
             this.isExistError();
-
           }.bind(this),
 
           error: function (oError) {
@@ -315,9 +333,11 @@ sap.ui.define(
                 properties: oData,
                 groupId: "changes",
               });
-            this.setStageSelection();
+
             this.byId("stageTab").unbindObject();
             this.byId("stageTab").setBindingContext(oNewEntryContext);
+
+            this.setStageSelection();
             this.setStateProperty("/editProjectMode", true);
             this.byId("stageForm").focus();
           }.bind(this),
