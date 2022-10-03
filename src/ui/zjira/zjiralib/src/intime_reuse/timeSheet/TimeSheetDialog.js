@@ -113,6 +113,13 @@ sap.ui.define([
             }.bind(this));
         },
 
+
+        _dateSheetPeriodChange: function(oEvent){
+            console.log('Datefrom:', oEvent.getSource().getBindingContext().getObject().DateSheetFrom);
+            console.log('DateTo:', oEvent.getSource().getBindingContext().getObject().DateSheetTo);
+        },
+
+
         _onOkButtonPress: function (oEvent) {
 
             this.setBusy(true);
