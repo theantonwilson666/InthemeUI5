@@ -33,7 +33,7 @@ module.exports = function(grunt) {
     var oAuth = {
         server: "http://sap-tm.inthemelab.com:8000",
         login: "VilsonAYU",
-        pass: "EDCrfv123!",
+        pass: "7||3M|P2kZ",
         packages: [{
                 package: "ZJIRA",
                 transportno: "TMDK910450",

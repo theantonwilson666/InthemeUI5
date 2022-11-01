@@ -20,7 +20,7 @@
                     useVariantManagement="false"
                     useTablePersonalisation="false"
                     enableAutoBinding="false"
-                    requestAtLeastFields="Worker,WorkerName,Percent"
+                    requestAtLeastFields="Worker,WorkerName,Percent,DateFrom,DateTo"
                     demandPopin="true">
                 <smartTable:customData>
                     <core:CustomData key="dateFormatSettings" value='\{"pattern": "dd.MM.yyyy"\}'/>
@@ -84,6 +84,43 @@
                                 <Text text="{/#WorkerScheduleConf/Percent/@sap:label}"/>
                             </header>
                         </Column>
+
+
+                         <!--3 column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                            "columnIndex": "2",
+                                                            "columnKey": "DateFrom",
+                                                            "leadingProperty": "DateFrom",
+                                                            "sortProperty": "DateFrom",
+                                                            "filterProperty": "DateFrom"
+                                                         }'/>
+                            </customData>
+                            <header>
+                                <Text text="{/#WorkerScheduleConf/DateFrom/@sap:label}"/>
+                            </header>
+                        </Column>
+
+
+                         <!--4 column -->
+                        <Column>
+                            <customData>
+                                <core:CustomData key="p13nData"
+                                                 value='\{
+                                                            "columnIndex": "3",
+                                                            "columnKey": "DateTo",
+                                                            "leadingProperty": "DateTo",
+                                                            "sortProperty": "DateTo",
+                                                            "filterProperty": "DateTo"
+                                                         }'/>
+                            </customData>
+                            <header>
+                                <Text text="{/#WorkerScheduleConf/DateTo/@sap:label}"/>
+                            </header>
+                        </Column>
+
                     </columns>
                     <items>
                         <ColumnListItem id="workerConfListItem">
@@ -94,6 +131,16 @@
                             <!--2 cells-->
                             <cells>
                                 <smartField:SmartField value="{Percent}" editable="{= ${state>/ConfigSTMode} === 'SingleSelectLeft' }"/>
+                            </cells>
+
+                             <!--3 cells-->
+                            <cells>
+                                <smartField:SmartField value="{DateFrom}" editable="{= ${state>/ConfigSTMode} === 'SingleSelectLeft' }"/>
+                            </cells>
+
+                             <!--4 cells-->
+                            <cells>
+                                <smartField:SmartField value="{DateTo}" editable="{= ${state>/ConfigSTMode} === 'SingleSelectLeft' }"/>
                             </cells>
                         </ColumnListItem>
                     </items>
