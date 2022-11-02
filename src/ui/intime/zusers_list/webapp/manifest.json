@@ -156,6 +156,14 @@
                       "text": "Синхр. 1C данных",
                       "press": "onSync1CData",
                       "determining": false
+                    },
+
+
+                    "freelance": {
+                      "id": "freelance",
+                      "text": "Сделать фрилансером",
+                      "press": "onMakeFreelance",
+                      "determining": false
                     }
                   }
                 }
