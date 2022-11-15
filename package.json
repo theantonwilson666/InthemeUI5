@@ -47,6 +47,9 @@
   "homepage": "https://github.com/theantonwilson666/InthemeUI5#readme",
   "devDependencies": {
     "grunt": "^1.5.3",
-    "grunt-connect-proxy": "^0.2.0"
+    "grunt-concurrent": "^3.0.0",
+    "grunt-connect-proxy": "^0.2.0",
+    "grunt-nodemon": "^0.4.2",
+    "nodemon": "^2.0.20"
   }
 }
