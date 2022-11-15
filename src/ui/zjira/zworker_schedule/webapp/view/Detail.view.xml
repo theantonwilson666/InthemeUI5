@@ -23,9 +23,9 @@
                 <f:heading>
                     <Title text="{WorkerName}" />
                 </f:heading>
-                <f:expandedContent>
+                <!-- <f:expandedContent>
                     <Label text="{PositionName}" />
-                </f:expandedContent>
+                </f:expandedContent> -->
                 <!-- <f:content>
                  <u:Calendar width="40em" id="workerCalendar" legend="calendarLegend" intervalSelection="false" select="onDateSelect" startDateChange="onStartDateChange"/>
 

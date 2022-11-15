@@ -120,7 +120,7 @@
                         <!--1 cells-->
                         <cells>
                             <HBox>
-                                <ObjectIdentifier title="{WorkerName}" text="{PositionName}" />
+                                <ObjectIdentifier title="{WorkerName}"/>
                             </HBox>
                         </cells>
                         <!--2 cells-->
