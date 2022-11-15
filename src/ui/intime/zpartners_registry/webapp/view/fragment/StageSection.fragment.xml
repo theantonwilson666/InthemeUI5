@@ -72,6 +72,7 @@
           <smartField:SmartField value="{EndDate}"
             entitySet="ZSNN_INT_PROJECT" />
         </smartForm:GroupElement>
+
         <!-- <smartForm:GroupElement>
           <smartField:SmartField value="{DocNumDate}" entitySet="ZSNN_INT_PROJECT" />
         </smartForm:GroupElement> -->

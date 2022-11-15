@@ -12,7 +12,8 @@
     xmlns:navpopover="sap.ui.comp.navpopover"
     xmlns:dnd-grid="sap.f.dnd">
 
-    <smartForm:SmartForm editable="{state>/subTaskEditMode}" entityType="ZSNN_INTIME_SUBTASKType">
+    <smartForm:SmartForm editable="{state>/subTaskEditMode}"
+        entityType="ZSNN_INTIME_SUBTASKType">
         <smartForm:Group label="Общая информация">
             <smartForm:GroupElement>
                 <smartField:SmartField value="{Name}"
@@ -63,8 +64,13 @@
                     editable="true"/>
             </smartForm:GroupElement>
 
+            <smartForm:GroupElement>
+                <smartField:SmartField value="{ExceedTimeForbidden}"
+                    editable="true"/>
+            </smartForm:GroupElement>
 
-             <smartForm:GroupElement>
+
+            <smartForm:GroupElement visible="{ExceedTimeForbidden}">
                 <smartField:SmartField value="{LimitTime}"
                     editable="true"/>
             </smartForm:GroupElement>
@@ -83,8 +89,7 @@
         <navpopover:SemanticObjectController entitySet="ZSNN_INTIME_TASK" enableAvailableActionsPersonalization='\{"ProjectName":false\}'/>
 
       <! <smartForm:semanticObjectController>
-        <navpopover:SemanticObjectController entitySet="ZSNN_INTIME_TASK"
-          enableAvailableActionsPersonalization='\{"taskData>/ProjectName":false\}'/>
+        <navpopover:SemanticObjectController entitySet="ZSNN_INTIME_TASK" enableAvailableActionsPersonalization='\{"taskData>/ProjectName":false\}'/>
 
       </smartForm:semanticObjectController> -->
 

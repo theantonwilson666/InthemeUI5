@@ -322,7 +322,7 @@ sap.ui.define(
         this.getModel().callFunction("/GetCreatedProjectStage", {
           method: "POST",
           urlParameters: {
-            ProjectID: this._selectedRowContext.getObject().ID,
+            ProjectID: this._selectedRowContext.getObject().ID
           },
 
           success: function (oData) {
