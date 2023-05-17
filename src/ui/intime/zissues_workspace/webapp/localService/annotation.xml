@@ -581,6 +581,35 @@
           Bool="true"/>
       </Annotations>
 
+        <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_SUBTASKType/LimitTimeU">
+        <Annotation Term="Common.ValueListWithFixedValues"
+          Bool="true" />
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="CollectionPath"
+              String="ZBNN_TIME_UNIT" />
+            <PropertyValue Property="SearchSupported"
+              Bool="true" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="LimitTimeU" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="Unit" />
+                </Record>
+                <Record Type="Common.ValueListParameterOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="LimitTimeUText" />
+                  <PropertyValue Property="ValueListProperty"
+                    String="UnitText" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+
       <Annotations Target="ZINT_UI_TASK_SRV.ZSNN_INTIME_SUBTASKType/EstimateTimeU">
         <Annotation Term="Common.ValueListWithFixedValues"
           Bool="true" />

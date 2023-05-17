@@ -1,33 +1,33 @@
 <core:FragmentDefinition xmlns:core="sap.ui.core"
-                         xmlns:mvc="sap.ui.core.mvc"
-                         displayBlock="true"
-                         xmlns="sap.m"
-                         xmlns:f="sap.f"
-                         xmlns:fb="sap.ui.comp.filterbar"
-                         xmlns:l="sap.ui.layout"
-                         xmlns:sv="sap.ui.comp.smartvariants"
-                         xmlns:unified="sap.ui.unified"
-                         xmlns:dnd="sap.ui.core.dnd"
-                         xmlns:smartForm="sap.ui.comp.smartform"
-                         xmlns:table="sap.ui.table"
-                         xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
-                         xmlns:smartTable="sap.ui.comp.smarttable"
-                         xmlns:smartField="sap.ui.comp.smartfield">
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:l="sap.ui.layout"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:unified="sap.ui.unified"
+    xmlns:dnd="sap.ui.core.dnd"
+    xmlns:smartForm="sap.ui.comp.smartform"
+    xmlns:table="sap.ui.table"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:smartField="sap.ui.comp.smartfield">
     <Dialog id="dayViewDialog"
-            title="{WorkerName}"
-            class="sapUiSizeCompact"
-            contentHeight="100%"
-            contentWidth="100%">
+        title="{WorkerName}"
+        class="sapUiSizeCompact"
+        contentHeight="100%"
+        contentWidth="100%">
         <smartForm:SmartForm id="dateSmartForm"
-                             title="{
+            title="{
 &#xA;&#xA;                                path:'Date',
 &#xA;&#xA;                                formatter: '.formatter.DateTimeCorrectTitle'
 &#xA;&#xA;                }"
-                             editable="true">
+            editable="true">
             <smartForm:layout>
                 <smartForm:ColumnLayout columnsM="2"
-                                        columnsL="2"
-                                        columnsXL="2" />
+                    columnsL="2"
+                    columnsXL="2" />
             </smartForm:layout>
             <smartForm:Group label="Тип дня">
                 <!-- <smartForm:Group label="{i18n>GroupTitle}"> -->
@@ -40,10 +40,20 @@
 &#xA;&#xA;                                   
 &#xA;&#xA;                                }" />
                 </smartForm:GroupElement>
-                <smartForm:GroupElement>
-                    <smartField:SmartField value="{DateType}"
-                                           editable="true"
-                                           entitySet="WorkerScheduleSet" />
+                <smartForm:GroupElement label="Тип дня">
+
+                    <Select enabled="true"
+                        editable="true"
+                        forceSelection="true"
+                        selectedKey="{DateType}"
+                        items="{/DateTypeSHSet}">
+                        <core:Item key="{Type}"
+                            text="{TypeName}" 
+                            enabled="{Enabled}"/>
+                    </Select>
+
+                    <!-- <smartField:SmartField value="{DateType}" editable="true" entitySet="WorkerScheduleSet" /> -->
+
                 </smartForm:GroupElement>
                 <!-- <smartForm:GroupElement>
                                 <smartField:SmartField value ="{WorkDayType}" editable="true" entitySet="WorkerScheduleSet"/>
@@ -52,17 +62,17 @@
             <smartForm:Group label="{i18n>BioGroup}">
                 <smartForm:GroupElement>
                     <smartField:SmartField id="WorkFactCheckBox"
-                                           enabled="false"
-                                           value="{Redacted}"
-                                           editable="false"
-                                           entitySet="WorkerScheduleSet" />
+                        enabled="false"
+                        value="{Redacted}"
+                        editable="false"
+                        entitySet="WorkerScheduleSet" />
                 </smartForm:GroupElement>
                 <smartForm:GroupElement>
                     <Button width="50%"
-                            text="Сбросить"
-                            visible="false"
-                            press="resetWorkerDay"
-                            id="resetWorkerDay" />
+                        text="Сбросить"
+                        visible="false"
+                        press="resetWorkerDay"
+                        id="resetWorkerDay" />
                 </smartForm:GroupElement>
             </smartForm:Group>
             <!-- <smartForm:Group label="{i18n>BioGroup}">
@@ -71,24 +81,24 @@
         </smartForm:SmartForm>
         <HBox>
             <smartTable:SmartTable beforeRebindTable="onBeforeRebindTable"
-                                   class=" sapUiLargeMarginBegin sapUiSmallMarginEnd"
-                                   id="dateSmartTable"
-                                   width="50%"
-                                   header="{i18n>DetailTableTitle}"
-                                   entitySet="WorkerDoorPassSet"
-                                   tableBindingPath="WorkerDoorPasses"
-                                   useExportToExcel="false"
-                                   useVariantManagement="false"
-                                   useTablePersonalisation="true"
-                                   enableAutoBinding="true"
-                                   requestAtLeastFields="EventDateTime"
-                                   smartFilterId="dateFilterBar">
+                class=" sapUiLargeMarginBegin sapUiSmallMarginEnd"
+                id="dateSmartTable"
+                width="50%"
+                header="{i18n>DetailTableTitle}"
+                entitySet="WorkerDoorPassSet"
+                tableBindingPath="WorkerDoorPasses"
+                useExportToExcel="false"
+                useVariantManagement="false"
+                useTablePersonalisation="true"
+                enableAutoBinding="true"
+                requestAtLeastFields="EventDateTime"
+                smartFilterId="dateFilterBar">
                 <table:Table selectionMode="None">
                     <table:columns>
                         <table:Column width="12rem">
                             <table:customData>
                                 <core:CustomData key="p13nData"
-                                                 value='\{
+                                    value='\{
 &#xA;&#xA;                                                        "columnIndex": "0",
 &#xA;&#xA;                                                        "columnKey": "EventDateTime",
 &#xA;&#xA;                                                        "leadingProperty": "EventDateTime",
@@ -107,29 +117,29 @@
                     </table:columns>
                 </table:Table>
             </smartTable:SmartTable>
-            
+
 
             <smartTable:SmartTable class=" sapUiLargeMarginBegin sapUiSmallMarginEnd"
-                                   id="planFactST"
-                                   width="50%"
-                                   tableType="ResponsiveTable"
-                                   header="План/Факт подробно"
-                                   entitySet="workerDayPlanFactSet"
-                                   tableBindingPath="toWorkerDayPlanFact"
-                                   useExportToExcel="false"
-                                   useVariantManagement="false"
-                                   useTablePersonalisation="true"
-                                   initiallyVisibleFields="IntervalTypeText,PlanTimeFrom,PlanTimeTo,FactTimeFrom,FactTimeTo,IntervalDivergence,IsCounted"
-                                   enableAutoBinding="true"/>
-                                   
+                id="planFactST"
+                width="50%"
+                tableType="ResponsiveTable"
+                header="План/Факт подробно"
+                entitySet="workerDayPlanFactSet"
+                tableBindingPath="toWorkerDayPlanFact"
+                useExportToExcel="false"
+                useVariantManagement="false"
+                useTablePersonalisation="true"
+                initiallyVisibleFields="IntervalTypeText,PlanTimeFrom,PlanTimeTo,FactTimeFrom,FactTimeTo,IntervalDivergence,IsCounted"
+                enableAutoBinding="true"/>
+
         </HBox>
         <beginButton>
             <Button text="Сохранить"
-                    press="onSaveChanges"/>
+                press="onSaveChanges"/>
         </beginButton>
         <endButton>
             <Button text="Отмена"
-                    press="onCancelUploadSchedulePress" />
+                press="onCancelUploadSchedulePress" />
         </endButton>
     </Dialog>
 </core:FragmentDefinition>

@@ -25,7 +25,8 @@
                     id="_SubTask-SmartField"
                     textInEditModeSource="None">
                 </smartField:SmartField>
-                <Text id="_SubTaskName-Text" text="{SubTaskName}"/>
+                <Text id="_SubTaskName-Text"
+                    text="{SubTaskName}"/>
             </smartForm:GroupElement>
 
             <smartForm:GroupElement>
@@ -50,8 +51,20 @@
 
         <smartForm:Group>
 
-            <smartForm:GroupElement>
-                <smartField:SmartField value="{DateSheet}" id="_DateSheet-SmartField"/>
+            <smartForm:GroupElement label="Списать период">
+
+                <DateRangeSelection id="_DateSheet-DateRangeSelection"
+                    dateValue="{DateSheetFrom}"
+                    secondDateValue="{DateSheetTo}"
+                    change="_dateSheetPeriodChange"
+                    displayFormat="dd.MM.yyyy"/>
+
+                <!-- <smartField:SmartField value="{DateSheet}" id="_DateSheet-SmartField"/> -->
+            </smartForm:GroupElement>
+
+            <smartForm:GroupElement visible="{= ( ( ${DateSheetFrom} === null || ${DateSheetFrom} === undefined ) &amp;&amp; ( ${DateSheetTo} === null || ${DateSheetTo} === undefined ) ) }">
+                <smartField:SmartField value="{DateSheet}"
+                    id="_DateSheet-SmartField"/>
             </smartForm:GroupElement>
 
             <smartForm:GroupElement>
@@ -60,7 +73,9 @@
 
 
             <smartForm:GroupElement>
-                <smartField:SmartField id="CommentSmartField" value="{Comment}" width="100%"/>
+                <smartField:SmartField id="CommentSmartField"
+                    value="{Comment}"
+                    width="100%"/>
             </smartForm:GroupElement>
 
         </smartForm:Group>

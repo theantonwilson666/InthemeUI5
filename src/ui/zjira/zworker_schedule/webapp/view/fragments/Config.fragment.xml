@@ -17,9 +17,9 @@
                         tabDensityMode="Compact"
                         select="onIconTabConfBarSelected">
                 <items>
-                    <IconTabFilter id="PositionTab" text="{i18n>PositionSchedule}" key="posSchedule">
+                    <!-- <IconTabFilter id="PositionTab" text="{i18n>PositionSchedule}" key="posSchedule">
                         <core:Fragment fragmentName="intheme.zworker_schedule.view.fragments.PositionSchedule" type="XML"/>
-                    </IconTabFilter>
+                    </IconTabFilter> -->
 
                     <IconTabFilter id="WorkerTab" text="{i18n>WorkerSchedule}" key="workerSchedule">
                         <core:Fragment fragmentName="intheme.zworker_schedule.view.fragments.WorkerSchedule" type="XML"/>

@@ -401,6 +401,9 @@ sap.ui.define([
 
 
                 this.byId("_moveSubTaskToTask-Dialog").setBusy(true);
+                
+                this._TaskID    = oSelectedItem.getBindingContext().getObject().TaskID;
+                this._SubTaskID = oEvent.getSource().getParent().getBindingContext().getObject().SubtaskId;
 
                 this.getModel().callFunction("/MoveSubTaskToTask", {
                     method: "POST",
@@ -414,6 +417,15 @@ sap.ui.define([
                         this.isExistError();
                         this.byId("_moveSubTaskToTask-Dialog").close();
                         this.onRemoveRowSelectionForMoveToTask();
+
+
+                        debugger;
+                        
+                        this.navTo("subtask", {
+                            taskId: btoa(this._TaskID),
+                            subTaskId: btoa(this._SubTaskID)
+                        }, false);
+
 
                     }.bind(this),
 
